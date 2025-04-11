@@ -20,14 +20,11 @@ fun Route.base64Routes() {
     // Main page for the Base64 tool
     get {
         val model = mapOf(
-            "pageTitle" to "Base64 Encoder and Decoder",
-            "pageDescription" to "Free online Base64 encoder and decoder. Convert text to Base64, decode Base64 to text, encode files to Base64, and convert Base64 back to files.",
-            "content" to FreeMarkerContent(
-                "pages/base64.ftl",
-                mapOf("currentTime" to LocalDateTime.now().toString())
-            )
+            "currentTime" to LocalDateTime.now().toString()
         )
-        call.respond(FreeMarkerContent("layouts/base.ftl", model))
+        
+        // Render the template directly - the page macro will handle layout
+        call.respond(FreeMarkerContent("pages/base64.ftl", model))
     }
 
     // Endpoint for encoding text to Base64
@@ -38,15 +35,15 @@ fun Route.base64Routes() {
         
         val encodedText = base64Service.encodeString(text, urlSafe)
         
-        call.respond(FreeMarkerContent(
-            "pages/base64-result.ftl",
-            mapOf(
-                "result" to encodedText,
-                "operation" to "encode",
-                "inputLength" to text.length,
-                "outputLength" to encodedText.length
-            )
-        ))
+        val resultModel = mapOf(
+            "result" to encodedText,
+            "operation" to "encode",
+            "inputLength" to text.length,
+            "outputLength" to encodedText.length
+        )
+        
+        // For HTMX requests, return just the result template
+        call.respond(FreeMarkerContent("pages/base64-result.ftl", resultModel))
     }
 
     // Endpoint for decoding Base64 to text
@@ -57,15 +54,15 @@ fun Route.base64Routes() {
         
         val decodedText = base64Service.decodeString(base64Text, urlSafe)
         
-        call.respond(FreeMarkerContent(
-            "pages/base64-result.ftl",
-            mapOf(
-                "result" to decodedText,
-                "operation" to "decode",
-                "inputLength" to base64Text.length,
-                "outputLength" to decodedText.length
-            )
-        ))
+        val resultModel = mapOf(
+            "result" to decodedText,
+            "operation" to "decode",
+            "inputLength" to base64Text.length,
+            "outputLength" to decodedText.length
+        )
+        
+        // Return the result template
+        call.respond(FreeMarkerContent("pages/base64-result.ftl", resultModel))
     }
 
     // Endpoint for encoding a file to Base64
@@ -78,8 +75,10 @@ fun Route.base64Routes() {
         multipart.forEachPart { part ->
             when (part) {
                 is PartData.FileItem -> {
-                    fileName = part.originalFileName ?: "unknown"
-                    fileBytes = part.streamProvider().readBytes()
+                    if (part.name == "file") {
+                        fileName = part.originalFileName ?: "unknown"
+                        fileBytes = part.streamProvider().readBytes()
+                    }
                 }
                 is PartData.FormItem -> {
                     if (part.name == "urlSafe") {
@@ -95,15 +94,15 @@ fun Route.base64Routes() {
             base64Service.encodeFile(it.inputStream(), urlSafe) 
         } ?: "Error: No file uploaded"
         
-        call.respond(FreeMarkerContent(
-            "pages/base64-result.ftl",
-            mapOf(
-                "result" to result,
-                "operation" to "fileEncode",
-                "fileName" to fileName,
-                "outputLength" to result.length
-            )
-        ))
+        val resultModel = mapOf(
+            "result" to result,
+            "operation" to "fileEncode",
+            "fileName" to fileName,
+            "outputLength" to result.length
+        )
+        
+        // Return the result template
+        call.respond(FreeMarkerContent("pages/base64-result.ftl", resultModel))
     }
 
     // Endpoint for decoding Base64 to a file

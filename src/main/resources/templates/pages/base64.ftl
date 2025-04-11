@@ -1,3 +1,8 @@
+<#-- Use the page macro from macros.ftl -->
+<@page 
+  title="Base64 Encoder and Decoder"
+  pageDescription="Free online Base64 encoder and decoder. Convert text to Base64, decode Base64 to text, encode files to Base64, and convert Base64 back to files."
+>
 <div class="max-w-4xl mx-auto">
     <h1 class="text-3xl font-bold mb-6 text-center">Base64 Encoder and Decoder</h1>
     
@@ -178,3 +183,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+</@page>

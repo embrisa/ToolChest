@@ -37,7 +37,8 @@ Follow this structure for organizing code:
 │   └── copilot-instructions.md     # GitHub Copilot instructions for the project
 ├── .gradle/                        # Gradle build system cache
 ├── .idea/                          # IntelliJ IDEA configuration files
-├── build/                          # Build output directoryxw
+├── bin/                            # Compiled binaries
+├── build/                          # Build output directory
 ├── gradle/                         # Gradle wrapper files
 ├── src/
 │   ├── main/
@@ -77,6 +78,12 @@ Follow this structure for organizing code:
 
 ## Rules
 - Before introducing a new file make sure something else is not already doing it or the file is located elsewhere.
+
+## Project Commands
+- `./gradlew build` - Build the project
+- `./dev-run.sh`    - Run the project in development mode
+- `./gradlew test`  - Run tests
+- `./gradlew clean` - Clean the project
 
 ### Coding Conventions
 

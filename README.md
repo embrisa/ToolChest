@@ -57,7 +57,9 @@ The directory structure for the monolith:
 │   └── copilot-instructions.md     # GitHub Copilot instructions for the project
 ├── .gradle/                        # Gradle build system cache
 ├── .idea/                          # IntelliJ IDEA configuration files
-├── build/                          # Build output directoryxw
+├── .gitignore                      # Git ignore file
+├── bin/                            # Compiled binaries
+├── build/                          # Build output directory
 ├── gradle/                         # Gradle wrapper files
 │   └── wrapper/
 │       ├── gradle-wrapper.jar

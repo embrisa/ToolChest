@@ -25,6 +25,7 @@ val caffeine_version = "3.1.8"
 val exposed_version = "0.47.0"
 val sqlite_version = "3.44.1.0"
 val freemarker_version = "2.3.32"
+val kotlin_test_version = "1.9.22"
 
 dependencies {
     // Ktor server
@@ -57,9 +58,24 @@ dependencies {
     // Caching
     implementation("com.github.ben-manes.caffeine:caffeine:$caffeine_version")
 
-    // Testing
+    // Testing - kotlin.test with JUnit 5
     testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
-    testImplementation("org.jetbrains.kotlin:kotlin-test:1.9.22")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlin_test_version")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_test_version")
+    
+    // Force Koin test to use our version of kotlin-test
+    testImplementation("io.insert-koin:koin-test:$koin_version") {
+        exclude(group = "org.jetbrains.kotlin", module = "kotlin-test-junit")
+    }
+}
+
+// Force consistent kotlin-test version
+configurations.all {
+    resolutionStrategy.eachDependency {
+        if (requested.group == "org.jetbrains.kotlin" && requested.name.startsWith("kotlin-test")) {
+            useVersion(kotlin_test_version)
+        }
+    }
 }
 
 // Configure Java toolchain to match system Java version
@@ -77,7 +93,7 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-// Configure testing to use the same JVM target
+// Keep using JUnit Platform runner for tests, which is compatible with kotlin-test-junit5
 tasks.withType<Test> {
     useJUnitPlatform()
 }

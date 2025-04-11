@@ -27,7 +27,7 @@
     
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-6 flex-grow">
-        <#if content??>${content}<#else></#if>
+        ${content}
     </main>
     
     <!-- Footer -->

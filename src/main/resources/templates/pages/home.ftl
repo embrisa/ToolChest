@@ -1,9 +1,10 @@
-<#-- Define custom variables to be assigned to the base layout -->
-<#assign pageTitle = "Free Online Utility Tools">
-<#assign pageDescription = "ToolChest offers free online utility tools including encoders, decoders, formatters, and more - no registration required.">
-
+<#-- Use the page macro from macros.ftl -->
+<@page 
+  title="Free Online Utility Tools"
+  pageDescription="ToolChest offers free online utility tools including encoders, decoders, formatters, and more - no registration required."
+>
 <#-- Hero Section -->
-<div class="bg-gradient-to-r from-blue-500 to-indigo-600 py-12 mb-8 text-white">
+<div class="bg-gradient-to-r from-blue-600 to-indigo-700 py-12 mb-8 text-white">
     <div class="container mx-auto px-4 text-center">
         <h1 class="text-3xl md:text-4xl font-bold mb-4">Your Toolkit for Everyday Tasks</h1>
         <p class="text-xl opacity-90 mb-6 max-w-2xl mx-auto">Free online utility tools to encode, decode, convert, and transform data. No registration required.</p>
@@ -27,86 +28,44 @@
         <#-- Base64 Encoder/Decoder Tool -->
         <#if availableTools?? && availableTools?size gt 0>
             <#list availableTools as tool>
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                    <div class="p-5">
-                        <div class="flex items-center mb-3">
-                            <div class="bg-blue-100 text-blue-500 rounded-full p-3 mr-3">
-                                <i class="fas ${tool.icon} text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-semibold">
-                                    ${tool.name}
-                                    <span class="bg-yellow-100 text-yellow-700 text-xs px-2 py-1 rounded-full ml-2">Popular</span>
-                                </h3>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-4">${tool.description}</p>
-                        <a href="${tool.url}" class="inline-block bg-blue-600 text-white rounded px-4 py-2 text-sm hover:bg-blue-700 transition-colors">
-                            Use Tool
-                        </a>
-                    </div>
-                </div>
+                <@toolCard 
+                    id=tool.id
+                    name=tool.name
+                    description=tool.description
+                    icon=tool.icon
+                    url=tool.url
+                    isComingSoon=false
+                />
             </#list>
         </#if>
         
         <#-- Example of other tools that would be available -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-            <div class="p-5">
-                <div class="flex items-center mb-3">
-                    <div class="bg-blue-100 text-blue-500 rounded-full p-3 mr-3">
-                        <i class="fas fa-code text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold">
-                            JSON Formatter
-                            <span class="bg-yellow-100 text-yellow-700 text-xs px-2 py-1 rounded-full ml-2">Popular</span>
-                        </h3>
-                    </div>
-                </div>
-                <p class="text-gray-600 text-sm mb-4">Format, validate, and beautify JSON data with syntax highlighting.</p>
-                <div class="inline-block bg-gray-200 text-gray-500 rounded px-4 py-2 text-sm cursor-not-allowed">
-                    Coming Soon
-                </div>
-            </div>
-        </div>
+        <@toolCard 
+            id="json-formatter"
+            name="JSON Formatter"
+            description="Format, validate, and beautify JSON data with syntax highlighting."
+            icon="fa-code"
+            url="/tools/json-formatter"
+            isComingSoon=true
+        />
         
-        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-            <div class="p-5">
-                <div class="flex items-center mb-3">
-                    <div class="bg-blue-100 text-blue-500 rounded-full p-3 mr-3">
-                        <i class="fas fa-unlock text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold">
-                            Password Generator
-                        </h3>
-                    </div>
-                </div>
-                <p class="text-gray-600 text-sm mb-4">Generate secure passwords with customizable options.</p>
-                <div class="inline-block bg-gray-200 text-gray-500 rounded px-4 py-2 text-sm cursor-not-allowed">
-                    Coming Soon
-                </div>
-            </div>
-        </div>
+        <@toolCard 
+            id="password-generator"
+            name="Password Generator"
+            description="Generate secure passwords with customizable options."
+            icon="fa-unlock"
+            url="/tools/password-generator"
+            isComingSoon=true
+        />
         
-        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-            <div class="p-5">
-                <div class="flex items-center mb-3">
-                    <div class="bg-blue-100 text-blue-500 rounded-full p-3 mr-3">
-                        <i class="fas fa-image text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold">
-                            Image Compressor
-                        </h3>
-                    </div>
-                </div>
-                <p class="text-gray-600 text-sm mb-4">Compress images without losing quality. Support for multiple formats.</p>
-                <div class="inline-block bg-gray-200 text-gray-500 rounded px-4 py-2 text-sm cursor-not-allowed">
-                    Coming Soon
-                </div>
-            </div>
-        </div>
+        <@toolCard 
+            id="image-compressor"
+            name="Image Compressor"
+            description="Compress images without losing quality. Support for multiple formats."
+            icon="fa-image"
+            url="/tools/image-compressor"
+            isComingSoon=true
+        />
     </div>
 </div>
 
@@ -163,3 +122,4 @@
         </p>
     </div>
 </div>
+</@page>
