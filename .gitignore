@@ -75,8 +75,6 @@ Thumbs.db
 # Keep .vscode/ directory but ignore some files
 .vscode/*
 !.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
 !.vscode/extensions.json
 
 # Node (if using for frontend assets)

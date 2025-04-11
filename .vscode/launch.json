@@ -2,27 +2,11 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "java",
+      "type": "node-terminal",
+      "name": "Run ToolChest Server",
       "request": "launch",
-      "name": "Build ToolChest",
-      "mainClass": "com.toolchest.Application",
-      "preLaunchTask": "gradleBuild",
-      "args": [],
-      "projectName": "ToolChest",
-      "sourcePaths": [
-        "${workspaceFolder}/src/main/kotlin"
-      ]
-    },
-    {
-      "type": "java",
-      "request": "launch",
-      "name": "Run ToolChest",
-      "mainClass": "com.toolchest.ApplicationKt",
-      "projectName": "ToolChest",
-      "args": [],
-      "sourcePaths": [
-        "${workspaceFolder}/src/main/kotlin"
-      ]
+      "command": "./gradlew run -t --no-daemon",
+      "cwd": "${workspaceFolder}"
     }
   ]
 }
