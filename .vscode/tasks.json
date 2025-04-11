@@ -1,0 +1,40 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "gradleBuild",
+      "type": "shell",
+      "command": "${workspaceFolder}/gradlew",
+      "args": [
+        "build",
+        "--no-daemon"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "gradleRunDev",
+      "type": "shell",
+      "command": "${workspaceFolder}/gradlew",
+      "args": [
+        "run",
+        "-t",
+        "--no-daemon"
+      ],
+      "group": "none",
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^.*$"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*Preparing.*$",
+          "endsPattern": "^.*Application started.*$"
+        }
+      }
+    }
+  ]
+}

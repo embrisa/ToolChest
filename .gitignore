@@ -2,6 +2,7 @@
 .gradle/
 build/
 out/
+bin/
 
 # Gradle wrapper
 !gradle/wrapper/gradle-wrapper.jar
@@ -71,7 +72,12 @@ Thumbs.db
 .settings/
 
 # VS Code
-.vscode/
+# Keep .vscode/ directory but ignore some files
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
 # Node (if using for frontend assets)
 node_modules/
