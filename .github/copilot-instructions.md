@@ -154,3 +154,16 @@ The first tool implements:
 5. URL-safe Base64 toggle option
 
 Follow this reference implementation pattern for all future tools.
+
+## Testing Guidelines
+
+1. **HTML Response Testing**: When writing tests for routes that return HTML/HTMX responses, ensure assertions match the actual HTML structure rather than expecting JSON-like patterns. HTMX and FreeMarker templates return HTML fragments that need different verification strategies than API endpoints.
+2. **Content Extraction**: Use regex patterns to extract values from HTML when needed for assertions, rather than trying to parse the complete HTML structure.
+3. **Response Validation**: Test for the presence of expected content elements rather than exact string matches, as HTML formatting may change.
+4. **Template Integration Tests**: Include tests that verify the templates render correctly with the provided models.
+
+### Common Testing Pitfalls
+
+- **JSON vs HTML Expectations**: Avoid writing tests that expect JSON responses when endpoints return HTML. Check for content within HTML structure instead.
+- **Missing HTML Element IDs**: Ensure HTML elements in templates have proper IDs to facilitate testing.
+- **HTMX Response Format**: Remember that HTMX responses are HTML fragments, not full pages or JSON structures.

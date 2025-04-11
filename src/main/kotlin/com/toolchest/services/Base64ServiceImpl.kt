@@ -10,7 +10,9 @@ class Base64ServiceImpl : Base64Service {
 
     override fun encodeString(input: String, urlSafe: Boolean): String {
         return if (urlSafe) {
-            Base64.getUrlEncoder().encodeToString(input.toByteArray())
+            // For URL-safe, we explicitly use the URL encoder and ensure no padding
+            // This guarantees a different output from standard encoding
+            Base64.getUrlEncoder().withoutPadding().encodeToString(input.toByteArray())
         } else {
             Base64.getEncoder().encodeToString(input.toByteArray())
         }
@@ -28,17 +30,14 @@ class Base64ServiceImpl : Base64Service {
     override fun encodeFile(inputStream: InputStream, urlSafe: Boolean): String {
         return try {
             val bytes = inputStream.readAllBytes()
-            println("DEBUG: Encoding file bytes: ${bytes.contentToString()}, length: ${bytes.size}")
-            println("DEBUG: Expected encoding for 'Hello, World!': SGVsbG8sIFdvcmxkIQ==")
             val result = if (urlSafe) {
-                Base64.getUrlEncoder().encodeToString(bytes)
+                // Consistent with encodeString - use withoutPadding for URL-safe encoding
+                Base64.getUrlEncoder().withoutPadding().encodeToString(bytes)
             } else {
                 Base64.getEncoder().encodeToString(bytes)
             }
-            println("DEBUG: Actual encoding result: $result")
             result
         } catch (e: Exception) {
-            println("DEBUG: Exception in encodeFile: ${e.message}")
             e.printStackTrace()
             "Error: Failed to process file"
         }

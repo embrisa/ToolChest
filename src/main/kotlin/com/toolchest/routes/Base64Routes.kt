@@ -35,15 +35,16 @@ fun Route.base64Routes() {
         
         val encodedText = base64Service.encodeString(text, urlSafe)
         
-        val resultModel = mapOf(
+        // Create a model with all necessary information
+        val model = mapOf(
             "result" to encodedText,
             "operation" to "encode",
             "inputLength" to text.length,
             "outputLength" to encodedText.length
         )
         
-        // For HTMX requests, return just the result template
-        call.respond(FreeMarkerContent("pages/base64-result.ftl", resultModel))
+        // Respond with the proper FreeMarker template
+        call.respond(FreeMarkerContent("pages/base64-result.ftl", model))
     }
 
     // Endpoint for decoding Base64 to text
@@ -52,17 +53,22 @@ fun Route.base64Routes() {
         val base64Text = parameters["text"] ?: ""
         val urlSafe = parameters["urlSafe"] == "on"
         
-        val decodedText = base64Service.decodeString(base64Text, urlSafe)
+        val decodedText = try {
+            base64Service.decodeString(base64Text, urlSafe)
+        } catch (e: Exception) {
+            "Error: ${e.message ?: "Invalid Base64 input"}"
+        }
         
-        val resultModel = mapOf(
+        // Create a model with all necessary information
+        val model = mapOf(
             "result" to decodedText,
             "operation" to "decode",
             "inputLength" to base64Text.length,
             "outputLength" to decodedText.length
         )
         
-        // Return the result template
-        call.respond(FreeMarkerContent("pages/base64-result.ftl", resultModel))
+        // Respond with the proper FreeMarker template
+        call.respond(FreeMarkerContent("pages/base64-result.ftl", model))
     }
 
     // Endpoint for encoding a file to Base64
@@ -94,15 +100,29 @@ fun Route.base64Routes() {
             base64Service.encodeFile(it.inputStream(), urlSafe) 
         } ?: "Error: No file uploaded"
         
-        val resultModel = mapOf(
+        val inputLength = fileBytes?.size ?: 0
+        
+        // Calculate the output length for Base64 encoding
+        val outputLength = if (result.startsWith("Error")) {
+            result.length
+        } else {
+            // Standard Base64 encoding formula: 3 bytes encode to 4 characters
+            val fullGroups = inputLength / 3
+            val remainderBytes = inputLength % 3
+            (fullGroups * 4) + (if (remainderBytes > 0) 4 else 0)
+        }
+        
+        // Create a model with all necessary information
+        val model = mapOf(
             "result" to result,
-            "operation" to "fileEncode",
+            "operation" to "fileEncode", // Use consistent naming matching test expectations
             "fileName" to fileName,
-            "outputLength" to result.length
+            "inputLength" to inputLength,
+            "outputLength" to outputLength
         )
         
-        // Return the result template
-        call.respond(FreeMarkerContent("pages/base64-result.ftl", resultModel))
+        // Respond with the proper FreeMarker template
+        call.respond(FreeMarkerContent("pages/base64-result.ftl", model))
     }
 
     // Endpoint for decoding Base64 to a file
@@ -112,17 +132,41 @@ fun Route.base64Routes() {
         val fileName = parameters["fileName"] ?: "decoded_file"
         val urlSafe = parameters["urlSafe"] == "on"
         
-        val decodedBytes = base64Service.decodeToBytes(base64Text, urlSafe)
-        
-        if (decodedBytes.isEmpty()) {
-            call.respond(HttpStatusCode.BadRequest, "Invalid Base64 input")
-            return@post
+        try {
+            val decodedBytes = base64Service.decodeToBytes(base64Text, urlSafe)
+            
+            if (decodedBytes.isEmpty()) {
+                // Return a proper formatted error response
+                val model = mapOf(
+                    "result" to "Error: Empty result",
+                    "operation" to "fileDecode",
+                    "inputLength" to base64Text.length,
+                    "outputLength" to 0,
+                    "error" to "Empty result"
+                )
+                
+                call.respond(HttpStatusCode.BadRequest, FreeMarkerContent("pages/base64-result.ftl", model))
+                return@post
+            }
+            
+            call.response.header(
+                HttpHeaders.ContentDisposition, 
+                ContentDisposition.Attachment.withParameter(ContentDisposition.Parameters.FileName, fileName).toString()
+            )
+            call.respondBytes(decodedBytes)
+            
+        } catch (e: Exception) {
+            // Return a proper formatted error response
+            val errorMessage = "Invalid Base64 input: ${e.message}"
+            val model = mapOf(
+                "result" to "Error: $errorMessage",
+                "operation" to "fileDecode",
+                "inputLength" to base64Text.length,
+                "outputLength" to 0,
+                "error" to e.message
+            )
+            
+            call.respond(HttpStatusCode.BadRequest, FreeMarkerContent("pages/base64-result.ftl", model))
         }
-        
-        call.response.header(
-            HttpHeaders.ContentDisposition, 
-            ContentDisposition.Attachment.withParameter(ContentDisposition.Parameters.FileName, fileName).toString()
-        )
-        call.respondBytes(decodedBytes)
     }
 }
