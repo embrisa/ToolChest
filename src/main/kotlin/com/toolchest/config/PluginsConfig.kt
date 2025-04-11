@@ -18,6 +18,7 @@ import io.ktor.server.plugins.compression.Compression
 import io.ktor.server.plugins.compression.gzip
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.plugins.statuspages.StatusPages
+import io.ktor.server.response.respond
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.routing
 import kotlinx.serialization.json.Json
@@ -53,7 +54,7 @@ fun Application.configurePlugins() {
         setSharedVariable("appVersion", "1.0.0")
 
         // Set template exception handler
-        setTemplateExceptionHandler { te, env, out ->
+        setTemplateExceptionHandler { te, _, out ->
             log.error("FreeMarker template error: ${te.message}", te)
             out.write("An error occurred while rendering the page. Please try again later.")
         }
@@ -113,14 +114,140 @@ fun Application.configurePlugins() {
         )
     }
 
-    // Setup global error handling
+    // Setup enhanced error handling with custom error pages
     install(StatusPages) {
-        exception<Throwable> { call, cause ->
-            call.respondText(
-                text = "500: ${cause.message ?: "An error occurred"}",
-                contentType = ContentType.Text.Plain,
-                status = HttpStatusCode.InternalServerError
+        // Handle common HTTP status codes
+        status(HttpStatusCode.NotFound) { call, _ ->
+            val referer = call.request.headers["Referer"]
+            call.respond(
+                HttpStatusCode.NotFound,
+                FreeMarkerContent(
+                    "pages/error.ftl",
+                    mapOf(
+                        "pageTitle" to "Page Not Found | ToolChest",
+                        "pageDescription" to "The requested page could not be found.",
+                        "error" to ErrorPageModel(
+                            errorCode = 404,
+                            errorTitle = "Page Not Found",
+                            errorMessage = "The page you're looking for doesn't exist or has been moved.",
+                            suggestedAction = "Check the URL or try searching for the tool you need.",
+                            showBackLink = referer != null
+                        )
+                    )
+                )
             )
+        }
+        
+        status(HttpStatusCode.Forbidden) { call, _ ->
+            call.respond(
+                HttpStatusCode.Forbidden,
+                FreeMarkerContent(
+                    "pages/error.ftl",
+                    mapOf(
+                        "pageTitle" to "Access Denied | ToolChest",
+                        "pageDescription" to "You don't have permission to access this resource.",
+                        "error" to ErrorPageModel(
+                            errorCode = 403,
+                            errorTitle = "Access Denied",
+                            errorMessage = "You don't have permission to access this resource.",
+                            suggestedAction = "Please check your credentials or contact us if you think this is an error."
+                        )
+                    )
+                )
+            )
+        }
+        
+        status(HttpStatusCode.BadRequest) { call, _ ->
+            call.respond(
+                HttpStatusCode.BadRequest,
+                FreeMarkerContent(
+                    "pages/error.ftl",
+                    mapOf(
+                        "pageTitle" to "Bad Request | ToolChest",
+                        "pageDescription" to "The request could not be processed.",
+                        "error" to ErrorPageModel(
+                            errorCode = 400,
+                            errorTitle = "Bad Request",
+                            errorMessage = "The server couldn't process your request due to invalid syntax.",
+                            suggestedAction = "Please check your input and try again."
+                        )
+                    )
+                )
+            )
+        }
+
+        // Add specific exception handlers for known exceptions
+        exception<IllegalArgumentException> { call, cause ->
+            // Determine if this is an HTMX request
+            val isHtmxRequest = call.request.headers["HX-Request"] == "true"
+            
+            if (isHtmxRequest) {
+                call.respond(
+                    HttpStatusCode.BadRequest,
+                    FreeMarkerContent(
+                        "components/error-message.ftl",
+                        mapOf("errorMessage" to (cause.message ?: "Invalid input provided"))
+                    )
+                )
+            } else {
+                call.respond(
+                    HttpStatusCode.BadRequest,
+                    FreeMarkerContent(
+                        "pages/error.ftl",
+                        mapOf(
+                            "pageTitle" to "Invalid Input | ToolChest",
+                            "pageDescription" to "The provided input is invalid.",
+                            "error" to ErrorPageModel(
+                                errorCode = 400,
+                                errorTitle = "Invalid Input",
+                                errorMessage = cause.message ?: "The provided input is invalid.",
+                                suggestedAction = "Please check your input and try again."
+                            )
+                        )
+                    )
+                )
+            }
+        }
+
+        // Generic exception handler for unexpected errors
+        exception<Throwable> { call, cause ->
+            // Log the error with structured information
+            call.application.log.error("Unhandled exception", cause)
+            
+            // Determine if this is an HTMX request
+            val isHtmxRequest = call.request.headers["HX-Request"] == "true"
+            
+            // For API endpoints and HTMX requests, consider different responses
+            if (isHtmxRequest) {
+                // For HTMX requests, return a fragment that can be inserted
+                call.respond(
+                    HttpStatusCode.InternalServerError,
+                    FreeMarkerContent(
+                        "components/error-message.ftl",
+                        mapOf(
+                            "errorMessage" to "An unexpected error occurred. Please try again later."
+                        )
+                    )
+                )
+            } else {
+                // Full page response for regular web requests
+                call.respond(
+                    HttpStatusCode.InternalServerError,
+                    FreeMarkerContent(
+                        "pages/error.ftl",
+                        mapOf(
+                            "pageTitle" to "Error | ToolChest",
+                            "pageDescription" to "An error occurred while processing your request.",
+                            "error" to ErrorPageModel(
+                                errorCode = 500,
+                                errorTitle = "Internal Server Error",
+                                errorMessage = "Something went wrong on our end.",
+                                suggestedAction = "Please try again later. If the problem persists, please contact us."
+                            )
+                        )
+                    )
+                )
+            }
         }
     }
 }

@@ -143,27 +143,55 @@ When implementing tools:
 4. Consider serverless functions for computationally simple tools
 5. Utilize browser caching and local caching to reduce backend load
 
-## Initial Tool: Base64 Encoder/Decoder
-
-The first tool implements:
-
-1. Text to Base64 encoding
-2. Base64 to text decoding
-3. File to Base64 conversion
-4. Base64 to file conversion
-5. URL-safe Base64 toggle option
-
-Follow this reference implementation pattern for all future tools.
-
 ## Testing Guidelines
 
-1. **HTML Response Testing**: When writing tests for routes that return HTML/HTMX responses, ensure assertions match the actual HTML structure rather than expecting JSON-like patterns. HTMX and FreeMarker templates return HTML fragments that need different verification strategies than API endpoints.
-2. **Content Extraction**: Use regex patterns to extract values from HTML when needed for assertions, rather than trying to parse the complete HTML structure.
+1. **HTML Response Testing**: When testing routes that return HTML/HTMX responses, verify content presence rather than exact structure. Use `assertTrue(body.contains("expected content"))` instead of expecting specific HTML patterns.
+
+2. **Content Extraction**: Use regex patterns to extract and validate specific values from HTML responses:
+   ```kotlin
+   val textareaPattern = "<textarea[^>]*id=\"result-text\"[^>]*>(.*?)</textarea>".toRegex(RegexOption.DOT_MATCHES_ALL)
+   val match = textareaPattern.find(responseText)
+   val content = match?.groupValues?.get(1)?.trim() ?: ""
+   ```
+
 3. **Response Validation**: Test for the presence of expected content elements rather than exact string matches, as HTML formatting may change.
-4. **Template Integration Tests**: Include tests that verify the templates render correctly with the provided models.
+
+4. **Template Integration Tests**: Include tests that verify templates render correctly with the provided models.
+
+5. **Edge Case Coverage**: Test multiple edge cases for each feature:
+   - Empty inputs/files
+   - Maximum size inputs (performance testing)
+   - Invalid/malformed inputs
+   - Special characters and Unicode handling
+   - Toggle options (e.g., URL-safe vs. standard encoding)
+
+6. **HTTP Header Validation**: For file downloads or specialized responses, verify HTTP headers:
+   ```kotlin
+   val contentDisposition = response.headers[HttpHeaders.ContentDisposition]
+   assertNotNull(contentDisposition)
+   assertTrue(contentDisposition.contains("attachment"))
+   assertTrue(contentDisposition.contains("filename"))
+   ```
+
+7. **Error Handling**: Verify appropriate error responses and error message content:
+   ```kotlin
+   assertTrue(body.contains("Error:"), "Response should show error message")
+   assertEquals(HttpStatusCode.BadRequest, response.status)
+   ```
+
+8. **Numeric Output Validation**: When testing outputs with variable formatting:
+   ```kotlin
+   // Handle numbers displayed with or without formatting (e.g., "136,536" or "136536")
+   val outputLengthPattern = "Output length: ([\\d,]+)".toRegex()
+   val outputLengthStr = outputLengthMatch.groupValues[1].replace(",", "")
+   val outputLength = outputLengthStr.toIntOrNull()
+   ```
 
 ### Common Testing Pitfalls
 
 - **JSON vs HTML Expectations**: Avoid writing tests that expect JSON responses when endpoints return HTML. Check for content within HTML structure instead.
 - **Missing HTML Element IDs**: Ensure HTML elements in templates have proper IDs to facilitate testing.
 - **HTMX Response Format**: Remember that HTMX responses are HTML fragments, not full pages or JSON structures.
+- **Brittle Assertions**: Avoid assertions tied to exact HTML structure; prefer content-based assertions.
+- **Ignored Edge Cases**: Always test empty inputs, maximum size inputs, and invalid inputs.
+- **Binary Data Testing**: When testing binary conversions, use `assertContentEquals` for byte array comparisons.

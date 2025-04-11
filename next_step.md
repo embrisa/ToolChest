@@ -1,52 +1,39 @@
-Testing (High Priority)
+## 2. Error Handling & Custom Error Pages (High Priority)
 
-The codebase currently lacks automated tests, which are crucial for maintaining reliability as the project grows.
+The current error handling is basic and lacks user-friendly error pages.
 
 ### Recommendations:
 
-- **Unit Tests**:
-  - Implement tests for `Base64ServiceImpl` to verify encoding/decoding functionality
-  - Add tests for any utility functions or helpers
-  - Use kotlin-test
-  - Ensure tests cover edge cases and error handling
-
-- **Integration Tests**:
-  - Add tests for route handlers using `ktor-server-test-host`
-  - Verify proper rendering of templates with expected data
-  - Test form submissions and HTMX interactions
-
-- **Test Structure**:
-  ```
-  src/
-  └── test/
-      └── kotlin/
-          └── com/
-              └── toolchest/
-                  ├── services/
-                  │   └── Base64ServiceImplTest.kt
-                  └── routes/
-                      ├── HomeRoutesTest.kt
-                      └── Base64RoutesTest.kt
-  ```
-
-- **Sample Test Implementation**:
+- Create custom error templates for common HTTP status codes:
+  - Create `/templates/pages/error.ftl` with dynamic content based on error code
+  - Enhance StatusPages plugin to use these templates
+  
+- Implement structured error responses for both UI and API endpoints:
   ```kotlin
-  // Base64ServiceImplTest.kt
-  package com.toolchest.services
-
-  import kotlin.test.Test
-  import kotlin.test.assertEquals
-
-  class Base64ServiceImplTest {
-      private val service = Base64ServiceImpl()
-      
-      @Test
-      fun `encodeString should correctly encode text to Base64`() {
-          val input = "Hello, World!"
-          val expected = "SGVsbG8sIFdvcmxkIQ=="
-          assertEquals(expected, service.encodeString(input))
+  install(StatusPages) {
+      status(HttpStatusCode.NotFound) { call, _ ->
+          call.respond(FreeMarkerContent(
+              "pages/error.ftl",
+              mapOf(
+                  "errorCode" to 404,
+                  "errorTitle" to "Page Not Found",
+                  "errorMessage" to "The page you're looking for doesn't exist."
+              )
+          ))
       }
       
-      // Add more tests for other methods and edge cases
+      exception<Throwable> { call, cause ->
+          // Log the error with structured information
+          call.application.log.error("Unhandled exception", cause)
+          
+          call.respond(FreeMarkerContent(
+              "pages/error.ftl",
+              mapOf(
+                  "errorCode" to 500,
+                  "errorTitle" to "Internal Server Error",
+                  "errorMessage" to "Something went wrong on our end. Please try again later."
+              )
+          ))
+      }
   }
   ```
