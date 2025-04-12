@@ -56,7 +56,7 @@
 </#macro>
 
 <#-- Macro for rendering a tool card -->
-<#macro toolCard id name description icon url isComingSoon=false>
+<#macro toolCard id name description icon="fa-tools" url="" isComingSoon=false>
     <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
         <div class="p-5">
             <div class="flex items-center mb-3">

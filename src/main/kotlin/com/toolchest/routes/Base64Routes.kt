@@ -1,6 +1,7 @@
 package com.toolchest.routes
 
 import com.toolchest.services.Base64Service
+import com.toolchest.services.ToolService
 import io.ktor.http.content.*
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -16,9 +17,13 @@ import java.time.LocalDateTime
  */
 fun Route.base64Routes() {
     val base64Service by inject<Base64Service>()
+    val toolService by inject<ToolService>()
 
     // Main page for the Base64 tool
     get {
+        // Record tool usage
+        toolService.recordToolUsage("base64")
+        
         val model = mapOf(
             "currentTime" to LocalDateTime.now().toString()
         )
@@ -29,6 +34,9 @@ fun Route.base64Routes() {
 
     // Endpoint for encoding text to Base64
     post("/encode") {
+        // Record tool usage
+        toolService.recordToolUsage("base64")
+        
         val parameters = call.receiveParameters()
         val text = parameters["text"] ?: ""
         val urlSafe = parameters["urlSafe"] == "on"
@@ -49,6 +57,9 @@ fun Route.base64Routes() {
 
     // Endpoint for decoding Base64 to text
     post("/decode") {
+        // Record tool usage
+        toolService.recordToolUsage("base64")
+        
         val parameters = call.receiveParameters()
         val base64Text = parameters["text"] ?: ""
         val urlSafe = parameters["urlSafe"] == "on"
@@ -73,6 +84,9 @@ fun Route.base64Routes() {
 
     // Endpoint for encoding a file to Base64
     post("/encode-file") {
+        // Record tool usage
+        toolService.recordToolUsage("base64")
+        
         val multipart = call.receiveMultipart()
         var fileName = ""
         var fileBytes: ByteArray? = null
@@ -127,6 +141,9 @@ fun Route.base64Routes() {
 
     // Endpoint for decoding Base64 to a file
     post("/decode-file") {
+        // Record tool usage
+        toolService.recordToolUsage("base64")
+        
         val parameters = call.receiveParameters()
         val base64Text = parameters["text"] ?: ""
         val fileName = parameters["fileName"] ?: "decoded_file"

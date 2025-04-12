@@ -1,5 +1,6 @@
 package com.toolchest
 
+import com.toolchest.config.configureDatabases
 import com.toolchest.config.configureKoin
 import com.toolchest.config.configurePlugins
 import com.toolchest.config.configureRouting
@@ -40,7 +41,10 @@ fun main() {
 }
 
 fun Application.configureApplication() {
-    // Configure dependency injection first
+    // Configure database connection first to ensure it's ready before any routes are handled
+    configureDatabases()
+    
+    // Configure dependency injection
     configureKoin()
 
     // Configure plugins and middleware
