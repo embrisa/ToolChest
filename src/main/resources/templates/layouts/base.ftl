@@ -1,10 +1,11 @@
+<#macro page title="" description="">
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="<#if pageDescription??>${pageDescription}<#else>Free online utility tools for everyday tasks</#if>">
-    <title><#if pageTitle??>${pageTitle} - ToolChest<#else>ToolChest - Free Online Utility Tools</#if></title>
+    <meta name="description" content="<#if description??>${description}<#elseif pageDescription??>${pageDescription}<#else>Free online utility tools for everyday tasks</#if>">
+    <title><#if title??>${title}<#elseif pageTitle??>${pageTitle} - ToolChest<#else>ToolChest - Free Online Utility Tools</#if></title>
     
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,7 +28,7 @@
     
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-6 flex-grow">
-        ${content}
+        <#nested>
     </main>
     
     <!-- Footer -->
@@ -40,3 +41,4 @@
     <#if bodyScripts??>${bodyScripts}</#if>
 </body>
 </html>
+</#macro>

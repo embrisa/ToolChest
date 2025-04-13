@@ -1,17 +1,14 @@
 package com.toolchest.routes
 
-import com.toolchest.configureApplicationForTests
-import com.toolchest.data.dto.TagDTO
-import com.toolchest.data.dto.ToolDTO
-import com.toolchest.services.ToolService
+import com.toolchest.MockFactory
+import com.toolchest.RouteTestHelper
+import com.toolchest.assertOk
+import com.toolchest.assertRedirectTo
+import com.toolchest.configureFreeMarkerForTests
 import io.kotest.core.spec.style.StringSpec
-import io.kotest.matchers.shouldBe
-import io.kotest.matchers.string.shouldContain
 import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import io.ktor.http.*
+import io.ktor.server.routing.*
 import io.ktor.server.testing.*
-import io.ktor.server.routing.routing
 import io.mockk.*
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
@@ -20,17 +17,9 @@ import org.koin.test.KoinTest
 
 class TagRoutesTest : StringSpec(), KoinTest {
 
-    private lateinit var toolServiceMock: ToolService
-
     init {
         beforeTest {
             stopKoin() // Ensure no existing Koin instance is running
-            toolServiceMock = mockk()
-            startKoin {
-                modules(module {
-                    single { toolServiceMock }
-                })
-            }
         }
 
         afterTest {
@@ -38,65 +27,65 @@ class TagRoutesTest : StringSpec(), KoinTest {
         }
 
         "Tag route should return correct data for valid tag" {
-            // Setup mock responses
-            val testTag = TagDTO(1, "Testing", "testing", "For testing tools", "#FF5733")
-            val testTools = listOf(
-                ToolDTO(
-                    1, "Test Tool 1", "test-tool-1", "A tool for testing", "fas fa-vial", 1, true,
-                    listOf(testTag), 0
-                ),
-                ToolDTO(
-                    2, "Test Tool 2", "test-tool-2", "Another tool for testing", "fas fa-vial", 2, true,
-                    listOf(testTag), 0
-                )
-            )
-            val allTags = listOf(
-                testTag,
-                TagDTO(2, "Development", "development", "Development tools", "#33FF57")
-            )
-
-            // Configure mocks
+            // Create mocks with the MockFactory
+            val toolServiceMock = MockFactory.createToolServiceMock()
+            val testTags = MockFactory.createSampleTags()
+            val testTag = testTags.first()
+            val testTools = MockFactory.createSampleTools(testTags)
+            
+            // Configure specific mock behaviors for this test
             every { toolServiceMock.getTagBySlug("testing") } returns testTag
             every { toolServiceMock.getToolsByTag("testing") } returns testTools
-            every { toolServiceMock.getAllTags() } returns allTags
-            // Mock the popularTools call which might be used in the template
-            every { toolServiceMock.getPopularTools(any()) } returns emptyList()
+            every { toolServiceMock.getAllTags() } returns testTags
+
+            // Set up Koin with our mocks
+            startKoin {
+                modules(module {
+                    single { toolServiceMock }
+                    single { MockFactory.createBase64ServiceMock() }
+                })
+            }
 
             testApplication {
                 application {
-                    configureApplicationForTests()
+                    configureFreeMarkerForTests()
+                    
+                    routing {
+                        homeRoutes()
+                    }
                 }
 
-                // Execute the request
-                val response = client.get("/tag/testing")
-
-                // Verify response status
-                response.status shouldBe HttpStatusCode.OK
-
-                // Verify content
-                val responseText = response.bodyAsText()
-                responseText shouldContain "Testing"
-
-                // Verify service interactions
-                verify(exactly = 1) { toolServiceMock.getTagBySlug("testing") }
-                verify(exactly = 1) { toolServiceMock.getToolsByTag("testing") }
-                verify(exactly = 1) { toolServiceMock.getAllTags() }
+                // Use our new test helper to simplify the test
+                RouteTestHelper.testEndpoint(client, "/tag/testing") { response ->
+                    response.assertOk()
+                    
+                    // Verify service interactions
+                    verify(exactly = 1) { toolServiceMock.getTagBySlug("testing") }
+                    verify(exactly = 1) { toolServiceMock.getToolsByTag("testing") }
+                    verify(exactly = 1) { toolServiceMock.getAllTags() }
+                }
             }
         }
 
         "Tag route should redirect to home page for invalid tag" {
-            // Setup mock responses
+            // Create mock with the MockFactory
+            val toolServiceMock = MockFactory.createToolServiceMock()
+            
+            // Configure specific mock behavior for this test
             every { toolServiceMock.getTagBySlug("nonexistent") } returns null
 
-            // Mock additional methods that might be called when home routes are registered
-            every { toolServiceMock.getAllTools() } returns emptyList()
-            every { toolServiceMock.getAllTags() } returns emptyList()
-            every { toolServiceMock.getPopularTools(any()) } returns emptyList()
+            // Set up Koin with our mocks
+            startKoin {
+                modules(module {
+                    single { toolServiceMock }
+                    single { MockFactory.createBase64ServiceMock() }
+                })
+            }
 
             testApplication {
                 application {
-                    configureApplicationForTests()
-                    // Explicitly register home routes to ensure tag route handler is properly initialized
+                    configureFreeMarkerForTests()
+                    
                     routing {
                         homeRoutes()
                     }
@@ -107,92 +96,90 @@ class TagRoutesTest : StringSpec(), KoinTest {
                     followRedirects = false
                 }
 
-                // Execute the request
-                val response = client.get("/tag/nonexistent")
-
-                // Verify redirect to home page for invalid tag
-                response.status shouldBe HttpStatusCode.Found
-                response.headers[HttpHeaders.Location] shouldBe "/"
-
-                // Verify service interaction
-                verify(exactly = 1) { toolServiceMock.getTagBySlug("nonexistent") }
+                // Use our new test helper with redirect assertion
+                RouteTestHelper.testEndpoint(client, "/tag/nonexistent") { response ->
+                    response.assertRedirectTo("/")
+                    
+                    // Verify service interaction
+                    verify(exactly = 1) { toolServiceMock.getTagBySlug("nonexistent") }
+                }
             }
         }
 
         "Home page should display tags and popular tools" {
-            // Setup mock responses
-            val tags = listOf(
-                TagDTO(1, "Encoding", "encoding", "Encoding tools", "#3B82F6"),
-                TagDTO(2, "Conversion", "conversion", "Conversion tools", "#10B981")
-            )
+            // Create mocks with the MockFactory
+            val toolServiceMock = MockFactory.createToolServiceMock()
+            val tags = MockFactory.createSampleTags()
+            val allTools = MockFactory.createSampleTools(tags)
+            val popularTools = listOf(allTools.first())
 
-            val allTools = listOf(
-                ToolDTO(
-                    1, "Base64", "base64", "Encode/decode Base64", "fas fa-exchange-alt", 1, true,
-                    listOf(tags[0]), 10
-                ),
-                ToolDTO(
-                    2, "JSON Formatter", "json", "Format JSON", "fas fa-code", 2, true,
-                    listOf(tags[1]), 5
-                )
-            )
-
-            val popularTools = listOf(
-                ToolDTO(
-                    1, "Base64", "base64", "Encode/decode Base64", "fas fa-exchange-alt", 1, true,
-                    listOf(tags[0]), 10
-                )
-            )
-
-            // Configure mocks
+            // Configure specific mock behaviors for this test
             every { toolServiceMock.getAllTools() } returns allTools
             every { toolServiceMock.getAllTags() } returns tags
             every { toolServiceMock.getPopularTools(5) } returns popularTools
 
+            // Set up Koin with our mocks
+            startKoin {
+                modules(module {
+                    single { toolServiceMock }
+                    single { MockFactory.createBase64ServiceMock() }
+                })
+            }
+
             testApplication {
                 application {
-                    configureApplicationForTests()
+                    configureFreeMarkerForTests()
+                    
+                    routing {
+                        homeRoutes()
+                    }
                 }
 
-                // Execute request
-                val response = client.get("/")
-
-                // Verify response status
-                response.status shouldBe HttpStatusCode.OK
-
-                // Verify content
-                val responseText = response.bodyAsText()
-
-                // Test names and descriptions instead of just specific tags
-                responseText shouldContain "Base64"
-                responseText shouldContain "JSON Formatter"
-                responseText shouldContain "Encode/decode Base64"
-                responseText shouldContain "Format JSON"
-
-                // Verify popular tools section
-                responseText shouldContain "Popular"
-
-                // Verify service interactions
-                verify(exactly = 1) { toolServiceMock.getAllTools() }
-                verify(exactly = 1) { toolServiceMock.getAllTags() }
-                verify(exactly = 1) { toolServiceMock.getPopularTools(5) }
+                // Use our new test helper
+                RouteTestHelper.testEndpoint(client, "/") { response ->
+                    response.assertOk()
+                    
+                    // Verify service interactions
+                    verify(exactly = 1) { toolServiceMock.getAllTools() }
+                    verify(exactly = 1) { toolServiceMock.getAllTags() }
+                    verify(exactly = 1) { toolServiceMock.getPopularTools(any()) }
+                }
             }
         }
 
         "Tool usage should be recorded when visiting a tool page" {
-            // Setup mock
-            every { toolServiceMock.recordToolUsage("base64") } just runs
+            // Create mocks with the MockFactory
+            val toolServiceMock = MockFactory.createToolServiceMock()
+            val base64ServiceMock = MockFactory.createBase64ServiceMock()
+            
+            // Set up Koin with our mocks
+            startKoin {
+                modules(module {
+                    single { toolServiceMock }
+                    single { base64ServiceMock }
+                })
+            }
 
+            // Test using our specialized base64Routes test helper
             testApplication {
                 application {
-                    configureApplicationForTests()
+                    configureFreeMarkerForTests()
+                    
+                    routing {
+                        homeRoutes()
+                        route("base64") {
+                            base64Routes()
+                        }
+                    }
                 }
 
-                // Execute request to a tool page using the correct path
-                client.get("/base64")
-
-                // Verify service was called to record usage
-                verify(exactly = 1) { toolServiceMock.recordToolUsage("base64") }
+                // Execute request to the base64 page and verify
+                RouteTestHelper.testEndpoint(client, "/base64") { response ->
+                    response.assertOk()
+                    
+                    // Verify service was called to record usage
+                    verify { toolServiceMock.recordToolUsage("base64") }
+                }
             }
         }
     }

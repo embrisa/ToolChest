@@ -175,7 +175,7 @@ Gradle:
 b. Testing
 Automated Testing:
 - Set up unit tests for service logic and integration tests for endpoints
-- Use testing libraries like JUnit or KotlinTest
+- Uses Kotest and MockK for testing
 
 c. Cost-Effective Deployment
 Direct PaaS Deployment:

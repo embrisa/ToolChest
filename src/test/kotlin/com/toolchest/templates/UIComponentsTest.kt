@@ -1,5 +1,6 @@
 package com.toolchest.templates
 
+import com.toolchest.configureApplicationForTests
 import com.toolchest.configureFreeMarkerForTests
 import com.toolchest.data.dto.TagDTO
 import com.toolchest.data.dto.ToolDTO
@@ -24,30 +25,31 @@ class UIComponentsTest : StringSpec({
     
     "tag navigation should display all tags with the current tag highlighted" {
         testApplication {
-            // Configure FreeMarker for templates
+            // For UI component tests, we need to use configureFreeMarkerForTests directly
+            // instead of configureApplicationForTests, to avoid duplicate route registration
             application {
                 configureFreeMarkerForTests()
-            }
-
-            // Configure test routes that use the tag navigation component
-            routing {
-                get("/test-tag-nav") {
-                    val allTags = listOf(
-                        TagDTO(1, "Encoding", "encoding", "Encoding tools", "#3B82F6"),
-                        TagDTO(2, "Conversion", "conversion", "Conversion tools", "#10B981"),
-                        TagDTO(3, "Formatting", "formatting", "Formatting tools", "#EF4444")
-                    )
-                    val currentTag = allTags[0]
-
-                    // Debug output
-                    application.log.info("Rendering tag navigation with ${allTags.size} tags")
-
-                    call.respond(
-                        FreeMarkerContent(
-                            "test/test-tag-navigation.ftl",
-                            mapOf("allTags" to allTags, "currentTag" to currentTag)
+                
+                // Configure test routes that use the tag navigation component
+                routing {
+                    get("/test-tag-nav") {
+                        val allTags = listOf(
+                            TagDTO(1, "Encoding", "encoding", "Encoding tools", "#3B82F6"),
+                            TagDTO(2, "Conversion", "conversion", "Conversion tools", "#10B981"),
+                            TagDTO(3, "Formatting", "formatting", "Formatting tools", "#EF4444")
                         )
-                    )
+                        val currentTag = allTags[0]
+
+                        // Debug output
+                        application.log.info("Rendering tag navigation with ${allTags.size} tags")
+
+                        call.respond(
+                            FreeMarkerContent(
+                                "test/test-tag-navigation.ftl",
+                                mapOf("allTags" to allTags, "currentTag" to currentTag)
+                            )
+                        )
+                    }
                 }
             }
 
@@ -84,37 +86,37 @@ class UIComponentsTest : StringSpec({
 
     "tool card should display tool info with associated tags" {
         testApplication {
-            // Configure FreeMarker for templates
+            // For UI component tests, we need to use configureFreeMarkerForTests directly
             application {
                 configureFreeMarkerForTests()
-            }
-
-            // Configure test route that uses the tool card component with tags
-            routing {
-                get("/test-tool-card") {
-                    val tags = listOf(
-                        TagDTO(1, "Encoding", "encoding", "Encoding tools", "#3B82F6"),
-                        TagDTO(2, "Popular", "popular", "Popular tools", "#EF4444")
-                    )
-
-                    val tool = ToolDTO(
-                        id = 1,
-                        name = "Base64 Encoder/Decoder",
-                        slug = "base64",
-                        description = "Encode or decode text and files using Base64",
-                        iconClass = "fas fa-exchange-alt",
-                        displayOrder = 1,
-                        isActive = true,
-                        tags = tags,
-                        usageCount = 10
-                    )
-
-                    call.respond(
-                        FreeMarkerContent(
-                            "test/test-tool-card.ftl",
-                            mapOf("tool" to tool)
+                
+                // Configure test route that uses the tool card component with tags
+                routing {
+                    get("/test-tool-card") {
+                        val tags = listOf(
+                            TagDTO(1, "Encoding", "encoding", "Encoding tools", "#3B82F6"),
+                            TagDTO(2, "Popular", "popular", "Popular tools", "#EF4444")
                         )
-                    )
+
+                        val tool = ToolDTO(
+                            id = 1,
+                            name = "Base64 Encoder/Decoder",
+                            slug = "base64",
+                            description = "Encode or decode text and files using Base64",
+                            iconClass = "fas fa-exchange-alt",
+                            displayOrder = 1,
+                            isActive = true,
+                            tags = tags,
+                            usageCount = 10
+                        )
+
+                        call.respond(
+                            FreeMarkerContent(
+                                "test/test-tool-card.ftl",
+                                mapOf("tool" to tool)
+                            )
+                        )
+                    }
                 }
             }
 
@@ -168,47 +170,47 @@ class UIComponentsTest : StringSpec({
 
     "tool grid should display multiple tools with various tag combinations" {
         testApplication {
-            // Configure FreeMarker for templates
+            // For UI component tests, we need to use configureFreeMarkerForTests directly
             application {
                 configureFreeMarkerForTests()
-            }
+                
+                // Configure test route that displays a grid of tools with various tag combinations
+                routing {
+                    get("/test-tool-grid") {
+                        // Create test tags
+                        val encodingTag = TagDTO(1, "Encoding", "encoding", "Encoding tools", "#3B82F6")
+                        val conversionTag = TagDTO(2, "Conversion", "conversion", "Conversion tools", "#10B981")
+                        val popularTag = TagDTO(3, "Popular", "popular", "Popular tools", "#EF4444")
 
-            // Configure test route that displays a grid of tools with various tag combinations
-            routing {
-                get("/test-tool-grid") {
-                    // Create test tags
-                    val encodingTag = TagDTO(1, "Encoding", "encoding", "Encoding tools", "#3B82F6")
-                    val conversionTag = TagDTO(2, "Conversion", "conversion", "Conversion tools", "#10B981")
-                    val popularTag = TagDTO(3, "Popular", "popular", "Popular tools", "#EF4444")
-
-                    // Create test tools with different tag combinations
-                    val toolsList = listOf(
-                        ToolDTO(
-                            1, "Tool with 1 tag", "tool1", "Description", "fas fa-1", 1, true,
-                            listOf(encodingTag), 5
-                        ),
-                        ToolDTO(
-                            2, "Tool with 2 tags", "tool2", "Description", "fas fa-2", 2, true,
-                            listOf(encodingTag, conversionTag), 10
-                        ),
-                        ToolDTO(
-                            3, "Tool with 3 tags", "tool3", "Description", "fas fa-3", 3, true,
-                            listOf(encodingTag, conversionTag, popularTag), 15
-                        )
-                    )
-
-                    // Respond with tag.ftl template
-                    call.respond(
-                        FreeMarkerContent(
-                            "pages/tag.ftl",
-                            mapOf(
-                                "tag" to encodingTag,
-                                "tools" to toolsList,
-                                "allTags" to listOf(encodingTag, conversionTag, popularTag),
-                                "testMode" to true
+                        // Create test tools with different tag combinations
+                        val toolsList = listOf(
+                            ToolDTO(
+                                1, "Tool with 1 tag", "tool1", "Description", "fas fa-1", 1, true,
+                                listOf(encodingTag), 5
+                            ),
+                            ToolDTO(
+                                2, "Tool with 2 tags", "tool2", "Description", "fas fa-2", 2, true,
+                                listOf(encodingTag, conversionTag), 10
+                            ),
+                            ToolDTO(
+                                3, "Tool with 3 tags", "tool3", "Description", "fas fa-3", 3, true,
+                                listOf(encodingTag, conversionTag, popularTag), 15
                             )
                         )
-                    )
+
+                        // Respond with tag.ftl template
+                        call.respond(
+                            FreeMarkerContent(
+                                "pages/tag.ftl",
+                                mapOf(
+                                    "tag" to encodingTag,
+                                    "tools" to toolsList,
+                                    "allTags" to listOf(encodingTag, conversionTag, popularTag),
+                                    "testMode" to true
+                                )
+                            )
+                        )
+                    }
                 }
             }
 
@@ -265,31 +267,31 @@ class UIComponentsTest : StringSpec({
 
     "empty tag results should display message and tag navigation" {
         testApplication {
-            // Configure FreeMarker for templates
+            // For UI component tests, we need to use configureFreeMarkerForTests directly
             application {
                 configureFreeMarkerForTests()
-            }
+                
+                // Configure test route for the case where a tag has no tools
+                routing {
+                    get("/test-empty-tag") {
+                        val tag = TagDTO(1, "Empty", "empty", "Tag with no tools", "#999999")
+                        val allTags = listOf(
+                            tag,
+                            TagDTO(2, "Other", "other", "Another tag", "#333333")
+                        )
 
-            // Configure test route for the case where a tag has no tools
-            routing {
-                get("/test-empty-tag") {
-                    val tag = TagDTO(1, "Empty", "empty", "Tag with no tools", "#999999")
-                    val allTags = listOf(
-                        tag,
-                        TagDTO(2, "Other", "other", "Another tag", "#333333")
-                    )
-
-                    call.respond(
-                        FreeMarkerContent(
-                            "pages/tag.ftl",
-                            mapOf(
-                                "tag" to tag,
-                                "tools" to emptyList<ToolDTO>(),
-                                "allTags" to allTags,
-                                "testMode" to true
+                        call.respond(
+                            FreeMarkerContent(
+                                "pages/tag.ftl",
+                                mapOf(
+                                    "tag" to tag,
+                                    "tools" to emptyList<ToolDTO>(),
+                                    "allTags" to allTags,
+                                    "testMode" to true
+                                )
                             )
                         )
-                    )
+                    }
                 }
             }
 

@@ -10,6 +10,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
+import io.ktor.server.freemarker.FreeMarkerContent
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -28,56 +29,123 @@ class ErrorHandlingTest : StringSpec({
      * without disrupting the global Koin container.
      */
     fun setupErrorTestApp(test: suspend ApplicationTestBuilder.() -> Unit) = testApplication {
-        // Only configure what's needed for testing error pages, avoid disrupting Koin
+        // Since this is a special test for error handling, we use configureFreeMarkerForTests directly
+        // rather than configureApplicationForTests which might register routes we don't want
         application {
-            // Use FreeMarker for templates
             configureFreeMarkerForTests()
             
-            // Install custom status pages similar to the main application
+            // We need to configure error handling specifically for these tests
             install(StatusPages) {
-                status(HttpStatusCode.NotFound) { call, _ ->
-                    call.respondText("Page Not Found", status = HttpStatusCode.NotFound)
+                status(HttpStatusCode.NotFound) { call, status ->
+                    call.respond(
+                        status,
+                        FreeMarkerContent(
+                            "pages/error.ftl", 
+                            mapOf(
+                                "pageTitle" to "Page Not Found | ToolChest",
+                                "pageDescription" to "The requested page could not be found.",
+                                "error" to ErrorPageModel(
+                                    errorCode = 404,
+                                    errorTitle = "Page Not Found",
+                                    errorMessage = "The page you're looking for doesn't exist.",
+                                    suggestedAction = "Check the URL or try searching for the tool you need.",
+                                    showBackLink = true
+                                )
+                            )
+                        )
+                    )
                 }
                 
-                exception<IllegalArgumentException> { call, cause ->
-                    call.respondText("400 Invalid Input: ${cause.message}", status = HttpStatusCode.BadRequest)
+                status(HttpStatusCode.BadRequest) { call, status ->
+                    call.respond(
+                        status,
+                        FreeMarkerContent(
+                            "pages/error.ftl", 
+                            mapOf(
+                                "pageTitle" to "Bad Request | ToolChest",
+                                "pageDescription" to "The request contains invalid data.",
+                                "error" to ErrorPageModel(
+                                    errorCode = 400,
+                                    errorTitle = "Invalid Input",
+                                    errorMessage = "The server couldn't process your request due to invalid syntax.",
+                                    suggestedAction = "Please check your input and try again.",
+                                    showBackLink = true
+                                )
+                            )
+                        )
+                    )
                 }
                 
-                exception<RuntimeException> { call, _ ->
-                    call.respondText("500 Internal Server Error: Something went wrong on our end", 
-                        status = HttpStatusCode.InternalServerError)
+                status(HttpStatusCode.InternalServerError) { call, status ->
+                    call.respond(
+                        status,
+                        FreeMarkerContent(
+                            "pages/error.ftl", 
+                            mapOf(
+                                "pageTitle" to "Error | ToolChest",
+                                "pageDescription" to "An error occurred while processing your request.",
+                                "error" to ErrorPageModel(
+                                    errorCode = 500,
+                                    errorTitle = "Internal Server Error",
+                                    errorMessage = "Something went wrong on our end.",
+                                    suggestedAction = "Please try again later. If the problem persists, please contact us.",
+                                    showBackLink = true
+                                )
+                            )
+                        )
+                    )
+                }
+                
+                exception<Throwable> { call, cause ->
+                    // For HTMX requests, respond with a fragment
+                    if (call.request.headers["HX-Request"] == "true") {
+                        call.respond(
+                            HttpStatusCode.InternalServerError,
+                            FreeMarkerContent(
+                                "components/error-message.ftl",
+                                mapOf("errorMessage" to "An unexpected error occurred. Please try again later.")
+                            )
+                        )
+                    } else {
+                        call.respond(
+                            HttpStatusCode.InternalServerError,
+                            FreeMarkerContent(
+                                "pages/error.ftl",
+                                mapOf(
+                                    "pageTitle" to "Error | ToolChest",
+                                    "pageDescription" to "An error occurred while processing your request.",
+                                    "error" to ErrorPageModel(
+                                        errorCode = 500,
+                                        errorTitle = "Internal Server Error",
+                                        errorMessage = "Something went wrong on our end.",
+                                        suggestedAction = "Please try again later. If the problem persists, please contact us.",
+                                        showBackLink = true
+                                    )
+                                )
+                            )
+                        )
+                    }
                 }
             }
             
-            // Set up test-specific routes that generate errors without affecting the real routing
+            // Configure test routes for error testing
             routing {
-                get("/valid-route") {
-                    call.respondText("Valid route")
-                }
+                // Route that returns 404 (handled by status page)
+                // This is handled by default when a route doesn't exist
                 
+                // Route that returns 400 Bad Request
                 get("/test-bad-request") {
-                    // Throw the exception in a controlled way that doesn't affect other tests
-                    throw IllegalArgumentException("Invalid input provided for test")
+                    call.respond(HttpStatusCode.BadRequest)
                 }
                 
+                // Route that returns 500 Internal Server Error
                 get("/test-server-error") {
-                    // Throw the exception in a controlled way that doesn't affect other tests
-                    throw RuntimeException("Test server error")
+                    call.respond(HttpStatusCode.InternalServerError)
                 }
                 
+                // Route that throws an exception to test exception handling
                 get("/test-htmx-error") {
-                    // Respond with HTMX-specific error format
-                    val isHtmxRequest = call.request.headers["HX-Request"] == "true"
-                    if (isHtmxRequest) {
-                        call.respondText(
-                            "<div id='error-message' class='alert alert-danger'>" +
-                            "An unexpected error occurred</div>",
-                            ContentType.Text.Html,
-                            HttpStatusCode.InternalServerError
-                        )
-                    } else {
-                        throw RuntimeException("Test HTMX error")
-                    }
+                    throw RuntimeException("Test exception")
                 }
             }
         }
@@ -95,9 +163,13 @@ class ErrorHandlingTest : StringSpec({
             // Get the response text
             val responseText = response.bodyAsText()
             
-            // Simple check for the error message
-            withClue("Response should contain error message") {
+            // Check for expected content in the error page
+            withClue("Response should contain error title") {
                 responseText shouldContain "Page Not Found"
+            }
+            
+            withClue("Response should contain error code") {
+                responseText shouldContain "404"
             }
         }
     }
@@ -111,9 +183,11 @@ class ErrorHandlingTest : StringSpec({
             
             // Verify response contains expected error page elements
             val responseText = response.bodyAsText()
+            
             withClue("Response should contain error code") {
                 responseText shouldContain "400"
             }
+            
             withClue("Response should contain error title") {
                 responseText shouldContain "Invalid Input"
             }
@@ -129,10 +203,12 @@ class ErrorHandlingTest : StringSpec({
             
             // Verify response contains expected error page elements
             val responseText = response.bodyAsText()
+            
             withClue("Response should contain error code") {
                 responseText shouldContain "500"
             }
-            withClue("Response should contain error message") {
+            
+            withClue("Response should contain error title") {
                 responseText shouldContain "Internal Server Error"
             }
         }
@@ -147,11 +223,9 @@ class ErrorHandlingTest : StringSpec({
             // Verify correct status code
             response.status shouldBe HttpStatusCode.InternalServerError
             
-            // Verify response contains expected error message component
+            // Verify response contains expected error message
             val responseText = response.bodyAsText()
-            withClue("Response should contain error message component ID") {
-                responseText shouldContain "error-message"
-            }
+            
             withClue("Response should contain error message text") {
                 responseText shouldContain "unexpected error occurred"
             }

@@ -2,6 +2,7 @@ package com.toolchest.config
 
 import com.toolchest.routes.base64Routes
 import com.toolchest.routes.homeRoutes
+import com.toolchest.services.ToolService
 import io.ktor.http.CacheControl
 import io.ktor.http.ContentType
 import io.ktor.server.application.Application
@@ -13,9 +14,12 @@ import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
 import io.ktor.server.routing.route
 import io.ktor.server.routing.routing
+import org.koin.ktor.ext.inject
 
 /** Configures all routes for the application */
 fun Application.configureRouting() {
+    val toolService by inject<ToolService>()
+    
     routing {
         // Serve static resources from resources/static directory
         staticResources("/static", "static") {
@@ -35,20 +39,10 @@ fun Application.configureRouting() {
         // Base64 tool routes
         route("/base64") { base64Routes() }
 
-        // Placeholder routes for links in header and footer
-        get("/tools") {
-            val model = mapOf(
-                "pageTitle" to "All Tools",
-                "pageDescription" to "Browse all available tools in ToolChest."
-            )
-
-            call.respond(FreeMarkerContent("pages/coming-soon.ftl", model))
-        }
-
         // Legal pages
         get("/privacy") {
             val model = mapOf(
-                "pageTitle" to "Privacy Policy",
+                "title" to "Privacy Policy",
                 "pageDescription" to "ToolChest privacy policy."
             )
 
@@ -57,7 +51,7 @@ fun Application.configureRouting() {
 
         get("/terms") {
             val model = mapOf(
-                "pageTitle" to "Terms of Service",
+                "title" to "Terms of Service",
                 "pageDescription" to "ToolChest terms of service."
             )
 
@@ -66,33 +60,13 @@ fun Application.configureRouting() {
 
         get("/contact") {
             val model = mapOf(
-                "pageTitle" to "Contact Us",
+                "title" to "Contact Us",
                 "pageDescription" to "Contact the ToolChest team."
             )
 
             call.respond(FreeMarkerContent("pages/coming-soon.ftl", model))
         }
         
-        // Category pages
-        val categoryRoutes = listOf(
-            "encoders-decoders", 
-            "formatters", 
-            "converters", 
-            "generators"
-        )
-        
-        categoryRoutes.forEach { category ->
-            get("/category/$category") {
-                val formattedCategory = category.split("-")
-                    .joinToString(" ") { it.capitalize() }
-                
-                val model = mapOf(
-                    "pageTitle" to "$formattedCategory Tools",
-                    "pageDescription" to "Browse $formattedCategory tools in ToolChest."
-                )
-                
-                call.respond(FreeMarkerContent("pages/coming-soon.ftl", model))
-            }
-        }
+        // Note: Tag and category-based routes have been removed in favor of a simpler navigation
     }
 }

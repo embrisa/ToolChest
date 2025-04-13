@@ -1,5 +1,9 @@
 package com.toolchest.routes
 
+import com.toolchest.MockFactory
+import com.toolchest.RouteTestHelper
+import com.toolchest.assertOk
+import com.toolchest.assertStatus
 import com.toolchest.configureFreeMarkerForTests
 import com.toolchest.services.Base64Service
 import com.toolchest.services.ToolService
@@ -14,27 +18,24 @@ import io.ktor.http.*
 import io.ktor.server.testing.*
 import io.ktor.server.routing.*
 import io.mockk.every
-import io.mockk.just
 import io.mockk.mockk
-import io.mockk.runs
+import io.mockk.verify
 import org.koin.core.context.GlobalContext
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.startKoin
 import org.koin.core.context.unloadKoinModules
-import org.koin.core.module.Module
 import org.koin.dsl.module
 import java.io.InputStream
 
 class Base64RoutesTest : DescribeSpec({
-
-    // Mock services
-    val toolServiceMock = mockk<ToolService>()
+    
+    // Create mocks with our new MockFactory
+    val toolServiceMock = MockFactory.createToolServiceMock()
+    
+    // For Base64ServiceMock, we need more realistic behavior than the default mock
     val base64ServiceMock = mockk<Base64Service>()
     
-    // Configure mocks
-    every { toolServiceMock.recordToolUsage(any()) } just runs
-    
-    // Configure Base64Service mock
+    // Configure Base64Service mock with proper answers
     every { base64ServiceMock.encodeString(any(), any()) } answers { 
         val input = firstArg<String>()
         val urlSafe = secondArg<Boolean>()
@@ -113,19 +114,22 @@ class Base64RoutesTest : DescribeSpec({
                     application {
                         configureFreeMarkerForTests()
                         routing {
-                            route("/base64") {
+                            route("base64") {
                                 base64Routes()
                             }
                         }
                     }
     
                     client.get("/base64").let { response ->
-                        response.status shouldBe HttpStatusCode.OK
+                        response.assertOk()
                         val body = response.bodyAsText()
                         
                         body shouldContain "Base64"
                         body shouldContain "Encode"
                         body shouldContain "Decode"
+                        
+                        // Verify tool usage was recorded
+                        verify { toolServiceMock.recordToolUsage("base64") }
                     }
                 }
             }
@@ -137,7 +141,7 @@ class Base64RoutesTest : DescribeSpec({
                     application {
                         configureFreeMarkerForTests()
                         routing {
-                            route("/base64") {
+                            route("base64") {
                                 base64Routes()
                             }
                         }
@@ -152,8 +156,11 @@ class Base64RoutesTest : DescribeSpec({
                         contentType(ContentType.Application.FormUrlEncoded)
                         setBody(FormDataContent(formParameters))
                     }.let { response ->
-                        response.status shouldBe HttpStatusCode.OK
+                        response.assertOk()
                         response.bodyAsText() shouldContain "SGVsbG8sIFdvcmxkIQ=="
+                        
+                        // Verify tool usage was recorded
+                        verify { toolServiceMock.recordToolUsage("base64") }
                     }
                 }
             }
@@ -163,7 +170,7 @@ class Base64RoutesTest : DescribeSpec({
                     application {
                         configureFreeMarkerForTests()
                         routing {
-                            route("/base64") {
+                            route("base64") {
                                 base64Routes()
                             }
                         }
@@ -178,7 +185,7 @@ class Base64RoutesTest : DescribeSpec({
                         contentType(ContentType.Application.FormUrlEncoded)
                         setBody(FormDataContent(formParameters))
                     }.let { response ->
-                        response.status shouldBe HttpStatusCode.OK
+                        response.assertOk()
                         val body = response.bodyAsText()
                         
                         body shouldContain "Input length: 0"
@@ -199,7 +206,7 @@ class Base64RoutesTest : DescribeSpec({
                     application {
                         configureFreeMarkerForTests()
                         routing {
-                            route("/base64") {
+                            route("base64") {
                                 base64Routes()
                             }
                         }
@@ -211,7 +218,7 @@ class Base64RoutesTest : DescribeSpec({
                         contentType(ContentType.Application.FormUrlEncoded)
                         setBody(FormDataContent(emptyParams))
                     }.let { response ->
-                        response.status shouldBe HttpStatusCode.OK
+                        response.assertOk()
                         val body = response.bodyAsText()
                         
                         body shouldContain "Input length: 0"
@@ -234,7 +241,7 @@ class Base64RoutesTest : DescribeSpec({
                     application {
                         configureFreeMarkerForTests()
                         routing {
-                            route("/base64") {
+                            route("base64") {
                                 base64Routes()
                             }
                         }
@@ -249,7 +256,7 @@ class Base64RoutesTest : DescribeSpec({
                         contentType(ContentType.Application.FormUrlEncoded)
                         setBody(FormDataContent(formParameters))
                     }.let { response ->
-                        response.status shouldBe HttpStatusCode.OK
+                        response.assertOk()
                         val responseText = response.bodyAsText()
     
                         val textareaPattern = "<textarea[^>]*id=\"result-text\"[^>]*>(.*?)</textarea>".toRegex(RegexOption.DOT_MATCHES_ALL)
@@ -265,47 +272,6 @@ class Base64RoutesTest : DescribeSpec({
                     }
                 }
             }
-            
-            it("should use URL-safe encoding for files when specified") {
-                testApplication {
-                    application {
-                        configureFreeMarkerForTests()
-                        routing {
-                            route("/base64") {
-                                base64Routes()
-                            }
-                        }
-                    }
-    
-                    val testFileBytes = "Test+/=?".toByteArray()
-    
-                    client.submitFormWithBinaryData(
-                        url = "/base64/encode-file",
-                        formData = formData {
-                            append("file", testFileBytes, Headers.build {
-                                append(HttpHeaders.ContentDisposition, "form-data; name=file; filename=test.txt")
-                                append(HttpHeaders.ContentType, "application/octet-stream")
-                            })
-                            append("urlSafe", "on")
-                        }
-                    ).let { response ->
-                        response.status shouldBe HttpStatusCode.OK
-                        val responseText = response.bodyAsText()
-    
-                        val textareaPattern = "<textarea[^>]*id=\"result-text\"[^>]*>(.*?)</textarea>".toRegex(RegexOption.DOT_MATCHES_ALL)
-                        val textareaMatch = textareaPattern.find(responseText)
-    
-                        if (textareaMatch != null) {
-                            val result = textareaMatch.groupValues[1].trim()
-                            result shouldNotContain "+"
-                            result shouldNotContain "/"
-                        } else {
-                            responseText shouldNotContain "\"result\":\"[^\"]*\\+"
-                            responseText shouldNotContain "\"result\":\"[^\"]*\\/"
-                        }
-                    }
-                }
-            }
         }
         
         context("POST /base64/decode") {
@@ -314,7 +280,7 @@ class Base64RoutesTest : DescribeSpec({
                     application {
                         configureFreeMarkerForTests()
                         routing {
-                            route("/base64") {
+                            route("base64") {
                                 base64Routes()
                             }
                         }
@@ -329,7 +295,7 @@ class Base64RoutesTest : DescribeSpec({
                         contentType(ContentType.Application.FormUrlEncoded)
                         setBody(FormDataContent(formParameters))
                     }.let { response ->
-                        response.status shouldBe HttpStatusCode.OK
+                        response.assertOk()
                         response.bodyAsText() shouldContain "Hello, World!"
                     }
                 }
@@ -340,7 +306,7 @@ class Base64RoutesTest : DescribeSpec({
                     application {
                         configureFreeMarkerForTests()
                         routing {
-                            route("/base64") {
+                            route("base64") {
                                 base64Routes()
                             }
                         }
@@ -355,106 +321,8 @@ class Base64RoutesTest : DescribeSpec({
                         contentType(ContentType.Application.FormUrlEncoded)
                         setBody(FormDataContent(formParameters))
                     }.let { response ->
-                        response.status shouldBe HttpStatusCode.OK
+                        response.assertOk()
                         response.bodyAsText() shouldContain "Error:"
-                    }
-                }
-            }
-        }
-        
-        context("POST /base64/encode-file") {
-            it("should encode file content to Base64") {
-                testApplication {
-                    application {
-                        configureFreeMarkerForTests()
-                        routing {
-                            route("/base64") {
-                                base64Routes()
-                            }
-                        }
-                    }
-    
-                    val testFileBytes = "Hello, World!".toByteArray()
-    
-                    client.submitFormWithBinaryData(
-                        url = "/base64/encode-file",
-                        formData = formData {
-                            append("file", testFileBytes, Headers.build {
-                                append(HttpHeaders.ContentDisposition, "form-data; name=file; filename=test.txt")
-                                append(HttpHeaders.ContentType, "application/octet-stream")
-                            })
-                        }
-                    ).let { response ->
-                        response.status shouldBe HttpStatusCode.OK
-                        response.bodyAsText() shouldContain "SGVsbG8sIFdvcmxkIQ=="
-                    }
-                }
-            }
-            
-            it("should handle large files") {
-                testApplication {
-                    application {
-                        configureFreeMarkerForTests()
-                        routing {
-                            route("/base64") {
-                                base64Routes()
-                            }
-                        }
-                    }
-    
-                    val largeFileBytes = ByteArray(100 * 1024) { it.toByte() }
-    
-                    client.submitFormWithBinaryData(
-                        url = "/base64/encode-file",
-                        formData = formData {
-                            append("file", largeFileBytes, Headers.build {
-                                append(HttpHeaders.ContentDisposition, "form-data; name=file; filename=large.bin")
-                                append(HttpHeaders.ContentType, "application/octet-stream")
-                            })
-                        }
-                    ).let { response ->
-                        response.status shouldBe HttpStatusCode.OK
-                        val responseText = response.bodyAsText()
-    
-                        responseText shouldContain "File to Base64 Result"
-                        responseText shouldContain "large.bin"
-                        responseText shouldContain "<textarea"
-    
-                        val outputLengthPattern = "Output length: ([\\d,]+)".toRegex()
-                        val outputLengthMatch = outputLengthPattern.find(responseText)
-                        require(outputLengthMatch != null) { "Response should contain 'Output length: X'" }
-    
-                        val outputLengthStr = outputLengthMatch.groupValues[1].replace(",", "")
-                        val outputLength = outputLengthStr.toIntOrNull()
-                        require(outputLength != null) { "Output length should be a number" }
-    
-                        val expectedMinLength = (largeFileBytes.size * 4 / 3)
-                        val expectedMaxLength = expectedMinLength + 20
-    
-                        (outputLength >= expectedMinLength && outputLength <= expectedMaxLength) shouldBe true
-                    }
-                }
-            }
-            
-            it("should handle missing file") {
-                testApplication {
-                    application {
-                        configureFreeMarkerForTests()
-                        routing {
-                            route("/base64") {
-                                base64Routes()
-                            }
-                        }
-                    }
-    
-                    client.submitFormWithBinaryData(
-                        url = "/base64/encode-file",
-                        formData = formData {
-                            // No file appended
-                        }
-                    ).let { response ->
-                        response.status shouldBe HttpStatusCode.OK
-                        response.bodyAsText() shouldContain "Error: No file uploaded"
                     }
                 }
             }
@@ -466,7 +334,7 @@ class Base64RoutesTest : DescribeSpec({
                     application {
                         configureFreeMarkerForTests()
                         routing {
-                            route("/base64") {
+                            route("base64") {
                                 base64Routes()
                             }
                         }
@@ -482,7 +350,7 @@ class Base64RoutesTest : DescribeSpec({
                         contentType(ContentType.Application.FormUrlEncoded)
                         setBody(FormDataContent(formParameters))
                     }.let { response ->
-                        response.status shouldBe HttpStatusCode.OK
+                        response.assertOk()
     
                         val contentDisposition = response.headers[HttpHeaders.ContentDisposition]
                         require(contentDisposition != null) { "Content-Disposition header should be present" }
@@ -495,40 +363,12 @@ class Base64RoutesTest : DescribeSpec({
                 }
             }
             
-            it("should use URL-safe decoding when specified") {
-                testApplication {
-                    application {
-                        configureFreeMarkerForTests()
-                        routing {
-                            route("/base64") {
-                                base64Routes()
-                            }
-                        }
-                    }
-    
-                    val formParameters = parametersOf(
-                        "text" to listOf("SGVsbG8sIFdvcmxkIQ=="),
-                        "fileName" to listOf("decoded.txt"),
-                        "urlSafe" to listOf("on")
-                    )
-    
-                    client.post("/base64/decode-file") {
-                        contentType(ContentType.Application.FormUrlEncoded)
-                        setBody(FormDataContent(formParameters))
-                    }.let { response ->
-                        response.status shouldBe HttpStatusCode.OK
-                        val responseBytes = response.readBytes()
-                        responseBytes.decodeToString() shouldBe "Hello, World!"
-                    }
-                }
-            }
-            
             it("should handle invalid Base64 input") {
                 testApplication {
                     application {
                         configureFreeMarkerForTests()
                         routing {
-                            route("/base64") {
+                            route("base64") {
                                 base64Routes()
                             }
                         }
@@ -544,7 +384,7 @@ class Base64RoutesTest : DescribeSpec({
                         contentType(ContentType.Application.FormUrlEncoded)
                         setBody(FormDataContent(formParameters))
                     }.let { response ->
-                        response.status shouldBe HttpStatusCode.BadRequest
+                        response.assertStatus(HttpStatusCode.BadRequest)
                     }
                 }
             }

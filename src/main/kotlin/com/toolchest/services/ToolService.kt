@@ -50,4 +50,28 @@ interface ToolService {
      * @return List of popular tools sorted by usage count
      */
     fun getPopularTools(limit: Int = 5): List<ToolDTO>
+    
+    /**
+     * Search for tools by query string
+     * @param query The search query
+     * @return List of tools matching the query
+     */
+    fun searchTools(query: String): List<ToolDTO>
+    
+    /**
+     * Get a paginated list of tools
+     * @param offset Number of tools to skip
+     * @param limit Maximum number of tools to return
+     * @return List of tools
+     */
+    fun getToolsPaginated(offset: Int, limit: Int): List<ToolDTO>
+    
+    /**
+     * Get a paginated list of tools by tag
+     * @param tagSlug The tag's unique slug
+     * @param offset Number of tools to skip
+     * @param limit Maximum number of tools to return
+     * @return List of tools with the specified tag
+     */
+    fun getToolsByTagPaginated(tagSlug: String, offset: Int, limit: Int): List<ToolDTO>
 }
