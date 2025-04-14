@@ -101,7 +101,7 @@ java {
 // Configure Kotlin to use the same JVM target as Java
 tasks.withType<KotlinCompile> {
     kotlinOptions {
-        jvmTarget = "21" // Match Java toolchain version
+        jvmTarget = "17" // Match Java toolchain version
         freeCompilerArgs += "-Xjsr305=strict"
     }
 }
