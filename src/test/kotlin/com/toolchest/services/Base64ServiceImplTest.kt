@@ -24,7 +24,6 @@ class Base64ServiceImplTest {
         
         @Test
         fun `encoding a standard string should produce the correct Base64 value`() = runTestWithSetup {
-            // Use a real implementation directly since we're not mocking
             val service = Base64ServiceImpl()
             
             // Execute test
