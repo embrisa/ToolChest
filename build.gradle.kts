@@ -94,7 +94,7 @@ configurations.all {
 // Configure Java toolchain to match system Java version
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21)) // Match your system Java version
+        languageVersion.set(JavaLanguageVersion.of(17)) // Match your system Java version
     }
 }
 
