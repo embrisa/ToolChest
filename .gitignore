@@ -4,9 +4,6 @@ build/
 out/
 bin/
 
-# Gradle wrapper
-!gradle/wrapper/gradle-wrapper.jar
-
 # Local configuration files
 local.properties
 *.local.conf
