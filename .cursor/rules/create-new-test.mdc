@@ -1,0 +1,46 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Cursor Rules: Automated Test Generation for ToolChest
+
+When generating new tests for ToolChest, follow these rules:
+
+## Directory and File Placement
+- Place new test files in `src/test/kotlin/com/toolchest/`.
+- Use the following subdirectories based on test type:
+  - `services/` for service/business logic tests
+  - `routes/` for route/endpoint tests
+  - `config/` for configuration and error handling tests
+  - `templates/` for UI/component/template tests
+- Name test files after the class or feature being tested, ending with `Test.kt` (e.g., `Base64ServiceImplTest.kt`, `HomeRoutesTest.kt`).
+
+## Naming Conventions
+- Use backtick-quoted, descriptive test names (e.g., `` `should encode text to Base64` ``).
+- Group related tests using `@Nested` classes and `@DisplayName` annotations.
+
+## Test Utilities
+- Use `runTestWithSetup()` from `TestUtils.kt` for Ktor test application setup.
+- Use `DatabaseTestUtils` for in-memory H2 database tests.
+- Use `MockFactory` to create mocks for services and sample data.
+- Always specify which tables to create for database tests.
+
+## Test Patterns
+- For route tests: verify status codes, response content, service calls, headers, and error handling.
+- For service tests: verify business logic, data transformations, database interactions, and error handling.
+- For template/UI tests: verify template existence, rendering, and key content in output.
+- For error handling: test custom error pages and HTMX error fragments.
+
+## Running Tests
+- Ensure all tests pass with `./gradlew test` or the IDE's test runner before considering the code valid.
+
+## Reference
+- For advanced patterns and examples, reference `docs/new_test_guide.md`.
+
+## Best Practices
+- Use `MockFactory` for mocks.
+- Clean up resources in database tests using provided helpers.
+- Keep tests isolated and deterministic.
+- Prefer integration-style tests for routes and templates, and unit tests for services.
+- Add new test wrappers for templates/components as needed for isolated UI tests. 

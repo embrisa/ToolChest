@@ -1,280 +1,92 @@
-1. Project Overview and Objectives
+# ToolChest
 
-Objective:
-Build a single, scalable Ktor monolith that integrates server-side rendered (SSR) frontends using FreeMarker templating with HTMX for dynamic updates—all while ensuring the application remains maintainable, SEO-friendly, and ready for growth. The platform will provide free utility tools with monetization through strategic ad placement.
+## Project Overview
+ToolChest is a Ktor-based monolithic web application providing free, high-quality utility tools with a focus on privacy, accessibility, and ease of use. The platform uses server-side rendering (SSR) with FreeMarker templates, HTMX for dynamic updates, and Tailwind CSS for modern, responsive design. The first tool implemented is a Base64 Encoder/Decoder for both text and files. More tools are planned and will be added incrementally.
 
-Initial Tool Implementation:
-- Base64 Encoder and Decoder: The first tool to implement, allowing users to encode text to Base64 and decode Base64 strings.
-- Additional tools will be added incrementally following the same architecture pattern.
+## Features
+- **Base64 Encoder/Decoder**: Encode/decode text and files to/from Base64, with URL-safe option and file download support.
+- **Tag Filtering & Search**: Filter tools by tag and search for tools (currently only Base64 tool is available).
+- **Error Handling**: Custom error pages for 400, 403, 404, and 500 errors, with HTMX-aware fragments for partial updates.
+- **Responsive UI**: Mobile-friendly, accessible design using Tailwind CSS and FreeMarker macros/components.
+- **SSR & HTMX**: All pages are server-rendered, with HTMX used for dynamic fragments (search, load more, etc.).
+- **No Authentication**: All tools are free to use, no registration required.
+- **Testing**: Strong test coverage for services, routes, configuration, and templates.
 
-Goals:
-Unified Codebase: One codebase that manages all backend logic and frontend rendering.
-Low Maintenance: Emphasize reusable components, centralized middleware, and common libraries.
-Scalability: Optimize the monolith to handle increasing traffic, and design for potential future modularization if needed (even within a monolithic structure).
-SEO & Performance: Use SSR to deliver quick, fully rendered pages, with HTMX providing selective dynamic updates without a heavy client-side framework.
-Monetization: Integrate non-intrusive ads to generate revenue while maintaining excellent user experience.
-Accessibility: Ensure tools are freely available without requiring user accounts or authentication.
-
-
-2. Technology Stack
-
-Backend Framework:
-Ktor (Kotlin):
-- Selected for its lightweight, asynchronous design and native Kotlin support
-- Will use FreeMarker for server-side rendering 
-- HTMX integration for dynamic content updates without full page refreshes
-
-Frontend Technology:
-- HTMX: For dynamic page updates and interactive elements without complex JavaScript
-- Tailwind CSS: Utility-first CSS framework for rapid UI development with minimal CSS footprint
-- Minimalist JavaScript for essential client-side functionality
-
-Database:
-- SQLite: Zero operational cost embedded database with no separate server needed
-- Exposed SQL framework for type-safe database access with Kotlin
-- Future migration path to PostgreSQL only when traffic and data needs justify it
-
-Supporting Libraries and Tools:
-- Dependency Injection: Koin (lightweight DI framework for Kotlin)
-- Logging: Simple SLF4J with Logback implementation (minimal config)
-- Monitoring: Basic health check endpoints and UptimeRobot for availability monitoring
-- Build Tool: Gradle with Kotlin DSL
-- Deployment: Direct PaaS deployment (no containerization) for minimum overhead
-- CDN: Cloudflare free tier for edge caching and DDoS protection
-
-
-3. Architectural Components and Project Structure
-
-a. Unified Monolith Design
-Single Application:
-All routes, business logic, and frontend rendering live in one Ktor application. This simplifies deployment, testing, and resource management while maintaining a scalable codebase.
-b. Project Directory Structure
-The directory structure for the monolith:
-
+## Directory Structure
 ```
 /ToolChest
-├── .github/
-│   └── copilot-instructions.md     # GitHub Copilot instructions for the project
-├── .gradle/                        # Gradle build system cache
-├── .idea/                          # IntelliJ IDEA configuration files
-├── .gitignore                      # Git ignore file
-├── bin/                            # Compiled binaries
-├── build/                          # Build output directory
-├── gradle/                         # Gradle wrapper files
-│   └── wrapper/
-│       ├── gradle-wrapper.jar
-│       └── gradle-wrapper.properties
 ├── src/
 │   ├── main/
 │   │   ├── kotlin/
-│   │   │   └── com/
-│   │   │       └── toolchest/
-│   │   │           ├── Application.kt           # Main application entry point
-│   │   │           ├── config/                  # Configurations
-│   │   │           │   ├── KoinConfig.kt        # Koin configuration
-│   │   │           │   ├── RoutingConfig.kt     # Routing configuration
-│   │   │           │   └── PluginsConfig.kt     # Plugins configuration
-│   │   │           ├── middleware/              # Global middleware
-│   │   │           ├── routes/                  # Route handlers
-│   │   │           └── services/                # Business logic
+│   │   │   └── com/toolchest/
+│   │   │       ├── Application.kt           # Main entry point
+│   │   │       ├── config/                  # App/config modules (Koin, Routing, Plugins, DB)
+│   │   │       ├── routes/                  # Route handlers (Home, Base64)
+│   │   │       ├── services/                # Business logic (ToolService, Base64Service)
+│   │   │       └── data/                    # Entities, DTOs, Tables
 │   │   └── resources/
-│   │       ├── logback.xml                      # Logging configuration
+│   │       ├── application.conf             # Main config
+│   │       ├── logback.xml                  # Logging config
 │   │       ├── static/
 │   │       │   ├── css/
-│   │       │   │   └── main.css                 # Custom CSS styles
-│   │       │   └── js/                          # JavaScript files
-│   │       └── templates/                       # FreeMarker templates
-│   │           ├── components/                  # Reusable template components
-│   │           │   ├── footer.ftl               # Footer component
-│   │           │   ├── header.ftl               # Header component
-│   │           │   └── tool-card.ftl            # Tool card component
-│   │           ├── layouts/
-│   │           │   └── base.ftl                 # Base layout template
-│   │           └── pages/
-│   │               └── home.ftl                 # Home page template
-│   └── test/                                    # Test code
-├── build.gradle.kts                             # Gradle build configuration
-├── gradlew                                      # Gradle wrapper script (Unix)
-├── gradlew.bat                                  # Gradle wrapper script (Windows)
-├── local.properties                             # Local configuration
-└── README.md                                    # Project documentation
+│   │       │   │   └── main.css             # Custom styles
+│   │       │   └── js/                      # (Currently empty)
+│   │       └── templates/
+│   │           ├── components/              # Header, footer, tool-card, tag-navigation, etc.
+│   │           ├── layouts/                 # Base layout macro
+│   │           └── pages/                   # home.ftl, base64.ftl, error.ftl, about.ftl, etc.
+│   └── test/
+│       └── kotlin/com/toolchest/
+│           ├── services/                    # Service tests
+│           ├── routes/                      # Route tests
+│           ├── config/                      # Config/error tests
+│           ├── templates/                   # UI/component tests
+│           └── TestUtils.kt                 # Test helpers
+├── build.gradle.kts                         # Gradle build config
+├── README.md                                # Project documentation
+└── docs/
+    └── deployment-readiness.md              # Deployment readiness assessment
 ```
 
-c. Routing and Endpoint Design
-Centralized Routing:
-Manage all endpoints via a top-level router that delegates requests to feature-specific modules. For example:
-routing {
-    route("/iplookup") { ipLookupRoutes() }
-    route("/loremipsum") { loremIpsumRoutes() }
-    route("/qrcode") { qrCodeRoutes() }
-    // Additional tool routes as needed
-}
-RESTful Endpoints:
-Define clear endpoints and, if necessary, version your API (e.g., /api/v1/) to maintain backward compatibility as the application evolves.
+## Technology Stack
+- **Backend**: Ktor (Kotlin), Koin (DI), Exposed (ORM), SQLite (default DB)
+- **Frontend**: FreeMarker (SSR), HTMX, Tailwind CSS, Font Awesome
+- **Testing**: JUnit5, MockK, H2 (for in-memory DB tests), Jsoup (HTML parsing)
+- **Logging**: SLF4J with Logback
 
+## Error Handling
+- Custom error pages for 400, 403, 404, and 500 errors
+- HTMX-aware error fragments for partial updates
+- All error templates are present in `templates/pages` and `templates/components`
 
-4. Integrated Frontend and Server-Side Rendering
+## Testing
+- Comprehensive test coverage for services, routes, configuration, and UI components
+- Tests are located in `src/test/kotlin/com/toolchest/`
+- Uses in-memory H2 database for isolated DB tests
 
-a. SSR with FreeMarker
-FreeMarker Templates:
-Leverage FreeMarker's powerful templating capabilities to generate dynamic content.
-Example snippet:
-<!-- base.ftl -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>${title}</title>
-</head>
-<body>
-    <header>
-        <h1>${welcome}</h1>
-    </header>
-    <div>
-        <#list tools as tool>
-            <p>${tool}</p>
-        </#list>
-    </div>
-</body>
-</html>
+## Deployment & Configuration
+- **Default DB**: SQLite, configured in `application.conf` (changeable via env vars)
+- **Port**: Defaults to 8080, can be overridden with `PORT` env var
+- **Production**: Review and set environment variables for DB path, port, and any secrets before deploying
+- **Static Assets**: CSS is present; JS directory is currently empty (add JS if needed for new features)
+- **Health Check**: `/health` endpoint returns `OK`
 
-b. Leveraging HTMX for Dynamic Interactivity
-Dynamic Updates:
-Use HTMX attributes to load fragments or update parts of the page without full reloads.
+## Monetization
+- No ad code is present yet. Footer and layout are ready for non-intrusive ad integration as planned.
 
-Example:
-<div hx-get="/updateFragment" hx-trigger="click" hx-target="#fragmentDiv" hx-swap="outerHTML">
-  Click to update content
-</div>
+## UI/UX
+- Fully responsive, mobile-friendly design
+- Uses FreeMarker macros and components for DRY, maintainable templates
+- Navigation and tag filtering are implemented
 
-c. Reusable UI Components
-Common Components:
-Build FreeMarker macros and includes for components like navigation bars, footers, and ad sections.
-Store these components centrally in the /resources/templates directory, so they can be easily reused across multiple pages.
+## Recommendations for First Deploy
+See `docs/deployment-readiness.md` for a full assessment and checklist. In summary:
+- Smoke test in a staging/production-like environment
+- Add JS if needed for new features
+- Review file upload and input validation for security
+- Set production config via environment variables
+- Set up log aggregation and health checks
+- Add ad code if monetization is a launch goal
 
-
-5. Middleware, Logging, and Error Handling
-
-Global Middleware:
-Implement middleware for centralized error handling, logging, and request rate limiting.
-Use Ktor's plugin system to install and configure these functionalities at the application level.
-Logging:
-Use libraries like SLF4J/Logback.
-Ensure consistent and structured logging for debugging and monitoring.
-Error Pages:
-Create user-friendly error pages or template fragments to display when an error occurs.
-Consider logging the error details and optionally returning different error views based on the error type.
-
-
-6. Build, Testing, and Deployment
-
-a. Build and Dependency Management
-Gradle:
-- Use Gradle with Kotlin DSL for dependency management and builds
-- Organize dependencies for Ktor, Koin, logging, and testing
-
-b. Testing
-Automated Testing:
-- Set up unit tests for service logic and integration tests for endpoints
-- Uses Junit5 and MockK for testing
-
-c. Cost-Effective Deployment
-Direct PaaS Deployment:
-- Deploy directly to platforms with generous free tiers (Railway, Render, Fly.io)
-- Skip containerization to reduce complexity and cost
-- Consider serverless functions for computationally simple tools like Base64 encoder
-
-CI/CD Pipeline:
-- Use free tiers of GitHub Actions or GitLab CI for automated testing
-- Implement simple deployment scripts for your selected PaaS provider
-
-
-7. Monitoring and Observability
-
-Cost-Effective Monitoring Strategy:
-- Simple Health Check Endpoints: Create basic endpoints that verify system functionality
-- UptimeRobot Integration: Use free tier for external availability monitoring (5-minute intervals)
-- Application Logs:
-  - Use SLF4J with Logback for straightforward logging
-  - Focus on critical events and errors
-  - Implement structured logging for easier analysis
-
-Future Scaling Considerations:
-- Single-Instance Deployment: Start with a single application instance
-- Static Site Generation: Where possible, pre-generate tool pages as static HTML
-- Serverless Functions: Consider migrating computation-heavy tools to serverless functions
-- Health-Based Monitoring: Implement alerts based on application health metrics before adding complex monitoring
-
-
-8. Documentation and Future Growth
-
-Documentation:
-Document the project architecture, module responsibilities, routing setup, and build/deployment process.
-Maintain code comments, API documentation, and system diagrams to help onboard new developers.
-Future Expansion:
-With the monolith structured in modular packages, adding new tool pages or enhancing existing ones becomes simpler.
-As needs evolve, consider integrating additional frontend frameworks or enhancing caching strategies, all without changing the foundational monolithic architecture.
-
-
-9. Caching Strategy
-
-Cost-Effective Caching Implementation:
-- HTTP Caching: Configure proper cache headers (Cache-Control, ETag) to maximize browser caching
-- Server-Side Caching:
-  - Local Caffeine Cache: In-memory cache for frequently accessed data and computation results
-  - No distributed caching infrastructure until traffic justifies it
-
-Caching Policies:
-- Dynamic Tool Results: Cache computation results when deterministic (like Base64 encoding/decoding) with short TTL
-- Static Content: Long-term caching with cache busting for CSS/JS/image assets
-- API Responses: Implement cache keys based on request parameters with appropriate invalidation strategies
-
-Performance Optimization:
-- Response Compression: Enable Gzip compression for all text-based responses (simpler implementation than Brotli)
-- Asset Minification: Implement build-time minification for JS/CSS assets
-- Tailwind CSS: Utilize Tailwind's JIT (Just-in-Time) compiler to minimize CSS bundle size by generating only the used styles
-- Cloudflare Free Tier: Leverage for edge caching and basic DDoS protection
-
-
-10. SEO Strategy & Implementation
-
-Technical SEO Optimizations:
-- Server-Side Rendering: All pages fully rendered server-side for optimal indexing
-- Semantic HTML: Proper use of H1-H6 tags, meta descriptions, and structured data
-- Sitemap Generation: Automated sitemap.xml generation
-- Robots.txt: Configured to guide search engine crawlers
-- Canonical URLs: Implemented to prevent duplicate content issues
-- Schema.org Markup: Add structured data for rich snippets in search results
-
-On-Page SEO:
-- Keyword Research: Target specific utility tool keywords (e.g., "online base64 encoder")
-- Meta Tags: Dynamic, descriptive title and meta description tags for each tool
-- URL Structure: Clean, descriptive URLs (e.g., /tools/base64)
-- Mobile Optimization: Fully responsive design with mobile-friendly UI using Tailwind's responsive utilities
-- Page Speed: Optimized load times through caching, compression, and asset optimization
-- Internal Linking: Strategic linking between related tools
-
-
-11. Monetization Strategy
-
-Cost-Effective Ad Implementation:
-- Initial Simple Ad Integration:
-  - Start with basic Google AdSense implementation (no premium services)
-  - Implement only in non-intrusive positions (sidebar, footer)
-  - Limit to 2-3 ad units per page maximum
-
-Performance Considerations:
-- Lazy Loading: Load ads only after core content has fully rendered
-- Minimal Third-Party Scripts: Avoid heavy ad tracking tools initially
-- Performance Monitoring: Track page load times before/after ad implementation
-
-Ad Implementation Strategy:
-- Phased Approach:
-  - Phase 1: Single ad unit in footer or sidebar
-  - Phase 2: Add second ad unit only after analyzing performance impact
-  - Phase 3: Consider A/B testing only after reaching significant traffic
-
-Future Monetization Options:
-- Keep infrastructure simple to allow for future:
-  - Affiliate programs with relevant developer tools
-  - Minimal referral links to complementary services
-  - Optional "remove ads" button (no account required, using local storage)
+## Contributing
+Contributions are welcome! Please review the codebase, run tests, and follow the established patterns for new tools and features.
