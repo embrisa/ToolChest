@@ -175,7 +175,7 @@ Gradle:
 b. Testing
 Automated Testing:
 - Set up unit tests for service logic and integration tests for endpoints
-- Uses Kotest and MockK for testing
+- Uses Junit5 and MockK for testing
 
 c. Cost-Effective Deployment
 Direct PaaS Deployment:
@@ -278,13 +278,3 @@ Future Monetization Options:
   - Affiliate programs with relevant developer tools
   - Minimal referral links to complementary services
   - Optional "remove ads" button (no account required, using local storage)
-
-
-12. First intial tool to implement and test and verify the project architecture on.
-  - Base64 Encoder/Decoder Implementation
-    Tool Features:
-    - Text to Base64: Convert plain text to Base64 encoded string
-    - Base64 to Text: Convert Base64 encoded string back to plain text
-    - File to Base64: Allow uploading files to encode as Base64
-    - Base64 to File: Convert Base64 strings back to downloadable files
-    - URL-safe Base64 Toggle: Option to use URL-safe Base64 encoding

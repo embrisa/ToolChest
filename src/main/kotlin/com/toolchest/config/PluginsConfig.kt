@@ -28,6 +28,7 @@ import io.ktor.http.CacheControl
 
 /** Configures all Ktor plugins and middleware for the application */
 fun Application.configurePlugins() {
+    println("Configuring Ktor plugins...")
     // Determine if we're in development mode
     val isDevelopmentMode = System.getenv("TOOLCHEST_DEV_MODE")?.equals("true", ignoreCase = true) == true
 

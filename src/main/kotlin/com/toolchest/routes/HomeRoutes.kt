@@ -37,17 +37,12 @@ fun Route.homeRoutes() {
         val query = parameters["query"] ?: ""
         
         val searchResults = toolService.searchTools(query)
-        val allTags = toolService.getAllTags()
         
-        val model = mapOf(
-            "availableTools" to searchResults,
-            "popularTools" to emptyList<Any>(), // Don't show popular tools in search results
-            "allTags" to allTags,
-            "searchQuery" to query,
-            "showLoadMore" to false // No load more for search results initially
-        )
-        
-        call.respond(FreeMarkerContent("pages/home.ftl", model))
+        // Use the dedicated search results template for better HTMX integration
+        call.respond(FreeMarkerContent("pages/partials/search-results.ftl", mapOf(
+            "tools" to searchResults,
+            "searchQuery" to query
+        )))
     }
     
     // Load more tools (HTMX endpoint)
@@ -96,7 +91,11 @@ fun Route.homeRoutes() {
     get("/about") {
         val model = mapOf(
             "pageTitle" to "About Us",
-            "pageDescription" to "Learn more about ToolChest and our mission to provide free, useful tools."
+            "pageDescription" to "Learn more about ToolChest and our mission to provide free, useful tools.",
+            "page" to mapOf(
+                "title" to "About Us",
+                "description" to "Learn more about ToolChest and our mission to provide free, useful tools."
+            )
         )
         
         // Render the template directly - no layout needed as it's handled by the page macro

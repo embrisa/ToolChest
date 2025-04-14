@@ -70,9 +70,6 @@
         <!-- Footer -->
         <#include "footer.ftl">
         
-        <!-- Custom JavaScript -->
-        <script src="/static/js/main.js"></script>
-        
         <!-- Additional body scripts -->
         <#if bodyScripts?has_content>${bodyScripts}</#if>
     </body>

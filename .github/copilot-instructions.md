@@ -38,9 +38,6 @@ src//main/resources/static/css/main.css
 src//main/resources/static/js
 src//main/resources/templates
 src//main/resources/templates/macros.ftl
-src//main/resources/templates/test
-src//main/resources/templates/test/test-tool-card.ftl
-src//main/resources/templates/test/test-tag-navigation.ftl
 src//main/resources/templates/components
 src//main/resources/templates/components/macros.ftl
 src//main/resources/templates/components/tag-navigation.ftl

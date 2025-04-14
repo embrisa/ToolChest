@@ -36,18 +36,6 @@
         </div>
         
         <div id="tool-container">
-            <!-- Popular Tools Section - Only show on main page, not search results -->
-            <#if popularTools?? && popularTools?size gt 0 && (!searchQuery?? || searchQuery == '')>
-                <div class="mb-8">
-                    <h2 class="text-2xl font-bold mb-4 border-b pb-2">Popular Tools</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <#list popularTools as tool>
-                            <@toolCard.tool tool=tool />
-                        </#list>
-                    </div>
-                </div>
-            </#if>
-            
             <!-- Tools Grid Section -->
             <div class="mb-6">
                 <h2 class="text-2xl font-bold mb-4 border-b pb-2">
@@ -56,41 +44,23 @@
                     <#elseif tag??>
                         ${tag.name} Tools
                     <#else>
-                        All Tools
+                        <#if popularTools?? && popularTools?size gt 0>Popular Tools<#else>All Tools</#if>
                     </#if>
                 </h2>
                 
-                <#if availableTools?? && availableTools?size gt 0>
+                <#if (availableTools?? && availableTools?size gt 0) || (popularTools?? && popularTools?size gt 0)>
                     <div id="tool-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <#list availableTools as tool>
-                            <div class="tool-item">
-                                <a href="/${tool.slug}" class="block bg-white rounded-lg shadow hover:shadow-md transition-shadow duration-300 h-full">
-                                    <div class="p-5">
-                                        <div class="flex items-start">
-                                            <div class="bg-blue-100 rounded-full p-3 mr-4">
-                                                <i class="fas ${tool.iconClass!'fa-code'} text-blue-600"></i>
-                                            </div>
-                                            <div>
-                                                <h3 class="font-semibold text-lg mb-1">${tool.name}</h3>
-                                                <p class="text-gray-600 text-sm">${tool.description}</p>
-                                                
-                                                <#-- Display tags -->
-                                                <#if tool.tags?? && tool.tags?size gt 0>
-                                                    <div class="mt-3 flex flex-wrap gap-1.5">
-                                                        <#list tool.tags as tag>
-                                                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium" 
-                                                                  style="background-color: ${tag.color}25; color: ${tag.color};">
-                                                                ${tag.name}
-                                                            </span>
-                                                        </#list>
-                                                    </div>
-                                                </#if>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </#list>
+                        <#-- First show popular tools if available and not searching -->
+                        <#if popularTools?? && popularTools?size gt 0 && (!searchQuery?? || searchQuery == '') && (!tag??)>
+                            <#list popularTools as tool>
+                                <@toolCard.toolCard tool=tool />
+                            </#list>
+                        <#-- Otherwise show regular tools -->
+                        <#elseif availableTools?? && availableTools?size gt 0>
+                            <#list availableTools as tool>
+                                <@toolCard.toolCard tool=tool />
+                            </#list>
+                        </#if>
                         
                         <#-- Load More Button -->
                         <#if showLoadMore?? && showLoadMore>

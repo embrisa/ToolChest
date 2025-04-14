@@ -1,13 +1,13 @@
 <#-- 
-Tag Navigation Component
+Tag Navigation Component for Testing
 Parameters:
 - allTags: List of all TagDTO objects
 - currentTag: (Optional) Currently selected TagDTO object or slug string
 -->
 
 <#macro tagNavigation allTags currentTag=null>
-<div class="flex flex-wrap items-center gap-2">
-    <a href="/" class="px-3 py-1 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors ${(currentTag??)?then('', 'font-medium bg-blue-100 text-blue-700')}"
+<div class="tag-navigation">
+    <a href="/" class="tag-nav-item ${(currentTag??)?then('', 'active')}"
        aria-current="${(currentTag??)?then('', 'page')}">
         All
     </a>
@@ -24,14 +24,11 @@ Parameters:
                 </#if>
             </#if>
             <a href="/tag/${tag.slug}" 
-               class="px-3 py-1 rounded-md hover:bg-gray-200 transition-colors ${isActive?then('font-medium bg-blue-100 text-blue-700', 'bg-gray-100 text-gray-700')}"
-               aria-current="${isActive?then('page', '')}"
-               style="">
+               class="tag-nav-item ${isActive?then('active', '')}"
+               aria-current="${isActive?then('page', '')}">
                 ${tag.name}
             </a>
         </#list>
     </#if>
 </div>
-</#macro>
-
-<#-- No self-rendering to avoid issues in tests -->
+</#macro> 

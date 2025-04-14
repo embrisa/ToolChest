@@ -23,12 +23,13 @@ fun Route.base64Routes() {
     get {
         // Record tool usage
         toolService.recordToolUsage("base64")
-        
+
         val model = mapOf(
+            "title" to "Base64 Encoder / Decoder",
+            "pageDescription" to "Free online tool to encode and decode text or files using Base64 encoding.",
             "currentTime" to LocalDateTime.now().toString()
         )
-        
-        // Render the template directly - the page macro will handle layout
+
         call.respond(FreeMarkerContent("pages/base64.ftl", model))
     }
 
@@ -155,23 +156,28 @@ fun Route.base64Routes() {
             if (decodedBytes.isEmpty()) {
                 // Return a proper formatted error response
                 val model = mapOf(
-                    "result" to "Error: Empty result",
+                    "result" to "Error: Invalid Base64 input",
                     "operation" to "fileDecode",
                     "inputLength" to base64Text.length,
                     "outputLength" to 0,
-                    "error" to "Empty result"
+                    "error" to "Invalid Base64 input"
                 )
                 
                 call.respond(HttpStatusCode.BadRequest, FreeMarkerContent("pages/base64-result.ftl", model))
                 return@post
             }
             
+            // Set content disposition header for attachment download
             call.response.header(
                 HttpHeaders.ContentDisposition, 
-                ContentDisposition.Attachment.withParameter(ContentDisposition.Parameters.FileName, fileName).toString()
+                "attachment; filename=\"${fileName}\""
             )
-            call.respondBytes(decodedBytes)
             
+            // Set content type to application/octet-stream
+            call.respondBytes(
+                bytes = decodedBytes,
+                contentType = ContentType.Application.OctetStream
+            )
         } catch (e: Exception) {
             // Return a proper formatted error response
             val errorMessage = "Invalid Base64 input: ${e.message}"
@@ -180,7 +186,7 @@ fun Route.base64Routes() {
                 "operation" to "fileDecode",
                 "inputLength" to base64Text.length,
                 "outputLength" to 0,
-                "error" to e.message
+                "error" to errorMessage
             )
             
             call.respond(HttpStatusCode.BadRequest, FreeMarkerContent("pages/base64-result.ftl", model))

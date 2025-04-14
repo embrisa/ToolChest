@@ -18,7 +18,7 @@ import org.koin.ktor.ext.inject
 
 /** Configures all routes for the application */
 fun Application.configureRouting() {
-    val toolService by inject<ToolService>()
+    println("Configuring routing...")
     
     routing {
         // Serve static resources from resources/static directory

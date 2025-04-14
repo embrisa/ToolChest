@@ -30,6 +30,11 @@ To run a specific test:
 ./gradlew test --tests "com.toolchest.routes.Base64RoutesTest"
 ```
 
+To run with more detailed output:
+```bash
+./gradlew test --tests "com.toolchest.templates.UIComponentsTest" -i
+```
+
 After running tests, reports can be found at:
 - HTML Test Report: `build/reports/tests/test/index.html`
 
@@ -44,7 +49,7 @@ ToolChest uses a multi-layered testing approach:
 
 ### Testing Libraries
 
-- **Kotest**: Main testing framework with multiple spec styles
+- **JUnit 5**: Main testing framework with annotations and assertions
 - **MockK**: Mocking library for Kotlin
 - **Ktor Test**: Testing utilities for Ktor applications
 - **Koin Test**: Testing utilities for Koin dependency injection
@@ -95,145 +100,166 @@ suspend fun HttpResponse.assertContains(text: String)
 suspend fun HttpResponse.assertRedirectTo(path: String)
 ```
 
-### Test Base Class
-
-```kotlin
-// Base class for tests requiring Koin dependency injection
-abstract class KoinBaseTest {
-    // Override to provide custom test modules
-    open fun provideTestModules(): List<Module>
-    
-    // Automatically called before each test to set up Koin
-    @BeforeTest
-    fun setupKoin()
-    
-    // Automatically called after each test to clean up Koin
-    @AfterTest
-    fun tearDownKoin()
-}
-```
-
-## Mock Factory
-
-The `MockFactory` object provides standardized mocks for common services:
-
-```kotlin
-// Create a mock ToolService with default configurations
-fun createToolServiceMock(relaxed: Boolean = true, relaxUnitFun: Boolean = true): ToolService
-
-// Create a mock Base64Service with default configurations
-fun createBase64ServiceMock(relaxed: Boolean = false): Base64Service
-
-// Create sample tag data for tests
-fun createSampleTags(): List<TagDTO>
-
-// Create sample tool data for tests
-fun createSampleTools(tags: List<TagDTO> = createSampleTags()): List<ToolDTO>
-```
-
-### Example: Using MockFactory
-
-```kotlin
-// Create a mock with default configuration
-val toolServiceMock = MockFactory.createToolServiceMock()
-
-// Override specific behaviors as needed
-every { toolServiceMock.getToolsByTag("base64") } returns listOf(baseTool)
-```
-
-## Route Testing
-
-The `RouteTestHelper` object provides utilities for testing routes:
-
-```kotlin
-// Test home routes with custom setup
-suspend fun testHomeRoutes(
-    toolServiceMock: ToolService = MockFactory.createToolServiceMock(),
-    testBlock: suspend ApplicationTestBuilder.() -> Unit
-)
-
-// Test base64 routes with custom setup
-suspend fun testBase64Routes(
-    toolServiceMock: ToolService = MockFactory.createToolServiceMock(),
-    base64ServiceMock: Base64Service = MockFactory.createBase64ServiceMock(),
-    testBlock: suspend ApplicationTestBuilder.() -> Unit
-)
-
-// Test a specific HTTP endpoint with detailed error reporting
-suspend fun testEndpoint(
-    client: HttpClient,
-    path: String,
-    method: HttpMethod = HttpMethod.Get,
-    setup: HttpRequestBuilder.() -> Unit = {},
-    assertions: suspend (HttpResponse) -> Unit
-)
-```
-
-### Example: Route Testing Pattern
-
-```kotlin
-@Test
-fun `route should return correct response`() {
-    testApplication {
-        application {
-            configureFreeMarkerForTests()
-            routing {
-                route("base64") {
-                    base64Routes()
-                }
-            }
-        }
-
-        // Use test helper to verify endpoint behavior
-        RouteTestHelper.testEndpoint(client, "/base64") { response ->
-            response.assertOk()
-            response.bodyAsText() shouldContain "Base64 Encoder"
-            
-            // Verify service interactions
-            verify { toolServiceMock.recordToolUsage("base64") }
-        }
-    }
-}
-```
-
-## Service Testing
-
-Services are tested using straightforward unit tests with mocks for dependencies:
-
-```kotlin
-class Base64ServiceImplTest : StringSpec({
-    val service = Base64ServiceImpl()
-    
-    "encodeString should correctly encode a string" {
-        val result = service.encodeString("Hello, World!")
-        result shouldBe "SGVsbG8sIFdvcmxkIQ=="
-    }
-    
-    "decodeString should correctly decode a valid Base64 string" {
-        val result = service.decodeString("SGVsbG8sIFdvcmxkIQ==")
-        result shouldBe "Hello, World!"
-    }
-})
-```
 
 ## Template Testing
 
-Templates are tested by rendering them with test data and verifying the output:
+FreeMarker templates are tested by rendering them with test data and verifying the output. This section has been updated based on recent experiences with the UIComponentsTest class.
+
+### FreeMarker Template Testing Best Practices
+
+1. **Testing Template Files Existence**
 
 ```kotlin
-class UIComponentsTest : StringSpec({
-    "tool-card template should render correctly" {
-        val template = FreeMarkerTemplate("components/tool-card.ftl")
-        val tool = MockFactory.createSampleTools()[0]
-        
-        val output = template.render(mapOf("tool" to tool))
-        
-        output shouldContain tool.name
-        output shouldContain tool.description
-        output shouldContain "href=\"/${tool.slug}\""
-    }
-})
+@Test
+fun `template file should exist in resources`() {
+    val classLoader = javaClass.classLoader
+    assertTrue(classLoader.getResource("templates/components/tool-card.ftl") != null, 
+               "Template file should exist")
+}
 ```
+
+2. **Testing Macro-Based Templates**
+
+When testing FreeMarker templates that define macros, you need special handling:
+
+```kotlin
+@Test
+fun `should render template macro correctly`() = testApplication {
+    application {
+        configureFreeMarkerForTests()
+        
+        routing {
+            get("/test-template") {
+                // Important: Use a wrapper template that calls the macro
+                call.respond(FreeMarkerContent(
+                    "components/template-test-wrapper.ftl",
+                    mapOf("data" to testData)
+                ))
+            }
+        }
+    }
+    
+    val response = client.get("/test-template")
+    assertEquals(HttpStatusCode.OK, response.status)
+    
+    val content = response.bodyAsText()
+    assertContains(content, "Expected Content")
+}
+```
+
+3. **Creating Wrapper Templates for Macro Testing**
+
+For templates that define macros but don't invoke them, create wrapper templates in your test resources:
+
+```kotlin
+// src/test/resources/templates/components/tool-card-test-wrapper.ftl
+<#import "/components/tool-card.ftl" as toolCardTemplate>
+<@toolCardTemplate.toolCard tool />
+```
+
+This ensures the macro is actually called during the test.
+
+### Structuring Template Tests with JUnit
+
+```kotlin
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class UIComponentsTest {
+    
+    // Sample data for all tests
+    private val sampleTags = MockFactory.createSampleTags()
+    private val sampleTools = MockFactory.createSampleTools(sampleTags)
+    private val toolServiceMock = MockFactory.createToolServiceMock()
+    
+    @BeforeEach
+    fun setup() {
+        // Configure mock responses
+        every { toolServiceMock.getAllTools() } returns sampleTools
+        every { toolServiceMock.getAllTags() } returns sampleTags
+    }
+    
+    @AfterEach
+    fun tearDown() {
+        // Clean up resources
+        stopKoin()
+    }
+    
+    @Nested
+    @DisplayName("Template files existence")
+    inner class TemplateFilesExistence {
+        @Test
+        fun `tag navigation should exist in the templates directory`() {
+            val classLoader = javaClass.classLoader
+            assertTrue(classLoader.getResource("templates/components/tag-navigation.ftl") != null)
+        }
+        
+        // Additional file existence tests
+    }
+    
+    @Nested
+    @DisplayName("Template rendering")
+    inner class TemplateRendering {
+        @Test
+        fun `should render tool card component correctly`() = testApplication {
+            application {
+                configureFreeMarkerForTests()
+                
+                routing {
+                    get("/test-tool-card") {
+                        val tool = sampleTools.first()
+                        call.respond(FreeMarkerContent(
+                            "components/tool-card-test-wrapper.ftl",
+                            mapOf("tool" to tool)
+                        ))
+                    }
+                }
+                
+                attributes.put(ToolServiceKey, toolServiceMock)
+            }
+            
+            val response = client.get("/test-tool-card")
+            assertEquals(HttpStatusCode.OK, response.status)
+            
+            val content = response.bodyAsText()
+            assertContains(content, "Base64")
+            assertContains(content, "/tag/encoding")
+        }
+        
+        // Additional rendering tests
+    }
+}
+```
+
+### Common FreeMarker Template Testing Issues
+
+1. **Empty Content When Testing Macro Templates**
+
+**Problem**: When rendering a template that only defines a macro without calling it, FreeMarker produces an empty string.
+
+**Solution**: Create test wrapper templates that import the original macro templates and call the macros with test data:
+
+```kotlin
+// src/test/resources/templates/components/tool-card-test-wrapper.ftl
+<#import "/components/tool-card.ftl" as toolCardTemplate>
+<@toolCardTemplate.toolCard tool />
+```
+
+2. **Resource Path Issues**
+
+**Problem**: Templates can't be found during tests due to classpath or resource path issues.
+
+**Solution**: Use enhanced debugging to verify resource paths:
+
+```kotlin
+// In your configureFreeMarkerForTests() function
+println("Template directory access check (via classloader):")
+println("- tool-card.ftl exists: ${classLoader.getResource("templates/components/tool-card.ftl") != null}")
+```
+
+3. **Inconsistent URL Paths in Templates**
+
+**Problem**: Tests fail because URL paths in templates don't match what the tests expect.
+
+**Solution**: Keep URL formats consistent across templates and tests. For example, use `/tag/{slug}` consistently rather than mixing `/tag/` and `/tags/`.
 
 ## Best Practices
 
@@ -242,7 +268,8 @@ class UIComponentsTest : StringSpec({
 Follow the Arrange-Act-Assert pattern:
 
 ```kotlin
-"test name" {
+@Test
+fun `test description`() {
     // Arrange - Set up test data and mocks
     val service = mockk<Base64Service>()
     every { service.encodeString(any(), any()) } returns "encoded-value"
@@ -251,7 +278,7 @@ Follow the Arrange-Act-Assert pattern:
     val result = service.encodeString("test", false)
     
     // Assert - Verify the expected outcome
-    result shouldBe "encoded-value"
+    assertEquals("encoded-value", result)
 }
 ```
 
@@ -260,9 +287,14 @@ Follow the Arrange-Act-Assert pattern:
 Use descriptive test names that explain the expected behavior:
 
 ```kotlin
-"GET /base64 should return 200 OK with expected content"
-"encodeString should handle empty input gracefully"
-"when input is invalid then an exception is thrown"
+@Test
+fun `GET base64 should return 200 OK with expected content`()
+
+@Test
+fun `encodeString should handle empty input gracefully`() 
+
+@Test
+fun `when input is invalid then an exception is thrown`()
 ```
 
 ### 3. Test Isolation
@@ -271,7 +303,7 @@ Ensure each test is isolated and doesn't depend on the state of other tests:
 
 - Reset mocks between tests
 - Don't rely on global state
-- Use `beforeTest` and `afterTest` to set up and tear down test environment
+- Use `@BeforeEach` and `@AfterEach` to set up and tear down test environment
 
 ### 4. Comprehensive Testing
 
@@ -281,6 +313,18 @@ Test both happy paths and edge cases:
 - Empty or null inputs
 - Maximum size inputs
 - Invalid inputs that should trigger errors
+
+### 5. Debugging Techniques
+
+For troubleshooting test failures, add debug output:
+
+```kotlin
+// In your test
+val content = response.bodyAsText()
+println("=== TEMPLATE OUTPUT ===")
+println(content)
+println("=====================")
+```
 
 ## Common Testing Patterns
 
@@ -376,9 +420,9 @@ client.submitFormWithBinaryData(
    - Symptoms: Routes not found or 404 errors
    - Solution: Ensure route paths in tests match production configuration
 
-3. **Serialization issues**:
-   - Symptoms: Unexpected content in responses
-   - Solution: Check content type and serialization configuration
+3. **FreeMarker template issues**:
+   - Symptoms: Empty template output, missing content
+   - Solution: Check if templates define macros that need to be called explicitly in wrapper templates
 
 4. **MockK verification failures**:
    - Symptoms: `Verification failed: Expected: XX, actual: YY`
@@ -405,7 +449,17 @@ For difficult-to-diagnose issues, use these techniques:
    val mock = mockk<Service>(relaxed = true)
    ```
 
-4. **Debug with IDE**:
-   - Set breakpoints in test code
-   - Inspect variables during test execution
-   - Use step-through debugging
+4. **Run tests with increased logging**:
+   ```bash
+   ./gradlew test --tests "SpecificTest" -i
+   ```
+
+5. **Debug test resources**:
+   ```kotlin
+   val classLoader = javaClass.classLoader
+   println("Current working directory: ${File(".").absolutePath}")
+   println("Resource exists: ${classLoader.getResource("path/to/resource") != null}")
+   ```
+
+6. **Use wrapper templates for macro testing**:
+   Create special test templates that import and call macros from the templates you want to test.

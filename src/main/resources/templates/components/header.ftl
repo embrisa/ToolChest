@@ -1,4 +1,4 @@
-<header class="bg-gradient-to-r from-blue-800 to-blue-900 text-white shadow-md">
+<header class="bg-gradient-to-r from-blue-500 to-violet-900 text-white shadow-md">
     <div class="container mx-auto px-4 py-4">
         <div class="flex justify-between items-center">
             <!-- Logo and Site Name -->

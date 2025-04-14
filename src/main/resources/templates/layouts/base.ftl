@@ -34,9 +34,6 @@
     <!-- Footer -->
     <#include "../components/footer.ftl">
     
-    <!-- Custom JavaScript -->
-    <script src="/static/js/main.js"></script>
-    
     <!-- Additional body scripts -->
     <#if bodyScripts??>${bodyScripts}</#if>
 </body>

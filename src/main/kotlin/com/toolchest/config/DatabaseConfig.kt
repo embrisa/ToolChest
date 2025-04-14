@@ -14,21 +14,45 @@ import org.jetbrains.exposed.sql.transactions.transaction
  * Database configuration for ToolChest
  */
 fun Application.configureDatabases() {
-    configureDatabases("data/toolchest.db", true)
+    val config = environment.config.config("database")
+    val driverClassName = config.property("driverClassName").getString()
+    val jdbcURL = config.property("jdbcURL").getString()
+    val maximumPoolSize = config.property("maximumPoolSize").getString().toInt()
+    
+    // Extract the database file path from JDBC URL for checking/creating directories
+    val dbFilePath = jdbcURL.substringAfter("jdbc:sqlite:")
+    
+    configureDatabases(driverClassName, jdbcURL, maximumPoolSize, true)
 }
 
 /**
  * Database configuration for ToolChest with custom parameters
  * 
- * @param dbFilePath The path to the database file
+ * @param driverClassName The JDBC driver class name
+ * @param jdbcURL The JDBC URL for database connection
+ * @param maximumPoolSize The maximum size of the connection pool
  * @param seedIfEmpty Whether to seed the database if it's empty
  */
-fun Application.configureDatabases(dbFilePath: String, seedIfEmpty: Boolean) {
+fun Application.configureDatabases(
+    driverClassName: String,
+    jdbcURL: String,
+    maximumPoolSize: Int,
+    seedIfEmpty: Boolean
+) {
     try {
-        val dbFile = File(dbFilePath)
-        dbFile.parentFile.mkdirs() // Ensure directory exists
+        // If using SQLite, ensure the parent directory exists
+        if (jdbcURL.startsWith("jdbc:sqlite:")) {
+            val dbFilePath = jdbcURL.substringAfter("jdbc:sqlite:")
+            val dbFile = File(dbFilePath)
+            dbFile.parentFile.mkdirs() // Ensure directory exists
+        }
         
-        Database.connect("jdbc:sqlite:${dbFile.absolutePath}", "org.sqlite.JDBC")
+        Database.connect(
+            url = jdbcURL,
+            driver = driverClassName,
+            user = "",
+            password = ""
+        )
         
         transaction {
             // Create tables if they don't exist
@@ -40,11 +64,23 @@ fun Application.configureDatabases(dbFilePath: String, seedIfEmpty: Boolean) {
             }
         }
         
-        log.info("Database configured successfully at $dbFilePath")
+        log.info("Database configured successfully with JDBC URL: $jdbcURL")
     } catch (e: Exception) {
         log.error("Error configuring database: ${e.message}", e)
         // Don't throw the exception further - just log it for error handling test
     }
+}
+
+/**
+ * Legacy configuration method for backward compatibility
+ */
+fun Application.configureDatabases(dbFilePath: String, seedIfEmpty: Boolean) {
+    configureDatabases(
+        driverClassName = "org.sqlite.JDBC", 
+        jdbcURL = "jdbc:sqlite:$dbFilePath", 
+        maximumPoolSize = 5,
+        seedIfEmpty = seedIfEmpty
+    )
 }
 
 /**

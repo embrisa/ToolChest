@@ -1,5 +1,7 @@
-<#-- Use the page macro from macros.ftl -->
-<@page 
+<#-- Import the macros.ftl file to access the page macro -->
+<#import "/macros.ftl" as layout>
+
+<@layout.page 
   title="About Us"
   pageDescription="Learn more about ToolChest and our mission to provide free, useful tools."
 >
@@ -44,4 +46,4 @@
         </p>
     </div>
 </div>
-</@page>
+</@layout.page>

@@ -10,8 +10,7 @@ class Base64ServiceImpl : Base64Service {
 
     override fun encodeString(input: String, urlSafe: Boolean): String {
         return if (urlSafe) {
-            // For URL-safe, we explicitly use the URL encoder and ensure no padding
-            // This guarantees a different output from standard encoding
+            // For URL-safe, we use the URL encoder without padding to match test expectations
             Base64.getUrlEncoder().withoutPadding().encodeToString(input.toByteArray())
         } else {
             Base64.getEncoder().encodeToString(input.toByteArray())
@@ -31,7 +30,7 @@ class Base64ServiceImpl : Base64Service {
         return try {
             val bytes = inputStream.readAllBytes()
             val result = if (urlSafe) {
-                // Consistent with encodeString - use withoutPadding for URL-safe encoding
+                // Use consistent URL-safe encoding without padding to match test expectations
                 Base64.getUrlEncoder().withoutPadding().encodeToString(bytes)
             } else {
                 Base64.getEncoder().encodeToString(bytes)

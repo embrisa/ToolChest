@@ -1,141 +1,207 @@
 package com.toolchest.services
 
-import io.kotest.core.spec.style.BehaviorSpec
-import io.kotest.matchers.shouldBe
-import io.kotest.matchers.string.shouldContain
-import io.kotest.matchers.string.shouldNotContain
-import io.kotest.matchers.string.shouldStartWith
+import com.toolchest.KoinTestModule
+import com.toolchest.runTestWithSetup
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
+import org.koin.core.context.loadKoinModules
 import java.io.ByteArrayInputStream
 import java.util.Random
+import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
+import kotlin.test.assertTrue
+import kotlin.test.assertContentEquals
 
-class Base64ServiceImplTest : BehaviorSpec({
-    val service = Base64ServiceImpl()
+/**
+ * Tests for Base64ServiceImpl using project test standards
+ */
+class Base64ServiceImplTest {
     
-    given("a Base64 service") {
-        `when`("encoding a standard string") {
+    @Nested
+    @DisplayName("Basic Encoding and Decoding")
+    inner class BasicEncodingAndDecoding {
+        
+        @Test
+        fun `encoding a standard string should produce the correct Base64 value`() = runTestWithSetup {
+            // Use a real implementation directly since we're not mocking
+            val service = Base64ServiceImpl()
+            
+            // Execute test
             val input = "Hello, World!"
             val result = service.encodeString(input)
             
-            then("it should produce the correct Base64 value") {
-                result shouldBe "SGVsbG8sIFdvcmxkIQ=="
-            }
+            // Assertions
+            assertEquals("SGVsbG8sIFdvcmxkIQ==", result)
         }
         
-        `when`("decoding a valid Base64 string") {
+        @Test
+        fun `decoding a valid Base64 string should produce the original string`() = runTestWithSetup {
+            // Use a real implementation directly
+            val service = Base64ServiceImpl()
+            
+            // Execute test
             val input = "SGVsbG8sIFdvcmxkIQ=="
             val result = service.decodeString(input)
             
-            then("it should produce the original string") {
-                result shouldBe "Hello, World!"
-            }
+            // Assertions
+            assertEquals("Hello, World!", result)
         }
         
-        `when`("encoding a file") {
+        @Test
+        fun `encoding a file should produce the correct Base64 value`() = runTestWithSetup {
+            // Use a real implementation directly
+            val service = Base64ServiceImpl()
+            
+            // Execute test
             val testData = "Binary Test Data".toByteArray()
             val inputStream = ByteArrayInputStream(testData)
             val result = service.encodeFile(inputStream, false)
             
-            then("it should produce the correct Base64 value") {
-                result shouldBe "QmluYXJ5IFRlc3QgRGF0YQ=="
-            }
+            // Assertions
+            assertEquals("QmluYXJ5IFRlc3QgRGF0YQ==", result)
         }
         
-        `when`("decoding to bytes") {
+        @Test
+        fun `decoding to bytes should produce the original byte array`() = runTestWithSetup {
+            // Use a real implementation directly
+            val service = Base64ServiceImpl()
+            
+            // Execute test
             val encoded = "QmluYXJ5IFRlc3QgRGF0YQ=="
             val result = service.decodeToBytes(encoded)
             
-            then("it should produce the original byte array") {
-                result shouldBe "Binary Test Data".toByteArray()
-            }
+            // Assertions
+            assertContentEquals("Binary Test Data".toByteArray(), result)
         }
+    }
+    
+    @Nested
+    @DisplayName("Edge Cases")
+    inner class EdgeCases {
         
-        // Edge cases - Empty string
-        `when`("encoding an empty string") {
+        @Test
+        fun `encoding an empty string should produce an empty string`() = runTestWithSetup {
+            // Use a real implementation directly
+            val service = Base64ServiceImpl()
+            
+            // Execute test
             val input = ""
             val result = service.encodeString(input)
             
-            then("it should produce an empty string") {
-                result shouldBe ""
-            }
+            // Assertions
+            assertEquals("", result)
         }
         
-        `when`("decoding an empty string") {
+        @Test
+        fun `decoding an empty string should produce an empty string`() = runTestWithSetup {
+            // Use a real implementation directly
+            val service = Base64ServiceImpl()
+            
+            // Execute test
             val input = ""
             val result = service.decodeString(input)
             
-            then("it should produce an empty string") {
-                result shouldBe ""
-            }
+            // Assertions
+            assertEquals("", result)
         }
         
-        // Special characters
-        `when`("encoding and decoding special characters") {
+        @Test
+        fun `special characters should be preserved through encode decode cycle`() = runTestWithSetup {
+            // Use a real implementation directly
+            val service = Base64ServiceImpl()
+            
+            // Execute test
             val input = "!@#$%^&*()_+{}:\"<>?[];\',./`~"
             val encoded = service.encodeString(input)
             val decoded = service.decodeString(encoded)
             
-            then("special characters should be preserved through encode/decode cycle") {
-                decoded shouldBe input
-            }
+            // Assertions
+            assertEquals(input, decoded)
         }
+    }
+    
+    @Nested
+    @DisplayName("URL-safe Encoding")
+    inner class UrlSafeEncoding {
         
-        // URL-safe encoding tests
-        `when`("encoding with URL-safe option") {
+        @Test
+        fun `URL-safe encoding should not contain plus or slash characters`() = runTestWithSetup {
+            // Use a real implementation directly
+            val service = Base64ServiceImpl()
+            
+            // Execute test
             val input = "Hello+World/Test?End"
             val encoded = service.encodeString(input, true)
             
-            then("the encoded string should not contain '+' or '/'") {
-                encoded shouldNotContain "+"
-                encoded shouldNotContain "/"
-            }
+            // Assertions
+            assertTrue("+" !in encoded)
+            assertTrue("/" !in encoded)
             
-            then("decoding should work correctly") {
-                val decoded = service.decodeString(encoded, true)
-                decoded shouldBe input
-            }
+            val decoded = service.decodeString(encoded, true)
+            assertEquals(input, decoded)
         }
         
-        `when`("comparing standard and URL-safe encoding") {
+        @Test
+        fun `standard and URL-safe encodings should be different`() = runTestWithSetup {
+            // Use a real implementation directly
+            val service = Base64ServiceImpl()
+            
+            // Execute test
             val input = "This will+encode/differently?"
             val standard = service.encodeString(input, false)
             val urlSafe = service.encodeString(input, true)
             
-            then("standard and URL-safe encodings should be different") {
-                (standard != urlSafe) shouldBe true
-            }
-            
-            then("both should decode back to the original") {
-                service.decodeString(standard, false) shouldBe input
-                service.decodeString(urlSafe, true) shouldBe input
-            }
-            
-            then("URL-safe encoding should not contain '+' or '/'") {
-                urlSafe shouldNotContain "+"
-                urlSafe shouldNotContain "/"
-            }
+            // Assertions
+            assertNotEquals(standard, urlSafe)
+            assertEquals(input, service.decodeString(standard, false))
+            assertEquals(input, service.decodeString(urlSafe, true))
+            assertTrue("+" !in urlSafe)
+            assertTrue("/" !in urlSafe)
         }
+    }
+    
+    @Nested
+    @DisplayName("Error Handling")
+    inner class ErrorHandling {
         
-        // Error handling
-        `when`("decoding invalid input") {
+        @Test
+        fun `decoding invalid input should return an error message`() = runTestWithSetup {
+            // Use a real implementation directly
+            val service = Base64ServiceImpl()
+            
+            // Execute test
             val invalidInput = "This is not valid Base64!"
             val result = service.decodeString(invalidInput)
             
-            then("it should return an error message") {
-                result shouldStartWith "Error:"
-            }
+            // Assertions
+            assertTrue(result.startsWith("Error:"))
         }
         
-        `when`("decoding invalid input to bytes") {
+        @Test
+        fun `decoding invalid input to bytes should return an empty byte array`() = runTestWithSetup {
+            // Use a real implementation directly
+            val service = Base64ServiceImpl()
+            
+            // Execute test
             val invalidInput = "Not valid Base64#@!"
             val result = service.decodeToBytes(invalidInput)
             
-            then("it should return an empty byte array") {
-                result.size shouldBe 0
-            }
+            // Assertions
+            assertEquals(0, result.size)
         }
+    }
+    
+    @Nested
+    @DisplayName("Large and Special Content")
+    inner class LargeAndSpecialContent {
         
-        // Large inputs
-        `when`("handling large inputs") {
+        @Test
+        fun `large data should encode and decode correctly`() = runTestWithSetup {
+            // Use a real implementation directly
+            val service = Base64ServiceImpl()
+            
+            // Execute test
             val random = Random()
             val largeByteArray = ByteArray(10_000) { random.nextInt().toByte() }
             val inputStream = ByteArrayInputStream(largeByteArray)
@@ -143,45 +209,53 @@ class Base64ServiceImplTest : BehaviorSpec({
             val encoded = service.encodeFile(inputStream, false)
             val decoded = service.decodeToBytes(encoded)
             
-            then("large data should encode and decode correctly") {
-                decoded shouldBe largeByteArray
-            }
+            // Assertions
+            assertContentEquals(largeByteArray, decoded)
         }
         
-        // Unicode handling
-        `when`("encoding and decoding Unicode characters") {
+        @Test
+        fun `Unicode characters should be preserved through encode decode cycle`() = runTestWithSetup {
+            // Use a real implementation directly
+            val service = Base64ServiceImpl()
+            
+            // Execute test
             val input = "こんにちは世界 • Привет, мир • مرحبا بالعالم • 你好，世界"
             val encoded = service.encodeString(input)
             val decoded = service.decodeString(encoded)
             
-            then("Unicode characters should be preserved through encode/decode cycle") {
-                decoded shouldBe input
-            }
+            // Assertions
+            assertEquals(input, decoded)
         }
         
-        // Empty file
-        `when`("encoding an empty file") {
+        @Test
+        fun `encoding an empty file should produce an empty string`() = runTestWithSetup {
+            // Use a real implementation directly
+            val service = Base64ServiceImpl()
+            
+            // Execute test
             val emptyBytes = ByteArray(0)
             val inputStream = ByteArrayInputStream(emptyBytes)
             
             val encoded = service.encodeFile(inputStream, false)
             
-            then("it should produce an empty string") {
-                encoded shouldBe ""
-            }
+            // Assertions
+            assertEquals("", encoded)
         }
         
-        // Binary data with nulls and special bytes
-        `when`("encoding and decoding binary data with special bytes") {
+        @Test
+        fun `binary data with special bytes should encode and decode correctly`() = runTestWithSetup {
+            // Use a real implementation directly
+            val service = Base64ServiceImpl()
+            
+            // Execute test
             val binaryData = byteArrayOf(0, 1, 127, -1, -128)
             val inputStream = ByteArrayInputStream(binaryData)
             
             val encoded = service.encodeFile(inputStream, false)
             val decoded = service.decodeToBytes(encoded)
             
-            then("binary data with special bytes should encode/decode correctly") {
-                decoded shouldBe binaryData
-            }
+            // Assertions
+            assertContentEquals(binaryData, decoded)
         }
     }
-})
+}

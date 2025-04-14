@@ -13,6 +13,7 @@ import com.toolchest.data.dto.toDTO
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import com.github.benmanes.caffeine.cache.Caffeine
+import org.jetbrains.exposed.sql.selectAll
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.TimeUnit
 
@@ -32,7 +33,7 @@ class ToolServiceImpl : ToolService {
     
     override fun getAllTools(): List<ToolDTO> {
         return transaction {
-            Tools.select { Tools.isActive eq true }
+            Tools.selectAll().where { Tools.isActive eq true }
                 .orderBy(Tools.displayOrder)
                 .map { row ->
                     val toolId = row[Tools.id].value
@@ -119,7 +120,7 @@ class ToolServiceImpl : ToolService {
                 }
                 .ifEmpty {
                     // Fallback to newest tools if no usage data
-                    Tools.select { Tools.isActive eq true }
+                    Tools.selectAll().where { Tools.isActive eq true }
                         .orderBy(Tools.id, SortOrder.DESC)
                         .limit(limit)
                         .map { row -> 
@@ -136,7 +137,7 @@ class ToolServiceImpl : ToolService {
         }
         
         // Split the query into search terms
-        val terms = query.toLowerCase().split(" ", ",", ";").filter { it.isNotBlank() }
+        val terms = query.lowercase().split(" ", ",", ";").filter { it.isNotBlank() }
         
         return transaction {
             // First, find tags matching the terms
