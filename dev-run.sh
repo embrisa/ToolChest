@@ -4,5 +4,9 @@
 echo "🔧 Starting ToolChest in DEVELOPMENT MODE"
 echo "🚫 Caching is disabled for easier development"
 
-# Set development mode environment variable and run the application
-TOOLCHEST_DEV_MODE=true ./gradlew run -t -Dio.ktor.development=true
+# Set environment variables
+PORT=8080
+TOOLCHEST_DEV_MODE=true
+
+# Run the application
+./gradlew run -t -Dio.ktor.development=true
