@@ -1,4 +1,5 @@
 import org.gradle.kotlin.dsl.testImplementation
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -29,6 +30,7 @@ val freemarkerVersion = "2.3.32"
 val kotlinTestVersion = "2.1.20"
 val mockkVersion = "1.14.0"
 val h2Version = "2.2.220"
+val jsoupVersion = "1.19.1"
 
 dependencies {
     // Ktor server
@@ -73,10 +75,10 @@ dependencies {
     testImplementation("com.h2database:h2:$h2Version")
 
     // Mocking
-    testImplementation("io.mockk:mockk:${mockkVersion}")
+    testImplementation("io.mockk:mockk:$mockkVersion")
 
     // Jsoup for HTML parsing
-    testImplementation("org.jsoup:jsoup:1.19.1")
+    testImplementation("org.jsoup:jsoup:$jsoupVersion")
 
     // Koin testing
     testImplementation("io.insert-koin:koin-test-junit5:$koinVersion")
@@ -94,15 +96,15 @@ configurations.all {
 // Configure Java toolchain to match system Java version
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17)) // Match your system Java version
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
 
 // Configure Kotlin to use the same JVM target as Java
 tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = "17" // Match Java toolchain version
-        freeCompilerArgs += "-Xjsr305=strict"
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_21) // Match Java toolchain version
+        freeCompilerArgs.add("-Xjsr305=strict")
     }
 }
 

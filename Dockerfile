@@ -1,12 +1,24 @@
-# Stage 1: Build the application
-FROM gradle:8.3.0-jdk17 AS build
+# Stage 1: Build
+FROM eclipse-temurin:21-jdk as build
+
 WORKDIR /app
 COPY . .
-RUN gradle shadowJar --no-daemon
+RUN ./gradlew shadowJar --no-daemon
 
-# Stage 2: Run the application
-FROM eclipse-temurin:17-jre
+# Stage 2: Run
+FROM eclipse-temurin:21-jre
+
+# If you want to support Railway's $PORT environment variable
+ARG PORT=8080
+ENV PORT=${PORT}
+
 WORKDIR /app
-COPY --from=build /app/build/libs/ToolChest-all.jar /app/ToolChest-all.jar
-EXPOSE 8080
-CMD ["java", "-jar", "/app/ToolChest-all.jar"]
+COPY --from=build /app/build/libs/*-all.jar app.jar
+
+# Optional security: run as non-root
+RUN useradd runtime
+USER runtime
+
+EXPOSE ${PORT}
+
+ENTRYPOINT ["java", "-Dio.ktor.development=false", "-Dserver.port=${PORT}", "-jar", "app.jar"]

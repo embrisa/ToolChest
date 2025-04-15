@@ -1,5 +1,0 @@
-[build]
-cmd = "./gradlew shadowJar"
-
-[start]
-cmd = "java -jar build/libs/ToolChest-all.jar"
