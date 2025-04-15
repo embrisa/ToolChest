@@ -1,2 +1,2 @@
 [start]
-cmd = "java $JAVA_OPTS -jar build/libs/*-all.jar"
+cmd = "java $JAVA_OPTS -jar build/libs/ToolChest-all.jar"
