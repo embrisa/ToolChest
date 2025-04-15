@@ -8,7 +8,7 @@
     "deploy": {
         "runtime": "V2",
         "numReplicas": 1,
-        "startCommand": "java -jar app.jar",
+        "startCommand": "java -jar app.jar -port=$PORT",
         "sleepApplication": false,
         "multiRegionConfig": {
             "europe-west4-drams3a": {
