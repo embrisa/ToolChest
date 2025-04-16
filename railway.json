@@ -8,7 +8,7 @@
     "deploy": {
         "runtime": "V2",
         "numReplicas": 1,
-        "startCommand": "sh -c 'java -jar app.jar -port=$PORT'",
+        "startCommand": "sh -c 'java -Dio.ktor.development=false -Dserver.port=$PORT -jar app.jar'",
         "sleepApplication": false,
         "multiRegionConfig": {
             "europe-west4-drams3a": {
