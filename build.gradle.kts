@@ -13,7 +13,7 @@ group = "com.toolchest"
 version = "0.0.1"
 
 application {
-    mainClass.set("com.toolchest.ApplicationKt")
+    mainClass.set("io.ktor.server.netty.EngineMain")
 }
 
 repositories {

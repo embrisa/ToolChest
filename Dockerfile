@@ -21,4 +21,4 @@ USER runtime
 
 EXPOSE ${PORT}
 
-ENTRYPOINT ["java", "-Dio.ktor.development=false", "-Dserver.port=${PORT}", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Dio.ktor.development=false", "-port=8080", "-jar", "app.jar"]
