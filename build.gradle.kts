@@ -1,3 +1,4 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.kotlin.dsl.testImplementation
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -112,4 +113,12 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
     systemProperty("ktor.testing", "true")
+}
+
+// Configure the shadowJar task
+tasks.withType<ShadowJar>().configureEach {
+    archiveBaseName.set("ToolChest")
+    archiveVersion.set("") // Omit version from the name
+    archiveClassifier.set("all") // Standard classifier for fat JARs
+    // This will result in build/libs/ToolChest-all.jar
 }

@@ -2,23 +2,30 @@
 FROM eclipse-temurin:21-jdk as build
 
 WORKDIR /app
+
+COPY build.gradle.kts settings.gradle.kts gradlew ./
+COPY gradle ./gradle
+RUN chmod +x ./gradlew
+RUN ./gradlew dependencies --no-daemon || true
+
 COPY . .
 RUN ./gradlew shadowJar --no-daemon
 
 # Stage 2: Run
 FROM eclipse-temurin:21-jre
 
-# If you want to support Railway's $PORT environment variable
 ARG PORT=8080
-ENV PORT=8080
+ENV PORT=${PORT}
 
 WORKDIR /app
-COPY --from=build /app/build/libs/*-all.jar ToolChest-All.jar
 
-# Optional security: run as non-root
-RUN useradd runtime
-USER runtime
+COPY --from=build /app/build/libs/ToolChest-all.jar /app/app.jar
 
-EXPOSE 8080
+# Create a non-root user and group (Debian/Ubuntu compatible)
+RUN groupadd --system nonroot && \
+    useradd --system --gid nonroot --no-create-home --shell /sbin/nologin nonroot
+USER nonroot
 
-ENTRYPOINT ["java", "-Dio.ktor.development=false", "-port=8080", "-jar", "ToolChest-All.jar"]
+EXPOSE ${PORT}
+
+ENTRYPOINT ["java", "-Dio.ktor.development=false", "-jar", "/app/app.jar"]
