@@ -185,19 +185,44 @@ export class ToolServiceImpl implements ToolService {
             return cachedData;
         }
 
+        // Step 1: Raw query to get ordered tool IDs
+        // Prisma handles boolean to integer conversion for SQLite in $queryRaw
+        const orderedToolIdResults: Array<{ id: string }> = await this.prisma.$queryRaw`
+            SELECT t.id
+            FROM Tool t
+            INNER JOIN ToolUsageStats tus ON t.id = tus.toolId
+            WHERE t.isActive = ${true}
+            ORDER BY tus.usageCount DESC, t.updatedAt DESC
+            LIMIT ${limit}
+        `;
+
+        if (!orderedToolIdResults || orderedToolIdResults.length === 0) {
+            this.cache.set(cacheKey, []);
+            return [];
+        }
+
+        const orderedToolIds = orderedToolIdResults.map(r => r.id);
+
+        // Step 2: Fetch tools based on the ordered IDs
         const popularToolsResults = await this.prisma.tool.findMany({
-            where: { isActive: true },
-            orderBy: [
-                { toolUsageStats: { _avg: { usageCount: 'desc' } } },
-                { updatedAt: 'desc' }
-            ],
-            take: limit,
+            where: {
+                id: { in: orderedToolIds },
+                // isActive: true, // Already effectively handled by the raw query
+            },
             include: {
                 tags: { include: { tag: true } },
-                toolUsageStats: true,
+                toolUsageStats: true, // Still include to populate the DTO correctly
             },
         });
-        const toolDTOs = (popularToolsResults as PrismaToolWithRelations[]).map((tool: PrismaToolWithRelations) => toToolDTO(tool));
+
+        // Step 3: Re-sort the fetched tools to match the order from the raw query,
+        // as findMany with an 'in' clause does not guarantee order.
+        const toolsMap = new Map(popularToolsResults.map((tool: PrismaToolWithRelations) => [tool.id, tool]));
+        const sortedPopularTools = orderedToolIds
+            .map(id => toolsMap.get(id))
+            .filter(Boolean) as PrismaToolWithRelations[]; // filter(Boolean) removes any undefined if a tool was somehow not found
+
+        const toolDTOs = sortedPopularTools.map((tool: PrismaToolWithRelations) => toToolDTO(tool));
         this.cache.set(cacheKey, toolDTOs);
         return toolDTOs;
     }
