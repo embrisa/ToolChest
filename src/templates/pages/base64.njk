@@ -1,0 +1,83 @@
+{# src/templates/pages/base64.njk #}
+{% extends "../layouts/base.njk" %}
+{% from "../components/macros.njk" import input %}
+
+{% block title %}{{ tool.name | default('Base64 Encoder/Decoder') }} - {{ appName }}{% endblock %}
+{% block description %}{{ tool.description | default('Encode to Base64 or decode from Base64. Supports URL-safe encoding and file processing.') }}{% endblock %}
+
+{% block content %}
+    <h1 class="text-3xl font-bold mb-2">{{ tool.name | default('Base64 Encoder/Decoder') }}</h1>
+    <p class="text-gray-600 mb-6">{{ tool.description | default('Encode to Base64 or decode from Base64. Supports URL-safe encoding and file processing.') }}</p>
+
+    <div id="base64-result-container" class="mb-6"></div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {# Encode Text #}
+        <section>
+            <h2 class="text-2xl font-semibold mb-4">Encode Text to Base64</h2>
+            <form hx-post="/base64/encode" hx-target="#base64-result-container" hx-swap="innerHTML">
+                <div class="mb-4">
+                    <label for="textToEncode" class="block text-sm font-medium text-gray-700 mb-1">Text to Encode:</label>
+                    {{ input(name='text', type='textarea', placeholder='Enter text to encode...') }}
+                </div>
+                <div class="mb-4">
+                    <input type="checkbox" id="urlSafeEncode" name="urlSafe" value="true" class="mr-2">
+                    <label for="urlSafeEncode" class="text-sm font-medium text-gray-700">URL Safe?</label>
+                </div>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors">Encode</button>
+            </form>
+        </section>
+
+        {# Decode Text #}
+        <section>
+            <h2 class="text-2xl font-semibold mb-4">Decode Base64 to Text</h2>
+            <form hx-post="/base64/decode" hx-target="#base64-result-container" hx-swap="innerHTML">
+                <div class="mb-4">
+                    <label for="textToDecode" class="block text-sm font-medium text-gray-700 mb-1">Base64 to Decode:</label>
+                    {{ input(name='text', type='textarea', placeholder='Enter Base64 string to decode...') }}
+                </div>
+                <div class="mb-4">
+                    <input type="checkbox" id="urlSafeDecode" name="urlSafe" value="true" class="mr-2">
+                    <label for="urlSafeDecode" class="text-sm font-medium text-gray-700">URL Safe?</label>
+                </div>
+                <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition-colors">Decode</button>
+            </form>
+        </section>
+
+        {# Encode File #}
+        <section class="md:col-span-2 mt-8 border-t pt-8">
+            <h2 class="text-2xl font-semibold mb-4">Encode File to Base64</h2>
+            <form hx-post="/base64/encode-file" hx-target="#base64-result-container" hx-swap="innerHTML" hx-encoding="multipart/form-data">
+                <div class="mb-4">
+                    <label for="fileToEncode" class="block text-sm font-medium text-gray-700 mb-1">File to Encode:</label>
+                    <input type="file" id="fileToEncode" name="file" class="border p-2 rounded w-full file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100" required>
+                </div>
+                <div class="mb-4">
+                    <input type="checkbox" id="urlSafeEncodeFile" name="urlSafe" value="true" class="mr-2">
+                    <label for="urlSafeEncodeFile" class="text-sm font-medium text-gray-700">URL Safe?</label>
+                </div>
+                <button type="submit" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded transition-colors">Encode File</button>
+            </form>
+        </section>
+
+        {# Decode File - This is a direct download, so no HTMX target needed for the form itself #}
+        <section class="md:col-span-2 mt-8 border-t pt-8">
+            <h2 class="text-2xl font-semibold mb-4">Decode Base64 to File</h2>
+            <form action="/base64/decode-file" method="POST">
+                <div class="mb-4">
+                    <label for="textToDecodeFile" class="block text-sm font-medium text-gray-700 mb-1">Base64 to Decode:</label>
+                    {{ input(name='text', type='textarea', placeholder='Enter Base64 string for file content...') }}
+                </div>
+                <div class="mb-4">
+                    <label for="fileNameDecode" class="block text-sm font-medium text-gray-700 mb-1">Output File Name:</label>
+                    {{ input(name='fileName', placeholder='e.g., decoded_file.txt', value='decoded_file.txt') }}
+                </div>
+                <div class="mb-4">
+                    <input type="checkbox" id="urlSafeDecodeFile" name="urlSafe" value="true" class="mr-2">
+                    <label for="urlSafeDecodeFile" class="text-sm font-medium text-gray-700">URL Safe?</label>
+                </div>
+                <button type="submit" class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded transition-colors">Decode and Download File</button>
+            </form>
+        </section>
+    </div>
+{% endblock %} 

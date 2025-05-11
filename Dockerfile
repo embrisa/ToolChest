@@ -1,31 +1,43 @@
-# Stage 1: Build
-FROM eclipse-temurin:21-jdk as build
+FROM node:20-slim AS base
 
+# Stage 1: Build
+FROM base AS builder
 WORKDIR /app
 
-COPY build.gradle.kts settings.gradle.kts gradlew ./
-COPY gradle ./gradle
-RUN chmod +x ./gradlew
-RUN ./gradlew dependencies --no-daemon || true
+# Copy package files and install dependencies
+COPY package.json package-lock.json* ./
+RUN npm ci
 
+# Copy the rest of the source code
 COPY . .
-RUN ./gradlew shadowJar --no-daemon
+
+# Build the TypeScript project
+RUN npm run build
 
 # Stage 2: Run
-FROM eclipse-temurin:21-jre
-
-ARG PORT=8080
-ENV PORT=${PORT}
-
+FROM node:20-slim AS runner
 WORKDIR /app
 
-COPY --from=build /app/build/libs/ToolChest-all.jar /app/app.jar
+ENV NODE_ENV production
 
-# Create a non-root user and group (Debian/Ubuntu compatible)
-RUN groupadd --system nonroot && \
-    useradd --system --gid nonroot --no-create-home --shell /sbin/nologin nonroot
-USER nonroot
+# Create a non-root user
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 appuser
 
-EXPOSE ${PORT}
+# Copy built assets and necessary files from the builder stage
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
 
-ENTRYPOINT ["java", "-Dio.ktor.development=false", "-jar", "/app/app.jar"]
+# Copy Prisma schema and migration files if they exist in the context of the Docker build
+# Ensure your .dockerignore is not excluding these if they are at the root
+COPY prisma ./prisma/
+
+USER appuser
+
+EXPOSE 8080
+
+# Set PORT environment variable, Railway might override this
+ENV PORT 8080
+
+CMD ["node", "dist/server.js"]

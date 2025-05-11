@@ -1,0 +1,67 @@
+{
+  "name": "toolchest",
+  "version": "1.0.0",
+  "description": "ToolChest is a Ktor-based monolithic web application providing free, high-quality utility tools with a focus on privacy, accessibility, and ease of use. The platform uses server-side rendering (SSR) with FreeMarker templates, HTMX for dynamic updates, and Tailwind CSS for modern, responsive design. The first tool implemented is a Base64 Encoder/Decoder for both text and files. More tools are planned and will be added incrementally.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "node dist/server.js",
+    "build": "tsc",
+    "dev": "nodemon src/server.ts",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write .",
+    "db:seed": "ts-node src/database/seeds/seed.ts",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/embrisa/ToolChest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/embrisa/ToolChest/issues"
+  },
+  "homepage": "https://github.com/embrisa/ToolChest#readme",
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.15.17",
+    "@types/supertest": "^6.0.3",
+    "@typescript-eslint/eslint-plugin": "^8.32.0",
+    "@typescript-eslint/parser": "^8.32.0",
+    "eslint": "^9.26.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.4.0",
+    "inversify": "^7.5.1",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.5.3",
+    "prisma": "^6.7.0",
+    "supertest": "^7.1.0",
+    "ts-jest": "^29.3.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.7.0",
+    "@types/compression": "^1.7.5",
+    "@types/express": "^5.0.1",
+    "@types/morgan": "^1.9.9",
+    "@types/multer": "^1.4.12",
+    "@types/nunjucks": "^3.2.6",
+    "compression": "^1.8.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.2",
+    "node-cache": "^5.1.2",
+    "nunjucks": "^3.2.4",
+    "reflect-metadata": "^0.2.2"
+  }
+}

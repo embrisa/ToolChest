@@ -1,0 +1,8 @@
+{# src/templates/components/macros.njk #}
+
+{# Example Macro #}
+{% macro input(name, value='', type='text', placeholder='') -%}
+    <input type="{{ type }}" name="{{ name }}" value="{{ value }}" placeholder="{{ placeholder }}" class="border p-2 rounded w-full">
+{%- endmacro %}
+
+{# Add other reusable macros here #} 

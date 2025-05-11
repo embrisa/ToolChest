@@ -1,0 +1,16 @@
+{# src/templates/pages/error.njk #}
+{% extends "../layouts/base.njk" %}
+
+{% block title %}{{ statusCode | default(500) }} Error - {{ appName }}{% endblock %}
+{% block description %}{{ message | default('An unexpected error occurred.') }}{% endblock %}
+
+{% block content %}
+    <div class="text-center py-10">
+        <h1 class="text-6xl font-bold text-red-500">{{ statusCode | default(500) }}</h1>
+        <p class="text-2xl font-semibold mt-4 mb-2">{{ title | default('Oops! Something went wrong.') }}</p>
+        <p class="text-gray-600 mb-8">{{ message | default('An unexpected error occurred. We are working to fix it.') }}</p>
+        <a href="/" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors">
+            Go to Homepage
+        </a>
+    </div>
+{% endblock %} 

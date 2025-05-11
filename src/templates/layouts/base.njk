@@ -1,0 +1,27 @@
+{# src/templates/layouts/base.njk #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ appName }}{% endblock %}</title>
+    <meta name="description" content="{% block description %}Default description{% endblock %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/htmx.org@1.9.0"></script>
+    {# Tailwind CSS via CDN - For production, consider a build step #}
+    <script src="https://cdn.tailwindcss.com"></script> 
+    <link rel="stylesheet" href="/static/css/main.css">
+    {% block headContent %}{% endblock %}
+</head>
+<body class="flex flex-col min-h-screen">
+    {% include "../components/header.njk" %}
+
+    <main class="flex-grow container mx-auto px-4 py-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include "../components/footer.njk" %}
+
+    {% block bodyScripts %}{% endblock %}
+</body>
+</html> 

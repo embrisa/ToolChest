@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Tool {
+  id           String         @id @default(cuid())
+  name         String         @unique
+  slug         String         @unique
+  description  String?
+  iconClass    String?
+  displayOrder Int            @default(0)
+  isActive     Boolean        @default(true)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  tags         ToolTag[]
+  toolUsageStats ToolUsageStats[]
+}
+
+model Tag {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  color       String?   @default("#000000") // Default color, e.g., black
+  createdAt   DateTime  @default(now())
+  tools       ToolTag[]
+}
+
+// Implicit many-to-many relation table for Tools and Tags
+model ToolTag {
+  tool    Tool     @relation(fields: [toolId], references: [id])
+  toolId  String
+  tag     Tag      @relation(fields: [tagId], references: [id])
+  tagId   String
+  assignedAt DateTime @default(now())
+
+  @@id([toolId, tagId])
+}
+
+model ToolUsageStats {
+  id         String   @id @default(cuid())
+  tool       Tool     @relation(fields: [toolId], references: [id])
+  toolId     String   @unique // Each tool has one stats entry
+  usageCount Int      @default(0)
+  lastUsed   DateTime @default(now())
+}
