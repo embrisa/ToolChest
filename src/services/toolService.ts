@@ -188,7 +188,7 @@ export class ToolServiceImpl implements ToolService {
         const popularToolsResults = await this.prisma.tool.findMany({
             where: { isActive: true },
             orderBy: [
-                { toolUsageStats: { usageCount: 'desc' } },
+                { toolUsageStats: { _avg: { usageCount: 'desc' } } },
                 { updatedAt: 'desc' }
             ],
             take: limit,
