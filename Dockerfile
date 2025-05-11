@@ -12,10 +12,10 @@ FROM node:20-slim AS base
 # If runtime issues persist, we'll add it to the runner stage too.
 
 # Stage 1: Build
-FROM node:20-slim AS builder # Changed from 'base' to 'node:20-slim' for clarity, or keep 'FROM base' if 'base' itself is node:20-slim
+FROM node:20-slim AS builder
 WORKDIR /app
 
-# Install OpenSSL required by Prisma
+# Install OpenSSL required by Prisma (primarily for 'prisma generate')
 RUN apt-get update -y && apt-get install -y openssl libssl-dev && rm -rf /var/lib/apt/lists/*
 
 # Copy package files and install dependencies
@@ -25,7 +25,7 @@ RUN npm ci
 # Copy the rest of the source code
 COPY . .
 
-# Build the TypeScript project (which now includes prisma generate)
+# Build the TypeScript project (which includes 'npx prisma generate')
 RUN npm run build
 
 # Stage 2: Run
@@ -34,8 +34,8 @@ WORKDIR /app
 
 ENV NODE_ENV production
 
-# Install OpenSSL required by Prisma Runtime (Query Engine)
-# This ensures the runtime also has the necessary SSL libraries.
+# Install OpenSSL if required by Prisma Runtime (Query Engine)
+# Note: libssl-dev is usually not needed for runtime.
 RUN apt-get update -y && apt-get install -y openssl libssl-dev && rm -rf /var/lib/apt/lists/*
 
 # Create a non-root user
@@ -46,23 +46,19 @@ RUN adduser --system --uid 1001 appuser
 COPY --from=builder --chown=appuser:nodejs /app/dist ./dist
 COPY --from=builder --chown=appuser:nodejs /app/node_modules ./node_modules
 COPY --from=builder --chown=appuser:nodejs /app/package.json ./package.json
+COPY --from=builder --chown=appuser:nodejs /app/src/templates ./src/templates
+COPY --from=builder --chown=appuser:nodejs /app/src/public ./src/public
 
-# Copy Prisma schema. It's needed for Prisma Client to find the schema at runtime
-# if your schema location is default or referenced by environment variable.
-# Also copy the query engine if not already in node_modules.
+# Copy Prisma schema and migration files from the builder stage.
+# These are needed for 'prisma migrate deploy'.
 COPY --from=builder --chown=appuser:nodejs /app/prisma ./prisma/
 
-# Ensure the generated Prisma Client query engine binaries are executable by the appuser
-# The Prisma client might place query engines in node_modules/.prisma/client or node_modules/@prisma/client/runtime
-# We also need to ensure the schema is available for the runtime if not embedded.
-# If `prisma generate` in the builder stage correctly places the engines in node_modules,
-# the COPY --from=builder /app/node_modules ./node_modules should bring them.
+# Apply database migrations. This is crucial for deployment.
+# This runs as root before switching to appuser.
+RUN npx prisma migrate deploy
 
 USER appuser
 
 EXPOSE 8080
-
-# Set PORT environment variable, Railway might override this
-ENV PORT 8080
 
 CMD ["node", "dist/server.js"]
