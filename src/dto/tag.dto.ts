@@ -10,17 +10,23 @@ export interface TagDTO {
     toolCount?: number; // Optional, as this needs to be calculated
 }
 
-// Define a more specific type for the Prisma Tag entity with includes for tool count
-export type PrismaTagWithToolCount = Prisma.TagGetPayload<{
+// Define a validator for the Prisma Tag entity with includes for tool count
+const tagWithToolCountValidator = Prisma.validator<Prisma.TagDefaultArgs>()({
     include: {
         _count: {
-            select: { tools: true };
-        };
-    };
-}>;
+            select: { tools: true },
+        },
+    },
+});
 
-// Type for a basic Tag, without tool count (e.g., when nested in ToolDTO)
-export type PrismaTagBasic = Prisma.TagGetPayload<{}>;
+// Use the validator to create the payload type
+export type PrismaTagWithToolCount = Prisma.TagGetPayload<typeof tagWithToolCountValidator>;
+
+// Define a validator for a basic Tag (e.g., when nested in ToolDTO)
+const basicTagValidator = Prisma.validator<Prisma.TagDefaultArgs>()({});
+
+// Use the validator to create the payload type
+export type PrismaTagBasic = Prisma.TagGetPayload<typeof basicTagValidator>;
 
 // Placeholder for helper function to convert a Prisma Tag entity to TagDTO
 // You'll need to implement this based on how you fetch and structure your data.

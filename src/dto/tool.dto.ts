@@ -15,11 +15,26 @@ export interface ToolDTO {
     tags?: TagDTO[];     // Optional, as tags might be loaded separately
 }
 
-// Define a more specific type for the Prisma Tool entity with includes
-export type PrismaToolWithRelations = Prisma.ToolGetPayload<{
+// Define a validator for the Prisma Tool entity with includes
+const toolWithRelationsValidator = Prisma.validator<Prisma.ToolDefaultArgs>()({
     include: {
-        tags: { include: { tag: true } };
-        toolUsageStats: true;
+        tags: {
+            include: {
+                tag: true, // Ensure the 'tag' relation within 'ToolTag' is included
+            },
+        },
+        toolUsageStats: true,
+    },
+});
+
+// Use the validator to create the payload type
+export type PrismaToolWithRelations = Prisma.ToolGetPayload<typeof toolWithRelationsValidator>;
+
+// Type for the 'toolTag' parameter, representing an element from tool.tags
+// This will be a ToolTag payload that includes the nested Tag
+type ToolTagWithTag = Prisma.ToolTagGetPayload<{
+    include: {
+        tag: true;
     };
 }>;
 
@@ -35,7 +50,7 @@ export function toToolDTO(tool: PrismaToolWithRelations): ToolDTO {
         isActive: tool.isActive,
         createdAt: tool.createdAt,
         updatedAt: tool.updatedAt,
-        usageCount: tool.toolUsageStats[0]?.usageCount ?? 0,
-        tags: tool.tags?.map(toolTag => toTagDTO(toolTag.tag as PrismaTagBasic)) ?? [],
+        usageCount: tool.toolUsageStats?.[0]?.usageCount ?? 0,
+        tags: tool.tags?.map((toolTag: ToolTagWithTag) => toTagDTO(toolTag.tag as PrismaTagBasic)) ?? [],
     };
 } 
