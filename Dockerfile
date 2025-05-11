@@ -1,5 +1,7 @@
 FROM node:20-slim AS base
 
+RUN apt-get update -y && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+
 # Stage 1: Build
 FROM base AS builder
 WORKDIR /app
