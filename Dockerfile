@@ -53,6 +53,11 @@ COPY --from=builder --chown=appuser:nodejs /app/src/public ./src/public
 # These are needed for 'prisma migrate deploy'.
 COPY --from=builder --chown=appuser:nodejs /app/prisma ./prisma/
 
+# Define DATABASE_URL for Prisma migrate deploy during build time.
+# This should point to the location of your SQLite file within the container.
+ARG DATABASE_URL_BUILDTIME="file:./prisma/toolchest.db"
+ENV DATABASE_URL=${DATABASE_URL_BUILDTIME}
+
 # Apply database migrations. This is crucial for deployment.
 # This runs as root before switching to appuser.
 RUN npx prisma migrate deploy
