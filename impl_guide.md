@@ -1,0 +1,272 @@
+## AI LLM Coding Agent Guide: ToolChest Project
+
+This document provides essential information for an AI LLM Coding Agent to effectively contribute to the ToolChest project. Understanding these details will enable the agent to generate high-quality, consistent, and relevant code.
+
+### 1. Project Overview and Goals
+
+* **Project Name:** ToolChest
+* **Core Goal:** To provide a web application offering free, high-quality utility tools with a strong emphasis on privacy, accessibility, and ease of use.
+* **Current State:** The project is a migration from a Kotlin/Ktor backend to a TypeScript/Node.js stack with Express.js.
+* **Key Characteristics:**
+    * Server-Side Rendering (SSR) using Nunjucks templates.
+    * Dynamic UI updates leveraging HTMX.
+    * Modern and responsive design via Tailwind CSS.
+    * No user authentication required; all tools are free to use.
+    * Incremental addition of new utility tools. The first implemented tool is a Base64 Encoder/Decoder.
+
+### 2. Core Requirements & Features
+
+* **Functionality:**
+    * **Base64 Encoder/Decoder:** Must support encoding/decoding of both text and files, include a URL-safe option, and provide file download capabilities for results.
+    * **Tool Discovery:** Users should be able to filter tools by tags and search for tools.
+* **User Experience:**
+    * **Privacy-focused:** No user registration.
+    * **Accessibility:** Design should be accessible.
+    * **Ease of Use:** Tools should be intuitive.
+    * **Responsive UI:** Mobile-friendly interface.
+* **Technical:**
+    * **Error Handling:** Implement custom error pages for 400, 403, 404, and 500 errors. Error responses should be HTMX-aware, providing fragments for partial updates where appropriate.
+    * **Testing:** Comprehensive test coverage for services, routes, and middleware.
+
+### 3. Technology Stack
+
+* **Backend:**
+    * **Language:** TypeScript
+    * **Runtime:** Node.js (v18, v20 or later recommended)
+    * **Framework:** Express.js
+* **Database:**
+    * **ORM:** Prisma
+    * **Development Database:** SQLite (default)
+    * **Schema Definition:** `prisma/schema.prisma` (see `prisma/migrations/20250510123258_initial_schema/migration.sql` for table structure)
+* **Frontend & Templating:**
+    * **Templating Engine:** Nunjucks (for SSR)
+    * **Dynamic Interactions:** HTMX
+    * **Styling:**
+        * Tailwind CSS (via CDN)
+        * Custom CSS in `src/public/css/main.css`
+        * Font Awesome (via CDN) for icons.
+* **Testing:**
+    * **Framework:** Jest
+    * **HTTP Testing:** Supertest
+    * **Configuration:** `jest.config.js`, `jest.setup.js`
+* **Dependency Injection (DI):** InversifyJS
+    * Configuration: `src/config/inversify.config.ts`
+    * Type Definitions: `src/config/types.ts`
+* **Logging:** Morgan (HTTP request logger), Custom logger (`src/utils/logger.ts`)
+* **Development Tools:**
+    * **Build Tool:** `tsc` (TypeScript Compiler)
+    * **Hot Reloading:** `nodemon`
+    * **Linting:** ESLint (`.eslintrc.js`, `.eslintignore`)
+    * **Formatting:** Prettier (`.prettierrc.js`)
+    * **Package Manager:** npm (see `package.json` and `package-lock.json`)
+* **Deployment:**
+    * **Containerization:** Docker (`Dockerfile`)
+    * **Platform:** Railway (`railway.json`)
+
+### 4. Architecture
+
+* **Monolithic Web Application:** All functionality is contained within a single application.
+* **Server-Side Rendering (SSR):** Nunjucks is used to render HTML on the server.
+* **Progressive Enhancement:** HTMX is used for dynamic partial page updates, enhancing the SSR foundation.
+* **Service-Oriented (Internal):** Business logic is encapsulated in services (e.g., `ToolService`, `Base64Service`).
+* **Controller Layer:** Express controllers handle HTTP requests, delegate to services, and manage responses (e.g., `HomeController`, `Base64Controller`).
+* **Middleware:** Custom and third-party middleware for logging, compression, cache control, and error handling.
+* **Dependency Injection:** InversifyJS is used to manage dependencies between components, particularly services and controllers.
+* **Configuration-Driven:** Utilizes `.env` for environment variables and `tsconfig.json` for TypeScript compilation.
+* **Data Transfer Objects (DTOs):** Used for structuring data between layers (e.g., `ToolDTO`, `TagDTO`).
+
+### 5. Project Structure
+
+The project follows a standard Node.js/TypeScript application structure:
+
+```
+/project-root
+├── /dist           # Compiled JavaScript (output of TSC)
+├── /prisma         # Prisma schema and migration files
+│   └── schema.prisma
+│   └── migrations/
+├── /src            # TypeScript source files
+│   ├── /config     # Configuration files (db, server, DI, etc.)
+│   ├── /controllers # Request handlers
+│   ├── /database   # Database related files (seeds, etc.)
+│   │   └── /seeds
+│   ├── /dto        # Data Transfer Objects (interfaces/classes)
+│   ├── /middleware # Custom Express middleware
+│   ├── /public     # Static assets (CSS, JS, images)
+│   │   └── /css
+│   │   └── /js
+│   ├── /routes     # Express route definitions
+│   ├── /services   # Business logic
+│   ├── /templates  # View templates (Nunjucks)
+│   │   ├── /components
+│   │   ├── /layouts
+│   │   └── /pages
+│   ├── app.ts      # Express application setup
+│   └── server.ts   # Server entry point
+├── /tests          # Test files (Jest)
+│   ├── /database
+│   ├── /middleware
+│   ├── /routes
+│   └── /services
+├── .env            # Environment variables (not committed)
+├── .eslintignore
+├── .eslintrc.js
+├── .gitignore
+├── .prettierrc.js
+├── Dockerfile      # For building containerized application
+├── package.json    # Project dependencies and scripts
+├── railway.json    # Configuration for Railway deployment
+├── README.md
+└── tsconfig.json
+```
+
+### 6. Coding Conventions & Quality
+
+* **Language:** TypeScript. Adhere to strong typing and modern TypeScript features.
+* **Linting:** ESLint is configured. Run `npm run lint` to check for issues. Configuration is in `.eslintrc.js`.
+* **Formatting:** Prettier is used for code formatting. Run `npm run format` to format code. Configuration is in `.prettierrc.js`.
+* **File Naming:** Generally camelCase for `.ts` files (e.g., `toolService.ts`, `homeController.ts`).
+* **DI:** Use InversifyJS for managing dependencies. Define service and controller interfaces/types in `src/config/types.ts` and configure bindings in `src/config/inversify.config.ts`.
+* **Asynchronous Operations:** Use `async/await` for promises.
+* **Error Handling:** Utilize the centralized error handling middleware. Service methods should throw errors, and controllers should catch them and pass to `next(error)`.
+
+### 7. Key Libraries, Frameworks, and Their Usage
+
+* **Express.js:** Web application framework.
+    * Application setup in `src/app.ts`.
+    * Routing is defined in `src/routes/` (e.g., `homeRoutes.ts`, `base64Routes.ts`).
+* **Nunjucks:** Templating engine for SSR.
+    * Templates are located in `src/templates/`.
+    * Configured in `src/app.ts`.
+    * Includes global functions (e.g., `now`) and filters (e.g., `date`).
+* **HTMX:** For enhancing HTML with AJAX capabilities and partial updates.
+    * Controllers should set `HX-Retarget` and `HX-Reswap` headers for HTMX responses where applicable (see `base64Controller.ts`).
+    * Error handling middleware is HTMX-aware.
+* **Prisma:** ORM for database interaction.
+    * Schema defined in `prisma/schema.prisma`.
+    * Migrations in `prisma/migrations/`. The initial schema can be seen in `prisma/migrations/20250510123258_initial_schema/migration.sql`.
+    * Prisma client is initialized in `src/config/database.ts` and injected via InversifyJS.
+    * Database seeding script: `src/database/seeds/seed.ts`.
+* **InversifyJS:** Dependency injection container.
+    * Configuration: `src/config/inversify.config.ts`.
+    * Service and controller symbols: `src/config/types.ts`.
+* **Jest:** Testing framework.
+    * Tests are located in the `/tests` directory, mirroring the `src` structure.
+    * Configuration: `jest.config.js`, setup: `jest.setup.js` (requires `reflect-metadata`).
+* **TypeScript:** Static typing for JavaScript.
+    * Configuration: `tsconfig.json`. Key settings include `target: "es2020"`, `module: "commonjs"`, `experimentalDecorators: true`, `emitDecoratorMetadata: true`, `strict: true`, `esModuleInterop: true`.
+* **Multer:** Middleware for handling `multipart/form-data`, primarily used for file uploads.
+    * Used in `base64Controller.ts` for file uploads.
+* **NodeCache:** In-memory caching for services to reduce database load.
+    * Used in `ToolServiceImpl` for caching database query results.
+* **Morgan:** HTTP request logger middleware.
+* **Compression:** Middleware for gzipping responses.
+* **Dotenv:** Loads environment variables from a `.env` file.
+
+### 8. Database Schema
+
+The database schema is managed by Prisma. The initial schema includes the following tables (refer to `prisma/migrations/20250510123258_initial_schema/migration.sql` for details):
+
+* **`Tool`**: Stores information about each utility tool.
+    * Fields: `id`, `name`, `slug`, `description`, `iconClass`, `displayOrder`, `isActive`, `createdAt`, `updatedAt`.
+    * Unique constraints on `name` and `slug`.
+* **`Tag`**: Stores tags that can be applied to tools.
+    * Fields: `id`, `name`, `slug`, `description`, `color`, `createdAt`.
+    * Unique constraints on `name` and `slug`.
+* **`ToolTag`**: A join table for the many-to-many relationship between `Tool` and `Tag`.
+    * Fields: `toolId`, `tagId`, `assignedAt`.
+    * Primary Key: (`toolId`, `tagId`).
+* **`ToolUsageStats`**: Tracks usage statistics for tools.
+    * Fields: `id`, `toolId`, `usageCount`, `lastUsed`.
+    * Unique constraint on `toolId`.
+
+### 9. Testing Strategy
+
+* **Unit Tests & Integration Tests:** The project uses Jest for testing.
+* **Services:** Business logic in services is unit tested (e.g., `tests/services/toolService.test.ts`, `tests/services/base64Service.test.ts`). Mocking dependencies like PrismaClient and NodeCache is common.
+* **Routes/Controllers:** Endpoint behavior is tested using Supertest (e.g., `tests/routes/homeRoutes.test.ts`, `tests/routes/base64Routes.test.ts`). Services are typically mocked to isolate controller logic.
+* **Middleware:** Custom middleware like error handlers are tested (e.g., `tests/middleware/errorHandler.test.ts`).
+* **Database:** Tests for database connectivity and schema integrity (see `tests/database/database.test.ts`). Seeding logic can also be tested.
+* **Running Tests:**
+    * `npm test`: Run all tests.
+    * `npm run test:watch`: Run tests in watch mode.
+    * `npm run test:coverage`: Generate a test coverage report.
+
+### 10. Deployment
+
+* **Containerization:** A `Dockerfile` is provided for building a Docker image.
+* **Target Platform:** Configured for deployment on Railway (see `railway.json`).
+* **Build Command:** `npm run build` (compiles TypeScript to `dist/`).
+* **Start Command:** `node dist/server.js`.
+* **Health Check:** An endpoint at `/health` is available, responding with HTTP 200 "OK".
+
+### 11. Environment Variables
+
+Key environment variables used by the application (refer to `README.md` for more details):
+
+* `PORT`: The port the server will listen on (default: 8080).
+* `DATABASE_URL`: The connection string for the database (e.g., `file:./prisma/toolchest.db` for SQLite).
+* `NODE_ENV`: Set to `production` for production builds/deployments, `development` otherwise. Influences logging, caching, and error detail visibility.
+
+### 12. Error Handling Approach
+
+* **Centralized Middleware:** `src/middleware/errorHandlerMiddleware.ts` defines `notFoundHandler` and `mainErrorHandler`.
+* **404 Not Found:** Handled by `notFoundHandler` after all other routes.
+* **General Errors:** `mainErrorHandler` catches errors passed via `next(error)`.
+* **Status Codes:** Errors are expected to have a `statusCode` or `status` property. If not, 500 is assumed.
+* **Error Exposure:** The `err.expose` property can be used to determine if an error message is safe to display to the client.
+* **HTMX Awareness:** The `mainErrorHandler` checks for the `HX-Request` header to return either a full error page (`pages/error`) or an error message component (`components/error-message`) suitable for HTMX partial updates.
+* **Logging:** Errors are logged using the custom logger (`src/utils/logger.ts`). Stack traces are logged in non-production environments.
+
+### 13. API Style (Internal)
+
+While primarily an SSR application, the use of HTMX implies internal "API-like" interactions where controllers handle POST requests (e.g., for Base64 encoding/decoding) and return HTML fragments.
+
+* **Input:** Typically `application/x-www-form-urlencoded` or `multipart/form-data` (for file uploads).
+* **Output:** HTML fragments, with HTMX-specific headers (`HX-Retarget`, `HX-Reswap`).
+* **Error Responses (HTMX):** HTML fragments rendered from `components/error-message`.
+
+### 14. Development Workflow
+
+(Refer to `README.md` for commands)
+
+1.  **Prerequisites:** Node.js (v18, v20+), npm.
+2.  **Installation:**
+    * Clone repository.
+    * `npm install` to install dependencies.
+3.  **Environment Setup:**
+    * Create a `.env` file from `.env.example` (if provided) or set necessary variables like `DATABASE_URL` and `PORT`.
+4.  **Database Setup:**
+    * `npx prisma migrate dev` to apply migrations.
+    * `npm run db:seed` to seed initial data.
+5.  **Running in Development:**
+    * `npm run dev` starts the server with `nodemon` for automatic restarts on file changes.
+6.  **Building for Production:**
+    * `npm run build` compiles TypeScript to `dist/`.
+7.  **Running in Production (Locally):**
+    * `npm start` runs the compiled app from `dist/`.
+8.  **Testing:**
+    * `npm test`
+    * `npm run test:watch`
+    * `npm run test:coverage`
+9.  **Code Quality:**
+    * `npm run lint`
+    * `npm run format`
+
+### 15. Guidance for the LLM Coding Agent
+
+* **Understand the Core Stack:** Familiarize yourself deeply with Node.js, TypeScript, Express.js, Prisma, Nunjucks, and HTMX, as these are central to the project.
+* **Follow Existing Patterns:** When adding new features or modifying existing ones, observe and replicate the patterns used in controllers, services, DTOs, routes, and templates.
+* **Dependency Injection:** Leverage InversifyJS for managing dependencies. New services or controllers should be injectable and their types/bindings added to the respective configuration files.
+* **DTOs:** Use DTOs for transferring data between services and controllers/templates to maintain clear data contracts.
+* **Prisma Usage:** Utilize Prisma Client for all database interactions. Adhere to the schema and use Prisma's migration tools for any schema changes (`npx prisma migrate dev`).
+* **HTMX Interactions:** When creating new dynamic features, ensure controllers are set up to return appropriate HTML fragments and HTMX response headers.
+* **Templating:** Use Nunjucks for rendering. Create reusable components/macros in `src/templates/components/` where appropriate.
+* **Error Handling:** Ensure all controller actions properly catch errors from services and pass them to `next(error)` for the centralized error handler.
+* **Testing is Key:** Write tests (unit for services, integration for routes/controllers) for any new code. Refer to existing tests in the `/tests` directory for structure and mocking strategies.
+* **Caching:** Be mindful of the caching layer in `ToolServiceImpl`. When adding or modifying data that affects cached entities (like Tools or Tags), ensure the cache is appropriately invalidated (e.g., `this.cache.flushAll()` is called in `recordToolUsage`). Consider if new service methods require their own caching logic.
+* **Static Assets & CSS:** Static files are in `src/public/`. Custom CSS beyond Tailwind CSS should go into `src/public/css/main.css`.
+* **Linting and Formatting:** Always run `npm run lint` and `npm run format` before committing code to maintain consistency.
+* **Read the README:** The `README.md` is a primary source of truth for setup, running, and high-level project information.
+
+By adhering to these guidelines, the AI LLM Coding Agent can be a valuable contributor to the ToolChest project.
