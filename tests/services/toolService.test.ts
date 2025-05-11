@@ -511,50 +511,84 @@ describe('ToolService', () => {
     describe('getPopularTools', () => {
         const limit = 5;
         const cacheKey = `popularTools:${limit}`;
-        // Re-use mockToolData from getAllTools, assuming it fits the popular tools criteria for the mock
-        const mockPopularToolDataFromDb: PrismaToolWithRelations[] = [
-            {
-                id: '1', name: 'Tool 1', slug: 'tool-1', description: 'Description 1',
-                iconClass: 'icon-1', displayOrder: 1, isActive: true, createdAt: new Date(), updatedAt: new Date(),
-                tags: [{ toolId: '1', tagId: 't1', assignedAt: new Date(), tag: { id: 't1', name: 'Tag 1', slug: 'tag-1', description: 'Tag 1 desc', color: 'blue', createdAt: new Date() } as Tag }],
-                toolUsageStats: [{ id: 's1', toolId: '1', usageCount: 100, lastUsed: new Date() }], // Higher usage for popular
-            },
-            {
-                id: '2', name: 'Tool 2', slug: 'tool-2', description: 'Description 2',
-                iconClass: 'icon-2', displayOrder: 2, isActive: true, createdAt: new Date(Date.now() - 100000), updatedAt: new Date(), // Older than Tool 3 for createdAt sort fallback
-                tags: [],
-                toolUsageStats: [{ id: 's2', toolId: '2', usageCount: 50, lastUsed: new Date() }]
-            }
-        ];
-        const mockPopularToolDTOs: ToolDTO[] = mockPopularToolDataFromDb.map(t => toToolDTO(t as any));
 
-        it('should return popular tools from database if not in cache', async () => {
-            mockCacheGet.mockReturnValue(undefined); // Cache miss
-            (mockPrismaClient.tool.findMany as jest.Mock).mockResolvedValue(mockPopularToolDataFromDb);
+        const now = new Date();
+        const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
+        const twoHoursAgo = new Date(now.getTime() - 2 * 60 * 60 * 1000);
+        const threeHoursAgo = new Date(now.getTime() - 3 * 60 * 60 * 1000);
+
+        const mockToolC_DB: PrismaToolWithRelations = {
+            id: 'C', name: 'Tool C', slug: 'tool-c', description: 'Popular and recently updated',
+            iconClass: 'icon-c', displayOrder: 3, isActive: true, createdAt: threeHoursAgo, updatedAt: oneHourAgo,
+            tags: [],
+            toolUsageStats: [{ id: 'sC', toolId: 'C', usageCount: 100, lastUsed: oneHourAgo, views: 0, averageRating: null, ratingsCount: 0 }],
+        };
+        const mockToolA_DB: PrismaToolWithRelations = {
+            id: 'A', name: 'Tool A', slug: 'tool-a', description: 'Very popular',
+            iconClass: 'icon-a', displayOrder: 1, isActive: true, createdAt: threeHoursAgo, updatedAt: twoHoursAgo,
+            tags: [],
+            toolUsageStats: [{ id: 'sA', toolId: 'A', usageCount: 100, lastUsed: twoHoursAgo, views: 0, averageRating: null, ratingsCount: 0 }],
+        };
+        const mockToolB_DB: PrismaToolWithRelations = {
+            id: 'B', name: 'Tool B', slug: 'tool-b', description: 'Moderately popular, very new update',
+            iconClass: 'icon-b', displayOrder: 2, isActive: true, createdAt: threeHoursAgo, updatedAt: now,
+            tags: [],
+            toolUsageStats: [{ id: 'sB', toolId: 'B', usageCount: 50, lastUsed: now, views: 0, averageRating: null, ratingsCount: 0 }],
+        };
+        const mockToolD_DB: PrismaToolWithRelations = {
+            id: 'D', name: 'Tool D', slug: 'tool-d', description: 'Less popular',
+            iconClass: 'icon-d', displayOrder: 4, isActive: true, createdAt: threeHoursAgo, updatedAt: oneHourAgo,
+            tags: [],
+            toolUsageStats: [{ id: 'sD', toolId: 'D', usageCount: 10, lastUsed: oneHourAgo, views: 0, averageRating: null, ratingsCount: 0 }],
+        };
+        const mockToolE_DB: PrismaToolWithRelations = {
+            id: 'E', name: 'Tool E', slug: 'tool-e', description: 'No usage stats',
+            iconClass: 'icon-e', displayOrder: 5, isActive: true, createdAt: threeHoursAgo, updatedAt: now,
+            tags: [],
+            toolUsageStats: [],
+        };
+
+        const mockUnsortedPopularToolDataFromDB: PrismaToolWithRelations[] = [
+            mockToolA_DB, mockToolB_DB, mockToolC_DB, mockToolD_DB, mockToolE_DB
+        ];
+
+        const expectedSortedPopularToolDTOs: ToolDTO[] = [
+            toToolDTO(mockToolC_DB as any),
+            toToolDTO(mockToolA_DB as any),
+            toToolDTO(mockToolB_DB as any),
+            toToolDTO(mockToolD_DB as any),
+            toToolDTO(mockToolE_DB as any),
+        ];
+
+        it('should return popular tools from database if not in cache, ordered by usageCount desc then updatedAt desc', async () => {
+            mockCacheGet.mockReturnValue(undefined);
+            (mockPrismaClient.tool.findMany as jest.Mock).mockResolvedValue(mockUnsortedPopularToolDataFromDB);
 
             const result = await toolService.getPopularTools(limit);
 
-            expect(result).toEqual(mockPopularToolDTOs);
+            expect(result).toEqual(expectedSortedPopularToolDTOs);
             expect(mockCacheGet).toHaveBeenCalledWith(cacheKey);
-            // Service currently orders by createdAt desc, not usageCount due to schema/service note
             expect(mockPrismaClient.tool.findMany).toHaveBeenCalledWith({
                 where: { isActive: true },
-                orderBy: [{ createdAt: 'desc' }],
+                orderBy: [
+                    { toolUsageStats: { usageCount: 'desc' } },
+                    { updatedAt: 'desc' }
+                ],
                 take: limit,
                 include: {
                     tags: { include: { tag: true } },
                     toolUsageStats: true,
                 },
             });
-            expect(mockCacheSet).toHaveBeenCalledWith(cacheKey, mockPopularToolDTOs);
+            expect(mockCacheSet).toHaveBeenCalledWith(cacheKey, expectedSortedPopularToolDTOs);
         });
 
         it('should return popular tools from cache if available', async () => {
-            mockCacheGet.mockReturnValue(mockPopularToolDTOs); // Cache hit
+            mockCacheGet.mockReturnValue(expectedSortedPopularToolDTOs);
 
             const result = await toolService.getPopularTools(limit);
 
-            expect(result).toEqual(mockPopularToolDTOs);
+            expect(result).toEqual(expectedSortedPopularToolDTOs);
             expect(mockCacheGet).toHaveBeenCalledWith(cacheKey);
             expect(mockPrismaClient.tool.findMany).not.toHaveBeenCalled();
             expect(mockCacheSet).not.toHaveBeenCalled();
@@ -574,7 +608,7 @@ describe('ToolService', () => {
 
         it('should handle errors from PrismaClient gracefully', async () => {
             mockCacheGet.mockReturnValue(undefined);
-            const prismaError = new Error("Prisma connection failed");
+            const prismaError = new Error("Prisma connection failed for popular tools");
             (mockPrismaClient.tool.findMany as jest.Mock).mockRejectedValue(prismaError);
 
             await expect(toolService.getPopularTools(limit)).rejects.toThrow(prismaError);
@@ -686,7 +720,7 @@ describe('ToolService', () => {
             },
             {
                 id: '2', name: 'Tool 2 Paginated', slug: 'tool-2-paginated', description: 'Desc 2',
-                iconClass: 'icon-2', displayOrder: 2, isActive: true, createdAt: new Date(), updatedAt: new Date(),
+                iconClass: 'icon-2', displayOrder: 2, isActive: true, createdAt: new Date(Date.now() - 100000), updatedAt: new Date(), // Older than Tool 3 for createdAt sort fallback
                 tags: [],
                 toolUsageStats: [{ id: 's2', toolId: '2', usageCount: 5, lastUsed: new Date() }]
             }
