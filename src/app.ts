@@ -22,7 +22,7 @@ export function createApp(): Application {
     app.locals.appVersion = process.env.npm_package_version || '0.1.0'; // Get version from package.json
 
     // Configure Nunjucks
-    const nunjucksEnv = nunjucks.configure(path.join(__dirname, 'templates'), {
+    const nunjucksEnv = nunjucks.configure(path.join(__dirname, '..', 'src', 'templates'), {
         autoescape: true,
         express: app,
         watch: process.env.NODE_ENV === 'development' // Watch for changes only in development
