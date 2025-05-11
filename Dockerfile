@@ -13,7 +13,7 @@ RUN npm ci
 # Copy the rest of the source code
 COPY . .
 
-# Build the TypeScript project
+# Build the TypeScript project (includes prisma generate)
 RUN npm run build
 
 # Stage 2: Run
@@ -30,10 +30,15 @@ RUN adduser --system --uid 1001 appuser
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/src/templates ./src/templates
+COPY --from=builder /app/src/public ./src/public
 
-# Copy Prisma schema and migration files if they exist in the context of the Docker build
-# Ensure your .dockerignore is not excluding these if they are at the root
+# Copy Prisma schema and migration files from the build context
 COPY prisma ./prisma/
+
+# Apply database migrations
+# This requires prisma CLI from node_modules and the schema/migrations from ./prisma
+RUN npx prisma migrate deploy
 
 USER appuser
 

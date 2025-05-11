@@ -46,7 +46,7 @@ export function createApp(): Application {
     app.set('view engine', 'njk');
 
     // Static Assets
-    const publicPath = path.join(__dirname, '..', 'public');
+    const publicPath = path.join(__dirname, '..', 'src', 'public');
     app.use('/static', express.static(publicPath));
 
     // Core Middleware
