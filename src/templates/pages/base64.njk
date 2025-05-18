@@ -13,12 +13,12 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         {# Encode Text #}
-        <section class="bg-white/5 rounded-xl p-6">
+        <section class="rounded-lg p-6 border border-ocean-400/10 backdrop-blur-md bg-navy-800/40 shadow-lg">
             <h2 class="text-2xl font-semibold mb-4 text-ocean-100">Encode Text to Base64</h2>
             <form hx-post="/base64/encode" hx-target="#base64-result-container" hx-swap="innerHTML">
                 <div class="mb-4">
                     <label for="textToEncode" class="block text-sm font-medium text-gray-300 mb-1">Text to Encode:</label>
-                    {{ input(name='text', type='textarea', placeholder='Enter text to encode...', class='bg-ocean-100/10 border-ocean-400/30 text-white placeholder-gray-500 rounded-md') }}
+                    {{ input(name='text', type='textarea', placeholder='Enter text to encode...', class='bg-ocean-100/10 border-ocean-400/20 text-white placeholder-gray-500 rounded-md') }}
                 </div>
                 <div class="mb-4">
                     <input type="checkbox" id="urlSafeEncode" name="urlSafe" value="true" class="mr-2">
@@ -29,12 +29,12 @@
         </section>
 
         {# Decode Text #}
-        <section class="bg-white/5 rounded-xl p-6">
+        <section class="rounded-lg p-6 border border-ocean-400/10 backdrop-blur-md bg-navy-800/40 shadow-lg">
             <h2 class="text-2xl font-semibold mb-4 text-ocean-100">Decode Base64 to Text</h2>
             <form hx-post="/base64/decode" hx-target="#base64-result-container" hx-swap="innerHTML">
                 <div class="mb-4">
                     <label for="textToDecode" class="block text-sm font-medium text-gray-300 mb-1">Base64 to Decode:</label>
-                    {{ input(name='text', type='textarea', placeholder='Enter Base64 string to decode...', class='bg-ocean-100/10 border-ocean-400/30 text-white placeholder-gray-500 rounded-md') }}
+                    {{ input(name='text', type='textarea', placeholder='Enter Base64 string to decode...', class='bg-ocean-100/10 border-ocean-400/20 text-white placeholder-gray-500 rounded-md') }}
                 </div>
                 <div class="mb-4">
                     <input type="checkbox" id="urlSafeDecode" name="urlSafe" value="true" class="mr-2">
@@ -60,14 +60,14 @@
         {# Decode File - This is a direct download, so no HTMX target needed for the form itself #}
         <section class="md:col-span-2 mt-8 border-t border-white/10 pt-8">
             <h2 class="text-2xl font-semibold mb-4 text-ocean-100">Decode Base64 to File</h2>
-            <form action="/base64/decode-file" method="POST" class="bg-white/5 rounded-xl p-6">
+            <form action="/base64/decode-file" method="POST" class="rounded-lg p-6 border border-ocean-400/10 backdrop-blur-md bg-navy-800/40 shadow-lg">
                 <div class="mb-4">
                     <label for="textToDecodeFile" class="block text-sm font-medium text-gray-300 mb-1">Base64 to Decode:</label>
-                    {{ input(name='text', type='textarea', placeholder='Enter Base64 string for file content...', class='bg-ocean-100/10 border-ocean-400/30 text-white placeholder-gray-500 rounded-md') }}
+                    {{ input(name='text', type='textarea', placeholder='Enter Base64 string for file content...', class='bg-ocean-100/10 border-ocean-400/20 text-white placeholder-gray-500 rounded-md') }}
                 </div>
                 <div class="mb-4">
                     <label for="fileNameDecode" class="block text-sm font-medium text-gray-300 mb-1">Output File Name:</label>
-                    {{ input(name='fileName', placeholder='e.g., decoded_file.txt', value='decoded_file.txt', class='bg-ocean-100/10 border-ocean-400/30 text-white placeholder-gray-500 rounded-md') }}
+                    {{ input(name='fileName', placeholder='e.g., decoded_file.txt', value='decoded_file.txt', class='bg-ocean-100/10 border-ocean-400/20 text-white placeholder-gray-500 rounded-md') }}
                 </div>
                 <div class="mb-4">
                     <input type="checkbox" id="urlSafeDecodeFile" name="urlSafe" value="true" class="mr-2">

@@ -17,11 +17,13 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3517982647276707" crossorigin="anonymous"></script>
     {% block headContent %}{% endblock %}
 </head>
-<body class="flex flex-col min-h-screen bg-[radial-gradient(ellipse_at_75%_-10%,#338DFF_0%,#00141F_60%)] text-white">
+<body class="flex flex-col min-h-screen bg-navy-900 text-white" style="background-image: var(--spacey-bg);">
     {% include "../components/navbar.njk" %}
 
     <main class="flex-grow container mx-auto px-4 py-8">
-        {% block content %}{% endblock %}
+        <div class="content-container">
+            {% block content %}{% endblock %}
+        </div>
     </main>
 
     {% include "../components/footer.njk" %}

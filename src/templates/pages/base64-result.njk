@@ -2,22 +2,22 @@
 {# This template is used for HTMX responses from Base64 operations #}
 
 {% if error %}
-    <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg border border-red-400" role="alert">
+    <div class="p-4 mb-4 text-sm text-danger border border-danger/10 bg-danger/5 backdrop-blur-md rounded-lg shadow-md" role="alert">
         <span class="font-medium">Error:</span> {{ error }}
     </div>
 {% elif result %}
-    <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg border border-green-400">
+    <div class="p-4 mb-4 text-sm text-ocean-100 border border-ocean-400/10 bg-ocean-400/5 backdrop-blur-md rounded-lg shadow-md">
         <h3 class="text-lg font-semibold mb-2">{{ title | default('Result') }}:</h3>
-        <textarea class="w-full p-2 border rounded bg-gray-50" rows="5" readonly onclick="this.select();">{{ result }}</textarea>
+        <textarea class="w-full p-2 border rounded bg-navy-900/50 border-gray-700/50 text-gray-200" rows="5" readonly onclick="this.select();">{{ result }}</textarea>
         {% if originalFileName %}
-            <p class="mt-2 text-xs text-gray-600">Original file: {{ originalFileName }}</p>
+            <p class="mt-2 text-xs text-gray-300">Original file: {{ originalFileName }}</p>
         {% endif %}
         {% if encodingType %}
-             <p class="mt-1 text-xs text-gray-600">Type: {{ encodingType }} {% if urlSafe %} (URL Safe){% endif %}</p>
+             <p class="mt-1 text-xs text-gray-300">Type: {{ encodingType }} {% if urlSafe %} (URL Safe){% endif %}</p>
         {% endif %}
     </div>
 {% else %}
-    <div class="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg border border-yellow-400" role="alert">
+    <div class="p-4 mb-4 text-sm text-sand-300 border border-sand-300/10 bg-sand-300/5 backdrop-blur-md rounded-lg shadow-md" role="alert">
         <span class="font-medium">Info:</span> No result to display.
     </div>
 {% endif %} 

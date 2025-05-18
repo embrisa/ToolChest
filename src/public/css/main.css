@@ -3,10 +3,12 @@
 :root {
     --sand-50: #FFEDCC;
     --sand-300: #FFC57E;
+    --sand-700: #FF9546;
     --ocean-100: #B7DFFF;
     --ocean-400: #6FB8FF;
     --ocean-700: #338DFF;
     --navy-900: #00141F;
+    --navy-800: #021D2C;
     --danger: #FF4D4F;
     --success: #22C55E;
     --gray-700: #4B5563;
@@ -25,6 +27,11 @@
             #001F4D 100%
             /* navy */
         );
+
+    --spacey-bg: radial-gradient(ellipse at 75% -10%, #338DFF 0%, #00141F 60%),
+        radial-gradient(circle at 10% 80%, rgba(255, 145, 70, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 40%, rgba(255, 184, 96, 0.2) 0%, transparent 45%),
+        radial-gradient(circle at 50% 70%, rgba(255, 124, 35, 0.08) 0%, transparent 35%);
 }
 
 body {
@@ -38,6 +45,10 @@ body {
     body {
         font-size: 1.125rem;
     }
+}
+
+.border {
+    border-color: var(--navy-800);
 }
 
 /* Headings */
@@ -61,13 +72,30 @@ h6 {
     font-family: 'Inter', sans-serif;
 }
 
-/* Tool Cards */
+/* Content Containers */
+.content-container {
+    background-color: rgba(2, 29, 44, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(51, 141, 255, 0.05);
+    border-radius: 1rem;
+    padding: 1.75rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Tool Cards - improved for readability */
 .tool-card {
     transition: transform .15s ease, box-shadow .15s ease;
+    background-color: rgba(2, 29, 44, 0.5);
+    border: 1px solid rgba(51, 141, 255, 0.03);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 0.75rem;
 }
 
 .tool-card:hover {
     transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    border-color: rgba(255, 184, 96, 0.08);
+    background-color: rgba(2, 29, 44, 0.65);
 }
 
 /* Tag Badges */
@@ -85,34 +113,44 @@ h6 {
 
 /* Dropzone */
 .dropzone {
-    border: 2px dashed var(--ocean-400);
+    border: 1px dashed rgba(255, 184, 96, 0.25);
     padding: 3rem;
-    border-radius: .75rem;
+    border-radius: 1rem;
     cursor: pointer;
-    transition: background .2s;
+    transition: all 0.2s;
+    background-color: rgba(255, 184, 96, 0.02);
+    backdrop-filter: blur(10px);
 }
 
 .dropzone:hover {
-    background: var(--ocean-100);
+    background-color: rgba(255, 184, 96, 0.1);
+    border-color: rgba(255, 145, 70, 0.4);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     color: var(--navy-900);
 }
 
 /* Buttons */
 .btn {
-    @apply font-bold py-2 px-4 rounded transition-colors;
+    @apply font-bold py-2 px-4 rounded-lg transition-colors;
 }
 
 .btn-primary {
-    background-color: var(--ocean-700);
+    background-color: var(--sand-700);
     color: white;
     font-weight: bold;
     padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    transition: background-color 0.2s;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(51, 141, 255, 0.05);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 .btn-primary:hover {
-    background-color: var(--sand-300);
+    background-color: rgba(255, 197, 126, 0.7);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* HTMX specific */
@@ -152,13 +190,11 @@ h6 {
 /* Add any custom CSS here that complements Tailwind CSS */
 
 /* Styling for forms if not fully covered by Tailwind or component macros */
-/* textarea, input[type="text"], input[type="file"] {
-    @apply mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
-    focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
-    disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-    invalid:border-pink-500 invalid:text-pink-600
-    focus:invalid:border-pink-500 focus:invalid:ring-pink-500;
-} */
+textarea,
+input[type="text"],
+input[type="file"] {
+    @apply mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500;
+}
 
 /* Custom component styles */
 .btn {
