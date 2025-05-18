@@ -6,4 +6,10 @@ export const TYPES = {
     Base64Controller: Symbol.for('Base64Controller'),
     HomeController: Symbol.for('HomeController'),
     // HomeController: Symbol.for('HomeController'), // Will add when refactoring HomeController
+    // New symbols for Favicon Generator
+    FaviconService: Symbol.for('FaviconService'),
+    FaviconController: Symbol.for('FaviconController'),
+    // New symbols for Hash Generator
+    HashService: Symbol.for('HashService'),
+    HashController: Symbol.for('HashController'),
 }; 

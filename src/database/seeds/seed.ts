@@ -39,9 +39,48 @@ async function seedInitialData() {
         },
     });
 
+    // Create image tag
+    const imageTag = await prisma.tag.upsert({
+        where: { slug: 'image' },
+        update: {},
+        create: {
+            name: 'Image',
+            slug: 'image',
+            description: 'Image manipulation and conversion tools',
+            color: '#EC4899', // Pink
+        },
+    });
+
+    // Create web tag
+    const webTag = await prisma.tag.upsert({
+        where: { slug: 'web' },
+        update: {},
+        create: {
+            name: 'Web',
+            slug: 'web',
+            description: 'Web development and utilities',
+            color: '#F59E0B', // Amber
+        },
+    });
+
+    // Create security tag
+    const securityTag = await prisma.tag.upsert({
+        where: { slug: 'security' },
+        update: {},
+        create: {
+            name: 'Security',
+            slug: 'security',
+            description: 'Tools related to security and cryptography',
+            color: '#F59E0B', // Amber
+        },
+    });
+
     console.log(`Created tag with id: ${encodingTag.id}`);
     console.log(`Created tag with id: ${conversionTag.id}`);
     console.log(`Created tag with id: ${textTag.id}`);
+    console.log(`Created tag with id: ${imageTag.id}`);
+    console.log(`Created tag with id: ${webTag.id}`);
+    console.log(`Created tag with id: ${securityTag.id}`);
 
     // Create tools and assign tags
     const base64Tool = await prisma.tool.upsert({
@@ -64,7 +103,50 @@ async function seedInitialData() {
         },
     });
 
+    // Create Favicon Generator tool
+    const faviconTool = await prisma.tool.upsert({
+        where: { slug: 'favicon-generator' },
+        update: {},
+        create: {
+            name: 'Favicon Generator',
+            slug: 'favicon-generator',
+            description: 'Generate favicons in various sizes and formats from your source image.',
+            iconClass: 'fas fa-icons',
+            displayOrder: 2,
+            isActive: true,
+            tags: {
+                create: [
+                    { tagId: imageTag.id },
+                    { tagId: webTag.id },
+                    { tagId: conversionTag.id },
+                ],
+            },
+        },
+    });
+
+    // Create Hash Generator tool
+    const hashGeneratorTool = await prisma.tool.upsert({
+        where: { slug: 'hash-generator' },
+        update: {},
+        create: {
+            name: 'Hash Generator',
+            slug: 'hash-generator',
+            description: 'Generate MD5, SHA1, SHA256, SHA512 hashes from text or files.',
+            iconClass: 'fas fa-hashtag',
+            displayOrder: 3,
+            isActive: true,
+            tags: {
+                create: [
+                    { tagId: securityTag.id },
+                    { tagId: textTag.id },
+                ],
+            },
+        },
+    });
+
     console.log(`Created tool with id: ${base64Tool.id}`);
+    console.log(`Created tool with id: ${faviconTool.id}`);
+    console.log(`Created tool with id: ${hashGeneratorTool.id}`);
     console.log('Seeding finished.');
 }
 

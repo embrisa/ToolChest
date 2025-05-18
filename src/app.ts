@@ -1,12 +1,15 @@
 import express, { Application, Request, Response, Router } from 'express';
 import path from 'path';
 import nunjucks from 'nunjucks';
+import session from 'express-session';
 import { appContainer } from './config/inversify.config'; // Import appContainer
 
 // Import route setup functions
 import { setupHomeRoutes } from './routes/homeRoutes';
 import { setupBase64Routes } from './routes/base64Routes';
 import { setupStaticPagesRoutes } from './routes/staticPagesRoutes';
+import { setupFaviconRoutes } from './routes/faviconRoutes';
+import { setupHashRoutes } from './routes/hashRoutes';
 
 // Import new middleware
 import morganMiddleware from './middleware/loggingMiddleware';
@@ -54,6 +57,17 @@ export function createApp(): Application {
     app.use(compressionMiddleware);
     app.use(cacheControlMiddleware);
 
+    // Session middleware
+    app.use(session({
+        secret: process.env.SESSION_SECRET || 'toolchest-secret',
+        resave: false,
+        saveUninitialized: true,
+        cookie: {
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 1000 * 60 * 15 // 15 minutes
+        }
+    }));
+
     // Body parsers (Content Negotiation)
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
@@ -71,6 +85,14 @@ export function createApp(): Application {
     const base64Router = Router();
     setupBase64Routes(base64Router, appContainer);
     app.use('/base64', base64Router);
+
+    const faviconRouter = Router();
+    setupFaviconRoutes(faviconRouter, appContainer);
+    app.use('/favicon-generator', faviconRouter);
+
+    const hashRouter = Router();
+    setupHashRoutes(hashRouter, appContainer);
+    app.use('/hash-generator', hashRouter);
 
     const staticPagesRouter = Router();
     setupStaticPagesRoutes(staticPagesRouter);

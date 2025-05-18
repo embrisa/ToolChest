@@ -1,0 +1,27 @@
+<div class="bg-white/5 p-6 rounded-lg shadow-md max-w-lg mx-auto">
+    <h2 class="text-2xl font-semibold text-white mb-4">Hash Result</h2>
+
+    {% if inputSummary %}
+    <div class="mb-3">
+        <p class="text-sm text-gray-400">Input: <span class="font-medium text-gray-300">{{ inputSummary }}</span></p>
+        <p class="text-sm text-gray-400">Algorithm: <span class="font-medium text-gray-300">{{ algorithm }}</span></p>
+    </div>
+    {% endif %}
+
+    {% if hexHash %}
+    <div class="mb-1">
+        <label for="hexHashOutput" class="block text-sm font-medium text-gray-300">Hexadecimal Hash:</label>
+        <textarea id="hexHashOutput" readonly rows="3"
+                  class="mt-1 block w-full bg-navy-900/70 border-gray-700 text-gray-200 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-ocean-400 focus:border-ocean-400 sm:text-sm select-all font-mono">{{ hexHash }}</textarea>
+    </div>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('hexHashOutput').value)"
+            class="mt-2 text-xs bg-ocean-700/50 hover:bg-ocean-700/70 text-white py-1 px-3 rounded">
+        Copy Hex Hash
+    </button>
+    {% elif errorMessage %}
+        {# This part is handled by components/error-message.njk if retargeted there by controller #}
+        <p class="text-danger">{{ errorMessage }}</p>
+    {% else %}
+        <p class="text-gray-400">No result generated yet.</p>
+    {% endif %}
+</div> 

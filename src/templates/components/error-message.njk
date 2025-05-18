@@ -1,6 +1,7 @@
 {# src/templates/components/error-message.njk #}
 {# This template is used for HTMX error responses #}
-<div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg border border-red-400" role="alert">
-    <span class="font-medium">{{ title | default('Error!') }}</span> {{ message | default('An unexpected error occurred.') }}
-    {% if details %}<pre class="mt-2 text-xs whitespace-pre-wrap">{{ details }}</pre>{% endif %}
+<div class="p-4 bg-danger/20 border border-danger rounded-md text-danger">
+  <p class="font-semibold">{{ title | default('Error!') }}</p>
+  <p>{{ message | default(errorMessage | default('An unexpected error occurred.')) }}</p>
+  {% if details %}<pre class="mt-2 text-xs whitespace-pre-wrap">{{ details }}</pre>{% endif %}
 </div> 

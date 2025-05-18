@@ -1,9 +1,9 @@
 {# src/templates/components/footer.njk #}
-<footer class="bg-gray-200 text-center p-4 mt-auto">
-    <p>&copy; {{ now() | date("YYYY") }} {{ appName }}. All rights reserved.</p>
-    <p>
-        <a href="/privacy" class="px-2 hover:text-blue-500">Privacy Policy</a>|
-        <a href="/terms" class="px-2 hover:text-blue-500">Terms of Service</a>|
-        <a href="/contact" class="px-2 hover:text-blue-500">Contact Us</a>
-    </p>
+<footer class="border-t border-white/10 text-center p-6 mt-auto backdrop-blur">
+    <p class="text-gray-400">&copy; {{ now() | date("YYYY") }} {{ appName }}. All rights reserved.</p>
+    <div class="mt-2">
+        <a href="/privacy" class="px-2 text-ocean-400 hover:text-ocean-100">Privacy Policy</a>|
+        <a href="/terms" class="px-2 text-ocean-400 hover:text-ocean-100">Terms of Service</a>|
+        <a href="/contact" class="px-2 text-ocean-400 hover:text-ocean-100">Contact Us</a>
+    </div>
 </footer> 
