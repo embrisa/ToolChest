@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 class StaticPageController {
     public getPrivacyPolicy(req: Request, res: Response) {
-        res.render('pages/static/privacy.njk', {
+        res.render('pages/privacy-policy', {
             title: 'Privacy Policy',
         });
     }
