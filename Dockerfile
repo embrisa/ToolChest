@@ -22,8 +22,8 @@ COPY . .
 # Prisma generate is already run above, but it's harmless to run again if part of the script.
 RUN npm run build
 
-# Prune development dependencies after build to keep node_modules smaller for the final image
-RUN npm prune --production
+# Keep all dependencies including Prisma CLI which we need for running migrations in production
+# Note: This makes the image larger but ensures we have the tools needed for database setup
 
 # Stage 2: Create the production image
 FROM node:20-slim AS production
@@ -50,12 +50,10 @@ RUN addgroup --system --gid 1001 nodejs && \
 # The user 'appuser' (which will run migrations and the app) needs write access here.
 RUN mkdir -p /data && chown appuser:nodejs /data
 
-# Copy built application from builder stage
+# Copy everything we need from builder stage (including all dependencies)
 COPY --from=builder --chown=appuser:nodejs /app/dist ./dist
 COPY --from=builder --chown=appuser:nodejs /app/node_modules ./node_modules
 COPY --from=builder --chown=appuser:nodejs /app/package*.json ./
-
-# Copy Prisma schema (optional for runtime, but can be useful)
 COPY --from=builder --chown=appuser:nodejs /app/prisma ./prisma
 
 # Copy static assets and templates required at runtime
