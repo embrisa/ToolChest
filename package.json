@@ -13,6 +13,7 @@
     "lint": "eslint . --ext .ts",
     "format": "prettier --write .",
     "db:seed": "ts-node src/database/seeds/seed.ts",
+    "db:seed:prod": "node dist/database/seeds/seed.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",

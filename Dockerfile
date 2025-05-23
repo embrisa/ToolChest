@@ -62,12 +62,15 @@ COPY --from=builder --chown=appuser:nodejs /app/prisma ./prisma
 COPY --from=builder --chown=appuser:nodejs /app/src/templates ./src/templates
 COPY --from=builder --chown=appuser:nodejs /app/src/public ./src/public
 
+# Copy startup script
+COPY --chown=appuser:nodejs scripts/start.sh ./scripts/start.sh
+RUN chmod +x ./scripts/start.sh
+
 # Switch to the non-root user
 USER appuser
 
 # Expose the port the app runs on
 EXPOSE 8080
 
-# Command to run the application
-# This uses the "start" script from your package.json: "node dist/server.js"
-CMD ["npm", "start"]
+# Command to run the startup script which handles migrations and app startup
+CMD ["./scripts/start.sh"]

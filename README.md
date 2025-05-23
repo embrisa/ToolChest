@@ -32,8 +32,8 @@
       * **Framework:** Express.js
   * **Database:**
       * **ORM:** Prisma
-      * **Development Database:** SQLite (default)
-      * **Schema Definition:** `prisma/schema.prisma` (see `prisma/migrations/20250510123258_initial_schema/migration.sql` for table structure)
+      * **Database:** PostgreSQL (both development and production)
+      * **Schema Definition:** `prisma/schema.prisma` (see `prisma/migrations/20250523201833_initial_postgresql/migration.sql` for table structure)
   * **Frontend & Templating:**
       * **Templating Engine:** Nunjucks (for SSR)
       * **Dynamic Interactions:** HTMX
@@ -140,7 +140,7 @@ The project follows a standard Node.js/TypeScript application structure:
       * Error handling middleware is HTMX-aware.
   * **Prisma:** ORM for database interaction.
       * Schema defined in `prisma/schema.prisma`.
-      * Migrations in `prisma/migrations/`. The initial schema can be seen in `prisma/migrations/20250510123258_initial_schema/migration.sql`.
+      * Migrations in `prisma/migrations/`. The current schema can be seen in `prisma/migrations/20250523201833_initial_postgresql/migration.sql`.
       * Prisma client is initialized in `src/config/database.ts` and injected via InversifyJS.
       * Database seeding script: `src/database/seeds/seed.ts`.
   * **InversifyJS:** Dependency injection container.
@@ -161,7 +161,7 @@ The project follows a standard Node.js/TypeScript application structure:
 
 ### 8. Database Schema
 
-The database schema is managed by Prisma. The initial schema includes the following tables (refer to `prisma/migrations/20250510123258_initial_schema/migration.sql` for details):
+The database schema is managed by Prisma. The PostgreSQL schema includes the following tables (refer to `prisma/migrations/20250523201833_initial_postgresql/migration.sql` for details):
 
   * **`Tool`**: Stores information about each utility tool.
       * Fields: `id`, `name`, `slug`, `description`, `iconClass`, `displayOrder`, `isActive`, `createdAt`, `updatedAt`.
@@ -192,14 +192,19 @@ The database schema is managed by Prisma. The initial schema includes the follow
 
   * **Containerization:** A `Dockerfile` is provided for building a Docker image.
   * **Target Platform:** Configured for deployment on Railway (see `railway.json`).
+  * **Database:** PostgreSQL database automatically provisioned on Railway.
   * **Build Command:** `npm run build` (compiles TypeScript to `dist/`).
   * **Start Command:** `node dist/server.js`.
   * **Health Check:** An endpoint at `/health` is available, responding with HTTP 200 "OK".
+  * **Railway Setup:**
+      * Add PostgreSQL database service to your Railway project
+      * Set `DATABASE_URL` environment variable to `${{ Postgres.DATABASE_URL }}`
+      * Migrations run automatically on deployment via `npx prisma migrate deploy`
 
 ### 11. Environment Variables
 
   * `PORT`: The port the server will listen on (default: 8080).
-  * `DATABASE_URL`: The connection string for the database (e.g., `file:./prisma/toolchest.db` for SQLite).
+  * `DATABASE_URL`: The connection string for the database (e.g., `postgresql://user:password@localhost:5432/toolchest_dev` for local development, or Railway's PostgreSQL connection string for production).
   * `NODE_ENV`: Set to `production` for production builds/deployments, `development` otherwise. Influences logging, caching, and error detail visibility.
 
 ### 12. Error Handling Approach
@@ -222,26 +227,35 @@ While primarily an SSR application, the use of HTMX implies internal "API-like" 
 
 ### 14. Development Workflow
 
-1.  **Prerequisites:** Node.js (v18, v20+), npm.
+1.  **Prerequisites:** Node.js (v18, v20+), npm, PostgreSQL.
 2.  **Installation:**
       * Clone repository.
       * `npm install` to install dependencies.
-3.  **Environment Setup:**
-      * Create a `.env` file from `.env.example` (if provided) or set necessary variables like `DATABASE_URL` and `PORT`.
-4.  **Database Setup:**
+3.  **PostgreSQL Setup:**
+      * **macOS:** `brew install postgresql@15 && brew services start postgresql@15`
+      * **Other platforms:** Install PostgreSQL 15+ from [postgresql.org](https://www.postgresql.org/download/)
+      * Create development database: `createdb toolchest_dev`
+4.  **Environment Setup:**
+      * Create a `.env` file with:
+        ```
+        DATABASE_URL="postgresql://yourusername@localhost:5432/toolchest_dev"
+        PORT=8080
+        NODE_ENV=development
+        ```
+5.  **Database Setup:**
       * `npx prisma migrate dev` to apply migrations.
       * `npm run db:seed` to seed initial data.
-5.  **Running in Development:**
+6.  **Running in Development:**
       * `npm run dev` starts the server with `nodemon` for automatic restarts on file changes.
-6.  **Building for Production:**
+7.  **Building for Production:**
       * `npm run build` compiles TypeScript to `dist/`.
-7.  **Running in Production (Locally):**
+8.  **Running in Production (Locally):**
       * `npm start` runs the compiled app from `dist/`.
-8.  **Testing:**
+9.  **Testing:**
       * `npm test`
       * `npm run test:watch`
       * `npm run test:coverage`
-9.  **Code Quality:**
+10.  **Code Quality:**
       * `npm run lint`
       * `npm run format`
 
@@ -265,3 +279,4 @@ While primarily an SSR application, the use of HTMX implies internal "API-like" 
       * Be cautious when modifying Prisma schema (`prisma/schema.prisma`); always generate and apply migrations (`npx prisma migrate dev`).
       * When adding new dependencies, update `package.json` and run `npm install`. Ensure the `package-lock.json` is also updated and committed.
       * Avoid introducing libraries that significantly deviate from the existing technology stack unless discussed and approved.
+  * **Database Migration Note:** The project was migrated from SQLite to PostgreSQL (see `migrate_to_postgresql.md` for details). All development and production environments now use PostgreSQL for better scalability and production readiness.
