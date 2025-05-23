@@ -186,13 +186,13 @@ export class ToolServiceImpl implements ToolService {
         }
 
         // Step 1: Raw query to get ordered tool IDs
-        // Prisma handles boolean to integer conversion for SQLite in $queryRaw
+        // Use quoted identifiers to match PostgreSQL table names created by migration
         const orderedToolIdResults: Array<{ id: string }> = await this.prisma.$queryRaw`
             SELECT t.id
-            FROM Tool t
-            INNER JOIN ToolUsageStats tus ON t.id = tus.toolId
-            WHERE t.isActive = ${true}
-            ORDER BY tus.usageCount DESC, t.updatedAt DESC
+            FROM "Tool" t
+            INNER JOIN "ToolUsageStats" tus ON t.id = tus."toolId"
+            WHERE t."isActive" = ${true}
+            ORDER BY tus."usageCount" DESC, t."updatedAt" DESC
             LIMIT ${limit}
         `;
 
