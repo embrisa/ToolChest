@@ -1,6 +1,6 @@
 import { injectable, inject } from 'inversify';
 import { PrismaClient } from '@prisma/client';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { TYPES } from '../config/types';
 import { AdminUserDTO, AdminLoginDTO, CreateAdminUserDTO, AdminRole } from '../dto/adminUserDTO';
 
