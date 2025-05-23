@@ -53,3 +53,36 @@ model ToolUsageStats {
   usageCount Int      @default(0)
   lastUsed   DateTime @default(now())
 }
+
+model AdminUser {
+  id           String           @id @default(cuid())
+  username     String           @unique
+  email        String           @unique
+  passwordHash String
+  role         AdminRole        @default(ADMIN)
+  isActive     Boolean          @default(true)
+  lastLoginAt  DateTime?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  auditLogs    AdminAuditLog[]
+}
+
+model AdminAuditLog {
+  id          String    @id @default(cuid())
+  adminUser   AdminUser @relation(fields: [adminUserId], references: [id])
+  adminUserId String
+  action      String
+  tableName   String
+  recordId    String
+  oldValues   Json?
+  newValues   Json?
+  ipAddress   String
+  userAgent   String
+  createdAt   DateTime  @default(now())
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  ADMIN
+  READ_ONLY
+}

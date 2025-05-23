@@ -1,4 +1,5 @@
 import { PrismaClient, Prisma } from '@prisma/client';
+import { seedAdminUser } from './adminSeed';
 
 const prisma = new PrismaClient();
 
@@ -153,6 +154,7 @@ async function seedInitialData() {
 async function main() {
     try {
         await seedInitialData();
+        await seedAdminUser();
     } catch (e) {
         console.error(e);
         process.exit(1);

@@ -143,6 +143,7 @@ The project follows a standard Node.js/TypeScript application structure:
       * Migrations in `prisma/migrations/`. The current schema can be seen in `prisma/migrations/20250523201833_initial_postgresql/migration.sql`.
       * Prisma client is initialized in `src/config/database.ts` and injected via InversifyJS.
       * Database seeding script: `src/database/seeds/seed.ts`.
+      * **Important:** When using `$queryRaw` with PostgreSQL, always quote table/column names (e.g., `"Tool"`, `"isActive"`) to match the exact case created by migrations. Unquoted identifiers are converted to lowercase by PostgreSQL.
   * **InversifyJS:** Dependency injection container.
       * Configuration: `src/config/inversify.config.ts`.
       * Service and controller symbols: `src/config/types.ts`.
@@ -277,6 +278,7 @@ While primarily an SSR application, the use of HTMX implies internal "API-like" 
       * Do not reinvent existing components or utility functions without strong justification. Check `src/utils`, service layers, and Nunjucks `components/macros` first.
       * Ensure any new routes are added to the appropriate route setup file (e.g., `src/routes/toolNameRoutes.ts`) and registered in `src/app.ts`.
       * Be cautious when modifying Prisma schema (`prisma/schema.prisma`); always generate and apply migrations (`npx prisma migrate dev`).
+      * **PostgreSQL Case Sensitivity:** When using `prisma.$queryRaw`, always quote identifiers (e.g., `FROM "Tool"` not `FROM Tool`) to match migration-created table names. Unquoted identifiers become lowercase and will cause "relation does not exist" errors.
       * When adding new dependencies, update `package.json` and run `npm install`. Ensure the `package-lock.json` is also updated and committed.
       * Avoid introducing libraries that significantly deviate from the existing technology stack unless discussed and approved.
   * **Database Migration Note:** The project was migrated from SQLite to PostgreSQL (see `migrate_to_postgresql.md` for details). All development and production environments now use PostgreSQL for better scalability and production readiness.

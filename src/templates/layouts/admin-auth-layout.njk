@@ -1,0 +1,38 @@
+{# src/templates/layouts/admin-auth-layout.njk #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin Login - ToolChest{% endblock %}</title>
+    <meta name="description" content="{% block description %}ToolChest Admin Login{% endblock %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/htmx.org@1.9.0"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/css/main.css">
+    {% block headContent %}{% endblock %}
+</head>
+<body class="min-h-screen flex items-center justify-center" style="background: var(--spacey-bg); background-attachment: fixed;">
+    <div class="max-w-md w-full space-y-8 p-6">
+        <div class="text-center">
+            <h1 class="logo text-4xl lg:text-5xl font-extrabold mb-2">
+                &lt;TC&gt;
+            </h1>
+            <p class="text-ocean-100 text-lg">Admin Dashboard</p>
+        </div>
+
+        {% block content %}{% endblock %}
+
+        <div class="text-center">
+            <a href="/" class="text-sm text-ocean-400 hover:text-white transition-colors inline-flex items-center">
+                <i class="fas fa-arrow-left mr-1"></i>Back to main site
+            </a>
+        </div>
+    </div>
+
+    {% block bodyScripts %}{% endblock %}
+</body>
+</html> 

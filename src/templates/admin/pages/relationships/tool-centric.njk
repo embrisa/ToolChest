@@ -1,0 +1,141 @@
+{% extends "layouts/admin-layout.njk" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <!-- Header -->
+    <div class="flex justify-between items-center">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-900">{{ title }}</h1>
+            <p class="text-gray-600 mt-1">Manage tags assigned to {{ toolRelationships.toolName }}</p>
+        </div>
+        <div class="flex space-x-3">
+            <a href="/admin/relationships" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i>Back to Matrix
+            </a>
+            <a href="/admin/tools/{{ toolRelationships.toolId }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                <i class="fas fa-eye mr-2"></i>View Tool
+            </a>
+        </div>
+    </div>
+
+    <!-- Tool Info Card -->
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+            <div class="flex-shrink-0">
+                <i class="fas fa-wrench text-blue-600 text-2xl"></i>
+            </div>
+            <div class="ml-4">
+                <h2 class="text-xl font-semibold text-gray-900">{{ toolRelationships.toolName }}</h2>
+                <p class="text-gray-600">{{ toolRelationships.toolSlug }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tags Management -->
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+        <div class="px-6 py-4 border-b border-gray-200">
+            <h2 class="text-lg font-semibold text-gray-900">Tag Assignments</h2>
+            <p class="text-sm text-gray-600 mt-1">Toggle tags on/off for this tool</p>
+        </div>
+        
+        {% if toolRelationships.tags.length > 0 %}
+        <div class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {% for tag in toolRelationships.tags %}
+                <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <span 
+                                class="inline-block w-4 h-4 rounded-full"
+                                style="background-color: {{ tag.color or '#6B7280' }}"
+                            ></span>
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-900">{{ tag.name }}</h3>
+                                <p class="text-xs text-gray-500">{{ tag.slug }}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            {% if tag.isAssigned %}
+                            <button 
+                                class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-xs font-medium hover:bg-red-200 transition-colors"
+                                hx-post="/admin/relationships/unassign"
+                                hx-vals='{"toolId": "{{ toolRelationships.toolId }}", "tagId": "{{ tag.id }}"}'
+                                hx-target="#message-area"
+                                hx-swap="innerHTML"
+                                hx-confirm="Remove this tag from {{ toolRelationships.toolName }}?"
+                            >
+                                <i class="fas fa-minus mr-1"></i>Remove
+                            </button>
+                            {% else %}
+                            <button 
+                                class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-medium hover:bg-green-200 transition-colors"
+                                hx-post="/admin/relationships/assign"
+                                hx-vals='{"toolId": "{{ toolRelationships.toolId }}", "tagId": "{{ tag.id }}"}'
+                                hx-target="#message-area"
+                                hx-swap="innerHTML"
+                            >
+                                <i class="fas fa-plus mr-1"></i>Assign
+                            </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% else %}
+        <div class="px-6 py-12 text-center">
+            <i class="fas fa-tags text-gray-400 text-4xl mb-4"></i>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">No Tags Available</h3>
+            <p class="text-gray-600 mb-4">Create some tags first to assign them to tools.</p>
+            <a href="/admin/tags/new" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                Create Tag
+            </a>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Message Area -->
+    <div id="message-area" class="hidden"></div>
+
+    <!-- Quick Stats -->
+    <div class="bg-white rounded-lg shadow p-6">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Stats</h3>
+        <div class="grid grid-cols-2 gap-4">
+            <div class="text-center">
+                <div class="text-2xl font-bold text-blue-600">
+                    {{ toolRelationships.tags | selectattr('isAssigned') | list | length }}
+                </div>
+                <div class="text-sm text-gray-600">Assigned Tags</div>
+            </div>
+            <div class="text-center">
+                <div class="text-2xl font-bold text-gray-600">
+                    {{ toolRelationships.tags | rejectattr('isAssigned') | list | length }}
+                </div>
+                <div class="text-sm text-gray-600">Available Tags</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Handle HTMX responses
+document.addEventListener('htmx:afterRequest', function(event) {
+    if (event.detail.target.id === 'message-area') {
+        // Show message briefly
+        const messageEl = document.getElementById('message-area');
+        messageEl.classList.remove('hidden');
+        setTimeout(() => {
+            messageEl.classList.add('hidden');
+        }, 3000);
+        
+        // Refresh the page to update the assignments
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
+    }
+});
+</script>
+{% endblock %} 

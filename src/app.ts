@@ -2,6 +2,7 @@ import express, { Application, Request, Response, Router } from 'express';
 import path from 'path';
 import nunjucks from 'nunjucks';
 import session from 'express-session';
+import helmet from 'helmet';
 import { appContainer } from './config/inversify.config'; // Import appContainer
 
 // Import route setup functions
@@ -10,6 +11,7 @@ import { setupBase64Routes } from './routes/base64Routes';
 import { setupStaticPagesRoutes } from './routes/staticPagesRoutes';
 import { setupFaviconRoutes } from './routes/faviconRoutes';
 import { setupHashRoutes } from './routes/hashRoutes';
+import adminRoutes from './routes/adminRoutes';
 
 // Import new middleware
 import morganMiddleware from './middleware/loggingMiddleware';
@@ -46,6 +48,34 @@ export function createApp(): Application {
         }
     });
 
+    // Add round filter
+    nunjucksEnv.addFilter('round', (num: number, decimals = 0) => {
+        if (typeof num !== 'number') return num;
+        return Number(num.toFixed(decimals));
+    });
+
+    // Add selectattr filter (similar to Jinja2)
+    nunjucksEnv.addFilter('selectattr', (array: any[], attr: string, value?: any) => {
+        if (!Array.isArray(array)) return [];
+        return array.filter(item => {
+            if (value !== undefined) {
+                return item[attr] === value;
+            }
+            return Boolean(item[attr]);
+        });
+    });
+
+    // Add rejectattr filter (opposite of selectattr)
+    nunjucksEnv.addFilter('rejectattr', (array: any[], attr: string, value?: any) => {
+        if (!Array.isArray(array)) return [];
+        return array.filter(item => {
+            if (value !== undefined) {
+                return item[attr] !== value;
+            }
+            return !Boolean(item[attr]);
+        });
+    });
+
     app.set('view engine', 'njk');
 
     // Static Assets
@@ -53,19 +83,24 @@ export function createApp(): Application {
     app.use('/static', express.static(publicPath));
 
     // Core Middleware
+    app.use(helmet({
+        contentSecurityPolicy: false // Disable CSP for now to allow inline scripts
+    }));
     app.use(morganMiddleware);
     app.use(compressionMiddleware);
     app.use(cacheControlMiddleware);
 
     // Session middleware
     app.use(session({
-        secret: process.env.SESSION_SECRET || 'toolchest-secret',
+        secret: process.env.ADMIN_SESSION_SECRET || process.env.SESSION_SECRET || 'toolchest-secret',
         resave: false,
-        saveUninitialized: true,
+        saveUninitialized: false,
         cookie: {
             secure: process.env.NODE_ENV === 'production',
-            maxAge: 1000 * 60 * 15 // 15 minutes
-        }
+            maxAge: parseInt(process.env.ADMIN_SESSION_TIMEOUT || '3600000', 10), // 1 hour default
+            httpOnly: true
+        },
+        name: 'toolchest.sid'
     }));
 
     // Body parsers (Content Negotiation)
@@ -97,6 +132,9 @@ export function createApp(): Application {
     const staticPagesRouter = Router();
     setupStaticPagesRoutes(staticPagesRouter);
     app.use('/', staticPagesRouter);
+
+    // Admin routes
+    app.use('/admin', adminRoutes);
 
     // Error Handling Middleware
     app.use(notFoundHandler);
