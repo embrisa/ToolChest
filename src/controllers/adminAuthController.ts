@@ -73,15 +73,31 @@ export class AdminAuthController {
             // Store admin user in session
             req.session.adminUser = adminUser;
 
-            if (req.headers['hx-request']) {
-                // Show success message with auto-redirect
-                res.set('HX-Retarget', '#login-error').set('HX-Reswap', 'innerHTML').render('admin/components/login-success', {
-                    message: 'Login successful! Redirecting...',
-                    redirectUrl: '/admin/dashboard'
-                });
-            } else {
-                res.redirect('/admin/dashboard');
-            }
+            // Ensure session is saved before redirecting
+            req.session.save((err) => {
+                if (err) {
+                    console.error('Session save error:', err);
+                    if (req.headers['hx-request']) {
+                        res.status(500).set('HX-Retarget', '#login-error').set('HX-Reswap', 'innerHTML').render('admin/components/error-message', {
+                            message: 'Login failed. Please try again.'
+                        });
+                    } else {
+                        res.render('admin/pages/login', {
+                            title: 'Admin Login - ToolChest',
+                            layout: 'admin/layouts/admin-auth-layout',
+                            error: 'Login failed. Please try again.'
+                        });
+                    }
+                    return;
+                }
+
+                if (req.headers['hx-request']) {
+                    // For HTMX requests, use HX-Redirect header for reliable redirection
+                    res.set('HX-Redirect', '/admin/dashboard').send();
+                } else {
+                    res.redirect('/admin/dashboard');
+                }
+            });
         } catch (error) {
             // Handle authentication service errors
             const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred';

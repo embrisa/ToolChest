@@ -1,10 +1,12 @@
 {# src/templates/admin/components/login-success.njk #}
 {% if message %}
-<div class="admin-alert admin-alert-success" 
-     hx-trigger="load delay:1500ms" 
-     hx-get="/admin/dashboard" 
-     hx-target="body" 
-     hx-push-url="true">
+<div class="admin-alert admin-alert-success">
     <i class="fas fa-check-circle mr-2"></i>{{ message }}
 </div>
+<script>
+    // Simple JavaScript redirect after a short delay
+    setTimeout(function() {
+        window.location.href = '/admin/dashboard';
+    }, 1500);
+</script>
 {% endif %} 
