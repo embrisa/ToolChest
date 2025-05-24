@@ -196,9 +196,24 @@ export class ToolServiceImpl implements ToolService {
             LIMIT ${limit}
         `;
 
+        // If no tools have usage stats yet, fall back to the most recently updated tools
         if (!orderedToolIdResults || orderedToolIdResults.length === 0) {
-            this.cache.set(cacheKey, []);
-            return [];
+            const fallbackTools = await this.prisma.tool.findMany({
+                where: { isActive: true },
+                orderBy: [
+                    { displayOrder: 'asc' },
+                    { updatedAt: 'desc' }
+                ],
+                take: limit,
+                include: {
+                    tags: { include: { tag: true } },
+                    toolUsageStats: true,
+                },
+            });
+
+            const toolDTOs = fallbackTools.map((tool: PrismaToolWithRelations) => toToolDTO(tool));
+            this.cache.set(cacheKey, toolDTOs);
+            return toolDTOs;
         }
 
         const orderedToolIds = orderedToolIdResults.map(r => r.id);
