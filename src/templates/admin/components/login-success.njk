@@ -1,0 +1,10 @@
+{# src/templates/admin/components/login-success.njk #}
+{% if message %}
+<div class="admin-alert admin-alert-success" 
+     hx-trigger="load delay:1500ms" 
+     hx-get="/admin/dashboard" 
+     hx-target="body" 
+     hx-push-url="true">
+    <i class="fas fa-check-circle mr-2"></i>{{ message }}
+</div>
+{% endif %} 

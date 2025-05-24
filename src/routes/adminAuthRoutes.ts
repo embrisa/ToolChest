@@ -13,6 +13,22 @@ const loginLimiter = rateLimit({
     message: 'Too many login attempts, please try again later.',
     standardHeaders: true,
     legacyHeaders: false,
+    handler: (req, res) => {
+        if (req.headers['hx-request']) {
+            res.status(429)
+                .set('HX-Retarget', '#login-error')
+                .set('HX-Reswap', 'innerHTML')
+                .render('admin/components/error-message', {
+                    message: 'Too many login attempts, please try again later.'
+                });
+        } else {
+            res.status(429).render('admin/pages/login', {
+                title: 'Admin Login - ToolChest',
+                layout: 'admin/layouts/admin-auth-layout',
+                error: 'Too many login attempts, please try again later.'
+            });
+        }
+    }
 });
 
 // Get controller from DI container

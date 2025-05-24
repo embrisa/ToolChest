@@ -37,7 +37,7 @@ export class AdminAuthController {
 
             if (!username || !password) {
                 if (req.headers['hx-request']) {
-                    res.status(400).set('HX-Retarget', '#login-error').render('admin/components/error-message', {
+                    res.status(400).set('HX-Retarget', '#login-error').set('HX-Reswap', 'innerHTML').render('admin/components/error-message', {
                         message: 'Username and password are required'
                     });
                 } else {
@@ -54,7 +54,7 @@ export class AdminAuthController {
 
             if (!adminUser) {
                 if (req.headers['hx-request']) {
-                    res.status(401).set('HX-Retarget', '#login-error').render('admin/components/error-message', {
+                    res.status(401).set('HX-Retarget', '#login-error').set('HX-Reswap', 'innerHTML').render('admin/components/error-message', {
                         message: 'Invalid username or password'
                     });
                 } else {
@@ -74,12 +74,29 @@ export class AdminAuthController {
             req.session.adminUser = adminUser;
 
             if (req.headers['hx-request']) {
-                res.set('HX-Redirect', '/admin/dashboard').send();
+                // Show success message with auto-redirect
+                res.set('HX-Retarget', '#login-error').set('HX-Reswap', 'innerHTML').render('admin/components/login-success', {
+                    message: 'Login successful! Redirecting...',
+                    redirectUrl: '/admin/dashboard'
+                });
             } else {
                 res.redirect('/admin/dashboard');
             }
         } catch (error) {
-            next(error);
+            // Handle authentication service errors
+            const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred';
+
+            if (req.headers['hx-request']) {
+                res.status(500).set('HX-Retarget', '#login-error').set('HX-Reswap', 'innerHTML').render('admin/components/error-message', {
+                    message: 'Login failed. Please try again.'
+                });
+            } else {
+                res.render('admin/pages/login', {
+                    title: 'Admin Login - ToolChest',
+                    layout: 'admin/layouts/admin-auth-layout',
+                    error: 'Login failed. Please try again.'
+                });
+            }
         }
     };
 
