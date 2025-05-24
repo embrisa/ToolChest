@@ -18,9 +18,9 @@
 <body class="min-h-screen" style="background: var(--spacey-bg); background-attachment: fixed;">
     <div class="flex h-screen">
         <!-- Sidebar -->
-        <div class="w-64 backdrop-blur-md border-r border-ocean-400/10 flex flex-col" style="background-color: rgba(2, 29, 44, 0.8);">
+        <div class="w-64 backdrop-blur-md border-r border-sand-300/10 flex flex-col" style="background-color: rgba(42, 34, 27, 0.8);">
             <!-- Logo -->
-            <div class="p-4 border-b border-ocean-400/10">
+            <div class="p-4 border-b border-sand-300/10">
                 <h1 class="text-xl font-bold">
                     <a href="/admin/dashboard" class="logo text-white hover:opacity-80 transition-opacity">
                         &lt;TC&gt; Admin
@@ -32,34 +32,34 @@
             <nav class="flex-1 p-4">
                 <ul class="space-y-2">
                     <li>
-                        <a href="/admin/dashboard" class="flex items-center p-3 rounded-lg transition-all duration-200 text-white hover:bg-ocean-400/20 {% if currentPath == '/admin/dashboard' %}bg-ocean-700/30 border border-ocean-400/20{% endif %}">
-                            <i class="fas fa-tachometer-alt mr-3 text-ocean-400"></i>Dashboard
+                        <a href="/admin/dashboard" class="flex items-center p-3 rounded-lg transition-all duration-200 text-white hover:bg-sand-400/20 {% if currentPath == '/admin/dashboard' %}bg-sand-500/30 border border-sand-300/20{% endif %}">
+                            <i class="fas fa-tachometer-alt mr-3 text-sand-300"></i>Dashboard
                         </a>
                     </li>
                     <li>
-                        <a href="/admin/tools" class="flex items-center p-3 rounded-lg transition-all duration-200 text-white hover:bg-ocean-400/20 {% if currentPath.startsWith('/admin/tools') %}bg-ocean-700/30 border border-ocean-400/20{% endif %}">
-                            <i class="fas fa-wrench mr-3 text-ocean-400"></i>Tools
+                        <a href="/admin/tools" class="flex items-center p-3 rounded-lg transition-all duration-200 text-white hover:bg-sand-400/20 {% if currentPath.startsWith('/admin/tools') %}bg-sand-500/30 border border-sand-300/20{% endif %}">
+                            <i class="fas fa-wrench mr-3 text-sand-300"></i>Tools
                         </a>
                     </li>
                     <li>
-                        <a href="/admin/tags" class="flex items-center p-3 rounded-lg transition-all duration-200 text-white hover:bg-ocean-400/20 {% if currentPath.startsWith('/admin/tags') %}bg-ocean-700/30 border border-ocean-400/20{% endif %}">
-                            <i class="fas fa-tags mr-3 text-ocean-400"></i>Tags
+                        <a href="/admin/tags" class="flex items-center p-3 rounded-lg transition-all duration-200 text-white hover:bg-sand-400/20 {% if currentPath.startsWith('/admin/tags') %}bg-sand-500/30 border border-sand-300/20{% endif %}">
+                            <i class="fas fa-tags mr-3 text-sand-300"></i>Tags
                         </a>
                     </li>
                     <li>
-                        <a href="/admin/relationships" class="flex items-center p-3 rounded-lg transition-all duration-200 text-white hover:bg-ocean-400/20 {% if currentPath.startsWith('/admin/relationships') %}bg-ocean-700/30 border border-ocean-400/20{% endif %}">
-                            <i class="fas fa-link mr-3 text-ocean-400"></i>Relationships
+                        <a href="/admin/relationships" class="flex items-center p-3 rounded-lg transition-all duration-200 text-white hover:bg-sand-400/20 {% if currentPath.startsWith('/admin/relationships') %}bg-sand-500/30 border border-sand-300/20{% endif %}">
+                            <i class="fas fa-link mr-3 text-sand-300"></i>Relationships
                         </a>
                     </li>
                     <li>
-                        <a href="/admin/analytics" class="flex items-center p-3 rounded-lg transition-all duration-200 text-white hover:bg-ocean-400/20 {% if currentPath.startsWith('/admin/analytics') %}bg-ocean-700/30 border border-ocean-400/20{% endif %}">
-                            <i class="fas fa-chart-bar mr-3 text-ocean-400"></i>Analytics
+                        <a href="/admin/analytics" class="flex items-center p-3 rounded-lg transition-all duration-200 text-white hover:bg-sand-400/20 {% if currentPath.startsWith('/admin/analytics') %}bg-sand-500/30 border border-sand-300/20{% endif %}">
+                            <i class="fas fa-chart-bar mr-3 text-sand-300"></i>Analytics
                         </a>
                     </li>
                     {% if adminUser and adminUser.role == 'SUPER_ADMIN' %}
                     <li>
-                        <a href="/admin/users" class="flex items-center p-3 rounded-lg transition-all duration-200 text-white hover:bg-ocean-400/20 {% if currentPath.startsWith('/admin/users') %}bg-ocean-700/30 border border-ocean-400/20{% endif %}">
-                            <i class="fas fa-users mr-3 text-ocean-400"></i>Users
+                        <a href="/admin/users" class="flex items-center p-3 rounded-lg transition-all duration-200 text-white hover:bg-sand-400/20 {% if currentPath.startsWith('/admin/users') %}bg-sand-500/30 border border-sand-300/20{% endif %}">
+                            <i class="fas fa-users mr-3 text-sand-300"></i>Users
                         </a>
                     </li>
                     {% endif %}
@@ -67,14 +67,14 @@
             </nav>
 
             <!-- User info and logout -->
-            <div class="p-4 border-t border-ocean-400/10">
+            <div class="p-4 border-t border-sand-300/10">
                 <div class="flex items-center justify-between">
                     <div class="text-sm">
                         <div class="font-medium text-white">{{ adminUser.username }}</div>
-                        <div class="text-ocean-100 text-xs">{{ adminUser.role }}</div>
+                        <div class="text-sand-200 text-xs">{{ adminUser.role }}</div>
                     </div>
                     <form hx-post="/admin/auth/logout" hx-confirm="Are you sure you want to logout?">
-                        <button type="submit" class="text-ocean-100 hover:text-white transition-colors p-2 rounded-lg hover:bg-ocean-400/20" title="Logout">
+                        <button type="submit" class="text-sand-200 hover:text-white transition-colors p-2 rounded-lg hover:bg-sand-400/20" title="Logout">
                             <i class="fas fa-sign-out-alt"></i>
                         </button>
                     </form>
@@ -85,13 +85,13 @@
         <!-- Main content -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <!-- Top bar -->
-            <header class="backdrop-blur-md border-b border-ocean-400/10 p-4" style="background-color: rgba(2, 29, 44, 0.6);">
+            <header class="backdrop-blur-md border-b border-sand-300/10 p-4" style="background-color: rgba(42, 34, 27, 0.6);">
                 <div class="flex items-center justify-between">
                     <h2 class="text-xl font-semibold text-white">
                         {% block pageTitle %}Dashboard{% endblock %}
                     </h2>
                     <div class="flex items-center space-x-4">
-                        <a href="/" target="_blank" class="text-ocean-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-ocean-400/20" title="View Site">
+                        <a href="/" target="_blank" class="text-sand-300 hover:text-white transition-colors p-2 rounded-lg hover:bg-sand-400/20" title="View Site">
                             <i class="fas fa-external-link-alt"></i>
                         </a>
                     </div>

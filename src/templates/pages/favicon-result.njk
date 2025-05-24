@@ -1,12 +1,12 @@
-<div class="p-6 rounded-lg border border-ocean-400/10 backdrop-blur-md bg-navy-800/40 shadow-lg">
-    <h2 class="text-2xl font-semibold text-white mb-4">{{ title }}</h2>
+<div class="tool-card p-6 rounded-lg shadow-lg">
+    <h2 class="text-2xl font-semibold text-sand-100 mb-4">{{ title }}</h2>
 
     {% if htmlTags %}
     <div class="mb-6">
-        <h3 class="text-xl font-medium text-gray-200 mb-2">HTML Tags for your <code>&lt;head&gt;</code>:</h3>
-        <pre class="bg-navy-900/70 p-4 rounded-md text-sm text-gray-300 overflow-x-auto whitespace-pre-wrap"><code>{{ htmlTags | escape }}</code></pre>
+        <h3 class="text-xl font-medium text-sand-200 mb-2">HTML Tags for your <code>&lt;head&gt;</code>:</h3>
+        <pre class="bg-dark-700/70 p-4 rounded-md text-sm text-neutral-300 overflow-x-auto whitespace-pre-wrap"><code>{{ htmlTags | escape }}</code></pre>
         <button onclick="navigator.clipboard.writeText(this.previousElementSibling.querySelector('code').textContent)"
-                class="mt-2 text-xs bg-ocean-700/50 hover:bg-ocean-700/70 text-white py-1 px-3 rounded">
+                class="btn btn-secondary mt-2 text-xs py-1 px-3">
             Copy Tags
         </button>
     </div>
@@ -14,8 +14,8 @@
 
     {% if files and files.length > 0 %}
     <div class="mb-6">
-        <h3 class="text-xl font-medium text-gray-200 mb-2">Generated Files:</h3>
-        <ul class="list-disc list-inside text-gray-300 space-y-1">
+        <h3 class="text-xl font-medium text-sand-200 mb-2">Generated Files:</h3>
+        <ul class="list-disc list-inside text-neutral-300 space-y-1">
             {% for file in files %}
             <li>{{ file.name }} ({{ (file.size / 1024).toFixed(1) }} KB)</li>
             {% endfor %}
@@ -23,16 +23,16 @@
         {% if zipDownloadLink %}
         <div class="mt-4">
             <a href="{{ zipDownloadLink }}" 
-               class="inline-block btn-primary text-sm">
+               class="inline-block btn btn-primary text-sm">
                 Download All as .ZIP
             </a>
-            <p class="text-xs text-gray-500 mt-2">Click to download all favicons as a single ZIP file.</p>
+            <p class="text-xs text-neutral-400 mt-2">Click to download all favicons as a single ZIP file.</p>
         </div>
         {% endif %}
     </div>
     {% endif %}
 
     {% if errorMessage %}
-    <p class="text-red-500">{{ errorMessage }}</p>
+    <p class="text-error">{{ errorMessage }}</p>
     {% endif %}
 </div> 

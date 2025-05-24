@@ -6,105 +6,215 @@
 {% block description %}{{ tool.description | default('Encode to Base64 or decode from Base64. Supports URL-safe encoding and file processing.') }}{% endblock %}
 
 {% block content %}
-    <h1 class="text-3xl font-bold mb-2 text-white">{{ tool.name | default('Base64 Encoder/Decoder') }}</h1>
-    <p class="text-gray-300 mb-6">{{ tool.description | default('Encode to Base64 or decode from Base64. Supports URL-safe encoding and file processing.') }}</p>
+    {# Tool Header #}
+    <div class="text-center mb-12">
+        <div class="w-20 h-20 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-sand-400/20 to-sand-300/10 flex items-center justify-center">
+            <i class="fas fa-code text-4xl text-sand-300"></i>
+        </div>
+        <h1 class="text-4xl lg:text-5xl font-bold mb-4 text-sand-100">
+            {{ tool.name | default('Base64 Encoder/Decoder') }}
+        </h1>
+        <p class="text-lg text-neutral-300 max-w-2xl mx-auto leading-relaxed">
+            {{ tool.description | default('Encode to Base64 or decode from Base64. Supports URL-safe encoding and file processing.') }}
+        </p>
+    </div>
 
-    <div id="base64-result-container" class="mb-6"></div>
+    {# Result Container #}
+    <div id="base64-result-container" class="mb-8"></div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {# Encode Text #}
-        <section class="rounded-lg p-6 border border-ocean-400/10 backdrop-blur-md bg-navy-800/40 shadow-lg">
-            <h2 class="text-2xl font-semibold mb-4 text-ocean-100">Encode Text to Base64</h2>
-            <form hx-post="/base64/encode" hx-target="#base64-result-container" hx-swap="innerHTML">
-                <div class="mb-4">
-                    <label for="textToEncode" class="block text-sm font-medium text-gray-300 mb-1">Text to Encode:</label>
-                    {{ input(name='text', type='textarea', placeholder='Enter text to encode...', class='bg-ocean-100/10 border-ocean-400/20 text-white placeholder-gray-500 rounded-md') }}
+    {# Tool Sections #}
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        {# Encode Text Section #}
+        <section class="tool-card rounded-3xl p-8 border border-sand-300/8 backdrop-blur-md bg-dark-700/60 shadow-xl">
+            <div class="flex items-center mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-sand-400/15 to-sand-300/10 flex items-center justify-center mr-4">
+                    <i class="fas fa-arrow-up text-sand-300 text-xl"></i>
                 </div>
-                <div class="mb-4">
-                    <input type="checkbox" id="urlSafeEncode" name="urlSafe" value="true" class="mr-2">
-                    <label for="urlSafeEncode" class="text-sm font-medium text-gray-300">URL Safe?</label>
+                <div>
+                    <h2 class="text-2xl font-semibold text-sand-100">Encode Text</h2>
+                    <p class="text-sm text-neutral-400">Convert text to Base64</p>
                 </div>
-                <button type="submit" class="btn-primary">Encode</button>
+            </div>
+            
+            <form hx-post="/base64/encode" hx-target="#base64-result-container" hx-swap="innerHTML" class="space-y-6">
+                <div class="form-field">
+                    <label for="textToEncode" class="form-label">Text to Encode</label>
+                    <textarea 
+                        name="text" 
+                        id="textToEncode"
+                        placeholder="Enter text to encode..."
+                        class="form-textarea min-h-[120px]"
+                        rows="5"
+                    ></textarea>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <input type="checkbox" id="urlSafeEncode" name="urlSafe" value="true" class="form-checkbox">
+                    <label for="urlSafeEncode" class="text-sm text-sand-200 cursor-pointer">URL Safe Encoding</label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-full inline-flex items-center justify-center gap-2">
+                    <i class="fas fa-code"></i>
+                    Encode to Base64
+                </button>
             </form>
         </section>
 
-        {# Decode Text #}
-        <section class="rounded-lg p-6 border border-ocean-400/10 backdrop-blur-md bg-navy-800/40 shadow-lg">
-            <h2 class="text-2xl font-semibold mb-4 text-ocean-100">Decode Base64 to Text</h2>
-            <form hx-post="/base64/decode" hx-target="#base64-result-container" hx-swap="innerHTML">
-                <div class="mb-4">
-                    <label for="textToDecode" class="block text-sm font-medium text-gray-300 mb-1">Base64 to Decode:</label>
-                    {{ input(name='text', type='textarea', placeholder='Enter Base64 string to decode...', class='bg-ocean-100/10 border-ocean-400/20 text-white placeholder-gray-500 rounded-md') }}
+        {# Decode Text Section #}
+        <section class="tool-card rounded-3xl p-8 border border-sand-300/8 backdrop-blur-md bg-dark-700/60 shadow-xl">
+            <div class="flex items-center mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-apple-blue/15 to-apple-blue/10 flex items-center justify-center mr-4">
+                    <i class="fas fa-arrow-down text-apple-blue text-xl"></i>
                 </div>
-                <div class="mb-4">
-                    <input type="checkbox" id="urlSafeDecode" name="urlSafe" value="true" class="mr-2">
-                    <label for="urlSafeDecode" class="text-sm font-medium text-gray-300">URL Safe?</label>
+                <div>
+                    <h2 class="text-2xl font-semibold text-sand-100">Decode Text</h2>
+                    <p class="text-sm text-neutral-400">Convert Base64 back to text</p>
                 </div>
-                <button type="submit" class="btn-primary">Decode</button>
+            </div>
+            
+            <form hx-post="/base64/decode" hx-target="#base64-result-container" hx-swap="innerHTML" class="space-y-6">
+                <div class="form-field">
+                    <label for="textToDecode" class="form-label">Base64 to Decode</label>
+                    <textarea 
+                        name="text" 
+                        id="textToDecode"
+                        placeholder="Enter Base64 string to decode..."
+                        class="form-textarea min-h-[120px]"
+                        rows="5"
+                    ></textarea>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <input type="checkbox" id="urlSafeDecode" name="urlSafe" value="true" class="form-checkbox">
+                    <label for="urlSafeDecode" class="text-sm text-sand-200 cursor-pointer">URL Safe Decoding</label>
+                </div>
+                
+                <button type="submit" class="btn btn-secondary w-full inline-flex items-center justify-center gap-2">
+                    <i class="fas fa-decode"></i>
+                    Decode from Base64
+                </button>
             </form>
         </section>
+    </div>
 
-        {# Encode File #}
-        <section class="md:col-span-2 mt-8 border-t border-white/10 pt-8">
-            <h2 class="text-2xl font-semibold mb-4 text-ocean-100">Encode File to Base64</h2>
-            <form hx-post="/base64/encode-file" hx-target="#base64-result-container" hx-swap="innerHTML" hx-encoding="multipart/form-data" class="dropzone flex flex-col items-center justify-center">
-                <p class="text-gray-300">Drag & drop a file or click to browse</p>
-                <input type="file" id="fileToEncode" name="file" class="hidden" required>
-                <div class="mb-4 mt-4 flex items-center">
-                    <input type="checkbox" id="urlSafeEncodeFile" name="urlSafe" value="true" class="mr-2">
-                    <label for="urlSafeEncodeFile" class="text-sm font-medium text-gray-300">URL Safe?</label>
-                </div>
-            </form>
+    {# File Operations Section #}
+    <div class="space-y-12">
+        {# Encode File Section #}
+        <section class="border-t border-sand-300/10 pt-12">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-semibold text-sand-200 mb-3">File Operations</h2>
+                <p class="text-neutral-400">Upload files to encode or decode file content</p>
+            </div>
+            
+            <div class="tool-card rounded-3xl p-12 border border-sand-300/8 backdrop-blur-md bg-dark-700/40 shadow-xl">
+                <h3 class="text-xl font-semibold text-sand-100 mb-6 text-center">Encode File to Base64</h3>
+                
+                <form hx-post="/base64/encode-file" hx-target="#base64-result-container" hx-swap="innerHTML" hx-encoding="multipart/form-data" class="space-y-6">
+                    {# Apple-style Drop Zone #}
+                    <div class="apple-dropzone border-2 border-dashed border-sand-300/30 rounded-3xl p-12 text-center cursor-pointer transition-all duration-300 hover:border-sand-300/50 hover:bg-sand-300/5">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-sand-400/20 to-sand-300/10 flex items-center justify-center">
+                            <i class="fas fa-cloud-upload-alt text-3xl text-sand-300"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold text-sand-200 mb-2">Drop files here or click to browse</h4>
+                        <p class="text-sm text-neutral-400 mb-4">Supports all file types</p>
+                        <input type="file" id="fileToEncode" name="file" class="hidden" required>
+                    </div>
+                    
+                    <div class="flex items-center justify-center space-x-3">
+                        <input type="checkbox" id="urlSafeEncodeFile" name="urlSafe" value="true" class="form-checkbox">
+                        <label for="urlSafeEncodeFile" class="text-sm text-sand-200 cursor-pointer">URL Safe Encoding</label>
+                    </div>
+                </form>
+            </div>
         </section>
 
-        {# Decode File - This is a direct download, so no HTMX target needed for the form itself #}
-        <section class="md:col-span-2 mt-8 border-t border-white/10 pt-8">
-            <h2 class="text-2xl font-semibold mb-4 text-ocean-100">Decode Base64 to File</h2>
-            <form action="/base64/decode-file" method="POST" class="rounded-lg p-6 border border-ocean-400/10 backdrop-blur-md bg-navy-800/40 shadow-lg">
-                <div class="mb-4">
-                    <label for="textToDecodeFile" class="block text-sm font-medium text-gray-300 mb-1">Base64 to Decode:</label>
-                    {{ input(name='text', type='textarea', placeholder='Enter Base64 string for file content...', class='bg-ocean-100/10 border-ocean-400/20 text-white placeholder-gray-500 rounded-md') }}
+        {# Decode File Section #}
+        <section class="border-t border-sand-300/10 pt-12">
+            <div class="tool-card rounded-3xl p-8 border border-sand-300/8 backdrop-blur-md bg-dark-700/60 shadow-xl">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-sunset-500/15 to-sunset-400/10 flex items-center justify-center mr-4">
+                        <i class="fas fa-file-download text-sunset-500 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-sand-100">Decode Base64 to File</h3>
+                        <p class="text-sm text-neutral-400">Convert Base64 back to downloadable file</p>
+                    </div>
                 </div>
-                <div class="mb-4">
-                    <label for="fileNameDecode" class="block text-sm font-medium text-gray-300 mb-1">Output File Name:</label>
-                    {{ input(name='fileName', placeholder='e.g., decoded_file.txt', value='decoded_file.txt', class='bg-ocean-100/10 border-ocean-400/20 text-white placeholder-gray-500 rounded-md') }}
-                </div>
-                <div class="mb-4">
-                    <input type="checkbox" id="urlSafeDecodeFile" name="urlSafe" value="true" class="mr-2">
-                    <label for="urlSafeDecodeFile" class="text-sm font-medium text-gray-300">URL Safe?</label>
-                </div>
-                <button type="submit" class="btn-primary">Decode and Download File</button>
-            </form>
+                
+                <form action="/base64/decode-file" method="POST" class="space-y-6">
+                    <div class="form-field">
+                        <label for="textToDecodeFile" class="form-label">Base64 Content</label>
+                        <textarea 
+                            name="text" 
+                            id="textToDecodeFile"
+                            placeholder="Enter Base64 string for file content..."
+                            class="form-textarea min-h-[120px]"
+                            rows="5"
+                        ></textarea>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="fileNameDecode" class="form-label">Output File Name</label>
+                        <input 
+                            type="text"
+                            name="fileName" 
+                            id="fileNameDecode"
+                            placeholder="e.g., decoded_file.txt"
+                            value="decoded_file.txt"
+                            class="form-input"
+                        />
+                    </div>
+                    
+                    <div class="flex items-center space-x-3">
+                        <input type="checkbox" id="urlSafeDecodeFile" name="urlSafe" value="true" class="form-checkbox">
+                        <label for="urlSafeDecodeFile" class="text-sm text-sand-200 cursor-pointer">URL Safe Decoding</label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-full inline-flex items-center justify-center gap-2">
+                        <i class="fas fa-download"></i>
+                        Decode and Download File
+                    </button>
+                </form>
+            </div>
         </section>
     </div>
 {% endblock %}
 
 {% block bodyScripts %}
 <script>
-    // Make the dropzone work with the file input
+    // Enhanced Apple-style dropzone functionality
     document.addEventListener('DOMContentLoaded', function() {
-        const dropzone = document.querySelector('.dropzone');
+        const dropzone = document.querySelector('.apple-dropzone');
         const fileInput = document.getElementById('fileToEncode');
         
         if (dropzone && fileInput) {
-            // Click on dropzone triggers file input click
+            // Click on dropzone triggers file input
             dropzone.addEventListener('click', function(e) {
                 if (e.target !== fileInput) {
                     fileInput.click();
                 }
             });
             
-            // File input change triggers form submission
+            // File input change with Apple-style feedback
             fileInput.addEventListener('change', function() {
                 if (fileInput.files.length > 0) {
-                    dropzone.classList.add('bg-ocean-100/20');
+                    const fileName = fileInput.files[0].name;
+                    dropzone.innerHTML = `
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-apple-blue/20 to-apple-blue/10 flex items-center justify-center">
+                            <i class="fas fa-check text-3xl text-apple-blue-light"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold text-apple-blue-light mb-2">File Selected</h4>
+                        <p class="text-sm text-neutral-300 mb-4">${fileName}</p>
+                        <div class="loading-spinner mx-auto"></div>
+                    `;
+                    
                     setTimeout(() => {
                         dropzone.closest('form').submit();
-                    }, 300);
+                    }, 500);
                 }
             });
             
-            // Drag and drop functionality
+            // Enhanced drag and drop with Apple-style animations
             ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
                 dropzone.addEventListener(eventName, function(e) {
                     e.preventDefault();
@@ -114,23 +224,34 @@
             
             ['dragenter', 'dragover'].forEach(eventName => {
                 dropzone.addEventListener(eventName, function() {
-                    dropzone.classList.add('bg-ocean-100/30');
+                    dropzone.classList.add('border-apple-blue/50', 'bg-apple-blue/5', 'scale-105');
+                    dropzone.classList.remove('border-sand-300/30');
                 }, false);
             });
             
             ['dragleave', 'drop'].forEach(eventName => {
                 dropzone.addEventListener(eventName, function() {
-                    dropzone.classList.remove('bg-ocean-100/30');
+                    dropzone.classList.remove('border-apple-blue/50', 'bg-apple-blue/5', 'scale-105');
+                    dropzone.classList.add('border-sand-300/30');
                 }, false);
             });
             
             dropzone.addEventListener('drop', function(e) {
                 fileInput.files = e.dataTransfer.files;
                 if (fileInput.files.length > 0) {
-                    dropzone.classList.add('bg-ocean-100/20');
+                    const fileName = fileInput.files[0].name;
+                    dropzone.innerHTML = `
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-apple-blue/20 to-apple-blue/10 flex items-center justify-center">
+                            <i class="fas fa-check text-3xl text-apple-blue-light"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold text-apple-blue-light mb-2">File Dropped</h4>
+                        <p class="text-sm text-neutral-300 mb-4">${fileName}</p>
+                        <div class="loading-spinner mx-auto"></div>
+                    `;
+                    
                     setTimeout(() => {
                         dropzone.closest('form').submit();
-                    }, 300);
+                    }, 500);
                 }
             }, false);
         }
