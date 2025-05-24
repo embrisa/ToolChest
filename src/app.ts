@@ -152,7 +152,7 @@ export function createApp(): Application {
 
     const base64Router = Router();
     setupBase64Routes(base64Router, appContainer);
-    app.use('/base64', base64Router);
+    app.use('/base64-converter', base64Router);
 
     const faviconRouter = Router();
     setupFaviconRoutes(faviconRouter, appContainer);
