@@ -2,18 +2,28 @@
 
 {% block title %}{{ title }}{% endblock %}
 
+{% block headContent %}
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
 {% block content %}
-<div class="space-y-6">
+<div class="space-y-8">
     <!-- Header -->
     <div class="flex justify-between items-center">
         <div>
-            <h1 class="text-2xl font-bold text-gray-900">Analytics Dashboard</h1>
-            <p class="text-gray-600 mt-1">Comprehensive usage statistics and insights</p>
+            <h1 class="text-3xl font-bold" style="color: var(--sand-100);">Analytics Dashboard</h1>
+            <p class="mt-2" style="color: var(--neutral-400);">Comprehensive usage statistics and insights</p>
         </div>
         <div class="flex space-x-3">
             <button 
                 type="button" 
-                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                class="content-container px-6 py-3 rounded-xl transition-all duration-200 hover:scale-105 border"
+                style="background: linear-gradient(135deg, var(--blue-500) 0%, var(--blue-600) 100%); 
+                       color: white; 
+                       border-color: rgba(255, 255, 255, 0.1);
+                       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 
+                                   0 4px 12px rgba(0, 0, 0, 0.15);"
                 hx-get="/admin/analytics/stats"
                 hx-target="#overview-stats"
                 hx-swap="outerHTML"
@@ -23,28 +33,41 @@
             <div class="relative">
                 <button 
                     type="button" 
-                    class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+                    class="content-container px-6 py-3 rounded-xl transition-all duration-200 hover:scale-105 border"
+                    style="background: linear-gradient(135deg, var(--sand-400) 0%, var(--sand-500) 100%); 
+                           color: white; 
+                           border-color: rgba(255, 255, 255, 0.1);
+                           box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 
+                                       0 4px 12px rgba(0, 0, 0, 0.15);"
                     onclick="toggleExportMenu()"
                 >
                     <i class="fas fa-download mr-2"></i>Export
                 </button>
-                <div id="exportMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
-                    <div class="py-1">
+                <div id="exportMenu" class="hidden absolute right-0 mt-3 w-56 content-container rounded-xl border z-10"
+                     style="background: rgba(254, 247, 237, 0.15); 
+                            border-color: rgba(254, 247, 237, 0.2);
+                            box-shadow: inset 0 1px 0 rgba(254, 247, 237, 0.1), 
+                                        0 20px 60px rgba(0, 0, 0, 0.3);">
+                    <div class="py-2">
                         <a href="/admin/analytics/export?type=overview&format=json" 
-                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                            <i class="fas fa-file-code mr-2"></i>Overview (JSON)
+                           class="block px-4 py-3 text-sm transition-colors rounded-lg mx-2 hover:bg-opacity-80"
+                           style="color: var(--sand-200); hover:background: rgba(254, 247, 237, 0.08);">
+                            <i class="fas fa-file-code mr-3" style="color: var(--blue-400);"></i>Overview (JSON)
                         </a>
                         <a href="/admin/analytics/export?type=overview&format=csv" 
-                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                            <i class="fas fa-file-csv mr-2"></i>Overview (CSV)
+                           class="block px-4 py-3 text-sm transition-colors rounded-lg mx-2 hover:bg-opacity-80"
+                           style="color: var(--sand-200); hover:background: rgba(254, 247, 237, 0.08);">
+                            <i class="fas fa-file-csv mr-3" style="color: var(--sand-400);"></i>Overview (CSV)
                         </a>
                         <a href="/admin/analytics/export?type=tools&format=json" 
-                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                            <i class="fas fa-tools mr-2"></i>Tools Data (JSON)
+                           class="block px-4 py-3 text-sm transition-colors rounded-lg mx-2 hover:bg-opacity-80"
+                           style="color: var(--sand-200); hover:background: rgba(254, 247, 237, 0.08);">
+                            <i class="fas fa-tools mr-3" style="color: var(--sunset-400);"></i>Tools Data (JSON)
                         </a>
                         <a href="/admin/analytics/export?type=tags&format=json" 
-                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                            <i class="fas fa-tags mr-2"></i>Tags Data (JSON)
+                           class="block px-4 py-3 text-sm transition-colors rounded-lg mx-2 hover:bg-opacity-80"
+                           style="color: var(--sand-200); hover:background: rgba(254, 247, 237, 0.08);">
+                            <i class="fas fa-tags mr-3" style="color: var(--sand-300);"></i>Tags Data (JSON)
                         </a>
                     </div>
                 </div>
@@ -56,57 +79,73 @@
     <div id="overview-stats">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <!-- Total Tools -->
-            <div class="bg-white rounded-lg shadow p-6">
+            <div class="content-container p-6 rounded-xl border"
+                 style="background: rgba(254, 247, 237, 0.1); 
+                        border-color: rgba(254, 247, 237, 0.08);
+                        box-shadow: inset 0 1px 0 rgba(254, 247, 237, 0.05), 
+                                    0 8px 32px rgba(0, 0, 0, 0.1);">
                 <div class="flex items-center">
-                    <div class="p-2 bg-blue-100 rounded-lg">
-                        <i class="fas fa-tools text-blue-600"></i>
+                    <div class="p-3 rounded-xl" style="background: rgba(51, 141, 255, 0.1);">
+                        <i class="fas fa-tools" style="color: var(--blue-400);"></i>
                     </div>
                     <div class="ml-4">
-                        <p class="text-sm font-medium text-gray-600">Total Tools</p>
-                        <p class="text-2xl font-bold text-gray-900">{{ metrics.overview.totalTools }}</p>
-                        <p class="text-xs text-gray-500">{{ metrics.overview.activeTools }} active</p>
+                        <p class="text-sm font-medium" style="color: var(--neutral-400);">Total Tools</p>
+                        <p class="text-2xl font-bold" style="color: var(--sand-100);">{{ metrics.overview.totalTools }}</p>
+                        <p class="text-xs" style="color: var(--neutral-500);">{{ metrics.overview.activeTools }} active</p>
                     </div>
                 </div>
             </div>
 
             <!-- Total Tags -->
-            <div class="bg-white rounded-lg shadow p-6">
+            <div class="content-container p-6 rounded-xl border"
+                 style="background: rgba(254, 247, 237, 0.1); 
+                        border-color: rgba(254, 247, 237, 0.08);
+                        box-shadow: inset 0 1px 0 rgba(254, 247, 237, 0.05), 
+                                    0 8px 32px rgba(0, 0, 0, 0.1);">
                 <div class="flex items-center">
-                    <div class="p-2 bg-green-100 rounded-lg">
-                        <i class="fas fa-tags text-green-600"></i>
+                    <div class="p-3 rounded-xl" style="background: rgba(245, 168, 103, 0.2);">
+                        <i class="fas fa-tags" style="color: var(--sand-400);"></i>
                     </div>
                     <div class="ml-4">
-                        <p class="text-sm font-medium text-gray-600">Total Tags</p>
-                        <p class="text-2xl font-bold text-gray-900">{{ metrics.overview.totalTags }}</p>
-                        <p class="text-xs text-gray-500">{{ metrics.overview.tagsInUse }} in use</p>
+                        <p class="text-sm font-medium" style="color: var(--neutral-400);">Total Tags</p>
+                        <p class="text-2xl font-bold" style="color: var(--sand-100);">{{ metrics.overview.totalTags }}</p>
+                        <p class="text-xs" style="color: var(--neutral-500);">{{ metrics.overview.tagsInUse }} in use</p>
                     </div>
                 </div>
             </div>
 
             <!-- Total Usage -->
-            <div class="bg-white rounded-lg shadow p-6">
+            <div class="content-container p-6 rounded-xl border"
+                 style="background: rgba(254, 247, 237, 0.1); 
+                        border-color: rgba(254, 247, 237, 0.08);
+                        box-shadow: inset 0 1px 0 rgba(254, 247, 237, 0.05), 
+                                    0 8px 32px rgba(0, 0, 0, 0.1);">
                 <div class="flex items-center">
-                    <div class="p-2 bg-purple-100 rounded-lg">
-                        <i class="fas fa-chart-line text-purple-600"></i>
+                    <div class="p-3 rounded-xl" style="background: rgba(255, 140, 66, 0.15);">
+                        <i class="fas fa-chart-line" style="color: var(--sunset-400);"></i>
                     </div>
                     <div class="ml-4">
-                        <p class="text-sm font-medium text-gray-600">Total Usage</p>
-                        <p class="text-2xl font-bold text-gray-900">{{ metrics.overview.totalUsage }}</p>
-                        <p class="text-xs text-gray-500">{{ metrics.overview.averageUsagePerTool }} avg per tool</p>
+                        <p class="text-sm font-medium" style="color: var(--neutral-400);">Total Usage</p>
+                        <p class="text-2xl font-bold" style="color: var(--sand-100);">{{ metrics.overview.totalUsage }}</p>
+                        <p class="text-xs" style="color: var(--neutral-500);">{{ metrics.overview.averageUsagePerTool }} avg per tool</p>
                     </div>
                 </div>
             </div>
 
             <!-- Average Tags per Tool -->
-            <div class="bg-white rounded-lg shadow p-6">
+            <div class="content-container p-6 rounded-xl border"
+                 style="background: rgba(254, 247, 237, 0.1); 
+                        border-color: rgba(254, 247, 237, 0.08);
+                        box-shadow: inset 0 1px 0 rgba(254, 247, 237, 0.05), 
+                                    0 8px 32px rgba(0, 0, 0, 0.1);">
                 <div class="flex items-center">
-                    <div class="p-2 bg-yellow-100 rounded-lg">
-                        <i class="fas fa-sitemap text-yellow-600"></i>
+                    <div class="p-3 rounded-xl" style="background: rgba(252, 211, 77, 0.15);">
+                        <i class="fas fa-sitemap" style="color: var(--sand-300);"></i>
                     </div>
                     <div class="ml-4">
-                        <p class="text-sm font-medium text-gray-600">Avg Tags/Tool</p>
-                        <p class="text-2xl font-bold text-gray-900">{{ metrics.overview.averageTagsPerTool }}</p>
-                        <p class="text-xs text-gray-500">{{ metrics.overview.toolsWithoutTags }} tools untagged</p>
+                        <p class="text-sm font-medium" style="color: var(--neutral-400);">Avg Tags/Tool</p>
+                        <p class="text-2xl font-bold" style="color: var(--sand-100);">{{ metrics.overview.averageTagsPerTool }}</p>
+                        <p class="text-xs" style="color: var(--neutral-500);">{{ metrics.overview.toolsWithoutTags }} tools untagged</p>
                     </div>
                 </div>
             </div>
@@ -116,12 +155,20 @@
     <!-- Charts Section -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Usage Trends Chart -->
-        <div class="bg-white rounded-lg shadow p-6">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-semibold text-gray-900">Usage Trends (30 Days)</h3>
+        <div class="content-container rounded-xl border p-6"
+             style="background: rgba(254, 247, 237, 0.08); 
+                    border-color: rgba(254, 247, 237, 0.08);
+                    box-shadow: inset 0 1px 0 rgba(254, 247, 237, 0.05), 
+                                0 12px 48px rgba(0, 0, 0, 0.12);">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-semibold" style="color: var(--sand-100);">Usage Trends (30 Days)</h3>
                 <button 
                     type="button"
-                    class="text-sm text-blue-600 hover:text-blue-800"
+                    class="text-sm px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 border"
+                    style="color: var(--blue-400); 
+                           border-color: rgba(51, 141, 255, 0.3);
+                           background: rgba(51, 141, 255, 0.1);
+                           hover:background: rgba(51, 141, 255, 0.15);"
                     hx-get="/admin/analytics/date-range?days=30"
                     hx-target="#usage-trends-chart"
                 >
@@ -132,10 +179,13 @@
                 {% if metrics.usageTrends.length > 0 %}
                 <canvas id="trendsChart" width="400" height="200"></canvas>
                 {% else %}
-                <div class="flex items-center justify-center h-full text-gray-500">
+                <div class="flex items-center justify-center h-full">
                     <div class="text-center">
-                        <i class="fas fa-chart-line text-4xl mb-2"></i>
-                        <p>No usage data available</p>
+                        <div class="p-4 rounded-full mx-auto w-16 h-16 flex items-center justify-center mb-4"
+                             style="background: rgba(156, 163, 175, 0.1);">
+                            <i class="fas fa-chart-line text-2xl" style="color: var(--neutral-400);"></i>
+                        </div>
+                        <p style="color: var(--neutral-400);">No usage data available</p>
                     </div>
                 </div>
                 {% endif %}
@@ -143,24 +193,35 @@
         </div>
 
         <!-- Recent Activity -->
-        <div class="bg-white rounded-lg shadow p-6">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Recent Activity (7 Days)</h3>
-            <div class="space-y-3">
+        <div class="content-container rounded-xl border p-6"
+             style="background: rgba(254, 247, 237, 0.08); 
+                    border-color: rgba(254, 247, 237, 0.08);
+                    box-shadow: inset 0 1px 0 rgba(254, 247, 237, 0.05), 
+                                0 12px 48px rgba(0, 0, 0, 0.12);">
+            <h3 class="text-xl font-semibold mb-6" style="color: var(--sand-100);">Recent Activity (7 Days)</h3>
+            <div class="space-y-4">
                 {% for activity in metrics.recentActivity %}
-                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                    <div>
-                        <p class="text-sm font-medium text-gray-900">{{ activity.date | date('MMM DD') }}</p>
-                        <p class="text-xs text-gray-600">{{ activity.uniqueTools }} tools used</p>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-lg font-bold text-blue-600">{{ activity.totalUsage }}</p>
-                        <p class="text-xs text-gray-500">total usage</p>
+                <div class="p-4 rounded-xl border transition-all duration-200 hover:scale-105"
+                     style="background: rgba(254, 247, 237, 0.1); 
+                            border-color: rgba(254, 247, 237, 0.15);">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-sm font-medium" style="color: var(--sand-100);">{{ activity.date | date('MMM DD') }}</p>
+                            <p class="text-xs" style="color: var(--neutral-400);">{{ activity.uniqueTools }} tools used</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-lg font-bold" style="color: var(--blue-400);">{{ activity.totalUsage }}</p>
+                            <p class="text-xs" style="color: var(--neutral-500);">total usage</p>
+                        </div>
                     </div>
                 </div>
                 {% else %}
-                <div class="text-center text-gray-500 py-8">
-                    <i class="fas fa-clock text-3xl mb-2"></i>
-                    <p>No recent activity</p>
+                <div class="text-center py-12">
+                    <div class="p-4 rounded-full mx-auto w-16 h-16 flex items-center justify-center mb-4"
+                         style="background: rgba(156, 163, 175, 0.1);">
+                        <i class="fas fa-clock text-2xl" style="color: var(--neutral-400);"></i>
+                    </div>
+                    <p style="color: var(--neutral-400);">No recent activity</p>
                 </div>
                 {% endfor %}
             </div>
@@ -170,80 +231,120 @@
     <!-- Top Tools and Tags -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Top Tools -->
-        <div class="bg-white rounded-lg shadow p-6">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-semibold text-gray-900">Top Tools by Usage</h3>
-                <a href="/admin/analytics/tools" class="text-sm text-blue-600 hover:text-blue-800">
-                    View All <i class="fas fa-arrow-right ml-1"></i>
+        <div class="content-container rounded-xl border p-6"
+             style="background: rgba(254, 247, 237, 0.08); 
+                    border-color: rgba(254, 247, 237, 0.08);
+                    box-shadow: inset 0 1px 0 rgba(254, 247, 237, 0.05), 
+                                0 12px 48px rgba(0, 0, 0, 0.12);">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-semibold" style="color: var(--sand-100);">Top Tools by Usage</h3>
+                <a href="/admin/analytics/tools" 
+                   class="text-sm px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 border inline-flex items-center"
+                   style="color: var(--blue-400); 
+                          border-color: rgba(51, 141, 255, 0.3);
+                          background: rgba(51, 141, 255, 0.1);
+                          hover:background: rgba(51, 141, 255, 0.15);">
+                    View All <i class="fas fa-arrow-right ml-2"></i>
                 </a>
             </div>
-            <div class="space-y-3">
+            <div class="space-y-4">
                 {% for tool in metrics.topTools %}
-                <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <i class="{{ tool.iconClass or 'fas fa-tools' }} text-gray-600"></i>
-                        </div>
-                        <div class="ml-3">
-                            <p class="text-sm font-medium text-gray-900">{{ tool.name }}</p>
-                            <div class="flex items-center space-x-2">
-                                <p class="text-xs text-gray-500">{{ tool.slug }}</p>
-                                {% if tool.isActive %}
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
-                                        Active
-                                    </span>
-                                {% else %}
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
-                                        Inactive
-                                    </span>
-                                {% endif %}
+                <div class="p-4 rounded-xl border transition-all duration-200 hover:scale-105"
+                     style="background: rgba(254, 247, 237, 0.1); 
+                            border-color: rgba(254, 247, 237, 0.15);">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 p-2 rounded-lg mr-4" 
+                                 style="background: rgba(245, 168, 103, 0.1);">
+                                <i class="{{ tool.iconClass or 'fas fa-tools' }}" style="color: var(--sand-400);"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium" style="color: var(--sand-100);">{{ tool.name }}</p>
+                                <div class="flex items-center space-x-3 mt-1">
+                                    <p class="text-xs" style="color: var(--neutral-500);">{{ tool.slug }}</p>
+                                    {% if tool.isActive %}
+                                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border"
+                                              style="background: rgba(16, 185, 129, 0.1); 
+                                                     color: var(--green-400); 
+                                                     border-color: rgba(16, 185, 129, 0.2);">
+                                            Active
+                                        </span>
+                                    {% else %}
+                                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border"
+                                              style="background: rgba(156, 163, 175, 0.1); 
+                                                     color: var(--neutral-400); 
+                                                     border-color: rgba(156, 163, 175, 0.2);">
+                                            Inactive
+                                        </span>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-lg font-bold text-blue-600">{{ tool.totalUsage }}</p>
-                        <p class="text-xs text-gray-500">uses</p>
+                        <div class="text-right">
+                            <p class="text-lg font-bold" style="color: var(--blue-400);">{{ tool.usageCount or 0 }}</p>
+                            <p class="text-xs" style="color: var(--neutral-500);">uses</p>
+                        </div>
                     </div>
                 </div>
                 {% else %}
-                <div class="text-center text-gray-500 py-8">
-                    <i class="fas fa-tools text-3xl mb-2"></i>
-                    <p>No tool usage data</p>
+                <div class="text-center py-12">
+                    <div class="p-4 rounded-full mx-auto w-16 h-16 flex items-center justify-center mb-4"
+                         style="background: rgba(156, 163, 175, 0.1);">
+                        <i class="fas fa-tools text-2xl" style="color: var(--neutral-400);"></i>
+                    </div>
+                    <p style="color: var(--neutral-400);">No tools data available</p>
                 </div>
                 {% endfor %}
             </div>
         </div>
 
         <!-- Top Tags -->
-        <div class="bg-white rounded-lg shadow p-6">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-semibold text-gray-900">Top Tags by Usage</h3>
-                <a href="/admin/analytics/tags" class="text-sm text-blue-600 hover:text-blue-800">
-                    View All <i class="fas fa-arrow-right ml-1"></i>
+        <div class="content-container rounded-xl border p-6"
+             style="background: rgba(254, 247, 237, 0.08); 
+                    border-color: rgba(254, 247, 237, 0.08);
+                    box-shadow: inset 0 1px 0 rgba(254, 247, 237, 0.05), 
+                                0 12px 48px rgba(0, 0, 0, 0.12);">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-semibold" style="color: var(--sand-100);">Top Tags by Usage</h3>
+                <a href="/admin/analytics/tags" 
+                   class="text-sm px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 border inline-flex items-center"
+                   style="color: var(--blue-400); 
+                          border-color: rgba(51, 141, 255, 0.3);
+                          background: rgba(51, 141, 255, 0.1);
+                          hover:background: rgba(51, 141, 255, 0.15);">
+                    View All <i class="fas fa-arrow-right ml-2"></i>
                 </a>
             </div>
-            <div class="space-y-3">
+            <div class="space-y-4">
                 {% for tag in metrics.topTags %}
-                <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
-                    <div class="flex items-center">
-                        <span 
-                            class="inline-block w-4 h-4 rounded-full"
-                            style="background-color: {{ tag.color or '#6B7280' }}"
-                        ></span>
-                        <div class="ml-3">
-                            <p class="text-sm font-medium text-gray-900">{{ tag.name }}</p>
-                            <p class="text-xs text-gray-500">{{ tag.toolCount }} tools</p>
+                <div class="p-4 rounded-xl border transition-all duration-200 hover:scale-105"
+                     style="background: rgba(254, 247, 237, 0.1); 
+                            border-color: rgba(254, 247, 237, 0.15);">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <span 
+                                class="inline-block w-6 h-6 rounded-full border border-white/20 mr-4"
+                                style="background-color: {{ tag.color or '#6B7280' }}; 
+                                       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);"
+                            ></span>
+                            <div>
+                                <p class="text-sm font-medium" style="color: var(--sand-100);">{{ tag.name }}</p>
+                                <p class="text-xs" style="color: var(--neutral-500);">{{ tag.slug }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-lg font-bold text-purple-600">{{ tag.totalUsage }}</p>
-                        <p class="text-xs text-gray-500">total usage</p>
+                        <div class="text-right">
+                            <p class="text-lg font-bold" style="color: var(--sunset-400);">{{ tag.toolCount or 0 }}</p>
+                            <p class="text-xs" style="color: var(--neutral-500);">tools</p>
+                        </div>
                     </div>
                 </div>
                 {% else %}
-                <div class="text-center text-gray-500 py-8">
-                    <i class="fas fa-tags text-3xl mb-2"></i>
-                    <p>No tag usage data</p>
+                <div class="text-center py-12">
+                    <div class="p-4 rounded-full mx-auto w-16 h-16 flex items-center justify-center mb-4"
+                         style="background: rgba(156, 163, 175, 0.1);">
+                        <i class="fas fa-tags text-2xl" style="color: var(--neutral-400);"></i>
+                    </div>
+                    <p style="color: var(--neutral-400);">No tags data available</p>
                 </div>
                 {% endfor %}
             </div>
@@ -251,46 +352,47 @@
     </div>
 
     <!-- Quick Actions -->
-    <div class="bg-white rounded-lg shadow p-6">
-        <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Analytics Actions</h3>
+    <div class="content-container rounded-xl border p-6"
+         style="background: rgba(254, 247, 237, 0.08); 
+                border-color: rgba(254, 247, 237, 0.08);
+                box-shadow: inset 0 1px 0 rgba(254, 247, 237, 0.05), 
+                            0 12px 48px rgba(0, 0, 0, 0.12);">
+        <h3 class="text-xl font-semibold mb-6" style="color: var(--sand-100);">Quick Actions</h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <a href="/admin/analytics/tools" 
-               class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-                <i class="fas fa-tools text-blue-600 mr-3 text-xl"></i>
-                <div>
-                    <p class="font-medium text-gray-900">Detailed Tool Analytics</p>
-                    <p class="text-sm text-gray-600">Usage trends and patterns</p>
-                </div>
+            <a href="/admin/tools" 
+               class="content-container p-6 rounded-xl transition-all duration-200 hover:scale-105 border text-center"
+               style="background: rgba(51, 141, 255, 0.1); 
+                      border-color: rgba(51, 141, 255, 0.2);
+                      box-shadow: inset 0 1px 0 rgba(51, 141, 255, 0.05), 
+                                  0 4px 12px rgba(0, 0, 0, 0.1);">
+                <i class="fas fa-tools text-2xl mb-3" style="color: var(--blue-400);"></i>
+                <h4 class="font-medium mb-2" style="color: var(--sand-100);">Manage Tools</h4>
+                <p class="text-sm" style="color: var(--neutral-400);">Create, edit, and organize your tools</p>
             </a>
-            <a href="/admin/analytics/tags" 
-               class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-                <i class="fas fa-tags text-green-600 mr-3 text-xl"></i>
-                <div>
-                    <p class="font-medium text-gray-900">Tag Performance</p>
-                    <p class="text-sm text-gray-600">Tag usage statistics</p>
-                </div>
+            
+            <a href="/admin/tags" 
+               class="content-container p-6 rounded-xl transition-all duration-200 hover:scale-105 border text-center"
+               style="background: rgba(245, 168, 103, 0.1); 
+                      border-color: rgba(245, 168, 103, 0.2);
+                      box-shadow: inset 0 1px 0 rgba(245, 168, 103, 0.05), 
+                                  0 4px 12px rgba(0, 0, 0, 0.1);">
+                <i class="fas fa-tags text-2xl mb-3" style="color: var(--sand-400);"></i>
+                <h4 class="font-medium mb-2" style="color: var(--sand-100);">Manage Tags</h4>
+                <p class="text-sm" style="color: var(--neutral-400);">Create and organize tag categories</p>
             </a>
-            <button 
-                type="button"
-                class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
-                hx-get="/admin/analytics/date-range"
-                hx-target="#date-range-modal"
-                hx-swap="innerHTML"
-                onclick="showDateRangeModal()"
-            >
-                <i class="fas fa-calendar-alt text-purple-600 mr-3 text-xl"></i>
-                <div>
-                    <p class="font-medium text-gray-900">Custom Date Range</p>
-                    <p class="text-sm text-gray-600">Analyze specific periods</p>
-                </div>
-            </button>
+            
+            <a href="/admin/relationships" 
+               class="content-container p-6 rounded-xl transition-all duration-200 hover:scale-105 border text-center"
+               style="background: rgba(255, 140, 66, 0.1); 
+                      border-color: rgba(255, 140, 66, 0.2);
+                      box-shadow: inset 0 1px 0 rgba(255, 140, 66, 0.05), 
+                                  0 4px 12px rgba(0, 0, 0, 0.1);">
+                <i class="fas fa-link text-2xl mb-3" style="color: var(--sunset-400);"></i>
+                <h4 class="font-medium mb-2" style="color: var(--sand-100);">Manage Relationships</h4>
+                <p class="text-sm" style="color: var(--neutral-400);">Assign tags to tools and manage connections</p>
+            </a>
         </div>
     </div>
-</div>
-
-<!-- Date Range Modal -->
-<div id="date-range-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 z-50">
-    <!-- Modal content will be loaded here -->
 </div>
 
 <script>
@@ -299,59 +401,66 @@ function toggleExportMenu() {
     menu.classList.toggle('hidden');
 }
 
-function showDateRangeModal() {
-    document.getElementById('date-range-modal').classList.remove('hidden');
-}
-
-function hideDateRangeModal() {
-    document.getElementById('date-range-modal').classList.add('hidden');
-}
-
 // Close export menu when clicking outside
 document.addEventListener('click', function(event) {
     const menu = document.getElementById('exportMenu');
-    const button = event.target.closest('button');
-    if (!button || button.onclick !== toggleExportMenu) {
+    const button = event.target.closest('[onclick="toggleExportMenu()"]');
+    
+    if (!button && !menu.contains(event.target)) {
         menu.classList.add('hidden');
     }
 });
 
-// Chart.js for usage trends
+// Initialize charts if data exists
 {% if metrics.usageTrends.length > 0 %}
 document.addEventListener('DOMContentLoaded', function() {
-    const ctx = document.getElementById('trendsChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: {{ metrics.usageTrends | map(attribute='date') | list | tojson }},
-            datasets: [{
-                label: 'Daily Usage',
-                data: {{ metrics.usageTrends | map(attribute='usage') | list | tojson }},
-                borderColor: 'rgb(59, 130, 246)',
-                backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                tension: 0.1,
-                fill: true
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
+    const ctx = document.getElementById('trendsChart');
+    if (ctx && typeof Chart !== 'undefined') {
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {{ metrics.usageTrends | map('date') | map('date', 'MMM DD') | dump | safe }},
+                datasets: [{
+                    label: 'Daily Usage',
+                    data: {{ metrics.usageTrends | map('usage') | dump | safe }},
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
             },
-            plugins: {
-                legend: {
-                    display: false
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(254, 247, 237, 0.1)'
+                        },
+                        ticks: {
+                            color: 'rgba(254, 247, 237, 0.6)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(254, 247, 237, 0.1)'
+                        },
+                        ticks: {
+                            color: 'rgba(254, 247, 237, 0.6)'
+                        }
+                    }
                 }
             }
-        }
-    });
+        });
+    }
 });
 {% endif %}
 </script>
 
-<!-- Chart.js CDN -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 {% endblock %} 

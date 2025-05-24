@@ -6,6 +6,7 @@ import { adminAuthMiddleware } from '../middleware/adminAuthMiddleware';
 import adminAuthRoutes from './adminAuthRoutes';
 import adminToolRoutes from './adminToolRoutes';
 import adminTagRoutes from './adminTagRoutes';
+import adminUserRoutes from './adminUserRoutes';
 import { adminRelationshipRoutes } from './adminRelationshipRoutes';
 import { adminAnalyticsRoutes } from './adminAnalyticsRoutes';
 
@@ -28,6 +29,9 @@ router.use('/tools', adminToolRoutes);
 
 // Tags management routes
 router.use('/tags', adminTagRoutes);
+
+// User management routes (super admin only)
+router.use('/users', adminUserRoutes);
 
 // Relationship management routes
 router.use('/relationships', adminRelationshipRoutes);

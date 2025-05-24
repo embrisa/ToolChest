@@ -10,10 +10,12 @@ import { HashService, HashServiceImpl } from '../services/hashService';
 import { HashController } from '../controllers/hashController';
 import { AdminAuthService, AdminAuthServiceImpl } from '../services/adminAuthService';
 import { AdminAuditService, AdminAuditServiceImpl } from '../services/adminAuditService';
+import { AdminUserService, AdminUserServiceImpl } from '../services/adminUserService';
 import { AdminAuthController } from '../controllers/adminAuthController';
 import { AdminDashboardController } from '../controllers/adminDashboardController';
 import { AdminToolController } from '../controllers/adminToolController';
 import { AdminTagController } from '../controllers/adminTagController';
+import { AdminUserController } from '../controllers/adminUserController';
 import { AdminToolService, AdminToolServiceImpl } from '../services/adminToolService';
 import { AdminTagService, AdminTagServiceImpl } from '../services/adminTagService';
 import { IAdminRelationshipService, AdminRelationshipServiceImpl } from '../services/adminRelationshipService';
@@ -37,6 +39,7 @@ appContainer.bind<AdminAuthService>(TYPES.AdminAuthService).to(AdminAuthServiceI
 appContainer.bind<AdminAuditService>(TYPES.AdminAuditService).to(AdminAuditServiceImpl).inSingletonScope();
 appContainer.bind<AdminToolService>(TYPES.AdminToolService).to(AdminToolServiceImpl).inSingletonScope();
 appContainer.bind<AdminTagService>(TYPES.AdminTagService).to(AdminTagServiceImpl).inSingletonScope();
+appContainer.bind<AdminUserService>(TYPES.AdminUserService).to(AdminUserServiceImpl).inSingletonScope();
 appContainer.bind<IAdminRelationshipService>(TYPES.AdminRelationshipService).to(AdminRelationshipServiceImpl).inSingletonScope();
 appContainer.bind<AdminAnalyticsService>(TYPES.AdminAnalyticsService).to(AdminAnalyticsServiceImpl).inSingletonScope();
 
@@ -49,6 +52,7 @@ appContainer.bind<AdminAuthController>(TYPES.AdminAuthController).to(AdminAuthCo
 appContainer.bind<AdminDashboardController>(TYPES.AdminDashboardController).to(AdminDashboardController).inSingletonScope();
 appContainer.bind<AdminToolController>(TYPES.AdminToolController).to(AdminToolController).inSingletonScope();
 appContainer.bind<AdminTagController>(TYPES.AdminTagController).to(AdminTagController).inSingletonScope();
+appContainer.bind<AdminUserController>(TYPES.AdminUserController).to(AdminUserController).inSingletonScope();
 appContainer.bind<IAdminRelationshipController>(TYPES.AdminRelationshipController).to(AdminRelationshipControllerImpl).inSingletonScope();
 appContainer.bind<IAdminAnalyticsController>(TYPES.AdminAnalyticsController).to(AdminAnalyticsControllerImpl).inSingletonScope();
 
