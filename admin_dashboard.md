@@ -728,15 +728,29 @@ npm start
 ### Required
 ```env
 DATABASE_URL=postgresql://user:password@localhost:5432/toolchest_dev
+NODE_ENV=production  # Required for Railway deployment
+```
+
+### Required for Railway Production
+```env
+# Railway automatically provides DATABASE_URL, but ensure these are set:
+ADMIN_SESSION_SECRET=your-strong-random-secret-key-here
+NODE_ENV=production
 ```
 
 ### Optional Admin Configuration
 ```env
-ADMIN_SESSION_SECRET=your-secret-key-here
 ADMIN_SESSION_TIMEOUT=3600000  # 1 hour in milliseconds
 ADMIN_BCRYPT_ROUNDS=12         # Password hashing rounds
-ADMIN_DEFAULT_PASSWORD=admin123 # Default admin password for seeding
+ADMIN_DEFAULT_PASSWORD=admin123 # Default admin password for seeding (change immediately!)
 ```
+
+### Railway Deployment Notes
+- Railway automatically provides `DATABASE_URL` for PostgreSQL services
+- Set `NODE_ENV=production` to enable PostgreSQL session store
+- Generate a strong `ADMIN_SESSION_SECRET` for production security
+- Sessions are now persisted in PostgreSQL instead of memory
+- HTTPS termination is handled by Railway proxy
 
 ---
 

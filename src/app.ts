@@ -3,6 +3,8 @@ import path from 'path';
 import nunjucks from 'nunjucks';
 import session from 'express-session';
 import helmet from 'helmet';
+import ConnectPgSimple from 'connect-pg-simple';
+import { Pool } from 'pg';
 import { appContainer } from './config/inversify.config'; // Import appContainer
 
 // Import route setup functions
@@ -21,6 +23,11 @@ import { notFoundHandler, mainErrorHandler } from './middleware/errorHandlerMidd
 
 export function createApp(): Application {
     const app: Application = express();
+
+    // Trust proxy for Railway deployment
+    if (process.env.NODE_ENV === 'production') {
+        app.set('trust proxy', 1);
+    }
 
     // App version and name (can be moved to a config file or .env)
     app.locals.appName = 'ToolChest';
@@ -90,15 +97,41 @@ export function createApp(): Application {
     app.use(compressionMiddleware);
     app.use(cacheControlMiddleware);
 
+    // Session store configuration
+    const PgSession = ConnectPgSimple(session);
+    let sessionStore;
+
+    if (process.env.NODE_ENV === 'production' && process.env.DATABASE_URL) {
+        try {
+            // Use PostgreSQL session store in production
+            sessionStore = new PgSession({
+                pool: new Pool({
+                    connectionString: process.env.DATABASE_URL,
+                    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+                }),
+                tableName: 'session',
+                createTableIfMissing: true
+            });
+            console.log('PostgreSQL session store configured for production');
+        } catch (error) {
+            console.error('Failed to configure PostgreSQL session store:', error);
+            console.log('Falling back to memory store');
+        }
+    } else {
+        console.log('Using memory session store for development');
+    }
+
     // Session middleware
     app.use(session({
+        store: sessionStore,
         secret: process.env.ADMIN_SESSION_SECRET || process.env.SESSION_SECRET || 'toolchest-secret',
         resave: false,
         saveUninitialized: false,
         cookie: {
-            secure: process.env.NODE_ENV === 'production',
+            secure: false, // Set to false for Railway - they handle HTTPS termination
             maxAge: parseInt(process.env.ADMIN_SESSION_TIMEOUT || '3600000', 10), // 1 hour default
-            httpOnly: true
+            httpOnly: true,
+            sameSite: 'lax' // Better compatibility with proxies
         },
         name: 'toolchest.sid'
     }));
