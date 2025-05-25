@@ -22,11 +22,30 @@ const cacheControlMiddleware = (req: Request, res: Response, next: NextFunction)
             }
         }
     } else {
-        // In development, prevent caching to see changes immediately
-        res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+        // Aggressive cache busting in development mode
+        res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0, s-maxage=0');
         res.setHeader('Pragma', 'no-cache');
         res.setHeader('Expires', '0');
         res.setHeader('Surrogate-Control', 'no-store');
+
+        // Additional headers for aggressive cache busting
+        res.setHeader('Last-Modified', new Date().toUTCString());
+        res.setHeader('ETag', `"${Date.now()}-${Math.random()}"`);
+
+        // Prevent conditional requests
+        res.removeHeader('If-Modified-Since');
+        res.removeHeader('If-None-Match');
+
+        // Force revalidation with upstream
+        res.setHeader('Vary', '*');
+
+        // Additional aggressive headers for browsers
+        res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0, s-maxage=0, private');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '-1');
+
+        // Prevent browser back/forward cache
+        res.setHeader('Clear-Site-Data', '"cache"');
     }
     next();
 };

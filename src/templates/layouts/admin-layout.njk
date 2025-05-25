@@ -18,9 +18,9 @@
 <body class="min-h-screen" style="background: var(--spacey-bg); background-attachment: fixed;">
     <div class="flex h-screen">
         <!-- Sidebar -->
-        <div class="w-64 backdrop-blur-md border-r border-sand-300/10 flex flex-col" style="background-color: rgba(42, 34, 27, 0.8);">
+        <div class="w-64 admin-sidebar-modern flex flex-col">
             <!-- Logo -->
-            <div class="p-4 border-b border-sand-300/10">
+            <div class="p-4">
                 <h1 class="text-xl font-bold">
                     <a href="/admin/dashboard" class="logo text-white hover:opacity-80 transition-opacity">
                         &lt;TC&gt; Admin
@@ -32,33 +32,33 @@
             <nav class="flex-1 p-4">
                 <ul class="space-y-2">
                     <li>
-                        <a href="/admin/dashboard" class="flex items-center p-3 rounded-lg transition-all duration-200 text-white hover:bg-sand-400/20 {% if currentPath == '/admin/dashboard' %}bg-sand-500/30 border border-sand-300/20{% endif %}">
+                        <a href="/admin/dashboard" class="admin-nav-item-modern flex items-center text-white {% if currentPath == '/admin/dashboard' %}active{% endif %}">
                             <i class="fas fa-tachometer-alt mr-3 text-sand-300"></i>Dashboard
                         </a>
                     </li>
                     <li>
-                        <a href="/admin/tools" class="flex items-center p-3 rounded-lg transition-all duration-200 text-white hover:bg-sand-400/20 {% if currentPath.startsWith('/admin/tools') %}bg-sand-500/30 border border-sand-300/20{% endif %}">
+                        <a href="/admin/tools" class="admin-nav-item-modern flex items-center text-white {% if currentPath.startsWith('/admin/tools') %}active{% endif %}">
                             <i class="fas fa-wrench mr-3 text-sand-300"></i>Tools
                         </a>
                     </li>
                     <li>
-                        <a href="/admin/tags" class="flex items-center p-3 rounded-lg transition-all duration-200 text-white hover:bg-sand-400/20 {% if currentPath.startsWith('/admin/tags') %}bg-sand-500/30 border border-sand-300/20{% endif %}">
+                        <a href="/admin/tags" class="admin-nav-item-modern flex items-center text-white {% if currentPath.startsWith('/admin/tags') %}active{% endif %}">
                             <i class="fas fa-tags mr-3 text-sand-300"></i>Tags
                         </a>
                     </li>
                     <li>
-                        <a href="/admin/relationships" class="flex items-center p-3 rounded-lg transition-all duration-200 text-white hover:bg-sand-400/20 {% if currentPath.startsWith('/admin/relationships') %}bg-sand-500/30 border border-sand-300/20{% endif %}">
+                        <a href="/admin/relationships" class="admin-nav-item-modern flex items-center text-white {% if currentPath.startsWith('/admin/relationships') %}active{% endif %}">
                             <i class="fas fa-link mr-3 text-sand-300"></i>Relationships
                         </a>
                     </li>
                     <li>
-                        <a href="/admin/analytics" class="flex items-center p-3 rounded-lg transition-all duration-200 text-white hover:bg-sand-400/20 {% if currentPath.startsWith('/admin/analytics') %}bg-sand-500/30 border border-sand-300/20{% endif %}">
+                        <a href="/admin/analytics" class="admin-nav-item-modern flex items-center text-white {% if currentPath.startsWith('/admin/analytics') %}active{% endif %}">
                             <i class="fas fa-chart-bar mr-3 text-sand-300"></i>Analytics
                         </a>
                     </li>
                     {% if adminUser and adminUser.role == 'SUPER_ADMIN' %}
                     <li>
-                        <a href="/admin/users" class="flex items-center p-3 rounded-lg transition-all duration-200 text-white hover:bg-sand-400/20 {% if currentPath.startsWith('/admin/users') %}bg-sand-500/30 border border-sand-300/20{% endif %}">
+                        <a href="/admin/users" class="admin-nav-item-modern flex items-center text-white {% if currentPath.startsWith('/admin/users') %}active{% endif %}">
                             <i class="fas fa-users mr-3 text-sand-300"></i>Users
                         </a>
                     </li>
@@ -67,7 +67,7 @@
             </nav>
 
             <!-- User info and logout -->
-            <div class="p-4 border-t border-sand-300/10">
+            <div class="p-4">
                 <div class="flex items-center justify-between">
                     <div class="text-sm">
                         <div class="font-medium text-white">{{ adminUser.username }}</div>
@@ -85,7 +85,7 @@
         <!-- Main content -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <!-- Top bar -->
-            <header class="backdrop-blur-md border-b border-sand-300/10 p-4" style="background-color: rgba(42, 34, 27, 0.6);">
+            <header class="navbar-modern p-4">
                 <div class="flex items-center justify-between">
                     <h2 class="text-xl font-semibold text-white">
                         {% block pageTitle %}Dashboard{% endblock %}

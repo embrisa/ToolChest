@@ -33,7 +33,14 @@ export class AdminAuthController {
     // POST /admin/auth/login - Process login
     processLogin = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const { username, password } = req.body as AdminLoginDTO;
+            const { username, password, rememberMe: rememberMeRaw } = req.body as {
+                username: string;
+                password: string;
+                rememberMe?: string | boolean;
+            };
+
+            // Convert checkbox value to boolean (HTML forms send "true" string or undefined)
+            const rememberMe = rememberMeRaw === true || rememberMeRaw === 'true';
 
             if (!username || !password) {
                 if (req.headers['hx-request']) {
@@ -72,6 +79,17 @@ export class AdminAuthController {
 
             // Store admin user in session
             req.session.adminUser = adminUser;
+
+            // Configure session timeout based on remember me option
+            if (rememberMe) {
+                // Extend session for 30 days if remember me is checked (configurable via env)
+                const rememberMeTimeout = parseInt(process.env.ADMIN_REMEMBER_ME_TIMEOUT || '2592000000', 10); // 30 days default
+                req.session.cookie.maxAge = rememberMeTimeout;
+            } else {
+                // Use default session timeout (1 hour)
+                const defaultTimeout = parseInt(process.env.ADMIN_SESSION_TIMEOUT || '3600000', 10); // 1 hour default
+                req.session.cookie.maxAge = defaultTimeout;
+            }
 
             // Ensure session is saved before redirecting
             req.session.save((err) => {

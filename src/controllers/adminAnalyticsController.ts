@@ -29,6 +29,8 @@ export class AdminAnalyticsControllerImpl implements IAdminAnalyticsController {
 
             res.render('admin/pages/analytics/dashboard', {
                 title: 'Analytics Dashboard',
+                layout: 'layouts/admin-layout',
+                adminUser: req.adminUser,
                 currentPath: req.path,
                 breadcrumbs: [
                     { label: 'Dashboard', url: '/admin/dashboard' },
@@ -180,6 +182,8 @@ export class AdminAnalyticsControllerImpl implements IAdminAnalyticsController {
 
             res.render('admin/pages/analytics/tools', {
                 title: 'Tool Analytics',
+                layout: 'layouts/admin-layout',
+                adminUser: req.adminUser,
                 currentPath: req.path,
                 breadcrumbs: [
                     { label: 'Dashboard', url: '/admin/dashboard' },
@@ -204,6 +208,8 @@ export class AdminAnalyticsControllerImpl implements IAdminAnalyticsController {
 
             res.render('admin/pages/analytics/tags', {
                 title: 'Tag Analytics',
+                layout: 'layouts/admin-layout',
+                adminUser: req.adminUser,
                 currentPath: req.path,
                 breadcrumbs: [
                     { label: 'Dashboard', url: '/admin/dashboard' },

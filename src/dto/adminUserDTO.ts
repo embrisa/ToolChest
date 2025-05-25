@@ -28,6 +28,7 @@ export interface UpdateAdminUserDTO {
 export interface AdminLoginDTO {
     username: string;
     password: string;
+    rememberMe?: boolean;
 }
 
 export enum AdminRole {

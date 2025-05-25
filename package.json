@@ -15,6 +15,7 @@
     "db:seed": "ts-node src/database/seeds/seed.ts",
     "db:seed:prod": "node dist/database/seeds/seed.js",
     "db:seed:admin": "ts-node src/database/seeds/adminSeed.ts",
+    "db:seed:usage": "ts-node src/database/seeds/usageStatsSeed.ts",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",

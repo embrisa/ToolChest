@@ -144,6 +144,35 @@ All components use sophisticated glass effects with:
 - Warm glass backgrounds
 - Apple-style focus and hover states
 
+#### Consistent Background System
+All pages should follow the two-tier background pattern established in the analytics dashboard:
+
+**Main Section Containers:**
+```css
+background: rgba(254, 247, 237, 0.08);
+border-color: rgba(254, 247, 237, 0.08);
+box-shadow: inset 0 1px 0 rgba(254, 247, 237, 0.05), 
+            0 12px 48px rgba(0, 0, 0, 0.12);
+```
+
+**Individual Cards/Items:**
+```css
+background: rgba(254, 247, 237, 0.1);
+border-color: rgba(254, 247, 237, 0.15);
+```
+
+This creates a subtle hierarchy where:
+- Main containers (charts, sections) have slightly darker backgrounds (0.08 opacity)
+- Individual cards/buttons have slightly lighter backgrounds (0.1 opacity)  
+- Borders are consistently subtle but provide structure
+- No conflicting glass morphism effects
+
+**Implementation Notes:**
+- Avoid using `.content-container` class for individual cards/buttons - it creates double glass effects
+- Use CSS classes instead of inline styles for glass morphism effects to ensure Safari compatibility
+- Maintain the same shadow and border radius patterns for consistency
+- All glass morphism effects include Safari-specific overrides using `@supports` queries
+
 #### Form Elements
 - **Refined Glass Inputs:** Inset shadows with sophisticated focus rings
 - **Apple-Style Focus:** Soft blue glow instead of harsh outlines
@@ -236,6 +265,91 @@ All components use sophisticated glass effects with:
 - **Mobile-First:** Base styles optimized for small screens
 - **Touch-Friendly:** Adequate spacing for touch interactions
 - **Progressive Enhancement:** Advanced effects degrade gracefully
+
+#### Safari Compatibility
+**Status:** ✅ **SOLVED** - Comprehensive automated system implemented.
+
+**Solution Overview:**
+The project now includes a comprehensive Safari compatibility system that automatically provides fallbacks for all glass morphism components. The system uses CSS custom properties and utility classes to ensure consistent behavior across all browsers.
+
+**Key Features:**
+- **Automated Glass Classes:** `.glass-light`, `.glass-medium`, `.glass-dark` with built-in Safari fallbacks
+- **CSS Variable System:** Existing components can add `--glass-bg` and `--glass-border` variables for automatic fallbacks
+- **Four-Layer Detection:** Multiple Safari detection methods ensure maximum compatibility
+- **Graceful Degradation:** Components look professional in both glass and non-glass modes
+
+**Multi-Layered Safari Detection Strategy:**
+The automated system uses four different Safari detection methods to ensure maximum compatibility:
+
+1. **Primary Detection:**
+   ```css
+   @supports (-webkit-backdrop-filter: blur(1px)) and (not (backdrop-filter: blur(1px))) {
+       /* Safari-specific overrides */
+   }
+   ```
+
+2. **WebKit Media Query Detection:**
+   ```css
+   @media screen and (-webkit-min-device-pixel-ratio: 0) {
+       _::-webkit-full-page-media,
+       _:future,
+       :root .component-class {
+           /* Highly specific Safari targeting */
+       }
+   }
+   ```
+
+3. **Appearance Detection:**
+   ```css
+   @supports (-webkit-appearance: none) and (not (appearance: none)) {
+       /* Alternative Safari detection */
+   }
+   ```
+
+4. **Universal Backdrop-Filter Fallback:**
+   ```css
+   @supports not (backdrop-filter: blur(1px)) {
+       /* Catches any browser without backdrop-filter support */
+   }
+   ```
+
+**Implementation Guide:**
+
+**For New Components (Recommended):**
+```html
+<!-- Use automated glass utility classes -->
+<div class="glass-light p-6 rounded-xl">
+    <!-- Content here - Safari fallbacks are automatic -->
+</div>
+```
+
+**For Existing Components:**
+```css
+.existing-component {
+    /* Add these variables for automatic Safari fallbacks */
+    --glass-bg: rgba(254, 247, 237, 0.1);
+    --glass-border: rgba(254, 247, 237, 0.15);
+    /* Component now gets automatic Safari compatibility */
+}
+```
+
+**Automated System Benefits:**
+- **Zero Manual Work:** New components automatically get Safari fallbacks
+- **Consistent Application:** All components use the same fallback strategy  
+- **Easy Maintenance:** Single source of truth for glass morphism styles
+- **Future-Proof:** New glass components automatically work in Safari
+
+**Testing Protocol:**
+- ✅ **Automated Coverage:** All glass components automatically included
+- ✅ **Consistent Patterns:** Unified fallback implementation
+- ✅ **Professional Appearance:** Both glass and non-glass modes look intentional
+- ✅ **No Manual Tracking:** System automatically handles all components
+
+**Graceful Degradation Strategy:**
+- **Chrome/Firefox:** Beautiful glass morphism with backdrop blur effects
+- **Safari:** Solid, consistent backgrounds with proper contrast
+- **Cross-Browser:** Professional appearance maintained everywhere
+- **Developer Experience:** No additional work required for Safari compatibility
 
 -----
 

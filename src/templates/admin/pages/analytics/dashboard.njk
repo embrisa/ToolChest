@@ -359,34 +359,19 @@
                             0 12px 48px rgba(0, 0, 0, 0.12);">
         <h3 class="text-xl font-semibold mb-6" style="color: var(--sand-100);">Quick Actions</h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <a href="/admin/tools" 
-               class="content-container p-6 rounded-xl transition-all duration-200 hover:scale-105 border text-center"
-               style="background: rgba(51, 141, 255, 0.1); 
-                      border-color: rgba(51, 141, 255, 0.2);
-                      box-shadow: inset 0 1px 0 rgba(51, 141, 255, 0.05), 
-                                  0 4px 12px rgba(0, 0, 0, 0.1);">
+            <a href="/admin/tools" class="analytics-quick-action">
                 <i class="fas fa-tools text-2xl mb-3" style="color: var(--blue-400);"></i>
                 <h4 class="font-medium mb-2" style="color: var(--sand-100);">Manage Tools</h4>
                 <p class="text-sm" style="color: var(--neutral-400);">Create, edit, and organize your tools</p>
             </a>
             
-            <a href="/admin/tags" 
-               class="content-container p-6 rounded-xl transition-all duration-200 hover:scale-105 border text-center"
-               style="background: rgba(245, 168, 103, 0.1); 
-                      border-color: rgba(245, 168, 103, 0.2);
-                      box-shadow: inset 0 1px 0 rgba(245, 168, 103, 0.05), 
-                                  0 4px 12px rgba(0, 0, 0, 0.1);">
+            <a href="/admin/tags" class="analytics-quick-action">
                 <i class="fas fa-tags text-2xl mb-3" style="color: var(--sand-400);"></i>
                 <h4 class="font-medium mb-2" style="color: var(--sand-100);">Manage Tags</h4>
                 <p class="text-sm" style="color: var(--neutral-400);">Create and organize tag categories</p>
             </a>
             
-            <a href="/admin/relationships" 
-               class="content-container p-6 rounded-xl transition-all duration-200 hover:scale-105 border text-center"
-               style="background: rgba(255, 140, 66, 0.1); 
-                      border-color: rgba(255, 140, 66, 0.2);
-                      box-shadow: inset 0 1px 0 rgba(255, 140, 66, 0.05), 
-                                  0 4px 12px rgba(0, 0, 0, 0.1);">
+            <a href="/admin/relationships" class="analytics-quick-action">
                 <i class="fas fa-link text-2xl mb-3" style="color: var(--sunset-400);"></i>
                 <h4 class="font-medium mb-2" style="color: var(--sand-100);">Manage Relationships</h4>
                 <p class="text-sm" style="color: var(--neutral-400);">Assign tags to tools and manage connections</p>
@@ -419,7 +404,7 @@ document.addEventListener('DOMContentLoaded', function() {
         new Chart(ctx, {
             type: 'line',
             data: {
-                labels: {{ metrics.usageTrends | map('date') | map('date', 'MMM DD') | dump | safe }},
+                labels: [{% for trend in metrics.usageTrends %}"{{ trend.date | date('MMM DD') }}"{% if not loop.last %},{% endif %}{% endfor %}],
                 datasets: [{
                     label: 'Daily Usage',
                     data: {{ metrics.usageTrends | map('usage') | dump | safe }},

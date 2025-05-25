@@ -20,7 +20,7 @@
         {% if popularTools and popularTools.length > 0 %}
             {% for tool in popularTools %}
                 <a href="/{{ tool.slug }}" class="block group cursor-pointer" aria-label="Open {{ tool.name }}">
-                    <article class="tool-card group relative rounded-2xl p-8 flex flex-col gap-6 hover:shadow-xl transition-all duration-400">
+                    <article class="tool-card-modern group relative flex flex-col gap-6">
                         {# Icon with enhanced styling #}
                         <div class="flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-sand-400/20 to-sand-300/10 mb-2">
                             <i class="fa {{ tool.iconClass | default('fas fa-toolbox') }} text-3xl icon transition-all duration-300"></i>
@@ -40,7 +40,13 @@
                         {% if tool.tags and tool.tags.length > 0 %}
                             <div class="flex flex-wrap gap-2 mt-auto">
                                 {% for tag in tool.tags %}
-                                    <span class="tag-badge text-xs px-3 py-1.5">{{ tag.name }}</span>
+                                    <span class="tag-badge-colored" 
+                                          style="--tag-color: {{ tag.color or '#6B7280' }}; 
+                                                 background-color: {{ tag.color or '#6B7280' }}20; 
+                                                 color: {{ tag.color or '#6B7280' }}; 
+                                                 border-color: {{ tag.color or '#6B7280' }}30;">
+                                        {{ tag.name }}
+                                    </span>
                                 {% endfor %}
                             </div>
                         {% endif %}

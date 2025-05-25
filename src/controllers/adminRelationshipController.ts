@@ -3,15 +3,16 @@ import { injectable, inject } from 'inversify';
 import { TYPES } from '../config/types';
 import { IAdminRelationshipService, BulkRelationshipRequest } from '../services/adminRelationshipService';
 import { AdminAuditService } from '../services/adminAuditService';
+import { AdminAuthRequest } from '../middleware/adminAuthMiddleware';
 
 export interface IAdminRelationshipController {
-    getRelationshipMatrix(req: Request, res: Response, next: NextFunction): Promise<void>;
-    getToolRelationships(req: Request, res: Response, next: NextFunction): Promise<void>;
-    getTagRelationships(req: Request, res: Response, next: NextFunction): Promise<void>;
-    assignTag(req: Request, res: Response, next: NextFunction): Promise<void>;
-    unassignTag(req: Request, res: Response, next: NextFunction): Promise<void>;
-    bulkManageRelationships(req: Request, res: Response, next: NextFunction): Promise<void>;
-    getRelationshipStats(req: Request, res: Response, next: NextFunction): Promise<void>;
+    getRelationshipMatrix(req: AdminAuthRequest, res: Response, next: NextFunction): Promise<void>;
+    getToolRelationships(req: AdminAuthRequest, res: Response, next: NextFunction): Promise<void>;
+    getTagRelationships(req: AdminAuthRequest, res: Response, next: NextFunction): Promise<void>;
+    assignTag(req: AdminAuthRequest, res: Response, next: NextFunction): Promise<void>;
+    unassignTag(req: AdminAuthRequest, res: Response, next: NextFunction): Promise<void>;
+    bulkManageRelationships(req: AdminAuthRequest, res: Response, next: NextFunction): Promise<void>;
+    getRelationshipStats(req: AdminAuthRequest, res: Response, next: NextFunction): Promise<void>;
 }
 
 @injectable()
@@ -21,13 +22,15 @@ export class AdminRelationshipControllerImpl implements IAdminRelationshipContro
         @inject(TYPES.AdminAuditService) private auditService: AdminAuditService
     ) { }
 
-    async getRelationshipMatrix(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async getRelationshipMatrix(req: AdminAuthRequest, res: Response, next: NextFunction): Promise<void> {
         try {
             const matrix = await this.relationshipService.getRelationshipMatrix();
             const stats = await this.relationshipService.getRelationshipStats();
 
             res.render('admin/pages/relationships/matrix', {
                 title: 'Tool-Tag Relationships',
+                layout: 'layouts/admin-layout',
+                adminUser: req.adminUser,
                 currentPath: req.path,
                 breadcrumbs: [
                     { label: 'Dashboard', url: '/admin/dashboard' },
@@ -41,13 +44,15 @@ export class AdminRelationshipControllerImpl implements IAdminRelationshipContro
         }
     }
 
-    async getToolRelationships(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async getToolRelationships(req: AdminAuthRequest, res: Response, next: NextFunction): Promise<void> {
         try {
             const { toolId } = req.params;
             const toolRelationships = await this.relationshipService.getToolRelationships(toolId);
 
             res.render('admin/pages/relationships/tool-centric', {
                 title: `Tags for ${toolRelationships.toolName}`,
+                layout: 'layouts/admin-layout',
+                adminUser: req.adminUser,
                 currentPath: req.path,
                 breadcrumbs: [
                     { label: 'Dashboard', url: '/admin/dashboard' },
@@ -61,13 +66,15 @@ export class AdminRelationshipControllerImpl implements IAdminRelationshipContro
         }
     }
 
-    async getTagRelationships(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async getTagRelationships(req: AdminAuthRequest, res: Response, next: NextFunction): Promise<void> {
         try {
             const { tagId } = req.params;
             const tagRelationships = await this.relationshipService.getTagRelationships(tagId);
 
             res.render('admin/pages/relationships/tag-centric', {
                 title: `Tools for ${tagRelationships.tagName}`,
+                layout: 'layouts/admin-layout',
+                adminUser: req.adminUser,
                 currentPath: req.path,
                 breadcrumbs: [
                     { label: 'Dashboard', url: '/admin/dashboard' },
@@ -81,16 +88,15 @@ export class AdminRelationshipControllerImpl implements IAdminRelationshipContro
         }
     }
 
-    async assignTag(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async assignTag(req: AdminAuthRequest, res: Response, next: NextFunction): Promise<void> {
         try {
             const { toolId, tagId } = req.body;
-            const adminUser = req.session.adminUser;
 
             await this.relationshipService.assignTag(toolId, tagId);
 
             // Log the action
             await this.auditService.logAction({
-                adminUserId: adminUser!.id,
+                adminUserId: req.adminUser!.id,
                 action: 'ASSIGN_TAG',
                 tableName: 'ToolTag',
                 recordId: `${toolId}-${tagId}`,
@@ -118,16 +124,15 @@ export class AdminRelationshipControllerImpl implements IAdminRelationshipContro
         }
     }
 
-    async unassignTag(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async unassignTag(req: AdminAuthRequest, res: Response, next: NextFunction): Promise<void> {
         try {
             const { toolId, tagId } = req.body;
-            const adminUser = req.session.adminUser;
 
             await this.relationshipService.unassignTag(toolId, tagId);
 
             // Log the action
             await this.auditService.logAction({
-                adminUserId: adminUser!.id,
+                adminUserId: req.adminUser!.id,
                 action: 'UNASSIGN_TAG',
                 tableName: 'ToolTag',
                 recordId: `${toolId}-${tagId}`,
@@ -154,10 +159,9 @@ export class AdminRelationshipControllerImpl implements IAdminRelationshipContro
         }
     }
 
-    async bulkManageRelationships(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async bulkManageRelationships(req: AdminAuthRequest, res: Response, next: NextFunction): Promise<void> {
         try {
             const { toolIds, tagIds, action } = req.body as BulkRelationshipRequest;
-            const adminUser = req.session.adminUser;
 
             const result = await this.relationshipService.bulkManageRelationships({
                 toolIds: Array.isArray(toolIds) ? toolIds : [toolIds],
@@ -167,7 +171,7 @@ export class AdminRelationshipControllerImpl implements IAdminRelationshipContro
 
             // Log the bulk action
             await this.auditService.logAction({
-                adminUserId: adminUser!.id,
+                adminUserId: req.adminUser!.id,
                 action: `BULK_${action.toUpperCase()}_TAGS`,
                 tableName: 'ToolTag',
                 recordId: 'bulk-operation',
@@ -203,7 +207,7 @@ export class AdminRelationshipControllerImpl implements IAdminRelationshipContro
         }
     }
 
-    async getRelationshipStats(req: Request, res: Response, next: NextFunction): Promise<void> {
+    async getRelationshipStats(req: AdminAuthRequest, res: Response, next: NextFunction): Promise<void> {
         try {
             const stats = await this.relationshipService.getRelationshipStats();
 

@@ -2,11 +2,11 @@
 {# This template is used for HTMX responses from Base64 operations #}
 
 {% if error %}
-    <div class="p-4 mb-4 text-sm text-error border border-error/10 bg-error/5 backdrop-blur-md rounded-lg shadow-md" role="alert">
+    <div class="content-container-light p-4 mb-4 text-sm text-error border-error" role="alert">
         <span class="font-medium">Error:</span> {{ error }}
     </div>
 {% elif result %}
-    <div class="p-4 mb-4 text-sm text-sand-100 border border-sand-300/10 bg-sand-300/5 backdrop-blur-md rounded-lg shadow-md">
+    <div class="content-container-light p-4 mb-4 text-sm text-sand-100">
         <h3 class="text-lg font-semibold mb-2 text-sand-100">{{ title | default('Result') }}:</h3>
         <textarea class="form-textarea" rows="5" readonly onclick="this.select();">{{ result }}</textarea>
         {% if originalFileName %}
@@ -17,7 +17,7 @@
         {% endif %}
     </div>
 {% else %}
-    <div class="p-4 mb-4 text-sm text-sand-300 border border-sand-300/10 bg-sand-300/5 backdrop-blur-md rounded-lg shadow-md" role="alert">
+    <div class="content-container-light p-4 mb-4 text-sm text-sand-300" role="alert">
         <span class="font-medium">Info:</span> No result to display.
     </div>
 {% endif %} 

@@ -2,7 +2,7 @@
 {% extends "layouts/admin-auth-layout.njk" %}
 
 {% block content %}
-<div class="content-container">
+<div class="content-container-main">
     <h2 class="text-2xl font-bold text-center text-sand-100 mb-6">Sign in to Admin</h2>
     
     {% if error %}
@@ -38,6 +38,19 @@
                 placeholder="Enter your password"
                 oninput="clearLoginError()"
             >
+        </div>
+
+        <div class="flex items-center">
+            <input 
+                type="checkbox" 
+                id="rememberMe" 
+                name="rememberMe" 
+                value="true"
+                class="h-4 w-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2"
+            >
+            <label for="rememberMe" class="ml-2 block text-sm text-sand-200">
+                Remember me for 30 days
+            </label>
         </div>
 
         <div>

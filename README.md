@@ -207,8 +207,24 @@ The database schema is managed by Prisma. The PostgreSQL schema includes the fol
   * `PORT`: The port the server will listen on (default: 8080).
   * `DATABASE_URL`: The connection string for the database (e.g., `postgresql://user:password@localhost:5432/toolchest_dev` for local development, or Railway's PostgreSQL connection string for production).
   * `NODE_ENV`: Set to `production` for production builds/deployments, `development` otherwise. Influences logging, caching, and error detail visibility.
+  * `ADMIN_SESSION_SECRET`: A secure random string used to sign session cookies. Generate with `node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"`.
+  * `ADMIN_SESSION_TIMEOUT`: Default session timeout in milliseconds (default: 3600000 = 1 hour).
+  * `ADMIN_REMEMBER_ME_TIMEOUT`: Session timeout when "Remember Me" is checked in milliseconds (default: 2592000000 = 30 days).
+  * `ADMIN_BCRYPT_ROUNDS`: Number of bcrypt salt rounds for password hashing (default: 12).
 
-### 12. Error Handling Approach
+### 12. Admin Authentication & Remember Me
+
+  * **Session-Based Authentication:** Admin users authenticate using PostgreSQL-backed sessions via `express-session` and `connect-pg-simple`.
+  * **Remember Me Functionality:** 
+      * When the "Remember Me" checkbox is checked during login, the session duration is extended from 1 hour to 30 days.
+      * Session timeout is configurable via environment variables (`ADMIN_SESSION_TIMEOUT` and `ADMIN_REMEMBER_ME_TIMEOUT`).
+      * Sessions are stored in the PostgreSQL database and persist across application restarts.
+  * **Password Security:** Passwords are hashed using bcrypt with configurable salt rounds (`ADMIN_BCRYPT_ROUNDS`).
+  * **Rate Limiting:** Login attempts are rate-limited to prevent brute force attacks (5 attempts per 15 minutes per IP).
+  * **Audit Logging:** All admin actions are logged to the `AdminAuditLog` table for security and compliance.
+  * **Role-Based Access:** Three admin roles supported: `SUPER_ADMIN`, `ADMIN`, and `READ_ONLY`.
+
+### 13. Error Handling Approach
 
   * **Centralized Middleware:** `src/middleware/errorHandlerMiddleware.ts` defines `notFoundHandler` and `mainErrorHandler`.
   * **404 Not Found:** Handled by `notFoundHandler` after all other routes.
@@ -218,7 +234,7 @@ The database schema is managed by Prisma. The PostgreSQL schema includes the fol
   * **HTMX Awareness:** The `mainErrorHandler` checks for the `HX-Request` header to return either a full error page (`pages/error`) or an error message component (`components/error-message`) suitable for HTMX partial updates.
   * **Logging:** Errors are logged using the custom logger (`src/utils/logger.ts`). Stack traces are logged in non-production environments.
 
-### 13. API Style (Internal)
+### 14. API Style (Internal)
 
 While primarily an SSR application, the use of HTMX implies internal "API-like" interactions where controllers handle POST requests (e.g., for Base64 encoding/decoding) and return HTML fragments.
 
@@ -226,7 +242,7 @@ While primarily an SSR application, the use of HTMX implies internal "API-like" 
   * **Output:** HTML fragments, with HTMX-specific headers (`HX-Retarget`, `HX-Reswap`).
   * **Error Responses (HTMX):** HTML fragments rendered from `components/error-message`.
 
-### 14. Development Workflow
+### 15. Development Workflow
 
 1.  **Prerequisites:** Node.js (v18, v20+), npm, PostgreSQL.
 2.  **Installation:**
@@ -260,7 +276,7 @@ While primarily an SSR application, the use of HTMX implies internal "API-like" 
       * `npm run lint`
       * `npm run format`
 
-### 15. Guidance for the LLM Coding Agent (Rules, Warnings, etc.)
+### 16. Guidance for the LLM Coding Agent (Rules, Warnings, etc.)
 
   * **Understand the Core Stack:** Familiarize yourself deeply with Node.js, TypeScript, Express.js, Prisma, Nunjucks, and HTMX, as these are central to the project.
   * **Follow Existing Patterns:** When adding new features or modifying existing ones, observe and replicate the patterns used in controllers, services, DTOs, routes, and templates.

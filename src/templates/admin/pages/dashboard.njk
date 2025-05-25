@@ -6,7 +6,7 @@
 {% block content %}
 <div class="space-y-6">
     <!-- Welcome message -->
-    <div class="content-container">
+    <div class="content-container-main">
         <h3 class="text-lg font-medium text-white mb-2">
             Welcome back, {{ adminUser.username }}!
         </h3>
@@ -18,7 +18,7 @@
 
     <!-- Quick stats -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="content-container">
+        <div class="content-container-light">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
                     <i class="fas fa-wrench text-2xl text-ocean-400"></i>
@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="content-container">
+        <div class="content-container-light">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
                     <i class="fas fa-tags text-2xl text-sand-300"></i>
@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <div class="content-container">
+        <div class="content-container-light">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
                     <i class="fas fa-chart-line text-2xl text-ocean-700"></i>
@@ -54,7 +54,7 @@
             </div>
         </div>
 
-        <div class="content-container">
+        <div class="content-container-light">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
                     <i class="fas fa-heartbeat text-2xl {% if metrics.systemHealth == 'healthy' %}text-success{% elif metrics.systemHealth == 'warning' %}text-sand-300{% else %}text-danger{% endif %}"></i>
@@ -70,18 +70,18 @@
     </div>
 
     <!-- Quick actions -->
-    <div class="content-container">
+    <div class="content-container-main">
         <h3 class="text-lg font-medium text-white mb-4">Quick Actions</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <a href="/admin/tools/new" class="tool-card p-4 flex items-center hover:scale-105 transition-transform">
+            <a href="/admin/tools/new" class="content-container-button p-4 flex items-center">
                 <i class="fas fa-plus-circle text-ocean-400 mr-3 text-xl"></i>
                 <span class="font-medium text-white">Add New Tool</span>
             </a>
-            <a href="/admin/tags/new" class="tool-card p-4 flex items-center hover:scale-105 transition-transform">
+            <a href="/admin/tags/new" class="content-container-button p-4 flex items-center">
                 <i class="fas fa-tag text-sand-300 mr-3 text-xl"></i>
                 <span class="font-medium text-white">Create New Tag</span>
             </a>
-            <a href="/admin/analytics" class="tool-card p-4 flex items-center hover:scale-105 transition-transform">
+            <a href="/admin/analytics" class="content-container-button p-4 flex items-center">
                 <i class="fas fa-chart-bar text-ocean-700 mr-3 text-xl"></i>
                 <span class="font-medium text-white">View Analytics</span>
             </a>

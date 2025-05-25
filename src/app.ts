@@ -83,11 +83,27 @@ export function createApp(): Application {
         });
     });
 
+    // Add map filter (similar to JavaScript Array.map)
+    nunjucksEnv.addFilter('map', (array: any[], attr: string) => {
+        if (!Array.isArray(array)) return [];
+        return array.map(item => {
+            if (typeof item === 'object' && item !== null && attr in item) {
+                return item[attr];
+            }
+            return item;
+        });
+    });
+
     app.set('view engine', 'njk');
 
     // Static Assets
     const publicPath = path.join(__dirname, '..', 'src', 'public');
-    app.use('/static', express.static(publicPath));
+    app.use('/static', express.static(publicPath, {
+        // Aggressive cache busting for development
+        etag: process.env.NODE_ENV !== 'development',
+        lastModified: false,
+        maxAge: process.env.NODE_ENV === 'development' ? 0 : '1d'
+    }));
 
     // Core Middleware
     app.use(helmet({

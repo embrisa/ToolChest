@@ -1438,7 +1438,7 @@ a.btn-secondary-modern:focus {
 /* Safari fixes for content-container-button */
 @supports (-webkit-backdrop-filter: blur(1px)) and (not (backdrop-filter: blur(1px))) {
     .content-container-button {
-        /* Removed Safari color override */
+        background: rgba(254, 247, 237, 0.1) !important;
         border: 1px solid rgba(254, 247, 237, 0.15) !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
@@ -1622,7 +1622,7 @@ a.btn-secondary-modern:focus {
 }
 
 .admin-nav-item-modern {
-    /* Removed Safari color override */
+    background: rgba(254, 247, 237, 0.1) !important;
     border: 1px solid rgba(254, 247, 237, 0.15) !important;
     border-radius: 0.75rem !important;
     padding: 0.75rem 1rem !important;
@@ -1672,7 +1672,7 @@ a.btn-secondary-modern:focus {
 /* Safari fixes for analytics quick action buttons */
 @supports (-webkit-backdrop-filter: blur(1px)) and (not (backdrop-filter: blur(1px))) {
     .analytics-quick-action {
-        /* Removed Safari color override */
+        background: rgba(254, 247, 237, 0.1) !important;
         border: 1px solid rgba(254, 247, 237, 0.15) !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
@@ -1698,7 +1698,7 @@ a.btn-secondary-modern:focus {
     }
 
     .tag-badge-colored {
-        /* Removed Safari color override */
+        background: rgba(254, 247, 237, 0.1) !important;
         color: var(--sand-200) !important;
         border: 0.5px solid rgba(254, 247, 237, 0.15) !important;
         backdrop-filter: none !important;
@@ -1712,7 +1712,7 @@ a.btn-secondary-modern:focus {
 
     /* Additional Safari fixes for favicon pages */
     .content-container-light {
-        /* Removed Safari color override */
+        background: rgba(254, 247, 237, 0.1) !important;
         border: 1px solid rgba(254, 247, 237, 0.15) !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
@@ -1740,7 +1740,7 @@ a.btn-secondary-modern:focus {
     }
 
     .form-input {
-        /* Removed Safari color override */
+        background: rgba(254, 247, 237, 0.1) !important;
         border: 1px solid rgba(254, 247, 237, 0.15) !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
@@ -1754,7 +1754,7 @@ a.btn-secondary-modern:focus {
     }
 
     .btn {
-        /* Removed Safari color override */
+        background: rgba(254, 247, 237, 0.1) !important;
         border: 1px solid rgba(254, 247, 237, 0.15) !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
@@ -1802,7 +1802,7 @@ a.btn-secondary-modern:focus {
     _::-webkit-full-page-media,
     _:future,
     :root .tool-card-modern {
-        /* Removed Safari color override */
+        background: rgba(254, 247, 237, 0.1) !important;
         border: 1px solid rgba(254, 247, 237, 0.15) !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
@@ -1842,7 +1842,7 @@ a.btn-secondary-modern:focus {
     _::-webkit-full-page-media,
     _:future,
     :root .tag-badge-colored {
-        /* Removed Safari color override */
+        background: rgba(254, 247, 237, 0.1) !important;
         color: var(--sand-200) !important;
         border: 0.5px solid rgba(254, 247, 237, 0.15) !important;
         backdrop-filter: none !important;
@@ -1860,7 +1860,7 @@ a.btn-secondary-modern:focus {
     _::-webkit-full-page-media,
     _:future,
     :root .content-container-light {
-        /* Removed Safari color override */
+        background: rgba(254, 247, 237, 0.1) !important;
         border: 1px solid rgba(254, 247, 237, 0.15) !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
@@ -1896,7 +1896,7 @@ a.btn-secondary-modern:focus {
     _::-webkit-full-page-media,
     _:future,
     :root .form-input {
-        /* Removed Safari color override */
+        background: rgba(254, 247, 237, 0.1) !important;
         border: 1px solid rgba(254, 247, 237, 0.15) !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
@@ -1914,7 +1914,7 @@ a.btn-secondary-modern:focus {
     _::-webkit-full-page-media,
     _:future,
     :root .btn {
-        /* Removed Safari color override */
+        background: rgba(254, 247, 237, 0.1) !important;
         border: 1px solid rgba(254, 247, 237, 0.15) !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
@@ -1969,7 +1969,7 @@ a.btn-secondary-modern:focus {
 /* Alternative Safari detection method */
 @supports (-webkit-appearance: none) and (not (appearance: none)) {
     .tool-card-modern {
-        /* Removed Safari color override */
+        background: rgba(254, 247, 237, 0.1) !important;
         border: 1px solid rgba(254, 247, 237, 0.15) !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
@@ -1999,7 +1999,7 @@ a.btn-secondary-modern:focus {
     }
 
     .tag-badge-colored {
-        /* Removed Safari color override */
+        background: rgba(254, 247, 237, 0.1) !important;
         color: var(--sand-200) !important;
         border: 0.5px solid rgba(254, 247, 237, 0.15) !important;
         backdrop-filter: none !important;
@@ -2013,7 +2013,7 @@ a.btn-secondary-modern:focus {
 
     /* Additional Safari fixes for favicon pages */
     .content-container-light {
-        /* Removed Safari color override */
+        background: rgba(254, 247, 237, 0.1) !important;
         border: 1px solid rgba(254, 247, 237, 0.15) !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
@@ -2041,7 +2041,7 @@ a.btn-secondary-modern:focus {
     }
 
     .form-input {
-        /* Removed Safari color override */
+        background: rgba(254, 247, 237, 0.1) !important;
         border: 1px solid rgba(254, 247, 237, 0.15) !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
@@ -2055,7 +2055,7 @@ a.btn-secondary-modern:focus {
     }
 
     .btn {
-        /* Removed Safari color override */
+        background: rgba(254, 247, 237, 0.1) !important;
         border: 1px solid rgba(254, 247, 237, 0.15) !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
@@ -2100,7 +2100,7 @@ a.btn-secondary-modern:focus {
 /* Universal Safari fix using a simpler approach */
 @supports not (backdrop-filter: blur(1px)) {
     .tool-card-modern {
-        /* Removed Safari color override */
+        background: rgba(254, 247, 237, 0.1) !important;
         border: 1px solid rgba(254, 247, 237, 0.15) !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
@@ -2204,7 +2204,7 @@ a.btn-secondary-modern:focus {
     }
 
     .tag-badge-colored {
-        /* Removed Safari color override */
+        background: rgba(254, 247, 237, 0.1) !important;
         color: var(--sand-200) !important;
         border: 0.5px solid rgba(254, 247, 237, 0.15) !important;
         backdrop-filter: none !important;
@@ -2218,7 +2218,7 @@ a.btn-secondary-modern:focus {
 
     /* Additional Safari fixes for favicon pages */
     .content-container-light {
-        /* Removed Safari color override */
+        background: rgba(254, 247, 237, 0.1) !important;
         border: 1px solid rgba(254, 247, 237, 0.15) !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
@@ -2246,7 +2246,7 @@ a.btn-secondary-modern:focus {
     }
 
     .form-input {
-        /* Removed Safari color override */
+        background: rgba(254, 247, 237, 0.1) !important;
         border: 1px solid rgba(254, 247, 237, 0.15) !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
@@ -2260,7 +2260,7 @@ a.btn-secondary-modern:focus {
     }
 
     .btn {
-        /* Removed Safari color override */
+        background: rgba(254, 247, 237, 0.1) !important;
         border: 1px solid rgba(254, 247, 237, 0.15) !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
@@ -2303,291 +2303,3 @@ a.btn-secondary-modern:focus {
 }
 
 /* Emergency Safari fix with maximum specificity */
-
-/* ================================================================
-   SAFARI COMPATIBILITY SYSTEM
-   
-   This system provides automatic Safari fallbacks for all glass morphism
-   components using CSS custom properties and comprehensive detection.
-   ================================================================ */
-
-/* Safari Detection Variables - Set in detection blocks */
-:root {
-    --safari-detected: 0;
-    --safari-bg-light: rgba(254, 247, 237, 0.1);
-    --safari-bg-medium: rgba(254, 247, 237, 0.08);
-    --safari-bg-dark: rgba(26, 21, 16, 0.7);
-    --safari-border-light: rgba(254, 247, 237, 0.15);
-    --safari-border-medium: rgba(254, 247, 237, 0.12);
-    --safari-border-dark: rgba(180, 83, 9, 0.25);
-}
-
-/* Glass Morphism Utility Classes - Automatically Safari Compatible */
-.glass-light {
-    background: var(--safari-bg-light);
-    border: 1px solid var(--safari-border-light);
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    box-shadow: inset 0 1px 0 rgba(254, 247, 237, 0.05),
-        0 8px 32px rgba(0, 0, 0, 0.12);
-}
-
-.glass-medium {
-    background: var(--safari-bg-medium);
-    border: 1px solid var(--safari-border-medium);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    box-shadow: inset 0 1px 0 rgba(254, 247, 237, 0.05),
-        0 12px 48px rgba(0, 0, 0, 0.12);
-}
-
-.glass-dark {
-    background: var(--safari-bg-dark);
-    border: 1px solid var(--safari-border-dark);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-/* Primary Safari Detection - Backdrop Filter Support */
-@supports (-webkit-backdrop-filter: blur(1px)) and (not (backdrop-filter: blur(1px))) {
-    :root {
-        --safari-detected: 1;
-    }
-
-    .glass-light,
-    .glass-medium,
-    .glass-dark {
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        box-shadow: none !important;
-    }
-}
-
-/* Secondary Safari Detection - WebKit Media Query */
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-
-    _::-webkit-full-page-media,
-    _:future,
-    :root {
-        --safari-detected: 1;
-    }
-
-    _::-webkit-full-page-media,
-    _:future,
-    :root .glass-light,
-    _::-webkit-full-page-media,
-    _:future,
-    :root .glass-medium,
-    _::-webkit-full-page-media,
-    _:future,
-    :root .glass-dark {
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        box-shadow: none !important;
-    }
-}
-
-/* Tertiary Safari Detection - Appearance Property */
-@supports (-webkit-appearance: none) and (not (appearance: none)) {
-    :root {
-        --safari-detected: 1;
-    }
-
-    .glass-light,
-    .glass-medium,
-    .glass-dark {
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        box-shadow: none !important;
-    }
-}
-
-/* Universal Backdrop Filter Fallback */
-@supports not (backdrop-filter: blur(1px)) {
-    :root {
-        --safari-detected: 1;
-    }
-
-    .glass-light,
-    .glass-medium,
-    .glass-dark {
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        box-shadow: none !important;
-    }
-}
-
-/* ================================================================
-   MIGRATION HELPER - Apply new system to existing components
-   
-   To migrate existing components:
-   1. Replace custom glass styles with .glass-light, .glass-medium, or .glass-dark
-   2. Remove individual Safari fallback blocks
-   3. Test in Safari to ensure compatibility
-   ================================================================ */
-
-/* Example migration for .tool-card-modern:
-   Before: Complex glass morphism + Safari fallbacks
-   After: Add class="glass-light" and remove custom styles
-*/
-
-/* Auto-apply glass utilities to existing components during transition */
-.content-container-main {
-    /* Keep existing styles but add auto-Safari detection */
-    --glass-bg: rgba(254, 247, 237, 0.08);
-    --glass-border: rgba(254, 247, 237, 0.08);
-}
-
-.content-container-light {
-    --glass-bg: rgba(254, 247, 237, 0.1);
-    --glass-border: rgba(254, 247, 237, 0.15);
-}
-
-.content-container-button {
-    --glass-bg: rgba(254, 247, 237, 0.06);
-    --glass-border: rgba(254, 247, 237, 0.1);
-}
-
-/* Apply Safari overrides to components with custom glass variables */
-@supports (-webkit-backdrop-filter: blur(1px)) and (not (backdrop-filter: blur(1px))) {
-
-    .content-container-main,
-    .content-container-light,
-    .content-container-button,
-    .tool-card-modern,
-    .tag-badge,
-    .tag-badge-colored,
-    .form-input-modern,
-    .btn-primary-modern,
-    .btn-secondary-modern,
-    .navbar-modern,
-    .admin-sidebar-modern,
-    .analytics-quick-action,
-    .section-header,
-    .form-container {
-        background: var(--glass-bg, var(--safari-bg-light)) !important;
-        border-color: var(--glass-border, var(--safari-border-light)) !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        box-shadow: none !important;
-    }
-}
-
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-
-    _::-webkit-full-page-media,
-    _:future,
-    :root .content-container-main,
-    _::-webkit-full-page-media,
-    _:future,
-    :root .content-container-light,
-    _::-webkit-full-page-media,
-    _:future,
-    :root .content-container-button,
-    _::-webkit-full-page-media,
-    _:future,
-    :root .tool-card-modern,
-    _::-webkit-full-page-media,
-    _:future,
-    :root .tag-badge,
-    _::-webkit-full-page-media,
-    _:future,
-    :root .tag-badge-colored,
-    _::-webkit-full-page-media,
-    _:future,
-    :root .form-input-modern,
-    _::-webkit-full-page-media,
-    _:future,
-    :root .btn-primary-modern,
-    _::-webkit-full-page-media,
-    _:future,
-    :root .btn-secondary-modern,
-    _::-webkit-full-page-media,
-    _:future,
-    :root .navbar-modern,
-    _::-webkit-full-page-media,
-    _:future,
-    :root .admin-sidebar-modern,
-    _::-webkit-full-page-media,
-    _:future,
-    :root .analytics-quick-action,
-    _::-webkit-full-page-media,
-    _:future,
-    :root .section-header,
-    _::-webkit-full-page-media,
-    _:future,
-    :root .form-container {
-        background: var(--glass-bg, var(--safari-bg-light)) !important;
-        border-color: var(--glass-border, var(--safari-border-light)) !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        box-shadow: none !important;
-    }
-}
-
-@supports (-webkit-appearance: none) and (not (appearance: none)) {
-
-    .content-container-main,
-    .content-container-light,
-    .content-container-button,
-    .tool-card-modern,
-    .tag-badge,
-    .tag-badge-colored,
-    .form-input-modern,
-    .btn-primary-modern,
-    .btn-secondary-modern,
-    .navbar-modern,
-    .admin-sidebar-modern,
-    .analytics-quick-action,
-    .section-header,
-    .form-container {
-        background: var(--glass-bg, var(--safari-bg-light)) !important;
-        border-color: var(--glass-border, var(--safari-border-light)) !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        box-shadow: none !important;
-    }
-}
-
-@supports not (backdrop-filter: blur(1px)) {
-
-    .content-container-main,
-    .content-container-light,
-    .content-container-button,
-    .tool-card-modern,
-    .tag-badge,
-    .tag-badge-colored,
-    .form-input-modern,
-    .btn-primary-modern,
-    .btn-secondary-modern,
-    .navbar-modern,
-    .admin-sidebar-modern,
-    .analytics-quick-action,
-    .section-header,
-    .form-container {
-        background: var(--glass-bg, var(--safari-bg-light)) !important;
-        border-color: var(--glass-border, var(--safari-border-light)) !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        box-shadow: none !important;
-    }
-}
-
-/* ================================================================
-   DEVELOPER GUIDE - How to use the new Safari-compatible system
-   
-   For NEW components:
-   1. Use .glass-light, .glass-medium, or .glass-dark classes
-   2. No additional Safari fallbacks needed
-   
-   For EXISTING components:
-   1. Set --glass-bg and --glass-border CSS variables
-   2. Component automatically gets Safari fallbacks
-   
-   Testing checklist:
-   1. Test in Chrome/Firefox (glass morphism should work)
-   2. Test in Safari (should get solid backgrounds)
-   3. Verify no transparency artifacts
-   4. Check visual hierarchy is maintained
-   ================================================================ */
