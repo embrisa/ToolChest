@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Admin Login - ToolChest{% endblock %}</title>
-    <meta name="description" content="{% block description %}ToolChest Admin Login{% endblock %}">
+    <title>{% block title %}Admin Login - tool-chest{% endblock %}</title>
+    <meta name="description" content="{% block description %}tool-chest Admin Login{% endblock %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
@@ -18,8 +18,9 @@
 <body class="min-h-screen flex items-center justify-center" style="background: var(--spacey-bg); background-attachment: fixed;">
     <div class="max-w-md w-full space-y-8 p-6">
         <div class="text-center">
-            <h1 class="logo text-4xl lg:text-5xl font-extrabold mb-2">
-                &lt;TC&gt;
+            {% from "components/logo.njk" import logo %}
+            <h1 class="mb-2">
+                {{ logo(size="text-4xl lg:text-5xl") }}
             </h1>
             <p class="text-sand-200 text-lg">Admin Dashboard</p>
         </div>

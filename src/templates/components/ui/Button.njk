@@ -1,0 +1,226 @@
+{#
+  Button Component
+  Purpose: Consistent button styling with Apple-inspired design and multiple variants
+  
+  Props:
+  - variant: 'primary' | 'secondary' | 'danger' | 'outline' | 'ghost' (default: 'primary')
+  - size: 'sm' | 'md' | 'lg' | 'xl' (default: 'md')
+  - icon: string (FontAwesome class, optional)
+  - iconPosition: 'left' | 'right' (default: 'left')
+  - fullWidth: boolean (default: false)
+  - loading: boolean (default: false)
+  - disabled: boolean (default: false)
+  - type: 'button' | 'submit' | 'reset' (default: 'button')
+  - href: string (optional, creates link instead of button)
+  - className: string (additional CSS classes)
+#}
+
+{% macro Button(
+  text='',
+  variant='primary',
+  size='md',
+  icon='',
+  iconPosition='left',
+  fullWidth=false,
+  loading=false,
+  disabled=false,
+  type='button',
+  href='',
+  className='',
+  attributes={}
+) %}
+
+{# Size definitions #}
+{% set sizeClasses = {
+  'sm': 'px-3 py-2 text-sm',
+  'md': 'px-4 py-2.5 text-base',
+  'lg': 'px-6 py-3 text-lg',
+  'xl': 'px-8 py-4 text-xl'
+} %}
+
+{# Icon sizes for each button size #}
+{% set iconSizes = {
+  'sm': 'text-sm',
+  'md': 'text-base',
+  'lg': 'text-lg',
+  'xl': 'text-xl'
+} %}
+
+{# Base button classes #}
+{% set baseClasses = [
+  'inline-flex items-center justify-center',
+  'font-semibold rounded-xl',
+  'transition-all duration-200 ease-out',
+  'focus:outline-none focus:ring-2 focus:ring-offset-2',
+  'disabled:opacity-50 disabled:cursor-not-allowed',
+  'transform hover:scale-[1.02] active:scale-[0.98]'
+] %}
+
+{# Variant-specific styling #}
+{% set variantClasses = {
+  'primary': [
+    'glass-light text-sand-700 hover:text-sand-800',
+    'focus:ring-sand-300',
+    'shadow-lg hover:shadow-xl'
+  ],
+  'secondary': [
+    'glass-light text-neutral-700 hover:text-neutral-800', 
+    'focus:ring-neutral-300',
+    'shadow-md hover:shadow-lg'
+  ],
+  'danger': [
+    'bg-red-600 hover:bg-red-700 text-white',
+    'focus:ring-red-300',
+    'shadow-lg hover:shadow-xl'
+  ],
+  'outline': [
+    'border-2 border-sand-300 hover:border-sand-400',
+    'text-sand-700 hover:text-sand-800 hover:bg-sand-50',
+    'focus:ring-sand-300'
+  ],
+  'ghost': [
+    'text-sand-700 hover:text-sand-800 hover:bg-sand-100',
+    'focus:ring-sand-300'
+  ]
+} %}
+
+{# Build final classes array #}
+{% set finalClasses = baseClasses + sizeClasses[size].split(' ') + variantClasses[variant] %}
+
+{% if fullWidth %}
+  {% set finalClasses = finalClasses + ['w-full'] %}
+{% endif %}
+
+{% if className %}
+  {% set finalClasses = finalClasses + className.split(' ') %}
+{% endif %}
+
+{# Determine if it's a link or button #}
+{% set isLink = href and href != '' %}
+{% set isDisabled = disabled or loading %}
+
+{# Glass morphism styling for primary and secondary variants #}
+{% set glassStyle = '' %}
+{% if variant in ['primary', 'secondary'] %}
+  {% if variant == 'primary' %}
+    {% set glassStyle = '--glass-bg: rgba(249, 200, 150, 0.12); --glass-border: rgba(249, 200, 150, 0.2);' %}
+  {% else %}
+    {% set glassStyle = '--glass-bg: rgba(254, 247, 237, 0.1); --glass-border: rgba(254, 247, 237, 0.15);' %}
+  {% endif %}
+{% endif %}
+
+{# Render button or link #}
+{% if isLink and not isDisabled %}
+  <a href="{{ href }}" 
+     class="{{ finalClasses | join(' ') }}"
+     {% if glassStyle %}style="{{ glassStyle }}"{% endif %}
+     {% for key, value in attributes %}{{ key }}="{{ value }}"{% endfor %}>
+{% else %}
+  <button type="{{ type }}"
+          class="{{ finalClasses | join(' ') }}"
+          {% if isDisabled %}disabled{% endif %}
+          {% if glassStyle %}style="{{ glassStyle }}"{% endif %}
+          {% for key, value in attributes %}{{ key }}="{{ value }}"{% endfor %}>
+{% endif %}
+
+  {# Loading spinner #}
+  {% if loading %}
+    <svg class="animate-spin -ml-1 mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    </svg>
+  {% endif %}
+
+  {# Left icon #}
+  {% if icon and iconPosition == 'left' and not loading %}
+    <i class="{{ icon }} {{ iconSizes[size] }} {% if text %}mr-2{% endif %}"></i>
+  {% endif %}
+
+  {# Button text #}
+  {% if text %}
+    <span>{{ text }}</span>
+  {% else %}
+    {{ caller() }}
+  {% endif %}
+
+  {# Right icon #}
+  {% if icon and iconPosition == 'right' and not loading %}
+    <i class="{{ icon }} {{ iconSizes[size] }} {% if text %}ml-2{% endif %}"></i>
+  {% endif %}
+
+{% if isLink and not isDisabled %}
+  </a>
+{% else %}
+  </button>
+{% endif %}
+
+{% endmacro %}
+
+{#
+  Icon Button - Button with only an icon, no text
+#}
+{% macro IconButton(
+  icon='fas fa-plus',
+  variant='primary',
+  size='md',
+  tooltip='',
+  href='',
+  disabled=false,
+  className='',
+  attributes={}
+) %}
+
+{# Size definitions for icon-only buttons #}
+{% set iconButtonSizes = {
+  'sm': 'p-2',
+  'md': 'p-2.5', 
+  'lg': 'p-3',
+  'xl': 'p-4'
+} %}
+
+{{ Button(
+  text='',
+  variant=variant,
+  size='md',
+  icon=icon,
+  href=href,
+  disabled=disabled,
+  className='aspect-square ' + iconButtonSizes[size] + ' ' + className,
+  attributes=attributes
+) }}
+
+{% endmacro %}
+
+{#
+  Button Group - Multiple buttons grouped together
+#}
+{% macro ButtonGroup(
+  buttons=[],
+  variant='secondary',
+  size='md',
+  className=''
+) %}
+
+<div class="inline-flex rounded-xl shadow-sm {{ className }}" role="group">
+  {% for button in buttons %}
+    {% set btnClasses = 'rounded-none' %}
+    {% if loop.first %}
+      {% set btnClasses = 'rounded-l-xl' %}
+    {% elif loop.last %}
+      {% set btnClasses = 'rounded-r-xl' %}
+    {% endif %}
+    
+    {{ Button(
+      text=button.text,
+      variant=variant,
+      size=size,
+      icon=button.icon,
+      href=button.href,
+      disabled=button.disabled,
+      className=btnClasses + ' border-r border-neutral-200 last:border-r-0',
+      attributes=button.attributes or {}
+    ) }}
+  {% endfor %}
+</div>
+
+{% endmacro %} 

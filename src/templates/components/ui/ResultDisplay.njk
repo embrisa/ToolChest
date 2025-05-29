@@ -1,0 +1,286 @@
+{#
+  ResultDisplay Component
+  
+  Purpose: Display operation results, errors, and loading states with interactive features
+  
+  Props:
+  - state ('success' | 'error' | 'empty' | 'loading', required): Current state
+  - title (string, optional): Result title/heading
+  - content (string, optional): Main result content
+  - metadata (object, optional): Additional metadata to display
+    - filename (string): Original filename
+    - size (string): File size
+    - type (string): Content type
+    - encoding (string): Encoding type
+  - copyable (boolean, default: true): Enable copy to clipboard
+  - downloadable (boolean, default: false): Enable download
+  - downloadFilename (string, optional): Filename for download
+  - autoSelect (boolean, default: true): Auto-select content on click
+  - containerClass (string, optional): Additional CSS classes
+  
+  Usage:
+  {{ ResultDisplay(state='success', title='Encoded Result', content='SGVsbG8gV29ybGQ=') }}
+  {{ ResultDisplay(state='error', title='Encoding Failed', content='Invalid input provided') }}
+#}
+
+{% macro ResultDisplay(state, title='', content='', metadata={}, copyable=true, downloadable=false, downloadFilename='result.txt', autoSelect=true, containerClass='') %}
+  {% set baseClasses = 'result-display result-display-' + state %}
+  
+  {# State-specific styling #}
+  {% if state == 'success' %}
+    {% set stateClasses = 'glass-light border-green-500/20' %}
+    {% set iconClass = 'fas fa-check-circle' %}
+    {% set iconColor = 'text-green-400' %}
+    {% set titleColor = 'text-sand-100' %}
+    {% set contentBg = 'bg-neutral-800/50 border-neutral-600/30' %}
+  {% elif state == 'error' %}
+    {% set stateClasses = 'glass-light border-red-500/30' %}
+    {% set iconClass = 'fas fa-exclamation-triangle' %}
+    {% set iconColor = 'text-red-400' %}
+    {% set titleColor = 'text-red-300' %}
+    {% set contentBg = 'bg-red-900/20 border-red-500/30' %}
+  {% elif state == 'loading' %}
+    {% set stateClasses = 'glass-light border-blue-500/20' %}
+    {% set iconClass = 'fas fa-spinner fa-spin' %}
+    {% set iconColor = 'text-blue-400' %}
+    {% set titleColor = 'text-sand-100' %}
+    {% set contentBg = 'bg-neutral-800/30 border-neutral-600/20' %}
+  {% else %}
+    {# Empty state #}
+    {% set stateClasses = 'glass-light border-neutral-600/20' %}
+    {% set iconClass = 'fas fa-info-circle' %}
+    {% set iconColor = 'text-neutral-400' %}
+    {% set titleColor = 'text-neutral-300' %}
+    {% set contentBg = 'bg-neutral-800/20 border-neutral-600/20' %}
+  {% endif %}
+
+  <div class="{{ baseClasses }} {{ stateClasses }} rounded-2xl p-6 {{ containerClass }}" 
+       {% if state == 'error' %}role="alert"{% endif %}>
+    
+    {# Header with icon and title #}
+    {% if title or state %}
+      <div class="result-header flex items-center mb-4">
+        <i class="{{ iconClass }} {{ iconColor }} text-xl mr-3"></i>
+        <h3 class="{{ titleColor }} text-lg font-semibold">
+          {{ title or (state|title + ' State') }}
+        </h3>
+      </div>
+    {% endif %}
+    
+    {# Main content area #}
+    {% if content %}
+      <div class="result-content mb-4">
+        {% if state == 'success' and content|length > 100 %}
+          {# Large content in textarea #}
+          <div class="relative">
+            <textarea 
+              readonly 
+              class="result-textarea w-full h-32 {{ contentBg }} rounded-xl p-4 text-neutral-200 font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+              {% if autoSelect %}onclick="this.select()"{% endif %}>{{ content }}</textarea>
+            
+            {# Action buttons overlay #}
+            {% if copyable or downloadable %}
+              <div class="absolute top-2 right-2 flex gap-2">
+                {% if copyable %}
+                  {% from 'components/ui/Button.njk' import IconButton %}
+                  {{ IconButton(
+                    icon='fas fa-copy',
+                    variant='secondary',
+                    size='sm',
+                    onclick='copyToClipboard("' + content + '")',
+                    title='Copy to clipboard'
+                  ) }}
+                {% endif %}
+                
+                {% if downloadable %}
+                  {{ IconButton(
+                    icon='fas fa-download',
+                    variant='secondary', 
+                    size='sm',
+                    onclick='downloadContent("' + content + '", "' + downloadFilename + '")',
+                    title='Download result'
+                  ) }}
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        {% else %}
+          {# Short content or error messages #}
+          <div class="{{ contentBg }} rounded-xl p-4">
+            <p class="text-neutral-200 {% if state == 'error' %}text-red-300{% endif %} {% if content|length > 50 %}font-mono text-sm{% endif %}">
+              {{ content }}
+            </p>
+            
+            {# Inline copy button for short content #}
+            {% if copyable and state == 'success' and content|length <= 100 %}
+              <div class="mt-3">
+                {% from 'components/ui/Button.njk' import Button %}
+                {{ Button(
+                  text='Copy Result',
+                  icon='fas fa-copy',
+                  variant='secondary',
+                  size='sm',
+                  onclick='copyToClipboard("' + content + '")'
+                ) }}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+    
+    {# Metadata section #}
+    {% if metadata and (metadata.filename or metadata.size or metadata.type or metadata.encoding) %}
+      <div class="result-metadata border-t border-neutral-600/20 pt-4">
+        <h4 class="text-neutral-400 text-sm font-medium mb-2">Details</h4>
+        <dl class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+          {% if metadata.filename %}
+            <div>
+              <dt class="text-neutral-500 inline">Filename:</dt>
+              <dd class="text-neutral-300 inline ml-2">{{ metadata.filename }}</dd>
+            </div>
+          {% endif %}
+          
+          {% if metadata.size %}
+            <div>
+              <dt class="text-neutral-500 inline">Size:</dt>
+              <dd class="text-neutral-300 inline ml-2">{{ metadata.size }}</dd>
+            </div>
+          {% endif %}
+          
+          {% if metadata.type %}
+            <div>
+              <dt class="text-neutral-500 inline">Type:</dt>
+              <dd class="text-neutral-300 inline ml-2">{{ metadata.type }}</dd>
+            </div>
+          {% endif %}
+          
+          {% if metadata.encoding %}
+            <div>
+              <dt class="text-neutral-500 inline">Encoding:</dt>
+              <dd class="text-neutral-300 inline ml-2">{{ metadata.encoding }}</dd>
+            </div>
+          {% endif %}
+        </dl>
+      </div>
+    {% endif %}
+    
+    {# Loading state content #}
+    {% if state == 'loading' and not content %}
+      <div class="result-loading text-center py-8">
+        <p class="text-neutral-300">Processing your request...</p>
+      </div>
+    {% endif %}
+    
+    {# Empty state content #}
+    {% if state == 'empty' and not content %}
+      <div class="result-empty text-center py-8">
+        <p class="text-neutral-400">No results to display yet.</p>
+        <p class="text-neutral-500 text-sm mt-1">Results will appear here after processing.</p>
+      </div>
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{#
+  QuickResult Component
+  
+  Simplified result display for inline results
+  
+  Props:
+  - content (string, required): Result content
+  - copyable (boolean, default: true): Enable copy functionality
+  - label (string, optional): Label for the result
+  - variant ('success' | 'info' | 'warning', default: 'info'): Visual variant
+#}
+
+{% macro QuickResult(content, copyable=true, label='', variant='info', containerClass='') %}
+  {% if variant == 'success' %}
+    {% set variantClasses = 'bg-green-500/10 border-green-500/20 text-green-300' %}
+    {% set labelColor = 'text-green-400' %}
+  {% elif variant == 'warning' %}
+    {% set variantClasses = 'bg-yellow-500/10 border-yellow-500/20 text-yellow-300' %}
+    {% set labelColor = 'text-yellow-400' %}
+  {% else %}
+    {% set variantClasses = 'bg-blue-500/10 border-blue-500/20 text-blue-300' %}
+    {% set labelColor = 'text-blue-400' %}
+  {% endif %}
+
+  <div class="quick-result {{ variantClasses }} border rounded-xl p-4 {{ containerClass }}">
+    {% if label %}
+      <div class="{{ labelColor }} text-sm font-medium mb-2">{{ label }}</div>
+    {% endif %}
+    
+    <div class="flex items-center justify-between">
+      <code class="text-neutral-200 font-mono text-sm break-all">{{ content }}</code>
+      
+      {% if copyable %}
+        {% from 'components/ui/Button.njk' import IconButton %}
+        <div class="ml-3 flex-shrink-0">
+          {{ IconButton(
+            icon='fas fa-copy',
+            variant='ghost',
+            size='sm',
+            onclick='copyToClipboard("' + content + '")',
+            title='Copy result'
+          ) }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endmacro %}
+
+{#
+  ResultCard Component
+  
+  Card-style result display for dashboard/listing views
+  
+  Props:
+  - title (string, required): Result title
+  - content (string, required): Result content
+  - timestamp (string, optional): When result was created
+  - tags (array, optional): Associated tags
+  - actions (array, optional): Action buttons
+#}
+
+{% macro ResultCard(title, content, timestamp='', tags=[], actions=[], containerClass='') %}
+  <div class="result-card glass-light rounded-2xl p-6 {{ containerClass }}">
+    {# Header #}
+    <div class="flex items-start justify-between mb-4">
+      <div>
+        <h3 class="text-sand-100 text-lg font-semibold mb-1">{{ title }}</h3>
+        {% if timestamp %}
+          <p class="text-neutral-400 text-sm">{{ timestamp }}</p>
+        {% endif %}
+      </div>
+      
+      {# Actions #}
+      {% if actions and actions|length > 0 %}
+        <div class="flex gap-2">
+          {% for action in actions %}
+            {% from 'components/ui/Button.njk' import IconButton %}
+            {{ IconButton(
+              icon=action.icon,
+              variant='secondary',
+              size='sm',
+              onclick=action.onclick or '',
+              href=action.href or '',
+              title=action.title or ''
+            ) }}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+    
+    {# Content preview #}
+    <div class="bg-neutral-800/50 rounded-xl p-4 mb-4">
+      <code class="text-neutral-200 font-mono text-sm block truncate">{{ content }}</code>
+    </div>
+    
+    {# Tags #}
+    {% if tags and tags|length > 0 %}
+      {% from 'components/ui/TagBadge.njk' import TagBadgeList %}
+      {{ TagBadgeList(tags=tags, size='sm') }}
+    {% endif %}
+  </div>
+{% endmacro %} 

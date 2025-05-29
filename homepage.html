@@ -1,0 +1,512 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0F0A08">
+    <title>ToolChest - Utility Tools</title>
+    <meta name="description" content="Utility tools for common tasks. Clean and functional.">
+    
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
+    
+    <script src="https://unpkg.com/htmx.org@1.9.0"></script>
+    
+    
+    <script src="https://cdn.tailwindcss.com"></script> 
+    
+    
+    <link rel="stylesheet" href="/static/css/main.css">
+    
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3517982647276707" crossorigin="anonymous"></script>
+    
+    
+</head>
+<body class="flex flex-col min-h-screen" style="background: var(--spacey-bg); background-attachment: fixed;">
+    
+<nav class="navbar-modern sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4 lg:py-5">
+    
+
+
+
+
+
+<a href="/" class="logo lg:text-7xl text-5xl font-extrabold">
+  &lt;tool-chest&gt;
+</a> 
+    
+    <div class="flex items-center space-x-4">
+      
+      <div class="relative">
+        <input 
+          hx-get="/search" 
+          hx-target="#tool-grid" 
+          hx-trigger="keyup changed delay:300ms, search" 
+          name="q" 
+          placeholder="Search tools…"
+          class="search-input w-64 lg:w-80 pl-10 pr-4 py-3 rounded-2xl text-sm transition-all duration-300 focus:w-96"
+          autocomplete="off"
+        />
+        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400 text-sm"></i>
+      </div>
+      
+      
+      <button class="lg:hidden content-container-button">
+        <i class="fas fa-bars text-sand-300"></i>
+      </button>
+    </div>
+  </div>
+</nav> 
+
+    <main class="flex-grow container mx-auto px-4 py-8 relative">
+        <div class="content-container-main">
+            
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <section class="hero-section py-16 md:py-20 lg:py-24 ">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center">
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-sand-100 via-sand-200 to-apple-blue bg-clip-text text-transparent leading-tight">
+          ToolChest
+        </h1>
+        
+        
+          <p class="text-xl md:text-2xl mt-4 text-neutral-300 leading-relaxed max-w-3xl mx-auto">
+            Utility tools for common tasks. Clean and functional.
+          </p>
+        
+      </div>
+    </div>
+  </section>
+
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+<div class="p-8 glass-light rounded-xl"
+     style="--glass-bg: rgba(254, 247, 237, 0.08); --glass-border: rgba(254, 247, 237, 0.08);">
+  
+    
+  
+</div>
+
+
+        
+        
+  
+    
+      
+    
+    
+    
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+  
+
+
+<div class="grid-cards">
+  
+    
+  
+</div>
+
+
+      
+        
+  
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    
+    
+  
+
+  <a href="/favicon-generator" class="tool-card tool-card-modern relative glass-light rounded-2xl p-6 transition-all duration-300 hover:shadow-lg hover:border-blue-500/20 group cursor-pointer ">
+    
+    <div class="w-16 h-16 rounded-2xl glass-medium flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
+      <i class="fas fa-icons text-sand-200 text-2xl"></i>
+    </div>
+    
+    
+    <h3 class="text-xl font-semibold text-sand-100 mb-2 group-hover:text-sand-200 transition-colors duration-300">
+      Favicon Generator
+    </h3>
+    
+    
+    <p class="text-neutral-300 text-sm leading-relaxed mb-4">
+      Generate favicons in various sizes and formats from your source image.
+    </p>
+    
+    
+    
+      <div class="flex flex-wrap gap-2 mb-4">
+        
+          <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white/10 text-sand-200 border border-white/20">
+            Image
+          </span>
+        
+          <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white/10 text-sand-200 border border-white/20">
+            Web
+          </span>
+        
+          <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white/10 text-sand-200 border border-white/20">
+            Conversion
+          </span>
+        
+      </div>
+    
+    
+    
+    <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sand-200">
+      <i class="fas fa-arrow-right"></i>
+    </div>
+  </a>
+
+      
+        
+  
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    
+    
+  
+
+  <a href="/hash-generator" class="tool-card tool-card-modern relative glass-light rounded-2xl p-6 transition-all duration-300 hover:shadow-lg hover:border-blue-500/20 group cursor-pointer ">
+    
+    <div class="w-16 h-16 rounded-2xl glass-medium flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
+      <i class="fas fa-hashtag text-sand-200 text-2xl"></i>
+    </div>
+    
+    
+    <h3 class="text-xl font-semibold text-sand-100 mb-2 group-hover:text-sand-200 transition-colors duration-300">
+      Hash Generator
+    </h3>
+    
+    
+    <p class="text-neutral-300 text-sm leading-relaxed mb-4">
+      Generate MD5, SHA1, SHA256, SHA512 hashes from text or files.
+    </p>
+    
+    
+    
+      <div class="flex flex-wrap gap-2 mb-4">
+        
+          <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white/10 text-sand-200 border border-white/20">
+            Security
+          </span>
+        
+          <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white/10 text-sand-200 border border-white/20">
+            Text
+          </span>
+        
+          <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white/10 text-sand-200 border border-white/20">
+            Encoding
+          </span>
+        
+          <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white/10 text-sand-200 border border-white/20">
+            Conversion
+          </span>
+        
+          <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white/10 text-sand-200 border border-white/20">
+            Web
+          </span>
+        
+      </div>
+    
+    
+    
+    <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sand-200">
+      <i class="fas fa-arrow-right"></i>
+    </div>
+  </a>
+
+      
+        
+  
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    
+    
+  
+
+  <a href="/base64-converter" class="tool-card tool-card-modern relative glass-light rounded-2xl p-6 transition-all duration-300 hover:shadow-lg hover:border-blue-500/20 group cursor-pointer ">
+    
+    <div class="w-16 h-16 rounded-2xl glass-medium flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
+      <i class="fas fa-exchange-alt text-sand-200 text-2xl"></i>
+    </div>
+    
+    
+    <h3 class="text-xl font-semibold text-sand-100 mb-2 group-hover:text-sand-200 transition-colors duration-300">
+      Base64 Converter
+    </h3>
+    
+    
+    <p class="text-neutral-300 text-sm leading-relaxed mb-4">
+      Encode or decode text using Base64
+    </p>
+    
+    
+    
+      <div class="flex flex-wrap gap-2 mb-4">
+        
+          <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white/10 text-sand-200 border border-white/20">
+            Text
+          </span>
+        
+          <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white/10 text-sand-200 border border-white/20">
+            Conversion
+          </span>
+        
+          <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white/10 text-sand-200 border border-white/20">
+            Encoding
+          </span>
+        
+      </div>
+    
+    
+    
+    <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sand-200">
+      <i class="fas fa-arrow-right"></i>
+    </div>
+  </a>
+
+      
+    
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+  
+
+
+<div class="grid-cards">
+  
+    
+  
+</div>
+
+
+  
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+<div class="p-6 glass-light rounded-xl"
+     style="--glass-bg: rgba(254, 247, 237, 0.08); --glass-border: rgba(254, 247, 237, 0.08);">
+  
+    
+  
+</div>
+
+
+
+        </div>
+    </main>
+
+    
+<footer class="footer-modern border-t border-sand-300/10 mt-auto">
+    <div class="max-w-7xl mx-auto px-6 py-12">
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            
+            <div class="text-center md:text-left">
+                
+                <div class="mb-4">
+<a href="/" class="logo text-3xl font-extrabold ">
+  &lt;tool-chest&gt;
+</a>
+</div>
+                <p class="text-neutral-300 text-sm leading-relaxed max-w-xs">
+                    Utility tools for common tasks.
+                </p>
+            </div>
+            
+            
+            <div class="text-center">
+                <h4 class="text-sand-200 font-semibold text-sm uppercase tracking-wider mb-4">Links</h4>
+                <div class="space-y-2">
+                    <a href="/privacy" class="block text-neutral-400 hover:text-sand-300 transition-colors duration-200 text-sm">
+                        Privacy Policy
+                    </a>
+                    <a href="/terms" class="block text-neutral-400 hover:text-sand-300 transition-colors duration-200 text-sm">
+                        Terms of Service
+                    </a>
+                    <a href="/contact" class="block text-neutral-400 hover:text-sand-300 transition-colors duration-200 text-sm">
+                        Contact
+                    </a>
+                </div>
+            </div>
+            
+            
+            <div class="text-center md:text-right">
+                <div class="flex justify-center md:justify-end space-x-4">
+                    <a href="#" class="w-8 h-8 content-container-button flex items-center justify-center">
+                        <i class="fab fa-github text-sand-300 text-sm"></i>
+                    </a>
+                    <a href="#" class="w-8 h-8 content-container-button flex items-center justify-center">
+                        <i class="fab fa-twitter text-sand-300 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="pt-8 border-t border-sand-300/10 text-center">
+            <p class="text-neutral-400 text-sm">
+                &copy; May 29, 2025 ToolChest. All rights reserved.
+            </p>
+        </div>
+    </div>
+</footer> 
+
+    <script>
+        // Navbar scroll blur effect
+        (function() {
+            const navbar = document.querySelector('.navbar-modern');
+            let ticking = false;
+            
+            function updateNavbar() {
+                const scrolled = window.scrollY > 20;
+                
+                if (scrolled && !navbar.classList.contains('scrolled')) {
+                    navbar.classList.add('scrolled');
+                } else if (!scrolled && navbar.classList.contains('scrolled')) {
+                    navbar.classList.remove('scrolled');
+                }
+                
+                ticking = false;
+            }
+            
+            function requestTick() {
+                if (!ticking) {
+                    requestAnimationFrame(updateNavbar);
+                    ticking = true;
+                }
+            }
+            
+            window.addEventListener('scroll', requestTick, { passive: true });
+            
+            // Initialize on page load
+            updateNavbar();
+        })();
+    </script>
+
+    
+</body>
+</html> 

@@ -1,0 +1,47 @@
+{#
+  UI Component Macros
+  Central import file for all UI components
+  
+  Usage:
+  {% from 'components/macros/ui-macros.njk' import ContentContainer %}
+#}
+
+{# Import the actual macros #}
+{% from 'components/ui/ContentContainer.njk' import ContentContainer as _ContentContainer %}
+{% from 'components/ui/HeroSection.njk' import HeroSection as _HeroSection %}
+{% from 'components/ui/ToolCard.njk' import ToolCard as _ToolCard %}
+{% from 'components/ui/EmptyState.njk' import EmptyState as _EmptyState %}
+{% from 'components/ui/TagBadge.njk' import TagBadge as _TagBadge %}
+{% from 'components/ui/IconContainer.njk' import IconContainer as _IconContainer %}
+{% from 'components/layout/ResponsiveGrid.njk' import ResponsiveGrid as _ResponsiveGrid %}
+
+{# Re-export macros #}
+{% macro ContentContainer(variant='light', padding='md', rounded=true, glass=true, className='') %}
+  {% set content = caller() if caller else '' %}
+  {{ _ContentContainer(variant, padding, rounded, glass, className, content) }}
+{% endmacro %}
+
+{% macro HeroSection(title, subtitle='', gradientColors=[], size='large', alignment='center', containerClass='') %}
+  {{ _HeroSection(title, subtitle, gradientColors, size, alignment, containerClass) }}
+{% endmacro %}
+
+{% macro ToolCard(tool, className='') %}
+  {{ _ToolCard(tool, className) }}
+{% endmacro %}
+
+{% macro EmptyState(icon='fas fa-inbox', title='No items found', message='', variant='neutral', size='md', className='') %}
+  {{ _EmptyState(icon, title, message, variant, size, className) }}
+{% endmacro %}
+
+{% macro TagBadge(name, color='#6B7280', size='md', variant='colored', href='', removable=false, onRemove='', containerClass='') %}
+  {{ _TagBadge(name, color, size, variant, href, removable, onRemove, containerClass) }}
+{% endmacro %}
+
+{% macro IconContainer(size='md', icon='fas fa-toolbox', variant='sand', rounded='2xl', className='', href='') %}
+  {{ _IconContainer(size, icon, variant, rounded, className, href) }}
+{% endmacro %}
+
+{% macro ResponsiveGrid(cols={mobile: 1, md: 2, lg: 3}, gap='md', className='') %}
+  {% set content = caller() if caller else '' %}
+  {{ _ResponsiveGrid(cols, gap, className, [], content) }}
+{% endmacro %} 

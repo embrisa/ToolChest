@@ -21,7 +21,7 @@ export const notFoundHandler = (req: Request, res: Response, next: NextFunction)
         statusCode: 404,
         title: 'Page Not Found',
         message: "Sorry, the page you are looking for doesn't exist.",
-        appName: req.app.locals.appName || 'ToolChest',
+        appName: req.app.locals.appName || 'tool-chest',
         appVersion: req.app.locals.appVersion || '0.1.0',
         showDetails: process.env.NODE_ENV !== 'production',
     };
@@ -48,7 +48,7 @@ export const mainErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
         message: err.expose ? err.message : (statusCode === 404 ? "The resource was not found." : 'An unexpected error occurred. Please try again later.'),
         stack: process.env.NODE_ENV !== 'production' ? err.stack : undefined,
         error: process.env.NODE_ENV !== 'production' ? err : {},
-        appName: req.app.locals.appName || 'ToolChest',
+        appName: req.app.locals.appName || 'tool-chest',
         appVersion: req.app.locals.appVersion || '0.1.0',
         showDetails: process.env.NODE_ENV !== 'production',
     };

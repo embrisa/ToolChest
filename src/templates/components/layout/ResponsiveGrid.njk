@@ -1,0 +1,115 @@
+{#
+  ResponsiveGrid Component
+  Purpose: Adaptive layout container for responsive grid systems
+  
+  Props:
+  - cols: object with breakpoint definitions { mobile: 1, md: 2, lg: 3, xl: 4 }
+  - gap: 'sm' | 'md' | 'lg' | 'xl' (default: 'md')
+  - className: string (additional CSS classes)
+  - items: array of items to render (optional, can use caller() instead)
+  - content: string content to render (used for re-export compatibility)
+  - variant: 'cards' | 'cards-compact' | 'auto-fit' | 'responsive' (default: 'cards')
+#}
+
+{% macro ResponsiveGrid(
+  cols=null,
+  gap='md',
+  className='',
+  items=[],
+  content='',
+  variant='cards'
+) %}
+
+{# Set gap class based on gap parameter #}
+{% if gap == 'sm' %}
+  {% set gapClass = 'gap-4' %}
+{% elif gap == 'lg' %}
+  {% set gapClass = 'gap-8' %}
+{% elif gap == 'xl' %}
+  {% set gapClass = 'gap-12' %}
+{% else %}
+  {% set gapClass = 'gap-6' %}
+{% endif %}
+
+{# Choose grid approach based on variant #}
+{% if variant == 'cards' %}
+  {% set baseClasses = 'grid-cards' %}
+{% elif variant == 'cards-compact' %}
+  {% set baseClasses = 'grid-cards-compact' %}
+{% elif variant == 'auto-fit' %}
+  {% set baseClasses = 'grid grid-auto-fit ' + gapClass %}
+{% else %}
+  {# Responsive variant - traditional approach #}
+  {% if not cols %}
+    {% set mobileCol = 1 %}
+    {% set mdCol = 2 %}
+    {% set lgCol = 3 %}
+  {% else %}
+    {% set mobileCol = cols.mobile or 1 %}
+    {% set mdCol = cols.md or 2 %}
+    {% set lgCol = cols.lg or 3 %}
+    {% set xlCol = cols.xl or null %}
+  {% endif %}
+
+  {# Build responsive grid classes as a string #}
+  {% set baseClasses = 'grid ' + gapClass %}
+  {% set responsiveClasses = ' grid-cols-' + mobileCol|string %}
+  {% set responsiveClasses = responsiveClasses + ' md:grid-cols-' + mdCol|string %}
+  {% set responsiveClasses = responsiveClasses + ' lg:grid-cols-' + lgCol|string %}
+  {% if xlCol %}
+    {% set responsiveClasses = responsiveClasses + ' xl:grid-cols-' + xlCol|string %}
+  {% endif %}
+  {% set baseClasses = baseClasses + responsiveClasses %}
+{% endif %}
+
+{# Combine all classes #}
+{% if className %}
+  {% set allClasses = baseClasses + ' ' + className %}
+{% else %}
+  {% set allClasses = baseClasses %}
+{% endif %}
+
+<div class="{{ allClasses }}">
+  {% if items and items.length > 0 %}
+    {% for item in items %}
+      <div class="grid-item">
+        {{ item | safe }}
+      </div>
+    {% endfor %}
+  {% elif content %}
+    {{ content | safe }}
+  {% else %}
+    {{ caller() if caller else '' }}
+  {% endif %}
+</div>
+
+{% endmacro %}
+
+{#
+  Auto Grid - Automatically adjusts columns based on content
+  Good for cards that should have consistent width
+#}
+{% macro AutoGrid(
+  minWidth='280px',
+  maxWidth='320px',
+  gap='md',
+  className=''
+) %}
+
+{# Set gap class based on gap parameter #}
+{% if gap == 'sm' %}
+  {% set gapClass = 'gap-4' %}
+{% elif gap == 'lg' %}
+  {% set gapClass = 'gap-8' %}
+{% elif gap == 'xl' %}
+  {% set gapClass = 'gap-12' %}
+{% else %}
+  {% set gapClass = 'gap-6' %}
+{% endif %}
+
+<div class="grid {{ gapClass }} {{ className }}" 
+     style="grid-template-columns: repeat(auto-fit, minmax({{ minWidth }}, {{ maxWidth }})); justify-content: center;">
+  {{ caller() if caller else '' }}
+</div>
+
+{% endmacro %} 

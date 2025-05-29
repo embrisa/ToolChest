@@ -1,0 +1,145 @@
+/* ================================================================
+   DESIGN SYSTEM - Enhanced Apple-inspired professional theme
+   ================================================================ */
+
+:root {
+    /* Core Sand/Professional Palette - More neutral, serious tones */
+    --sand-50: #FEF7ED;
+    --sand-100: #FDF2E3;
+    --sand-200: #F8E4C7;
+    --sand-300: #F0D0A0;
+    --sand-400: #E6BC7A;
+    --sand-500: #D4A665;
+    --sand-600: #BF934E;
+    --sand-700: #A67D3A;
+    --sand-800: #8B6B2A;
+
+    /* Complementary Professional Orange - Toned down */
+    --sunset-400: #E6824A;
+    --sunset-500: #D9732F;
+    --sunset-600: #C4641F;
+    --sunset-700: #AB5516;
+
+    /* Supporting Earth Tones - More muted */
+    --amber-300: #E6C547;
+    --amber-600: #C69806;
+
+    /* Professional Neutrals - Brighter for better contrast */
+    --neutral-50: #FEFEFE;
+    --neutral-100: #F8F8F7;
+    --neutral-200: #EEEDE9;
+    --neutral-300: #E0DDD6;
+    --neutral-400: #B8B3A8;
+    --neutral-500: #8A8478;
+    --neutral-600: #6B6459;
+    --neutral-700: #534F47;
+    --neutral-800: #3A362F;
+    --neutral-900: #2B2822;
+
+    /* Medium Brightness Dark Theme Colors */
+    --dark-900: #151310;
+    --dark-800: #201C18;
+    --dark-700: #332A22;
+
+    /* Apple-style Blue Accents - More professional */
+    --apple-blue: #0071E3;
+    --apple-blue-light: #4A9EFF;
+    --apple-blue-dark: #0056B8;
+
+    /* State Colors */
+    --success: #30D158;
+    --warning: #FF9F0A;
+    --error: #FF453A;
+    --info: #64D2FF;
+
+    /* More professional gradients - less vibrant */
+    --accent-gradient: linear-gradient(135deg,
+            #D4A665 0%,
+            #E6BC7A 20%,
+            #F0D0A0 35%,
+            #E6C547 45%,
+            #8BB5E8 60%,
+            #6FA8E6 75%,
+            #0071E3 100%);
+
+    --hero-gradient: linear-gradient(135deg,
+            #FEF7ED 0%,
+            #F0D0A0 25%,
+            #D4A665 50%,
+            #6FA8E6 75%,
+            #0071E3 100%);
+
+    /* Medium brightness cosmic background */
+    --spacey-bg:
+        radial-gradient(ellipse at 75% -10%, rgba(0, 113, 227, 0.18) 0%, transparent 60%),
+        radial-gradient(circle at 25% 90%, rgba(111, 168, 230, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 10% 80%, rgba(230, 188, 122, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 90% 40%, rgba(230, 197, 71, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 50% 70%, rgba(166, 125, 58, 0.05) 0%, transparent 35%),
+        linear-gradient(135deg, var(--dark-900) 0%, var(--dark-800) 100%);
+
+    /* Typography scale */
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+    --font-size-5xl: 3rem;
+    --font-size-6xl: 3.75rem;
+
+    /* Spacing scale */
+    --space-0-5: 0.125rem;
+    --space-1: 0.25rem;
+    --space-1-5: 0.375rem;
+    --space-2: 0.5rem;
+    --space-2-5: 0.625rem;
+    --space-3: 0.75rem;
+    --space-3-5: 0.875rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-7: 1.75rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-14: 3.5rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+
+    /* Border radius */
+    --radius-xs: 0.25rem;
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+    --radius-3xl: 2rem;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+    /* Inset shadows for glass effects */
+    --shadow-inset-sm: inset 0 1px 2px 0 rgba(255, 255, 255, 0.05);
+    --shadow-inset-md: inset 0 2px 4px 0 rgba(255, 255, 255, 0.06);
+
+    /* Focus ring */
+    --focus-ring: 0 0 0 3px rgba(0, 122, 255, 0.15);
+    --focus-ring-dark: 0 0 0 3px rgba(100, 210, 255, 0.2);
+
+    /* Glass morphism variables for Safari compatibility - Medium brightness */
+    --glass-bg-light: rgba(254, 247, 237, 0.12);
+    --glass-bg-medium: rgba(254, 247, 237, 0.1);
+    --glass-bg-dark: rgba(51, 42, 33, 0.7);
+    --glass-border-light: rgba(254, 247, 237, 0.18);
+    --glass-border-medium: rgba(254, 247, 237, 0.15);
+    --glass-border-dark: rgba(240, 208, 160, 0.12);
+}

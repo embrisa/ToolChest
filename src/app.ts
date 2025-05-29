@@ -30,7 +30,7 @@ export function createApp(): Application {
     }
 
     // App version and name (can be moved to a config file or .env)
-    app.locals.appName = 'ToolChest';
+    app.locals.appName = 'tool-chest';
     app.locals.appVersion = process.env.npm_package_version || '0.1.0'; // Get version from package.json
 
     // Configure Nunjucks

@@ -1,0 +1,284 @@
+{#
+  SearchInput Component
+  Purpose: Apple-style search input with HTMX integration and advanced features
+  
+  Props:
+  - name: string (form field name, default: 'search')
+  - placeholder: string (placeholder text)
+  - value: string (initial value)
+  - size: 'sm' | 'md' | 'lg'
+  - variant: 'default' | 'compact' | 'hero' | 'navbar'
+  - expandOnFocus: boolean (expand width on focus)
+  - showClearButton: boolean (show clear button when text exists)
+  - showSearchButton: boolean (show search button)
+  - icon: string (FontAwesome icon class)
+  - iconPosition: 'left' | 'right'
+  - target: string (HTMX target selector)
+  - trigger: string (HTMX trigger)
+  - endpoint: string (search endpoint URL)
+  - debounce: number (debounce delay in ms)
+  - minLength: number (minimum characters to trigger search)
+  - showResults: boolean (show search results dropdown)
+  - maxResults: number (max results to show)
+  - noResultsText: string (text when no results found)
+  - loadingText: string (text while loading)
+  - disabled: boolean
+  - readonly: boolean
+  - required: boolean
+  - autocomplete: string
+  - class: string (additional classes)
+  - id: string (unique identifier)
+  - onInput: string (JavaScript function on input)
+  - onClear: string (JavaScript function on clear)
+  - onSearch: string (JavaScript function on search)
+#}
+
+{# Main SearchInput macro #}
+{% macro SearchInput(name='search', placeholder='Search...', value='', size='md', variant='default', expandOnFocus=true, showClearButton=true, showSearchButton=false, icon='fas fa-search', iconPosition='left', target='', trigger='keyup changed delay:300ms', endpoint='', debounce=300, minLength=1, showResults=true, maxResults=10, noResultsText='No results found', loadingText='Searching...', disabled=false, readonly=false, required=false, autocomplete='off', class='', id='', onInput='', onClear='', onSearch='') %}
+  {% set searchId = id or (name + '_search') %}
+  {% set inputId = searchId + '_input' %}
+  {% set resultsId = searchId + '_results' %}
+  
+  {# Build HTMX attributes #}
+  {% set htmxAttrs = {} %}
+  {% if target and endpoint %}
+    {% set searchTrigger = trigger + ', search' %}
+    {% if minLength > 1 %}
+      {% set searchTrigger = trigger + ' [target.value.length >= ' + minLength + '], search' %}
+    {% endif %}
+    {% set htmxAttrs = {
+      'hx-get': endpoint,
+      'hx-target': target,
+      'hx-trigger': searchTrigger,
+      'hx-swap': 'innerHTML',
+      'hx-indicator': '#' + searchId + '_loading'
+    } %}
+  {% endif %}
+
+  <div id="{{ searchId }}" 
+       class="search-input-container search-input-{{ size }} search-input-{{ variant }} {{ 'search-input-expandable' if expandOnFocus }} {{ 'search-input-disabled' if disabled }} {{ class }}"
+       data-search-name="{{ name }}"
+       data-search-min-length="{{ minLength }}"
+       data-search-debounce="{{ debounce }}"
+       data-search-max-results="{{ maxResults }}"
+       data-search-show-results="{{ showResults }}"
+       {% if disabled %}data-disabled="true"{% endif %}>
+    
+    {# Search input wrapper #}
+    <div class="search-input-wrapper">
+      
+      {# Left icon #}
+      {% if icon and iconPosition == 'left' %}
+        <div class="search-input-icon search-input-icon-left">
+          <i class="{{ icon }}"></i>
+        </div>
+      {% endif %}
+      
+      {# Main search input #}
+      <input type="search"
+             id="{{ inputId }}"
+             name="{{ name }}"
+             class="search-input search-input-field search-input-field-{{ size }}"
+             placeholder="{{ placeholder }}"
+             {% if value %}value="{{ value }}"{% endif %}
+             {% if disabled %}disabled{% endif %}
+             {% if readonly %}readonly{% endif %}
+             {% if required %}required{% endif %}
+             autocomplete="{{ autocomplete }}"
+             {% for attr, val in htmxAttrs %}{{ attr }}="{{ val }}"{% endfor %}
+             {% if onInput %}oninput="{{ onInput }}"{% endif %}
+             onfocus="handleSearchFocus('{{ searchId }}')"
+             onblur="handleSearchBlur('{{ searchId }}')"
+             onkeydown="handleSearchKeydown(event, '{{ searchId }}')" />
+      
+      {# Loading indicator #}
+      <div id="{{ searchId }}_loading" class="search-input-loading htmx-indicator">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+      
+      {# Clear button #}
+      {% if showClearButton %}
+        <button type="button" 
+                class="search-input-clear"
+                onclick="clearSearchInput('{{ searchId }}'){% if onClear %}; {{ onClear }}{% endif %}"
+                style="display: none;"
+                aria-label="Clear search">
+          <i class="fas fa-times"></i>
+        </button>
+      {% endif %}
+      
+      {# Right icon or search button #}
+      {% if showSearchButton %}
+        <button type="button" 
+                class="search-input-button search-input-button-{{ size }}"
+                onclick="performSearch('{{ searchId }}'){% if onSearch %}; {{ onSearch }}{% endif %}"
+                {% if disabled %}disabled{% endif %}
+                aria-label="Search">
+          <i class="{{ icon }}"></i>
+        </button>
+      {% elif icon and iconPosition == 'right' %}
+        <div class="search-input-icon search-input-icon-right">
+          <i class="{{ icon }}"></i>
+        </div>
+      {% endif %}
+    </div>
+    
+    {# Search results dropdown #}
+    {% if showResults %}
+      <div id="{{ resultsId }}" 
+           class="search-results-dropdown" 
+           style="display: none;"
+           role="listbox"
+           aria-label="Search results">
+        
+        {# Results will be populated dynamically #}
+        <div class="search-results-content">
+          {# Loading state #}
+          <div class="search-results-loading" style="display: none;">
+            <div class="search-results-item search-results-loading-item">
+              <i class="fas fa-spinner fa-spin"></i>
+              <span>{{ loadingText }}</span>
+            </div>
+          </div>
+          
+          {# No results state #}
+          <div class="search-results-empty" style="display: none;">
+            <div class="search-results-item search-results-empty-item">
+              <i class="fas fa-search"></i>
+              <span>{{ noResultsText }}</span>
+            </div>
+          </div>
+          
+          {# Results list #}
+          <div class="search-results-list">
+            {# Dynamic results will be inserted here #}
+          </div>
+        </div>
+        
+        {# Results footer #}
+        <div class="search-results-footer" style="display: none;">
+          <div class="search-results-hint">
+            <kbd>↑</kbd><kbd>↓</kbd> to navigate, <kbd>Enter</kbd> to select, <kbd>Esc</kbd> to close
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{# Navbar Search - Compact search for navigation bars #}
+{% macro NavbarSearch(name='q', placeholder='Search tools...', target='#tool-grid', endpoint='/search', expandOnFocus=true, class='') %}
+  {{ SearchInput(
+    name=name,
+    placeholder=placeholder,
+    target=target,
+    endpoint=endpoint,
+    size='md',
+    variant='navbar',
+    expandOnFocus=expandOnFocus,
+    showResults=false,
+    debounce=300,
+    minLength=1,
+    class=class
+  ) }}
+{% endmacro %}
+
+{# Hero Search - Large search for hero sections #}
+{% macro HeroSearch(name='search', placeholder='What are you looking for?', target='#search-results', endpoint='/search', showSearchButton=true, class='') %}
+  {{ SearchInput(
+    name=name,
+    placeholder=placeholder,
+    target=target,
+    endpoint=endpoint,
+    size='lg',
+    variant='hero',
+    expandOnFocus=false,
+    showSearchButton=showSearchButton,
+    showResults=true,
+    maxResults=8,
+    debounce=200,
+    minLength=2,
+    class=class
+  ) }}
+{% endmacro %}
+
+{# Compact Search - Small search for sidebars #}
+{% macro CompactSearch(name='search', placeholder='Search...', target='', endpoint='', class='') %}
+  {{ SearchInput(
+    name=name,
+    placeholder=placeholder,
+    target=target,
+    endpoint=endpoint,
+    size='sm',
+    variant='compact',
+    expandOnFocus=false,
+    showResults=false,
+    iconPosition='right',
+    class=class
+  ) }}
+{% endmacro %}
+
+{# Filter Search - Search with filtering capabilities #}
+{% macro FilterSearch(name='filter', placeholder='Filter items...', target='', endpoint='', minLength=1, debounce=100, class='') %}
+  {{ SearchInput(
+    name=name,
+    placeholder=placeholder,
+    target=target,
+    endpoint=endpoint,
+    size='md',
+    variant='default',
+    expandOnFocus=false,
+    showResults=false,
+    showClearButton=true,
+    minLength=minLength,
+    debounce=debounce,
+    trigger='keyup changed delay:' + debounce + 'ms',
+    class=class
+  ) }}
+{% endmacro %}
+
+{# Live Search - Search with live results dropdown #}
+{% macro LiveSearch(name='search', placeholder='Start typing to search...', endpoint='/api/search', maxResults=10, minLength=2, class='') %}
+  {{ SearchInput(
+    name=name,
+    placeholder=placeholder,
+    endpoint=endpoint,
+    size='md',
+    variant='default',
+    expandOnFocus=true,
+    showResults=true,
+    maxResults=maxResults,
+    minLength=minLength,
+    debounce=250,
+    noResultsText='No matches found',
+    loadingText='Searching...',
+    class=class
+  ) }}
+{% endmacro %}
+
+{# Command Search - Search with command palette style #}
+{% macro CommandSearch(name='command', placeholder='Type a command or search...', target='#command-results', endpoint='/api/command-search', class='') %}
+  <div class="command-search-overlay" style="display: none;" onclick="hideCommandSearch()">
+    <div class="command-search-modal" onclick="event.stopPropagation()">
+      {{ SearchInput(
+        name=name,
+        placeholder=placeholder,
+        target=target,
+        endpoint=endpoint,
+        size='lg',
+        variant='hero',
+        expandOnFocus=false,
+        showResults=true,
+        maxResults=15,
+        minLength=0,
+        debounce=150,
+        icon='fas fa-terminal',
+        noResultsText='No commands found',
+        class='command-search-input ' + class
+      ) }}
+      <div id="command-results" class="command-search-results">
+        {# Command results will be loaded here #}
+      </div>
+    </div>
+  </div>
+{% endmacro %} 

@@ -43,6 +43,38 @@
 
     {% include "../components/footer.njk" %}
 
+    <script>
+        // Navbar scroll blur effect
+        (function() {
+            const navbar = document.querySelector('.navbar-modern');
+            let ticking = false;
+            
+            function updateNavbar() {
+                const scrolled = window.scrollY > 20;
+                
+                if (scrolled && !navbar.classList.contains('scrolled')) {
+                    navbar.classList.add('scrolled');
+                } else if (!scrolled && navbar.classList.contains('scrolled')) {
+                    navbar.classList.remove('scrolled');
+                }
+                
+                ticking = false;
+            }
+            
+            function requestTick() {
+                if (!ticking) {
+                    requestAnimationFrame(updateNavbar);
+                    ticking = true;
+                }
+            }
+            
+            window.addEventListener('scroll', requestTick, { passive: true });
+            
+            // Initialize on page load
+            updateNavbar();
+        })();
+    </script>
+
     {% block bodyScripts %}{% endblock %}
 </body>
 </html> 

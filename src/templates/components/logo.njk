@@ -1,4 +1,13 @@
 {# src/templates/components/logo.njk #}
+
+{# Macro for flexible logo usage #}
+{% macro logo(size="lg:text-7xl text-5xl", suffix="", href="/", classes="") %}
+<a href="{{ href }}" class="logo {{ size }} font-extrabold {{ classes }}">
+  &lt;tool-chest&gt;{% if suffix %} {{ suffix }}{% endif %}
+</a>
+{% endmacro %}
+
+{# Default logo for simple inclusion #}
 <a href="/" class="logo lg:text-7xl text-5xl font-extrabold">
-  &lt;TC&gt;
+  &lt;tool-chest&gt;
 </a> 

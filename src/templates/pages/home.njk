@@ -1,82 +1,29 @@
 {# src/templates/pages/home.njk #}
 {% extends "../layouts/base.njk" %}
+{% from 'components/ui/ContentContainer.njk' import ContentContainer %}
+{% from 'components/ui/HeroSection.njk' import HeroSection %}
+{% from 'components/ui/ToolCard.njk' import ToolCardGrid %}
+{% from 'components/ui/EmptyState.njk' import EmptyState %}
 
 {% block title %}{{ super() }} - Utility Tools{% endblock %}
 {% block description %}Utility tools for common tasks. Clean and functional.{% endblock %}
 
 {% block content %}
     {# Hero Section #}
-    <div class="text-center mb-16">
-        <h1 class="text-5xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-sand-100 via-sand-200 to-apple-blue bg-clip-text text-transparent leading-tight">
-            {{ appName }}
-        </h1>
-        <p class="text-xl lg:text-2xl text-neutral-300 max-w-3xl mx-auto leading-relaxed">
-            Utility tools for common tasks.
-        </p>
-    </div>
+    {{ HeroSection(
+        title=appName or 'tool-chest',
+        subtitle='Utility tools for common tasks. Clean and functional.'
+    ) }}
     
-    {# Tool Grid #}
-    <div id="tool-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-        {% if popularTools and popularTools.length > 0 %}
-            {% for tool in popularTools %}
-                <a href="/{{ tool.slug }}" class="block group cursor-pointer" aria-label="Open {{ tool.name }}">
-                    <article class="tool-card-modern group relative flex flex-col gap-6">
-                        {# Icon with enhanced styling #}
-                        <div class="flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-sand-400/20 to-sand-300/10 mb-2">
-                            <i class="fa {{ tool.iconClass | default('fas fa-toolbox') }} text-3xl icon transition-all duration-300"></i>
-                        </div>
-                        
-                        {# Content #}
-                        <div class="flex-grow">
-                            <h3 class="font-semibold text-xl text-sand-100 mb-3 group-hover:text-apple-blue transition-colors duration-300">
-                                {{ tool.name }}
-                            </h3>
-                            <p class="text-base text-neutral-300 leading-relaxed mb-6">
-                                {{ tool.description | truncate(120, true) }}
-                            </p>
-                        </div>
-                        
-                        {# Tags #}
-                        {% if tool.tags and tool.tags.length > 0 %}
-                            <div class="flex flex-wrap gap-2 mt-auto">
-                                {% for tag in tool.tags %}
-                                    <span class="tag-badge-colored" 
-                                          style="--tag-color: {{ tag.color or '#6B7280' }}; 
-                                                 background-color: {{ tag.color or '#6B7280' }}20; 
-                                                 color: {{ tag.color or '#6B7280' }}; 
-                                                 border-color: {{ tag.color or '#6B7280' }}30;">
-                                        {{ tag.name }}
-                                    </span>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                        
-                        {# Hover indicator #}
-                        <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <i class="fas fa-arrow-right text-apple-blue text-sm"></i>
-                        </div>
-                    </article>
-                </a>
-            {% endfor %}
-        {% else %}
-            {# Empty state #}
-            <div class="col-span-full flex flex-col items-center justify-center py-20 text-center">
-                <div class="w-24 h-24 rounded-3xl bg-gradient-to-br from-sand-400/10 to-sand-300/5 flex items-center justify-center mb-6">
-                    <i class="fas fa-toolbox text-4xl text-sand-300/50"></i>
-                </div>
-                <h3 class="text-2xl font-semibold text-sand-200 mb-3">No tools available</h3>
-                <p class="text-lg text-neutral-400 max-w-md">
-                    Tools will appear here when available.
-                </p>
-            </div>
-        {% endif %}
-    </div>
-
-    {# Ad Unit - Horizontal ad between content sections (temporarily commented out for initial AdSense verification)
-    {% include "../components/ad-unit.njk" with { 
-        slot: '1234567890', 
-        format: 'horizontal',
-        style: 'display:block; text-align:center; margin:24px 0;' 
-    } %}
-    #}
+    {# Main Content Container #}
+    {% call ContentContainer(variant='transparent', padding='sm') %}
+        {# Tools Grid using ToolCardGrid component #}
+        {{ ToolCardGrid(
+            tools=popularTools,
+            variant='modern',
+            showTags=true,
+            emptyStateTitle='No tools available',
+            emptyStateDescription='Check back later for new utility tools.'
+        ) }}
+    {% endcall %}
 {% endblock %} 

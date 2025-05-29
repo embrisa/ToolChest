@@ -1,0 +1,303 @@
+{#
+  TransitionEffects Utility Component
+  Comprehensive animation library for smooth transitions and effects
+  
+  Props for AnimatedElement:
+  - element (string): HTML element type (default: 'div')
+  - animation (string): Animation type
+  - duration (string): 'fast' | 'normal' | 'slow' | 'custom'
+  - delay (string): 'none' | 'short' | 'medium' | 'long' | 'custom'
+  - easing (string): 'linear' | 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out' | 'bounce' | 'custom'
+  - trigger (string): 'immediate' | 'hover' | 'focus' | 'scroll' | 'click'
+  - repeat (boolean): Repeat animation
+  - customDuration (string): Custom duration value (e.g., '500ms')
+  - customDelay (string): Custom delay value
+  - customEasing (string): Custom easing function
+  - className (string): Additional CSS classes
+  - content (string): Element content
+#}
+
+{%- macro AnimatedElement(element='div', animation='fade-in', duration='normal', delay='none', easing='ease-out', trigger='immediate', repeat=false, customDuration='', customDelay='', customEasing='', className='', content='', id='') -%}
+  {%- set animations = {
+    'fade-in': 'animate-fade-in',
+    'fade-out': 'animate-fade-out', 
+    'slide-in-left': 'animate-slide-in-left',
+    'slide-in-right': 'animate-slide-in-right',
+    'slide-in-up': 'animate-slide-in-up',
+    'slide-in-down': 'animate-slide-in-down',
+    'scale-in': 'animate-scale-in',
+    'scale-out': 'animate-scale-out',
+    'bounce-in': 'animate-bounce-in',
+    'pulse': 'animate-pulse',
+    'shake': 'animate-shake',
+    'rotate': 'animate-rotate',
+    'float': 'animate-float',
+    'glow': 'animate-glow',
+    'blur-in': 'animate-blur-in',
+    'zoom-in': 'animate-zoom-in',
+    'flip-x': 'animate-flip-x',
+    'flip-y': 'animate-flip-y'
+  } -%}
+  
+  {%- set durations = {
+    'fast': 'animation-duration-150',
+    'normal': 'animation-duration-300',
+    'slow': 'animation-duration-500',
+    'custom': 'animation-duration-custom'
+  } -%}
+  
+  {%- set delays = {
+    'none': '',
+    'short': 'animation-delay-100',
+    'medium': 'animation-delay-300',
+    'long': 'animation-delay-500',
+    'custom': 'animation-delay-custom'
+  } -%}
+  
+  {%- set easings = {
+    'linear': 'animation-timing-linear',
+    'ease': 'animation-timing-ease',
+    'ease-in': 'animation-timing-ease-in',
+    'ease-out': 'animation-timing-ease-out',
+    'ease-in-out': 'animation-timing-ease-in-out',
+    'bounce': 'animation-timing-bounce',
+    'custom': 'animation-timing-custom'
+  } -%}
+  
+  {%- set triggers = {
+    'immediate': '',
+    'hover': 'animate-on-hover',
+    'focus': 'animate-on-focus',
+    'scroll': 'animate-on-scroll',
+    'click': 'animate-on-click'
+  } -%}
+
+  {# Build style attribute #}
+  {% set styleAttr = '' %}
+  {% if customDuration %}
+    {% set styleAttr = '--animation-duration: ' + customDuration + ';' %}
+    {% if customDelay %}
+      {% set styleAttr = styleAttr + ' --animation-delay: ' + customDelay + ';' %}
+    {% endif %}
+    {% if customEasing %}
+      {% set styleAttr = styleAttr + ' --animation-timing: ' + customEasing + ';' %}
+    {% endif %}
+  {% endif %}
+
+  <{{ element }}
+    {% if id %}id="{{ id }}"{% endif %}
+    class="animated-element {{ animations[animation] }} {{ durations[duration] }} {{ delays[delay] }} {{ easings[easing] }} {{ triggers[trigger] }}{% if repeat %} animation-infinite{% endif %}{% if className %} {{ className }}{% endif %}"
+    {% if styleAttr %}style="{{ styleAttr }}"{% endif %}
+  >
+    {{ content }}
+  </{{ element }}>
+{%- endmacro -%}
+
+{#
+  FadeTransition - Simple fade in/out effects
+#}
+{%- macro FadeTransition(content, direction='in', duration='normal', delay='none', trigger='immediate', className='') -%}
+  {{ AnimatedElement('div', 'fade-' + direction, duration, delay, 'ease-out', trigger, false, '', '', '', className, content) }}
+{%- endmacro -%}
+
+{#
+  SlideTransition - Slide animations from different directions
+#}
+{%- macro SlideTransition(content, direction='up', duration='normal', delay='none', trigger='immediate', className='') -%}
+  {{ AnimatedElement('div', 'slide-in-' + direction, duration, delay, 'ease-out', trigger, false, '', '', '', className, content) }}
+{%- endmacro -%}
+
+{#
+  ScaleTransition - Scale in/out animations
+#}
+{%- macro ScaleTransition(content, direction='in', duration='normal', delay='none', trigger='hover', className='') -%}
+  {{ AnimatedElement('div', 'scale-' + direction, duration, delay, 'ease-out', trigger, false, '', '', '', className, content) }}
+{%- endmacro -%}
+
+{#
+  LoadingAnimation - Animated loading indicators
+#}
+{%- macro LoadingAnimation(type='pulse', size='md', color='neutral', duration='normal', className='') -%}
+  {%- set sizes = {
+    'xs': 'w-3 h-3',
+    'sm': 'w-4 h-4', 
+    'md': 'w-6 h-6',
+    'lg': 'w-8 h-8',
+    'xl': 'w-12 h-12'
+  } -%}
+  
+  {%- set colors = {
+    'neutral': 'bg-neutral-400',
+    'sand': 'bg-sand-400',
+    'apple-blue': 'bg-apple-blue',
+    'success': 'bg-green-400',
+    'warning': 'bg-yellow-400',
+    'danger': 'bg-red-400'
+  } -%}
+
+  <div class="loading-animation {{ sizes[size] }} {{ colors[color] }} rounded-full{% if className %} {{ className }}{% endif %}">
+    {{ AnimatedElement('div', type, duration, 'none', 'ease-in-out', 'immediate', true, '', '', '', 'w-full h-full rounded-full') }}
+  </div>
+{%- endmacro -%}
+
+{#
+  StaggeredAnimation - Multiple elements with staggered timing
+#}
+{%- macro StaggeredAnimation(items, animation='fade-in', staggerDelay='100ms', duration='normal', className='') -%}
+  <div class="staggered-animation{% if className %} {{ className }}{% endif %}">
+    {% for item in items %}
+      {{ AnimatedElement('div', animation, duration, 'custom', 'ease-out', 'scroll', false, '', (loop.index0 * staggerDelay|int) + 'ms', '', 'stagger-item', item) }}
+    {% endfor %}
+  </div>
+{%- endmacro -%}
+
+{#
+  HoverEffect - Hover-triggered animations
+#}
+{%- macro HoverEffect(content, effect='scale-in', intensity='normal', className='') -%}
+  {%- set intensities = {
+    'subtle': 'hover-effect-subtle',
+    'normal': 'hover-effect-normal', 
+    'strong': 'hover-effect-strong'
+  } -%}
+  
+  <div class="hover-effect {{ intensities[intensity] }} group cursor-pointer{% if className %} {{ className }}{% endif %}">
+    {{ AnimatedElement('div', effect, 'fast', 'none', 'ease-out', 'hover', false, '', '', '', 'transition-all duration-200', content) }}
+  </div>
+{%- endmacro -%}
+
+{#
+  ScrollReveal - Elements that animate when scrolled into view
+#}
+{%- macro ScrollReveal(content, animation='slide-in-up', threshold='0.1', duration='normal', delay='none', className='') -%}
+  <div 
+    class="scroll-reveal{% if className %} {{ className }}{% endif %}"
+    data-animation="{{ animation }}"
+    data-threshold="{{ threshold }}"
+    data-duration="{{ duration }}"
+    data-delay="{{ delay }}"
+  >
+    {{ content }}
+  </div>
+{%- endmacro -%}
+
+{#
+  ParallaxElement - Simple parallax scroll effect
+#}
+{%- macro ParallaxElement(content, speed='0.5', direction='vertical', className='') -%}
+  <div 
+    class="parallax-element{% if className %} {{ className }}{% endif %}"
+    data-parallax-speed="{{ speed }}"
+    data-parallax-direction="{{ direction }}"
+  >
+    {{ content }}
+  </div>
+{%- endmacro -%}
+
+{#
+  SequenceAnimation - Chain of animations
+#}
+{%- macro SequenceAnimation(steps, className='') -%}
+  <div class="sequence-animation{% if className %} {{ className }}{% endif %}" data-sequence='{{ steps | tojson }}'>
+    <!-- Animation sequence controlled by JavaScript -->
+  </div>
+{%- endmacro -%}
+
+{#
+  MorphTransition - Smooth morphing between states
+#}
+{%- macro MorphTransition(beforeContent, afterContent, trigger='hover', duration='normal', className='') -%}
+  <div class="morph-transition group cursor-pointer{% if className %} {{ className }}{% endif %}">
+    <div class="morph-before transition-all duration-300 group-hover:opacity-0 group-hover:scale-95">
+      {{ beforeContent }}
+    </div>
+    <div class="morph-after absolute inset-0 opacity-0 scale-105 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
+      {{ afterContent }}
+    </div>
+  </div>
+{%- endmacro -%}
+
+{#
+  GlowEffect - Animated glow effects
+#}
+{%- macro GlowEffect(content, color='apple-blue', intensity='normal', animated=true, className='') -%}
+  {%- set colors = {
+    'apple-blue': 'shadow-apple-blue/50',
+    'sand': 'shadow-sand-400/50',
+    'success': 'shadow-green-400/50',
+    'warning': 'shadow-yellow-400/50',
+    'danger': 'shadow-red-400/50',
+    'neutral': 'shadow-neutral-400/50'
+  } -%}
+  
+  {%- set intensities = {
+    'subtle': 'shadow-sm',
+    'normal': 'shadow-lg',
+    'strong': 'shadow-xl'
+  } -%}
+
+  <div class="glow-effect {{ colors[color] }} {{ intensities[intensity] }}{% if animated %} animate-glow{% endif %}{% if className %} {{ className }}{% endif %}">
+    {{ content }}
+  </div>
+{%- endmacro -%}
+
+{#
+  TextAnimation - Animated text effects
+#}
+{%- macro TextAnimation(text, effect='typewriter', speed='normal', className='') -%}
+  {%- set effects = {
+    'typewriter': 'text-typewriter',
+    'fade-in-words': 'text-fade-words',
+    'slide-in-letters': 'text-slide-letters',
+    'rainbow': 'text-rainbow',
+    'glitch': 'text-glitch'
+  } -%}
+
+  <span 
+    class="text-animation {{ effects[effect] }}{% if className %} {{ className }}{% endif %}"
+    data-text="{{ text }}"
+    data-speed="{{ speed }}"
+  >
+    {{ text }}
+  </span>
+{%- endmacro -%}
+
+{#
+  Usage Examples:
+
+  Basic animated element:
+  {{ AnimatedElement('div', 'fade-in', 'normal', 'short', 'ease-out', 'scroll', false, '', '', '', 'p-4', 'Animated content') }}
+
+  Fade transition:
+  {{ FadeTransition('This fades in smoothly', 'in', 'slow', 'medium') }}
+
+  Slide transition:
+  {{ SlideTransition('Slides in from below', 'up', 'normal', 'none', 'scroll') }}
+
+  Scale on hover:
+  {{ ScaleTransition('Hover to scale', 'in', 'fast', 'none', 'hover') }}
+
+  Loading animation:
+  {{ LoadingAnimation('pulse', 'md', 'apple-blue', 'normal') }}
+
+  Staggered list:
+  {{ StaggeredAnimation(['Item 1', 'Item 2', 'Item 3'], 'slide-in-left', '150ms') }}
+
+  Hover effect:
+  {{ HoverEffect('Hover me!', 'scale-in', 'normal') }}
+
+  Scroll reveal:
+  {{ ScrollReveal('Reveals on scroll', 'slide-in-up', '0.2') }}
+
+  Parallax element:
+  {{ ParallaxElement('Parallax content', '0.5', 'vertical') }}
+
+  Morph transition:
+  {{ MorphTransition('Before', 'After', 'hover') }}
+
+  Glow effect:
+  {{ GlowEffect('Glowing content', 'apple-blue', 'normal', true) }}
+
+  Text animation:
+  {{ TextAnimation('Animated text', 'typewriter', 'normal') }}
+#} 
