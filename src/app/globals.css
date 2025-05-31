@@ -1,0 +1,284 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================================================================
+   DESIGN SYSTEM - Enhanced Apple-inspired professional theme
+   ================================================================ */
+
+:root {
+  /* Core Sand/Professional Palette - More neutral, serious tones */
+  --sand-50: #fef7ed;
+  --sand-100: #fdf2e3;
+  --sand-200: #f8e4c7;
+  --sand-300: #f0d0a0;
+  --sand-400: #e6bc7a;
+  --sand-500: #d4a665;
+  --sand-600: #bf934e;
+  --sand-700: #a67d3a;
+  --sand-800: #8b6b2a;
+
+  /* Complementary Professional Orange - Toned down */
+  --sunset-400: #e6824a;
+  --sunset-500: #d9732f;
+  --sunset-600: #c4641f;
+  --sunset-700: #ab5516;
+
+  /* Supporting Earth Tones - More muted */
+  --amber-300: #e6c547;
+  --amber-600: #c69806;
+
+  /* Professional Neutrals - Brighter for better contrast */
+  --neutral-50: #fefefe;
+  --neutral-100: #f8f8f7;
+  --neutral-200: #eeede9;
+  --neutral-300: #e0ddd6;
+  --neutral-400: #b8b3a8;
+  --neutral-500: #8a8478;
+  --neutral-600: #6b6459;
+  --neutral-700: #534f47;
+  --neutral-800: #3a362f;
+  --neutral-900: #2b2822;
+
+  /* Medium Brightness Dark Theme Colors */
+  --dark-900: #151310;
+  --dark-800: #201c18;
+  --dark-700: #332a22;
+
+  /* Apple-style Blue Accents - More professional */
+  --apple-blue: #0071e3;
+  --apple-blue-light: #4a9eff;
+  --apple-blue-dark: #0056b8;
+
+  /* State Colors */
+  --success: #30d158;
+  --warning: #ff9f0a;
+  --error: #ff453a;
+  --info: #64d2ff;
+
+  /* Typography scale */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+  --font-size-6xl: 3.75rem;
+
+  /* Spacing scale */
+  --space-0-5: 0.125rem;
+  --space-1: 0.25rem;
+  --space-1-5: 0.375rem;
+  --space-2: 0.5rem;
+  --space-2-5: 0.625rem;
+  --space-3: 0.75rem;
+  --space-3-5: 0.875rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-7: 1.75rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-14: 3.5rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+
+  /* Border radius */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+  --radius-full: 9999px;
+
+  /* Focus ring */
+  --focus-ring: 0 0 0 3px rgba(0, 122, 255, 0.15);
+  --focus-ring-dark: 0 0 0 3px rgba(100, 210, 255, 0.2);
+
+  /* Glass morphism variables */
+  --glass-bg-light: rgba(254, 247, 237, 0.12);
+  --glass-bg-medium: rgba(254, 247, 237, 0.1);
+  --glass-bg-dark: rgba(51, 42, 33, 0.7);
+  --glass-border-light: rgba(254, 247, 237, 0.18);
+  --glass-border-medium: rgba(254, 247, 237, 0.15);
+  --glass-border-dark: rgba(240, 208, 160, 0.12);
+
+  /* Medium brightness cosmic background */
+  --spacey-bg:
+    radial-gradient(ellipse at 75% -10%,
+      rgba(0, 113, 227, 0.18) 0%,
+      transparent 60%),
+    radial-gradient(circle at 25% 90%,
+      rgba(111, 168, 230, 0.08) 0%,
+      transparent 50%),
+    radial-gradient(circle at 10% 80%,
+      rgba(230, 188, 122, 0.12) 0%,
+      transparent 40%),
+    radial-gradient(circle at 90% 40%,
+      rgba(230, 197, 71, 0.08) 0%,
+      transparent 45%),
+    radial-gradient(circle at 50% 70%,
+      rgba(166, 125, 58, 0.05) 0%,
+      transparent 35%),
+    linear-gradient(135deg, var(--dark-900) 0%, var(--dark-800) 100%);
+
+  --background: var(--dark-900);
+  --foreground: var(--neutral-100);
+}
+
+/* ================================================================
+   BASE STYLES
+   ================================================================ */
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family:
+    'Inter',
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background: var(--spacey-bg);
+  color: var(--foreground);
+  min-height: 100vh;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ================================================================
+   ACCESSIBILITY IMPROVEMENTS
+   ================================================================ */
+
+/* Focus styles for better accessibility */
+*:focus-visible {
+  outline: 2px solid var(--apple-blue);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --neutral-100: #ffffff;
+    --neutral-900: #000000;
+    --apple-blue: #0066cc;
+  }
+}
+
+/* ================================================================
+   UTILITY CLASSES
+   ================================================================ */
+
+.glass-card {
+  background: var(--glass-bg-dark);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 0.5px solid var(--glass-border-dark);
+  border-radius: var(--radius-lg);
+  box-shadow:
+    inset 0 1px 0 rgba(254, 247, 237, 0.05),
+    0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-6);
+  border: 0.5px solid rgba(240, 208, 160, 0.15);
+  border-radius: var(--radius-lg);
+  background: rgba(240, 208, 160, 0.1);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  color: var(--neutral-100);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  line-height: 1.5;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  box-shadow:
+    inset 0 1px 0 rgba(254, 247, 237, 0.05),
+    0 4px 16px rgba(0, 0, 0, 0.06);
+  letter-spacing: -0.01em;
+  min-height: 44px;
+}
+
+.btn-primary:hover {
+  background: rgba(240, 208, 160, 0.14);
+  border-color: rgba(240, 208, 160, 0.2);
+  color: var(--neutral-50);
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(254, 247, 237, 0.08),
+    0 6px 24px rgba(0, 0, 0, 0.08);
+}
+
+.btn-primary:focus-visible {
+  box-shadow:
+    var(--focus-ring-dark),
+    inset 0 1px 0 rgba(254, 247, 237, 0.05),
+    0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* ================================================================
+   LINE CLAMP UTILITIES
+   ================================================================ */
+
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
