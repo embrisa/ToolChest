@@ -200,6 +200,36 @@ Use `@/` prefix for all imports: `@/components/ui`, `@/services/tools`, `@/types
   - Features: Generic progress bar, stage messages, time estimates
   - Usage: `<ProgressCard progress={{progress: 75, stage: "processing"}} title="Encoding" />`
 
+### Tool Page Template Components (`@/components/ui`)
+
+- **`ToolPageTemplate`** - Complete tool page template combining all common elements
+  - Features: Hero, privacy badge, feature grid, info section, animations
+  - Usage: `<ToolPageTemplate title="Tool Name" description="..." infoSection={{...}}><ToolComponent /></ToolPageTemplate>`
+
+- **`ToolPageLayout`** - Common layout structure with background patterns
+  - Features: Background mesh, noise overlay, responsive container
+  - Usage: `<ToolPageLayout><content /></ToolPageLayout>`
+
+- **`ToolPageHero`** - Hero section with icon, title, and description
+  - Features: Customizable icons, gradient text, responsive sizing
+  - Usage: `<ToolPageHero title="Tool Name" description="..." iconText="T" />`
+
+- **`PrivacyBadge`** - Privacy-first messaging with customizable colors
+  - Features: Animated pulse, customizable styling, consistent messaging
+  - Usage: `<PrivacyBadge message="🔒 Privacy-First • Client-Side Processing" />`
+
+- **`FeatureCard`** - Individual feature display card
+  - Features: Icon support, badges, hover effects, consistent styling
+  - Usage: `<FeatureCard title="Feature" description="..." icon={<Icon />} />`
+
+- **`FeatureGrid`** - Responsive grid layout for feature cards
+  - Features: Responsive columns, optional title/description, animation delays
+  - Usage: `<FeatureGrid features={[...]} columns={{md: 2, lg: 4}} />`
+
+- **`ToolInfoSection`** - Information section with multiple subsections
+  - Features: Two-column layout, custom icons, list items with icons
+  - Usage: `<ToolInfoSection title="About" description="..." sections={[...]} />`
+
 ### Error Handling Components (`@/components/errors`)
 
 - **`ErrorBoundary`** - React error boundary with recovery options

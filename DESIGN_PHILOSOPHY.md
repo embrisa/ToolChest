@@ -122,7 +122,7 @@ Each tool has its own identity color for consistency:
 #### **Primary Font: Inter Variable**
 
 ```css
-font-family: "Inter Variable", "Inter", system-ui, sans-serif;
+font-family: "Inter Variable", "Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
 ```
 
 - **Usage**: Body text, headings, UI elements
@@ -132,12 +132,20 @@ font-family: "Inter Variable", "Inter", system-ui, sans-serif;
 #### **Monospace Font: JetBrains Mono Variable**
 
 ```css
-font-family:
-  "JetBrains Mono Variable", "JetBrains Mono", "Fira Code", monospace;
+font-family: "JetBrains Mono Variable", "JetBrains Mono", "Fira Code", "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", "Source Code Pro", "Menlo", "Consolas", "DejaVu Sans Mono", monospace;
 ```
 
 - **Usage**: Code blocks, file names, technical data, input fields with technical content
 - **Rationale**: Developer-focused, excellent character distinction, ligature support
+
+#### **Heading Font: Clash Display Variable**
+
+```css
+font-family: "Clash Display Variable", "Clash Display", "Inter Variable", "Inter", system-ui, sans-serif;
+```
+
+- **Usage**: Display headings, hero titles, major section headers
+- **Rationale**: Modern, sophisticated display font for impactful headings
 
 ### Typography Scale
 
@@ -489,49 +497,127 @@ Before implementing any layout, ensure:
 #### **Border Radius Scale**
 
 ```css
---radius-sm: 0.5rem; /* 8px  - Small elements */
---radius-md: 0.75rem; /* 12px - Standard elements */
---radius-lg: 1rem; /* 16px - Cards, buttons */
---radius-xl: 1.5rem; /* 24px - Large surfaces */
---radius-2xl: 2rem; /* 32px - Hero elements */
+/* Default Tailwind values, plus custom extensions */
+--radius-sm: 0.125rem; /* 2px - Tailwind default */
+--radius-default: 0.25rem; /* 4px - Tailwind default */
+--radius-md: 0.375rem; /* 6px - Tailwind default */
+--radius-lg: 0.5rem; /* 8px - Tailwind default */
+--radius-xl: 0.75rem; /* 12px - Tailwind default */
+--radius-2xl: 1rem; /* 16px - Tailwind default */
+--radius-3xl: 1.5rem; /* 24px - Tailwind default */
+--radius-4xl: 2rem; /* 32px - Custom extension */
+--radius-5xl: 2.5rem; /* 40px - Custom extension */
+--radius-6xl: 3rem; /* 48px - Custom extension */
 ```
 
 #### **Shadow System**
 
 ```css
 /* Elevation system for depth and hierarchy */
---shadow-soft: 0 2px 8px rgb(0 0 0 / 0.04); /* Subtle elevation */
---shadow-medium: 0 4px 12px rgb(0 0 0 / 0.08); /* Standard cards */
---shadow-large: 0 8px 24px rgb(0 0 0 / 0.12); /* Elevated elements */
---shadow-colored: 0 4px 14px rgb(14 165 233 / 0.15); /* Brand shadows */
+--shadow-soft: 0 2px 8px 0 rgb(0 0 0 / 0.04); /* Subtle elevation */
+--shadow-medium: 0 4px 12px 0 rgb(0 0 0 / 0.08); /* Standard cards */
+--shadow-large: 0 8px 24px 0 rgb(0 0 0 / 0.12); /* Elevated elements */
+--shadow-extra-large: 0 12px 32px 0 rgb(0 0 0 / 0.16); /* Major elevation */
+--shadow-glow: 0 0 20px rgb(14 165 233 / 0.15); /* Brand glow */
+--shadow-glow-accent: 0 0 20px rgb(217 70 239 / 0.15); /* Accent glow */
+--shadow-inner-soft: inset 0 1px 3px 0 rgb(0 0 0 / 0.05); /* Inset shadows */
+--shadow-colored: 0 4px 14px 0 rgb(14 165 233 / 0.15); /* Brand shadows */
 ```
 
 ---
 
 ## 🧩 Component Philosophy
 
-### Component Categories
+### Actual Component Classes (from globals.css)
 
-#### **Foundation Components**
+#### **Button Components**
 
-- **Button**: Primary, secondary, ghost, and danger variants with consistent sizing
-- **Input**: Form controls with validation states and accessibility features
-- **Card**: Flexible container with header, content, and footer sections
-- **Loading**: Skeleton loaders and progress indicators with ARIA announcements
+```css
+.btn-primary {
+  @apply inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white;
+  @apply bg-brand-500 hover:bg-brand-600 rounded-lg shadow-lg transition-all duration-200;
+  @apply focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center px-6 py-3 text-sm font-medium;
+  @apply bg-neutral-100 hover:bg-neutral-150 text-neutral-700 rounded-lg shadow transition-all duration-200;
+  @apply focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2;
+}
+```
+
+#### **Card Components**
+
+```css
+.card {
+  @apply bg-neutral-50 rounded-lg shadow-soft border border-neutral-200 transition-all duration-200;
+}
+
+.card-interactive {
+  @apply card hover:shadow-medium hover:scale-105 cursor-pointer;
+  @apply hover:bg-neutral-25 hover:border-neutral-250;
+}
+```
+
+#### **Form Components**
+
+```css
+.input-field {
+  @apply w-full px-4 py-3 text-sm bg-neutral-50 border border-neutral-200 rounded-lg;
+  @apply text-neutral-700 placeholder:text-neutral-400;
+  @apply focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500;
+  @apply focus:bg-neutral-25 transition-all duration-200;
+}
+```
+
+#### **Typography Utilities**
+
+```css
+.text-primary { @apply text-neutral-700; /* 9.2:1 contrast ratio */ }
+.text-secondary { @apply text-neutral-500; /* 7.1:1 contrast ratio */ }
+.text-tertiary { @apply text-neutral-600; /* 8.1:1 contrast ratio */ }
+.text-muted { @apply text-neutral-400; /* 4.8:1 contrast ratio */ }
+```
 
 #### **Layout Components**
 
-- **Container**: Responsive width containers with consistent padding
-- **Grid**: CSS Grid-based layouts with proper responsive breakpoints
-- **Stack**: Vertical spacing utility for consistent content flow
-- **Header/Footer**: Site-wide navigation and branding elements
+```css
+.container-wide { @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-12; }
+.container-narrow { @apply max-w-4xl mx-auto px-6 sm:px-8 lg:px-12; }
+.container-text { @apply max-w-3xl mx-auto px-6 sm:px-8; }
+```
 
-#### **Tool Components**
+#### **Section Spacing**
 
-- **ToolCard**: Specialized cards for tool discovery with hover effects
-- **FileUpload**: Drag-and-drop file handling with accessibility
-- **ProgressIndicator**: Real-time progress for file processing
-- **ResultDisplay**: Consistent output formatting across tools
+```css
+.section-spacing-sm { @apply py-12 lg:py-16; }
+.section-spacing-md { @apply py-16 lg:py-20; }
+.section-spacing-lg { @apply py-20 lg:py-24; }
+.section-spacing-xl { @apply py-24 lg:py-32; }
+```
+
+#### **Special Effects**
+
+```css
+.noise-texture {
+  position: relative;
+}
+
+.noise-texture::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bg-gradient-shift {
+  background: linear-gradient(-45deg, rgba(14, 165, 233, 0.15), rgba(147, 51, 234, 0.12), rgba(6, 182, 212, 0.15), rgba(59, 130, 246, 0.12));
+  background-size: 400% 400%;
+  animation: colorShift 120s ease-in-out infinite;
+}
+```
 
 ### Component Guidelines
 
@@ -562,7 +648,7 @@ Every component should be designed for reuse across multiple contexts. Props sho
 
 - **Enhanced Text Contrast**: Minimum 7:1 ratio for normal text, 4.5:1 for large text (WCAG AAA)
 - **Interactive Elements**: Minimum 4.5:1 contrast for interactive components
-- **Background Balance**: Muted light gray backgrounds (#f1f3f4) maintain dark aesthetic while providing sufficient contrast
+- **Background Balance**: Muted light gray backgrounds (#f1f3f4) provide professional aesthetic while maintaining excellent contrast
 - **Color Independence**: Information never conveyed by color alone
 - **Visual Hierarchy**: Clear distinction between background, surface, and text colors
 
@@ -651,13 +737,13 @@ Every component should be designed for reuse across multiple contexts. Props sho
 
 ### Professional Light Theme
 
-#### **CSS Custom Properties**
+#### **CSS Custom Properties (from globals.css)**
 
 Our design system uses CSS custom properties for consistent light mode styling:
 
 ```css
 :root {
-  /* Light theme variables */
+  /* Light theme variables - actual values from globals.css */
   --background: 241 243 244; /* neutral-100 - primary background */
   --background-secondary: 232 234 237; /* neutral-150 - secondary surfaces */
   --background-tertiary: 248 249 250; /* neutral-50 - elevated surfaces (cards) */
@@ -667,6 +753,13 @@ Our design system uses CSS custom properties for consistent light mode styling:
   --border: 218 220 224; /* neutral-200 - borders */
   --border-secondary: 232 234 237; /* neutral-150 - subtle borders */
   --ring: 14 165 233; /* brand-500 - focus rings */
+}
+
+/* Body defaults */
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background-color: #f1f3f4; /* neutral-100 */
+  color: #202124; /* neutral-700 */
 }
 ```
 
@@ -706,7 +799,7 @@ Colors are mapped to semantic purposes for consistent usage:
 ### Breakpoint System
 
 ```css
-/* Mobile-first responsive breakpoints */
+/* Mobile-first responsive breakpoints (Tailwind defaults) */
 --breakpoint-sm: 640px; /* Large phones */
 --breakpoint-md: 768px; /* Tablets */
 --breakpoint-lg: 1024px; /* Small laptops */
@@ -825,6 +918,83 @@ Colors are mapped to semantic purposes for consistent usage:
 - **Error Tracking**: Comprehensive error logging and alerts
 - **User Analytics**: Privacy-first analytics for usage insights
 - **Performance Budgets**: Automated alerts for performance regressions
+
+---
+
+## 🔧 Actual Tailwind Extensions & Plugins
+
+### Custom Tailwind Utilities (from tailwind.config.js)
+
+#### **Text Wrapping Utilities**
+
+```css
+.text-balance { text-wrap: balance; }
+.text-pretty { text-wrap: pretty; }
+```
+
+#### **Glass Effect Utilities**
+
+```css
+.glass {
+  backdrop-filter: blur(10px);
+  background-color: rgb(255 255 255 / 0.1);
+  border: 1px solid rgb(255 255 255 / 0.2);
+}
+
+.glass-dark {
+  backdrop-filter: blur(10px);
+  background-color: rgb(0 0 0 / 0.2);
+  border: 1px solid rgb(255 255 255 / 0.1);
+}
+```
+
+### Extended Animations
+
+Our Tailwind config includes custom animations beyond the defaults:
+
+```css
+/* Animation classes available */
+.animate-fade-in
+.animate-fade-in-up
+.animate-fade-in-down
+.animate-slide-up
+.animate-slide-down
+.animate-slide-left
+.animate-slide-right
+.animate-scale-in
+.animate-scale-out
+.animate-bounce-gentle
+.animate-pulse-gentle
+.animate-shimmer
+.animate-gradient
+.animate-float
+.animate-glow
+```
+
+### Extended Spacing Values
+
+Beyond Tailwind defaults, we have custom spacing:
+
+```css
+/* Custom spacing extensions */
+4.5: "1.125rem", /* 18px */
+5.5: "1.375rem", /* 22px */
+6.5: "1.625rem", /* 26px */
+7.5: "1.875rem", /* 30px */
+8.5: "2.125rem", /* 34px */
+9.5: "2.375rem", /* 38px */
+13: "3.25rem",   /* 52px */
+15: "3.75rem",   /* 60px */
+17: "4.25rem",   /* 68px */
+18: "4.5rem",    /* 72px */
+19: "4.75rem",   /* 76px */
+21: "5.25rem",   /* 84px */
+22: "5.5rem",    /* 88px */
+26: "6.5rem",    /* 104px */
+30: "7.5rem",    /* 120px */
+34: "8.5rem",    /* 136px */
+38: "9.5rem",    /* 152px */
+```
 
 ---
 

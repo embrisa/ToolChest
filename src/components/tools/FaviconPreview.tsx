@@ -40,18 +40,21 @@ export function FaviconPreview({
     faviconUrl: string;
     size: number;
   }) => (
-    <div className="surface rounded-t-xl p-3 border-b-0 max-w-xs shadow-medium">
-      <div className="flex items-center space-x-3 bg-white dark:bg-neutral-800 rounded-lg p-3 shadow-soft border border-neutral-200 dark:border-neutral-700">
+    <div className="bg-neutral-50 rounded-t-xl p-4 border-b-0 max-w-sm shadow-soft">
+      <div className="flex items-center gap-3 bg-neutral-25 rounded-lg p-3 shadow-soft border border-neutral-200">
         <img
           src={faviconUrl}
           alt="Favicon in browser tab"
           className="w-4 h-4 flex-shrink-0"
           style={{ imageRendering: size <= 32 ? "pixelated" : "auto" }}
         />
-        <span className="text-sm text-neutral-700 dark:text-neutral-300 truncate font-medium">
-          tool-chest - Your site
+        <span className="text-sm text-foreground truncate font-medium">
+          tool-chest - Your Site
         </span>
-        <button className="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 text-sm ml-auto focus:outline-none focus:ring-2 focus:ring-neutral-500/50 rounded">
+        <button
+          className="text-neutral-400 hover:text-neutral-600 text-sm ml-auto focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 rounded p-1"
+          aria-label="Close tab"
+        >
           ×
         </button>
       </div>
@@ -65,8 +68,8 @@ export function FaviconPreview({
     faviconUrl: string;
     size: number;
   }) => (
-    <div className="surface rounded-xl p-4 shadow-medium max-w-xs hover:shadow-large transition-all duration-200">
-      <div className="flex items-center space-x-3">
+    <div className="bg-neutral-50 rounded-xl p-4 shadow-soft max-w-sm hover:shadow-medium transition-all duration-200 border border-neutral-200">
+      <div className="flex items-center gap-3">
         <img
           src={faviconUrl}
           alt="Favicon in bookmark"
@@ -74,14 +77,14 @@ export function FaviconPreview({
           style={{ imageRendering: size <= 32 ? "pixelated" : "auto" }}
         />
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100 truncate">
+          <p className="text-sm font-medium text-foreground truncate">
             tool-chest
           </p>
-          <p className="text-xs text-neutral-500 dark:text-neutral-400 truncate">
+          <p className="text-xs text-foreground-secondary truncate">
             tool-chest.com
           </p>
         </div>
-        <div className="text-warning-500 dark:text-warning-400 text-sm">⭐</div>
+        <div className="text-amber-500 text-sm" aria-label="Bookmarked">⭐</div>
       </div>
     </div>
   );
@@ -93,23 +96,24 @@ export function FaviconPreview({
     faviconUrl: string;
     size: number;
   }) => (
-    <div className="flex flex-col items-center space-y-3 p-6">
+    <div className="flex flex-col items-center gap-3 p-6">
       <div className="relative group">
         <img
           src={faviconUrl}
           alt="Favicon as desktop icon"
-          className="w-16 h-16 rounded-2xl shadow-large hover:shadow-extra-large transition-all duration-200 hover:scale-105"
+          className="w-16 h-16 rounded-2xl shadow-medium hover:shadow-large transition-all duration-200 hover:scale-105"
           style={{
             imageRendering: size <= 64 ? "pixelated" : "auto",
             filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.15))",
           }}
         />
-        <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-brand-500 rounded-full border-2 border-white dark:border-neutral-900 flex items-center justify-center shadow-medium">
+        <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-500 rounded-full border-2 border-neutral-25 flex items-center justify-center shadow-soft">
           <svg
             className="w-3 h-3 text-white"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
@@ -120,7 +124,7 @@ export function FaviconPreview({
           </svg>
         </div>
       </div>
-      <span className="text-xs text-neutral-600 dark:text-neutral-400 text-center max-w-20 truncate font-medium">
+      <span className="text-xs text-foreground-secondary text-center max-w-20 truncate font-medium">
         tool-chest
       </span>
     </div>
@@ -139,13 +143,14 @@ export function FaviconPreview({
 
     if (relevantSizes.length === 0) {
       return (
-        <div className="text-center py-12 space-y-4">
-          <div className="w-16 h-16 mx-auto bg-neutral-100 dark:bg-neutral-800 rounded-2xl flex items-center justify-center">
+        <div className="text-center py-12 space-y-6">
+          <div className="w-16 h-16 mx-auto bg-neutral-100 rounded-2xl flex items-center justify-center shadow-soft">
             <svg
-              className="w-8 h-8 text-neutral-400 dark:text-neutral-500"
+              className="w-8 h-8 text-neutral-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -155,11 +160,11 @@ export function FaviconPreview({
               />
             </svg>
           </div>
-          <div>
-            <p className="text-neutral-500 dark:text-neutral-400 font-medium">
+          <div className="space-y-3">
+            <p className="text-foreground-secondary font-medium text-body">
               No suitable sizes generated for {context.name}
             </p>
-            <p className="text-sm text-neutral-400 dark:text-neutral-500 mt-2 max-w-md mx-auto">
+            <p className="text-sm text-neutral-400 max-w-md mx-auto leading-relaxed">
               {context.id === "browser" &&
                 "Generate 16px or 32px sizes for browser tabs"}
               {context.id === "bookmark" &&
@@ -174,11 +179,11 @@ export function FaviconPreview({
 
     return (
       <div className="space-y-8">
-        <div className="text-center space-y-2">
-          <h4 className="text-title text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+        <div className="text-center space-y-3">
+          <h4 className="text-title text-xl font-semibold text-foreground">
             {context.name}
           </h4>
-          <p className="text-body text-neutral-600 dark:text-neutral-400">
+          <p className="text-body text-foreground-secondary max-w-2xl mx-auto">
             {context.description}
           </p>
         </div>
@@ -190,14 +195,14 @@ export function FaviconPreview({
             return (
               <div key={sizeKey} className="space-y-4">
                 <div className="text-center">
-                  <span className="inline-flex items-center px-3 py-1 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                  <span className="inline-flex items-center px-4 py-2 rounded-lg bg-neutral-100 border border-neutral-200 text-sm font-medium text-foreground shadow-soft">
                     {size.name} • {size.width}×{size.height}
                   </span>
                 </div>
 
                 <div
-                  className="flex justify-center p-6 rounded-2xl border border-neutral-200 dark:border-neutral-700 transition-all duration-200 hover:border-neutral-300 dark:hover:border-neutral-600"
-                  style={{ backgroundColor: context.backgroundColor }}
+                  className="flex justify-center p-6 rounded-2xl border border-neutral-200 transition-all duration-200 hover:border-neutral-300 hover:shadow-soft"
+                  style={{ backgroundColor: context.backgroundColor || '#f8f9fa' }}
                 >
                   {context.id === "browser" && (
                     <BrowserTabPreview faviconUrl={url!} size={size.width} />
@@ -215,13 +220,14 @@ export function FaviconPreview({
         </div>
 
         {/* Size Information */}
-        <div className="p-6 bg-gradient-to-r from-brand-50 to-accent-50 dark:from-brand-950/20 dark:to-accent-950/20 rounded-2xl border border-brand-200 dark:border-brand-800">
-          <h5 className="text-sm font-semibold text-brand-900 dark:text-brand-100 mb-3 flex items-center">
+        <div className="p-6 bg-gradient-to-r from-emerald-50 to-green-50 rounded-2xl border border-emerald-200 shadow-soft">
+          <h5 className="text-body font-semibold text-emerald-900 mb-4 flex items-center">
             <svg
-              className="w-4 h-4 mr-2"
+              className="w-5 h-5 mr-3 text-emerald-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -230,54 +236,54 @@ export function FaviconPreview({
                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            Size Recommendations
+            Size Recommendations for {context.name}
           </h5>
-          <div className="text-sm text-brand-800 dark:text-brand-200 space-y-2">
+          <div className="text-sm text-emerald-800 space-y-3">
             {context.id === "browser" && (
               <>
                 <p className="flex items-center">
-                  <span className="w-2 h-2 bg-brand-500 rounded-full mr-3"></span>
-                  16×16px: Standard browser favicon
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full mr-3 flex-shrink-0"></span>
+                  <span><strong>16×16px:</strong> Standard browser favicon for tabs</span>
                 </p>
                 <p className="flex items-center">
-                  <span className="w-2 h-2 bg-brand-500 rounded-full mr-3"></span>
-                  32×32px: High-DPI browser displays
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full mr-3 flex-shrink-0"></span>
+                  <span><strong>32×32px:</strong> High-DPI browser displays and shortcuts</span>
                 </p>
               </>
             )}
             {context.id === "bookmark" && (
               <>
                 <p className="flex items-center">
-                  <span className="w-2 h-2 bg-accent-500 rounded-full mr-3"></span>
-                  16×16px: Basic bookmark icon
+                  <span className="w-2 h-2 bg-sky-500 rounded-full mr-3 flex-shrink-0"></span>
+                  <span><strong>16×16px:</strong> Basic bookmark icon in toolbars</span>
                 </p>
                 <p className="flex items-center">
-                  <span className="w-2 h-2 bg-accent-500 rounded-full mr-3"></span>
-                  32×32px: Standard bookmark bar
+                  <span className="w-2 h-2 bg-sky-500 rounded-full mr-3 flex-shrink-0"></span>
+                  <span><strong>32×32px:</strong> Standard bookmark bar display</span>
                 </p>
                 <p className="flex items-center">
-                  <span className="w-2 h-2 bg-accent-500 rounded-full mr-3"></span>
-                  48×48px: Large bookmark displays
+                  <span className="w-2 h-2 bg-sky-500 rounded-full mr-3 flex-shrink-0"></span>
+                  <span><strong>48×48px:</strong> Large bookmark grid views</span>
                 </p>
               </>
             )}
             {context.id === "desktop" && (
               <>
                 <p className="flex items-center">
-                  <span className="w-2 h-2 bg-success-500 rounded-full mr-3"></span>
-                  64×64px: Small desktop icons
+                  <span className="w-2 h-2 bg-purple-500 rounded-full mr-3 flex-shrink-0"></span>
+                  <span><strong>64×64px:</strong> Small desktop icons and taskbar</span>
                 </p>
                 <p className="flex items-center">
-                  <span className="w-2 h-2 bg-success-500 rounded-full mr-3"></span>
-                  128×128px: Standard desktop icons
+                  <span className="w-2 h-2 bg-purple-500 rounded-full mr-3 flex-shrink-0"></span>
+                  <span><strong>128×128px:</strong> Standard desktop icons</span>
                 </p>
                 <p className="flex items-center">
-                  <span className="w-2 h-2 bg-success-500 rounded-full mr-3"></span>
-                  192×192px: Android home screen
+                  <span className="w-2 h-2 bg-purple-500 rounded-full mr-3 flex-shrink-0"></span>
+                  <span><strong>192×192px:</strong> Android home screen icons</span>
                 </p>
                 <p className="flex items-center">
-                  <span className="w-2 h-2 bg-success-500 rounded-full mr-3"></span>
-                  512×512px: iOS/high-res displays
+                  <span className="w-2 h-2 bg-purple-500 rounded-full mr-3 flex-shrink-0"></span>
+                  <span><strong>512×512px:</strong> iOS and high-resolution displays</span>
                 </p>
               </>
             )}
@@ -288,12 +294,17 @@ export function FaviconPreview({
   };
 
   return (
-    <div className={`space-y-6 animate-fade-in-up ${className}`}>
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <h3 className="text-title text-xl font-semibold text-neutral-900 dark:text-neutral-100">
-          {title}
-        </h3>
-        <div className="flex flex-wrap gap-2">
+    <div className={`space-y-8 animate-fade-in-up ${className}`}>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+        <div className="space-y-2">
+          <h3 className="text-title text-xl font-semibold text-foreground">
+            {title}
+          </h3>
+          <p className="text-sm text-foreground-secondary">
+            Preview your favicons in realistic browser contexts
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-3">
           {contexts.map((context) => (
             <Button
               key={context.id}
@@ -304,6 +315,7 @@ export function FaviconPreview({
                 onContextChange?.(context.id);
               }}
               className="text-sm"
+              aria-pressed={activeTab === context.id}
             >
               {context.name}
             </Button>
@@ -311,12 +323,14 @@ export function FaviconPreview({
         </div>
       </div>
 
-      <div className="bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-medium overflow-hidden">
+      <div className="bg-neutral-25 rounded-2xl border border-neutral-200 shadow-soft overflow-hidden">
         <div className="p-8">
           {contexts.map((context) => (
             <div
               key={context.id}
               className={`${activeTab === context.id ? "block" : "hidden"}`}
+              role="tabpanel"
+              aria-labelledby={`tab-${context.id}`}
             >
               <PreviewGrid context={context} />
             </div>

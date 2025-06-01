@@ -74,6 +74,28 @@ export type { OptionGroupProps } from "./OptionGroup";
 export { ProgressCard } from "./ProgressCard";
 export type { ProgressCardProps, ProgressInfo } from "./ProgressCard";
 
+// New Tool Page Components
+export { ToolPageLayout } from "./ToolPageLayout";
+export type { ToolPageLayoutProps } from "./ToolPageLayout";
+
+export { ToolPageHero } from "./ToolPageHero";
+export type { ToolPageHeroProps } from "./ToolPageHero";
+
+export { PrivacyBadge } from "./PrivacyBadge";
+export type { PrivacyBadgeProps } from "./PrivacyBadge";
+
+export { FeatureCard } from "./FeatureCard";
+export type { FeatureCardProps } from "./FeatureCard";
+
+export { FeatureGrid } from "./FeatureGrid";
+export type { FeatureGridProps } from "./FeatureGrid";
+
+export { ToolInfoSection } from "./ToolInfoSection";
+export type { ToolInfoSectionProps, InfoSection, InfoListItem } from "./ToolInfoSection";
+
+export { ToolPageTemplate } from "./ToolPageTemplate";
+export type { ToolPageTemplateProps } from "./ToolPageTemplate";
+
 export { WebVitals } from "./WebVitals";
 
 // Suspense and Loading Components

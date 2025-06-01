@@ -556,28 +556,74 @@ export function FaviconGeneratorTool() {
         </CardContent>
       </Card>
 
-      {/* Enhanced Preview */}
+      {/* Enhanced Real-time Preview */}
       {state.showPreview && Object.keys(state.previewUrls).length > 0 && (
-        <Card variant="elevated" className="animate-fade-in-up">
-          <CardHeader>
-            <h2 className="text-title text-xl font-semibold text-foreground mb-2">
-              Real-time Preview
-            </h2>
-            <p className="text-body text-foreground-secondary">
-              See how your favicons will look in different contexts
-            </p>
+        <Card variant="elevated" className="tool-card-favicon animate-fade-in-up">
+          <CardHeader className="pb-8">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="tool-icon tool-icon-favicon h-14 w-14 rounded-2xl bg-gradient-to-br from-emerald-100 to-green-200 dark:from-emerald-900/30 dark:to-green-800/30 flex items-center justify-center">
+                <span className="text-lg font-bold text-emerald-700 dark:text-emerald-300">👁️</span>
+              </div>
+              <div>
+                <h2 className="text-title text-2xl font-semibold text-foreground mb-2">
+                  Real-time Preview
+                </h2>
+                <p className="text-body text-foreground-secondary">
+                  See how your favicons will look in different browser contexts and sizes
+                </p>
+              </div>
+            </div>
           </CardHeader>
-          <CardContent>
-            <FaviconPreview
-              previewUrls={state.previewUrls}
-              selectedContext={state.options.previewContext}
-              onContextChange={(context) =>
-                handleOptionsChange({
-                  previewContext: context as "browser" | "bookmark" | "desktop" | "all",
-                })
-              }
-              title="Context Preview"
-            />
+          <CardContent className="pt-0">
+            <div className="space-y-8">
+              {/* Preview Component */}
+              <FaviconPreview
+                previewUrls={state.previewUrls}
+                selectedContext={state.options.previewContext}
+                onContextChange={(context) =>
+                  handleOptionsChange({
+                    previewContext: context as "browser" | "bookmark" | "desktop" | "all",
+                  })
+                }
+                title="Context Preview"
+              />
+
+              {/* Preview Stats */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="bg-neutral-50 rounded-lg p-4 border border-neutral-200">
+                  <div className="text-sm font-medium text-foreground-secondary mb-1">
+                    Sizes Generated
+                  </div>
+                  <div className="text-lg font-semibold text-foreground">
+                    {Object.keys(state.previewUrls).length}
+                  </div>
+                </div>
+                <div className="bg-neutral-50 rounded-lg p-4 border border-neutral-200">
+                  <div className="text-sm font-medium text-foreground-secondary mb-1">
+                    Format
+                  </div>
+                  <div className="text-lg font-semibold text-foreground">
+                    {(state.options.outputFormat || "PNG").toUpperCase()}
+                  </div>
+                </div>
+                <div className="bg-neutral-50 rounded-lg p-4 border border-neutral-200">
+                  <div className="text-sm font-medium text-foreground-secondary mb-1">
+                    Quality
+                  </div>
+                  <div className="text-lg font-semibold text-foreground">
+                    {Math.round((state.options.quality || 0.9) * 100)}%
+                  </div>
+                </div>
+                <div className="bg-neutral-50 rounded-lg p-4 border border-neutral-200">
+                  <div className="text-sm font-medium text-foreground-secondary mb-1">
+                    Padding
+                  </div>
+                  <div className="text-lg font-semibold text-foreground">
+                    {state.options.padding || 0}px
+                  </div>
+                </div>
+              </div>
+            </div>
           </CardContent>
         </Card>
       )}
