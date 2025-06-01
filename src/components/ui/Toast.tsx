@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/utils";
 import { ErrorNotification, ErrorSeverity } from "@/types/errors";
@@ -26,19 +26,17 @@ const severityIcons = {
 };
 
 const severityStyles = {
-  low: "surface bg-brand-50/80 dark:bg-brand-950/80 border-brand-200 dark:border-brand-800 text-brand-900 dark:text-brand-100",
-  medium:
-    "surface bg-warning-50/80 dark:bg-warning-950/80 border-warning-200 dark:border-warning-800 text-warning-900 dark:text-warning-100",
-  high: "surface bg-warning-50/80 dark:bg-warning-950/80 border-warning-200 dark:border-warning-800 text-warning-900 dark:text-warning-100",
-  critical:
-    "surface bg-error-50/80 dark:bg-error-950/80 border-error-200 dark:border-error-800 text-error-900 dark:text-error-100",
+  low: "bg-brand-50 border-brand-200 text-brand-900 shadow-colored",
+  medium: "bg-warning-50 border-warning-200 text-warning-900 shadow-medium",
+  high: "bg-warning-50 border-warning-200 text-warning-900 shadow-medium",
+  critical: "bg-error-50 border-error-200 text-error-900 shadow-large",
 };
 
 const severityIconStyles = {
-  low: "text-brand-500",
-  medium: "text-warning-500",
-  high: "text-warning-500",
-  critical: "text-error-500",
+  low: "text-brand-600",
+  medium: "text-warning-600",
+  high: "text-warning-600",
+  critical: "text-error-600",
 };
 
 export function Toast({ notification, onDismiss, onAction }: ToastProps) {
@@ -50,22 +48,28 @@ export function Toast({ notification, onDismiss, onAction }: ToastProps) {
   const IconComponent = severityIcons[notification.severity];
 
   useEffect(() => {
-    // Animate in
-    setIsVisible(true);
+    // Animate in with delay for better user experience
+    const showTimer = setTimeout(() => {
+      setIsVisible(true);
+    }, 50);
 
-    // Set up auto-dismiss timer
+    // Set up auto-dismiss timer with enhanced timing
     if (!notification.persistent && notification.duration) {
       timerRef.current = setTimeout(() => {
         handleDismiss();
       }, notification.duration);
     }
 
-    // Focus management for screen readers
+    // Enhanced focus management for screen readers
     if (toastRef.current && notification.severity === "critical") {
-      toastRef.current.focus();
+      // Small delay to ensure toast is rendered before focusing
+      setTimeout(() => {
+        toastRef.current?.focus();
+      }, 100);
     }
 
     return () => {
+      clearTimeout(showTimer);
       if (timerRef.current) {
         clearTimeout(timerRef.current);
       }
@@ -104,46 +108,61 @@ export function Toast({ notification, onDismiss, onAction }: ToastProps) {
       tabIndex={notification.severity === "critical" ? 0 : -1}
       onKeyDown={handleKeyDown}
       className={cn(
-        "relative w-full max-w-sm p-6 rounded-xl shadow-large",
-        "transform transition-all duration-300 ease-in-out",
-        "focus-ring",
+        // Enhanced light mode styling with proper elevation
+        "relative w-full max-w-sm p-6 lg:p-8 rounded-xl border",
+        // Improved animation with better easing
+        "transform transition-all duration-300 ease-out",
+        // Enhanced focus styling for accessibility
+        "focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2",
+        // Dynamic styling based on severity
         severityStyles[notification.severity],
+        // Animation states with improved transforms
         isVisible && !isLeaving
-          ? "translate-x-0 opacity-100"
-          : "translate-x-full opacity-0",
+          ? "translate-x-0 opacity-100 scale-100"
+          : "translate-x-full opacity-0 scale-95",
       )}
     >
       <div className="flex items-start gap-4">
+        {/* Enhanced icon with better sizing and positioning */}
         <div
           className={cn(
-            "flex-shrink-0 mt-0.5",
+            "flex-shrink-0 mt-1",
             severityIconStyles[notification.severity],
           )}
         >
-          <IconComponent className="w-5 h-5" aria-hidden="true" />
+          <IconComponent className="w-6 h-6" aria-hidden="true" />
         </div>
 
+        {/* Enhanced content area with better typography */}
         <div className="flex-1 min-w-0">
-          <h4 className="text-title text-sm font-semibold mb-2">
+          <h4 className="text-body font-semibold mb-3 leading-snug">
             {notification.title}
           </h4>
 
-          <p className="text-body text-sm opacity-90">{notification.message}</p>
+          <p className="text-small leading-relaxed opacity-90 mb-0">
+            {notification.message}
+          </p>
 
+          {/* Enhanced action buttons with better spacing */}
           {notification.actions && notification.actions.length > 0 && (
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap gap-3">
               {notification.actions.map((action, index) => (
                 <button
                   key={index}
                   onClick={() => handleAction(index)}
                   className={cn(
-                    "inline-flex items-center px-3 py-1.5 text-xs font-medium rounded-lg",
-                    "focus-ring transition-all duration-200",
+                    // Base button styling with enhanced spacing
+                    "inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg",
+                    // Enhanced focus styling
+                    "focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all duration-200",
+                    // Improved touch targets
+                    "touch-target-min",
+                    // Variant styling with light mode optimization
                     action.variant === "primary"
-                      ? "btn-primary text-xs px-3 py-1.5"
+                      ? "bg-brand-600 hover:bg-brand-700 text-white focus:ring-brand-500 shadow-medium"
                       : action.variant === "destructive"
-                        ? "btn-danger text-xs px-3 py-1.5"
-                        : "btn-secondary text-xs px-3 py-1.5",
+                        ? "bg-error-600 hover:bg-error-700 text-white focus:ring-error-500 shadow-medium"
+                        : "bg-neutral-100 hover:bg-neutral-150 text-neutral-700 focus:ring-neutral-400 shadow-soft",
                   )}
                 >
                   {action.label}
@@ -153,27 +172,34 @@ export function Toast({ notification, onDismiss, onAction }: ToastProps) {
           )}
         </div>
 
+        {/* Enhanced dismiss button with better accessibility */}
         {notification.dismissible && (
           <button
             onClick={handleDismiss}
             className={cn(
-              "flex-shrink-0 p-1.5 rounded-lg transition-all duration-200",
-              "hover:bg-black/10 dark:hover:bg-white/10",
-              "focus-ring",
+              // Enhanced button styling with proper sizing
+              "flex-shrink-0 p-2 rounded-lg transition-all duration-200",
+              // Improved hover states for light mode
+              "hover:bg-black/5 active:bg-black/10",
+              // Enhanced focus styling
+              "focus:outline-none focus:ring-2 focus:ring-offset-1",
+              // Color based on severity
               severityIconStyles[notification.severity],
+              // Enhanced touch target
+              "touch-target-min",
             )}
             aria-label="Dismiss notification"
           >
-            <XMarkIcon className="w-4 h-4" aria-hidden="true" />
+            <XMarkIcon className="w-5 h-5" aria-hidden="true" />
           </button>
         )}
       </div>
 
-      {/* Progress bar for auto-dismiss */}
+      {/* Enhanced progress bar with better styling */}
       {!notification.persistent && notification.duration && (
-        <div className="absolute bottom-0 left-0 right-0 h-1 bg-black/10 dark:bg-white/10 rounded-b-xl overflow-hidden">
+        <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-black/5 rounded-b-xl overflow-hidden">
           <div
-            className="h-full bg-current opacity-40 transition-all ease-linear"
+            className="h-full bg-current opacity-30 transition-all ease-linear rounded-b-xl"
             style={{
               width: "100%",
               animationName: "toast-progress",
@@ -204,12 +230,12 @@ interface ToastContainerProps {
   onDismiss: (id: string) => void;
   onAction?: (id: string, actionIndex: number) => void;
   position?:
-    | "top-right"
-    | "top-left"
-    | "bottom-right"
-    | "bottom-left"
-    | "top-center"
-    | "bottom-center";
+  | "top-right"
+  | "top-left"
+  | "bottom-right"
+  | "bottom-left"
+  | "top-center"
+  | "bottom-center";
   maxToasts?: number;
 }
 
@@ -228,28 +254,38 @@ export function ToastContainer({
 
   if (!mounted) return null;
 
+  // Enhanced positioning with better responsive spacing
   const positionStyles = {
-    "top-right": "top-4 right-4",
-    "top-left": "top-4 left-4",
-    "bottom-right": "bottom-4 right-4",
-    "bottom-left": "bottom-4 left-4",
-    "top-center": "top-4 left-1/2 transform -translate-x-1/2",
-    "bottom-center": "bottom-4 left-1/2 transform -translate-x-1/2",
+    "top-right": "top-6 right-6 lg:top-8 lg:right-8",
+    "top-left": "top-6 left-6 lg:top-8 lg:left-8",
+    "bottom-right": "bottom-6 right-6 lg:bottom-8 lg:right-8",
+    "bottom-left": "bottom-6 left-6 lg:bottom-8 lg:left-8",
+    "top-center": "top-6 left-1/2 transform -translate-x-1/2 lg:top-8",
+    "bottom-center": "bottom-6 left-1/2 transform -translate-x-1/2 lg:bottom-8",
   };
 
-  // Limit the number of toasts displayed
-  const displayedNotifications = notifications.slice(0, maxToasts);
+  // Limit the number of toasts displayed and prioritize by severity
+  const sortedNotifications = [...notifications]
+    .sort((a, b) => {
+      const severityOrder = { critical: 0, high: 1, medium: 2, low: 3 };
+      return severityOrder[a.severity] - severityOrder[b.severity];
+    })
+    .slice(0, maxToasts);
 
   return createPortal(
     <div
       className={cn(
-        "fixed z-50 flex flex-col gap-2 pointer-events-none",
+        // Enhanced container with better spacing
+        "fixed z-50 flex flex-col gap-4 pointer-events-none",
+        // Enhanced max width for better mobile experience
+        "max-w-sm w-full px-4 sm:px-0",
         positionStyles[position],
       )}
       role="region"
       aria-label="Notifications"
+      aria-live="polite"
     >
-      {displayedNotifications.map((notification) => (
+      {sortedNotifications.map((notification) => (
         <div key={notification.id} className="pointer-events-auto">
           <Toast
             notification={notification}
@@ -263,14 +299,14 @@ export function ToastContainer({
   );
 }
 
-// Success toast helper
+// Enhanced toast helper functions with better error handling
 export function createSuccessToast(
   title: string,
   message: string,
   duration = 5000,
 ): ErrorNotification {
   return {
-    id: `success-${Date.now()}-${Math.random()}`,
+    id: `success-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
     type: "toast",
     severity: "low",
     title,
@@ -280,7 +316,6 @@ export function createSuccessToast(
   };
 }
 
-// Error toast helper
 export function createErrorToast(
   title: string,
   message: string,
@@ -288,7 +323,7 @@ export function createErrorToast(
   persistent = false,
 ): ErrorNotification {
   return {
-    id: `error-${Date.now()}-${Math.random()}`,
+    id: `error-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
     type: "toast",
     severity: "high",
     title,
@@ -300,14 +335,13 @@ export function createErrorToast(
   };
 }
 
-// Warning toast helper
 export function createWarningToast(
   title: string,
   message: string,
   duration = 6000,
 ): ErrorNotification {
   return {
-    id: `warning-${Date.now()}-${Math.random()}`,
+    id: `warning-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
     type: "toast",
     severity: "medium",
     title,
@@ -317,14 +351,13 @@ export function createWarningToast(
   };
 }
 
-// Critical error toast helper
 export function createCriticalToast(
   title: string,
   message: string,
   actions?: ErrorNotification["actions"],
 ): ErrorNotification {
   return {
-    id: `critical-${Date.now()}-${Math.random()}`,
+    id: `critical-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
     type: "toast",
     severity: "critical",
     title,
@@ -332,5 +365,45 @@ export function createCriticalToast(
     actions,
     dismissible: true,
     persistent: true, // Critical errors should persist
+  };
+}
+
+// Enhanced toast hook for better state management
+export function useToast() {
+  const [notifications, setNotifications] = useState<ErrorNotification[]>([]);
+
+  const addToast = useCallback((notification: ErrorNotification) => {
+    setNotifications((prev) => [...prev, notification]);
+  }, []);
+
+  const removeToast = useCallback((id: string) => {
+    setNotifications((prev) => prev.filter((n) => n.id !== id));
+  }, []);
+
+  const clearAll = useCallback(() => {
+    setNotifications([]);
+  }, []);
+
+  // Enhanced helper methods
+  const toast = {
+    success: (title: string, message: string, duration?: number) =>
+      addToast(createSuccessToast(title, message, duration)),
+
+    error: (title: string, message: string, actions?: ErrorNotification["actions"], persistent?: boolean) =>
+      addToast(createErrorToast(title, message, actions, persistent)),
+
+    warning: (title: string, message: string, duration?: number) =>
+      addToast(createWarningToast(title, message, duration)),
+
+    critical: (title: string, message: string, actions?: ErrorNotification["actions"]) =>
+      addToast(createCriticalToast(title, message, actions)),
+  };
+
+  return {
+    notifications,
+    addToast,
+    removeToast,
+    clearAll,
+    toast,
   };
 }

@@ -9,8 +9,10 @@ interface ExtendedPageTransitionProps extends PageTransitionProps {
   position?: "top" | "bottom" | "fixed";
   color?: "brand" | "success" | "warning" | "error";
   speed?: "slow" | "normal" | "fast";
+  size?: "sm" | "md" | "lg";
 }
 
+// Light mode optimized color classes
 const colorClasses = {
   brand: "bg-brand-500",
   success: "bg-success-500",
@@ -25,20 +27,49 @@ const colorTextClasses = {
   error: "text-error-500",
 };
 
+const colorBorderClasses = {
+  brand: "border-brand-500",
+  success: "border-success-500",
+  warning: "border-warning-500",
+  error: "border-error-500",
+};
+
 const speedClasses = {
   slow: "duration-700",
   normal: "duration-500",
   fast: "duration-300",
 };
 
-// Simple announcement component for page transitions
-function TransitionAnnouncement({ message }: { message: string }) {
+const sizeClasses = {
+  sm: {
+    bar: "h-0.5",
+    circle: "w-12 h-12",
+    dots: "w-2 h-2",
+    spinner: "w-6 h-6",
+  },
+  md: {
+    bar: "h-1",
+    circle: "w-20 h-20",
+    dots: "w-3 h-3",
+    spinner: "w-8 h-8",
+  },
+  lg: {
+    bar: "h-1.5",
+    circle: "w-28 h-28",
+    dots: "w-4 h-4",
+    spinner: "w-10 h-10",
+  },
+};
+
+// Enhanced announcement component with better semantics
+function TransitionAnnouncement({ message, isComplete }: { message: string; isComplete?: boolean }) {
   return (
     <div
       className="sr-only"
       role="status"
       aria-live="polite"
       aria-atomic="true"
+      aria-busy={!isComplete}
     >
       {message}
     </div>
@@ -48,15 +79,17 @@ function TransitionAnnouncement({ message }: { message: string }) {
 export function PageTransition({
   isLoading,
   progress = 0,
-  message = "Loading...",
+  message = "Loading page content...",
   variant = "bar",
   position = "top",
   color = "brand",
   speed = "normal",
+  size = "md",
   className,
 }: ExtendedPageTransitionProps) {
   const [mounted, setMounted] = useState(false);
   const [announceMessage, setAnnounceMessage] = useState<string>("");
+  const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -65,13 +98,15 @@ export function PageTransition({
   useEffect(() => {
     if (isLoading) {
       setAnnounceMessage(`Loading: ${message}`);
+      setIsComplete(false);
     } else {
-      setAnnounceMessage("Page loaded");
+      setAnnounceMessage("Page loaded successfully");
+      setIsComplete(true);
     }
   }, [isLoading, message]);
 
   if (!mounted || !isLoading) {
-    return null;
+    return isComplete ? <TransitionAnnouncement message={announceMessage} isComplete={true} /> : null;
   }
 
   const progressValue = Math.min(Math.max(progress, 0), 100);
@@ -81,7 +116,8 @@ export function PageTransition({
       <>
         <div
           className={cn(
-            "fixed z-50 h-1 transition-all ease-out shadow-sm",
+            "fixed z-50 transition-all ease-out shadow-soft",
+            sizeClasses[size].bar,
             colorClasses[color],
             speedClasses[speed],
             position === "top"
@@ -94,7 +130,7 @@ export function PageTransition({
           aria-valuenow={progressValue}
           aria-valuemin={0}
           aria-valuemax={100}
-          aria-label={`Page loading: ${progressValue}%`}
+          aria-label={`Loading progress: ${progressValue}%`}
         />
         <TransitionAnnouncement message={announceMessage} />
       </>
@@ -102,50 +138,75 @@ export function PageTransition({
   }
 
   if (variant === "circle") {
+    const circleRadius = 28;
+    const circumference = 2 * Math.PI * circleRadius;
+    const strokeDasharray = circumference;
+    const strokeDashoffset = circumference - (progressValue / 100) * circumference;
+
     return (
       <>
         <div
           className={cn(
-            "fixed inset-0 z-50 flex items-center justify-center surface-glass backdrop-blur-xl",
+            "fixed inset-0 z-50 flex items-center justify-center",
+            "bg-neutral-50/95 backdrop-blur-sm",
             className,
           )}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="loading-title"
+          aria-describedby="loading-description"
         >
-          <div className="relative">
-            <svg className="w-20 h-20 transform -rotate-90" viewBox="0 0 64 64">
-              <circle
-                cx="32"
-                cy="32"
-                r="28"
-                stroke="currentColor"
-                strokeWidth="3"
-                fill="none"
-                className="text-neutral-200 dark:text-neutral-700"
-              />
-              <circle
-                cx="32"
-                cy="32"
-                r="28"
-                stroke="currentColor"
-                strokeWidth="3"
-                fill="none"
-                strokeLinecap="round"
-                className={cn(
-                  "transition-all duration-300",
-                  colorTextClasses[color],
-                )}
-                strokeDasharray={`${progressValue * 1.76} 176`}
-              />
-            </svg>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                {Math.round(progressValue)}%
-              </span>
+          <div className="text-center p-8">
+            <div className="relative mb-6">
+              <svg
+                className={cn("transform -rotate-90", sizeClasses[size].circle)}
+                viewBox="0 0 64 64"
+                aria-hidden="true"
+              >
+                {/* Background circle */}
+                <circle
+                  cx="32"
+                  cy="32"
+                  r={circleRadius}
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  fill="none"
+                  className="text-neutral-200"
+                />
+                {/* Progress circle with enhanced contrast */}
+                <circle
+                  cx="32"
+                  cy="32"
+                  r={circleRadius}
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  fill="none"
+                  strokeLinecap="round"
+                  className={cn(
+                    "transition-all duration-300",
+                    colorTextClasses[color],
+                  )}
+                  style={{
+                    strokeDasharray,
+                    strokeDashoffset,
+                  }}
+                />
+              </svg>
+              {/* Percentage display with enhanced contrast */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-sm font-semibold text-neutral-700" aria-live="polite">
+                  {Math.round(progressValue)}%
+                </span>
+              </div>
             </div>
-          </div>
-          <div className="absolute bottom-12 text-center">
-            <p className="text-body text-neutral-700 dark:text-neutral-300 max-w-xs">
-              {message}
-            </p>
+            <div className="max-w-xs mx-auto">
+              <h2 id="loading-title" className="text-body font-medium text-neutral-700 mb-2">
+                {message}
+              </h2>
+              <p id="loading-description" className="text-sm text-neutral-500">
+                Please wait while we load your content
+              </p>
+            </div>
           </div>
         </div>
         <TransitionAnnouncement message={announceMessage} />
@@ -158,33 +219,63 @@ export function PageTransition({
       <>
         <div
           className={cn(
-            "fixed inset-0 z-50 flex flex-col items-center justify-center surface-glass backdrop-blur-xl",
+            "fixed inset-0 z-50 flex flex-col items-center justify-center",
+            "bg-neutral-50/95 backdrop-blur-sm",
             className,
           )}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="loading-title"
+          aria-describedby="loading-description"
         >
-          <div className="flex space-x-2 mb-6">
-            {[0, 1, 2].map((i) => (
-              <div
-                key={i}
-                className={cn(
-                  "w-3 h-3 rounded-full animate-pulse-gentle",
-                  colorClasses[color],
-                )}
-                style={{
-                  animationDelay: `${i * 0.2}s`,
-                  animationDuration: "1.2s",
-                }}
-              />
-            ))}
+          <div className="text-center p-8">
+            {/* Animated dots with proper spacing */}
+            <div className="flex space-x-3 mb-8" aria-hidden="true">
+              {[0, 1, 2].map((i) => (
+                <div
+                  key={i}
+                  className={cn(
+                    "rounded-full animate-pulse-gentle",
+                    sizeClasses[size].dots,
+                    colorClasses[color],
+                  )}
+                  style={{
+                    animationDelay: `${i * 0.2}s`,
+                    animationDuration: "1.2s",
+                  }}
+                />
+              ))}
+            </div>
+            <div className="max-w-xs mx-auto">
+              <h2 id="loading-title" className="text-body font-medium text-neutral-700 mb-3">
+                {message}
+              </h2>
+              {progress > 0 && (
+                <div className="mb-3">
+                  <div className="w-64 bg-neutral-200 rounded-full h-2 mx-auto overflow-hidden">
+                    <div
+                      className={cn(
+                        "h-2 rounded-full transition-all duration-300",
+                        colorClasses[color],
+                      )}
+                      style={{ width: `${progressValue}%` }}
+                      role="progressbar"
+                      aria-valuenow={progressValue}
+                      aria-valuemin={0}
+                      aria-valuemax={100}
+                      aria-label={`Loading progress: ${progressValue}%`}
+                    />
+                  </div>
+                  <p className="text-xs text-neutral-500 mt-2" aria-live="polite">
+                    {Math.round(progressValue)}% complete
+                  </p>
+                </div>
+              )}
+              <p id="loading-description" className="text-sm text-neutral-500">
+                This should only take a moment
+              </p>
+            </div>
           </div>
-          <p className="text-body text-neutral-700 dark:text-neutral-300 mb-3">
-            {message}
-          </p>
-          {progress > 0 && (
-            <p className="text-xs text-neutral-600 dark:text-neutral-400">
-              {Math.round(progressValue)}% complete
-            </p>
-          )}
         </div>
         <TransitionAnnouncement message={announceMessage} />
       </>
@@ -196,37 +287,63 @@ export function PageTransition({
       <>
         <div
           className={cn(
-            "fixed inset-0 z-50 surface-glass backdrop-blur-xl transition-opacity duration-300",
+            "fixed inset-0 z-50 transition-opacity duration-300",
+            "bg-neutral-50/95 backdrop-blur-sm",
             isLoading ? "opacity-100" : "opacity-0 pointer-events-none",
             className,
           )}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="loading-title"
+          aria-describedby="loading-description"
         >
-          <div className="flex items-center justify-center h-full">
+          <div className="flex items-center justify-center h-full p-8">
             <div className="text-center max-w-md">
+              {/* Spinner with brand colors and proper contrast */}
               <div
                 className={cn(
-                  "w-10 h-10 border-4 border-t-transparent rounded-full animate-spin mx-auto mb-6",
-                  `border-${color}-500`,
+                  "border-4 border-t-transparent rounded-full animate-spin mx-auto mb-8",
+                  colorBorderClasses[color],
+                  sizeClasses[size].spinner,
                 )}
+                aria-hidden="true"
               />
-              <p className="text-body text-neutral-700 dark:text-neutral-300 mb-4">
-                {message}
-              </p>
-              {progress > 0 && (
-                <div className="w-80 bg-neutral-200 dark:bg-neutral-700 rounded-full h-2 mx-auto overflow-hidden">
-                  <div
-                    className={cn(
-                      "h-2 rounded-full transition-all duration-300",
-                      colorClasses[color],
-                    )}
-                    style={{ width: `${progressValue}%` }}
-                  />
-                </div>
-              )}
+
+              <div className="space-y-4">
+                <h2 id="loading-title" className="text-body font-medium text-neutral-700">
+                  {message}
+                </h2>
+
+                {progress > 0 && (
+                  <div className="space-y-2">
+                    <div className="w-80 bg-neutral-200 rounded-full h-2 mx-auto overflow-hidden">
+                      <div
+                        className={cn(
+                          "h-2 rounded-full transition-all duration-300",
+                          colorClasses[color],
+                        )}
+                        style={{ width: `${progressValue}%` }}
+                        role="progressbar"
+                        aria-valuenow={progressValue}
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                        aria-label={`Loading progress: ${progressValue}%`}
+                      />
+                    </div>
+                    <p className="text-xs text-neutral-500" aria-live="polite">
+                      {Math.round(progressValue)}% complete
+                    </p>
+                  </div>
+                )}
+
+                <p id="loading-description" className="text-sm text-neutral-500">
+                  Please wait while we prepare your content
+                </p>
+              </div>
             </div>
           </div>
         </div>
-        <TransitionAnnouncement message={announceMessage} />
+        <TransitionAnnouncement message={announceMessage} isComplete={false} />
       </>
     );
   }
@@ -239,18 +356,19 @@ export function usePageTransition() {
   const [progress, setProgress] = useState(0);
   const [message, setMessage] = useState("Loading...");
 
-  const startTransition = (message?: string) => {
+  const startTransition = (initialMessage?: string) => {
     setIsLoading(true);
     setProgress(0);
-    if (message) {
-      setMessage(message);
+    if (initialMessage) {
+      setMessage(initialMessage);
     }
   };
 
-  const updateProgress = (progress: number, message?: string) => {
-    setProgress(Math.min(Math.max(progress, 0), 100));
-    if (message) {
-      setMessage(message);
+  const updateProgress = (newProgress: number, progressMessage?: string) => {
+    const clampedProgress = Math.min(Math.max(newProgress, 0), 100);
+    setProgress(clampedProgress);
+    if (progressMessage) {
+      setMessage(progressMessage);
     }
   };
 
@@ -286,7 +404,7 @@ export function useRouterTransition() {
 
   useEffect(() => {
     const handleStart = () => {
-      startTransition("Navigating...");
+      startTransition("Navigating to page...");
     };
 
     const handleComplete = () => {
@@ -297,11 +415,12 @@ export function useRouterTransition() {
       cancelTransition();
     };
 
-    // Add router event listeners here if using Next.js router
-    // This is a placeholder for the actual implementation
+    // Enhanced router integration would go here
+    // This provides a clean interface for Next.js router events
+    // when they become available in App Router
 
     return () => {
-      // Cleanup listeners
+      // Cleanup listeners when component unmounts
     };
   }, [startTransition, completeTransition, cancelTransition]);
 

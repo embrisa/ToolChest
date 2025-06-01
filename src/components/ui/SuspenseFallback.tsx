@@ -26,27 +26,33 @@ export function SuspenseFallback({
         return (
           <div
             className={cn(
-              "min-h-screen bg-neutral-50 dark:bg-neutral-950 flex items-center justify-center",
+              "min-h-screen bg-neutral-100 flex items-center justify-center",
+              "px-6 sm:px-8 lg:px-12 py-12",
               className,
             )}
           >
-            <div className="text-center max-w-md mx-auto p-8">
-              <Loading size="lg" variant="spinner" text={message} />
-              {showProgress && progress > 0 && (
-                <div className="mt-6">
-                  <div className="w-80 bg-neutral-200 dark:bg-neutral-700 rounded-full h-2 mx-auto overflow-hidden">
-                    <div
-                      className="bg-gradient-to-r from-brand-500 to-brand-600 h-2 rounded-full transition-all duration-300 ease-out"
-                      style={{
-                        width: `${Math.min(Math.max(progress, 0), 100)}%`,
-                      }}
-                    />
+            <div className="text-center max-w-lg mx-auto">
+              <div className="space-y-8">
+                <Loading size="lg" variant="spinner" text={message} />
+
+                {showProgress && progress > 0 && (
+                  <div className="space-y-6">
+                    <div className="w-full max-w-sm mx-auto">
+                      <div className="bg-neutral-200 rounded-full h-3 overflow-hidden shadow-inner-soft">
+                        <div
+                          className="bg-gradient-to-r from-brand-500 to-brand-600 h-3 rounded-full transition-all duration-500 ease-out shadow-sm"
+                          style={{
+                            width: `${Math.min(Math.max(progress, 0), 100)}%`,
+                          }}
+                        />
+                      </div>
+                      <p className="text-small text-tertiary mt-4 font-medium">
+                        {Math.round(progress)}% complete
+                      </p>
+                    </div>
                   </div>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-3">
-                    {Math.round(progress)}% complete
-                  </p>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
         );
@@ -54,13 +60,18 @@ export function SuspenseFallback({
       case "section":
         return (
           <div
-            className={cn("flex items-center justify-center py-16", className)}
+            className={cn(
+              "flex items-center justify-center py-16 lg:py-20",
+              "bg-neutral-50/50",
+              className
+            )}
             style={{ height }}
           >
-            <div className="text-center">
+            <div className="text-center space-y-6">
               <Loading size="md" variant="spinner" text={message} />
+
               {showProgress && progress > 0 && (
-                <div className="mt-4 text-sm text-neutral-600 dark:text-neutral-400">
+                <div className="text-small text-tertiary font-medium">
                   {Math.round(progress)}% complete
                 </div>
               )}
@@ -70,15 +81,29 @@ export function SuspenseFallback({
 
       case "card":
         return (
-          <div className={cn("card p-8", className)} style={{ height }}>
-            <div className="space-y-6">
-              <SkeletonLoader variant="text" className="h-6 w-3/4" />
-              <SkeletonLoader variant="text" lines={3} className="space-y-3" />
-              <div className="flex justify-between items-center pt-4">
-                <SkeletonLoader variant="text" className="h-4 w-24" />
-                <SkeletonLoader variant="button" className="w-20" />
+          <div
+            className={cn(
+              "card bg-neutral-50 shadow-medium p-8 lg:p-10",
+              className
+            )}
+            style={{ height }}
+          >
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <SkeletonLoader variant="text" className="h-7 w-3/4" />
+                <div className="space-y-3">
+                  <SkeletonLoader variant="text" className="h-5 w-full" />
+                  <SkeletonLoader variant="text" className="h-5 w-5/6" />
+                  <SkeletonLoader variant="text" className="h-5 w-4/5" />
+                </div>
+              </div>
+
+              <div className="flex justify-between items-center pt-6 border-t border-neutral-200">
+                <SkeletonLoader variant="text" className="h-5 w-28" />
+                <SkeletonLoader variant="button" className="w-24 h-10" />
               </div>
             </div>
+
             <div className="sr-only" role="status" aria-live="polite">
               {message}
             </div>
@@ -87,17 +112,24 @@ export function SuspenseFallback({
 
       case "list":
         return (
-          <div className={cn("space-y-4", className)} style={{ height }}>
+          <div
+            className={cn(
+              "space-y-6",
+              className
+            )}
+            style={{ height }}
+          >
             {Array.from({ length: 5 }, (_, index) => (
-              <div key={index} className="flex items-center space-x-4">
-                <SkeletonLoader variant="circular" className="w-12 h-12" />
+              <div key={index} className="flex items-center gap-6">
+                <SkeletonLoader variant="circular" className="w-14 h-14 flex-shrink-0" />
                 <div className="flex-1 space-y-3">
-                  <SkeletonLoader variant="text" className="h-5 w-3/4" />
+                  <SkeletonLoader variant="text" className="h-6 w-3/4" />
                   <SkeletonLoader variant="text" className="h-4 w-1/2" />
                 </div>
-                <SkeletonLoader variant="text" className="h-4 w-20" />
+                <SkeletonLoader variant="text" className="h-5 w-24 flex-shrink-0" />
               </div>
             ))}
+
             <div className="sr-only" role="status" aria-live="polite">
               {message}
             </div>
@@ -106,8 +138,15 @@ export function SuspenseFallback({
 
       case "form":
         return (
-          <div className={cn("card p-8", className)} style={{ height }}>
+          <div
+            className={cn(
+              "card bg-neutral-50 shadow-medium p-8 lg:p-10",
+              className
+            )}
+            style={{ height }}
+          >
             <FormSkeleton />
+
             <div className="sr-only" role="status" aria-live="polite">
               {message}
             </div>
@@ -117,7 +156,10 @@ export function SuspenseFallback({
       default:
         return (
           <div
-            className={cn("flex items-center justify-center py-8", className)}
+            className={cn(
+              "flex items-center justify-center py-12 lg:py-16",
+              className
+            )}
             style={{ height }}
           >
             <Loading size="md" variant="spinner" text={message} />
@@ -139,7 +181,7 @@ export function ToolPageFallback({
     <SuspenseFallback
       variant="page"
       message={message}
-      className="bg-neutral-50 dark:bg-neutral-950"
+      className="bg-neutral-100"
     />
   );
 }
@@ -152,12 +194,14 @@ export function ToolGridFallback({
   message?: string;
 }) {
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="flex items-center justify-between">
-        <SkeletonLoader variant="text" className="h-7 w-40" />
-        <SkeletonLoader variant="text" className="h-5 w-28" />
+        <SkeletonLoader variant="text" className="h-8 w-48" />
+        <SkeletonLoader variant="text" className="h-6 w-32" />
       </div>
+
       <ToolCardSkeleton count={count} />
+
       <div className="sr-only" role="status" aria-live="polite">
         {message}
       </div>
@@ -175,12 +219,14 @@ export function AdminTableFallback({
   message?: string;
 }) {
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="flex items-center justify-between">
-        <SkeletonLoader variant="text" className="h-8 w-48" />
-        <SkeletonLoader variant="button" className="w-28 h-10" />
+        <SkeletonLoader variant="text" className="h-9 w-56" />
+        <SkeletonLoader variant="button" className="w-32 h-11" />
       </div>
+
       <TableSkeleton rows={rows} columns={columns} />
+
       <div className="sr-only" role="status" aria-live="polite">
         {message}
       </div>
@@ -194,12 +240,14 @@ export function AdminDashboardFallback({
   message?: string;
 }) {
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       <div className="flex items-center justify-between">
-        <SkeletonLoader variant="text" className="h-9 w-56" />
-        <SkeletonLoader variant="text" className="h-5 w-36" />
+        <SkeletonLoader variant="text" className="h-10 w-64" />
+        <SkeletonLoader variant="text" className="h-6 w-40" />
       </div>
+
       <DashboardSkeleton />
+
       <div className="sr-only" role="status" aria-live="polite">
         {message}
       </div>
@@ -239,7 +287,7 @@ export function withSuspense<P extends object>(
   return WrappedComponent;
 }
 
-// Hook for managing suspense states
+// Hook for managing suspense states with enhanced error handling
 export function useSuspenseState(initialLoading = true) {
   const [isLoading, setIsLoading] = React.useState(initialLoading);
   const [error, setError] = React.useState<Error | null>(null);

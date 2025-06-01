@@ -62,19 +62,19 @@ export function ProgressIndicator({
       </div>
 
       {/* Visual progress bar */}
-      <div className="space-y-3">
+      <div className="space-y-4">
         <div className="flex justify-between items-center text-sm">
-          <span className="text-body font-medium text-neutral-900 dark:text-neutral-100">
+          <span className="text-primary font-medium">
             {getStageLabel(stage)}
           </span>
-          <span className="text-neutral-600 dark:text-neutral-400 font-medium">
+          <span className="text-secondary font-medium">
             {Math.round(percent)}%
           </span>
         </div>
 
         <div className="relative">
           <div
-            className="w-full bg-neutral-200 dark:bg-neutral-700 rounded-full h-3 overflow-hidden"
+            className="w-full bg-neutral-200 rounded-full h-3 overflow-hidden"
             role="progressbar"
             aria-valuenow={percent}
             aria-valuemin={0}
@@ -86,7 +86,7 @@ export function ProgressIndicator({
               style={{ width: `${percent}%` }}
             />
           </div>
-          {/* Glow effect */}
+          {/* Glow effect for enhanced visual appeal */}
           <div
             className="absolute inset-0 bg-gradient-to-r from-brand-500/20 to-brand-600/20 rounded-full blur-sm -z-10"
             style={{ width: `${percent}%` }}
@@ -95,11 +95,11 @@ export function ProgressIndicator({
 
         {/* Progress details */}
         <div className="flex justify-between items-center text-xs">
-          <span className="text-neutral-600 dark:text-neutral-400">
+          <span className="text-secondary">
             {formatBytes(bytesProcessed)} / {formatBytes(totalBytes)}
           </span>
           {estimatedTimeRemaining && estimatedTimeRemaining > 1 && (
-            <span className="text-neutral-600 dark:text-neutral-400">
+            <span className="text-secondary">
               {formatTimeRemaining(estimatedTimeRemaining)}
             </span>
           )}

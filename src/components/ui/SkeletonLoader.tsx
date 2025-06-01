@@ -10,12 +10,12 @@ export interface SkeletonLoaderProps extends SkeletonLoadingProps {
 }
 
 const variantClasses = {
-  text: "skeleton-text",
-  circular: "skeleton-avatar",
-  rectangular: "skeleton rounded-xl",
-  card: "skeleton rounded-xl",
-  avatar: "skeleton-avatar",
-  button: "skeleton-button",
+  text: "bg-neutral-200 rounded-lg",
+  circular: "bg-neutral-200 rounded-full",
+  rectangular: "bg-neutral-200 rounded-xl",
+  card: "bg-neutral-200 rounded-xl",
+  avatar: "bg-neutral-200 rounded-full",
+  button: "bg-neutral-200 rounded-lg",
 };
 
 const sizeClasses = {
@@ -55,7 +55,7 @@ export function SkeletonLoader({
         className={cn(
           variantClasses[variant],
           height || sizeClasses.md,
-          !animated && "animate-none",
+          animated && "animate-pulse",
           className,
         )}
         style={{ width: finalWidth }}
@@ -80,7 +80,7 @@ export function SkeletonLoader({
 
   return (
     <div
-      className={cn("w-full", count > 1 && "space-y-6")}
+      className={cn("w-full", count > 1 && "space-y-8")}
       role="status"
       aria-label={ariaLabel}
     >
@@ -93,17 +93,17 @@ export function SkeletonLoader({
 // Specialized skeleton components for common use cases
 export function ToolCardSkeleton({ count = 1 }: { count?: number }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
       {Array.from({ length: count }, (_, index) => (
-        <div key={index} className="card p-6">
-          <div className="flex items-center space-x-4 mb-4">
-            <SkeletonLoader variant="circular" className="w-10 h-10" />
+        <div key={index} className="card p-8">
+          <div className="flex items-center space-x-4 mb-6">
+            <SkeletonLoader variant="circular" className="w-12 h-12" />
             <SkeletonLoader variant="text" className="h-6 w-32" />
           </div>
-          <SkeletonLoader variant="text" lines={2} className="mb-4" />
+          <SkeletonLoader variant="text" lines={2} className="mb-6" />
           <div className="flex items-center justify-between">
             <SkeletonLoader variant="text" className="h-4 w-20" />
-            <SkeletonLoader variant="button" className="w-24" />
+            <SkeletonLoader variant="button" className="w-24 h-10" />
           </div>
         </div>
       ))}
@@ -123,9 +123,9 @@ export function TableSkeleton({
   return (
     <div className="card overflow-hidden">
       {showHeader && (
-        <div className="bg-neutral-50 dark:bg-neutral-800/50 px-6 py-4 border-b border-neutral-200/50 dark:border-neutral-700/50">
+        <div className="bg-neutral-150 px-8 py-6 border-b border-neutral-200">
           <div
-            className="grid gap-4"
+            className="grid gap-6"
             style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
           >
             {Array.from({ length: columns }, (_, index) => (
@@ -134,11 +134,11 @@ export function TableSkeleton({
           </div>
         </div>
       )}
-      <div className="divide-y divide-neutral-200/50 dark:divide-neutral-700/50">
+      <div className="divide-y divide-neutral-200">
         {Array.from({ length: rows }, (_, rowIndex) => (
-          <div key={rowIndex} className="px-6 py-4">
+          <div key={rowIndex} className="px-8 py-6">
             <div
-              className="grid gap-4"
+              className="grid gap-6"
               style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
             >
               {Array.from({ length: columns }, (_, colIndex) => (
@@ -154,26 +154,26 @@ export function TableSkeleton({
 
 export function FormSkeleton() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="form-group">
-        <SkeletonLoader variant="text" className="h-5 w-24 mb-2" />
+        <SkeletonLoader variant="text" className="h-5 w-24 mb-3" />
         <SkeletonLoader variant="rectangular" className="h-12 w-full" />
       </div>
       <div className="form-group">
-        <SkeletonLoader variant="text" className="h-5 w-32 mb-2" />
-        <SkeletonLoader variant="rectangular" className="h-28 w-full" />
+        <SkeletonLoader variant="text" className="h-5 w-32 mb-3" />
+        <SkeletonLoader variant="rectangular" className="h-32 w-full" />
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-6">
         <div className="form-group">
-          <SkeletonLoader variant="text" className="h-5 w-20 mb-2" />
+          <SkeletonLoader variant="text" className="h-5 w-20 mb-3" />
           <SkeletonLoader variant="rectangular" className="h-12 w-full" />
         </div>
         <div className="form-group">
-          <SkeletonLoader variant="text" className="h-5 w-28 mb-2" />
+          <SkeletonLoader variant="text" className="h-5 w-28 mb-3" />
           <SkeletonLoader variant="rectangular" className="h-12 w-full" />
         </div>
       </div>
-      <div className="flex justify-end space-x-3">
+      <div className="flex justify-end space-x-4">
         <SkeletonLoader variant="button" className="w-20 h-10" />
         <SkeletonLoader variant="button" className="w-24 h-10" />
       </div>
@@ -183,13 +183,13 @@ export function FormSkeleton() {
 
 export function DashboardSkeleton() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {Array.from({ length: 4 }, (_, index) => (
-          <div key={index} className="card p-6">
+          <div key={index} className="card p-8">
             <div className="flex items-center justify-between">
-              <div className="space-y-3">
+              <div className="space-y-4">
                 <SkeletonLoader variant="text" className="h-4 w-20" />
                 <SkeletonLoader variant="text" className="h-8 w-16" />
               </div>
@@ -200,20 +200,20 @@ export function DashboardSkeleton() {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="card p-6">
-          <SkeletonLoader variant="text" className="h-6 w-40 mb-6" />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="card p-8">
+          <SkeletonLoader variant="text" className="h-6 w-40 mb-8" />
           <SkeletonLoader variant="rectangular" className="h-80 w-full" />
         </div>
-        <div className="card p-6">
-          <SkeletonLoader variant="text" className="h-6 w-48 mb-6" />
+        <div className="card p-8">
+          <SkeletonLoader variant="text" className="h-6 w-48 mb-8" />
           <SkeletonLoader variant="rectangular" className="h-80 w-full" />
         </div>
       </div>
 
       {/* Data Table */}
-      <div className="card p-6">
-        <SkeletonLoader variant="text" className="h-6 w-32 mb-6" />
+      <div className="card p-8">
+        <SkeletonLoader variant="text" className="h-6 w-32 mb-8" />
         <TableSkeleton rows={8} columns={6} showHeader={true} />
       </div>
     </div>

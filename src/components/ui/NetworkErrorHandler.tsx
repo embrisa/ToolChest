@@ -67,10 +67,11 @@ export function NetworkErrorHandler({
     if (!isOnline) {
       return (
         <svg
-          className="w-12 h-12 text-error-500 mx-auto"
+          className="w-16 h-16 text-error-500 mx-auto"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
+          aria-hidden="true"
         >
           <path
             strokeLinecap="round"
@@ -84,10 +85,11 @@ export function NetworkErrorHandler({
 
     return (
       <svg
-        className="w-12 h-12 text-error-500 mx-auto"
+        className="w-16 h-16 text-error-500 mx-auto"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
+        aria-hidden="true"
       >
         <path
           strokeLinecap="round"
@@ -105,48 +107,61 @@ export function NetworkErrorHandler({
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center p-8 text-center",
-        "card",
+        "flex flex-col items-center justify-center p-8 lg:p-12 text-center",
+        "card bg-neutral-50 shadow-medium",
+        "min-h-[320px] lg:min-h-[400px]",
         className,
       )}
     >
-      <div role="alert" aria-live="assertive">
+      <div className="mb-8">
         {getErrorIcon()}
+      </div>
 
-        <h3 className="mt-4 text-title text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-          {showOfflineMessage ? "Connection Lost" : "Something went wrong"}
-        </h3>
+      <div
+        role="alert"
+        aria-live="assertive"
+        className="space-y-6 max-w-md mx-auto"
+      >
+        <div className="space-y-4">
+          <h3 className="text-title text-xl font-semibold text-primary">
+            {showOfflineMessage ? "Connection Lost" : "Something went wrong"}
+          </h3>
 
-        <p className="mt-2 text-body text-sm text-neutral-600 dark:text-neutral-400 max-w-md">
-          {getErrorMessage(error)}
-        </p>
+          <p className="text-body text-base text-secondary leading-relaxed">
+            {getErrorMessage(error)}
+          </p>
+        </div>
 
         {retryCount > 0 && (
-          <p className="mt-2 text-xs text-neutral-500 dark:text-neutral-400">
-            Failed attempts: {retryCount}/{maxRetries}
-          </p>
+          <div className="pt-2">
+            <p className="text-small text-tertiary">
+              Failed attempts: {retryCount}/{maxRetries}
+            </p>
+          </div>
         )}
 
         {countdown > 0 && (
-          <p className="mt-2 text-xs text-neutral-500 dark:text-neutral-400">
-            Retrying in {countdown} seconds...
-          </p>
+          <div className="pt-2">
+            <p className="text-small text-tertiary">
+              Retrying in {countdown} seconds...
+            </p>
+          </div>
         )}
       </div>
 
-      <div className="mt-6 flex flex-col sm:flex-row gap-3">
+      <div className="mt-10 flex flex-col sm:flex-row gap-4 w-full max-w-sm">
         {canRetry && (
           <Button
             onClick={onRetry}
             disabled={isRetrying || countdown > 0}
             variant="primary"
-            size="sm"
-            className="min-w-[120px]"
+            size="md"
+            className="w-full sm:w-auto min-w-[140px] touch-target-comfortable"
           >
             {isRetrying ? (
               <>
-                <Loading size="sm" variant="spinner" className="mr-2" />
-                Retrying...
+                <Loading size="sm" variant="spinner" className="mr-3" />
+                <span>Retrying...</span>
               </>
             ) : (
               "Try Again"
@@ -157,18 +172,34 @@ export function NetworkErrorHandler({
         <Button
           onClick={() => window.location.reload()}
           variant="secondary"
-          size="sm"
-          className="min-w-[120px]"
+          size="md"
+          className="w-full sm:w-auto min-w-[140px] touch-target-comfortable"
         >
           Refresh Page
         </Button>
       </div>
 
       {showOfflineMessage && (
-        <div className="mt-4 p-3 bg-warning-50 dark:bg-warning-950/50 border border-warning-200 dark:border-warning-800 rounded-xl">
-          <p className="text-sm text-warning-800 dark:text-warning-200">
-            The page will automatically retry when your connection is restored.
-          </p>
+        <div className="mt-8 p-6 bg-warning-50 border border-warning-200 rounded-xl shadow-soft max-w-md">
+          <div className="flex items-start gap-3">
+            <svg
+              className="w-5 h-5 text-warning-600 mt-0.5 flex-shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 16h-1v-4h-1m1-4h.01M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"
+              />
+            </svg>
+            <p className="text-small text-warning-800 leading-relaxed">
+              The page will automatically retry when your connection is restored.
+            </p>
+          </div>
         </div>
       )}
     </div>
@@ -312,11 +343,11 @@ export function ToolLoadingError({
       : new Error(`Failed to load ${toolName || "tool"}: ${error.message}`);
 
   return (
-    <div className="min-h-[400px] flex items-center justify-center">
+    <div className="min-h-[400px] flex items-center justify-center p-6">
       <NetworkErrorHandler
         error={customError}
         onRetry={onRetry}
-        className="max-w-md"
+        className="max-w-lg w-full"
       />
     </div>
   );
@@ -337,11 +368,11 @@ export function AdminDataError({
       : new Error(`Failed to load ${dataType}: ${error.message}`);
 
   return (
-    <div className="p-6">
+    <div className="p-6 lg:p-8">
       <NetworkErrorHandler
         error={customError}
         onRetry={onRetry}
-        className="max-w-lg mx-auto"
+        className="max-w-2xl mx-auto"
       />
     </div>
   );

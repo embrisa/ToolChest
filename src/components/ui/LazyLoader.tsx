@@ -15,12 +15,12 @@ export interface LazyLoaderProps {
   props?: any;
   loadingType?: "skeleton" | "spinner" | "custom";
   skeletonVariant?:
-    | "text"
-    | "circular"
-    | "rectangular"
-    | "card"
-    | "avatar"
-    | "button";
+  | "text"
+  | "circular"
+  | "rectangular"
+  | "card"
+  | "avatar"
+  | "button";
   className?: string;
 }
 
@@ -53,18 +53,28 @@ export function LazyLoader({
             role="status"
             aria-label="Loading component..."
           >
-            <Loading size="md" variant="spinner" text="Loading component..." />
+            <Loading
+              size="md"
+              variant="spinner"
+              text="Loading component..."
+              showText={true}
+            />
           </div>
         );
       case "custom":
       default:
         return (
           <div
-            className="flex items-center justify-center p-8 text-neutral-600 dark:text-neutral-400"
+            className="flex items-center justify-center p-8 text-secondary"
             role="status"
             aria-label="Loading component..."
           >
-            <Loading size="md" variant="dots" text="Loading..." />
+            <Loading
+              size="md"
+              variant="dots"
+              text="Loading..."
+              showText={true}
+            />
           </div>
         );
     }
@@ -112,7 +122,7 @@ export function preloadComponent(componentImport: () => Promise<any>) {
   }
 }
 
-// Hook for component preloading
+// Hook for component preloading with light mode optimization
 export function useComponentPreloader() {
   const preloadToolComponents = React.useCallback(() => {
     const components = [

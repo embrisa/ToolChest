@@ -12,9 +12,15 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 const inputVariants = {
   default: "input-field",
   error:
-    "input-error border-error-500 focus:border-error-500 focus:ring-error-500/50",
+    "w-full px-4 py-3 text-sm bg-neutral-50 border-2 border-error-500 rounded-lg " +
+    "text-neutral-700 placeholder:text-neutral-400 " +
+    "focus:outline-none focus:ring-2 focus:ring-error-500 focus:border-error-500 " +
+    "focus:bg-neutral-25 transition-all duration-200",
   success:
-    "input-field border-success-500 focus:border-success-500 focus:ring-success-500/50",
+    "w-full px-4 py-3 text-sm bg-neutral-50 border-2 border-success-500 rounded-lg " +
+    "text-neutral-700 placeholder:text-neutral-400 " +
+    "focus:outline-none focus:ring-2 focus:ring-success-500 focus:border-success-500 " +
+    "focus:bg-neutral-25 transition-all duration-200",
 };
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -37,9 +43,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const currentVariant = error ? "error" : variant;
 
     return (
-      <div className="form-group">
+      <div className="w-full">
         {label && (
-          <label htmlFor={inputId} className="form-label">
+          <label
+            htmlFor={inputId}
+            className="block text-sm font-medium text-primary mb-2"
+          >
             {label}
             {isRequired && (
               <span
@@ -56,10 +65,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           id={inputId}
           className={cn(
-            // Base styles from design system
+            // Base styles using design system
             inputVariants[currentVariant],
-            // Focus ring utility
-            "focus-ring",
+            // Ensure minimum touch target height (44px+)
+            "min-h-[2.75rem]",
             className,
           )}
           aria-invalid={error ? "true" : "false"}
@@ -71,16 +80,31 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {error && (
           <p
             id={errorId}
-            className="form-error"
+            className="mt-2 text-sm text-error-600 flex items-start gap-1"
             role="alert"
             aria-live="polite"
           >
-            {error}
+            <svg
+              className="w-4 h-4 mt-0.5 flex-shrink-0"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              aria-hidden="true"
+            >
+              <path
+                fillRule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <span>{error}</span>
           </p>
         )}
 
         {helperText && !error && (
-          <p id={helperId} className="form-help">
+          <p
+            id={helperId}
+            className="mt-2 text-sm text-secondary"
+          >
             {helperText}
           </p>
         )}

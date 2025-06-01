@@ -73,11 +73,16 @@ export function ColorPicker({
   const isCustomColor = !presetColors.some((color) => color.value === value);
 
   return (
-    <div className={cn("form-group", className)}>
-      {label && <label className="form-label">{label}</label>}
+    <div className={cn("space-y-6", className)}>
+      {/* Label with enhanced contrast */}
+      {label && (
+        <label className="text-primary text-sm font-medium block mb-4">
+          {label}
+        </label>
+      )}
 
-      {/* Preset Colors */}
-      <div className="grid grid-cols-5 gap-3">
+      {/* Preset Colors Grid with proper spacing */}
+      <div className="grid grid-cols-5 gap-4">
         {presetColors.map((color) => (
           <button
             key={color.value}
@@ -85,11 +90,16 @@ export function ColorPicker({
             onClick={() => handlePresetSelect(color.value)}
             disabled={disabled}
             className={cn(
-              "relative w-14 h-14 rounded-xl border-2 transition-all duration-200",
-              "focus-ring hover:scale-105",
+              // Base styling with enhanced touch targets (48px minimum)
+              "relative w-14 h-14 rounded-lg border-2 transition-all duration-200",
+              // Focus and interaction states using design system
+              "focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2",
+              "hover:scale-105 active:scale-95",
+              // Selection and default states with enhanced contrast
               value === color.value
                 ? "border-brand-500 ring-2 ring-brand-500/20 shadow-medium"
-                : "border-neutral-300 dark:border-neutral-600 hover:border-neutral-400 dark:hover:border-neutral-500",
+                : "border-neutral-200 hover:border-neutral-300 shadow-soft",
+              // Disabled state
               disabled
                 ? "opacity-50 cursor-not-allowed hover:scale-100"
                 : "cursor-pointer",
@@ -99,7 +109,7 @@ export function ColorPicker({
                 color.value === "transparent" ? "transparent" : color.value,
               backgroundImage:
                 color.value === "transparent"
-                  ? "linear-gradient(45deg, #ccc 25%, transparent 25%), linear-gradient(-45deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%), linear-gradient(-45deg, transparent 75%, #ccc 75%)"
+                  ? "linear-gradient(45deg, #dadce0 25%, transparent 25%), linear-gradient(-45deg, #dadce0 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #dadce0 75%), linear-gradient(-45deg, transparent 75%, #dadce0 75%)"
                   : undefined,
               backgroundSize:
                 color.value === "transparent" ? "8px 8px" : undefined,
@@ -111,9 +121,10 @@ export function ColorPicker({
             aria-label={`${color.name}${color.description ? ` - ${color.description}` : ""}`}
             title={color.description || color.name}
           >
+            {/* Selection indicator with enhanced visibility */}
             {value === color.value && (
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-5 h-5 rounded-full bg-white dark:bg-neutral-900 border-2 border-neutral-300 dark:border-neutral-600 flex items-center justify-center shadow-medium">
+                <div className="w-5 h-5 rounded-full bg-neutral-50 border-2 border-neutral-300 flex items-center justify-center shadow-medium">
                   <div className="w-2.5 h-2.5 rounded-full bg-brand-500"></div>
                 </div>
               </div>
@@ -122,9 +133,9 @@ export function ColorPicker({
         ))}
       </div>
 
-      {/* Custom Color Option */}
+      {/* Custom Color Section */}
       {allowCustom && (
-        <div className="space-y-3">
+        <div className="space-y-4">
           <Button
             type="button"
             variant={
@@ -140,12 +151,14 @@ export function ColorPicker({
               : "Choose Custom Color"}
           </Button>
 
+          {/* Custom Color Controls */}
           {(showCustomPicker || isCustomColor) && (
-            <div className="surface-elevated p-4 rounded-xl space-y-4">
-              <div className="flex items-center space-x-3">
+            <div className="card p-6 space-y-6">
+              {/* Color Picker Input */}
+              <div className="flex items-center gap-4">
                 <label
                   htmlFor="custom-color-input"
-                  className="text-body text-sm font-medium text-neutral-900 dark:text-neutral-100"
+                  className="text-primary text-sm font-medium min-w-0 flex-shrink-0"
                 >
                   Custom:
                 </label>
@@ -155,11 +168,19 @@ export function ColorPicker({
                   value={customColor}
                   onChange={(e) => handleCustomColorChange(e.target.value)}
                   disabled={disabled}
-                  className="w-10 h-10 rounded-lg border-2 border-neutral-300 dark:border-neutral-600 cursor-pointer disabled:cursor-not-allowed focus-ring"
+                  className={cn(
+                    // Enhanced touch target and styling
+                    "w-12 h-12 rounded-lg border-2 border-neutral-200 cursor-pointer",
+                    "focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2",
+                    "disabled:cursor-not-allowed disabled:opacity-50",
+                    "shadow-soft hover:shadow-medium transition-all duration-200"
+                  )}
                   aria-label="Choose custom color"
                 />
               </div>
-              <div className="flex items-center space-x-3">
+
+              {/* Hex Input with Preview */}
+              <div className="flex items-center gap-4">
                 <input
                   type="text"
                   value={customColor}
@@ -171,11 +192,12 @@ export function ColorPicker({
                   }}
                   placeholder="#ffffff"
                   disabled={disabled}
-                  className="input-field flex-1 text-code"
+                  className="input-field flex-1 font-mono text-sm"
                   aria-label="Custom color hex value"
                 />
+                {/* Color Preview */}
                 <div
-                  className="w-10 h-10 rounded-lg border-2 border-neutral-300 dark:border-neutral-600 shadow-soft"
+                  className="w-12 h-12 rounded-lg border-2 border-neutral-200 shadow-soft flex-shrink-0"
                   style={{ backgroundColor: customColor }}
                   aria-hidden="true"
                 />
@@ -185,11 +207,13 @@ export function ColorPicker({
         </div>
       )}
 
-      {/* Current Selection Display */}
-      <div className="text-xs text-neutral-600 dark:text-neutral-400 mt-2">
+      {/* Current Selection Display with enhanced contrast */}
+      <div className="text-tertiary text-sm">
         <span className="font-medium">Current:</span>{" "}
-        {presetColors.find((color) => color.value === value)?.name ||
-          (value === "transparent" ? "Transparent" : value)}
+        <span className="text-primary">
+          {presetColors.find((color) => color.value === value)?.name ||
+            (value === "transparent" ? "Transparent" : value)}
+        </span>
       </div>
     </div>
   );

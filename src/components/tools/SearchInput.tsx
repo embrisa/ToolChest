@@ -86,7 +86,7 @@ export function SearchInput({
         <div className="relative">
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
             <svg
-              className="h-5 w-5 text-neutral-400 dark:text-neutral-500"
+              className="h-5 w-5 text-neutral-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -117,13 +117,13 @@ export function SearchInput({
     <div className={cn("relative", className)} data-testid={testId}>
       <div className="relative">
         {/* Search Icon */}
-        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
           <svg
             className={cn(
               "h-5 w-5 transition-all duration-200",
               isFocused
-                ? "text-brand-500 dark:text-brand-400"
-                : "text-neutral-400 dark:text-neutral-500",
+                ? "text-brand-500"
+                : "text-neutral-400",
             )}
             fill="none"
             stroke="currentColor"
@@ -149,11 +149,9 @@ export function SearchInput({
           onBlur={() => setIsFocused(false)}
           placeholder={placeholder}
           className={cn(
-            "pl-12 pr-12 text-body",
-            "bg-white dark:bg-neutral-900",
-            "border-neutral-200 dark:border-neutral-700",
-            "hover:border-brand-300 dark:hover:border-brand-600",
-            "focus:border-brand-500 focus:ring-brand-500/20",
+            "pl-12 pr-12",
+            "bg-neutral-50 border-neutral-200",
+            "hover:border-brand-300 focus:border-brand-500",
             "transition-all duration-200",
           )}
           aria-label="Search tools"
@@ -163,10 +161,10 @@ export function SearchInput({
         />
 
         {/* Loading Spinner or Clear Button */}
-        <div className="absolute inset-y-0 right-0 pr-4 flex items-center">
+        <div className="absolute inset-y-0 right-0 pr-4 flex items-center z-10">
           {isLoading ? (
             <div
-              className="animate-spin h-5 w-5 text-brand-500 dark:text-brand-400"
+              className="animate-spin h-5 w-5 text-brand-500"
               aria-hidden="true"
               role="status"
               aria-label="Searching"
@@ -190,12 +188,10 @@ export function SearchInput({
               <button
                 onClick={handleClear}
                 className={cn(
-                  "h-5 w-5 rounded-full flex items-center justify-center",
+                  "min-h-[2.75rem] min-w-[2.75rem] rounded-full flex items-center justify-center",
                   "text-neutral-400 hover:text-neutral-600",
-                  "dark:text-neutral-500 dark:hover:text-neutral-300",
-                  "hover:bg-neutral-100 dark:hover:bg-neutral-800",
-                  "focus:outline-none focus:ring-2 focus:ring-brand-500/20",
-                  "transition-all duration-200",
+                  "hover:bg-neutral-100 transition-all duration-200",
+                  "focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2",
                 )}
                 aria-label="Clear search"
                 type="button"
@@ -205,6 +201,7 @@ export function SearchInput({
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
                   <path
                     strokeLinecap="round"
@@ -223,18 +220,19 @@ export function SearchInput({
       {value && resultCount !== undefined && (
         <div
           className={cn(
-            "mt-2 text-sm text-neutral-600 dark:text-neutral-400",
+            "mt-3 text-sm text-secondary",
             "animate-fade-in-up",
           )}
           aria-live="polite"
         >
           {resultCount === 0 ? (
-            <span className="text-warning-600 dark:text-warning-400">
+            <span className="text-warning-600 font-medium">
               No tools found for "{value}"
             </span>
           ) : (
             <span>
               {resultCount} tool{resultCount !== 1 ? "s" : ""} found
+              {value && ` for "${value}"`}
             </span>
           )}
         </div>
@@ -248,7 +246,7 @@ export function SearchInput({
           aria-live="polite"
           aria-atomic="true"
         >
-          {value ? `${resultCount} tools found` : ""}
+          {value ? `${resultCount} tools found for ${value}` : ""}
         </div>
       )}
     </div>
