@@ -230,12 +230,12 @@ interface ToastContainerProps {
   onDismiss: (id: string) => void;
   onAction?: (id: string, actionIndex: number) => void;
   position?:
-  | "top-right"
-  | "top-left"
-  | "bottom-right"
-  | "bottom-left"
-  | "top-center"
-  | "bottom-center";
+    | "top-right"
+    | "top-left"
+    | "bottom-right"
+    | "bottom-left"
+    | "top-center"
+    | "bottom-center";
   maxToasts?: number;
 }
 
@@ -389,14 +389,21 @@ export function useToast() {
     success: (title: string, message: string, duration?: number) =>
       addToast(createSuccessToast(title, message, duration)),
 
-    error: (title: string, message: string, actions?: ErrorNotification["actions"], persistent?: boolean) =>
-      addToast(createErrorToast(title, message, actions, persistent)),
+    error: (
+      title: string,
+      message: string,
+      actions?: ErrorNotification["actions"],
+      persistent?: boolean,
+    ) => addToast(createErrorToast(title, message, actions, persistent)),
 
     warning: (title: string, message: string, duration?: number) =>
       addToast(createWarningToast(title, message, duration)),
 
-    critical: (title: string, message: string, actions?: ErrorNotification["actions"]) =>
-      addToast(createCriticalToast(title, message, actions)),
+    critical: (
+      title: string,
+      message: string,
+      actions?: ErrorNotification["actions"],
+    ) => addToast(createCriticalToast(title, message, actions)),
   };
 
   return {

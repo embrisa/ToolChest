@@ -9,6 +9,11 @@ import {
   ProgressIndicator,
   AriaLiveRegion,
   useAccessibilityAnnouncements,
+  Alert,
+  AlertList,
+  Loading,
+  ResultsPanel,
+  ResultBadge,
 } from "@/components/ui";
 import { HashGeneratorService } from "@/services/tools/hashGeneratorService";
 import {
@@ -18,16 +23,8 @@ import {
   ClipboardResult,
   HASH_ALGORITHMS,
   ALGORITHM_INFO,
-  FILE_SIZE_LIMITS,
 } from "@/types/tools/hashGenerator";
 import { A11yAnnouncement } from "@/types/tools/base64";
-import {
-  DocumentDuplicateIcon,
-  DocumentArrowDownIcon,
-  ExclamationTriangleIcon,
-  CheckCircleIcon,
-  XCircleIcon,
-} from "@heroicons/react/24/outline";
 import { cn } from "@/utils";
 
 export function HashGeneratorTool() {
@@ -51,117 +48,137 @@ export function HashGeneratorTool() {
 
   const [dragActive, setDragActive] = useState(false);
   const [copySuccess, setCopySuccess] = useState<ClipboardResult | null>(null);
-  const [announcement, setAnnouncement] = useState<A11yAnnouncement | null>(
-    null,
-  );
+  const [announcement, setAnnouncement] = useState<A11yAnnouncement | null>(null);
   const [generateAllHashes, setGenerateAllHashes] = useState(false);
 
   const { announceToScreenReader } = useAccessibilityAnnouncements();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const stateRef = useRef(state);
+  const lastProcessedInputRef = useRef<{
+    inputType: string;
+    textInput: string;
+    fileInput: File | null;
+    generateAllHashes: boolean;
+    algorithm: string
+  }>({
+    inputType: "",
+    textInput: "",
+    fileInput: null,
+    generateAllHashes: false,
+    algorithm: "",
+  });
 
-  // Process hash generation
-  const processHash = useCallback(
-    async (algorithm?: HashAlgorithm) => {
-      if (state.inputType === "text" && !state.textInput.trim()) {
-        setState((prev) => ({
-          ...prev,
-          results: generateAllHashes
-            ? { MD5: null, "SHA-1": null, "SHA-256": null, "SHA-512": null }
-            : { ...prev.results, [algorithm || state.algorithm]: null },
-          error: null,
-          progress: null,
-          warnings: [],
-          validationErrors: [],
-        }));
-        return;
-      }
+  // Keep stateRef current
+  useEffect(() => {
+    stateRef.current = state;
+  }, [state]);
 
-      if (state.inputType === "file" && !state.fileInput) {
-        setState((prev) => ({
-          ...prev,
-          results: generateAllHashes
-            ? { MD5: null, "SHA-1": null, "SHA-256": null, "SHA-512": null }
-            : { ...prev.results, [algorithm || state.algorithm]: null },
-          error: null,
-          progress: null,
-          warnings: [],
-          validationErrors: [],
-        }));
-        return;
-      }
+  // Process hash generation with enhanced error handling and progress
+  const processHash = useCallback(async (shouldTrackUsage = true) => {
+    // Get current state values to avoid stale closures
+    const currentState = stateRef.current;
 
-      // Validate input before processing
-      if (state.inputType === "file" && state.fileInput) {
-        const validation = HashGeneratorService.validateFile(state.fileInput);
-        if (!validation.isValid) {
-          setState((prev) => ({
-            ...prev,
-            error: validation.error || "File validation failed",
-            validationErrors: validation.validationErrors || [],
-            warnings: validation.warnings || [],
-          }));
-
-          setAnnouncement(
-            announceToScreenReader(
-              `File validation failed: ${validation.error}`,
-              "assertive",
-            ),
-          );
-          return;
-        }
-      }
-
+    if (currentState.inputType === "text" && !currentState.textInput.trim()) {
       setState((prev) => ({
         ...prev,
-        isProcessing: true,
+        results: generateAllHashes
+          ? { MD5: null, "SHA-1": null, "SHA-256": null, "SHA-512": null }
+          : { ...prev.results, [currentState.algorithm]: null },
         error: null,
         progress: null,
+        warnings: [],
         validationErrors: [],
       }));
+      return;
+    }
 
-      const algorithmsToProcess = generateAllHashes
-        ? HASH_ALGORITHMS
-        : [algorithm || state.algorithm];
+    if (currentState.inputType === "file" && !currentState.fileInput) {
+      setState((prev) => ({
+        ...prev,
+        results: generateAllHashes
+          ? { MD5: null, "SHA-1": null, "SHA-256": null, "SHA-512": null }
+          : { ...prev.results, [currentState.algorithm]: null },
+        error: null,
+        progress: null,
+        warnings: [],
+        validationErrors: [],
+      }));
+      return;
+    }
 
-      // Announce start of processing to screen readers
-      setAnnouncement(
-        announceToScreenReader(
-          `Starting hash generation for ${algorithmsToProcess.join(", ")}`,
-          "polite",
-        ),
-      );
+    // Validate input before processing
+    if (currentState.inputType === "file" && currentState.fileInput) {
+      const validation = HashGeneratorService.validateFile(currentState.fileInput);
+      if (!validation.isValid) {
+        setState((prev) => ({
+          ...prev,
+          error: validation.error || "File validation failed",
+          validationErrors: validation.validationErrors || [],
+          warnings: validation.warnings || [],
+        }));
 
-      try {
-        const input =
-          state.inputType === "text" ? state.textInput : state.fileInput!;
-        const inputSize =
-          state.inputType === "text"
-            ? state.textInput.length
-            : state.fileInput!.size;
+        setAnnouncement(
+          announceToScreenReader(
+            `File validation failed: ${validation.error}`,
+            "assertive",
+          ),
+        );
+        return;
+      }
+    }
 
-        const results: Partial<Record<HashAlgorithm, HashResult>> = {};
-        let allWarnings: string[] = [];
+    setState((prev) => ({
+      ...prev,
+      isProcessing: true,
+      error: null,
+      progress: null,
+      validationErrors: [],
+    }));
 
-        for (const algo of algorithmsToProcess) {
-          const result: HashResult = await HashGeneratorService.generateHash({
-            algorithm: algo,
-            inputType: state.inputType,
-            input,
-            onProgress: (progress) => {
-              setState((prev) => ({ ...prev, progress }));
-            },
-          });
+    const algorithmsToProcess = generateAllHashes
+      ? HASH_ALGORITHMS
+      : [currentState.algorithm];
 
-          results[algo] = result;
+    // Announce start of processing to screen readers
+    setAnnouncement(
+      announceToScreenReader(
+        `Starting hash generation for ${algorithmsToProcess.join(", ")}`,
+        "polite",
+      ),
+    );
 
-          if (result.warnings) {
-            allWarnings = [...allWarnings, ...result.warnings];
-          }
+    try {
+      const input =
+        currentState.inputType === "text" ? currentState.textInput : currentState.fileInput!;
+      const inputSize =
+        currentState.inputType === "text"
+          ? currentState.textInput.length
+          : currentState.fileInput!.size;
 
-          // Track usage analytics (privacy-compliant)
+      const results: Partial<Record<HashAlgorithm, HashResult>> = {};
+      let allWarnings: string[] = [];
+
+      for (const algo of algorithmsToProcess) {
+        const result: HashResult = await HashGeneratorService.generateHash({
+          algorithm: algo,
+          inputType: currentState.inputType,
+          input,
+          onProgress: (progress) => {
+            setState((prev) => ({ ...prev, progress }));
+          },
+        });
+
+        results[algo] = result;
+
+        if (result.warnings) {
+          allWarnings = [...allWarnings, ...result.warnings];
+        }
+
+        // Track usage analytics only when explicitly requested (privacy-compliant)
+        if (shouldTrackUsage && result.success && inputSize > 0) {
           HashGeneratorService.trackUsage({
             algorithm: algo,
-            inputType: state.inputType,
+            inputType: currentState.inputType,
             inputSize,
             processingTime: result.processingTime || 0,
             success: result.success,
@@ -169,105 +186,150 @@ export function HashGeneratorTool() {
             error: result.success ? undefined : result.error,
           });
         }
+      }
 
-        setState((prev) => ({
-          ...prev,
-          results: generateAllHashes
-            ? ({ ...results } as Record<HashAlgorithm, HashResult | null>)
-            : {
-                ...prev.results,
-                [algorithm || state.algorithm]:
-                  results[algorithm || state.algorithm] || null,
-              },
-          error: null,
-          warnings: [...new Set(allWarnings)], // Remove duplicates
-          isProcessing: false,
-          progress: null,
-        }));
+      setState((prev) => ({
+        ...prev,
+        results: generateAllHashes
+          ? ({ ...results } as Record<HashAlgorithm, HashResult | null>)
+          : {
+            ...prev.results,
+            [currentState.algorithm]:
+              results[currentState.algorithm] || null,
+          },
+        error: null,
+        warnings: [...new Set(allWarnings)], // Remove duplicates
+        isProcessing: false,
+        progress: null,
+      }));
 
-        // Announce completion
-        const successCount = Object.values(results).filter(
-          (r) => r?.success,
-        ).length;
-        const failureCount = Object.values(results).filter(
-          (r) => !r?.success,
-        ).length;
+      // Announce completion
+      const successCount = Object.values(results).filter(
+        (r) => r?.success,
+      ).length;
+      const failureCount = Object.values(results).filter(
+        (r) => !r?.success,
+      ).length;
 
-        if (failureCount === 0) {
-          setAnnouncement(
-            announceToScreenReader(
-              `Hash generation completed successfully for ${successCount} algorithm${successCount > 1 ? "s" : ""}`,
-              "polite",
-            ),
-          );
-        } else {
-          setAnnouncement(
-            announceToScreenReader(
-              `Hash generation completed with ${failureCount} error${failureCount > 1 ? "s" : ""}`,
-              "assertive",
-            ),
-          );
-        }
-      } catch (error) {
-        const errorMessage =
-          error instanceof Error ? error.message : "Hash generation failed";
-        setState((prev) => ({
-          ...prev,
-          error: errorMessage,
-          isProcessing: false,
-          progress: null,
-        }));
-
+      if (failureCount === 0) {
         setAnnouncement(
           announceToScreenReader(
-            `Hash generation failed: ${errorMessage}`,
+            `Hash generation completed successfully for ${successCount} algorithm${successCount > 1 ? "s" : ""}`,
+            "polite",
+          ),
+        );
+      } else {
+        setAnnouncement(
+          announceToScreenReader(
+            `Hash generation completed with ${failureCount} error${failureCount > 1 ? "s" : ""}`,
             "assertive",
           ),
         );
       }
-    },
-    [
-      state.algorithm,
-      state.inputType,
-      state.textInput,
-      state.fileInput,
-      generateAllHashes,
-      announceToScreenReader,
-    ],
-  );
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Hash generation failed";
+      setState((prev) => ({
+        ...prev,
+        error: errorMessage,
+        isProcessing: false,
+        progress: null,
+      }));
 
-  // Enhanced auto-process with improved debouncing for text input
-  useEffect(() => {
-    if (state.inputType === "text") {
-      // Only process if there's actual text content
-      if (state.textInput.trim()) {
-        const timer = setTimeout(() => {
-          processHash();
-        }, 300); // 300ms debounce for real-time processing
-        return () => clearTimeout(timer);
-      } else {
-        // Clear results immediately when text is empty
-        setState((prev) => ({
-          ...prev,
-          results: generateAllHashes
-            ? { MD5: null, "SHA-1": null, "SHA-256": null, "SHA-512": null }
-            : { ...prev.results, [state.algorithm]: null },
-          error: null,
-          warnings: [],
-          validationErrors: [],
-        }));
-      }
-    } else if (state.fileInput) {
-      // Process file immediately when selected
-      processHash();
+      setAnnouncement(
+        announceToScreenReader(
+          `Hash generation failed: ${errorMessage}`,
+          "assertive",
+        ),
+      );
     }
   }, [
-    processHash,
+    // Use a ref for state to avoid recreating this function on every state change
+    // This prevents the infinite loop since the callback won't change
+    generateAllHashes,
+    announceToScreenReader,
+  ]);
+
+  // Manual processing function for explicit user actions
+  const manualProcess = useCallback(() => {
+    // Clear the last processed input to allow reprocessing
+    lastProcessedInputRef.current = {
+      inputType: "",
+      textInput: "",
+      fileInput: null,
+      generateAllHashes: false,
+      algorithm: "",
+    };
+    processHash(true); // Track usage for manual processing
+  }, [processHash]);
+
+  // Clear last processed input when mode or algorithm changes
+  useEffect(() => {
+    lastProcessedInputRef.current = {
+      inputType: "",
+      textInput: "",
+      fileInput: null,
+      generateAllHashes: false,
+      algorithm: "",
+    };
+  }, [generateAllHashes, state.algorithm]);
+
+  // Auto-process when inputs change (with debouncing for text)
+  useEffect(() => {
+    // Check if input has actually changed and we're not already processing
+    const currentInput = {
+      inputType: state.inputType,
+      textInput: state.textInput,
+      fileInput: state.fileInput,
+      generateAllHashes,
+      algorithm: state.algorithm,
+    };
+
+    const lastProcessed = lastProcessedInputRef.current;
+    const hasInputChanged =
+      currentInput.inputType !== lastProcessed.inputType ||
+      currentInput.textInput !== lastProcessed.textInput ||
+      currentInput.fileInput !== lastProcessed.fileInput ||
+      currentInput.generateAllHashes !== lastProcessed.generateAllHashes ||
+      currentInput.algorithm !== lastProcessed.algorithm;
+
+    // Don't process if input hasn't changed or if already processing
+    if (!hasInputChanged || state.isProcessing) {
+      return;
+    }
+
+    if (state.inputType === "text" && state.textInput.trim()) {
+      // Debounce text input processing
+      const timer = setTimeout(() => {
+        lastProcessedInputRef.current = { ...currentInput };
+        processHash(false); // Don't track usage for auto-processing
+      }, 300);
+      return () => clearTimeout(timer);
+    } else if (state.inputType === "file" && state.fileInput) {
+      // Process file immediately when selected, but update the ref first
+      lastProcessedInputRef.current = { ...currentInput };
+      processHash(false); // Don't track usage for auto-processing
+    } else if (state.inputType === "text" && !state.textInput.trim()) {
+      // Clear results immediately when text is empty
+      lastProcessedInputRef.current = { ...currentInput };
+      setState((prev) => ({
+        ...prev,
+        results: generateAllHashes
+          ? { MD5: null, "SHA-1": null, "SHA-256": null, "SHA-512": null }
+          : { ...prev.results, [state.algorithm]: null },
+        error: null,
+        warnings: [],
+        validationErrors: [],
+      }));
+    }
+  }, [
+    // Only depend on the actual input values, not the processing function
     state.inputType,
     state.textInput,
     state.fileInput,
     generateAllHashes,
     state.algorithm,
+    state.isProcessing, // Include this to prevent processing when already processing
   ]);
 
   // Enhanced file selection with validation
@@ -304,22 +366,15 @@ export function HashGeneratorTool() {
     [announceToScreenReader],
   );
 
-  // Drag and drop handlers
-  const handleDragEnter = useCallback((e: React.DragEvent) => {
+  // Enhanced drag and drop handlers with accessibility
+  const handleDrag = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setDragActive(true);
-  }, []);
-
-  const handleDragLeave = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
-  }, []);
-
-  const handleDragOver = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+    if (e.type === "dragenter" || e.type === "dragover") {
+      setDragActive(true);
+    } else if (e.type === "dragleave") {
+      setDragActive(false);
+    }
   }, []);
 
   const handleDrop = useCallback(
@@ -328,320 +383,241 @@ export function HashGeneratorTool() {
       e.stopPropagation();
       setDragActive(false);
 
-      const files = Array.from(e.dataTransfer.files);
-      if (files.length > 0) {
-        handleFileSelect(files[0]);
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        handleFileSelect(e.dataTransfer.files[0]);
+      } else {
+        setAnnouncement(
+          announceToScreenReader(
+            "No valid file found in drop operation",
+            "assertive",
+          ),
+        );
       }
     },
-    [handleFileSelect],
+    [handleFileSelect, announceToScreenReader],
   );
 
-  // Enhanced copy to clipboard with improved feedback
-  const handleCopyToClipboard = useCallback(
-    async (hash: string, algorithm: HashAlgorithm) => {
-      // Show immediate feedback
-      setCopySuccess({
-        success: true,
-        message: "Copying...",
-        timestamp: Date.now(),
-      });
+  // Enhanced copy to clipboard with accessibility feedback
+  const handleCopy = useCallback(async () => {
+    // Get all successful hash results
+    const allHashes = HASH_ALGORITHMS
+      .filter(algorithm => state.results[algorithm]?.success && state.results[algorithm]?.hash)
+      .map(algorithm => {
+        const result = state.results[algorithm];
+        return `${algorithm}: ${result?.hash}`;
+      })
+      .join('\n\n');
 
-      const result = await HashGeneratorService.copyToClipboard(hash);
+    if (!allHashes) return;
 
-      setCopySuccess({
-        success: result.success,
-        message: result.message,
-        timestamp: Date.now(),
-      });
+    const result = await HashGeneratorService.copyToClipboard(allHashes);
+    setCopySuccess({
+      success: result.success,
+      message: result.message,
+      timestamp: Date.now(),
+    });
 
-      // Enhanced accessibility announcement with more context
-      const hashLength = hash.length;
-      const hashPreview = hash.substring(0, 8) + "...";
-      setAnnouncement(
-        announceToScreenReader(
-          `${algorithm} hash ${result.success ? `(${hashLength} characters, starting with ${hashPreview}) copied to clipboard` : "copy failed: " + result.message}`,
-          result.success ? "polite" : "assertive",
-        ),
-      );
+    setAnnouncement(
+      announceToScreenReader(
+        result.message,
+        result.success ? "polite" : "assertive",
+      ),
+    );
 
-      // Clear success message after 3 seconds
+    if (result.success) {
       setTimeout(() => setCopySuccess(null), 3000);
-    },
-    [announceToScreenReader],
-  );
-
-  // Clear copy success message when it expires
-  useEffect(() => {
-    if (copySuccess) {
-      const timer = setTimeout(() => setCopySuccess(null), 3000);
-      return () => clearTimeout(timer);
     }
-  }, [copySuccess]);
+  }, [state.results, announceToScreenReader]);
+
+  // Clear file input
+  const handleClearFile = useCallback(() => {
+    setState((prev) => ({
+      ...prev,
+      fileInput: null,
+      results: { MD5: null, "SHA-1": null, "SHA-256": null, "SHA-512": null },
+      error: null,
+      warnings: [],
+      validationErrors: [],
+    }));
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+
+    setAnnouncement(announceToScreenReader("File cleared", "polite"));
+  }, [announceToScreenReader]);
 
   return (
-    <div className="space-y-8">
-      {/* ARIA Live Region for announcements */}
+    <div className="container-wide space-y-12">
+      {/* ARIA live region for screen reader announcements */}
       <AriaLiveRegion announcement={announcement} />
 
-      {/* Input Type Selection */}
+      {/* Hash Algorithm and Input Type Selection */}
       <Card variant="elevated" className="tool-card-hash">
-        <CardHeader>
-          <div className="flex items-center gap-3 mb-2">
-            <div className="tool-icon tool-icon-hash">#</div>
+        <CardHeader className="pb-8">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="tool-icon tool-icon-hash h-14 w-14 rounded-2xl bg-gradient-to-br from-accent-100 to-accent-200 dark:from-accent-900/30 dark:to-accent-800/30 flex items-center justify-center">
+              <span className="text-lg font-bold text-accent-700 dark:text-accent-300">#</span>
+            </div>
             <div>
-              <h2 className="text-title text-xl font-semibold text-neutral-900 dark:text-neutral-100">
-                Input Method
+              <h2 className="text-title text-2xl font-semibold text-foreground mb-2">
+                Hash Generation Settings
               </h2>
-              <p className="text-body text-neutral-600 dark:text-neutral-400">
-                Choose how you want to provide data for hash generation
+              <p className="text-body text-foreground-secondary">
+                Choose your algorithm and input preferences
               </p>
             </div>
           </div>
         </CardHeader>
-        <CardContent>
-          <fieldset className="space-y-4">
-            <legend className="sr-only">
-              Choose input method for hash generation
-            </legend>
-
-            <div className="flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={() =>
-                  setState((prev) => ({
-                    ...prev,
-                    inputType: "text",
-                    fileInput: null,
-                    results: {
-                      MD5: null,
-                      "SHA-1": null,
-                      "SHA-256": null,
-                      "SHA-512": null,
-                    },
-                  }))
-                }
-                className={cn(
-                  "px-6 py-3 rounded-xl border-2 font-medium text-body transition-all duration-200",
-                  "focus:outline-none focus:ring-2 focus:ring-accent-500/20 focus:ring-offset-2",
-                  "dark:focus:ring-offset-neutral-900",
-                  state.inputType === "text"
-                    ? cn(
-                        "border-accent-400 bg-gradient-to-r from-accent-50 to-accent-100/50",
-                        "dark:border-accent-500 dark:from-accent-950/50 dark:to-accent-900/30",
-                        "text-accent-800 dark:text-accent-200 shadow-glow-accent",
-                      )
-                    : cn(
-                        "border-neutral-200 dark:border-neutral-700",
-                        "bg-white dark:bg-neutral-900",
-                        "text-neutral-700 dark:text-neutral-300",
-                        "hover:border-accent-200 dark:hover:border-accent-700",
-                        "hover:bg-accent-50/50 dark:hover:bg-accent-950/20",
-                      ),
-                )}
-                aria-pressed={state.inputType === "text"}
-                aria-describedby="text-input-description"
-              >
-                Text Input
-              </button>
-
-              <button
-                type="button"
-                onClick={() =>
-                  setState((prev) => ({
-                    ...prev,
-                    inputType: "file",
-                    textInput: "",
-                    results: {
-                      MD5: null,
-                      "SHA-1": null,
-                      "SHA-256": null,
-                      "SHA-512": null,
-                    },
-                  }))
-                }
-                className={cn(
-                  "px-6 py-3 rounded-xl border-2 font-medium text-body transition-all duration-200",
-                  "focus:outline-none focus:ring-2 focus:ring-accent-500/20 focus:ring-offset-2",
-                  "dark:focus:ring-offset-neutral-900",
-                  state.inputType === "file"
-                    ? cn(
-                        "border-accent-400 bg-gradient-to-r from-accent-50 to-accent-100/50",
-                        "dark:border-accent-500 dark:from-accent-950/50 dark:to-accent-900/30",
-                        "text-accent-800 dark:text-accent-200 shadow-glow-accent",
-                      )
-                    : cn(
-                        "border-neutral-200 dark:border-neutral-700",
-                        "bg-white dark:bg-neutral-900",
-                        "text-neutral-700 dark:text-neutral-300",
-                        "hover:border-accent-200 dark:hover:border-accent-700",
-                        "hover:bg-accent-50/50 dark:hover:bg-accent-950/20",
-                      ),
-                )}
-                aria-pressed={state.inputType === "file"}
-                aria-describedby="file-input-description"
-              >
-                File Upload
-              </button>
-            </div>
-
-            <div className="text-body text-neutral-600 dark:text-neutral-400">
-              {state.inputType === "text" && (
-                <p id="text-input-description">
-                  Enter text to generate hash values. Processing happens in
-                  real-time as you type.
-                </p>
-              )}
-              {state.inputType === "file" && (
-                <p id="file-input-description">
-                  Upload a file to generate hash values. Maximum file size:
-                  10MB.
-                </p>
-              )}
-            </div>
-          </fieldset>
-        </CardContent>
-      </Card>
-
-      {/* Algorithm Selection */}
-      <Card variant="default">
-        <CardHeader>
-          <h2 className="text-title text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-            Hash Algorithm Options
-          </h2>
-          <p className="text-body text-neutral-600 dark:text-neutral-400">
-            Select specific algorithms or generate all hash types
-          </p>
-        </CardHeader>
-        <CardContent>
-          <fieldset className="space-y-6">
-            <legend className="sr-only">Choose hash algorithm options</legend>
-
-            {/* Generate All Toggle */}
-            <div className="space-y-3">
-              <label className="flex items-center gap-3 cursor-pointer group">
-                <div className="relative">
-                  <input
-                    type="checkbox"
-                    checked={generateAllHashes}
-                    onChange={(e) => setGenerateAllHashes(e.target.checked)}
-                    className="sr-only"
-                  />
-                  <div
-                    className={cn(
-                      "w-12 h-6 rounded-full border-2 transition-all duration-200",
-                      "focus-within:ring-2 focus-within:ring-accent-500/20",
-                      generateAllHashes
-                        ? "bg-accent-500 border-accent-500"
-                        : "bg-neutral-200 border-neutral-300 dark:bg-neutral-700 dark:border-neutral-600",
-                    )}
-                  >
+        <CardContent className="pt-0">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Algorithm Selection */}
+            <div className="space-y-4">
+              <label className="text-body font-medium text-foreground">Hash Algorithm</label>
+              <div className="space-y-3">
+                <label className="flex items-center gap-3 cursor-pointer group">
+                  <div className="relative">
+                    <input
+                      type="checkbox"
+                      checked={generateAllHashes}
+                      onChange={(e) => setGenerateAllHashes(e.target.checked)}
+                      className="sr-only"
+                    />
                     <div
                       className={cn(
-                        "w-4 h-4 bg-white rounded-full shadow-sm transition-transform duration-200",
-                        "transform translate-y-0.5",
-                        generateAllHashes ? "translate-x-6" : "translate-x-0.5",
+                        "w-12 h-6 rounded-full border-2 transition-all duration-200",
+                        "focus-within:ring-2 focus-within:ring-accent-500/20",
+                        generateAllHashes
+                          ? "bg-accent-500 border-accent-500"
+                          : "bg-neutral-200 border-neutral-300 dark:bg-neutral-700 dark:border-neutral-600",
                       )}
-                    />
+                    >
+                      <div
+                        className={cn(
+                          "w-4 h-4 bg-white rounded-full shadow-sm transition-transform duration-200",
+                          "transform translate-y-0.5",
+                          generateAllHashes ? "translate-x-6" : "translate-x-0.5",
+                        )}
+                      />
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <span className="text-body font-medium text-neutral-900 dark:text-neutral-100">
-                    Generate All Hash Types
+                  <span className="text-body font-medium text-foreground">
+                    Generate All
                   </span>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                    Create MD5, SHA-1, SHA-256, and SHA-512 hashes
-                    simultaneously
-                  </p>
-                </div>
-              </label>
+                </label>
+
+                {!generateAllHashes && (
+                  <select
+                    value={state.algorithm}
+                    onChange={(e) => setState((prev) => ({
+                      ...prev,
+                      algorithm: e.target.value as HashAlgorithm,
+                      results: { MD5: null, "SHA-1": null, "SHA-256": null, "SHA-512": null }
+                    }))}
+                    className="input-field h-12"
+                    aria-label="Select hash algorithm"
+                  >
+                    {HASH_ALGORITHMS.map((algo) => (
+                      <option key={algo} value={algo}>
+                        {algo} - {ALGORITHM_INFO[algo]?.description || 'Hash function'}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
             </div>
 
-            {/* Individual Algorithm Selection */}
-            {!generateAllHashes && (
-              <div className="space-y-3">
-                <p className="form-label">Individual Algorithm</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {HASH_ALGORITHMS.map((algo) => (
-                    <button
-                      key={algo}
-                      type="button"
-                      onClick={() =>
-                        setState((prev) => ({ ...prev, algorithm: algo }))
-                      }
-                      className={cn(
-                        "p-4 rounded-xl border-2 text-left transition-all duration-200",
-                        "focus:outline-none focus:ring-2 focus:ring-accent-500/20 focus:ring-offset-2",
-                        "dark:focus:ring-offset-neutral-900",
-                        state.algorithm === algo
-                          ? cn(
-                              "border-accent-400 bg-gradient-to-r from-accent-50 to-accent-100/50",
-                              "dark:border-accent-500 dark:from-accent-950/50 dark:to-accent-900/30",
-                              "shadow-glow-accent",
-                            )
-                          : cn(
-                              "border-neutral-200 dark:border-neutral-700",
-                              "bg-white dark:bg-neutral-900",
-                              "hover:border-accent-200 dark:hover:border-accent-700",
-                              "hover:bg-accent-50/30 dark:hover:bg-accent-950/10",
-                            ),
-                      )}
-                      aria-pressed={state.algorithm === algo}
-                    >
-                      <div className="space-y-1">
-                        <h3
-                          className={cn(
-                            "font-semibold text-body",
-                            state.algorithm === algo
-                              ? "text-accent-800 dark:text-accent-200"
-                              : "text-neutral-900 dark:text-neutral-100",
-                          )}
-                        >
-                          {algo}
-                        </h3>
-                        <p
-                          className={cn(
-                            "text-sm",
-                            state.algorithm === algo
-                              ? "text-accent-600 dark:text-accent-300"
-                              : "text-neutral-600 dark:text-neutral-400",
-                          )}
-                        >
-                          {ALGORITHM_INFO[algo]?.description ||
-                            "Cryptographic hash function"}
-                        </p>
-                      </div>
-                    </button>
-                  ))}
-                </div>
+            {/* Input Type Selection */}
+            <div className="space-y-4">
+              <label className="text-body font-medium text-foreground">Input Type</label>
+              <div className="flex gap-3">
+                <Button
+                  variant={state.inputType === "text" ? "primary" : "secondary"}
+                  size="sm"
+                  onClick={() =>
+                    setState((prev) => ({
+                      ...prev,
+                      inputType: "text",
+                      results: { MD5: null, "SHA-1": null, "SHA-256": null, "SHA-512": null },
+                      fileInput: null,
+                    }))
+                  }
+                  aria-pressed={state.inputType === "text"}
+                  className="flex-1 h-12"
+                >
+                  Text
+                </Button>
+                <Button
+                  variant={state.inputType === "file" ? "primary" : "secondary"}
+                  size="sm"
+                  onClick={() =>
+                    setState((prev) => ({
+                      ...prev,
+                      inputType: "file",
+                      results: { MD5: null, "SHA-1": null, "SHA-256": null, "SHA-512": null },
+                      textInput: "",
+                    }))
+                  }
+                  aria-pressed={state.inputType === "file"}
+                  className="flex-1 h-12"
+                >
+                  File
+                </Button>
               </div>
-            )}
-          </fieldset>
+            </div>
+
+            {/* Info Panel */}
+            <div className="space-y-4">
+              <label className="text-body font-medium text-foreground">Security Level</label>
+              <div className="space-y-2">
+                {generateAllHashes ? (
+                  <div className="text-sm text-foreground-secondary">
+                    <span className="text-success-600 font-medium">Secure:</span> SHA-256, SHA-512<br />
+                    <span className="text-warning-600 font-medium">Legacy:</span> MD5, SHA-1
+                  </div>
+                ) : (
+                  <div className={cn(
+                    "px-3 py-2 rounded-lg text-sm font-medium",
+                    ALGORITHM_INFO[state.algorithm]?.secure
+                      ? "bg-success-100 text-success-800 dark:bg-success-900/30 dark:text-success-200"
+                      : "bg-warning-100 text-warning-800 dark:bg-warning-900/30 dark:text-warning-200"
+                  )}>
+                    {ALGORITHM_INFO[state.algorithm]?.secure ? "Secure" : "Legacy - Not Recommended"}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         </CardContent>
       </Card>
 
       {/* Input Section */}
       <Card variant="default">
-        <CardHeader>
-          <h2 className="text-title text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+        <CardHeader className="pb-8">
+          <h2 className="text-title text-xl font-semibold text-foreground mb-2">
             {state.inputType === "text" ? "Text Input" : "File Upload"}
           </h2>
-          <p className="text-body text-neutral-600 dark:text-neutral-400">
+          <p className="text-body text-foreground-secondary">
             {state.inputType === "text"
               ? "Enter the text you want to hash"
               : "Upload a file to generate hash values"}
           </p>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-0">
           {state.inputType === "text" ? (
-            <div className="space-y-4">
+            <div className="space-y-6">
               <textarea
                 value={state.textInput}
                 onChange={(e) =>
-                  setState((prev) => ({ ...prev, textInput: e.target.value }))
+                  setState((prev) => ({
+                    ...prev,
+                    textInput: e.target.value,
+                    results: { MD5: null, "SHA-1": null, "SHA-256": null, "SHA-512": null },
+                  }))
                 }
                 placeholder="Enter text to hash..."
                 className={cn(
-                  "input-field h-32 resize-vertical text-code",
+                  "input-field h-40 resize-vertical text-code",
                   "placeholder:text-neutral-400 dark:placeholder:text-neutral-500",
                   state.isProcessing && "opacity-50 cursor-not-allowed",
                 )}
@@ -649,27 +625,26 @@ export function HashGeneratorTool() {
                 disabled={state.isProcessing}
               />
               {state.textInput && (
-                <div className="text-sm text-neutral-500 dark:text-neutral-400">
-                  Input length: {state.textInput.length.toLocaleString()}{" "}
-                  characters
+                <div className="text-sm text-foreground-secondary">
+                  Input length: {state.textInput.length.toLocaleString()} characters
                 </div>
               )}
             </div>
           ) : (
-            <div className="space-y-6">
+            <div className="space-y-8">
               {/* File Upload Area */}
               <div
                 className={cn(
-                  "relative border-2 border-dashed rounded-2xl p-8 text-center",
+                  "relative border-2 border-dashed rounded-2xl p-12 text-center",
                   "transition-all duration-300 group",
                   dragActive
                     ? "border-accent-400 bg-accent-50 dark:border-accent-500 dark:bg-accent-950/20"
                     : "border-neutral-300 dark:border-neutral-600 hover:border-accent-300 dark:hover:border-accent-600",
                   state.isProcessing && "opacity-50 pointer-events-none",
                 )}
-                onDragEnter={handleDragEnter}
-                onDragLeave={handleDragLeave}
-                onDragOver={handleDragOver}
+                onDragEnter={handleDrag}
+                onDragLeave={handleDrag}
+                onDragOver={handleDrag}
                 onDrop={handleDrop}
               >
                 <input
@@ -683,17 +658,17 @@ export function HashGeneratorTool() {
                   disabled={state.isProcessing}
                 />
 
-                <div className="space-y-4">
+                <div className="space-y-6">
                   <div
                     className={cn(
-                      "mx-auto h-16 w-16 rounded-full flex items-center justify-center",
+                      "mx-auto h-20 w-20 rounded-full flex items-center justify-center",
                       "bg-gradient-to-br from-accent-100 to-accent-200",
                       "dark:from-accent-900/30 dark:to-accent-800/30",
                       "transition-transform duration-200 group-hover:scale-110",
                     )}
                   >
                     <svg
-                      className="h-8 w-8 text-accent-600 dark:text-accent-400"
+                      className="h-10 w-10 text-accent-600 dark:text-accent-400"
                       stroke="currentColor"
                       fill="none"
                       viewBox="0 0 48 48"
@@ -707,13 +682,13 @@ export function HashGeneratorTool() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-body text-neutral-600 dark:text-neutral-400">
+                    <p className="text-body text-foreground-secondary mb-2">
                       <span className="font-semibold text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300 cursor-pointer">
                         Click to upload
                       </span>{" "}
                       or drag and drop
                     </p>
-                    <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+                    <p className="text-sm text-foreground-tertiary">
                       Maximum file size: 10MB
                     </p>
                   </div>
@@ -722,21 +697,19 @@ export function HashGeneratorTool() {
 
               {/* Selected File Info */}
               {state.fileInput && (
-                <div
-                  className={cn("surface rounded-xl p-4 animate-fade-in-up")}
-                >
+                <div className={cn("bg-background-tertiary rounded-2xl p-6 animate-fade-in-up border border-border-secondary")}>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-6">
                       <div className="flex-shrink-0">
                         <div
                           className={cn(
-                            "h-12 w-12 rounded-xl flex items-center justify-center",
+                            "h-16 w-16 rounded-2xl flex items-center justify-center",
                             "bg-gradient-to-br from-neutral-100 to-neutral-200",
                             "dark:from-neutral-800 dark:to-neutral-700",
                           )}
                         >
                           <svg
-                            className="h-6 w-6 text-neutral-600 dark:text-neutral-400"
+                            className="h-8 w-8 text-neutral-600 dark:text-neutral-400"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -751,10 +724,10 @@ export function HashGeneratorTool() {
                         </div>
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="text-body font-medium text-neutral-900 dark:text-neutral-100 truncate">
+                        <p className="text-body font-medium text-foreground truncate mb-1">
                           {state.fileInput.name}
                         </p>
-                        <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                        <p className="text-sm text-foreground-secondary">
                           {(state.fileInput.size / 1024).toFixed(1)} KB
                           {state.fileInput.type && ` • ${state.fileInput.type}`}
                         </p>
@@ -763,14 +736,10 @@ export function HashGeneratorTool() {
                     <Button
                       variant="secondary"
                       size="sm"
-                      onClick={() => {
-                        setState((prev) => ({ ...prev, fileInput: null }));
-                        if (fileInputRef.current) {
-                          fileInputRef.current.value = "";
-                        }
-                      }}
+                      onClick={handleClearFile}
                       aria-label="Remove selected file"
                       disabled={state.isProcessing}
+                      className="h-10"
                     >
                       Remove
                     </Button>
@@ -782,81 +751,24 @@ export function HashGeneratorTool() {
 
           {/* Validation Errors */}
           {state.validationErrors.length > 0 && (
-            <div
-              className={cn(
-                "mt-6 p-4 rounded-xl border",
-                "bg-error-50 border-error-200 dark:bg-error-950/20 dark:border-error-800",
-                "animate-fade-in-up",
-              )}
+            <Alert
+              variant="error"
+              title={`Validation Error${state.validationErrors.length > 1 ? "s" : ""}`}
+              className="mt-8"
             >
-              <div className="flex gap-3">
-                <div className="flex-shrink-0">
-                  <svg
-                    className="h-5 w-5 text-error-500"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-body font-semibold text-error-800 dark:text-error-200">
-                    Validation Error
-                    {state.validationErrors.length > 1 ? "s" : ""}
-                  </h3>
-                  <div className="mt-2 text-body text-error-700 dark:text-error-300">
-                    <ul className="list-disc list-inside space-y-1">
-                      {state.validationErrors.map((error, index) => (
-                        <li key={index}>{error}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
+              <AlertList items={state.validationErrors} />
+            </Alert>
           )}
 
           {/* Warnings */}
           {state.warnings.length > 0 && (
-            <div
-              className={cn(
-                "mt-6 p-4 rounded-xl border",
-                "bg-warning-50 border-warning-200 dark:bg-warning-950/20 dark:border-warning-800",
-                "animate-fade-in-up",
-              )}
+            <Alert
+              variant="warning"
+              title={`Warning${state.warnings.length > 1 ? "s" : ""}`}
+              className="mt-8"
             >
-              <div className="flex gap-3">
-                <div className="flex-shrink-0">
-                  <svg
-                    className="h-5 w-5 text-warning-500"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-body font-semibold text-warning-800 dark:text-warning-200">
-                    Warning{state.warnings.length > 1 ? "s" : ""}
-                  </h3>
-                  <div className="mt-2 text-body text-warning-700 dark:text-warning-300">
-                    <ul className="list-disc list-inside space-y-1">
-                      {state.warnings.map((warning, index) => (
-                        <li key={index}>{warning}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
+              <AlertList items={state.warnings} />
+            </Alert>
           )}
         </CardContent>
       </Card>
@@ -864,15 +776,15 @@ export function HashGeneratorTool() {
       {/* Progress Indicator */}
       {state.isProcessing && state.progress && (
         <Card variant="elevated" className="animate-fade-in-up">
-          <CardContent>
-            <div className="space-y-4">
+          <CardContent className="p-8">
+            <div className="space-y-6">
               <div className="flex items-center justify-between">
-                <span className="text-body font-medium text-neutral-700 dark:text-neutral-300">
+                <span className="text-body font-medium text-foreground">
                   {state.progress.stage === "reading" && "Reading file..."}
                   {state.progress.stage === "hashing" && "Generating hashes..."}
                   {state.progress.stage === "complete" && "Complete!"}
                 </span>
-                <span className="text-body text-neutral-500 dark:text-neutral-400">
+                <span className="text-body text-foreground-secondary">
                   {state.progress.percentage}%
                 </span>
               </div>
@@ -892,7 +804,7 @@ export function HashGeneratorTool() {
               />
               {state.progress.estimatedTimeRemaining &&
                 state.progress.estimatedTimeRemaining > 1 && (
-                  <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                  <p className="text-sm text-foreground-secondary">
                     Estimated time remaining:{" "}
                     {state.progress.estimatedTimeRemaining}s
                   </p>
@@ -905,122 +817,88 @@ export function HashGeneratorTool() {
       {/* Error Display */}
       {state.error && (
         <Card variant="default" className="animate-fade-in-up">
-          <CardContent>
-            <div
-              className={cn(
-                "p-4 rounded-xl border",
-                "bg-error-50 border-error-200 dark:bg-error-950/20 dark:border-error-800",
-              )}
-            >
-              <div className="flex gap-3">
-                <div className="flex-shrink-0">
-                  <svg
-                    className="h-5 w-5 text-error-500"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-body font-semibold text-error-800 dark:text-error-200">
-                    Hash Generation Failed
-                  </h3>
-                  <div className="mt-2 text-body text-error-700 dark:text-error-300">
-                    {state.error}
-                  </div>
-                </div>
-              </div>
-            </div>
+          <CardContent className="p-8">
+            <Alert variant="error" title="Hash Generation Failed">
+              {state.error}
+            </Alert>
           </CardContent>
         </Card>
       )}
 
-      {/* Results Section */}
-      {Object.values(state.results).some((result) => result?.success) && (
-        <Card variant="elevated" className="animate-fade-in-up">
-          <CardHeader>
-            <h2 className="text-title text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-              Hash Results
-            </h2>
-            <p className="text-body text-neutral-600 dark:text-neutral-400">
-              Generated hash values for your input
-            </p>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {HASH_ALGORITHMS.map((algorithm) => {
-                const result = state.results[algorithm];
-                if (!result?.success || !result.hash) return null;
-
-                return (
-                  <div
-                    key={algorithm}
-                    className={cn(
-                      "p-4 rounded-xl border",
-                      "bg-accent-50/50 border-accent-200/50",
-                      "dark:bg-accent-950/20 dark:border-accent-800/50",
-                    )}
-                  >
-                    <div className="flex items-center justify-between mb-3">
-                      <div>
-                        <h3 className="text-body font-semibold text-accent-800 dark:text-accent-200">
-                          {algorithm}
-                        </h3>
-                        <p className="text-sm text-accent-600 dark:text-accent-300">
-                          {result.hash.length} characters
-                          {result.processingTime &&
-                            ` • ${result.processingTime}ms`}
-                        </p>
-                      </div>
-                      <Button
-                        variant="secondary"
-                        size="sm"
-                        onClick={() =>
-                          handleCopyToClipboard(result.hash!, algorithm)
-                        }
-                        className="flex items-center gap-2"
-                        aria-label={`Copy ${algorithm} hash to clipboard`}
-                      >
-                        <DocumentDuplicateIcon className="h-4 w-4" />
-                        Copy
-                      </Button>
-                    </div>
-                    <div
-                      className={cn(
-                        "p-3 rounded-lg font-mono text-sm break-all",
-                        "bg-neutral-100 dark:bg-neutral-800",
-                        "text-neutral-800 dark:text-neutral-200",
-                        "border border-neutral-200 dark:border-neutral-700",
-                      )}
-                    >
-                      {result.hash}
-                    </div>
-                  </div>
-                );
-              })}
-
-              {/* Copy Success Feedback */}
-              {copySuccess && (
-                <div
-                  className={cn(
-                    "p-3 rounded-xl text-body animate-fade-in",
-                    copySuccess.success
-                      ? "bg-success-50 text-success-700 border border-success-200 dark:bg-success-950/20 dark:text-success-300 dark:border-success-800"
-                      : "bg-error-50 text-error-700 border border-error-200 dark:bg-error-950/20 dark:text-error-300 dark:border-error-800",
-                  )}
+      {/* Hash Results Section - Always Visible */}
+      <ResultsPanel
+        title="Hash Results"
+        result={
+          // Combine all successful hash results into a single output
+          HASH_ALGORITHMS
+            .filter(algorithm => state.results[algorithm]?.success && state.results[algorithm]?.hash)
+            .map(algorithm => {
+              const result = state.results[algorithm];
+              return `${algorithm}: ${result?.hash}`;
+            })
+            .join('\n\n') || ""
+        }
+        isProcessing={state.isProcessing}
+        onCopy={handleCopy}
+        copySuccess={copySuccess?.success && copySuccess.message.includes('copied')}
+        copyLabel="Copy All Hashes"
+        placeholder={
+          state.isProcessing
+            ? "Generating hash values..."
+            : "Hash results will appear here after processing your input"
+        }
+        metadata={
+          Object.values(state.results).some(r => r?.success)
+            ? [
+              {
+                label: "Algorithms",
+                value: HASH_ALGORITHMS.filter(a => state.results[a]?.success).length,
+                format: (v: string | number) => `${v} hash${Number(v) === 1 ? '' : 'es'} generated`
+              },
+              ...(Object.values(state.results).find(r => r?.success && r.processingTime)
+                ? [{
+                  label: "Total Time",
+                  value: Object.values(state.results)
+                    .filter(r => r?.success && r.processingTime)
+                    .reduce((sum, r) => sum + (r?.processingTime || 0), 0),
+                  format: (v: string | number) => `${v}ms`
+                }]
+                : []),
+              ...(Object.values(state.results).some(r => r?.success && r.serverSide)
+                ? [{ label: "Processing", value: "Mixed (Client + Server)" }]
+                : Object.values(state.results).some(r => r?.success && !r.serverSide)
+                  ? [{ label: "Processing", value: "Client-side" }]
+                  : [])
+            ]
+            : []
+        }
+        badges={
+          Object.values(state.results).some(r => r?.success)
+            ? HASH_ALGORITHMS
+              .filter(algorithm => state.results[algorithm]?.success)
+              .map(algorithm => (
+                <ResultBadge
+                  key={algorithm}
+                  variant={ALGORITHM_INFO[algorithm]?.secure ? "success" : "warning"}
                 >
-                  {copySuccess.message}
-                </div>
-              )}
-            </div>
-          </CardContent>
-        </Card>
-      )}
+                  {algorithm}
+                </ResultBadge>
+              ))
+            : []
+        }
+        rows={6}
+        className="animate-fade-in-up"
+      >
+        {/* Copy Success Feedback */}
+        {copySuccess && (
+          <Alert
+            variant={copySuccess.success ? "success" : "error"}
+            className="animate-fade-in"
+          >
+            {copySuccess.message}
+          </Alert>
+        )}
+      </ResultsPanel>
     </div>
   );
 }

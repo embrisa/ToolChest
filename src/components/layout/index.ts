@@ -1,6 +1,6 @@
 /**
  * Layout Components
- * 
+ *
  * Core layout components that provide the structure and navigation
  * for the tool-chest application. These components follow our design
  * philosophy of accessibility-first, mobile-responsive design with

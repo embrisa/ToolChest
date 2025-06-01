@@ -8,6 +8,7 @@ import {
 } from "@/types/admin/tool";
 import { TagDTO, ToolDTO } from "@/types/tools/tool";
 import { ToolForm } from "@/components/admin";
+import { Button } from "@/components/ui";
 
 export default function EditToolPage() {
   const router = useRouter();
@@ -106,13 +107,11 @@ export default function EditToolPage() {
 
   if (initialLoading) {
     return (
-      <div className="container-narrow">
-        <div className="flex items-center justify-center py-16">
+      <div className="container-narrow section-spacing-md">
+        <div className="flex items-center justify-center py-20">
           <div className="text-center animate-fade-in-up">
-            <div className="w-12 h-12 border-3 border-brand-200 border-t-brand-500 rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-neutral-600 dark:text-neutral-400 text-body">
-              Loading tool...
-            </p>
+            <div className="w-12 h-12 border-3 border-neutral-200 border-t-brand-500 rounded-full animate-spin mx-auto mb-6"></div>
+            <p className="text-secondary text-lg">Loading tool...</p>
           </div>
         </div>
       </div>
@@ -121,14 +120,15 @@ export default function EditToolPage() {
 
   if (notFound) {
     return (
-      <div className="container-narrow">
-        <div className="text-center py-16 animate-fade-in-up">
-          <div className="w-20 h-20 bg-neutral-100 dark:bg-neutral-800 rounded-full flex items-center justify-center mx-auto mb-6">
+      <div className="container-narrow section-spacing-md">
+        <div className="text-center py-20 animate-fade-in-up">
+          <div className="w-24 h-24 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-8">
             <svg
-              className="w-10 h-10 text-neutral-400 dark:text-neutral-500"
+              className="w-12 h-12 text-neutral-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -138,22 +138,25 @@ export default function EditToolPage() {
               />
             </svg>
           </div>
-          <h1 className="text-title text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">
+          <h1 className="text-3xl font-bold text-primary mb-4">
             Tool Not Found
           </h1>
-          <p className="text-body text-neutral-600 dark:text-neutral-400 mb-8 max-w-md mx-auto">
+          <p className="text-lg text-secondary mb-8 max-w-lg mx-auto">
             The tool you're looking for doesn't exist or has been deleted. It
             may have been removed or the URL may be incorrect.
           </p>
-          <button
+          <Button
             onClick={() => router.push("/admin/tools")}
-            className="btn-primary focus-ring"
+            variant="primary"
+            size="lg"
+            className="focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
           >
             <svg
-              className="w-4 h-4 mr-2"
+              className="w-5 h-5 mr-3"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -163,7 +166,7 @@ export default function EditToolPage() {
               />
             </svg>
             Back to Tools
-          </button>
+          </Button>
         </div>
       </div>
     );
@@ -171,15 +174,16 @@ export default function EditToolPage() {
 
   if (!tool) {
     return (
-      <div className="container-narrow">
-        <div className="surface-elevated rounded-2xl p-6 border-l-4 border-l-error-500 animate-fade-in-up">
-          <div className="flex items-start space-x-4">
+      <div className="container-narrow section-spacing-md">
+        <div className="card rounded-2xl p-8 border-l-4 border-l-error-500 animate-fade-in-up">
+          <div className="flex items-start space-x-6">
             <div className="flex-shrink-0">
-              <div className="w-10 h-10 bg-error-100 dark:bg-error-900/20 rounded-xl flex items-center justify-center">
+              <div className="w-12 h-12 bg-error-50 rounded-xl flex items-center justify-center">
                 <svg
-                  className="w-5 h-5 text-error-600 dark:text-error-400"
+                  className="w-6 h-6 text-error-600"
                   fill="currentColor"
                   viewBox="0 0 20 20"
+                  aria-hidden="true"
                 >
                   <path
                     fillRule="evenodd"
@@ -190,16 +194,21 @@ export default function EditToolPage() {
               </div>
             </div>
             <div className="flex-1">
-              <h3 className="text-title text-lg font-semibold text-error-900 dark:text-error-100 mb-2">
+              <h3 className="text-xl font-semibold text-error-900 mb-3">
                 Error Loading Tool
               </h3>
-              <p className="text-body text-error-700 dark:text-error-300 mb-4">
+              <p className="text-base text-error-700 mb-6">
                 Failed to load tool data. Please check your connection and try
                 again.
               </p>
-              <button onClick={loadData} className="btn-secondary focus-ring">
+              <Button
+                onClick={loadData}
+                variant="secondary"
+                size="md"
+                className="focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+              >
                 Try Again
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -219,75 +228,93 @@ export default function EditToolPage() {
   };
 
   return (
-    <div className="container-narrow animate-fade-in-up">
-      {/* Header */}
-      <div className="mb-8">
-        <nav
-          className="flex items-center space-x-2 text-sm text-neutral-500 dark:text-neutral-400 mb-4"
-          aria-label="Breadcrumb"
-        >
-          <button
-            onClick={() => router.push("/admin/tools")}
-            className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors focus-ring rounded-md px-1"
+    <div className="container-narrow section-spacing-md">
+      <div className="space-y-12 animate-fade-in-up">
+        {/* Header Section */}
+        <div className="space-y-6">
+          {/* Breadcrumb Navigation */}
+          <nav
+            className="flex items-center space-x-3 text-sm"
+            aria-label="Breadcrumb"
           >
-            Tools Management
-          </button>
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-              clipRule="evenodd"
-            />
-          </svg>
-          <span className="text-neutral-900 dark:text-neutral-100">
-            Edit Tool
-          </span>
-        </nav>
+            <button
+              onClick={() => router.push("/admin/tools")}
+              className="text-secondary hover:text-brand-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 rounded-md px-2 py-1"
+            >
+              Tools Management
+            </button>
+            <svg
+              className="w-4 h-4 text-neutral-400"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              aria-hidden="true"
+            >
+              <path
+                fillRule="evenodd"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <span className="text-primary font-medium">Edit Tool</span>
+          </nav>
 
-        <div className="flex items-start space-x-4">
-          <div className="flex-shrink-0">
-            <div className="w-12 h-12 bg-gradient-to-br from-accent-500 to-accent-600 rounded-2xl flex items-center justify-center shadow-colored">
-              <svg
-                className="w-6 h-6 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                />
-              </svg>
+          {/* Page Header */}
+          <div className="flex items-start space-x-6">
+            <div className="flex-shrink-0">
+              <div className="w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 rounded-2xl flex items-center justify-center shadow-colored">
+                <svg
+                  className="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div className="space-y-3">
+              <h1 className="text-4xl font-bold text-primary">Edit Tool</h1>
+              <p className="text-lg text-secondary max-w-2xl">
+                Update the settings and configuration for{" "}
+                <span className="font-semibold text-primary">
+                  "{tool.name}"
+                </span>
+                . Modify properties, reassign tags, and adjust availability.
+              </p>
             </div>
           </div>
-          <div>
-            <h1 className="text-display text-3xl font-bold text-gradient-brand mb-2">
-              Edit Tool
-            </h1>
-            <p className="text-body text-neutral-600 dark:text-neutral-400">
-              Update the settings and configuration for{" "}
-              <span className="font-medium text-neutral-900 dark:text-neutral-100">
-                "{tool.name}"
-              </span>
-              .
-            </p>
+        </div>
+
+        {/* Form Section */}
+        <div className="animate-slide-up" style={{ animationDelay: "0.1s" }}>
+          <div className="card rounded-2xl shadow-medium">
+            <div className="px-8 py-6 border-b border-neutral-150 bg-neutral-50">
+              <h2 className="text-xl font-semibold text-primary">
+                Tool Configuration
+              </h2>
+              <p className="text-secondary mt-2">
+                Update the details below to modify your tool settings.
+              </p>
+            </div>
+            <div className="p-8">
+              <ToolForm
+                initialData={initialData}
+                availableTags={availableTags}
+                onSubmit={handleSubmit}
+                onCancel={handleCancel}
+                isEditing={true}
+                isLoading={loading}
+                errors={errors}
+              />
+            </div>
           </div>
         </div>
-      </div>
-
-      {/* Form */}
-      <div className="animate-slide-up" style={{ animationDelay: "0.1s" }}>
-        <ToolForm
-          initialData={initialData}
-          availableTags={availableTags}
-          onSubmit={handleSubmit}
-          onCancel={handleCancel}
-          isEditing={true}
-          isLoading={loading}
-          errors={errors}
-        />
       </div>
     </div>
   );

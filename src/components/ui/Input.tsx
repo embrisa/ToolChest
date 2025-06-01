@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, forwardRef } from "react";
+import React, { InputHTMLAttributes, forwardRef, useId } from "react";
 import { cn } from "@/utils";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -37,7 +37,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     },
     ref,
   ) => {
-    const inputId = id || `input-${Math.random().toString(36).slice(2, 11)}`;
+    const generatedId = useId();
+    const inputId = id || `input-${generatedId}`;
     const errorId = error ? `${inputId}-error` : undefined;
     const helperId = helperText ? `${inputId}-helper` : undefined;
     const currentVariant = error ? "error" : variant;
@@ -101,10 +102,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
 
         {helperText && !error && (
-          <p
-            id={helperId}
-            className="mt-2 text-sm text-secondary"
-          >
+          <p id={helperId} className="mt-2 text-sm text-secondary">
             {helperText}
           </p>
         )}

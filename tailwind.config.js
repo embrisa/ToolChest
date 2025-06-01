@@ -86,28 +86,28 @@ module.exports = {
 
         // Neutral Colors - Balanced Grays with Enhanced Contrast
         neutral: {
-          0: "#ffffff",      // Pure white (reserved for highlights)
-          25: "#fcfcfc",     // Subtle off-white
-          50: "#f8f9fa",     // Very light background (new primary background)
-          100: "#f1f3f4",    // Light surfaces
-          150: "#e8eaed",    // Subtle borders
-          200: "#dadce0",    // Medium borders, dividers
-          250: "#ced4da",    // Light borders
-          300: "#bdc1c6",    // Disabled states
-          350: "#adb5bd",    // Muted elements
-          400: "#9aa0a6",    // Placeholder text
-          450: "#868e96",    // Supporting icons
-          500: "#5f6368",    // Secondary text (improved contrast)
-          550: "#495057",    // Emphasized secondary text
-          600: "#3c4043",    // Primary supporting text
-          650: "#343a40",    // Strong supporting text
-          700: "#202124",    // Primary text
-          750: "#1a1d20",    // High emphasis text
-          800: "#171717",    // Maximum emphasis
-          850: "#121212",    // Near black
-          900: "#0d0d0d",    // Deepest text
-          950: "#0a0a0a",    // Almost black
-          1000: "#000000",   // Pure black
+          0: "#ffffff", // Pure white (reserved for highlights)
+          25: "#fcfcfc", // Subtle off-white
+          50: "#f8f9fa", // Very light background (new primary background)
+          100: "#f1f3f4", // Light surfaces
+          150: "#e8eaed", // Subtle borders
+          200: "#dadce0", // Medium borders, dividers
+          250: "#ced4da", // Light borders
+          300: "#bdc1c6", // Disabled states
+          350: "#adb5bd", // Muted elements
+          400: "#9aa0a6", // Placeholder text
+          450: "#868e96", // Supporting icons
+          500: "#5f6368", // Secondary text (improved contrast)
+          550: "#495057", // Emphasized secondary text
+          600: "#3c4043", // Primary supporting text
+          650: "#343a40", // Strong supporting text
+          700: "#202124", // Primary text
+          750: "#1a1d20", // High emphasis text
+          800: "#171717", // Maximum emphasis
+          850: "#121212", // Near black
+          900: "#0d0d0d", // Deepest text
+          950: "#0a0a0a", // Almost black
+          1000: "#000000", // Pure black
         },
 
         // Semantic Colors
@@ -242,10 +242,7 @@ module.exports = {
         gradient: "gradient 6s ease infinite",
         float: "float 3s ease-in-out infinite",
         glow: "glow 2s ease-in-out infinite alternate",
-        "float-slow": "floatSlow 6s ease-in-out infinite",
-        "float-reverse": "floatReverse 4s ease-in-out infinite",
-        "pulse-slow": "pulseSlow 4s ease-in-out infinite",
-        "gradient-shift": "gradientShift 8s ease-in-out infinite",
+
       },
 
       keyframes: {
@@ -311,28 +308,7 @@ module.exports = {
           "0%": { boxShadow: "0 0 20px rgb(14 165 233 / 0.1)" },
           "100%": { boxShadow: "0 0 30px rgb(14 165 233 / 0.2)" },
         },
-        floatSlow: {
-          "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
-          "50%": { transform: "translateY(-20px) rotate(1deg)" },
-        },
-        floatReverse: {
-          "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
-          "50%": { transform: "translateY(15px) rotate(-1deg)" },
-        },
-        pulseSlow: {
-          "0%, 100%": { opacity: "0.8", transform: "scale(1)" },
-          "50%": { opacity: "1", transform: "scale(1.05)" },
-        },
-        gradientShift: {
-          "0%, 100%": {
-            backgroundPosition: "0% 50%",
-            transform: "rotate(0deg)"
-          },
-          "50%": {
-            backgroundPosition: "100% 50%",
-            transform: "rotate(1deg)"
-          },
-        },
+
       },
 
       backdropBlur: {
@@ -350,14 +326,8 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "gradient-mesh":
           "radial-gradient(at 40% 20%, rgb(14 165 233 / 0.5) 0px, transparent 50%), radial-gradient(at 80% 0%, rgb(217 70 239 / 0.5) 0px, transparent 50%), radial-gradient(at 0% 50%, rgb(34 197 94 / 0.5) 0px, transparent 50%)",
-        "gradient-dramatic":
-          "radial-gradient(circle at 20% 80%, rgb(14 165 233 / 0.3) 0%, transparent 30%), radial-gradient(circle at 80% 20%, rgb(217 70 239 / 0.3) 0%, transparent 30%), radial-gradient(circle at 40% 40%, rgb(34 197 94 / 0.2) 0%, transparent 30%)",
-        "gradient-epic":
-          "linear-gradient(135deg, rgb(14 165 233 / 0.1) 0%, transparent 30%), linear-gradient(225deg, rgb(217 70 239 / 0.1) 0%, transparent 30%), linear-gradient(315deg, rgb(34 197 94 / 0.05) 0%, transparent 30%)",
         noise:
           "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E\")",
-        "noise-heavy":
-          "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E\")",
       },
     },
   },

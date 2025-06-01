@@ -21,7 +21,7 @@ export interface WebVitalsProps {
 export interface WebVitalMetric {
   name: string;
   value: number;
-  rating: 'good' | 'needs-improvement' | 'poor';
+  rating: "good" | "needs-improvement" | "poor";
   delta: number;
   id: string;
   entries: PerformanceEntry[];
@@ -30,12 +30,12 @@ export interface WebVitalMetric {
 
 // Performance thresholds following Core Web Vitals standards
 const DEFAULT_THRESHOLDS = {
-  lcp: 2500,  // Good: ≤2.5s, Poor: >4.0s
-  fid: 100,   // Good: ≤100ms, Poor: >300ms
-  inp: 200,   // Good: ≤200ms, Poor: >500ms
-  cls: 0.1,   // Good: ≤0.1, Poor: >0.25
-  fcp: 1800,  // Good: ≤1.8s, Poor: >3.0s
-  ttfb: 800,  // Good: ≤800ms, Poor: >1800ms
+  lcp: 2500, // Good: ≤2.5s, Poor: >4.0s
+  fid: 100, // Good: ≤100ms, Poor: >300ms
+  inp: 200, // Good: ≤200ms, Poor: >500ms
+  cls: 0.1, // Good: ≤0.1, Poor: >0.25
+  fcp: 1800, // Good: ≤1.8s, Poor: >3.0s
+  ttfb: 800, // Good: ≤800ms, Poor: >1800ms
 };
 
 export function WebVitals({
@@ -50,86 +50,107 @@ export function WebVitals({
   const [isSupported, setIsSupported] = useState<boolean | null>(null);
 
   // Enhanced metric handler with rating calculation
-  const handleMetric = useCallback((metric: any) => {
-    const enhancedMetric: WebVitalMetric = {
-      name: metric.name,
-      value: metric.value,
-      delta: metric.delta,
-      id: metric.id,
-      entries: metric.entries || [],
-      timestamp: Date.now(),
-      rating: calculateRating(metric.name, metric.value, performanceThresholds),
-    };
+  const handleMetric = useCallback(
+    (metric: any) => {
+      const enhancedMetric: WebVitalMetric = {
+        name: metric.name,
+        value: metric.value,
+        delta: metric.delta,
+        id: metric.id,
+        entries: metric.entries || [],
+        timestamp: Date.now(),
+        rating: calculateRating(
+          metric.name,
+          metric.value,
+          performanceThresholds,
+        ),
+      };
 
-    // Update local state for debugging
-    setMetrics(prev => {
-      const existing = prev.findIndex(m => m.name === metric.name);
-      if (existing >= 0) {
-        const updated = [...prev];
-        updated[existing] = enhancedMetric;
-        return updated;
+      // Update local state for debugging
+      setMetrics((prev) => {
+        const existing = prev.findIndex((m) => m.name === metric.name);
+        if (existing >= 0) {
+          const updated = [...prev];
+          updated[existing] = enhancedMetric;
+          return updated;
+        }
+        return [...prev, enhancedMetric];
+      });
+
+      // Report to performance optimization hook
+      reportWebVitals(metric);
+
+      // Custom callback
+      onMetricReport?.(enhancedMetric);
+
+      // Console reporting for development
+      if (enableConsoleReporting || debug) {
+        console.group(`📊 Web Vital: ${metric.name}`);
+        console.log(`Value: ${metric.value.toFixed(2)}${getUnit(metric.name)}`);
+        console.log(`Rating: ${enhancedMetric.rating.toUpperCase()}`);
+        console.log(`Delta: ${metric.delta?.toFixed(2) || "N/A"}`);
+        console.log(`ID: ${metric.id}`);
+        if (metric.entries?.length) {
+          console.log("Entries:", metric.entries);
+        }
+        console.groupEnd();
       }
-      return [...prev, enhancedMetric];
-    });
 
-    // Report to performance optimization hook
-    reportWebVitals(metric);
-
-    // Custom callback
-    onMetricReport?.(enhancedMetric);
-
-    // Console reporting for development
-    if (enableConsoleReporting || debug) {
-      console.group(`📊 Web Vital: ${metric.name}`);
-      console.log(`Value: ${metric.value.toFixed(2)}${getUnit(metric.name)}`);
-      console.log(`Rating: ${enhancedMetric.rating.toUpperCase()}`);
-      console.log(`Delta: ${metric.delta?.toFixed(2) || 'N/A'}`);
-      console.log(`ID: ${metric.id}`);
-      if (metric.entries?.length) {
-        console.log('Entries:', metric.entries);
+      // Accessibility announcements for screen readers in debug mode
+      if (debug && enhancedMetric.rating === "poor") {
+        announcePerformanceIssue(enhancedMetric);
       }
-      console.groupEnd();
-    }
-
-    // Accessibility announcements for screen readers in debug mode
-    if (debug && enhancedMetric.rating === 'poor') {
-      announcePerformanceIssue(enhancedMetric);
-    }
-  }, [reportWebVitals, onMetricReport, enableConsoleReporting, debug, performanceThresholds]);
+    },
+    [
+      reportWebVitals,
+      onMetricReport,
+      enableConsoleReporting,
+      debug,
+      performanceThresholds,
+    ],
+  );
 
   // Calculate performance rating based on Core Web Vitals thresholds
-  const calculateRating = (name: string, value: number, thresholds: typeof DEFAULT_THRESHOLDS): 'good' | 'needs-improvement' | 'poor' => {
+  const calculateRating = (
+    name: string,
+    value: number,
+    thresholds: typeof DEFAULT_THRESHOLDS,
+  ): "good" | "needs-improvement" | "poor" => {
     const threshold = thresholds[name.toLowerCase() as keyof typeof thresholds];
-    if (!threshold) return 'good';
+    if (!threshold) return "good";
 
     // Special handling for CLS (smaller is better)
-    if (name.toLowerCase() === 'cls') {
-      if (value <= 0.1) return 'good';
-      if (value <= 0.25) return 'needs-improvement';
-      return 'poor';
+    if (name.toLowerCase() === "cls") {
+      if (value <= 0.1) return "good";
+      if (value <= 0.25) return "needs-improvement";
+      return "poor";
     }
 
     // Standard handling for time-based metrics
-    if (value <= threshold) return 'good';
-    if (value <= threshold * 2) return 'needs-improvement';
-    return 'poor';
+    if (value <= threshold) return "good";
+    if (value <= threshold * 2) return "needs-improvement";
+    return "poor";
   };
 
   // Get appropriate unit for metric display
   const getUnit = (metricName: string): string => {
     const name = metricName.toLowerCase();
-    if (name === 'cls') return '';
-    if (name.includes('time') || ['lcp', 'fid', 'inp', 'fcp', 'ttfb'].includes(name)) return 'ms';
-    return '';
+    if (name === "cls") return "";
+    if (
+      name.includes("time") ||
+      ["lcp", "fid", "inp", "fcp", "ttfb"].includes(name)
+    )
+      return "ms";
+    return "";
   };
 
   // Announce performance issues to screen readers
   const announcePerformanceIssue = (metric: WebVitalMetric) => {
-    const announcement = document.createElement('div');
-    announcement.setAttribute('role', 'status');
-    announcement.setAttribute('aria-live', 'polite');
-    announcement.setAttribute('aria-atomic', 'true');
-    announcement.className = 'sr-only';
+    const announcement = document.createElement("div");
+    announcement.setAttribute("role", "status");
+    announcement.setAttribute("aria-live", "polite");
+    announcement.setAttribute("aria-atomic", "true");
+    announcement.className = "sr-only";
     announcement.textContent = `Performance alert: ${metric.name} has poor rating with value ${metric.value.toFixed(2)}${getUnit(metric.name)}`;
 
     document.body.appendChild(announcement);
@@ -190,18 +211,21 @@ export function WebVitals({
           onTTFB(handleMetric);
 
           // Legacy FID support (if available in older versions)
-          if ('onFID' in webVitals && typeof webVitals.onFID === 'function') {
+          if ("onFID" in webVitals && typeof webVitals.onFID === "function") {
             webVitals.onFID(handleMetric);
           }
 
           if (debug) {
             console.log("✅ Web Vitals monitoring initialized");
             console.log("📈 Tracking metrics:", [
-              'CLS', 'INP', 'LCP', 'FCP', 'TTFB',
-              ...('onFID' in webVitals ? ['FID'] : [])
+              "CLS",
+              "INP",
+              "LCP",
+              "FCP",
+              "TTFB",
+              ...("onFID" in webVitals ? ["FID"] : []),
             ]);
           }
-
         } catch (error) {
           if (debug) {
             console.error("Failed to initialize Web Vitals monitoring:", error);
@@ -220,10 +244,13 @@ export function WebVitals({
   // Performance summary for debugging
   useEffect(() => {
     if (debug && metrics.length > 0) {
-      const summary = metrics.reduce((acc, metric) => {
-        acc[metric.rating] = (acc[metric.rating] || 0) + 1;
-        return acc;
-      }, {} as Record<string, number>);
+      const summary = metrics.reduce(
+        (acc, metric) => {
+          acc[metric.rating] = (acc[metric.rating] || 0) + 1;
+          return acc;
+        },
+        {} as Record<string, number>,
+      );
 
       console.log("📊 Web Vitals Summary:", summary);
     }
@@ -273,6 +300,6 @@ export const getWebVitalsSupport = async (): Promise<boolean> => {
 };
 
 export const formatMetricValue = (name: string, value: number): string => {
-  const unit = name.toLowerCase() === 'cls' ? '' : 'ms';
+  const unit = name.toLowerCase() === "cls" ? "" : "ms";
   return `${value.toFixed(2)}${unit}`;
 };

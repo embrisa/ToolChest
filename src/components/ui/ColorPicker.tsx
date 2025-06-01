@@ -173,7 +173,7 @@ export function ColorPicker({
                     "w-12 h-12 rounded-lg border-2 border-neutral-200 cursor-pointer",
                     "focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2",
                     "disabled:cursor-not-allowed disabled:opacity-50",
-                    "shadow-soft hover:shadow-medium transition-all duration-200"
+                    "shadow-soft hover:shadow-medium transition-all duration-200",
                   )}
                   aria-label="Choose custom color"
                 />

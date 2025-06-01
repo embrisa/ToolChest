@@ -96,7 +96,7 @@ export class Base64Service {
 
     try {
       if (options.inputType === "text") {
-        return this.encodeText(
+        return await this.encodeText(
           options.input as string,
           options.variant,
           startTime,
@@ -126,7 +126,7 @@ export class Base64Service {
 
     try {
       if (options.inputType === "text") {
-        return this.decodeText(
+        return await this.decodeText(
           options.input as string,
           options.variant,
           startTime,
@@ -151,11 +151,11 @@ export class Base64Service {
   /**
    * Enhanced text encoding with validation
    */
-  private static encodeText(
+  private static async encodeText(
     text: string,
     variant: "standard" | "url-safe",
     startTime: number,
-  ): Base64Result {
+  ): Promise<Base64Result> {
     if (!text) {
       return {
         success: false,
@@ -212,11 +212,11 @@ export class Base64Service {
   /**
    * Enhanced text decoding with validation
    */
-  private static decodeText(
+  private static async decodeText(
     base64: string,
     variant: "standard" | "url-safe",
     startTime: number,
-  ): Base64Result {
+  ): Promise<Base64Result> {
     if (!base64) {
       return {
         success: false,
@@ -396,7 +396,7 @@ export class Base64Service {
         totalBytes: file.size,
       });
 
-      const result = this.decodeText(text, variant, startTime);
+      const result = await this.decodeText(text, variant, startTime);
 
       onProgress?.({
         stage: "complete",

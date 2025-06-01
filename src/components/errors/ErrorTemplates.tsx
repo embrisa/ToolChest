@@ -84,7 +84,7 @@ export function HttpErrorPage({
                 );
                 const body = encodeURIComponent(
                   `Error ${statusCode} occurred on ${window.location.href}\n\n` +
-                  `Please describe the issue:\n\n`,
+                    `Please describe the issue:\n\n`,
                 );
                 window.location.href = `mailto:support@tool-chest.com?subject=${subject}&body=${body}`;
                 break;

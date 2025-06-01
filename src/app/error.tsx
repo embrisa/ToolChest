@@ -61,10 +61,10 @@ export default function Error({ error, reset }: ErrorProps) {
               const subject = encodeURIComponent(`Error Report - ${errorId}`);
               const body = encodeURIComponent(
                 `Error ID: ${errorId}\n` +
-                `Time: ${new Date().toISOString()}\n` +
-                `URL: ${window.location.href}\n` +
-                `Error: ${error.message}\n\n` +
-                `Please describe what you were doing when this error occurred:\n\n`,
+                  `Time: ${new Date().toISOString()}\n` +
+                  `URL: ${window.location.href}\n` +
+                  `Error: ${error.message}\n\n` +
+                  `Please describe what you were doing when this error occurred:\n\n`,
               );
               window.location.href = `mailto:support@tool-chest.com?subject=${subject}&body=${body}`;
             },

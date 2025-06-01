@@ -1,6 +1,3 @@
--- CreateEnum
-CREATE TYPE "AdminRole" AS ENUM ('SUPER_ADMIN', 'ADMIN', 'READ_ONLY');
-
 -- CreateTable
 CREATE TABLE "Tool" (
     "id" TEXT NOT NULL,
@@ -64,7 +61,7 @@ CREATE TABLE "AdminUser" (
     "username" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "passwordHash" TEXT NOT NULL,
-    "role" "AdminRole" NOT NULL DEFAULT 'ADMIN',
+    "role" TEXT NOT NULL DEFAULT 'ADMIN',
     "isActive" BOOLEAN NOT NULL DEFAULT true,
     "lastLoginAt" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

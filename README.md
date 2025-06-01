@@ -21,7 +21,7 @@ A modern, privacy-focused collection of essential computer tools built with Next
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
 
 ### Installation

@@ -56,7 +56,9 @@ export function Loading({
             />
           </svg>
           {showText && (
-            <p className={cn("text-primary font-medium", textSizeClasses[size])}>
+            <p
+              className={cn("text-primary font-medium", textSizeClasses[size])}
+            >
               {text}
             </p>
           )}
@@ -93,7 +95,9 @@ export function Loading({
             />
           </div>
           {showText && (
-            <p className={cn("text-primary font-medium", textSizeClasses[size])}>
+            <p
+              className={cn("text-primary font-medium", textSizeClasses[size])}
+            >
               {text}
             </p>
           )}
@@ -114,7 +118,9 @@ export function Loading({
             )}
           />
           {showText && (
-            <p className={cn("text-primary font-medium", textSizeClasses[size])}>
+            <p
+              className={cn("text-primary font-medium", textSizeClasses[size])}
+            >
               {text}
             </p>
           )}

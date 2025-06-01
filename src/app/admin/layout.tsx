@@ -28,33 +28,47 @@ export default function AdminLayout({
     return pathname.startsWith(href);
   };
 
+  const handleLogout = () => {
+    document.cookie =
+      "admin-auth=; path=/admin; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    window.location.href = "/admin/auth";
+  };
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-neutral-100">
       {/* Admin Header */}
-      <header className="navbar sticky top-0 z-50">
+      <header className="sticky top-0 z-50 bg-neutral-50 border-b border-neutral-200 shadow-soft">
         <div className="container-wide">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center space-x-8">
+          <div className="flex justify-between items-center py-6">
+            <div className="flex items-center space-x-12">
               <Link
                 href="/admin/dashboard"
-                className="navbar-brand text-xl font-bold"
+                className="text-2xl font-bold text-primary hover:text-brand-600 transition-colors duration-200"
+                aria-label="tool-chest Admin Dashboard Home"
               >
                 tool-chest Admin
               </Link>
 
-              <nav className="hidden md:flex space-x-1">
+              <nav
+                className="hidden lg:flex space-x-2"
+                role="navigation"
+                aria-label="Admin navigation"
+              >
                 {navigationItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "navbar-link flex items-center space-x-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200",
+                      "flex items-center space-x-3 px-6 py-3 rounded-lg text-sm font-medium transition-all duration-200 min-h-[44px]",
                       isActiveLink(item.href)
-                        ? "navbar-link-active bg-brand-50 dark:bg-brand-950/30 text-brand-600 dark:text-brand-400"
-                        : "text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50",
+                        ? "bg-brand-50 text-brand-600 shadow-soft border border-brand-200"
+                        : "text-neutral-600 hover:text-primary hover:bg-neutral-100 border border-transparent hover:border-neutral-200",
                     )}
+                    aria-current={isActiveLink(item.href) ? "page" : undefined}
                   >
-                    <span className="text-base">{item.icon}</span>
+                    <span className="text-base" aria-hidden="true">
+                      {item.icon}
+                    </span>
                     <span>{item.name}</span>
                   </Link>
                 ))}
@@ -64,26 +78,28 @@ export default function AdminLayout({
             <div className="flex items-center space-x-4">
               <Link
                 href="/"
-                className="text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 text-sm font-medium px-3 py-2 rounded-lg hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-200"
+                className="text-secondary hover:text-primary text-sm font-medium px-6 py-3 rounded-lg hover:bg-neutral-100 transition-all duration-200 border border-neutral-200 hover:border-neutral-300 min-h-[44px] flex items-center space-x-2"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="View public site (opens in new tab)"
               >
                 <span className="hidden sm:inline">View Site</span>
-                <span className="sm:hidden">🔗</span>
+                <span className="text-base" aria-hidden="true">
+                  🔗
+                </span>
               </Link>
 
               <Button
                 variant="danger"
-                size="sm"
-                onClick={() => {
-                  document.cookie =
-                    "admin-auth=; path=/admin; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-                  window.location.href = "/admin/auth";
-                }}
-                className="text-sm"
+                size="md"
+                onClick={handleLogout}
+                className="text-sm min-h-[44px]"
+                aria-label="Logout from admin panel"
               >
                 <span className="hidden sm:inline">Logout</span>
-                <span className="sm:hidden">🚪</span>
+                <span className="sm:hidden text-base" aria-hidden="true">
+                  🚪
+                </span>
               </Button>
             </div>
           </div>
@@ -91,21 +107,26 @@ export default function AdminLayout({
       </header>
 
       {/* Mobile Navigation */}
-      <nav className="md:hidden surface border-b border-neutral-200/50 dark:border-neutral-800/50">
-        <div className="container-wide py-2">
-          <div className="flex space-x-1 overflow-x-auto scrollbar-hide">
+      <nav
+        className="lg:hidden bg-neutral-50 border-b border-neutral-200"
+        role="navigation"
+        aria-label="Mobile admin navigation"
+      >
+        <div className="container-wide py-4">
+          <div className="flex space-x-2 overflow-x-auto scrollbar-hide">
             {navigationItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200",
+                  "flex items-center space-x-2 px-4 py-3 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200 min-h-[44px] border",
                   isActiveLink(item.href)
-                    ? "bg-brand-50 dark:bg-brand-950/30 text-brand-600 dark:text-brand-400"
-                    : "text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50",
+                    ? "bg-brand-50 text-brand-600 border-brand-200 shadow-soft"
+                    : "text-neutral-600 hover:text-primary hover:bg-neutral-100 border-neutral-200 hover:border-neutral-300",
                 )}
+                aria-current={isActiveLink(item.href) ? "page" : undefined}
               >
-                <span>{item.icon}</span>
+                <span aria-hidden="true">{item.icon}</span>
                 <span>{item.name}</span>
               </Link>
             ))}
@@ -114,7 +135,9 @@ export default function AdminLayout({
       </nav>
 
       {/* Admin Content */}
-      <main className="container-wide py-8">{children}</main>
+      <main className="container-wide section-spacing-md" role="main">
+        {children}
+      </main>
     </div>
   );
 }

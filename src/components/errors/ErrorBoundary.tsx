@@ -212,10 +212,12 @@ export function useErrorBoundary() {
     setError(null);
   }, []);
 
-  const captureError = React.useCallback((error: Error) => {
-    setError(error);
+  const captureError = React.useCallback((errorToThrow: Error) => {
+    // Throw immediately instead of setting state to avoid infinite loops
+    throw errorToThrow;
   }, []);
 
+  // Only throw if error state is set externally (not through captureError)
   React.useEffect(() => {
     if (error) {
       throw error;

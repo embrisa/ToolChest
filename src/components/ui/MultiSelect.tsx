@@ -45,14 +45,14 @@ export function MultiSelect({
   const filteredOptions =
     searchable && state.searchQuery
       ? options.filter(
-        (option) =>
-          option.label
-            .toLowerCase()
-            .includes(state.searchQuery.toLowerCase()) ||
-          option.description
-            ?.toLowerCase()
-            .includes(state.searchQuery.toLowerCase()),
-      )
+          (option) =>
+            option.label
+              .toLowerCase()
+              .includes(state.searchQuery.toLowerCase()) ||
+            option.description
+              ?.toLowerCase()
+              .includes(state.searchQuery.toLowerCase()),
+        )
       : options;
 
   // Get selected options for display
@@ -242,7 +242,10 @@ export function MultiSelect({
     <div className="space-y-4">
       {/* Label with enhanced contrast */}
       {label && (
-        <label htmlFor={listId.current} className="text-primary text-sm font-medium block">
+        <label
+          htmlFor={listId.current}
+          className="text-primary text-sm font-medium block"
+        >
           {label}
           {required && (
             <span className="text-error-500 ml-1 font-medium">*</span>
@@ -252,9 +255,7 @@ export function MultiSelect({
 
       {/* Description with proper contrast */}
       {description && (
-        <p className="text-secondary text-sm leading-relaxed">
-          {description}
-        </p>
+        <p className="text-secondary text-sm leading-relaxed">{description}</p>
       )}
 
       {/* Selected Items Display with enhanced styling */}
@@ -268,7 +269,7 @@ export function MultiSelect({
                 "inline-flex items-center gap-2 px-3 py-2",
                 "bg-brand-100 text-brand-800 text-sm rounded-lg",
                 "border border-brand-200 shadow-soft",
-                "transition-all duration-200"
+                "transition-all duration-200",
               )}
             >
               <span className="text-sm font-medium">{option.label}</span>
@@ -280,7 +281,7 @@ export function MultiSelect({
                   // Enhanced remove button with proper touch target
                   "hover:bg-brand-200 rounded-sm p-1 transition-colors duration-200",
                   "focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-1",
-                  "disabled:opacity-50 disabled:cursor-not-allowed"
+                  "disabled:opacity-50 disabled:cursor-not-allowed",
                 )}
                 aria-label={`Remove ${option.label}`}
               >
@@ -324,7 +325,7 @@ export function MultiSelect({
                 className={cn(
                   "w-full bg-transparent border-none outline-none",
                   "text-primary placeholder:text-muted text-sm",
-                  "disabled:cursor-not-allowed"
+                  "disabled:cursor-not-allowed",
                 )}
                 disabled={disabled}
               />
@@ -354,11 +355,13 @@ export function MultiSelect({
 
         {/* Dropdown Options with enhanced styling */}
         {state.isExpanded && (
-          <div className={cn(
-            // Enhanced dropdown styling following design system
-            "absolute z-50 w-full mt-2 card shadow-large border border-neutral-200",
-            "max-h-60 overflow-auto"
-          )}>
+          <div
+            className={cn(
+              // Enhanced dropdown styling following design system
+              "absolute z-50 w-full mt-2 card shadow-large border border-neutral-200",
+              "max-h-60 overflow-auto",
+            )}
+          >
             {filteredOptions.length > 0 ? (
               <ul
                 ref={listboxRef}
@@ -386,7 +389,7 @@ export function MultiSelect({
                         // Disabled state
                         isDisabled && "opacity-50 cursor-not-allowed",
                         // Hover state for non-disabled items
-                        !isDisabled && "hover:bg-neutral-50"
+                        !isDisabled && "hover:bg-neutral-50",
                       )}
                       onClick={() => !isDisabled && handleOptionSelect(option)}
                     >
@@ -444,7 +447,10 @@ export function MultiSelect({
 
       {/* Error Message with enhanced contrast */}
       {error && (
-        <p className="text-error-600 text-sm flex items-center gap-2" role="alert">
+        <p
+          className="text-error-600 text-sm flex items-center gap-2"
+          role="alert"
+        >
           <span className="w-1.5 h-1.5 bg-error-500 rounded-full flex-shrink-0"></span>
           {error}
         </p>

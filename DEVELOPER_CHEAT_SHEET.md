@@ -1,12 +1,10 @@
-# tool-chest Developer Cheat Sheet
+# tool-chest AI Developer Reference
 
-## 🚀 Quick Start
+## 🚀 Tech Stack & Architecture
 
-### Project Overview
+**tool-chest** is a Next.js 14+ web application providing privacy-focused computer tools with professional light mode design.
 
-**tool-chest** is a Next.js 14+ web application providing essential computer tools with a focus on privacy, accessibility, and performance. The platform serves as a comprehensive collection of utilities for various computer tasks, from encoding and file conversion to text processing and beyond. The application features a professional light mode design optimized for productivity and accessibility.
-
-**Tech Stack:**
+**Core Technologies:**
 
 - **Framework:** Next.js 14+ (App Router)
 - **Frontend:** React 18+ with TypeScript
@@ -16,30 +14,20 @@
 - **Authentication:** Simple token-based admin auth
 - **Testing:** Jest + React Testing Library + Playwright
 
-### Quick Commands
+**Key Commands:**
 
 ```bash
-# Development
-npm run dev              # Start development server
-npm run build           # Build for production
-npm run start           # Start production server
-npm run lint            # Run ESLint
-npm run type-check      # TypeScript validation
+npm run dev              # Development server
+npm run build           # Production build
+npx prisma migrate dev  # Database migrations
+npm test                # Unit tests
+npm run test:e2e        # E2E tests
 
-# Database
-npx prisma migrate dev  # Run migrations
-npx prisma generate     # Generate Prisma client
-npx prisma studio       # Open Prisma Studio
-
-# Testing
-npm test                # Run unit tests
-npm run test:e2e        # Run E2E tests
-npm run test:a11y       # Run accessibility tests
-npm run validate        # Run all quality checks
-
-# Setup
-npm run setup           # Initial project setup
-npm run validate-env    # Validate environment variables
+# Debugging Commands
+DEBUG=prisma:query npm run dev    # Enable database query logging
+npm run validate-env              # Check environment variables
+npx prisma studio                # Database GUI (background service)
+npm run lint -- --format=json    # Machine-readable lint output
 ```
 
 ---
@@ -49,30 +37,15 @@ npm run validate-env    # Validate environment variables
 ```
 src/
 ├── app/                    # Next.js App Router
-│   ├── api/               # API routes
-│   │   ├── tools/         # Tool APIs
-│   │   └── admin/         # Admin APIs
-│   ├── tools/             # Tool pages
-│   │   ├── base64/        # Base64 encoder/decoder
-│   │   ├── hash-generator/ # Hash generator
-│   │   ├── favicon-generator/ # Favicon generator
-│   │   └── markdown-to-pdf/ # Markdown to PDF converter
-│   ├── admin/             # Admin area
-│   │   ├── auth/          # Authentication
-│   │   ├── dashboard/     # Dashboard
-│   │   ├── tools/         # Tool management
-│   │   ├── tags/          # Tag management
-│   │   ├── analytics/     # Analytics
-│   │   └── monitoring/    # System monitoring
-│   ├── layout.tsx         # Root layout
-│   ├── page.tsx           # Home page
-│   └── globals.css        # Global styles
+│   ├── api/               # API routes (tools/, admin/)
+│   ├── tools/             # Tool pages (base64/, hash-generator/, etc.)
+│   ├── admin/             # Admin area (auth/, dashboard/, tools/, tags/)
+│   └── layout.tsx         # Root layout
 ├── components/            # React components
-│   ├── ui/                # Base UI (Button, Input, Card)
-│   ├── layout/            # Layout (Header, Footer)
+│   ├── ui/                # Base UI components
+│   ├── layout/            # Header, Footer
 │   ├── tools/             # Tool-specific components
-│   ├── admin/             # Admin components
-│   └── errors/            # Error handling components
+│   └── admin/             # Admin components
 ├── hooks/                 # Custom React hooks
 ├── lib/                   # Core utilities
 ├── services/              # Business logic
@@ -82,203 +55,264 @@ src/
 
 ---
 
-## 🛠️ Development Patterns
-
-### Tool Categories
-
-Tools are organized into logical categories for better user experience:
-
-- **Encoding/Decoding**: Base64, URL encoding, HTML entities, etc.
-- **Hashing/Crypto**: MD5, SHA variants, password generators, etc.
-- **File Processing**: Format conversion, compression, image tools, etc.
-- **Text Processing**: Formatting, validation, transformation, etc.
-- **Development**: JSON formatting, regex testing, API tools, etc.
-- **Utilities**: Unit conversion, calculators, generators, etc.
-
-## 🛠️ Development Patterns
+## 🛠️ Core Development Patterns
 
 ### Path Aliases
 
-```typescript
-import { Button } from "@/components/ui";
-import { ToolService } from "@/services/tools";
-import { ToolData } from "@/types/tools";
-import { formatBytes } from "@/utils/formatting";
-```
+Use `@/` prefix for all imports: `@/components/ui`, `@/services/tools`, `@/types/tools`
 
-### Component Patterns
+### Component Standards
 
-```typescript
-// Standard Component
-export function ComponentName({ prop1, prop2 }: ComponentProps) {
-  return <div>...</div>;
-}
+- Always use `useId()` hook for generated component IDs (prevents hydration mismatches)
+- Wrap tools in `<ErrorBoundary>` components
+- Use `<ClientOnlyTool>` wrapper for hydration-safe client components
+- Include proper TypeScript interfaces for all props
 
-// With Error Boundary
-export default function ToolPage() {
-  return (
-    <ErrorBoundary>
-      <ToolComponent />
-    </ErrorBoundary>
-  );
-}
+### Tool Categories
 
-// With Loading State
-export default function DataComponent() {
-  const { data, error, isLoading } = useSWR('/api/data', fetcher);
-
-  if (isLoading) return <SkeletonLoader />;
-  if (error) return <ErrorPage error={error} />;
-  return <DataDisplay data={data} />;
-}
-```
+- **Encoding/Decoding**: Base64, URL encoding, HTML entities
+- **Hashing/Crypto**: MD5, SHA variants, password generators
+- **File Processing**: Format conversion, compression, image tools
+- **Text Processing**: Formatting, validation, transformation
+- **Development**: JSON formatting, regex testing, API tools
+- **Utilities**: Unit conversion, calculators, generators
 
 ### Service Pattern
 
-```typescript
-// Base Service
-export class BaseService {
-  protected cache = new Map();
-  protected handleError(error: Error) {
-    /* ... */
-  }
-}
+- Extend `BaseService` class for consistent error handling and caching
+- Use `ToolService` for tool-specific operations
+- Implement client-side processing for privacy (fallback to server for large files)
 
-// Tool Service
-export class ToolService extends BaseService {
-  async getAllTools(filters?: ToolFilters) {
-    // Implementation with caching
-  }
+---
+
+## 🧩 Shared UI Components Library
+
+### Base UI Components (`@/components/ui`)
+
+#### Core Interactive Components
+- **`Button`** - Primary interactive element with 6 variants (`primary`, `secondary`, `ghost`, `danger`, `outline`, `gradient`)
+  - Sizes: `sm`, `md`, `lg`, `xl`
+  - Features: Loading states, icons, full-width mode
+  - Usage: `<Button variant="primary" size="md" isLoading={loading}>Save</Button>`
+
+- **`Input`** - Text input with validation and accessibility features
+  - Built-in error states and ARIA support
+  - Usage: `<Input placeholder="Enter text" aria-label="Search input" />`
+
+- **`MultiSelect`** - Multi-value selection component with search and keyboard navigation
+  - Usage: `<MultiSelect options={options} value={selected} onChange={setSelected} />`
+
+- **`ColorPicker`** - Advanced color selection with multiple format support
+  - Supports HSL, RGB, HEX formats with accessibility compliance
+
+#### Layout & Structure Components
+- **`Card`** - Flexible container with variants (`default`, `interactive`, `elevated`)
+  - Sub-components: `CardHeader`, `CardTitle`, `CardContent`, `CardFooter`
+  - Padding options: `none`, `sm`, `md`, `lg`
+  - Usage: `<Card variant="interactive"><CardTitle>Title</CardTitle><CardContent>Content</CardContent></Card>`
+
+#### Loading & State Components
+- **`Loading`** - Consistent loading indicators
+  - `LoadingSkeleton` for content placeholders
+  - Usage: `<Loading size="lg" />` or `<LoadingSkeleton />`
+
+- **`SkeletonLoader`** - Multiple skeleton variants for different content types
+  - `ToolCardSkeleton`, `TableSkeleton`, `FormSkeleton`, `DashboardSkeleton`
+  - Usage: `<ToolCardSkeleton count={6} />`
+
+- **`ProgressIndicator`** - Visual progress feedback for long operations
+  - Usage: `<ProgressIndicator value={75} max={100} />`
+
+- **`SuspenseFallback`** - Specialized fallbacks for different page types
+  - `ToolPageFallback`, `ToolGridFallback`, `AdminTableFallback`
+  - HOC: `withSuspense(Component, FallbackComponent)`
+
+#### Performance & Optimization Components
+- **`OptimizedImage`** - Next.js Image wrapper with performance optimizations
+  - Variants: `ToolIcon`, `HeroImage`, `Thumbnail`
+  - Usage: `<OptimizedImage src="/icon.png" alt="Tool icon" variant="ToolIcon" />`
+
+- **`LazyLoader`** - Component lazy loading with preloading capabilities
+  - HOC: `withLazyLoading(Component, LoadingComponent)`
+  - Hook: `useComponentPreloader(componentImport)`
+
+- **`PageTransition`** - Smooth page transitions with Router integration
+  - Hooks: `usePageTransition()`, `useRouterTransition()`
+
+#### Interaction & Feedback Components
+- **`Alert`** - Reusable alert/message component with consistent styling across all tools
+  - Variants: `error`, `warning`, `success`, `info`
+  - Features: Built-in icons, optional titles, list support with `AlertList`
+  - Usage: `<Alert variant="warning" title="Warning">Message</Alert>`
+
+- **`Toast`** - Toast notification system with multiple severity levels
+  - Functions: `createSuccessToast()`, `createErrorToast()`, `createWarningToast()`, `createCriticalToast()`
+  - Usage: `<ToastContainer />` + `createSuccessToast("Operation completed")`
+
+- **`AriaLiveRegion`** - Accessibility announcements for screen readers
+  - Hook: `useAccessibilityAnnouncements()`
+  - Usage: `<AriaLiveRegion />` + `announceToScreenReader("Status updated")`
+
+#### Error Handling & Network Components
+- **`NetworkErrorHandler`** - Automatic retry logic with backoff strategy
+  - Components: `ToolLoadingError`, `AdminDataError`
+  - Hooks: `useRetryWithBackoff()`, `useNetworkRetry()`
+
+- **`WebVitals`** - Performance monitoring integration
+  - Usage: `<WebVitals reportWebVitals={reportHandler} />`
+
+### Layout Components (`@/components/layout`)
+
+- **`Header`** - Main navigation with responsive design and tool search
+- **`Footer`** - Site footer with links and branding
+
+### Tool-Specific Shared Components (`@/components/tools`)
+
+- **`ToolCard`** - Standardized tool display card with consistent styling
+- **`SearchInput`** - Enhanced search with debouncing and accessibility
+- **`TagFilter`** - Multi-select tag filtering with visual feedback
+- **`FaviconPreview`** - Real-time favicon preview with multiple sizes
+- **`PdfCustomizationPanel`** - Reusable PDF generation settings panel
+
+### Tool Workflow Components (`@/components/ui`)
+
+- **`ToolHeader`** - Consistent tool header with icon, title, and description
+  - Features: Custom icons, gradient backgrounds, flexible styling
+  - Usage: `<ToolHeader title="Base64 Tool" description="Encode and decode" iconText="B64" />`
+
+- **`FileUpload`** - Drag-and-drop file upload with visual feedback
+  - Features: Drag states, file validation, accessibility, custom styling
+  - Usage: `<FileUpload onFileSelect={handleFile} accept="image/*" maxSize={10} />`
+
+- **`FileInfo`** - Selected file information display with remove functionality
+  - Features: File size formatting, type display, remove button
+  - Usage: `<FileInfo file={selectedFile} onRemove={handleRemove} />`
+
+- **`OptionGroup`** - Toggle button groups for tool settings
+  - Features: Single selection, disabled states, custom styling
+  - Usage: `<OptionGroup label="Mode" value={mode} options={modeOptions} onChange={setMode} />`
+
+- **`ResultsPanel`** - Tool results display with copy/download actions
+  - Features: Metadata display, action buttons, status feedback, badges
+  - Usage: `<ResultsPanel title="Result" result={data} onCopy={copy} onDownload={download} />`
+
+- **`ProgressCard`** - Operation progress with contextual messages
+  - Features: Generic progress bar, stage messages, time estimates
+  - Usage: `<ProgressCard progress={{progress: 75, stage: "processing"}} title="Encoding" />`
+
+### Error Handling Components (`@/components/errors`)
+
+- **`ErrorBoundary`** - React error boundary with recovery options
+- **`ErrorPage`** - Standardized error page layouts
+- **`ErrorTemplates`** - Pre-built error message templates
+- **`ErrorRecoveryProvider`** - Context for error recovery actions
+
+### Component Usage Patterns
+
+#### Standard Tool Wrapper Pattern
+```typescript
+import { ErrorBoundary, Card, Button, Loading } from '@/components/ui';
+
+export function MyTool() {
+  return (
+    <ErrorBoundary fallback={<ToolLoadingError />}>
+      <Card variant="interactive">
+        <CardHeader>
+          <CardTitle>Tool Name</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {/* Tool content */}
+        </CardContent>
+        <CardFooter>
+          <Button variant="primary" isLoading={processing}>
+            Process
+          </Button>
+        </CardFooter>
+      </Card>
+    </ErrorBoundary>
+  );
 }
+```
+
+#### Form Component Pattern
+```typescript
+import { Input, Button, MultiSelect, Toast } from '@/components/ui';
+
+export function ToolForm({ onSubmit }) {
+  return (
+    <form onSubmit={handleSubmit}>
+      <Input 
+        label="Input Text" 
+        aria-describedby="input-help"
+        aria-invalid={hasError}
+      />
+      <MultiSelect 
+        options={tagOptions}
+        placeholder="Select tags..."
+      />
+      <Button type="submit" variant="primary" fullWidth>
+        Submit
+      </Button>
+    </form>
+  );
+}
+```
+
+#### Loading State Pattern
+```typescript
+import { withSuspense, ToolPageFallback } from '@/components/ui';
+
+const LazyTool = lazy(() => import('./MyTool'));
+
+export const MyToolWithSuspense = withSuspense(LazyTool, ToolPageFallback);
 ```
 
 ---
 
-## 🎨 UI Standards
+## 🎨 Design System (Light Mode Only)
 
 ### Component Variants
 
-```typescript
-// Button Variants for Light Mode
-<Button variant="primary" size="lg">Primary Action</Button>    // Brand blue with white text
-<Button variant="secondary" size="md">Secondary</Button>      // Neutral with dark text
-<Button variant="danger" size="sm">Delete</Button>           // Error red with white text
+- **Buttons**: `primary` (brand blue), `secondary` (neutral), `danger` (red)
+- **Cards**: `default` (bg-neutral-50), `interactive` (hover effects), `error` (error state)
+- **Backgrounds**: `bg-neutral-100` (page), `bg-neutral-50` (cards), `bg-neutral-25` (hover)
 
-// Card Types with Light Mode Backgrounds
-<Card variant="default">    // bg-neutral-50 (elevated light surface)
-<Card variant="interactive"> // Hover to bg-neutral-25 (subtle highlight)
-<Card variant="error">      // Error state with proper contrast
+### Accessibility Requirements
 
-// Light Mode Background Classes
-className="bg-neutral-100"  // Page background (professional muted gray)
-className="bg-neutral-50"   // Card/surface background (elevated)
-className="bg-neutral-25"   // Hover states (bright highlights)
-className="bg-neutral-150"  // Secondary/recessed surfaces
-```
+- **WCAG AAA compliance** required
+- **Contrast ratios**: 7:1+ for normal text, 4.5:1+ for large text
+- **Text classes**: `text-primary` (9.2:1), `text-secondary` (7.1:1), `text-tertiary` (8.1:1)
+- All interactive elements need `aria-label` and `aria-describedby`
+- Form controls must include `aria-invalid` when applicable
 
 ### Responsive Design
 
-```typescript
-// Tailwind Classes
-className =
-  "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6";
-className = "px-4 sm:px-6 lg:px-8"; // Container padding
-className = "text-sm sm:text-base lg:text-lg"; // Responsive text
-```
-
-### Accessibility & Contrast Requirements
-
-```typescript
-// Enhanced contrast text classes (WCAG AAA compliant - Light Mode Only)
-<h1 className="text-primary">Primary heading</h1>      // 9.2:1 contrast
-<p className="text-secondary">Secondary content</p>    // 7.1:1 contrast
-<span className="text-tertiary">Supporting text</span> // 8.1:1 contrast
-<small className="text-muted">Muted text</small>       // 4.8:1 contrast
-
-// Light mode background hierarchy
-<div className="bg-neutral-100">Page background</div>         // Primary (muted gray)
-<div className="bg-neutral-50">Card/surface background</div>  // Elevated (light)
-<div className="bg-neutral-25">Hover states</div>            // Interactive highlights
-<div className="bg-neutral-150">Secondary surface</div>      // Recessed areas
-
-// Required for all interactive elements
-<button
-  aria-label="Clear search input"
-  aria-describedby="search-help-text"
-  className="btn-primary" // Enhanced contrast for light mode
->
-
-// Form controls optimized for light theme
-<input
-  aria-invalid={hasError}
-  aria-describedby="error-message"
-  className="input-field" // Light mode optimized contrast
-/>
-
-// Loading states with proper announcements
-<div aria-live="polite" aria-busy="true">
-  Loading content...
-</div>
-```
+- Use Tailwind responsive classes: `grid-cols-1 md:grid-cols-2 lg:grid-cols-3`
+- Container padding: `px-4 sm:px-6 lg:px-8`
+- Responsive text: `text-sm sm:text-base lg:text-lg`
 
 ---
 
-## 🔧 Tool Implementation Guide
-
-### Client-Side Processing Pattern
-
-```typescript
-// 1. Define types
-export interface ToolInputData {
-  text?: string;
-  file?: File;
-  options: ToolOptions;
-}
-
-// 2. Create service
-export class ToolService {
-  async processClientSide(input: ToolInputData): Promise<ToolResult> {
-    // Privacy-first: process in browser
-  }
-
-  async processServerSide(input: ToolInputData): Promise<ToolResult> {
-    // Fallback for large files
-  }
-}
-
-// 3. Component with progress
-export function ToolComponent() {
-  const [progress, setProgress] = useState<ProgressState>();
-
-  const handleProcess = async (input: ToolInputData) => {
-    const isLargeFile = input.file && input.file.size > LARGE_FILE_THRESHOLD;
-
-    if (isLargeFile) {
-      // Show progress indicator
-      setProgress({ message: "Processing...", percentage: 0 });
-    }
-
-    const result = await toolService.processClientSide(input);
-    // Handle result...
-  };
-}
-```
+## 🔧 Tool Implementation Guidelines
 
 ### File Processing Standards
 
-```typescript
-// File validation
-const LARGE_FILE_THRESHOLD = 5 * 1024 * 1024; // 5MB
-const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+- **Large file threshold**: 5MB (show progress indicator)
+- **Max file size**: 10MB
+- **Download naming**: `toolchest_${toolName}_${timestamp}.${extension}`
+- **Client-side first**: Process in browser for privacy, server fallback for large files
 
-// Download naming convention
-const filename = `toolchest_${toolName}_${timestamp}.${extension}`;
+### Input Validation
 
-// Progress for large operations
-if (fileSize > LARGE_FILE_THRESHOLD) {
-  showProgressIndicator();
-}
-```
+- Use Zod schemas for all input validation
+- Validate file size and MIME types
+- Sanitize all user inputs
+
+### Error Handling
+
+- Use toast notifications for user feedback
+- Implement proper error boundaries
+- Consistent API error responses with appropriate HTTP status codes
 
 ---
 
@@ -286,354 +320,288 @@ if (fileSize > LARGE_FILE_THRESHOLD) {
 
 ### Authentication
 
-```typescript
-// Simple token-based auth
-const ADMIN_SECRET_TOKEN = process.env.ADMIN_SECRET_TOKEN;
-
-// Middleware protection
-export function middleware(request: NextRequest) {
-  if (request.nextUrl.pathname.startsWith('/admin')) {
-    // Check admin cookie
-  }
-}
-
-// Login flow (light mode optimized)
-<form onSubmit={handleLogin}>
-  <input
-    type="password"
-    placeholder="Admin token"
-    value={token}
-    onChange={(e) => setToken(e.target.value)}
-    className="input-field" // Light mode styling
-  />
-</form>
-```
+- Simple token-based auth using `ADMIN_SECRET_TOKEN` environment variable
+- Middleware protection for `/admin` routes
+- Cookie-based session management
 
 ### CRUD Operations
 
-```typescript
-// Admin API pattern
-// GET /api/admin/tools - List with filtering
-// POST /api/admin/tools - Create new
-// GET /api/admin/tools/[id] - Get specific
-// PUT /api/admin/tools/[id] - Update
-// DELETE /api/admin/tools/[id] - Delete
+Standard REST API patterns:
 
-// With validation
-const result = await adminToolService.create(formData);
-if (!result.success) {
-  setErrors(result.errors);
-  return;
-}
-```
+- `GET /api/admin/tools` - List with filtering
+- `POST /api/admin/tools` - Create
+- `PUT /api/admin/tools/[id]` - Update
+- `DELETE /api/admin/tools/[id]` - Delete
 
 ---
 
-## 🧪 Testing Patterns
+## 🚨 Hydration & SSR Critical Rules
 
-### Unit Tests
+### Prevent Hydration Mismatches
 
-```typescript
-// Component testing
-import { render, screen } from '@testing-library/react';
-import { Button } from '@/components/ui/Button';
+- **Never use**: `Math.random()`, `Date.now()`, or non-deterministic values
+- **Always use**: `useId()` for component IDs
+- **Client-only content**: Wrap in mount-aware components that render consistent fallbacks
+- **Controlled inputs**: Always provide value (never mix defaultValue/value)
+- **URL state**: Only access after component mounts
 
-test('renders button with correct text', () => {
-  render(<Button>Click me</Button>);
-  expect(screen.getByRole('button')).toHaveTextContent('Click me');
-});
+### Hydration-Safe Patterns
 
-// Hook testing
-import { renderHook } from '@testing-library/react';
-import { useToolsWithState } from '@/hooks/useToolsWithState';
+- Use `useState(false)` + `useEffect(() => setMounted(true), [])` for client-only content
+- Provide consistent server/client rendering with fallback components
+- Test all components for hydration compatibility
 
-test('fetches tools data', async () => {
-  const { result } = renderHook(() => useToolsWithState());
-  // Test hook behavior
-});
-```
+---
 
-### E2E Tests
+## ⚡ React Infinite Loop Prevention
 
-```typescript
-// Playwright tests
-import { test, expect } from "@playwright/test";
+### Critical Patterns That Cause Infinite Loops
 
-test("base64 tool encodes text correctly", async ({ page }) => {
-  await page.goto("/tools/base64");
-  await page.fill('[data-testid="text-input"]', "Hello World");
-  await page.click('[data-testid="encode-button"]');
-  await expect(page.locator('[data-testid="result"]')).toContainText(
-    "SGVsbG8gV29ybGQ=",
-  );
-});
-```
+- **Object dependencies in useEffect**: `useEffect(() => {}, [sortOptions, filters])` - objects recreate on every render
+- **useEffect calling setState without proper deps**: Creates render → setState → render cycles
+- **Error boundaries throwing in useEffect**: `useEffect(() => { if (error) throw error }, [error])`
 
-### Accessibility Tests
+### Prevention Rules
+
+- **Memoize functions with useCallback**: Include specific primitive dependencies, not objects
+- **Extract primitive values**: `[sortOptions.field, filters.search]` instead of `[sortOptions, filters]`
+- **Never throw errors in useEffect**: Use error boundaries or immediate throwing in callbacks
+- **Debug infinite loops**: Look for "Maximum update depth exceeded" error
+
+### Safe Patterns
 
 ```typescript
-// A11y validation
-import { axe, toHaveNoViolations } from 'jest-axe';
+// ❌ BAD - Object dependencies cause infinite loops
+useEffect(() => { loadData(); }, [sortOptions, filters]);
 
-test('page has no accessibility violations', async () => {
-  const { container } = render(<HomePage />);
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
-});
+// ✅ GOOD - Memoized function with primitive dependencies  
+const loadData = useCallback(async () => {
+  // implementation
+}, [sortOptions.field, sortOptions.direction, filters.search]);
+
+useEffect(() => { loadData(); }, [loadData]);
+
+// ❌ BAD - Error throwing in useEffect
+const captureError = (error) => setError(error);
+useEffect(() => { if (error) throw error; }, [error]);
+
+// ✅ GOOD - Immediate error throwing
+const captureError = useCallback((error) => { throw error; }, []);
 ```
 
 ---
 
 ## 📊 Performance Standards
 
-### Core Web Vitals & Accessibility Targets
+### Core Web Vitals Targets
 
-- **LCP (Largest Contentful Paint):** < 2.5s
-- **FID (First Input Delay):** < 100ms
-- **CLS (Cumulative Layout Shift):** < 0.1
-- **Lighthouse Score:** > 90 (all categories)
-- **Accessibility Score:** > 95 (WCAG AAA compliance)
-- **Contrast Ratios:** 7:1+ for normal text, 4.5:1+ for large text
+- **LCP**: < 2.5s
+- **FID**: < 100ms
+- **CLS**: < 0.1
+- **Lighthouse Score**: > 90 (all categories)
+- **Accessibility Score**: > 95
 
 ### Optimization Techniques
 
-```typescript
-// Image optimization
-import Image from 'next/image';
-
-<Image
-  src="/tool-icon.png"
-  alt="Tool description"
-  width={48}
-  height={48}
-  priority={isAboveFold}
-  placeholder="blur"
-  blurDataURL="data:image/..." // Low-quality placeholder
-/>
-
-// Code splitting
-const AdminDashboard = dynamic(() => import('@/components/admin/Dashboard'), {
-  ssr: false,
-  loading: () => <DashboardSkeleton />
-});
-
-// Data fetching with SWR
-const { data, error } = useSWR(
-  '/api/tools',
-  fetcher,
-  {
-    revalidateOnFocus: false,
-    dedupingInterval: 60000,
-  }
-);
-```
-
-### Caching Strategy
-
-```typescript
-// API routes with caching
-export async function GET() {
-  const data = await getToolsData();
-
-  return Response.json(data, {
-    headers: {
-      "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
-    },
-  });
-}
-
-// ISR for static content
-export const revalidate = 300; // 5 minutes
-```
+- Use Next.js `Image` component with proper sizing and placeholders
+- Implement code splitting with `dynamic()` imports
+- SWR for data fetching with appropriate cache settings
+- API routes include proper `Cache-Control` headers
 
 ---
 
-## 🚨 Error Handling
+## 🧪 Testing Requirements
 
-### Error Boundary Pattern
+### Test Coverage
 
-```typescript
-// Component level
-<ErrorBoundary fallback={<ErrorPage />}>
-  <ToolComponent />
-</ErrorBoundary>
+- **Unit tests**: >80% coverage using Jest + React Testing Library
+- **E2E tests**: Playwright for critical user flows
+- **Accessibility tests**: jest-axe for WCAG compliance
+- **Performance tests**: Lighthouse CI integration
 
-// Page level
-export default function ToolPage() {
-  return (
-    <ErrorRecoveryProvider>
-      <ToolContent />
-    </ErrorRecoveryProvider>
-  );
-}
-```
+### Testing Patterns
 
-### Toast Notifications
+- Test component rendering and user interactions
+- Mock external dependencies
+- Test error states and loading states
+- Verify accessibility compliance
 
-```typescript
-import { toast } from "@/components/ui/Toast";
+### Automated Testing & Monitoring
 
-// Success
-toast.success("File processed successfully!");
+```bash
+# Headless testing for CI/CD
+npm run test:e2e -- --headless
+npm run test:a11y -- --reporter=json
 
-// Error with retry
-toast.error("Processing failed", {
-  action: {
-    label: "Retry",
-    onClick: () => retryOperation(),
-  },
-});
-```
+# Performance monitoring
+npm run lighthouse -- --output=json
+npm run test:load                    # Load testing
 
-### API Error Handling
-
-```typescript
-// Consistent error responses
-return Response.json(
-  { error: "Validation failed", details: validationErrors },
-  { status: 400 },
-);
-
-// Client-side error handling
-try {
-  const result = await apiCall();
-} catch (error) {
-  if (error.status === 429) {
-    // Handle rate limiting
-  } else if (error.status >= 500) {
-    // Handle server errors
-  }
-}
+# Health check automation
+curl -f http://localhost:3000/api/health || exit 1
 ```
 
 ---
 
 ## 🔒 Security & Privacy
 
-### Input Validation
+### Privacy-First Approach
 
-```typescript
-// Zod schemas for validation
-const ToolInputSchema = z.object({
-  text: z.string().max(1000000),
-  file: z.instanceof(File).optional(),
-  options: z.object({...})
-});
+- Process data client-side whenever possible
+- Never store user data unnecessarily
+- Clear processing happens in browser
+- Server-side only for large file fallbacks
 
-// File validation
-const validateFile = (file: File) => {
-  if (file.size > MAX_FILE_SIZE) {
-    throw new Error('File too large');
-  }
-  if (!ALLOWED_MIME_TYPES.includes(file.type)) {
-    throw new Error('File type not allowed');
-  }
-};
-```
+### Input Security
 
-### Privacy-First Processing
-
-```typescript
-// Client-side processing (preferred)
-const processLocally = async (data: string) => {
-  // Process entirely in browser
-  return btoa(data); // Example: Base64 encoding
-};
-
-// Server-side fallback (only when necessary)
-const processOnServer = async (data: FormData) => {
-  // Only for large files or complex operations
-  return await fetch("/api/process", { method: "POST", body: data });
-};
-```
+- Validate all file uploads (size, type, content)
+- Sanitize user inputs
+- Use proper CORS settings
+- Rate limiting on API endpoints
 
 ---
 
-## 🌍 Environment Setup
+## 🌍 Environment Configuration
 
-### Required Environment Variables
+### Required Variables
 
 ```bash
-# Database
-DATABASE_URL="postgresql://user:pass@localhost:5432/toolchest"
-
-# Admin Authentication
-ADMIN_SECRET_TOKEN="your-secure-admin-token"
-
-# Optional
-NEXT_PUBLIC_GA_ID="G-XXXXXXXXXX"
-NEXT_PUBLIC_SITE_URL="https://toolchest.dev"
+DATABASE_URL="postgresql://..."
+ADMIN_SECRET_TOKEN="secure-token"
+NEXT_PUBLIC_GA_ID="G-XXXXXXXXXX"  # Optional
+NEXT_PUBLIC_SITE_URL="https://..."  # Optional
 ```
 
 ### Development Setup
 
+1. Clone repo and `npm install`
+2. Copy `env.example` to `.env.local`
+3. Run `npx prisma migrate dev`
+4. Start with `npm run dev`
+
+### Server Monitoring & Health Checks
+
 ```bash
-# 1. Clone and install
-git clone <repo>
-cd toolchest
-npm install
+# Monitor server logs in real-time
+npm run dev | tee logs/dev.log
 
-# 2. Environment setup
-cp env.example .env.local
-# Edit .env.local with your values
+# Health check endpoints for monitoring
+curl -s http://localhost:3000/api/health
+curl -s http://localhost:3000/debug
 
-# 3. Database setup
-npx prisma migrate dev
-npx prisma generate
+# Database connection monitoring
+npx prisma db pull --print > /dev/null && echo "DB OK" || echo "DB FAIL"
 
-# 4. Start development
-npm run dev
+# Memory and performance monitoring
+ps aux | grep node                   # Process monitoring
+curl -s http://localhost:3000/api/tools -w "@curl-format.txt"
 ```
 
 ---
 
-## 📋 Quality Checklist
+## 🐛 Server-Side Debugging & Monitoring
 
-### Before Commit
+### Debug API Endpoints
 
-- [ ] TypeScript compiles without errors
-- [ ] ESLint passes with zero warnings
-- [ ] Prettier formatting applied
-- [ ] Unit tests pass with >80% coverage
-- [ ] Accessibility tests pass (light mode)
-- [ ] Manual testing completed (light mode UI)
+- **`GET /debug`**: Comprehensive debugging page with structured data output
+- **`GET /api/tools`**: Direct API testing endpoint
+- **`GET /api/admin/tools`**: Admin API testing (with auth)
+- **`GET /api/health`**: System health check endpoint
 
-### Before Deploy
+### Console/Terminal Debugging
 
-- [ ] Build succeeds without warnings
-- [ ] E2E tests pass
-- [ ] Performance tests meet targets
-- [ ] Security scan passes
-- [ ] Environment variables configured
-- [ ] Database migrations applied
-- [ ] Light mode styling verified
+- **Development server logs**: Monitor `npm run dev` output for errors
+- **Database queries**: Enable Prisma logging with `DEBUG=prisma:query`
+- **API call tracing**: Use `DEBUG=api:*` for request/response logging
+- **Build analysis**: Run `npm run build` to catch static generation errors
+
+### Server-Side Error Patterns
+
+- **Database connection failures**: Check `DATABASE_URL` and connection pooling
+- **Prisma client issues**: Verify `npx prisma generate` has been run
+- **Environment variable problems**: Use `npm run validate-env`
+- **Memory leaks**: Monitor process memory during long operations
+- **API rate limiting**: Check response headers for rate limit status
+
+### Automated Debugging Commands
+
+```bash
+# Check API health programmatically
+curl -s http://localhost:3000/api/health | jq
+
+# Test tool endpoints directly
+curl -s http://localhost:3000/api/tools | jq '.length'
+
+# Verify admin authentication
+curl -H "Authorization: Bearer $ADMIN_TOKEN" http://localhost:3000/api/admin/tools
+
+# Check database connection
+npx prisma db pull --print
+
+# Analyze build output
+npm run build 2>&1 | grep -E "(error|warning|failed)"
+```
+
+### Debug Page Data Structure
+
+The `/debug` endpoint returns structured JSON for programmatic analysis:
+
+```json
+{
+  "mounted": boolean,
+  "directApiCall": { "success": boolean, "data": array, "error": string },
+  "swrHook": { "data": array, "error": object, "isLoading": boolean },
+  "toolsHook": { "tools": array, "tags": array, "loading": boolean },
+  "timestamp": string,
+  "environment": string
+}
+```
+
+### Log Analysis Patterns
+
+- **Hydration mismatches**: Look for "Warning: Text content did not match" in console
+- **API failures**: Monitor network tab or server logs for 4xx/5xx responses
+- **Performance issues**: Check for "Slow query" warnings in Prisma logs
+- **Memory issues**: Watch for "JavaScript heap out of memory" errors
+- **Authentication problems**: Look for 401/403 responses in admin endpoints
 
 ---
 
-## 🔧 Development Standards
+## 📋 Quality Standards
 
-### Code Quality Guidelines
+### Code Quality
 
-- Use TypeScript for all new code
-- Follow existing component patterns
-- Include proper ARIA labels for accessibility
-- Add unit tests for new functionality
-- Update documentation for API changes
+- TypeScript for all new code
+- ESLint + Prettier formatting
+- Proper ARIA labels for accessibility
+- Use established component patterns
+- Include unit tests for new features
 
-### Development Workflow
+### Pre-Commit Automation
 
 ```bash
-# Feature development
-git checkout -b feature/new-tool
-git commit -m "feat: add new tool with accessibility support"
-git push origin feature/new-tool
+# Automated quality checks
+npm run type-check                   # TypeScript validation
+npm run lint -- --format=json       # Machine-readable linting
+npm test -- --coverage --json       # Test coverage output
+npm run build 2>&1 | grep -c error  # Build error count
+
+# Pre-commit hook validation
+npm run validate                     # All quality checks
 ```
 
-### Quality Checklist
+### Deployment Monitoring
 
-- [ ] Code follows project patterns
-- [ ] Accessibility requirements met
-- [ ] Performance impact assessed
-- [ ] Tests cover new functionality
-- [ ] Documentation updated
-- [ ] Error handling implemented
+```bash
+# Automated deployment checks
+npm run build                        # Build validation
+npm run test:e2e -- --headless      # Headless E2E tests
+npm run security-scan               # Security validation
+
+# Health verification post-deployment
+curl -f $DEPLOY_URL/api/health
+curl -s $DEPLOY_URL/debug | jq '.environment'
+
+# Database migration verification
+npx prisma migrate status
+```

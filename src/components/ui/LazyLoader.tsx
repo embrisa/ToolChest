@@ -15,12 +15,12 @@ export interface LazyLoaderProps {
   props?: any;
   loadingType?: "skeleton" | "spinner" | "custom";
   skeletonVariant?:
-  | "text"
-  | "circular"
-  | "rectangular"
-  | "card"
-  | "avatar"
-  | "button";
+    | "text"
+    | "circular"
+    | "rectangular"
+    | "card"
+    | "avatar"
+    | "button";
   className?: string;
 }
 

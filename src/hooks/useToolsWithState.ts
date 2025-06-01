@@ -4,7 +4,6 @@ import { ToolDTO, TagDTO } from "@/types/tools/tool";
 import { ApiResponse } from "@/types/api/common";
 import { swrFetcher } from "@/lib/api";
 import { useToolFilterState, ToolFilterState } from "./useUrlState";
-import { usePerformanceOptimization } from "./usePerformanceOptimization";
 
 interface ToolsWithStateResult {
   tools: ToolDTO[];
@@ -27,7 +26,7 @@ interface ToolsWithStateResult {
 }
 
 /**
- * Enhanced hook for tools with URL state management, performance optimizations, and intelligent caching
+ * Enhanced hook for tools with URL state management
  */
 export function useToolsWithState(): ToolsWithStateResult {
   const {
@@ -40,15 +39,10 @@ export function useToolsWithState(): ToolsWithStateResult {
     mounted,
   } = useToolFilterState();
 
-  const { optimizeCache, preloadResource, measureRenderPerformance } =
-    usePerformanceOptimization();
-
   // Build API endpoint based on filter state
   const apiEndpoint = useMemo(() => {
-    // Don't build endpoint until mounted to prevent hydration mismatch
-    if (!mounted) {
-      return "/api/tools?limit=24"; // Default endpoint
-    }
+    // Don't return an endpoint until mounted to prevent hydration issues
+    if (!mounted) return null;
 
     const params = new URLSearchParams();
 
@@ -79,46 +73,26 @@ export function useToolsWithState(): ToolsWithStateResult {
     }
   }, [filterState, mounted]);
 
-  // Get optimized cache configuration
-  const cacheConfig = useMemo(() => {
-    const cache = optimizeCache({
-      key: apiEndpoint,
-      ttl: filterState.query ? 60 : 300, // Shorter cache for search results
-      staleWhileRevalidate: 600,
-      strategy: "cache-first",
-    });
-    return cache.getCacheConfig();
-  }, [apiEndpoint, filterState.query, optimizeCache]);
-
-  // Fetch tools data with optimized caching
+  // Fetch tools data with simplified SWR config
+  // Only fetch when mounted and endpoint is available
   const {
     data,
     error,
     isLoading,
     mutate: mutateTools,
-  } = useSWR<ApiResponse<ToolDTO[]>>(
-    mounted ? apiEndpoint : null, // Only fetch after mounting
-    swrFetcher,
-    {
-      ...cacheConfig,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: true,
-      errorRetryCount: 3,
-      errorRetryInterval: 1000,
-      keepPreviousData: true, // Prevent loading flicker
-      dedupingInterval: filterState.query ? 2000 : 5000, // Shorter deduping for search
-      // Performance optimization: Reduce revalidation frequency for stable data
-      refreshInterval: filterState.query ? 0 : 60000, // Only refresh static lists every minute
-    },
-  );
+  } = useSWR<ToolDTO[]>(apiEndpoint, swrFetcher, {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: true,
+    errorRetryCount: 3,
+    errorRetryInterval: 1000,
+    dedupingInterval: 2000,
+  });
 
-  // Client-side filtering for tags when searching with memoization
+  // Client-side filtering for tags when searching
   const filteredTools = useMemo(() => {
-    const perfMeasure = measureRenderPerformance("tools-filtering");
+    if (!data) return [];
 
-    if (!data?.data) return [];
-
-    let tools = data.data;
+    let tools = data;
 
     // If we have both search query and tags, apply tag filtering client-side
     if (filterState.query && filterState.tags.length > 0) {
@@ -127,21 +101,16 @@ export function useToolsWithState(): ToolsWithStateResult {
       );
     }
 
-    perfMeasure.end();
     return tools;
-  }, [
-    data?.data,
-    filterState.query,
-    filterState.tags,
-    measureRenderPerformance,
-  ]);
+  }, [data, filterState.query, filterState.tags]);
 
   // Preload next page of results
   const preloadNextPage = useCallback(async () => {
-    if (filterState.query || !data?.meta?.total) return;
+    if (filterState.query || !data) return;
 
-    const hasNextPage = filterState.page * filterState.limit < data.meta.total;
-    if (!hasNextPage) return;
+    // Since we don't have meta.total anymore, we can't determine if there's a next page
+    // This functionality would need to be implemented differently
+    return;
 
     const nextPageParams = new URLSearchParams();
     if (filterState.tags.length > 0) {
@@ -157,39 +126,36 @@ export function useToolsWithState(): ToolsWithStateResult {
 
     const nextPageUrl = `/api/tools?${nextPageParams.toString()}`;
 
-    await preloadResource(nextPageUrl, "fetch", { priority: "low" });
-  }, [filterState, data?.meta?.total, preloadResource]);
+    // Simple prefetch
+    fetch(nextPageUrl).catch(() => {
+      // Ignore errors for prefetch
+    });
+  }, [filterState, data]);
 
   // Prefetch individual tool data
-  const prefetchTool = useCallback(
-    async (toolSlug: string) => {
-      const toolUrl = `/api/tools/${toolSlug}`;
-      await preloadResource(toolUrl, "fetch", { priority: "normal" });
-    },
-    [preloadResource],
-  );
+  const prefetchTool = useCallback(async (toolSlug: string) => {
+    const toolUrl = `/api/tools/${toolSlug}`;
+    fetch(toolUrl).catch(() => {
+      // Ignore errors for prefetch
+    });
+  }, []);
 
-  // Enhanced retry function with exponential backoff
+  // Enhanced retry function
   const retry = useCallback(async () => {
     await mutateTools();
   }, [mutateTools]);
 
-  // Optimistic usage tracking with performance monitoring
+  // Optimistic usage tracking
   const recordUsage = useCallback(
     async (toolSlug: string) => {
-      const perfMeasure = measureRenderPerformance("usage-tracking");
-
       try {
         // Optimistic update - increment usage count immediately
-        if (data?.data) {
-          const optimisticData = {
-            ...data,
-            data: data.data.map((tool) =>
-              tool.slug === toolSlug
-                ? { ...tool, usageCount: (tool.usageCount || 0) + 1 }
-                : tool,
-            ),
-          };
+        if (data) {
+          const optimisticData = data.map((tool) =>
+            tool.slug === toolSlug
+              ? { ...tool, usageCount: (tool.usageCount || 0) + 1 }
+              : tool,
+          );
 
           // Update local cache optimistically
           await mutateTools(optimisticData, false);
@@ -219,33 +185,19 @@ export function useToolsWithState(): ToolsWithStateResult {
         await mutateTools();
 
         // Don't throw error - usage tracking is not critical to UX
-      } finally {
-        perfMeasure.end();
       }
     },
-    [data, mutateTools, measureRenderPerformance],
+    [data, mutateTools],
   );
 
-  // Preload critical resources on mount
-  useEffect(() => {
-    // Preload popular tools and tags in the background
-    preloadResource("/api/tools?popular=true", "fetch", { priority: "low" });
-    preloadResource("/api/tags", "fetch", { priority: "low" });
-  }, [preloadResource]);
-
-  // Auto-preload next page when approaching the end
-  useEffect(() => {
-    if (!isLoading && filteredTools.length >= filterState.limit * 0.8) {
-      preloadNextPage();
-    }
-  }, [filteredTools.length, filterState.limit, isLoading, preloadNextPage]);
-
-  const totalCount = data?.meta?.total || filteredTools.length;
-  const isEmpty = !isLoading && filteredTools.length === 0;
+  const totalCount = filteredTools.length;
+  // Show as loading if not mounted or if SWR is loading
+  const effectiveLoading = !mounted || isLoading;
+  const isEmpty = !effectiveLoading && filteredTools.length === 0;
 
   return {
     tools: filteredTools,
-    isLoading,
+    isLoading: effectiveLoading,
     error,
     isEmpty,
     totalCount,
@@ -265,76 +217,50 @@ export function useToolsWithState(): ToolsWithStateResult {
 }
 
 /**
- * Hook for tags with enhanced caching and performance optimization
+ * Hook for tags with simplified caching
  */
 export function useTagsWithState() {
-  const { optimizeCache } = usePerformanceOptimization();
-
-  // Get optimized cache configuration for tags (they change infrequently)
-  const cacheConfig = useMemo(() => {
-    const cache = optimizeCache({
-      key: "/api/tags",
-      ttl: 600, // 10 minute cache for tags
-      staleWhileRevalidate: 1800, // 30 minute stale-while-revalidate
-      strategy: "cache-first",
-    });
-    return cache.getCacheConfig();
-  }, [optimizeCache]);
+  // Get mounted state to prevent hydration issues
+  const { mounted } = useToolFilterState();
 
   const {
     data,
     error,
     isLoading,
     mutate: mutateTags,
-  } = useSWR<TagDTO[]>("/api/tags", swrFetcher, {
-    ...cacheConfig,
+  } = useSWR<TagDTO[]>(mounted ? "/api/tags" : null, swrFetcher, {
     revalidateOnFocus: false,
     revalidateOnReconnect: true,
     errorRetryCount: 3,
     errorRetryInterval: 1000,
-    dedupingInterval: 30000, // Tags change less frequently
-    refreshInterval: 300000, // Refresh every 5 minutes
+    dedupingInterval: 30000,
   });
 
   const retry = useCallback(async () => {
     await mutateTags();
   }, [mutateTags]);
 
+  // Show as loading if not mounted or if SWR is loading
+  const effectiveLoading = !mounted || isLoading;
+
   return {
     tags: data || [],
-    isLoading,
+    isLoading: effectiveLoading,
     error,
     retry,
   };
 }
 
 /**
- * Hook for individual tool with usage tracking and performance optimization
+ * Hook for individual tool with usage tracking
  */
 export function useToolWithUsage(slug: string) {
-  const { optimizeCache, measureRenderPerformance } =
-    usePerformanceOptimization();
-
-  // Get optimized cache configuration
-  const cacheConfig = useMemo(() => {
-    if (!slug) return {};
-
-    const cache = optimizeCache({
-      key: `/api/tools/${slug}`,
-      ttl: 300, // 5 minute cache for individual tools
-      staleWhileRevalidate: 600,
-      strategy: "cache-first",
-    });
-    return cache.getCacheConfig();
-  }, [slug, optimizeCache]);
-
   const {
     data,
     error,
     isLoading,
     mutate: mutateTool,
   } = useSWR<ToolDTO>(slug ? `/api/tools/${slug}` : null, swrFetcher, {
-    ...cacheConfig,
     revalidateOnFocus: false,
     revalidateOnReconnect: true,
     errorRetryCount: 3,
@@ -342,8 +268,6 @@ export function useToolWithUsage(slug: string) {
 
   const recordUsage = useCallback(async () => {
     if (!slug) return;
-
-    const perfMeasure = measureRenderPerformance("individual-tool-usage");
 
     try {
       // Optimistic update
@@ -373,10 +297,8 @@ export function useToolWithUsage(slug: string) {
     } catch (error) {
       console.error("Failed to record tool usage:", error);
       await mutateTool(); // Revert on error
-    } finally {
-      perfMeasure.end();
     }
-  }, [slug, data, mutateTool, measureRenderPerformance]);
+  }, [slug, data, mutateTool]);
 
   return {
     tool: data,

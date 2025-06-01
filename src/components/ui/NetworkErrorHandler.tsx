@@ -113,9 +113,7 @@ export function NetworkErrorHandler({
         className,
       )}
     >
-      <div className="mb-8">
-        {getErrorIcon()}
-      </div>
+      <div className="mb-8">{getErrorIcon()}</div>
 
       <div
         role="alert"
@@ -197,7 +195,8 @@ export function NetworkErrorHandler({
               />
             </svg>
             <p className="text-small text-warning-800 leading-relaxed">
-              The page will automatically retry when your connection is restored.
+              The page will automatically retry when your connection is
+              restored.
             </p>
           </div>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import {
   AdminTagListItem,
@@ -22,12 +22,8 @@ export default function AdminTagsPage() {
 
   const [filters, setFilters] = useState<AdminTagsFilters>({});
 
-  // Load tags
-  useEffect(() => {
-    loadData();
-  }, [sortOptions, filters]);
-
-  const loadData = async () => {
+  // Memoize loadData to prevent infinite re-renders
+  const loadData = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -55,7 +51,17 @@ export default function AdminTagsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [
+    sortOptions.field,
+    sortOptions.direction,
+    filters.search,
+    filters.hasTools,
+  ]);
+
+  // Load tags - use specific dependencies instead of objects
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   const handleSort = (field: AdminTagsSortOptions["field"]) => {
     setSortOptions((prev) => ({

@@ -77,18 +77,16 @@ Our neutral colors provide the foundation for all content, using rich grays that
 
 ```css
 /* Balanced spectrum optimized for contrast and visual hierarchy */
---neutral-25: #fcfcfc   /* Pure card hover states */
---neutral-50: #f8f9fa   /* Card/surface backgrounds */
---neutral-100: #f1f3f4  /* Page background (darker aesthetic) */
---neutral-150: #e8eaed  /* Subtle borders */
---neutral-200: #dadce0  /* Medium borders, dividers */
---neutral-300: #bdc1c6  /* Disabled states */
---neutral-400: #9aa0a6  /* Placeholder text */
---neutral-500: #5f6368  /* Secondary text (improved contrast) */
---neutral-600: #3c4043  /* Primary supporting text */
---neutral-700: #202124  /* Primary text */
---neutral-800: #171717  /* High emphasis text */
---neutral-900: #0d0d0d  /* Maximum contrast text */
+--neutral-25: #fcfcfc /* Pure card hover states */ --neutral-50: #f8f9fa
+  /* Card/surface backgrounds */ --neutral-100: #f1f3f4
+  /* Page background (darker aesthetic) */ --neutral-150: #e8eaed
+  /* Subtle borders */ --neutral-200: #dadce0 /* Medium borders, dividers */
+  --neutral-300: #bdc1c6 /* Disabled states */ --neutral-400: #9aa0a6
+  /* Placeholder text */ --neutral-500: #5f6368
+  /* Secondary text (improved contrast) */ --neutral-600: #3c4043
+  /* Primary supporting text */ --neutral-700: #202124 /* Primary text */
+  --neutral-800: #171717 /* High emphasis text */ --neutral-900: #0d0d0d
+  /* Maximum contrast text */;
 ```
 
 ### Color Usage Guidelines
@@ -204,7 +202,7 @@ Our type scale follows a mathematical progression optimized for digital reading:
 - **Optimal line length**: 45-75 characters for body text
 - **Enhanced contrast ratios**: Minimum 7:1 for normal text, 4.5:1 for large text (exceeding WCAG AAA)
 - **Balanced backgrounds**: Subtle off-white (#f8f9fa) instead of pure white to reduce eye strain
-- **Text color hierarchy**: 
+- **Text color hierarchy**:
   - Primary text: neutral-700 (#202124) - 9.2:1 contrast ratio
   - Secondary text: neutral-500 (#5f6368) - 7.1:1 contrast ratio
   - Supporting text: neutral-600 (#3c4043) - 8.1:1 contrast ratio
@@ -223,15 +221,15 @@ Our spacing system follows an 8px base grid with generous spacing for optimal vi
 ```css
 /* Base unit: 8px for consistent spacing throughout */
 --space-1: 0.25rem; /* 4px  - Micro spacing (borders, fine adjustments) */
---space-2: 0.5rem;  /* 8px  - Base unit (small gaps, tight spacing) */
+--space-2: 0.5rem; /* 8px  - Base unit (small gaps, tight spacing) */
 --space-3: 0.75rem; /* 12px - Small gaps (form elements, badges) */
---space-4: 1rem;    /* 16px - Standard spacing (button padding, small margins) */
---space-6: 1.5rem;  /* 24px - Section spacing (card content, moderate margins) */
---space-8: 2rem;    /* 32px - Large spacing (section gaps, component margins) */
+--space-4: 1rem; /* 16px - Standard spacing (button padding, small margins) */
+--space-6: 1.5rem; /* 24px - Section spacing (card content, moderate margins) */
+--space-8: 2rem; /* 32px - Large spacing (section gaps, component margins) */
 --space-10: 2.5rem; /* 40px - Extra large spacing (major component separation) */
---space-12: 3rem;   /* 48px - Major sections (page sections, layout gaps) */
---space-16: 4rem;   /* 64px - Page sections (hero padding, major separations) */
---space-20: 5rem;   /* 80px - Extra major sections (large hero areas) */
+--space-12: 3rem; /* 48px - Major sections (page sections, layout gaps) */
+--space-16: 4rem; /* 64px - Page sections (hero padding, major separations) */
+--space-20: 5rem; /* 80px - Extra major sections (large hero areas) */
 ```
 
 #### **Container & Edge Spacing Standards**
@@ -241,74 +239,119 @@ Proper edge margins and container padding are essential for professional appeara
 ```css
 /* Container Padding (Responsive) */
 .container-padding {
-  padding-left: 1.5rem;  /* 24px - Mobile */
+  padding-left: 1.5rem; /* 24px - Mobile */
   padding-right: 1.5rem; /* 24px - Mobile */
 }
 
 @media (min-width: 640px) {
   .container-padding {
-    padding-left: 2rem;  /* 32px - Tablet */
+    padding-left: 2rem; /* 32px - Tablet */
     padding-right: 2rem; /* 32px - Tablet */
   }
 }
 
 @media (min-width: 1024px) {
   .container-padding {
-    padding-left: 3rem;  /* 48px - Desktop */
+    padding-left: 3rem; /* 48px - Desktop */
     padding-right: 3rem; /* 48px - Desktop */
   }
 }
 
 /* Section Vertical Spacing */
-.section-spacing-sm { padding-top: 3rem; padding-bottom: 3rem; }   /* 48px */
-.section-spacing-md { padding-top: 4rem; padding-bottom: 4rem; }   /* 64px */
-.section-spacing-lg { padding-top: 5rem; padding-bottom: 5rem; }   /* 80px */
-.section-spacing-xl { padding-top: 6rem; padding-bottom: 6rem; }   /* 96px */
+.section-spacing-sm {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+} /* 48px */
+.section-spacing-md {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+} /* 64px */
+.section-spacing-lg {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+} /* 80px */
+.section-spacing-xl {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+} /* 96px */
 ```
 
 #### **Component Spacing Guidelines**
 
 ##### **Card Components**
+
 ```css
 /* Card Internal Spacing */
-.card-padding-sm { padding: 1.5rem; }  /* 24px - Compact cards */
-.card-padding-md { padding: 2rem; }    /* 32px - Standard cards */
-.card-padding-lg { padding: 2.5rem; }  /* 40px - Feature cards */
+.card-padding-sm {
+  padding: 1.5rem;
+} /* 24px - Compact cards */
+.card-padding-md {
+  padding: 2rem;
+} /* 32px - Standard cards */
+.card-padding-lg {
+  padding: 2.5rem;
+} /* 40px - Feature cards */
 
 /* Card Grid Spacing */
-.card-grid-gap-sm { gap: 1.5rem; }     /* 24px - Compact grids */
-.card-grid-gap-md { gap: 2rem; }       /* 32px - Standard grids */
-.card-grid-gap-lg { gap: 3rem; }       /* 48px - Spacious grids */
+.card-grid-gap-sm {
+  gap: 1.5rem;
+} /* 24px - Compact grids */
+.card-grid-gap-md {
+  gap: 2rem;
+} /* 32px - Standard grids */
+.card-grid-gap-lg {
+  gap: 3rem;
+} /* 48px - Spacious grids */
 ```
 
 ##### **Typography Spacing**
+
 ```css
 /* Heading Margins */
-.heading-margin-sm { margin-bottom: 0.75rem; }  /* 12px - Small headings */
-.heading-margin-md { margin-bottom: 1rem; }     /* 16px - Standard headings */
-.heading-margin-lg { margin-bottom: 1.5rem; }   /* 24px - Major headings */
-.heading-margin-xl { margin-bottom: 2rem; }     /* 32px - Hero headings */
+.heading-margin-sm {
+  margin-bottom: 0.75rem;
+} /* 12px - Small headings */
+.heading-margin-md {
+  margin-bottom: 1rem;
+} /* 16px - Standard headings */
+.heading-margin-lg {
+  margin-bottom: 1.5rem;
+} /* 24px - Major headings */
+.heading-margin-xl {
+  margin-bottom: 2rem;
+} /* 32px - Hero headings */
 
 /* Text Spacing */
-.text-spacing { margin-top: 0.5rem; }           /* 8px - Secondary text */
-.paragraph-spacing { margin-bottom: 1.5rem; }   /* 24px - Paragraph separation */
+.text-spacing {
+  margin-top: 0.5rem;
+} /* 8px - Secondary text */
+.paragraph-spacing {
+  margin-bottom: 1.5rem;
+} /* 24px - Paragraph separation */
 ```
 
 ##### **Layout Grid Spacing**
+
 ```css
 /* Desktop Layout Grids */
-.layout-gap-sm { gap: 2rem; }   /* 32px - Compact layouts */
-.layout-gap-md { gap: 3rem; }   /* 48px - Standard layouts */
-.layout-gap-lg { gap: 4rem; }   /* 64px - Spacious layouts */
+.layout-gap-sm {
+  gap: 2rem;
+} /* 32px - Compact layouts */
+.layout-gap-md {
+  gap: 3rem;
+} /* 48px - Standard layouts */
+.layout-gap-lg {
+  gap: 4rem;
+} /* 64px - Spacious layouts */
 
 /* Mobile to Desktop Responsive Grid Gaps */
 .responsive-grid-gap {
-  gap: 2rem;                     /* 32px - Mobile/Tablet */
+  gap: 2rem; /* 32px - Mobile/Tablet */
 }
 
 @media (min-width: 1024px) {
   .responsive-grid-gap {
-    gap: 3rem;                   /* 48px - Desktop */
+    gap: 3rem; /* 48px - Desktop */
   }
 }
 ```
@@ -316,20 +359,17 @@ Proper edge margins and container padding are essential for professional appeara
 #### **Spacing Implementation Examples**
 
 ##### **Hero Section Pattern**
+
 ```tsx
 // Enhanced hero section with proper spacing
 <header className="relative overflow-hidden">
   <div className="container-wide px-6 sm:px-8 lg:px-12 py-20 sm:py-24 lg:py-32">
     <div className="text-center">
-      <h1 className="text-display font-bold mb-8">
-        {/* Hero Title */}
-      </h1>
+      <h1 className="text-display font-bold mb-8">{/* Hero Title */}</h1>
       <p className="text-body max-w-3xl mx-auto mb-12">
         {/* Hero Description */}
       </p>
-      <div className="mb-16">
-        {/* Call to Action */}
-      </div>
+      <div className="mb-16">{/* Call to Action */}</div>
       <div className="flex items-center justify-center gap-8 sm:gap-12">
         {/* Stats or Features */}
       </div>
@@ -339,41 +379,33 @@ Proper edge margins and container padding are essential for professional appeara
 ```
 
 ##### **Main Content Pattern**
+
 ```tsx
 // Main content with proper section spacing
 <main className="container-wide px-6 sm:px-8 lg:px-12 py-12 lg:py-16">
   <div className="lg:grid lg:grid-cols-4 lg:gap-12">
     <div className="lg:col-span-3">
-      <div className="mb-10">
-        {/* Section Header */}
-      </div>
+      <div className="mb-10">{/* Section Header */}</div>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
         {/* Content Grid */}
       </div>
     </div>
     <aside className="lg:col-span-1">
-      <div className="card p-8">
-        {/* Sidebar Content */}
-      </div>
+      <div className="card p-8">{/* Sidebar Content */}</div>
     </aside>
   </div>
 </main>
 ```
 
 ##### **Mobile-First Responsive Spacing**
+
 ```tsx
 // Mobile-optimized spacing with desktop enhancements
 <div className="lg:hidden mb-10">
-  <div className="mb-6">
-    {/* Mobile Header */}
-  </div>
+  <div className="mb-6">{/* Mobile Header */}</div>
   <details className="group">
-    <summary className="card p-6">
-      {/* Collapsible Content Trigger */}
-    </summary>
-    <div className="card p-8 mt-4">
-      {/* Collapsible Content */}
-    </div>
+    <summary className="card p-6">{/* Collapsible Content Trigger */}</summary>
+    <div className="card p-8 mt-4">{/* Collapsible Content */}</div>
   </details>
 </div>
 ```
@@ -385,28 +417,28 @@ Proper edge margins and container padding are essential for professional appeara
 .touch-target-min {
   min-height: 44px;
   min-width: 44px;
-  padding: 0.75rem 1rem;      /* 12px 16px minimum */
+  padding: 0.75rem 1rem; /* 12px 16px minimum */
 }
 
 .touch-target-comfortable {
   min-height: 48px;
   min-width: 48px;
-  padding: 1rem 1.5rem;       /* 16px 24px comfortable */
+  padding: 1rem 1.5rem; /* 16px 24px comfortable */
 }
 
 .touch-target-generous {
   min-height: 52px;
   min-width: 52px;
-  padding: 1rem 2rem;         /* 16px 32px generous */
+  padding: 1rem 2rem; /* 16px 32px generous */
 }
 
 /* Interactive Element Spacing */
 .interactive-spacing {
-  margin: 0.5rem;             /* 8px minimum around interactive elements */
+  margin: 0.5rem; /* 8px minimum around interactive elements */
 }
 
 .interactive-spacing-comfortable {
-  margin: 0.75rem;            /* 12px comfortable spacing */
+  margin: 0.75rem; /* 12px comfortable spacing */
 }
 ```
 
@@ -428,29 +460,29 @@ Before implementing any layout, ensure:
 ```css
 /* ❌ Too tight - creates cramped feeling */
 .cramped-layout {
-  padding: 0.5rem;            /* 8px - too small for cards */
-  gap: 0.75rem;               /* 12px - too small for grids */
-  margin-bottom: 0.5rem;      /* 8px - too small for sections */
+  padding: 0.5rem; /* 8px - too small for cards */
+  gap: 0.75rem; /* 12px - too small for grids */
+  margin-bottom: 0.5rem; /* 8px - too small for sections */
 }
 
 /* ❌ Inconsistent spacing */
 .inconsistent-spacing {
-  margin-bottom: 18px;        /* Not on 8px grid */
-  padding: 14px;              /* Not on 8px grid */
-  gap: 22px;                  /* Not on 8px grid */
+  margin-bottom: 18px; /* Not on 8px grid */
+  padding: 14px; /* Not on 8px grid */
+  gap: 22px; /* Not on 8px grid */
 }
 
 /* ❌ No edge margins */
 .no-edge-margins {
-  padding-left: 0;            /* Content touches edges */
-  padding-right: 0;           /* Content touches edges */
+  padding-left: 0; /* Content touches edges */
+  padding-right: 0; /* Content touches edges */
 }
 
 /* ✅ Proper generous spacing */
 .generous-spacing {
-  padding: 2rem;              /* 32px - comfortable card padding */
-  gap: 2rem;                  /* 32px - proper grid spacing */
-  margin-bottom: 2.5rem;      /* 40px - clear section separation */
+  padding: 2rem; /* 32px - comfortable card padding */
+  gap: 2rem; /* 32px - proper grid spacing */
+  margin-bottom: 2.5rem; /* 40px - clear section separation */
 }
 ```
 
@@ -626,15 +658,15 @@ Our design system uses CSS custom properties for consistent light mode styling:
 ```css
 :root {
   /* Light theme variables */
-  --background: 241 243 244;      /* neutral-100 - primary background */
-  --background-secondary: 232 234 237;  /* neutral-150 - secondary surfaces */
-  --background-tertiary: 248 249 250;   /* neutral-50 - elevated surfaces (cards) */
-  --foreground: 32 33 36;         /* neutral-700 - primary text */
-  --foreground-secondary: 95 99 104;    /* neutral-500 - secondary text */
-  --foreground-tertiary: 60 64 67;      /* neutral-600 - supporting text */
-  --border: 218 220 224;          /* neutral-200 - borders */
-  --border-secondary: 232 234 237;      /* neutral-150 - subtle borders */
-  --ring: 14 165 233;             /* brand-500 - focus rings */
+  --background: 241 243 244; /* neutral-100 - primary background */
+  --background-secondary: 232 234 237; /* neutral-150 - secondary surfaces */
+  --background-tertiary: 248 249 250; /* neutral-50 - elevated surfaces (cards) */
+  --foreground: 32 33 36; /* neutral-700 - primary text */
+  --foreground-secondary: 95 99 104; /* neutral-500 - secondary text */
+  --foreground-tertiary: 60 64 67; /* neutral-600 - supporting text */
+  --border: 218 220 224; /* neutral-200 - borders */
+  --border-secondary: 232 234 237; /* neutral-150 - subtle borders */
+  --ring: 14 165 233; /* brand-500 - focus rings */
 }
 ```
 

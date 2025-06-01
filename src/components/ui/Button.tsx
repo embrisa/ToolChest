@@ -5,12 +5,12 @@ import { cn } from "@/utils";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?:
-  | "primary"
-  | "secondary"
-  | "ghost"
-  | "danger"
-  | "outline"
-  | "gradient";
+    | "primary"
+    | "secondary"
+    | "ghost"
+    | "danger"
+    | "outline"
+    | "gradient";
   size?: "sm" | "md" | "lg" | "xl";
   isLoading?: boolean;
   loadingText?: string;

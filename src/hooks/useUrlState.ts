@@ -37,9 +37,9 @@ export function useUrlState(options: UseUrlStateOptions = {}) {
       });
     }
 
-    // Apply default values for missing keys
+    // Apply default values for missing keys and ensure no undefined values
     Object.entries(defaultValues).forEach(([key, defaultValue]) => {
-      if (!(key in state)) {
+      if (!(key in state) || state[key] === undefined) {
         state[key] = defaultValue;
       }
     });
@@ -161,7 +161,7 @@ export function useToolFilterState() {
 
   const filterState: ToolFilterState = useMemo(
     () => ({
-      query: (urlState.query as string) || "",
+      query: String(urlState.query || ""),
       tags: Array.isArray(urlState.tags) ? urlState.tags : [],
       sortBy: (urlState.sortBy as string) || "displayOrder",
       sortOrder: (urlState.sortOrder as "asc" | "desc") || "asc",

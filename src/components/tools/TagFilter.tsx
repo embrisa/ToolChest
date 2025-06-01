@@ -69,18 +69,18 @@ export function TagFilter({
   return (
     <div
       ref={containerRef}
-      className={cn("space-y-4", className)}
+      className={cn("section-spacing-sm", className)}
       data-testid={testId}
     >
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <h2 className="text-title text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+      {/* Header with enhanced spacing */}
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="text-primary text-xl font-semibold">
           Filter by Category
           {selectedCount > 0 && (
             <span
               className={cn(
-                "ml-3 text-xs font-medium px-2.5 py-1 rounded-full",
-                "bg-brand-100 text-brand-800 dark:bg-brand-900/30 dark:text-brand-200",
+                "ml-4 text-xs font-medium px-3 py-1.5 rounded-lg",
+                "bg-brand-100 text-brand-800",
                 "animate-fade-in",
               )}
             >
@@ -92,14 +92,7 @@ export function TagFilter({
         {selectedCount > 0 && (
           <button
             onClick={onClearAll}
-            className={cn(
-              "text-sm font-medium px-3 py-1.5 rounded-lg",
-              "text-brand-600 hover:text-brand-700",
-              "dark:text-brand-400 dark:hover:text-brand-300",
-              "hover:bg-brand-50 dark:hover:bg-brand-950/50",
-              "focus:outline-none focus:ring-2 focus:ring-brand-500/20",
-              "transition-all duration-200",
-            )}
+            className="btn-secondary text-sm"
             aria-label="Clear all selected filters"
             data-testid="clear-all-tags"
           >
@@ -108,11 +101,11 @@ export function TagFilter({
         )}
       </div>
 
-      {/* Tag List */}
+      {/* Tag List with generous spacing */}
       <div
         role="group"
         aria-label="Tool category filters"
-        className="space-y-3"
+        className="space-y-4"
       >
         {tagsToShow.map((tag) => {
           const isSelected = selectedTags.includes(tag.slug);
@@ -126,43 +119,33 @@ export function TagFilter({
               onKeyDown={(e) => handleKeyDown(e, tag.slug)}
               data-testid={`tag-${tag.slug}`}
               className={cn(
-                "flex items-center justify-between p-4 rounded-xl border cursor-pointer",
-                "transition-all duration-200 group",
-                "focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:ring-offset-2",
-                "dark:focus:ring-offset-neutral-900",
+                "card-interactive p-6",
+                "min-h-[80px]", // Generous touch target with room for stacked content
+                "focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2",
                 isSelected
                   ? cn(
                       "border-brand-300 bg-gradient-to-r from-brand-50 to-brand-100/50",
-                      "dark:border-brand-600 dark:from-brand-950/50 dark:to-brand-900/30",
-                      "text-brand-900 dark:text-brand-100",
                       "shadow-colored",
                     )
-                  : cn(
-                      "border-neutral-200 dark:border-neutral-700",
-                      "bg-white dark:bg-neutral-900",
-                      "text-neutral-700 dark:text-neutral-300",
-                      "hover:border-brand-200 dark:hover:border-brand-700",
-                      "hover:bg-brand-50/50 dark:hover:bg-brand-950/20",
-                      "shadow-soft hover:shadow-medium",
-                    ),
+                  : "hover:bg-neutral-25",
               )}
               aria-pressed={isSelected}
               aria-describedby={showCount ? `tag-count-${tag.id}` : undefined}
             >
-              <div className="flex items-center gap-3">
+              <div className="flex items-start gap-4">
                 <div
                   className={cn(
-                    "w-5 h-5 border-2 rounded-md flex items-center justify-center",
-                    "transition-all duration-200 group-hover:scale-110",
+                    "w-6 h-6 border-2 rounded-lg flex items-center justify-center mt-1",
+                    "transition-all duration-200 group-hover:scale-110 flex-shrink-0",
                     isSelected
                       ? "border-brand-500 bg-brand-500 shadow-glow"
-                      : "border-neutral-300 dark:border-neutral-600",
+                      : "border-neutral-300",
                   )}
                   aria-hidden="true"
                 >
                   {isSelected && (
                     <svg
-                      className="w-3 h-3 text-white"
+                      className="w-4 h-4 text-white"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -175,55 +158,51 @@ export function TagFilter({
                   )}
                 </div>
 
-                <span className="text-body font-medium">{tag.name}</span>
-              </div>
-
-              {showCount && tag.toolCount !== undefined && (
-                <span
-                  id={`tag-count-${tag.id}`}
-                  className={cn(
-                    "text-sm px-2 py-1 rounded-lg font-medium",
-                    isSelected
-                      ? "text-brand-600 bg-brand-200/50 dark:text-brand-300 dark:bg-brand-800/50"
-                      : "text-neutral-500 bg-neutral-100 dark:text-neutral-400 dark:bg-neutral-800",
+                <div className="flex-1 min-w-0 space-y-2">
+                  <div className="text-primary font-medium text-lg leading-tight">
+                    {tag.name}
+                  </div>
+                  {showCount && tag.toolCount !== undefined && (
+                    <div
+                      id={`tag-count-${tag.id}`}
+                      className={cn(
+                        "text-sm font-medium",
+                        isSelected ? "text-brand-600" : "text-secondary",
+                      )}
+                    >
+                      {tag.toolCount} tools
+                    </div>
                   )}
-                >
-                  {tag.toolCount} tools
-                </span>
-              )}
+                </div>
+              </div>
             </div>
           );
         })}
 
-        {/* Expand/Collapse Button */}
+        {/* Expand/Collapse Button with enhanced touch target */}
         {hiddenTags.length > 0 && (
           <button
             onClick={() => setIsExpanded(!isExpanded)}
             onKeyDown={handleExpandKeyDown}
             className={cn(
-              "w-full p-4 rounded-xl border border-neutral-200 dark:border-neutral-700",
-              "bg-white dark:bg-neutral-900",
-              "text-neutral-600 hover:text-neutral-800",
-              "dark:text-neutral-400 dark:hover:text-neutral-200",
-              "hover:bg-neutral-50 dark:hover:bg-neutral-800",
-              "hover:border-neutral-300 dark:hover:border-neutral-600",
-              "focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:ring-offset-2",
-              "dark:focus:ring-offset-neutral-900",
+              "card w-full p-6 min-h-[60px]",
+              "text-secondary hover:text-primary",
+              "hover:bg-neutral-50",
+              "focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2",
               "transition-all duration-200 group",
-              "shadow-soft hover:shadow-medium",
             )}
             aria-expanded={isExpanded}
             aria-controls="hidden-tags"
           >
-            <div className="flex items-center justify-center gap-2">
-              <span className="text-body font-medium">
+            <div className="flex items-center justify-center gap-3">
+              <span className="font-medium text-lg">
                 {isExpanded
                   ? `Show fewer categories`
                   : `Show ${hiddenTags.length} more categories`}
               </span>
               <svg
                 className={cn(
-                  "w-4 h-4 transition-transform duration-200",
+                  "w-5 h-5 transition-transform duration-200",
                   isExpanded ? "rotate-180" : "rotate-0",
                   "group-hover:scale-110",
                 )}

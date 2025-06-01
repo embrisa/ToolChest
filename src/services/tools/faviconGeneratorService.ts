@@ -545,11 +545,11 @@ export class FaviconGeneratorService {
       size.format === "ico"
         ? await this.generateICOBlob(canvas)
         : await this.generateCompressedBlob(
-          canvas,
-          format,
-          quality,
-          compressionOptions,
-        );
+            canvas,
+            format,
+            quality,
+            compressionOptions,
+          );
 
     const dataUrl = await this.blobToDataUrl(blob);
     const filename = `${size.name}.${size.format === "ico" ? "ico" : format}`;
@@ -692,10 +692,10 @@ export class FaviconGeneratorService {
             b
               ? resolve(b)
               : reject(
-                new Error(
-                  `Failed to generate ${outputFormat.toUpperCase()} blob`,
+                  new Error(
+                    `Failed to generate ${outputFormat.toUpperCase()} blob`,
+                  ),
                 ),
-              ),
           mimeType,
           quality,
         );
@@ -1169,22 +1169,22 @@ export class FaviconGeneratorService {
     <h2>📁 Files Included</h2>
     <div class="file-list">
                 ${favicons
-        .map((favicon) => {
-          let description = `${favicon.size.width}×${favicon.size.height} ${favicon.size.format.toUpperCase()}`;
-          if (favicon.filename === "favicon.ico") {
-            description += " (Multi-size)";
-          } else if (favicon.filename.includes("apple-touch")) {
-            description += " (Apple)";
-          } else if (favicon.filename.includes("android")) {
-            description += " (Android/PWA)";
-          }
+                  .map((favicon) => {
+                    let description = `${favicon.size.width}×${favicon.size.height} ${favicon.size.format.toUpperCase()}`;
+                    if (favicon.filename === "favicon.ico") {
+                      description += " (Multi-size)";
+                    } else if (favicon.filename.includes("apple-touch")) {
+                      description += " (Apple)";
+                    } else if (favicon.filename.includes("android")) {
+                      description += " (Android/PWA)";
+                    }
 
-          return `<div class="file-item">
+                    return `<div class="file-item">
                 <strong>${favicon.filename}</strong><br>
                 <small>${description}</small>
             </div>`;
-        })
-        .join("")}
+                  })
+                  .join("")}
         ${hasManifest ? '<div class="file-item"><strong>manifest.json</strong><br><small>Web App Manifest</small></div>' : ""}
         <div class="file-item"><strong>html-snippets.txt</strong><br><small>Copy-paste HTML code</small></div>
     </div>

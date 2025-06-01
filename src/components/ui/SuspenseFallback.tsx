@@ -63,7 +63,7 @@ export function SuspenseFallback({
             className={cn(
               "flex items-center justify-center py-16 lg:py-20",
               "bg-neutral-50/50",
-              className
+              className,
             )}
             style={{ height }}
           >
@@ -84,7 +84,7 @@ export function SuspenseFallback({
           <div
             className={cn(
               "card bg-neutral-50 shadow-medium p-8 lg:p-10",
-              className
+              className,
             )}
             style={{ height }}
           >
@@ -112,21 +112,21 @@ export function SuspenseFallback({
 
       case "list":
         return (
-          <div
-            className={cn(
-              "space-y-6",
-              className
-            )}
-            style={{ height }}
-          >
+          <div className={cn("space-y-6", className)} style={{ height }}>
             {Array.from({ length: 5 }, (_, index) => (
               <div key={index} className="flex items-center gap-6">
-                <SkeletonLoader variant="circular" className="w-14 h-14 flex-shrink-0" />
+                <SkeletonLoader
+                  variant="circular"
+                  className="w-14 h-14 flex-shrink-0"
+                />
                 <div className="flex-1 space-y-3">
                   <SkeletonLoader variant="text" className="h-6 w-3/4" />
                   <SkeletonLoader variant="text" className="h-4 w-1/2" />
                 </div>
-                <SkeletonLoader variant="text" className="h-5 w-24 flex-shrink-0" />
+                <SkeletonLoader
+                  variant="text"
+                  className="h-5 w-24 flex-shrink-0"
+                />
               </div>
             ))}
 
@@ -141,7 +141,7 @@ export function SuspenseFallback({
           <div
             className={cn(
               "card bg-neutral-50 shadow-medium p-8 lg:p-10",
-              className
+              className,
             )}
             style={{ height }}
           >
@@ -158,7 +158,7 @@ export function SuspenseFallback({
           <div
             className={cn(
               "flex items-center justify-center py-12 lg:py-16",
-              className
+              className,
             )}
             style={{ height }}
           >

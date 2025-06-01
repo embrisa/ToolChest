@@ -59,7 +59,7 @@ export function OptimizedImage({
       setCurrentSrc(fallbackSrc);
       setHasError(false);
       setIsLoading(true);
-      setRetryCount(prev => prev + 1);
+      setRetryCount((prev) => prev + 1);
     }
   }, [fallbackSrc, currentSrc, retryCount, onLoadError]);
 
@@ -72,7 +72,7 @@ export function OptimizedImage({
     if (retryCount < 3) {
       setHasError(false);
       setIsLoading(true);
-      setRetryCount(prev => prev + 1);
+      setRetryCount((prev) => prev + 1);
       // Force image reload by adding timestamp
       setCurrentSrc(`${src}?retry=${Date.now()}`);
     }
@@ -140,11 +140,7 @@ export function OptimizedImage({
     if (loadingVariant === "minimal") {
       return (
         <div
-          className={cn(
-            baseClasses,
-            "bg-neutral-50",
-            placeholderClassName,
-          )}
+          className={cn(baseClasses, "bg-neutral-50", placeholderClassName)}
           aria-label="Loading image"
           role="img"
         />
@@ -232,8 +228,17 @@ export function OptimizedImage({
       />
 
       {/* Screen reader announcements for loading state changes */}
-      <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">
-        {isLoading ? "Image loading" : hasError ? "Image failed to load" : "Image loaded successfully"}
+      <div
+        className="sr-only"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {isLoading
+          ? "Image loading"
+          : hasError
+            ? "Image failed to load"
+            : "Image loaded successfully"}
       </div>
     </div>
   );

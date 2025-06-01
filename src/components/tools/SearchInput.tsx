@@ -105,7 +105,7 @@ export function SearchInput({
             placeholder={placeholder}
             className="pl-12 pr-12"
             aria-label="Search tools"
-            defaultValue=""
+            value=""
             readOnly
           />
         </div>
@@ -121,9 +121,7 @@ export function SearchInput({
           <svg
             className={cn(
               "h-5 w-5 transition-all duration-200",
-              isFocused
-                ? "text-brand-500"
-                : "text-neutral-400",
+              isFocused ? "text-brand-500" : "text-neutral-400",
             )}
             fill="none"
             stroke="currentColor"
@@ -142,7 +140,7 @@ export function SearchInput({
         <Input
           ref={inputRef}
           type="text"
-          value={value}
+          value={value || ""}
           onChange={(e) => handleInputChange(e.target.value)}
           onKeyDown={handleKeyDown}
           onFocus={() => setIsFocused(true)}
@@ -219,10 +217,7 @@ export function SearchInput({
       {/* Search Results Summary */}
       {value && resultCount !== undefined && (
         <div
-          className={cn(
-            "mt-3 text-sm text-secondary",
-            "animate-fade-in-up",
-          )}
+          className={cn("mt-3 text-sm text-secondary", "animate-fade-in-up")}
           aria-live="polite"
         >
           {resultCount === 0 ? (

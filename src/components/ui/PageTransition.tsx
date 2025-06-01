@@ -62,7 +62,13 @@ const sizeClasses = {
 };
 
 // Enhanced announcement component with better semantics
-function TransitionAnnouncement({ message, isComplete }: { message: string; isComplete?: boolean }) {
+function TransitionAnnouncement({
+  message,
+  isComplete,
+}: {
+  message: string;
+  isComplete?: boolean;
+}) {
   return (
     <div
       className="sr-only"
@@ -106,7 +112,9 @@ export function PageTransition({
   }, [isLoading, message]);
 
   if (!mounted || !isLoading) {
-    return isComplete ? <TransitionAnnouncement message={announceMessage} isComplete={true} /> : null;
+    return isComplete ? (
+      <TransitionAnnouncement message={announceMessage} isComplete={true} />
+    ) : null;
   }
 
   const progressValue = Math.min(Math.max(progress, 0), 100);
@@ -141,7 +149,8 @@ export function PageTransition({
     const circleRadius = 28;
     const circumference = 2 * Math.PI * circleRadius;
     const strokeDasharray = circumference;
-    const strokeDashoffset = circumference - (progressValue / 100) * circumference;
+    const strokeDashoffset =
+      circumference - (progressValue / 100) * circumference;
 
     return (
       <>
@@ -194,13 +203,19 @@ export function PageTransition({
               </svg>
               {/* Percentage display with enhanced contrast */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-sm font-semibold text-neutral-700" aria-live="polite">
+                <span
+                  className="text-sm font-semibold text-neutral-700"
+                  aria-live="polite"
+                >
                   {Math.round(progressValue)}%
                 </span>
               </div>
             </div>
             <div className="max-w-xs mx-auto">
-              <h2 id="loading-title" className="text-body font-medium text-neutral-700 mb-2">
+              <h2
+                id="loading-title"
+                className="text-body font-medium text-neutral-700 mb-2"
+              >
                 {message}
               </h2>
               <p id="loading-description" className="text-sm text-neutral-500">
@@ -247,7 +262,10 @@ export function PageTransition({
               ))}
             </div>
             <div className="max-w-xs mx-auto">
-              <h2 id="loading-title" className="text-body font-medium text-neutral-700 mb-3">
+              <h2
+                id="loading-title"
+                className="text-body font-medium text-neutral-700 mb-3"
+              >
                 {message}
               </h2>
               {progress > 0 && (
@@ -266,7 +284,10 @@ export function PageTransition({
                       aria-label={`Loading progress: ${progressValue}%`}
                     />
                   </div>
-                  <p className="text-xs text-neutral-500 mt-2" aria-live="polite">
+                  <p
+                    className="text-xs text-neutral-500 mt-2"
+                    aria-live="polite"
+                  >
                     {Math.round(progressValue)}% complete
                   </p>
                 </div>
@@ -310,7 +331,10 @@ export function PageTransition({
               />
 
               <div className="space-y-4">
-                <h2 id="loading-title" className="text-body font-medium text-neutral-700">
+                <h2
+                  id="loading-title"
+                  className="text-body font-medium text-neutral-700"
+                >
                   {message}
                 </h2>
 
@@ -336,7 +360,10 @@ export function PageTransition({
                   </div>
                 )}
 
-                <p id="loading-description" className="text-sm text-neutral-500">
+                <p
+                  id="loading-description"
+                  className="text-sm text-neutral-500"
+                >
                   Please wait while we prepare your content
                 </p>
               </div>

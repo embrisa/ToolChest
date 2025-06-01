@@ -27,42 +27,37 @@ export function ToolCard({
       case "base64":
         return {
           hoverShadow: "hover:shadow-[0_8px_24px_rgb(14_165_233_/_0.15)]",
-          hoverBorder: "hover:border-brand-200 dark:hover:border-brand-700",
+          hoverBorder: "hover:border-brand-200",
           iconBg: "bg-gradient-to-br from-brand-500 to-brand-600",
-          titleHover:
-            "group-hover:text-brand-600 dark:group-hover:text-brand-400",
+          titleHover: "group-hover:text-brand-600",
         };
       case "hash-generator":
         return {
           hoverShadow: "hover:shadow-[0_8px_24px_rgb(217_70_239_/_0.15)]",
-          hoverBorder: "hover:border-accent-200 dark:hover:border-accent-700",
+          hoverBorder: "hover:border-accent-200",
           iconBg: "bg-gradient-to-br from-accent-500 to-accent-600",
-          titleHover:
-            "group-hover:text-accent-600 dark:group-hover:text-accent-400",
+          titleHover: "group-hover:text-accent-600",
         };
       case "favicon-generator":
         return {
           hoverShadow: "hover:shadow-[0_8px_24px_rgb(34_197_94_/_0.15)]",
-          hoverBorder: "hover:border-success-200 dark:hover:border-success-700",
+          hoverBorder: "hover:border-success-200",
           iconBg: "bg-gradient-to-br from-success-500 to-success-600",
-          titleHover:
-            "group-hover:text-success-600 dark:group-hover:text-success-400",
+          titleHover: "group-hover:text-success-600",
         };
       case "markdown-to-pdf":
         return {
           hoverShadow: "hover:shadow-[0_8px_24px_rgb(245_158_11_/_0.15)]",
-          hoverBorder: "hover:border-warning-200 dark:hover:border-warning-700",
+          hoverBorder: "hover:border-warning-200",
           iconBg: "bg-gradient-to-br from-warning-500 to-warning-600",
-          titleHover:
-            "group-hover:text-warning-600 dark:group-hover:text-warning-400",
+          titleHover: "group-hover:text-warning-600",
         };
       default:
         return {
           hoverShadow: "hover:shadow-[0_8px_24px_rgb(14_165_233_/_0.15)]",
-          hoverBorder: "hover:border-brand-200 dark:hover:border-brand-700",
+          hoverBorder: "hover:border-brand-200",
           iconBg: "bg-gradient-to-br from-brand-500 to-brand-600",
-          titleHover:
-            "group-hover:text-brand-600 dark:group-hover:text-brand-400",
+          titleHover: "group-hover:text-brand-600",
         };
     }
   };
@@ -73,12 +68,11 @@ export function ToolCard({
     <Card
       className={cn(
         "group transition-all duration-300 cursor-pointer h-full",
-        "border-neutral-200 dark:border-neutral-800",
-        "bg-white dark:bg-neutral-900",
+        "border-neutral-200 bg-neutral-50",
         "shadow-soft hover:shadow-large",
         "hover:scale-[1.02] hover:-translate-y-1",
-        "focus-within:ring-2 focus-within:ring-brand-500/20 focus-within:ring-offset-2",
-        "dark:focus-within:ring-offset-neutral-900",
+        "focus-within:ring-2 focus-within:ring-brand-500 focus-within:ring-offset-2",
+        "min-h-[240px]", // Generous minimum height for consistency
         toolStyling.hoverShadow,
         toolStyling.hoverBorder,
         className,
@@ -91,12 +85,12 @@ export function ToolCard({
         className="block h-full focus:outline-none"
         aria-describedby={`tool-description-${tool.id}`}
       >
-        <CardHeader className="pb-4">
+        <CardHeader className="pb-6">
           <CardTitle
             as="h3"
             className={cn(
-              "text-title text-lg font-semibold",
-              "text-neutral-900 dark:text-neutral-100",
+              "text-xl font-semibold",
+              "text-primary",
               "transition-all duration-200",
               toolStyling.titleHover,
             )}
@@ -106,7 +100,7 @@ export function ToolCard({
                 <span
                   className={cn(
                     tool.iconClass,
-                    "text-xl flex-shrink-0",
+                    "text-2xl flex-shrink-0",
                     "transition-transform duration-200 group-hover:scale-110",
                   )}
                   aria-hidden="true"
@@ -114,8 +108,8 @@ export function ToolCard({
               ) : (
                 <div
                   className={cn(
-                    "w-12 h-12 rounded-xl flex items-center justify-center",
-                    "text-white font-semibold text-lg flex-shrink-0",
+                    "w-14 h-14 rounded-xl flex items-center justify-center",
+                    "text-white font-semibold text-xl flex-shrink-0",
                     "transition-transform duration-200 group-hover:scale-110",
                     toolStyling.iconBg,
                   )}
@@ -124,19 +118,16 @@ export function ToolCard({
                   {tool.name.charAt(0).toUpperCase()}
                 </div>
               )}
-              <span className="text-balance">{tool.name}</span>
+              <span className="text-balance leading-tight">{tool.name}</span>
             </div>
           </CardTitle>
         </CardHeader>
 
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-6">
           {tool.description && (
             <p
               id={`tool-description-${tool.id}`}
-              className={cn(
-                "text-body text-neutral-600 dark:text-neutral-400",
-                "line-clamp-2 text-pretty",
-              )}
+              className="text-secondary text-lg line-clamp-2 text-pretty leading-relaxed"
             >
               {tool.description}
             </p>
@@ -144,7 +135,7 @@ export function ToolCard({
 
           {tool.tags && tool.tags.length > 0 && (
             <div
-              className="flex flex-wrap gap-2"
+              className="flex flex-wrap gap-3"
               role="list"
               aria-label="Tool categories"
             >
@@ -153,10 +144,9 @@ export function ToolCard({
                   key={tag.id}
                   role="listitem"
                   className={cn(
-                    "inline-flex items-center px-2.5 py-1 rounded-lg",
-                    "text-xs font-medium",
-                    "bg-neutral-100 text-neutral-700",
-                    "dark:bg-neutral-800 dark:text-neutral-300",
+                    "inline-flex items-center px-3 py-1.5 rounded-lg",
+                    "text-sm font-medium",
+                    "bg-neutral-100 text-tertiary",
                     "transition-colors duration-200",
                   )}
                   style={
@@ -175,10 +165,9 @@ export function ToolCard({
               {tool.tags.length > 3 && (
                 <span
                   className={cn(
-                    "inline-flex items-center px-2.5 py-1 rounded-lg",
-                    "text-xs font-medium",
-                    "bg-neutral-100 text-neutral-500",
-                    "dark:bg-neutral-800 dark:text-neutral-400",
+                    "inline-flex items-center px-3 py-1.5 rounded-lg",
+                    "text-sm font-medium",
+                    "bg-neutral-100 text-muted",
                   )}
                 >
                   +{tool.tags.length - 3} more
@@ -189,13 +178,10 @@ export function ToolCard({
 
           {showUsageCount && tool.usageCount !== undefined && (
             <div
-              className={cn(
-                "flex items-center gap-1.5 text-xs",
-                "text-neutral-500 dark:text-neutral-400",
-              )}
+              className={cn("flex items-center gap-2 text-sm", "text-muted")}
             >
               <svg
-                className="w-3.5 h-3.5"
+                className="w-4 h-4"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -219,16 +205,16 @@ export function ToolCard({
           )}
         </CardContent>
 
-        {/* Hover indicator */}
+        {/* Hover indicator with enhanced spacing */}
         <div
           className={cn(
-            "absolute top-4 right-4 opacity-0 group-hover:opacity-100",
+            "absolute top-6 right-6 opacity-0 group-hover:opacity-100",
             "transition-all duration-200 transform group-hover:scale-110",
           )}
           aria-hidden="true"
         >
           <svg
-            className="w-5 h-5 text-neutral-400 dark:text-neutral-500"
+            className="w-6 h-6 text-muted"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

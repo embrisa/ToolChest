@@ -98,11 +98,16 @@ export default function RootLayout({
       </head>
       <body className="flex flex-col min-h-screen bg-background text-foreground font-sans antialiased transition-colors duration-300">
         <WebVitals debug={process.env.NODE_ENV === "development"} />
+
+        {/* Animated Background */}
+        <div className="fixed inset-0 -z-10 bg-gradient-shift" aria-hidden="true" />
+
+        {/* Subtle noise texture overlay */}
+        <div className="fixed inset-0 -z-10 bg-noise opacity-20" aria-hidden="true" />
+
         <Header />
 
-        <main className="flex-grow relative">
-          {children}
-        </main>
+        <main className="flex-grow relative">{children}</main>
 
         <Footer />
       </body>

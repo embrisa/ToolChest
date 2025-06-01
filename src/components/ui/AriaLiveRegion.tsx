@@ -27,9 +27,10 @@ export function AriaLiveRegion({
       regionRef.current.textContent = announcement.message;
 
       // Enhanced timing based on message importance and length
-      const clearDelay = announcement.type === "assertive"
-        ? Math.max(4000, announcement.message.length * 50) // Longer for critical messages
-        : Math.max(3000, announcement.message.length * 40); // Standard timing
+      const clearDelay =
+        announcement.type === "assertive"
+          ? Math.max(4000, announcement.message.length * 50) // Longer for critical messages
+          : Math.max(3000, announcement.message.length * 40); // Standard timing
 
       // Clear the announcement after appropriate delay
       timeoutRef.current = setTimeout(() => {
@@ -54,7 +55,7 @@ export function AriaLiveRegion({
         "sr-only",
         // Enhanced positioning for better screen reader detection
         "absolute left-[-10000px] top-auto w-px h-px overflow-hidden",
-        className
+        className,
       )}
       role="status"
       aria-live={announcement?.type || "polite"}
@@ -71,17 +72,18 @@ export function useAccessibilityAnnouncements() {
   const announceToScreenReader = (
     message: string,
     type: A11yAnnouncementType = "polite",
-    priority: "low" | "medium" | "high" = "medium"
+    priority: "low" | "medium" | "high" = "medium",
   ): A11yAnnouncement => {
     // Enhanced message formatting for better screen reader experience
-    const formattedMessage = message.trim().replace(/\s+/g, ' ');
+    const formattedMessage = message.trim().replace(/\s+/g, " ");
 
     // Ensure proper punctuation for natural speech rhythm
-    const finalMessage = formattedMessage.endsWith('.') ||
-      formattedMessage.endsWith('!') ||
-      formattedMessage.endsWith('?')
-      ? formattedMessage
-      : `${formattedMessage}.`;
+    const finalMessage =
+      formattedMessage.endsWith(".") ||
+      formattedMessage.endsWith("!") ||
+      formattedMessage.endsWith("?")
+        ? formattedMessage
+        : `${formattedMessage}.`;
 
     return {
       message: finalMessage,
@@ -100,7 +102,8 @@ export function useAccessibilityAnnouncements() {
     announceToScreenReader(`Warning: ${message}`, "polite", "medium");
 
   const announceProgress = (message: string, progress?: number) => {
-    const progressText = progress !== undefined ? ` ${Math.round(progress)}% complete` : '';
+    const progressText =
+      progress !== undefined ? ` ${Math.round(progress)}% complete` : "";
     return announceToScreenReader(`${message}${progressText}`, "polite", "low");
   };
 
@@ -109,6 +112,6 @@ export function useAccessibilityAnnouncements() {
     announceSuccess,
     announceError,
     announceWarning,
-    announceProgress
+    announceProgress,
   };
 }

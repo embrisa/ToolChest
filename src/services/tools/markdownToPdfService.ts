@@ -995,8 +995,9 @@ export class MarkdownToPdfService {
                 color: ${colors.text};
             }
             
-            ${syntaxHighlighting?.lineNumbers
-        ? `
+            ${
+              syntaxHighlighting?.lineNumbers
+                ? `
             .pdf-code-block .hljs {
                 counter-reset: line-numbering;
             }
@@ -1018,8 +1019,8 @@ export class MarkdownToPdfService {
                 user-select: none;
             }
             `
-        : ""
-      }
+                : ""
+            }
             
             /* Enhanced strikethrough support (GFM) */
             .pdf-strikethrough {

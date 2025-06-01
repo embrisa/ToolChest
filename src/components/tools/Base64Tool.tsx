@@ -9,6 +9,10 @@ import {
   ProgressIndicator,
   AriaLiveRegion,
   useAccessibilityAnnouncements,
+  Alert,
+  AlertList,
+  Loading,
+  TextareaLoadingWrapper,
 } from "@/components/ui";
 import { Base64Service } from "@/services/tools/base64Service";
 import {
@@ -42,10 +46,24 @@ export function Base64Tool() {
 
   const { announceToScreenReader } = useAccessibilityAnnouncements();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const stateRef = useRef(state);
+  const lastProcessedInputRef = useRef<{ inputType: string; textInput: string; fileInput: File | null }>({
+    inputType: "",
+    textInput: "",
+    fileInput: null,
+  });
+
+  // Keep stateRef current
+  useEffect(() => {
+    stateRef.current = state;
+  }, [state]);
 
   // Process Base64 operation with enhanced error handling and progress
-  const processBase64 = useCallback(async () => {
-    if (state.inputType === "text" && !state.textInput.trim()) {
+  const processBase64 = useCallback(async (shouldTrackUsage = true) => {
+    // Get current state values to avoid stale closures
+    const currentState = stateRef.current;
+
+    if (currentState.inputType === "text" && !currentState.textInput.trim()) {
       setState((prev) => ({
         ...prev,
         result: null,
@@ -57,7 +75,7 @@ export function Base64Tool() {
       return;
     }
 
-    if (state.inputType === "file" && !state.fileInput) {
+    if (currentState.inputType === "file" && !currentState.fileInput) {
       setState((prev) => ({
         ...prev,
         result: null,
@@ -70,8 +88,8 @@ export function Base64Tool() {
     }
 
     // Validate input before processing
-    if (state.inputType === "file" && state.fileInput) {
-      const validation = Base64Service.validateFile(state.fileInput);
+    if (currentState.inputType === "file" && currentState.fileInput) {
+      const validation = Base64Service.validateFile(currentState.fileInput);
       if (!validation.isValid) {
         setState((prev) => ({
           ...prev,
@@ -100,21 +118,21 @@ export function Base64Tool() {
 
     // Announce start of processing to screen readers
     setAnnouncement(
-      announceToScreenReader(`Starting ${state.mode} operation`, "polite"),
+      announceToScreenReader(`Starting ${currentState.mode} operation`, "polite"),
     );
 
     try {
       const input =
-        state.inputType === "text" ? state.textInput : state.fileInput!;
+        currentState.inputType === "text" ? currentState.textInput : currentState.fileInput!;
       const inputSize =
-        state.inputType === "text"
-          ? state.textInput.length
-          : state.fileInput!.size;
+        currentState.inputType === "text"
+          ? currentState.textInput.length
+          : currentState.fileInput!.size;
 
-      const result: Base64Result = await Base64Service[state.mode]({
-        mode: state.mode,
-        variant: state.variant,
-        inputType: state.inputType,
+      const result: Base64Result = await Base64Service[currentState.mode]({
+        mode: currentState.mode,
+        variant: currentState.variant,
+        inputType: currentState.inputType,
         input,
         onProgress: (progress) => {
           setState((prev) => ({ ...prev, progress }));
@@ -130,31 +148,33 @@ export function Base64Tool() {
         progress: null,
       }));
 
-      // Track usage analytics (privacy-compliant)
-      Base64Service.trackUsage({
-        operation: state.mode,
-        inputType: state.inputType,
-        variant: state.variant,
-        inputSize,
-        outputSize: result.success ? result.data?.length || 0 : 0,
-        processingTime: result.processingTime || 0,
-        success: result.success,
-        clientSide: !result.serverSide,
-        error: result.success ? undefined : result.error,
-      });
+      // Track usage analytics only when explicitly requested (privacy-compliant)
+      if (shouldTrackUsage && result.success && inputSize > 0) {
+        Base64Service.trackUsage({
+          operation: currentState.mode,
+          inputType: currentState.inputType,
+          variant: currentState.variant,
+          inputSize,
+          outputSize: result.success ? result.data?.length || 0 : 0,
+          processingTime: result.processingTime || 0,
+          success: result.success,
+          clientSide: !result.serverSide,
+          error: result.success ? undefined : result.error,
+        });
+      }
 
       // Announce completion
       if (result.success) {
         setAnnouncement(
           announceToScreenReader(
-            `${state.mode} operation completed successfully`,
+            `${currentState.mode} operation completed successfully`,
             "polite",
           ),
         );
       } else {
         setAnnouncement(
           announceToScreenReader(
-            `${state.mode} operation failed: ${result.error}`,
+            `${currentState.mode} operation failed: ${result.error}`,
             "assertive",
           ),
         );
@@ -178,25 +198,67 @@ export function Base64Tool() {
       );
     }
   }, [
-    state.mode,
-    state.variant,
-    state.inputType,
-    state.textInput,
-    state.fileInput,
+    // Use a ref for state to avoid recreating this function on every state change
+    // This prevents the infinite loop since the callback won't change
     announceToScreenReader,
   ]);
 
+  // Manual processing function for explicit user actions
+  const manualProcess = useCallback(() => {
+    // Clear the last processed input to allow reprocessing
+    lastProcessedInputRef.current = {
+      inputType: "",
+      textInput: "",
+      fileInput: null,
+    };
+    processBase64(true); // Track usage for manual processing
+  }, [processBase64]);
+
+  // Clear last processed input when mode or variant changes
+  useEffect(() => {
+    lastProcessedInputRef.current = {
+      inputType: "",
+      textInput: "",
+      fileInput: null,
+    };
+  }, [state.mode, state.variant]);
+
   // Auto-process when inputs change (with debouncing for text)
   useEffect(() => {
-    if (state.inputType === "text") {
-      const timer = setTimeout(() => {
-        processBase64();
-      }, 300); // 300ms debounce
-      return () => clearTimeout(timer);
-    } else {
-      processBase64();
+    // Check if input has actually changed and we're not already processing
+    const currentInput = {
+      inputType: state.inputType,
+      textInput: state.textInput,
+      fileInput: state.fileInput,
+    };
+
+    const lastProcessed = lastProcessedInputRef.current;
+    const hasInputChanged =
+      currentInput.inputType !== lastProcessed.inputType ||
+      currentInput.textInput !== lastProcessed.textInput ||
+      currentInput.fileInput !== lastProcessed.fileInput;
+
+    // Don't process if input hasn't changed or if already processing
+    if (!hasInputChanged || state.isProcessing) {
+      return;
     }
-  }, [processBase64, state.inputType]);
+
+    if (state.inputType === "text" && state.textInput.trim()) {
+      // Process immediately for instant feedback
+      lastProcessedInputRef.current = { ...currentInput };
+      processBase64(false); // Don't track usage for auto-processing
+    } else if (state.inputType === "file" && state.fileInput) {
+      // Process immediately for files, but update the ref first
+      lastProcessedInputRef.current = { ...currentInput };
+      processBase64(false); // Don't track usage for auto-processing
+    }
+  }, [
+    // Only depend on the actual input values, not the processing function
+    state.inputType,
+    state.textInput,
+    state.fileInput,
+    state.isProcessing, // Include this to prevent processing when already processing
+  ]);
 
   // Enhanced file selection with validation
   const handleFileSelect = useCallback(
@@ -330,31 +392,33 @@ export function Base64Tool() {
   }, [announceToScreenReader]);
 
   return (
-    <div className="space-y-8">
+    <div className="container-wide space-y-12">
       {/* ARIA live region for screen reader announcements */}
       <AriaLiveRegion announcement={announcement} />
 
       {/* Mode and Variant Selection */}
       <Card variant="elevated" className="tool-card-base64">
-        <CardHeader>
-          <div className="flex items-center gap-3 mb-2">
-            <div className="tool-icon tool-icon-base64">B64</div>
+        <CardHeader className="pb-8">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="tool-icon tool-icon-base64 h-14 w-14 rounded-2xl bg-gradient-to-br from-brand-100 to-brand-200 dark:from-brand-900/30 dark:to-brand-800/30 flex items-center justify-center">
+              <span className="text-lg font-bold text-brand-700 dark:text-brand-300">B64</span>
+            </div>
             <div>
-              <h2 className="text-title text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+              <h2 className="text-title text-2xl font-semibold text-foreground mb-2">
                 Base64 Operation Settings
               </h2>
-              <p className="text-body text-neutral-600 dark:text-neutral-400">
+              <p className="text-body text-foreground-secondary">
                 Choose your encoding/decoding preferences
               </p>
             </div>
           </div>
         </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <CardContent className="pt-0">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Mode Selection */}
-            <div className="space-y-3">
-              <label className="form-label">Operation Mode</label>
-              <div className="flex gap-2">
+            <div className="space-y-4">
+              <label className="text-body font-medium text-foreground">Operation Mode</label>
+              <div className="flex gap-3">
                 <Button
                   variant={state.mode === "encode" ? "primary" : "secondary"}
                   size="sm"
@@ -366,7 +430,7 @@ export function Base64Tool() {
                     }))
                   }
                   aria-pressed={state.mode === "encode"}
-                  className="flex-1"
+                  className="flex-1 h-12"
                 >
                   Encode
                 </Button>
@@ -381,7 +445,7 @@ export function Base64Tool() {
                     }))
                   }
                   aria-pressed={state.mode === "decode"}
-                  className="flex-1"
+                  className="flex-1 h-12"
                 >
                   Decode
                 </Button>
@@ -389,9 +453,9 @@ export function Base64Tool() {
             </div>
 
             {/* Input Type Selection */}
-            <div className="space-y-3">
-              <label className="form-label">Input Type</label>
-              <div className="flex gap-2">
+            <div className="space-y-4">
+              <label className="text-body font-medium text-foreground">Input Type</label>
+              <div className="flex gap-3">
                 <Button
                   variant={state.inputType === "text" ? "primary" : "secondary"}
                   size="sm"
@@ -404,7 +468,7 @@ export function Base64Tool() {
                     }))
                   }
                   aria-pressed={state.inputType === "text"}
-                  className="flex-1"
+                  className="flex-1 h-12"
                 >
                   Text
                 </Button>
@@ -420,7 +484,7 @@ export function Base64Tool() {
                     }))
                   }
                   aria-pressed={state.inputType === "file"}
-                  className="flex-1"
+                  className="flex-1 h-12"
                 >
                   File
                 </Button>
@@ -428,9 +492,9 @@ export function Base64Tool() {
             </div>
 
             {/* Variant Selection */}
-            <div className="space-y-3">
-              <label className="form-label">Base64 Variant</label>
-              <div className="flex gap-2">
+            <div className="space-y-4">
+              <label className="text-body font-medium text-foreground">Base64 Variant</label>
+              <div className="flex gap-3">
                 <Button
                   variant={
                     state.variant === "standard" ? "primary" : "secondary"
@@ -444,7 +508,7 @@ export function Base64Tool() {
                     }))
                   }
                   aria-pressed={state.variant === "standard"}
-                  className="flex-1"
+                  className="flex-1 h-12"
                   title="Standard Base64 encoding with +, /, and = characters"
                 >
                   Standard
@@ -462,7 +526,7 @@ export function Base64Tool() {
                     }))
                   }
                   aria-pressed={state.variant === "url-safe"}
-                  className="flex-1"
+                  className="flex-1 h-12"
                   title="URL-safe Base64 encoding with -, _, and no padding"
                 >
                   URL-Safe
@@ -475,21 +539,21 @@ export function Base64Tool() {
 
       {/* Input Section */}
       <Card variant="default">
-        <CardHeader>
-          <h2 className="text-title text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+        <CardHeader className="pb-8">
+          <h2 className="text-title text-xl font-semibold text-foreground mb-2">
             {state.mode === "encode"
               ? "Input to Encode"
               : "Base64 Data to Decode"}
           </h2>
-          <p className="text-body text-neutral-600 dark:text-neutral-400">
+          <p className="text-body text-foreground-secondary">
             {state.inputType === "text"
               ? `Enter ${state.mode === "encode" ? "text" : "Base64 data"} below`
               : `Upload a file to ${state.mode}`}
           </p>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-0">
           {state.inputType === "text" ? (
-            <div className="space-y-4">
+            <div className="space-y-6">
               <textarea
                 value={state.textInput}
                 onChange={(e) =>
@@ -505,7 +569,7 @@ export function Base64Tool() {
                     : "Enter Base64 data to decode..."
                 }
                 className={cn(
-                  "input-field h-32 resize-vertical text-code",
+                  "input-field h-40 resize-vertical text-code",
                   "placeholder:text-neutral-400 dark:placeholder:text-neutral-500",
                   state.isProcessing && "opacity-50 cursor-not-allowed",
                 )}
@@ -517,18 +581,18 @@ export function Base64Tool() {
                 disabled={state.isProcessing}
               />
               {state.textInput && (
-                <div className="text-sm text-neutral-500 dark:text-neutral-400">
+                <div className="text-sm text-foreground-secondary">
                   Input length: {state.textInput.length.toLocaleString()}{" "}
                   characters
                 </div>
               )}
             </div>
           ) : (
-            <div className="space-y-6">
+            <div className="space-y-8">
               {/* File Upload Area */}
               <div
                 className={cn(
-                  "relative border-2 border-dashed rounded-2xl p-8 text-center",
+                  "relative border-2 border-dashed rounded-2xl p-12 text-center",
                   "transition-all duration-300 group",
                   dragActive
                     ? "border-brand-400 bg-brand-50 dark:border-brand-500 dark:bg-brand-950/20"
@@ -551,17 +615,17 @@ export function Base64Tool() {
                   disabled={state.isProcessing}
                 />
 
-                <div className="space-y-4">
+                <div className="space-y-6">
                   <div
                     className={cn(
-                      "mx-auto h-16 w-16 rounded-full flex items-center justify-center",
+                      "mx-auto h-20 w-20 rounded-full flex items-center justify-center",
                       "bg-gradient-to-br from-brand-100 to-brand-200",
                       "dark:from-brand-900/30 dark:to-brand-800/30",
                       "transition-transform duration-200 group-hover:scale-110",
                     )}
                   >
                     <svg
-                      className="h-8 w-8 text-brand-600 dark:text-brand-400"
+                      className="h-10 w-10 text-brand-600 dark:text-brand-400"
                       stroke="currentColor"
                       fill="none"
                       viewBox="0 0 48 48"
@@ -575,13 +639,13 @@ export function Base64Tool() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-body text-neutral-600 dark:text-neutral-400">
+                    <p className="text-body text-foreground-secondary mb-2">
                       <span className="font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 cursor-pointer">
                         Click to upload
                       </span>{" "}
                       or drag and drop
                     </p>
-                    <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+                    <p className="text-sm text-foreground-tertiary">
                       Maximum file size: 10MB
                     </p>
                   </div>
@@ -591,20 +655,20 @@ export function Base64Tool() {
               {/* Selected File Info */}
               {state.fileInput && (
                 <div
-                  className={cn("surface rounded-xl p-4 animate-fade-in-up")}
+                  className={cn("bg-background-tertiary rounded-2xl p-6 animate-fade-in-up border border-border-secondary")}
                 >
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-6">
                       <div className="flex-shrink-0">
                         <div
                           className={cn(
-                            "h-12 w-12 rounded-xl flex items-center justify-center",
+                            "h-16 w-16 rounded-2xl flex items-center justify-center",
                             "bg-gradient-to-br from-neutral-100 to-neutral-200",
                             "dark:from-neutral-800 dark:to-neutral-700",
                           )}
                         >
                           <svg
-                            className="h-6 w-6 text-neutral-600 dark:text-neutral-400"
+                            className="h-8 w-8 text-neutral-600 dark:text-neutral-400"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -619,10 +683,10 @@ export function Base64Tool() {
                         </div>
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="text-body font-medium text-neutral-900 dark:text-neutral-100 truncate">
+                        <p className="text-body font-medium text-foreground truncate mb-1">
                           {state.fileInput.name}
                         </p>
-                        <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                        <p className="text-sm text-foreground-secondary">
                           {(state.fileInput.size / 1024).toFixed(1)} KB
                           {state.fileInput.type && ` • ${state.fileInput.type}`}
                         </p>
@@ -634,6 +698,7 @@ export function Base64Tool() {
                       onClick={handleClearFile}
                       aria-label="Remove selected file"
                       disabled={state.isProcessing}
+                      className="h-10"
                     >
                       Remove
                     </Button>
@@ -645,81 +710,24 @@ export function Base64Tool() {
 
           {/* Validation Errors */}
           {state.validationErrors.length > 0 && (
-            <div
-              className={cn(
-                "mt-6 p-4 rounded-xl border",
-                "bg-error-50 border-error-200 dark:bg-error-950/20 dark:border-error-800",
-                "animate-fade-in-up",
-              )}
+            <Alert
+              variant="error"
+              title={`Validation Error${state.validationErrors.length > 1 ? "s" : ""}`}
+              className="mt-8"
             >
-              <div className="flex gap-3">
-                <div className="flex-shrink-0">
-                  <svg
-                    className="h-5 w-5 text-error-500"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-body font-semibold text-error-800 dark:text-error-200">
-                    Validation Error
-                    {state.validationErrors.length > 1 ? "s" : ""}
-                  </h3>
-                  <div className="mt-2 text-body text-error-700 dark:text-error-300">
-                    <ul className="list-disc list-inside space-y-1">
-                      {state.validationErrors.map((error, index) => (
-                        <li key={index}>{error.message}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
+              <AlertList items={state.validationErrors.map(error => error.message)} />
+            </Alert>
           )}
 
           {/* Warnings */}
           {state.warnings.length > 0 && (
-            <div
-              className={cn(
-                "mt-6 p-4 rounded-xl border",
-                "bg-warning-50 border-warning-200 dark:bg-warning-950/20 dark:border-warning-800",
-                "animate-fade-in-up",
-              )}
+            <Alert
+              variant="warning"
+              title={`Warning${state.warnings.length > 1 ? "s" : ""}`}
+              className="mt-8"
             >
-              <div className="flex gap-3">
-                <div className="flex-shrink-0">
-                  <svg
-                    className="h-5 w-5 text-warning-500"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-body font-semibold text-warning-800 dark:text-warning-200">
-                    Warning{state.warnings.length > 1 ? "s" : ""}
-                  </h3>
-                  <div className="mt-2 text-body text-warning-700 dark:text-warning-300">
-                    <ul className="list-disc list-inside space-y-1">
-                      {state.warnings.map((warning, index) => (
-                        <li key={index}>{warning}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
+              <AlertList items={state.warnings} />
+            </Alert>
           )}
         </CardContent>
       </Card>
@@ -727,16 +735,16 @@ export function Base64Tool() {
       {/* Progress Indicator */}
       {state.isProcessing && state.progress && (
         <Card variant="elevated" className="animate-fade-in-up">
-          <CardContent>
-            <div className="space-y-4">
+          <CardContent className="p-8">
+            <div className="space-y-6">
               <div className="flex items-center justify-between">
-                <span className="text-body font-medium text-neutral-700 dark:text-neutral-300">
+                <span className="text-body font-medium text-foreground">
                   {state.progress.stage === "reading" && "Reading file..."}
                   {state.progress.stage === "processing" &&
                     `${state.mode === "encode" ? "Encoding" : "Decoding"}...`}
                   {state.progress.stage === "complete" && "Complete!"}
                 </span>
-                <span className="text-body text-neutral-500 dark:text-neutral-400">
+                <span className="text-body text-foreground-secondary">
                   {state.progress.progress}%
                 </span>
               </div>
@@ -747,7 +755,7 @@ export function Base64Tool() {
               />
               {state.progress.estimatedTimeRemaining &&
                 state.progress.estimatedTimeRemaining > 1 && (
-                  <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                  <p className="text-sm text-foreground-secondary">
                     Estimated time remaining:{" "}
                     {state.progress.estimatedTimeRemaining}s
                   </p>
@@ -760,53 +768,26 @@ export function Base64Tool() {
       {/* Error Display */}
       {state.error && (
         <Card variant="default" className="animate-fade-in-up">
-          <CardContent>
-            <div
-              className={cn(
-                "p-4 rounded-xl border",
-                "bg-error-50 border-error-200 dark:bg-error-950/20 dark:border-error-800",
-              )}
-            >
-              <div className="flex gap-3">
-                <div className="flex-shrink-0">
-                  <svg
-                    className="h-5 w-5 text-error-500"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-body font-semibold text-error-800 dark:text-error-200">
-                    Operation Failed
-                  </h3>
-                  <div className="mt-2 text-body text-error-700 dark:text-error-300">
-                    {state.error}
-                  </div>
-                </div>
-              </div>
-            </div>
+          <CardContent className="p-8">
+            <Alert variant="error" title="Operation Failed">
+              {state.error}
+            </Alert>
           </CardContent>
         </Card>
       )}
 
       {/* Results Section */}
-      {state.result?.success && state.result.data && (
-        <Card variant="elevated" className="animate-fade-in-up">
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <div>
-                <h2 className="text-title text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-                  {state.mode === "encode"
-                    ? "Encoded Result"
-                    : "Decoded Result"}
-                </h2>
-                <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400 mt-2">
+      <Card variant="elevated" className="animate-fade-in-up">
+        <CardHeader className="pb-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-title text-xl font-semibold text-foreground mb-3">
+                {state.mode === "encode"
+                  ? "Encoded Result"
+                  : "Decoded Result"}
+              </h2>
+              {state.result?.success && state.result.data ? (
+                <div className="flex flex-wrap items-center gap-6 text-sm text-foreground-secondary">
                   {state.result.originalSize && (
                     <span>
                       Input: {state.result.originalSize.toLocaleString()} bytes
@@ -817,13 +798,11 @@ export function Base64Tool() {
                       Output: {state.result.outputSize.toLocaleString()} bytes
                     </span>
                   )}
-                  {state.result.processingTime && (
-                    <span>Time: {state.result.processingTime}ms</span>
-                  )}
+
                   {state.result.serverSide && (
                     <span
                       className={cn(
-                        "inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium",
+                        "inline-flex items-center px-3 py-1 rounded-lg text-xs font-medium",
                         "bg-brand-100 text-brand-800 dark:bg-brand-900/30 dark:text-brand-200",
                       )}
                     >
@@ -831,101 +810,96 @@ export function Base64Tool() {
                     </span>
                   )}
                 </div>
-              </div>
-              <div className="flex gap-2">
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={handleCopy}
-                  disabled={!state.result.data}
-                  aria-label="Copy result to clipboard"
-                  className={
-                    copySuccess?.success
-                      ? "bg-success-50 text-success-700 dark:bg-success-950/20 dark:text-success-300"
-                      : ""
-                  }
-                >
-                  {copySuccess?.success ? "Copied!" : "Copy"}
-                </Button>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={handleDownload}
-                  disabled={!state.result.data}
-                  aria-label="Download result as file"
-                >
-                  Download
-                </Button>
-              </div>
+              ) : state.isProcessing ? (
+                <div className="flex items-center gap-3 text-body text-foreground-secondary">
+                  <Loading size="sm" variant="dots" />
+                  <span>Processing your input...</span>
+                </div>
+              ) : (
+                <p className="text-body text-foreground-secondary">
+                  {`Result will appear here after ${state.mode === "encode" ? "encoding" : "decoding"}`}
+                </p>
+              )}
             </div>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <textarea
-                value={state.result.data}
-                readOnly
+            <div className="flex gap-3">
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={handleCopy}
+                disabled={state.isProcessing || !state.result?.success || !state.result.data}
+                aria-label="Copy result to clipboard"
                 className={cn(
-                  "input-field h-32 resize-vertical text-code bg-neutral-50 dark:bg-neutral-800",
-                  "cursor-text select-all",
+                  "h-10",
+                  copySuccess?.success
+                    ? "bg-success-100 text-success-800 dark:bg-success-950/40 dark:text-success-200"
+                    : ""
+                )}
+                isLoading={state.isProcessing}
+              >
+                {copySuccess?.success ? "Copied!" : "Copy"}
+              </Button>
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={handleDownload}
+                disabled={state.isProcessing || !state.result?.success || !state.result.data}
+                aria-label="Download result as file"
+                className="h-10"
+                isLoading={state.isProcessing}
+              >
+                Download
+              </Button>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent className="pt-0">
+          <div className="space-y-6">
+            <TextareaLoadingWrapper
+              isLoading={state.isProcessing}
+              loadingText={`${state.mode === "encode" ? "Encoding" : "Decoding"}...`}
+              minDisplayTime={800}
+              aria-label={`${state.mode} operation in progress`}
+            >
+              <textarea
+                value={state.result?.success && state.result.data ? state.result.data : ""}
+                readOnly
+                placeholder={
+                  state.mode === "encode"
+                    ? "Encoded data will appear here..."
+                    : "Decoded data will appear here..."
+                }
+                className={cn(
+                  "input-field h-40 resize-vertical text-code bg-background-tertiary",
+                  state.result?.success && state.result.data
+                    ? "cursor-text select-all"
+                    : "cursor-default",
+                  !state.result?.success || !state.result.data
+                    ? "placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
+                    : ""
                 )}
                 aria-label={`${state.mode} result`}
               />
+            </TextareaLoadingWrapper>
 
-              {/* Copy Success Feedback */}
-              {copySuccess && (
-                <div
-                  className={cn(
-                    "p-3 rounded-xl text-body animate-fade-in",
-                    copySuccess.success
-                      ? "bg-success-50 text-success-700 border border-success-200 dark:bg-success-950/20 dark:text-success-300 dark:border-success-800"
-                      : "bg-error-50 text-error-700 border border-error-200 dark:bg-error-950/20 dark:text-error-300 dark:border-error-800",
-                  )}
-                >
-                  {copySuccess.message}
-                </div>
-              )}
+            {/* Copy Success Feedback */}
+            {copySuccess && (
+              <Alert
+                variant={copySuccess.success ? "success" : "error"}
+                className="animate-fade-in"
+              >
+                {copySuccess.message}
+              </Alert>
+            )}
 
-              {/* Result Warnings */}
-              {state.result.warnings && state.result.warnings.length > 0 && (
-                <div
-                  className={cn(
-                    "p-4 rounded-xl border",
-                    "bg-warning-50 border-warning-200 dark:bg-warning-950/20 dark:border-warning-800",
-                  )}
-                >
-                  <div className="flex gap-3">
-                    <div className="flex-shrink-0">
-                      <svg
-                        className="h-5 w-5 text-warning-500"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="text-body font-semibold text-warning-800 dark:text-warning-200">
-                        Processing Notes
-                      </h3>
-                      <div className="mt-2 text-body text-warning-700 dark:text-warning-300">
-                        <ul className="list-disc list-inside space-y-1">
-                          {state.result.warnings.map((warning, index) => (
-                            <li key={index}>{warning}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </CardContent>
-        </Card>
-      )}
+            {/* Result Warnings */}
+            {state.result?.success && state.result.warnings && state.result.warnings.length > 0 && (
+              <Alert variant="warning" title="Processing Notes">
+                <AlertList items={state.result.warnings} />
+              </Alert>
+            )}
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
