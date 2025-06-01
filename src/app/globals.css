@@ -1,284 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ================================================================
-   DESIGN SYSTEM - Enhanced Apple-inspired professional theme
-   ================================================================ */
-
-:root {
-  /* Core Sand/Professional Palette - More neutral, serious tones */
-  --sand-50: #fef7ed;
-  --sand-100: #fdf2e3;
-  --sand-200: #f8e4c7;
-  --sand-300: #f0d0a0;
-  --sand-400: #e6bc7a;
-  --sand-500: #d4a665;
-  --sand-600: #bf934e;
-  --sand-700: #a67d3a;
-  --sand-800: #8b6b2a;
-
-  /* Complementary Professional Orange - Toned down */
-  --sunset-400: #e6824a;
-  --sunset-500: #d9732f;
-  --sunset-600: #c4641f;
-  --sunset-700: #ab5516;
-
-  /* Supporting Earth Tones - More muted */
-  --amber-300: #e6c547;
-  --amber-600: #c69806;
-
-  /* Professional Neutrals - Brighter for better contrast */
-  --neutral-50: #fefefe;
-  --neutral-100: #f8f8f7;
-  --neutral-200: #eeede9;
-  --neutral-300: #e0ddd6;
-  --neutral-400: #b8b3a8;
-  --neutral-500: #8a8478;
-  --neutral-600: #6b6459;
-  --neutral-700: #534f47;
-  --neutral-800: #3a362f;
-  --neutral-900: #2b2822;
-
-  /* Medium Brightness Dark Theme Colors */
-  --dark-900: #151310;
-  --dark-800: #201c18;
-  --dark-700: #332a22;
-
-  /* Apple-style Blue Accents - More professional */
-  --apple-blue: #0071e3;
-  --apple-blue-light: #4a9eff;
-  --apple-blue-dark: #0056b8;
-
-  /* State Colors */
-  --success: #30d158;
-  --warning: #ff9f0a;
-  --error: #ff453a;
-  --info: #64d2ff;
-
-  /* Typography scale */
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 1.875rem;
-  --font-size-4xl: 2.25rem;
-  --font-size-5xl: 3rem;
-  --font-size-6xl: 3.75rem;
-
-  /* Spacing scale */
-  --space-0-5: 0.125rem;
-  --space-1: 0.25rem;
-  --space-1-5: 0.375rem;
-  --space-2: 0.5rem;
-  --space-2-5: 0.625rem;
-  --space-3: 0.75rem;
-  --space-3-5: 0.875rem;
-  --space-4: 1rem;
-  --space-5: 1.25rem;
-  --space-6: 1.5rem;
-  --space-7: 1.75rem;
-  --space-8: 2rem;
-  --space-10: 2.5rem;
-  --space-12: 3rem;
-  --space-14: 3.5rem;
-  --space-16: 4rem;
-  --space-20: 5rem;
-
-  /* Border radius */
-  --radius-xs: 0.25rem;
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-  --radius-2xl: 1.5rem;
-  --radius-3xl: 2rem;
-  --radius-full: 9999px;
-
-  /* Focus ring */
-  --focus-ring: 0 0 0 3px rgba(0, 122, 255, 0.15);
-  --focus-ring-dark: 0 0 0 3px rgba(100, 210, 255, 0.2);
-
-  /* Glass morphism variables */
-  --glass-bg-light: rgba(254, 247, 237, 0.12);
-  --glass-bg-medium: rgba(254, 247, 237, 0.1);
-  --glass-bg-dark: rgba(51, 42, 33, 0.7);
-  --glass-border-light: rgba(254, 247, 237, 0.18);
-  --glass-border-medium: rgba(254, 247, 237, 0.15);
-  --glass-border-dark: rgba(240, 208, 160, 0.12);
-
-  /* Medium brightness cosmic background */
-  --spacey-bg:
-    radial-gradient(ellipse at 75% -10%,
-      rgba(0, 113, 227, 0.18) 0%,
-      transparent 60%),
-    radial-gradient(circle at 25% 90%,
-      rgba(111, 168, 230, 0.08) 0%,
-      transparent 50%),
-    radial-gradient(circle at 10% 80%,
-      rgba(230, 188, 122, 0.12) 0%,
-      transparent 40%),
-    radial-gradient(circle at 90% 40%,
-      rgba(230, 197, 71, 0.08) 0%,
-      transparent 45%),
-    radial-gradient(circle at 50% 70%,
-      rgba(166, 125, 58, 0.05) 0%,
-      transparent 35%),
-    linear-gradient(135deg, var(--dark-900) 0%, var(--dark-800) 100%);
-
-  --background: var(--dark-900);
-  --foreground: var(--neutral-100);
-}
-
-/* ================================================================
-   BASE STYLES
-   ================================================================ */
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-  font-family:
-    'Inter',
-    system-ui,
-    -apple-system,
-    sans-serif;
-  background: var(--spacey-bg);
-  color: var(--foreground);
-  min-height: 100vh;
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-/* ================================================================
-   ACCESSIBILITY IMPROVEMENTS
-   ================================================================ */
-
-/* Focus styles for better accessibility */
-*:focus-visible {
-  outline: 2px solid var(--apple-blue);
-  outline-offset: 2px;
-  border-radius: var(--radius-sm);
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+@layer base {
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #f1f3f4;
+    /* neutral-100 - darker but still maintains good contrast */
+    color: #202124;
+    /* neutral-700 - better contrast */
   }
-}
 
-/* High contrast mode support */
-@media (prefers-contrast: high) {
+  /* CSS Custom Properties for Semantic Colors */
   :root {
-    --neutral-100: #ffffff;
-    --neutral-900: #000000;
-    --apple-blue: #0066cc;
+    --background: 241 243 244;
+    /* neutral-100 - primary background */
+    --background-secondary: 232 234 237;
+    /* neutral-150 - secondary surfaces */
+    --background-tertiary: 248 249 250;
+    /* neutral-50 - elevated surfaces (cards) */
+    --foreground: 32 33 36;
+    /* neutral-700 - primary text */
+    --foreground-secondary: 95 99 104;
+    /* neutral-500 - secondary text */
+    --foreground-tertiary: 60 64 67;
+    /* neutral-600 - supporting text */
+    --border: 218 220 224;
+    /* neutral-200 - borders */
+    --border-secondary: 232 234 237;
+    /* neutral-150 - subtle borders */
+    --ring: 14 165 233;
+    /* brand-500 - focus rings */
   }
 }
 
-/* ================================================================
-   UTILITY CLASSES
-   ================================================================ */
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white;
+    @apply bg-brand-500 hover:bg-brand-600 rounded-lg shadow-lg transition-all duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2;
+  }
 
-.glass-card {
-  background: var(--glass-bg-dark);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 0.5px solid var(--glass-border-dark);
-  border-radius: var(--radius-lg);
-  box-shadow:
-    inset 0 1px 0 rgba(254, 247, 237, 0.05),
-    0 4px 16px rgba(0, 0, 0, 0.08);
-}
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-medium;
+    @apply bg-neutral-100 hover:bg-neutral-150 text-neutral-700 rounded-lg shadow transition-all duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2;
+  }
 
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-3) var(--space-6);
-  border: 0.5px solid rgba(240, 208, 160, 0.15);
-  border-radius: var(--radius-lg);
-  background: rgba(240, 208, 160, 0.1);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  color: var(--neutral-100);
-  font-size: var(--font-size-base);
-  font-weight: 500;
-  line-height: 1.5;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  outline: none;
-  box-shadow:
-    inset 0 1px 0 rgba(254, 247, 237, 0.05),
-    0 4px 16px rgba(0, 0, 0, 0.06);
-  letter-spacing: -0.01em;
-  min-height: 44px;
-}
+  .card {
+    @apply bg-neutral-50 rounded-lg shadow-soft border border-neutral-200 transition-all duration-200;
+  }
 
-.btn-primary:hover {
-  background: rgba(240, 208, 160, 0.14);
-  border-color: rgba(240, 208, 160, 0.2);
-  color: var(--neutral-50);
-  transform: translateY(-1px);
-  box-shadow:
-    inset 0 1px 0 rgba(254, 247, 237, 0.08),
-    0 6px 24px rgba(0, 0, 0, 0.08);
-}
+  .card-interactive {
+    @apply card hover:shadow-medium hover:scale-105 cursor-pointer;
+    @apply hover:bg-neutral-25 hover:border-neutral-250;
+  }
 
-.btn-primary:focus-visible {
-  box-shadow:
-    var(--focus-ring-dark),
-    inset 0 1px 0 rgba(254, 247, 237, 0.05),
-    0 4px 16px rgba(0, 0, 0, 0.06);
-}
+  .input-field {
+    @apply w-full px-4 py-3 text-sm bg-neutral-50 border border-neutral-200 rounded-lg;
+    @apply text-neutral-700 placeholder:text-neutral-400;
+    @apply focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500;
+    @apply focus:bg-neutral-25 transition-all duration-200;
+  }
 
-/* ================================================================
-   LINE CLAMP UTILITIES
-   ================================================================ */
+  /* Text Utilities with Improved Contrast */
+  .text-primary {
+    @apply text-neutral-700;
+    /* 9.2:1 contrast ratio */
+  }
 
-.line-clamp-1 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-}
+  .text-secondary {
+    @apply text-neutral-500;
+    /* 7.1:1 contrast ratio */
+  }
 
-.line-clamp-2 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
+  .text-tertiary {
+    @apply text-neutral-600;
+    /* 8.1:1 contrast ratio */
+  }
 
-.line-clamp-3 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  .text-muted {
+    @apply text-neutral-400;
+    /* 4.8:1 contrast ratio */
+  }
+
+  /* Dramatic Background Effects */
+  .bg-dramatic {
+    @apply bg-gradient-dramatic bg-[length:300%_300%] animate-gradient-shift;
+  }
+
+  .bg-epic {
+    @apply bg-gradient-epic bg-[length:200%_200%] animate-gradient-shift;
+  }
+
+  .bg-atmospheric {
+    background:
+      radial-gradient(circle at 20% 80%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(217, 70, 239, 0.12) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(34, 197, 94, 0.08) 0%, transparent 50%),
+      linear-gradient(135deg, rgba(0, 0, 0, 0.02) 0%, transparent 100%);
+  }
+
+  /* Enhanced Noise Patterns */
+  .noise-texture {
+    position: relative;
+  }
+
+  .noise-texture::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Container Classes with Enhanced Spacing */
+  .container-wide {
+    @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-12;
+  }
+
+  .container-narrow {
+    @apply max-w-4xl mx-auto px-6 sm:px-8 lg:px-12;
+  }
+
+  .container-text {
+    @apply max-w-3xl mx-auto px-6 sm:px-8;
+  }
+
+  /* Section Spacing Classes */
+  .section-spacing-sm {
+    @apply py-12 lg:py-16;
+  }
+
+  .section-spacing-md {
+    @apply py-16 lg:py-20;
+  }
+
+  .section-spacing-lg {
+    @apply py-20 lg:py-24;
+  }
+
+  .section-spacing-xl {
+    @apply py-24 lg:py-32;
+  }
 }

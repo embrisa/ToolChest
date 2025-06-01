@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
-import { server, features } from '@/lib/env';
+import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+import { server, features } from "@/lib/env";
 
 export async function GET() {
   try {
@@ -16,11 +16,11 @@ export async function GET() {
     ]);
 
     return NextResponse.json({
-      status: 'healthy',
+      status: "healthy",
       timestamp: new Date().toISOString(),
       environment: server.nodeEnv,
       database: {
-        status: 'connected',
+        status: "connected",
         responseTime: `${dbResponseTime}ms`,
         users: userCount,
         tools: toolCount,
@@ -37,22 +37,22 @@ export async function GET() {
         nodeEnv: server.nodeEnv,
         isDevelopment: server.isDevelopment,
       },
-      version: process.env.npm_package_version || '0.1.0',
+      version: process.env.npm_package_version || "0.1.0",
     });
   } catch (error) {
-    console.error('Health check failed:', error);
+    console.error("Health check failed:", error);
 
     return NextResponse.json(
       {
-        status: 'unhealthy',
+        status: "unhealthy",
         timestamp: new Date().toISOString(),
         environment: server.nodeEnv,
         database: {
-          status: 'disconnected',
+          status: "disconnected",
           error:
-            error instanceof Error ? error.message : 'Unknown database error',
+            error instanceof Error ? error.message : "Unknown database error",
         },
-        error: error instanceof Error ? error.message : 'Unknown error',
+        error: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 },
     );

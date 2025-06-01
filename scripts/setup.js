@@ -11,21 +11,21 @@
  * 5. Running initial health checks
  */
 
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require("fs");
+const path = require("path");
+const { execSync } = require("child_process");
 
 // Color codes for terminal output
 const colors = {
-  red: '\x1b[31m',
-  green: '\x1b[32m',
-  yellow: '\x1b[33m',
-  blue: '\x1b[34m',
-  magenta: '\x1b[35m',
-  cyan: '\x1b[36m',
-  white: '\x1b[37m',
-  reset: '\x1b[0m',
-  bold: '\x1b[1m',
+  red: "\x1b[31m",
+  green: "\x1b[32m",
+  yellow: "\x1b[33m",
+  blue: "\x1b[34m",
+  magenta: "\x1b[35m",
+  cyan: "\x1b[36m",
+  white: "\x1b[37m",
+  reset: "\x1b[0m",
+  bold: "\x1b[1m",
 };
 
 function log(message, color = colors.white) {
@@ -57,7 +57,7 @@ function logInfo(message) {
 function runCommand(command, description) {
   try {
     log(`   Running: ${command}`);
-    execSync(command, { stdio: 'inherit' });
+    execSync(command, { stdio: "inherit" });
     logSuccess(`${description} completed`);
     return true;
   } catch (error) {
@@ -87,118 +87,118 @@ async function main() {
   );
 
   // Step 1: Check if we're in the right directory
-  logStep(1, 'Verifying setup location');
+  logStep(1, "Verifying setup location");
 
-  if (!fileExists('package.json')) {
+  if (!fileExists("package.json")) {
     logError(
-      'package.json not found. Please run this script from the Next.js project root.',
+      "package.json not found. Please run this script from the Next.js project root.",
     );
     process.exit(1);
   }
 
-  const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-  if (packageJson.name !== 'nextjs') {
+  const packageJson = JSON.parse(fs.readFileSync("package.json", "utf8"));
+  if (packageJson.name !== "nextjs") {
     logError("This doesn't appear to be the Next.js ToolChest project.");
     process.exit(1);
   }
 
-  logSuccess('Project location verified');
+  logSuccess("Project location verified");
 
   // Step 2: Set up environment files
-  logStep(2, 'Setting up environment configuration');
+  logStep(2, "Setting up environment configuration");
 
-  if (!fileExists('.env.local')) {
-    if (fileExists('env.example')) {
-      copyFile('env.example', '.env.local');
+  if (!fileExists(".env.local")) {
+    if (fileExists("env.example")) {
+      copyFile("env.example", ".env.local");
       logWarning(
-        'Please update .env.local with your actual database URL and other configurations',
+        "Please update .env.local with your actual database URL and other configurations",
       );
     } else {
-      logError('env.example not found. Cannot create .env.local');
+      logError("env.example not found. Cannot create .env.local");
       process.exit(1);
     }
   } else {
-    logInfo('.env.local already exists, skipping copy');
+    logInfo(".env.local already exists, skipping copy");
   }
 
   // Step 3: Install dependencies
-  logStep(3, 'Installing dependencies');
+  logStep(3, "Installing dependencies");
 
-  if (!runCommand('npm install', 'Dependency installation')) {
+  if (!runCommand("npm install", "Dependency installation")) {
     logError(
-      'Failed to install dependencies. Please check your npm configuration.',
+      "Failed to install dependencies. Please check your npm configuration.",
     );
     process.exit(1);
   }
 
   // Step 4: Generate Prisma client
-  logStep(4, 'Setting up database client');
+  logStep(4, "Setting up database client");
 
-  if (!runCommand('npm run db:generate', 'Prisma client generation')) {
+  if (!runCommand("npm run db:generate", "Prisma client generation")) {
     logError(
-      'Failed to generate Prisma client. Please check your database configuration.',
+      "Failed to generate Prisma client. Please check your database configuration.",
     );
     process.exit(1);
   }
 
   // Step 5: Validate environment configuration
-  logStep(5, 'Validating environment configuration');
+  logStep(5, "Validating environment configuration");
 
   try {
-    execSync('npm run env:validate', { stdio: 'pipe' });
-    logSuccess('Environment configuration is valid');
+    execSync("npm run env:validate", { stdio: "pipe" });
+    logSuccess("Environment configuration is valid");
   } catch (error) {
-    logError('Environment validation failed');
+    logError("Environment validation failed");
     logInfo(
-      'Please check your .env.local file and ensure all required variables are set',
+      "Please check your .env.local file and ensure all required variables are set",
     );
-    logInfo('Refer to env.example for the complete list of required variables');
+    logInfo("Refer to env.example for the complete list of required variables");
 
     // Show the specific error
     const errorOutput = error.stdout ? error.stdout.toString() : error.message;
     log(`\n${colors.red}Error details:${colors.reset}`);
     log(errorOutput);
 
-    logInfo('\n📝 To fix this:');
-    logInfo('1. Open .env.local in your editor');
+    logInfo("\n📝 To fix this:");
+    logInfo("1. Open .env.local in your editor");
     logInfo(
-      '2. Update the DATABASE_URL with your PostgreSQL connection string',
+      "2. Update the DATABASE_URL with your PostgreSQL connection string",
     );
-    logInfo('3. Set any other required environment variables');
+    logInfo("3. Set any other required environment variables");
     logInfo('4. Run "npm run env:validate" to check your configuration');
 
     process.exit(1);
   }
 
   // Step 6: Test build process
-  logStep(6, 'Testing build process');
+  logStep(6, "Testing build process");
 
-  if (!runCommand('npm run type-check', 'TypeScript type checking')) {
-    logError('TypeScript type checking failed. Please fix type errors.');
+  if (!runCommand("npm run type-check", "TypeScript type checking")) {
+    logError("TypeScript type checking failed. Please fix type errors.");
     process.exit(1);
   }
 
   // Step 7: Run linting
-  logStep(7, 'Running code quality checks');
+  logStep(7, "Running code quality checks");
 
-  if (!runCommand('npm run lint', 'ESLint checking')) {
+  if (!runCommand("npm run lint", "ESLint checking")) {
     logWarning(
       'Linting issues found. You may want to run "npm run lint:fix" to auto-fix some issues.',
     );
   }
 
   // Step 8: Final health check (optional, only if server is running)
-  logStep(8, 'Final validation');
+  logStep(8, "Final validation");
 
   log(`\n${colors.bold}${colors.green}🎉 Setup Complete!${colors.reset}\n`);
 
-  logInfo('Next steps:');
-  logInfo('1. Update your .env.local file with the correct DATABASE_URL');
-  logInfo('2. Start the development server: npm run dev');
+  logInfo("Next steps:");
+  logInfo("1. Update your .env.local file with the correct DATABASE_URL");
+  logInfo("2. Start the development server: npm run dev");
   logInfo(
-    '3. Visit http://localhost:3000/api/health to verify everything is working',
+    "3. Visit http://localhost:3000/api/health to verify everything is working",
   );
-  logInfo('4. Start developing your Next.js ToolChest application!');
+  logInfo("4. Start developing your Next.js ToolChest application!");
 
   log(`\n${colors.bold}Useful commands:${colors.reset}`);
   log(

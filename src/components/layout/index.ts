@@ -1,12 +1,16 @@
-// Layout components will be exported from here
-// TODO: Add actual layout components as they are created
+/**
+ * Layout Components
+ * 
+ * Core layout components that provide the structure and navigation
+ * for the tool-chest application. These components follow our design
+ * philosophy of accessibility-first, mobile-responsive design with
+ * enhanced contrast and spacing.
+ */
 
-// Placeholder export to make this a valid module
-export const LAYOUT_COMPONENTS_PLACEHOLDER = 'layout-components';
+// Header component - Main navigation and branding
+export { Header } from "./Header";
+export type { HeaderProps } from "./Header";
 
-// Layout components
-export { Header } from './Header';
-export type { HeaderProps } from './Header';
-
-export { Footer } from './Footer';
-export type { FooterProps } from './Footer'; 
+// Footer component - Site footer with links and branding
+export { Footer } from "./Footer";
+export type { FooterProps } from "./Footer";

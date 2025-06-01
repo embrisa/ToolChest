@@ -1,2 +1,2 @@
 // Loading States & Suspense Types
-export * from './loading'; 
+export * from "./loading";

@@ -1,160 +1,93 @@
-# ToolChest - Web Tools Collection
+# tool-chest - Essential Computer Tools Collection
 
-A modern web application built with **Next.js 15** providing useful tools for developers and content creators. Features client-side processing for privacy and performance.
+A modern, privacy-focused collection of essential computer tools built with Next.js 14+. All processing happens client-side to ensure your data never leaves your browser.
 
-## ✨ Features
+## 🚀 Features
 
-### 🔧 Available Tools
-- **Base64 Encoder/Decoder** - Convert text and files to/from Base64 with URL-safe options
-- **Hash Generator** - Generate MD5, SHA-1, SHA-256, SHA-512 hashes for text and files
-- **Favicon Generator** - Create favicons in all standard sizes from any image
-- **Markdown to PDF** - Convert Markdown to professional PDFs with syntax highlighting
-
-### 🎯 Key Features
-- **Privacy-First**: All processing happens client-side when possible
-- **Accessibility**: WCAG 2.1 AA compliant throughout
-- **Performance**: Optimized for Core Web Vitals
+- **Privacy-First**: All tools run entirely in your browser
+- **Modern UI**: Built with Next.js 14+ and Tailwind CSS
+- **Accessibility**: WCAG 2.1 AA compliant
+- **Performance**: Optimized for speed and efficiency
 - **Mobile-Friendly**: Responsive design for all devices
-- **Admin Dashboard**: Simple token-based admin access for analytics
 
-## 🚀 Quick Start
+## 🛠️ Available Tools
+
+- **Base64 Encoder/Decoder**: Convert text to/from Base64 encoding
+- **Hash Generator**: Generate MD5, SHA-1, SHA-256, and other hashes
+- **Favicon Generator**: Create favicons from images or text
+- **Markdown to PDF**: Convert Markdown documents to PDF with custom styling
+
+## 🏃‍♂️ Quick Start
 
 ### Prerequisites
+
 - Node.js 18+ 
 - npm or yarn
-- PostgreSQL database (or SQLite for development)
 
 ### Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone [repository-url]
-   cd ToolChest
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Set up environment variables**
-   ```bash
-   cp env.example .env.local
-   # Edit .env.local with your configuration
-   ```
-
-4. **Set up database**
-   ```bash
-   npm run db:push
-   npm run db:generate
-   ```
-
-5. **Start development server**
-   ```bash
-   npm run dev
-   ```
-
-6. **Visit the application**
-   Open [http://localhost:3000](http://localhost:3000)
-
-## 🔧 Development
-
-### Available Scripts
-
 ```bash
-# Development
-npm run dev          # Start development server
-npm run build        # Build for production  
-npm run start        # Start production server
-
-# Database
-npm run db:generate  # Generate Prisma client
-npm run db:push      # Push schema to database
-npm run db:migrate   # Run migrations
-npm run db:studio    # Open Prisma Studio
-
-# Quality & Testing
-npm run lint         # Run ESLint
-npm run type-check   # Run TypeScript checks
-npm run test         # Run Jest tests
-npm run test:e2e     # Run Playwright E2E tests
-npm run validate     # Run all quality checks
-
-# Performance
-npm run analyze      # Analyze bundle size
-npm run validate:performance  # Run Lighthouse tests
+git clone https://github.com/your-username/tool-chest.git
+cd tool-chest
+npm install
 ```
 
-### Project Structure
+### Development
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view the application.
+
+### Production Build
+
+```bash
+npm run build
+npm start
+```
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+npm run test
+
+# Run E2E tests
+npm run test:e2e
+
+# Run accessibility tests
+npm run test:a11y
+```
+
+## 📁 Project Structure
 
 ```
 src/
 ├── app/                 # Next.js App Router pages
-│   ├── api/            # API routes
-│   ├── tools/          # Tool pages
-│   └── admin/          # Admin interface
-├── components/         # React components
-│   ├── ui/            # Reusable UI components
-│   ├── tools/         # Tool-specific components
-│   └── admin/         # Admin components
-├── services/          # Business logic services
-├── hooks/             # Custom React hooks
-├── types/             # TypeScript type definitions
-└── utils/             # Utility functions
+├── components/          # Reusable React components
+├── hooks/              # Custom React hooks
+├── lib/                # Utility libraries
+├── services/           # Business logic and API services
+├── types/              # TypeScript type definitions
+└── utils/              # Helper functions
 ```
-
-## 🔐 Admin Access
-
-The application includes a simple admin dashboard for analytics and management:
-
-1. Set `ADMIN_SECRET_TOKEN` in your environment variables
-2. Visit `/admin/dashboard` 
-3. Enter your secret token
-4. Access tools, tags, and analytics management
-
-## 🌐 Deployment
-
-### Railway (Recommended)
-
-1. **Connect your repository to Railway**
-2. **Set environment variables:**
-   ```bash
-   DATABASE_URL=postgresql://...
-   ADMIN_SECRET_TOKEN=your-secret-token
-   ```
-3. **Deploy automatically on git push**
-
-### Manual Deployment
-
-```bash
-# Build the application
-npm run build
-
-# Start production server
-npm run start
-```
-
-## 📊 Architecture
-
-- **Framework**: Next.js 15 with App Router
-- **Frontend**: React 19 + TypeScript + Tailwind CSS
-- **Database**: PostgreSQL with Prisma ORM
-- **State Management**: SWR for server state, React state for UI
-- **Testing**: Jest + React Testing Library + Playwright
-- **Performance**: Core Web Vitals optimized
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests: `npm run validate`
-5. Submit a pull request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## 📄 License
 
-MIT License - see LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
----
+## 🙏 Acknowledgments
 
-**Migration Complete**: Successfully migrated from Express.js + HTMX to Next.js + React while maintaining all functionality and improving performance and accessibility.
+- Built with [Next.js](https://nextjs.org/)
+- Styled with [Tailwind CSS](https://tailwindcss.com/)
+- Icons from [Heroicons](https://heroicons.com/)
+- Designed to be a comprehensive toolkit for everyday computer tasks

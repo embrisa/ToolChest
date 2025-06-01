@@ -11,7 +11,7 @@ export interface EnvironmentConfig {
   DATABASE_URL: string;
 
   // Next.js Configuration
-  NODE_ENV: 'development' | 'production' | 'test';
+  NODE_ENV: "development" | "production" | "test";
   PORT: number;
 
   // Authentication & Security
@@ -56,7 +56,7 @@ const parseBoolean = (
   defaultValue: boolean = false,
 ): boolean => {
   if (!value) return defaultValue;
-  return value.toLowerCase() === 'true' || value === '1';
+  return value.toLowerCase() === "true" || value === "1";
 };
 
 // Helper function to parse number from string
@@ -76,27 +76,27 @@ const parseArray = (
 ): string[] => {
   if (!value) return defaultValue;
   return value
-    .split(',')
+    .split(",")
     .map((item) => item.trim())
     .filter(Boolean);
 };
 
 // Validate and parse environment variables
 function validateEnvironment(): EnvironmentConfig {
-  const requiredVars = ['DATABASE_URL'];
+  const requiredVars = ["DATABASE_URL"];
   const missing = requiredVars.filter((varName) => !process.env[varName]);
 
   if (missing.length > 0) {
     throw new Error(
-      `Missing required environment variables: ${missing.join(', ')}\n` +
-      'Please check your .env.local file and ensure all required variables are set.\n' +
-      'See env.example for a complete list of required variables.',
+      `Missing required environment variables: ${missing.join(", ")}\n` +
+        "Please check your .env.local file and ensure all required variables are set.\n" +
+        "See env.example for a complete list of required variables.",
     );
   }
 
   // Validate NODE_ENV
-  const nodeEnv = process.env.NODE_ENV || 'development';
-  if (!['development', 'production', 'test'].includes(nodeEnv)) {
+  const nodeEnv = process.env.NODE_ENV || "development";
+  if (!["development", "production", "test"].includes(nodeEnv)) {
     throw new Error(
       `Invalid NODE_ENV: ${nodeEnv}. Must be one of: development, production, test`,
     );
@@ -104,12 +104,15 @@ function validateEnvironment(): EnvironmentConfig {
 
   // Validate DATABASE_URL format
   const databaseUrl = process.env.DATABASE_URL!;
-  const isPostgres = databaseUrl.startsWith('postgresql://') || databaseUrl.startsWith('postgres://');
-  const isSqlite = databaseUrl.startsWith('file:') || databaseUrl.startsWith('sqlite:');
+  const isPostgres =
+    databaseUrl.startsWith("postgresql://") ||
+    databaseUrl.startsWith("postgres://");
+  const isSqlite =
+    databaseUrl.startsWith("file:") || databaseUrl.startsWith("sqlite:");
 
   if (!isPostgres && !isSqlite) {
     throw new Error(
-      'DATABASE_URL must be a valid PostgreSQL connection string or SQLite file URL',
+      "DATABASE_URL must be a valid PostgreSQL connection string or SQLite file URL",
     );
   }
 
@@ -118,7 +121,7 @@ function validateEnvironment(): EnvironmentConfig {
     DATABASE_URL: databaseUrl,
 
     // Next.js Configuration
-    NODE_ENV: nodeEnv as 'development' | 'production' | 'test',
+    NODE_ENV: nodeEnv as "development" | "production" | "test",
     PORT: parseNumber(process.env.PORT, 3000),
 
     // Authentication & Security
@@ -146,11 +149,11 @@ function validateEnvironment(): EnvironmentConfig {
     // Development Settings
     ENABLE_DEV_LOGGING: parseBoolean(
       process.env.ENABLE_DEV_LOGGING,
-      nodeEnv === 'development',
+      nodeEnv === "development",
     ),
     ENABLE_HOT_RELOAD: parseBoolean(
       process.env.ENABLE_HOT_RELOAD,
-      nodeEnv === 'development',
+      nodeEnv === "development",
     ),
 
     // Feature Flags
@@ -181,7 +184,7 @@ function validateEnvironment(): EnvironmentConfig {
 
     // CORS & Security
     ALLOWED_ORIGINS: parseArray(process.env.ALLOWED_ORIGINS, [
-      'http://localhost:3000',
+      "http://localhost:3000",
     ]),
     ENABLE_SECURITY_HEADERS: parseBoolean(
       process.env.ENABLE_SECURITY_HEADERS,
@@ -196,12 +199,12 @@ let env: EnvironmentConfig;
 try {
   env = validateEnvironment();
 } catch (error) {
-  console.error('Environment validation failed:', error);
-  if (process.env.NODE_ENV !== 'production') {
-    console.error('\n📝 To fix this:');
-    console.error('1. Copy env.example to .env.local');
-    console.error('2. Update the DATABASE_URL and other required variables');
-    console.error('3. Restart the development server\n');
+  console.error("Environment validation failed:", error);
+  if (process.env.NODE_ENV !== "production") {
+    console.error("\n📝 To fix this:");
+    console.error("1. Copy env.example to .env.local");
+    console.error("2. Update the DATABASE_URL and other required variables");
+    console.error("3. Restart the development server\n");
   }
   throw error;
 }
@@ -217,9 +220,9 @@ export const database = {
 export const server = {
   nodeEnv: env.NODE_ENV,
   port: env.PORT,
-  isDevelopment: env.NODE_ENV === 'development',
-  isProduction: env.NODE_ENV === 'production',
-  isTest: env.NODE_ENV === 'test',
+  isDevelopment: env.NODE_ENV === "development",
+  isProduction: env.NODE_ENV === "production",
+  isTest: env.NODE_ENV === "test",
 };
 
 export const auth = {

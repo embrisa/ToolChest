@@ -1,144 +1,229 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import { Button } from '@/components/ui';
-import { MagnifyingGlassIcon, HomeIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
+"use client";
 
-export const metadata: Metadata = {
-    title: '404 - Page Not Found',
-    description: 'The page you requested could not be found. Find what you\'re looking for using our navigation or search.',
-    robots: {
-        index: false,
-        follow: false,
-    },
-};
+import Link from "next/link";
+import { Button } from "@/components/ui";
+import {
+  MagnifyingGlassIcon,
+  HomeIcon,
+  ArrowLeftIcon,
+} from "@heroicons/react/24/outline";
 
 export default function NotFound() {
-    return (
-        <div className="min-h-[60vh] flex items-center justify-center px-4">
-            <div className="max-w-2xl mx-auto text-center">
-                {/* Error Code and Icon */}
-                <div className="mb-8">
-                    <div className="text-6xl font-bold text-blue-600 mb-4" aria-hidden="true">
-                        404
-                    </div>
-                    <div className="flex justify-center mb-6">
-                        <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center">
-                            <MagnifyingGlassIcon className="w-12 h-12 text-blue-600" aria-hidden="true" />
-                        </div>
-                    </div>
-                </div>
-
-                {/* Main Message */}
-                <div className="mb-8">
-                    <h1 className="text-3xl font-bold text-gray-900 mb-4">
-                        Page Not Found
-                    </h1>
-                    <p className="text-lg text-gray-600 mb-6">
-                        The page you&apos;re looking for doesn&apos;t exist. It may have been moved, deleted, or you may have typed the URL incorrectly.
-                    </p>
-                </div>
-
-                {/* Suggestions */}
-                <div className="mb-10">
-                    <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                        Here&apos;s what you can do:
-                    </h2>
-                    <ul className="text-left space-y-2 text-gray-600 max-w-md mx-auto">
-                        <li className="flex items-start">
-                            <span className="inline-block w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0" aria-hidden="true"></span>
-                            Check the URL for typos
-                        </li>
-                        <li className="flex items-start">
-                            <span className="inline-block w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0" aria-hidden="true"></span>
-                            Use the navigation menu to find what you&apos;re looking for
-                        </li>
-                        <li className="flex items-start">
-                            <span className="inline-block w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0" aria-hidden="true"></span>
-                            Return to the home page
-                        </li>
-                        <li className="flex items-start">
-                            <span className="inline-block w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0" aria-hidden="true"></span>
-                            Search for tools using the search feature
-                        </li>
-                    </ul>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-                    <Link href="/" className="w-full sm:w-auto">
-                        <Button className="w-full">
-                            <HomeIcon className="w-5 h-5 mr-2" aria-hidden="true" />
-                            Go to Home
-                        </Button>
-                    </Link>
-                    <Button
-                        variant="outline"
-                        className="w-full sm:w-auto"
-                        onClick={() => window.history.back()}
-                    >
-                        <ArrowLeftIcon className="w-5 h-5 mr-2" aria-hidden="true" />
-                        Go Back
-                    </Button>
-                </div>
-
-                {/* Popular Tools Section */}
-                <div className="border-t pt-8">
-                    <h2 className="text-lg font-semibold text-gray-900 mb-4">
-                        Popular Tools
-                    </h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto">
-                        <Link
-                            href="/tools/base64"
-                            className="block p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                        >
-                            <div className="font-medium text-gray-900">Base64 Tool</div>
-                            <div className="text-sm text-gray-600 mt-1">
-                                Encode and decode Base64 data
-                            </div>
-                        </Link>
-                        <Link
-                            href="/tools/hash-generator"
-                            className="block p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                        >
-                            <div className="font-medium text-gray-900">Hash Generator</div>
-                            <div className="text-sm text-gray-600 mt-1">
-                                Generate MD5, SHA hashes
-                            </div>
-                        </Link>
-                        <Link
-                            href="/tools/favicon-generator"
-                            className="block p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                        >
-                            <div className="font-medium text-gray-900">Favicon Generator</div>
-                            <div className="text-sm text-gray-600 mt-1">
-                                Create favicons from images
-                            </div>
-                        </Link>
-                        <Link
-                            href="/tools/markdown-to-pdf"
-                            className="block p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                        >
-                            <div className="font-medium text-gray-900">Markdown to PDF</div>
-                            <div className="text-sm text-gray-600 mt-1">
-                                Convert Markdown to PDF
-                            </div>
-                        </Link>
-                    </div>
-                </div>
-
-                {/* Contact Support */}
-                <div className="mt-8 pt-6 border-t">
-                    <p className="text-sm text-gray-500">
-                        Still can&apos;t find what you&apos;re looking for?{' '}
-                        <a
-                            href="mailto:support@toolchest.app"
-                            className="text-blue-600 hover:text-blue-800 underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
-                        >
-                            Contact Support
-                        </a>
-                    </p>
-                </div>
+  return (
+    <div className="min-h-screen bg-background flex items-center justify-center px-4 py-12">
+      <div className="max-w-2xl mx-auto text-center">
+        {/* Error Code and Icon */}
+        <div className="mb-8 animate-fade-in-up">
+          <div
+            className="text-6xl sm:text-7xl md:text-8xl font-bold text-gradient-brand mb-6"
+            aria-hidden="true"
+          >
+            404
+          </div>
+          <div className="flex justify-center mb-8">
+            <div className="w-24 h-24 bg-brand-50 dark:bg-brand-950/20 border border-brand-200 dark:border-brand-800/30 rounded-2xl flex items-center justify-center shadow-soft animate-float">
+              <MagnifyingGlassIcon
+                className="w-12 h-12 text-brand-500 dark:text-brand-400"
+                aria-hidden="true"
+              />
             </div>
+          </div>
         </div>
-    );
-} 
+
+        {/* Main Message */}
+        <div
+          className="mb-10 animate-fade-in-up"
+          style={{ animationDelay: "0.1s" }}
+        >
+          <h1 className="text-display text-3xl sm:text-4xl font-bold text-foreground mb-6">
+            Page Not Found
+          </h1>
+          <p className="text-body text-lg text-foreground-secondary mb-8 max-w-lg mx-auto">
+            The page you&apos;re looking for doesn&apos;t exist. It may have
+            been moved, deleted, or you may have typed the URL incorrectly.
+          </p>
+        </div>
+
+        {/* Suggestions */}
+        <div
+          className="mb-12 animate-fade-in-up"
+          style={{ animationDelay: "0.2s" }}
+        >
+          <h2 className="text-heading text-xl font-semibold text-foreground mb-6">
+            Here&apos;s what you can do:
+          </h2>
+          <ul className="text-left space-y-4 text-foreground-secondary max-w-md mx-auto">
+            <li className="flex items-start group">
+              <span
+                className="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2.5 mr-4 flex-shrink-0 group-hover:bg-brand-600 transition-all duration-200 group-hover:scale-125"
+                aria-hidden="true"
+              ></span>
+              <span className="text-body group-hover:text-foreground transition-colors duration-200">
+                Check the URL for typos
+              </span>
+            </li>
+            <li className="flex items-start group">
+              <span
+                className="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2.5 mr-4 flex-shrink-0 group-hover:bg-brand-600 transition-all duration-200 group-hover:scale-125"
+                aria-hidden="true"
+              ></span>
+              <span className="text-body group-hover:text-foreground transition-colors duration-200">
+                Use the navigation menu to find what you&apos;re looking for
+              </span>
+            </li>
+            <li className="flex items-start group">
+              <span
+                className="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2.5 mr-4 flex-shrink-0 group-hover:bg-brand-600 transition-all duration-200 group-hover:scale-125"
+                aria-hidden="true"
+              ></span>
+              <span className="text-body group-hover:text-foreground transition-colors duration-200">
+                Return to the home page
+              </span>
+            </li>
+            <li className="flex items-start group">
+              <span
+                className="inline-block w-2 h-2 bg-brand-500 rounded-full mt-2.5 mr-4 flex-shrink-0 group-hover:bg-brand-600 transition-all duration-200 group-hover:scale-125"
+                aria-hidden="true"
+              ></span>
+              <span className="text-body group-hover:text-foreground transition-colors duration-200">
+                Search for tools using the search feature
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        {/* Action Buttons */}
+        <div
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 animate-fade-in-up"
+          style={{ animationDelay: "0.3s" }}
+        >
+          <Link href="/" className="w-full sm:w-auto">
+            <Button
+              variant="primary"
+              size="lg"
+              className="w-full sm:w-auto focus-ring"
+            >
+              <HomeIcon className="w-5 h-5 mr-2" aria-hidden="true" />
+              Go to Home
+            </Button>
+          </Link>
+          <Button
+            variant="secondary"
+            size="lg"
+            className="w-full sm:w-auto focus-ring"
+            onClick={() => window.history.back()}
+          >
+            <ArrowLeftIcon className="w-5 h-5 mr-2" aria-hidden="true" />
+            Go Back
+          </Button>
+        </div>
+
+        {/* Popular Tools Section */}
+        <div
+          className="border-t border-border pt-10 animate-fade-in-up"
+          style={{ animationDelay: "0.4s" }}
+        >
+          <h2 className="text-heading text-lg font-semibold text-foreground mb-6">
+            Popular Tools
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+            <Link
+              href="/tools/base64"
+              className="card-interactive p-6 group focus-ring"
+            >
+              <div className="flex items-start space-x-4">
+                <div className="tool-icon tool-icon-base64 w-10 h-10 text-sm group-hover:scale-110 transition-transform duration-200">
+                  B64
+                </div>
+                <div className="flex-1 text-left">
+                  <div className="font-medium text-foreground group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors duration-200">
+                    Base64 Tool
+                  </div>
+                  <div className="text-sm text-foreground-secondary mt-1">
+                    Encode and decode Base64 data
+                  </div>
+                </div>
+              </div>
+            </Link>
+            <Link
+              href="/tools/hash-generator"
+              className="card-interactive p-6 group focus-ring"
+            >
+              <div className="flex items-start space-x-4">
+                <div className="tool-icon tool-icon-hash w-10 h-10 text-sm group-hover:scale-110 transition-transform duration-200">
+                  #
+                </div>
+                <div className="flex-1 text-left">
+                  <div className="font-medium text-foreground group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors duration-200">
+                    Hash Generator
+                  </div>
+                  <div className="text-sm text-foreground-secondary mt-1">
+                    Generate MD5, SHA hashes
+                  </div>
+                </div>
+              </div>
+            </Link>
+            <Link
+              href="/tools/favicon-generator"
+              className="card-interactive p-6 group focus-ring"
+            >
+              <div className="flex items-start space-x-4">
+                <div className="tool-icon tool-icon-favicon w-10 h-10 text-sm group-hover:scale-110 transition-transform duration-200">
+                  ⭐
+                </div>
+                <div className="flex-1 text-left">
+                  <div className="font-medium text-foreground group-hover:text-success-600 dark:group-hover:text-success-400 transition-colors duration-200">
+                    Favicon Generator
+                  </div>
+                  <div className="text-sm text-foreground-secondary mt-1">
+                    Create favicons from images
+                  </div>
+                </div>
+              </div>
+            </Link>
+            <Link
+              href="/tools/markdown-to-pdf"
+              className="card-interactive p-6 group focus-ring"
+            >
+              <div className="flex items-start space-x-4">
+                <div className="tool-icon tool-icon-markdown w-10 h-10 text-sm group-hover:scale-110 transition-transform duration-200">
+                  MD
+                </div>
+                <div className="flex-1 text-left">
+                  <div className="font-medium text-foreground group-hover:text-warning-600 dark:group-hover:text-warning-400 transition-colors duration-200">
+                    Markdown to PDF
+                  </div>
+                  <div className="text-sm text-foreground-secondary mt-1">
+                    Convert Markdown to PDF
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+
+        {/* Contact Support */}
+        <div
+          className="mt-10 pt-6 border-t border-border animate-fade-in-up"
+          style={{ animationDelay: "0.5s" }}
+        >
+          <p className="text-sm text-foreground-secondary">
+            Still can&apos;t find what you&apos;re looking for?{" "}
+            <a
+              href="mailto:support@tool-chest.com"
+              className="text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300 underline focus-ring rounded-sm transition-colors duration-200"
+            >
+              Contact Support
+            </a>
+          </p>
+        </div>
+
+        {/* Screen Reader Announcement */}
+        <div className="sr-only" aria-live="polite" aria-atomic="true">
+          Error 404: Page Not Found. The page you&apos;re looking for
+          doesn&apos;t exist. 4 suggestions and 2 recovery actions available.
+        </div>
+      </div>
+    </div>
+  );
+}

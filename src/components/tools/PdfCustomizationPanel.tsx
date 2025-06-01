@@ -1,672 +1,571 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 import {
-    PdfStylingOptions,
-    PdfTemplate,
-    PDF_TEMPLATES,
-    PdfFontFamily,
-    SyntaxTheme
-} from '@/types/tools/markdownToPdf';
-import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
+  PdfStylingOptions,
+  PdfTemplate,
+  PDF_TEMPLATES,
+  PdfFontFamily,
+  SyntaxTheme,
+  PdfTheme,
+} from "@/types/tools/markdownToPdf";
+import { Button } from "@/components/ui/Button";
+import { Card, CardHeader, CardContent } from "@/components/ui/Card";
 import {
-    DocumentTextIcon,
-    Cog6ToothIcon,
-    EyeIcon,
-    AdjustmentsHorizontalIcon,
-    SwatchIcon,
-    DocumentCheckIcon,
-} from '@heroicons/react/24/outline';
+  DocumentTextIcon,
+  Cog6ToothIcon,
+  EyeIcon,
+  AdjustmentsHorizontalIcon,
+  SwatchIcon,
+  DocumentCheckIcon,
+} from "@heroicons/react/24/outline";
 
 interface PdfCustomizationPanelProps {
-    stylingOptions: PdfStylingOptions;
-    onStylingChange: (options: PdfStylingOptions) => void;
-    onPreviewChange?: (enabled: boolean) => void;
-    showPreview?: boolean;
+  stylingOptions: PdfStylingOptions;
+  onStylingChange: (options: PdfStylingOptions) => void;
+  onPreviewChange?: (enabled: boolean) => void;
+  showPreview?: boolean;
 }
 
 export function PdfCustomizationPanel({
-    stylingOptions,
-    onStylingChange,
-    onPreviewChange,
-    showPreview = true,
+  stylingOptions,
+  onStylingChange,
+  onPreviewChange,
+  showPreview = true,
 }: PdfCustomizationPanelProps) {
-    const updateStyling = (updates: Partial<PdfStylingOptions>) => {
-        onStylingChange({ ...stylingOptions, ...updates });
+  const updateStyling = (updates: Partial<PdfStylingOptions>) => {
+    onStylingChange({ ...stylingOptions, ...updates });
+  };
+
+  // Helper functions to ensure proper structure with required properties
+  const updateHeader = (
+    updates: Partial<NonNullable<PdfStylingOptions["header"]>>,
+  ) => {
+    const currentHeader = stylingOptions.header || { enabled: false };
+    updateStyling({
+      header: {
+        ...currentHeader,
+        enabled: currentHeader.enabled ?? false, // Ensure enabled is always boolean
+        ...updates,
+      },
+    });
+  };
+
+  const updateFooter = (
+    updates: Partial<NonNullable<PdfStylingOptions["footer"]>>,
+  ) => {
+    const currentFooter = stylingOptions.footer || { enabled: false };
+    updateStyling({
+      footer: {
+        ...currentFooter,
+        enabled: currentFooter.enabled ?? false, // Ensure enabled is always boolean
+        ...updates,
+      },
+    });
+  };
+
+  const updateTableOfContents = (
+    updates: Partial<NonNullable<PdfStylingOptions["tableOfContents"]>>,
+  ) => {
+    const currentToc = stylingOptions.tableOfContents || { enabled: false };
+    updateStyling({
+      tableOfContents: {
+        ...currentToc,
+        enabled: currentToc.enabled ?? false, // Ensure enabled is always boolean
+        ...updates,
+      },
+    });
+  };
+
+  const updateSyntaxHighlighting = (
+    updates: Partial<NonNullable<PdfStylingOptions["syntaxHighlighting"]>>,
+  ) => {
+    const currentSyntax = stylingOptions.syntaxHighlighting || {
+      enabled: false,
+      theme: "github",
     };
+    updateStyling({
+      syntaxHighlighting: {
+        ...currentSyntax,
+        enabled: currentSyntax.enabled ?? false, // Ensure enabled is always boolean
+        theme: currentSyntax.theme ?? "github", // Ensure theme is always present
+        ...updates,
+      },
+    });
+  };
 
-    // Helper functions to ensure proper structure with required properties
-    const updateHeader = (updates: Partial<NonNullable<PdfStylingOptions['header']>>) => {
-        const currentHeader = stylingOptions.header || { enabled: false };
-        updateStyling({
-            header: {
-                ...currentHeader,
-                enabled: currentHeader.enabled ?? false, // Ensure enabled is always boolean
-                ...updates,
-            }
-        });
-    };
+  const updateAccessibility = (
+    updates: Partial<NonNullable<PdfStylingOptions["accessibility"]>>,
+  ) => {
+    const currentAccessibility = stylingOptions.accessibility || {};
+    updateStyling({
+      accessibility: {
+        ...currentAccessibility,
+        ...updates,
+      },
+    });
+  };
 
-    const updateFooter = (updates: Partial<NonNullable<PdfStylingOptions['footer']>>) => {
-        const currentFooter = stylingOptions.footer || { enabled: false };
-        updateStyling({
-            footer: {
-                ...currentFooter,
-                enabled: currentFooter.enabled ?? false, // Ensure enabled is always boolean
-                ...updates,
-            }
-        });
-    };
+  const applyTemplate = (template: PdfTemplate) => {
+    onStylingChange({
+      ...stylingOptions,
+      ...template.stylingOptions,
+    });
+  };
 
-    const updateTableOfContents = (updates: Partial<NonNullable<PdfStylingOptions['tableOfContents']>>) => {
-        const currentToc = stylingOptions.tableOfContents || { enabled: false };
-        updateStyling({
-            tableOfContents: {
-                ...currentToc,
-                enabled: currentToc.enabled ?? false, // Ensure enabled is always boolean
-                ...updates,
-            }
-        });
-    };
+  return (
+    <div className="space-y-8 animate-fade-in-up">
+      {/* Header */}
+      <div className="text-center space-y-4">
+        <div className="tool-icon tool-icon-pdf mx-auto">
+          <span className="text-2xl">📄</span>
+        </div>
+        <div>
+          <h1 className="text-display text-4xl font-bold text-gradient-brand mb-2">
+            PDF Customization
+          </h1>
+          <p className="text-body text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
+            Customize your PDF output with templates, typography, colors, and
+            advanced options
+          </p>
+        </div>
+      </div>
 
-    const updateSyntaxHighlighting = (updates: Partial<NonNullable<PdfStylingOptions['syntaxHighlighting']>>) => {
-        const currentSyntax = stylingOptions.syntaxHighlighting || { enabled: false, theme: 'github' };
-        updateStyling({
-            syntaxHighlighting: {
-                ...currentSyntax,
-                enabled: currentSyntax.enabled ?? false, // Ensure enabled is always boolean
-                theme: currentSyntax.theme ?? 'github', // Ensure theme is always present
-                ...updates,
-            }
-        });
-    };
+      {/* Preview Toggle */}
+      {onPreviewChange && (
+        <div className="flex justify-center">
+          <Button
+            variant={showPreview ? "primary" : "secondary"}
+            onClick={() => onPreviewChange(!showPreview)}
+            className="flex items-center gap-2"
+          >
+            <EyeIcon className="h-4 w-4" />
+            {showPreview ? "Hide Preview" : "Show Preview"}
+          </Button>
+        </div>
+      )}
 
-
-
-    const updateAccessibility = (updates: Partial<NonNullable<PdfStylingOptions['accessibility']>>) => {
-        const currentAccessibility = stylingOptions.accessibility || {};
-        updateStyling({
-            accessibility: {
-                ...currentAccessibility,
-                ...updates,
-            }
-        });
-    };
-
-    const applyTemplate = (template: PdfTemplate) => {
-        onStylingChange({
-            ...stylingOptions,
-            ...template.stylingOptions,
-        });
-    };
-
-    return (
-        <div className="space-y-6">
-            {/* Template Selection */}
-            <Card className="p-4">
-                <div className="flex items-center gap-2 mb-4">
-                    <DocumentTextIcon className="h-5 w-5 text-blue-600" />
-                    <h3 className="text-lg font-semibold">PDF Templates</h3>
+      {/* Template Selection */}
+      <Card className="tool-card tool-card-pdf">
+        <CardHeader>
+          <h2 className="text-title text-2xl font-semibold text-neutral-900 dark:text-neutral-100 flex items-center gap-3">
+            <div className="w-10 h-10 bg-brand-100 dark:bg-brand-900/50 rounded-xl flex items-center justify-center">
+              <DocumentTextIcon className="h-5 w-5 text-brand-600 dark:text-brand-400" />
+            </div>
+            PDF Templates
+          </h2>
+          <p className="text-body text-neutral-600 dark:text-neutral-400 mt-2">
+            Choose a pre-designed template for your PDF styling
+          </p>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {PDF_TEMPLATES.map((template) => (
+              <button
+                key={template.id}
+                onClick={() => applyTemplate(template)}
+                className={`group p-4 text-left border-2 rounded-xl transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-500/50 ${
+                  stylingOptions.theme === template.stylingOptions.theme
+                    ? "border-brand-400 bg-brand-50 dark:bg-brand-950/20 shadow-colored"
+                    : "border-neutral-200 dark:border-neutral-700 hover:border-brand-300 hover:bg-brand-50/30 dark:hover:bg-brand-950/10"
+                }`}
+                aria-label={`Apply ${template.name} template`}
+              >
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold text-neutral-900 dark:text-neutral-100">
+                      {template.name}
+                    </span>
+                    {template.recommended && (
+                      <span className="text-xs bg-success-100 dark:bg-success-900/50 text-success-700 dark:text-success-300 px-2 py-1 rounded-lg font-medium">
+                        Recommended
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                    {template.description}
+                  </p>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                    {PDF_TEMPLATES.map((template) => (
-                        <button
-                            key={template.id}
-                            onClick={() => applyTemplate(template)}
-                            className={`p-3 text-left border-2 rounded-lg transition-all hover:border-blue-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 ${stylingOptions.theme === template.stylingOptions.theme
-                                ? 'border-blue-500 bg-blue-50'
-                                : 'border-gray-200'
-                                }`}
-                            aria-label={`Apply ${template.name} template`}
-                        >
-                            <div className="font-medium text-sm text-gray-900">
-                                {template.name}
-                                {template.recommended && (
-                                    <span className="ml-2 px-2 py-1 text-xs bg-green-100 text-green-800 rounded">
-                                        Recommended
-                                    </span>
-                                )}
-                            </div>
-                            <div className="text-xs text-gray-600 mt-1">
-                                {template.description}
-                            </div>
-                        </button>
-                    ))}
-                </div>
-            </Card>
+              </button>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
-            {/* Typography Settings */}
-            <Card className="p-4">
-                <div className="flex items-center gap-2 mb-4">
-                    <AdjustmentsHorizontalIcon className="h-5 w-5 text-green-600" />
-                    <h3 className="text-lg font-semibold">Typography</h3>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Font Family
-                        </label>
-                        <select
-                            value={stylingOptions.fontFamily}
-                            onChange={(e) => updateStyling({ fontFamily: e.target.value as PdfFontFamily })}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            aria-label="Select font family"
-                        >
-                            <option value="sans-serif">Sans Serif</option>
-                            <option value="serif">Serif</option>
-                            <option value="monospace">Monospace</option>
-                            <option value="times">Times</option>
-                            <option value="helvetica">Helvetica</option>
-                            <option value="courier">Courier</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Font Size: {stylingOptions.fontSize}px
-                        </label>
-                        <input
-                            type="range"
-                            min="8"
-                            max="24"
-                            value={stylingOptions.fontSize}
-                            onChange={(e) => updateStyling({ fontSize: parseInt(e.target.value) })}
-                            className="w-full"
-                            aria-label="Adjust font size"
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Line Height: {stylingOptions.lineHeight}
-                        </label>
-                        <input
-                            type="range"
-                            min="1"
-                            max="2"
-                            step="0.1"
-                            value={stylingOptions.lineHeight}
-                            onChange={(e) => updateStyling({ lineHeight: parseFloat(e.target.value) })}
-                            className="w-full"
-                            aria-label="Adjust line height"
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Heading Scale: {stylingOptions.headingScale}
-                        </label>
-                        <input
-                            type="range"
-                            min="1"
-                            max="2"
-                            step="0.1"
-                            value={stylingOptions.headingScale}
-                            onChange={(e) => updateStyling({ headingScale: parseFloat(e.target.value) })}
-                            className="w-full"
-                            aria-label="Adjust heading scale"
-                        />
-                    </div>
-                </div>
-            </Card>
+      {/* Typography Settings */}
+      <Card>
+        <div className="p-6 border-b border-neutral-200 dark:border-neutral-700">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-accent-100 dark:bg-accent-900/50 rounded-xl flex items-center justify-center">
+              <AdjustmentsHorizontalIcon className="h-5 w-5 text-accent-600 dark:text-accent-400" />
+            </div>
+            <div>
+              <h3 className="text-title text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+                Typography
+              </h3>
+              <p className="text-body text-neutral-600 dark:text-neutral-400 mt-1">
+                Customize fonts, sizes, and text styling
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="form-label mb-3">Font Family</label>
+              <select
+                value={stylingOptions.fontFamily}
+                onChange={(e) =>
+                  updateStyling({ fontFamily: e.target.value as PdfFontFamily })
+                }
+                className="select"
+                aria-label="Select font family"
+              >
+                <option value="sans-serif">Sans Serif</option>
+                <option value="serif">Serif</option>
+                <option value="monospace">Monospace</option>
+                <option value="times">Times</option>
+                <option value="helvetica">Helvetica</option>
+                <option value="courier">Courier</option>
+              </select>
+            </div>
+            <div>
+              <label className="form-label mb-3">
+                Font Size: {stylingOptions.fontSize}px
+              </label>
+              <input
+                type="range"
+                min="8"
+                max="24"
+                value={stylingOptions.fontSize}
+                onChange={(e) =>
+                  updateStyling({ fontSize: parseInt(e.target.value) })
+                }
+                className="w-full h-2 bg-neutral-200 dark:bg-neutral-700 rounded-lg appearance-none cursor-pointer slider"
+                aria-label="Adjust font size"
+              />
+              <div className="flex justify-between text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+                <span>8px</span>
+                <span>24px</span>
+              </div>
+            </div>
+            <div>
+              <label className="form-label mb-3">
+                Line Height: {stylingOptions.lineHeight}
+              </label>
+              <input
+                type="range"
+                min="1"
+                max="2"
+                step="0.1"
+                value={stylingOptions.lineHeight}
+                onChange={(e) =>
+                  updateStyling({ lineHeight: parseFloat(e.target.value) })
+                }
+                className="w-full h-2 bg-neutral-200 dark:bg-neutral-700 rounded-lg appearance-none cursor-pointer slider"
+                aria-label="Adjust line height"
+              />
+              <div className="flex justify-between text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+                <span>1.0</span>
+                <span>2.0</span>
+              </div>
+            </div>
+            <div>
+              <label className="form-label mb-3">
+                Heading Scale: {stylingOptions.headingScale}
+              </label>
+              <input
+                type="range"
+                min="1"
+                max="2"
+                step="0.1"
+                value={stylingOptions.headingScale}
+                onChange={(e) =>
+                  updateStyling({ headingScale: parseFloat(e.target.value) })
+                }
+                className="w-full h-2 bg-neutral-200 dark:bg-neutral-700 rounded-lg appearance-none cursor-pointer slider"
+                aria-label="Adjust heading scale"
+              />
+              <div className="flex justify-between text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+                <span>1.0</span>
+                <span>2.0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Card>
 
-            {/* Colors */}
-            <Card className="p-4">
-                <div className="flex items-center gap-2 mb-4">
-                    <SwatchIcon className="h-5 w-5 text-purple-600" />
-                    <h3 className="text-lg font-semibold">Colors</h3>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Background Color
-                        </label>
-                        <div className="flex items-center gap-2">
-                            <input
-                                type="color"
-                                value={stylingOptions.backgroundColor || '#ffffff'}
-                                onChange={(e) => updateStyling({ backgroundColor: e.target.value })}
-                                className="w-12 h-8 border border-gray-300 rounded cursor-pointer"
-                                aria-label="Select background color"
-                            />
-                            <input
-                                type="text"
-                                value={stylingOptions.backgroundColor || '#ffffff'}
-                                onChange={(e) => updateStyling({ backgroundColor: e.target.value })}
-                                className="flex-1 px-3 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="#ffffff"
-                            />
-                        </div>
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Text Color
-                        </label>
-                        <div className="flex items-center gap-2">
-                            <input
-                                type="color"
-                                value={stylingOptions.textColor || '#000000'}
-                                onChange={(e) => updateStyling({ textColor: e.target.value })}
-                                className="w-12 h-8 border border-gray-300 rounded cursor-pointer"
-                                aria-label="Select text color"
-                            />
-                            <input
-                                type="text"
-                                value={stylingOptions.textColor || '#000000'}
-                                onChange={(e) => updateStyling({ textColor: e.target.value })}
-                                className="flex-1 px-3 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="#000000"
-                            />
-                        </div>
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Link Color
-                        </label>
-                        <div className="flex items-center gap-2">
-                            <input
-                                type="color"
-                                value={stylingOptions.linkColor || '#0066cc'}
-                                onChange={(e) => updateStyling({ linkColor: e.target.value })}
-                                className="w-12 h-8 border border-gray-300 rounded cursor-pointer"
-                                aria-label="Select link color"
-                            />
-                            <input
-                                type="text"
-                                value={stylingOptions.linkColor || '#0066cc'}
-                                onChange={(e) => updateStyling({ linkColor: e.target.value })}
-                                className="flex-1 px-3 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="#0066cc"
-                            />
-                        </div>
-                    </div>
-                </div>
-            </Card>
+      {/* Color Theme */}
+      <Card>
+        <div className="p-6 border-b border-neutral-200 dark:border-neutral-700">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-success-100 dark:bg-success-900/50 rounded-xl flex items-center justify-center">
+              <SwatchIcon className="h-5 w-5 text-success-600 dark:text-success-400" />
+            </div>
+            <div>
+              <h3 className="text-title text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+                Color Theme
+              </h3>
+              <p className="text-body text-neutral-600 dark:text-neutral-400 mt-1">
+                Choose colors for your PDF design
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="form-label mb-3">Theme</label>
+              <select
+                value={stylingOptions.theme}
+                onChange={(e) =>
+                  updateStyling({ theme: e.target.value as PdfTheme })
+                }
+                className="select"
+                aria-label="Select color theme"
+              >
+                <option value="default">Default</option>
+                <option value="github">GitHub</option>
+                <option value="academic">Academic</option>
+                <option value="minimal">Minimal</option>
+                <option value="dark">Dark</option>
+                <option value="professional">Professional</option>
+              </select>
+            </div>
+            <div>
+              <label className="form-label mb-3">Primary Color</label>
+              <input
+                type="color"
+                value={stylingOptions.linkColor || "#0ea5e9"}
+                onChange={(e) => updateStyling({ linkColor: e.target.value })}
+                className="w-full h-12 border border-neutral-300 dark:border-neutral-600 rounded-xl cursor-pointer focus:ring-2 focus:ring-brand-500/50"
+                aria-label="Select link color"
+              />
+            </div>
+          </div>
+        </div>
+      </Card>
 
-            {/* Header & Footer */}
-            <Card className="p-4">
-                <div className="flex items-center gap-2 mb-4">
-                    <DocumentCheckIcon className="h-5 w-5 text-indigo-600" />
-                    <h3 className="text-lg font-semibold">Header & Footer</h3>
-                </div>
+      {/* Page Layout */}
+      <Card>
+        <div className="p-6 border-b border-neutral-200 dark:border-neutral-700">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-warning-100 dark:bg-warning-900/50 rounded-xl flex items-center justify-center">
+              <DocumentCheckIcon className="h-5 w-5 text-warning-600 dark:text-warning-400" />
+            </div>
+            <div>
+              <h3 className="text-title text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+                Page Layout
+              </h3>
+              <p className="text-body text-neutral-600 dark:text-neutral-400 mt-1">
+                Configure page size, margins, and layout options
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="form-label mb-3">Page Format</label>
+              <select
+                value={stylingOptions.format}
+                onChange={(e) =>
+                  updateStyling({
+                    format: e.target.value as "a4" | "letter" | "legal",
+                  })
+                }
+                className="select"
+                aria-label="Select page format"
+              >
+                <option value="a4">A4</option>
+                <option value="letter">Letter</option>
+                <option value="legal">Legal</option>
+              </select>
+            </div>
+            <div>
+              <label className="form-label mb-3">
+                Margin: {stylingOptions.margin.top}mm
+              </label>
+              <input
+                type="range"
+                min="10"
+                max="40"
+                value={stylingOptions.margin.top}
+                onChange={(e) => {
+                  const marginValue = parseInt(e.target.value);
+                  updateStyling({
+                    margin: {
+                      top: marginValue,
+                      right: marginValue,
+                      bottom: marginValue,
+                      left: marginValue,
+                    },
+                  });
+                }}
+                className="w-full h-2 bg-neutral-200 dark:bg-neutral-700 rounded-lg appearance-none cursor-pointer slider"
+                aria-label="Adjust page margin"
+              />
+              <div className="flex justify-between text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+                <span>10mm</span>
+                <span>40mm</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Card>
 
-                <div className="space-y-4">
-                    {/* Header Settings */}
-                    <div className="border border-gray-200 rounded-lg p-4">
-                        <div className="flex items-center gap-2 mb-3">
-                            <input
-                                type="checkbox"
-                                id="header-enabled"
-                                checked={stylingOptions.header?.enabled || false}
-                                onChange={(e) => updateHeader({ enabled: e.target.checked })}
-                                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                            />
-                            <label htmlFor="header-enabled" className="font-medium text-gray-900">
-                                Enable Header
-                            </label>
-                        </div>
-
-                        {stylingOptions.header?.enabled && (
-                            <div className="space-y-3">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                                        Header Content
-                                    </label>
-                                    <input
-                                        type="text"
-                                        value={stylingOptions.header?.content || ''}
-                                        onChange={(e) => updateStyling({
-                                            header: {
-                                                enabled: stylingOptions.header?.enabled || false,
-                                                ...stylingOptions.header,
-                                                content: e.target.value
-                                            }
-                                        })}
-                                        placeholder="e.g., {{title}} | {{date}}"
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    />
-                                    <p className="text-xs text-gray-500 mt-1">
-                                        Use variables: &#123;&#123;title&#125;&#125;, &#123;&#123;author&#125;&#125;, &#123;&#123;date&#125;&#125;
-                                    </p>
-                                </div>
-                                <div className="grid grid-cols-2 gap-3">
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                                            Alignment
-                                        </label>
-                                        <select
-                                            value={stylingOptions.header?.alignment || 'center'}
-                                            onChange={(e) => updateHeader({ alignment: e.target.value as 'left' | 'center' | 'right' })}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        >
-                                            <option value="left">Left</option>
-                                            <option value="center">Center</option>
-                                            <option value="right">Right</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                                            Border Bottom
-                                        </label>
-                                        <input
-                                            type="checkbox"
-                                            checked={stylingOptions.header?.borderBottom || false}
-                                            onChange={(e) => updateHeader({ borderBottom: e.target.checked })}
-                                            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-
-                    {/* Footer Settings */}
-                    <div className="border border-gray-200 rounded-lg p-4">
-                        <div className="flex items-center gap-2 mb-3">
-                            <input
-                                type="checkbox"
-                                id="footer-enabled"
-                                checked={stylingOptions.footer?.enabled || false}
-                                onChange={(e) => updateFooter({ enabled: e.target.checked })}
-                                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                            />
-                            <label htmlFor="footer-enabled" className="font-medium text-gray-900">
-                                Enable Footer
-                            </label>
-                        </div>
-
-                        {stylingOptions.footer?.enabled && (
-                            <div className="space-y-3">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                                        Footer Content
-                                    </label>
-                                    <input
-                                        type="text"
-                                        value={stylingOptions.footer?.content || ''}
-                                        onChange={(e) => updateFooter({ content: e.target.value })}
-                                        placeholder="e.g., {{author}}"
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    />
-                                </div>
-                                <div className="grid grid-cols-3 gap-3">
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                                            Alignment
-                                        </label>
-                                        <select
-                                            value={stylingOptions.footer?.alignment || 'center'}
-                                            onChange={(e) => updateFooter({ alignment: e.target.value as 'left' | 'center' | 'right' })}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        >
-                                            <option value="left">Left</option>
-                                            <option value="center">Center</option>
-                                            <option value="right">Right</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                                            Page Numbers
-                                        </label>
-                                        <input
-                                            type="checkbox"
-                                            checked={stylingOptions.footer?.includePageNumbers || false}
-                                            onChange={(e) => updateFooter({ includePageNumbers: e.target.checked })}
-                                            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                                            Border Top
-                                        </label>
-                                        <input
-                                            type="checkbox"
-                                            checked={stylingOptions.footer?.borderTop || false}
-                                            onChange={(e) => updateFooter({ borderTop: e.target.checked })}
-                                            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </Card>
+      {/* Advanced Options */}
+      <Card>
+        <div className="p-6 border-b border-neutral-200 dark:border-neutral-700">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-neutral-100 dark:bg-neutral-800 rounded-xl flex items-center justify-center">
+              <Cog6ToothIcon className="h-5 w-5 text-neutral-600 dark:text-neutral-400" />
+            </div>
+            <div>
+              <h3 className="text-title text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+                Advanced Options
+              </h3>
+              <p className="text-body text-neutral-600 dark:text-neutral-400 mt-1">
+                Additional features and customizations
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="p-6">
+          <div className="space-y-6">
+            {/* Headers and Footers */}
+            <div className="space-y-4">
+              <h4 className="font-semibold text-neutral-900 dark:text-neutral-100">
+                Headers & Footers
+              </h4>
+              <div className="space-y-3">
+                <label className="flex items-center space-x-3">
+                  <input
+                    type="checkbox"
+                    checked={stylingOptions.header?.enabled || false}
+                    onChange={(e) =>
+                      updateHeader({ enabled: e.target.checked })
+                    }
+                    className="checkbox"
+                  />
+                  <span className="form-label">Include page headers</span>
+                </label>
+                <label className="flex items-center space-x-3">
+                  <input
+                    type="checkbox"
+                    checked={stylingOptions.footer?.enabled || false}
+                    onChange={(e) =>
+                      updateFooter({ enabled: e.target.checked })
+                    }
+                    className="checkbox"
+                  />
+                  <span className="form-label">Include page footers</span>
+                </label>
+              </div>
+            </div>
 
             {/* Table of Contents */}
-            <Card className="p-4">
-                <div className="flex items-center gap-2 mb-4">
-                    <Cog6ToothIcon className="h-5 w-5 text-orange-600" />
-                    <h3 className="text-lg font-semibold">Table of Contents</h3>
-                </div>
-
-                <div className="space-y-4">
-                    <div className="flex items-center gap-2">
-                        <input
-                            type="checkbox"
-                            id="toc-enabled"
-                            checked={stylingOptions.tableOfContents?.enabled || false}
-                            onChange={(e) => updateTableOfContents({ enabled: e.target.checked })}
-                            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                        />
-                        <label htmlFor="toc-enabled" className="font-medium text-gray-900">
-                            Generate Table of Contents
-                        </label>
-                    </div>
-
-                    {stylingOptions.tableOfContents?.enabled && (
-                        <div className="space-y-3">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    Title
-                                </label>
-                                <input
-                                    type="text"
-                                    value={stylingOptions.tableOfContents?.title || 'Table of Contents'}
-                                    onChange={(e) => updateTableOfContents({ title: e.target.value })}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                />
-                            </div>
-                            <div className="grid grid-cols-2 gap-3">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                                        Max Depth
-                                    </label>
-                                    <select
-                                        value={stylingOptions.tableOfContents?.maxDepth || 3}
-                                        onChange={(e) => updateTableOfContents({ maxDepth: parseInt(e.target.value) })}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    >
-                                        <option value={1}>H1 only</option>
-                                        <option value={2}>H1-H2</option>
-                                        <option value={3}>H1-H3</option>
-                                        <option value={4}>H1-H4</option>
-                                        <option value={5}>H1-H5</option>
-                                        <option value={6}>H1-H6</option>
-                                    </select>
-                                </div>
-                                <div className="space-y-2">
-                                    <div className="flex items-center gap-2">
-                                        <input
-                                            type="checkbox"
-                                            id="toc-page-numbers"
-                                            checked={stylingOptions.tableOfContents?.includePageNumbers || false}
-                                            onChange={(e) => updateTableOfContents({ includePageNumbers: e.target.checked })}
-                                            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                                        />
-                                        <label htmlFor="toc-page-numbers" className="text-sm text-gray-700">
-                                            Page Numbers
-                                        </label>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <input
-                                            type="checkbox"
-                                            id="toc-dot-fill"
-                                            checked={stylingOptions.tableOfContents?.dotFill || false}
-                                            onChange={(e) => updateTableOfContents({ dotFill: e.target.checked })}
-                                            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                                        />
-                                        <label htmlFor="toc-dot-fill" className="text-sm text-gray-700">
-                                            Dot Fill
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                </div>
-            </Card>
+            <div className="space-y-4">
+              <h4 className="font-semibold text-neutral-900 dark:text-neutral-100">
+                Table of Contents
+              </h4>
+              <label className="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  checked={stylingOptions.tableOfContents?.enabled || false}
+                  onChange={(e) =>
+                    updateTableOfContents({ enabled: e.target.checked })
+                  }
+                  className="checkbox"
+                />
+                <span className="form-label">Generate table of contents</span>
+              </label>
+            </div>
 
             {/* Syntax Highlighting */}
-            <Card className="p-4">
-                <div className="flex items-center gap-2 mb-4">
-                    <Cog6ToothIcon className="h-5 w-5 text-red-600" />
-                    <h3 className="text-lg font-semibold">Syntax Highlighting</h3>
-                </div>
-
-                <div className="space-y-4">
-                    <div className="flex items-center gap-2">
-                        <input
-                            type="checkbox"
-                            id="syntax-enabled"
-                            checked={stylingOptions.syntaxHighlighting?.enabled || false}
-                            onChange={(e) => updateSyntaxHighlighting({ enabled: e.target.checked })}
-                            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                        />
-                        <label htmlFor="syntax-enabled" className="font-medium text-gray-900">
-                            Enable Syntax Highlighting
-                        </label>
-                    </div>
-
-                    {stylingOptions.syntaxHighlighting?.enabled && (
-                        <div className="space-y-3">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    Theme
-                                </label>
-                                <select
-                                    value={stylingOptions.syntaxHighlighting?.theme || 'github'}
-                                    onChange={(e) => updateSyntaxHighlighting({ theme: e.target.value as SyntaxTheme })}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                >
-                                    <option value="github">GitHub</option>
-                                    <option value="monokai">Monokai</option>
-                                    <option value="vs">Visual Studio</option>
-                                    <option value="atom-one-dark">Atom One Dark</option>
-                                    <option value="rainbow">Rainbow</option>
-                                </select>
-                            </div>
-                            <div className="grid grid-cols-2 gap-3">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                                        Font Size: {stylingOptions.syntaxHighlighting?.fontSize || 11}px
-                                    </label>
-                                    <input
-                                        type="range"
-                                        min="8"
-                                        max="16"
-                                        value={stylingOptions.syntaxHighlighting?.fontSize || 11}
-                                        onChange={(e) => updateSyntaxHighlighting({ fontSize: parseInt(e.target.value) })}
-                                        className="w-full"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <div className="flex items-center gap-2">
-                                        <input
-                                            type="checkbox"
-                                            id="syntax-line-numbers"
-                                            checked={stylingOptions.syntaxHighlighting?.lineNumbers || false}
-                                            onChange={(e) => updateSyntaxHighlighting({ lineNumbers: e.target.checked })}
-                                            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                                        />
-                                        <label htmlFor="syntax-line-numbers" className="text-sm text-gray-700">
-                                            Line Numbers
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                </div>
-            </Card>
-
-            {/* Accessibility Settings */}
-            <Card className="p-4">
-                <div className="flex items-center gap-2 mb-4">
-                    <EyeIcon className="h-5 w-5 text-teal-600" />
-                    <h3 className="text-lg font-semibold">Accessibility</h3>
-                </div>
-
-                <div className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-3">
-                            <div className="flex items-center gap-2">
-                                <input
-                                    type="checkbox"
-                                    id="high-contrast"
-                                    checked={stylingOptions.accessibility?.highContrast || false}
-                                    onChange={(e) => updateAccessibility({ highContrast: e.target.checked })}
-                                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                                />
-                                <label htmlFor="high-contrast" className="text-sm text-gray-700">
-                                    High Contrast Mode
-                                </label>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <input
-                                    type="checkbox"
-                                    id="structured-headings"
-                                    checked={stylingOptions.accessibility?.structuredHeadings || false}
-                                    onChange={(e) => updateAccessibility({ structuredHeadings: e.target.checked })}
-                                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                                />
-                                <label htmlFor="structured-headings" className="text-sm text-gray-700">
-                                    Structured Headings
-                                </label>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <input
-                                    type="checkbox"
-                                    id="alt-text-images"
-                                    checked={stylingOptions.accessibility?.altTextForImages || false}
-                                    onChange={(e) => updateAccessibility({ altTextForImages: e.target.checked })}
-                                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                                />
-                                <label htmlFor="alt-text-images" className="text-sm text-gray-700">
-                                    Alt Text for Images
-                                </label>
-                            </div>
-                        </div>
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Accessibility Font Size
-                            </label>
-                            <select
-                                value={stylingOptions.accessibility?.fontSize || 'normal'}
-                                onChange={(e) => updateAccessibility({ fontSize: e.target.value as 'small' | 'normal' | 'large' | 'x-large' })}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            >
-                                <option value="small">Small</option>
-                                <option value="normal">Normal</option>
-                                <option value="large">Large</option>
-                                <option value="x-large">Extra Large</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </Card>
-
-            {/* Preview Toggle */}
-            {onPreviewChange && (
-                <div className="flex justify-center">
-                    <Button
-                        variant="outline"
-                        onClick={() => onPreviewChange(!showPreview)}
-                        className="flex items-center gap-2"
+            <div className="space-y-4">
+              <h4 className="font-semibold text-neutral-900 dark:text-neutral-100">
+                Code Highlighting
+              </h4>
+              <div className="space-y-3">
+                <label className="flex items-center space-x-3">
+                  <input
+                    type="checkbox"
+                    checked={
+                      stylingOptions.syntaxHighlighting?.enabled || false
+                    }
+                    onChange={(e) =>
+                      updateSyntaxHighlighting({ enabled: e.target.checked })
+                    }
+                    className="checkbox"
+                  />
+                  <span className="form-label">Enable syntax highlighting</span>
+                </label>
+                {stylingOptions.syntaxHighlighting?.enabled && (
+                  <div className="ml-6">
+                    <label className="form-label mb-2">
+                      Highlighting Theme
+                    </label>
+                    <select
+                      value={
+                        stylingOptions.syntaxHighlighting.theme || "github"
+                      }
+                      onChange={(e) =>
+                        updateSyntaxHighlighting({
+                          theme: e.target.value as SyntaxTheme,
+                        })
+                      }
+                      className="select"
+                      aria-label="Select syntax highlighting theme"
                     >
-                        <EyeIcon className="h-4 w-4" />
-                        {showPreview ? 'Hide Preview' : 'Show Preview'}
-                    </Button>
-                </div>
-            )}
+                      <option value="github">GitHub</option>
+                      <option value="github-dark">GitHub Dark</option>
+                      <option value="monokai">Monokai</option>
+                      <option value="solarized-light">Solarized Light</option>
+                      <option value="solarized-dark">Solarized Dark</option>
+                    </select>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Accessibility */}
+            <div className="space-y-4">
+              <h4 className="font-semibold text-neutral-900 dark:text-neutral-100">
+                Accessibility
+              </h4>
+              <div className="space-y-3">
+                <label className="flex items-center space-x-3">
+                  <input
+                    type="checkbox"
+                    checked={
+                      stylingOptions.accessibility?.highContrast || false
+                    }
+                    onChange={(e) =>
+                      updateAccessibility({ highContrast: e.target.checked })
+                    }
+                    className="checkbox"
+                  />
+                  <span className="form-label">High contrast mode</span>
+                </label>
+                <label className="flex items-center space-x-3">
+                  <input
+                    type="checkbox"
+                    checked={stylingOptions.accessibility?.fontSize === "large"}
+                    onChange={(e) =>
+                      updateAccessibility({
+                        fontSize: e.target.checked ? "large" : "normal",
+                      })
+                    }
+                    className="checkbox"
+                  />
+                  <span className="form-label">Large text size</span>
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
-    );
-} 
+      </Card>
+    </div>
+  );
+}

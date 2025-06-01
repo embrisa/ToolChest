@@ -56,13 +56,17 @@
     "@heroicons/react": "^2.2.0",
     "@monaco-editor/react": "^4.7.0",
     "@prisma/client": "^6.8.2",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.16",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@types/highlight.js": "^9.12.4",
     "@types/markdown-it": "^14.1.2",
     "@typescript-eslint/eslint-plugin": "^8.33.0",
     "@typescript-eslint/parser": "^8.33.0",
+    "autoprefixer": "^10.4.21",
     "clsx": "^2.1.1",
+    "critters": "^0.0.23",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.4.1",
@@ -77,6 +81,7 @@
     "next": "15.3.3",
     "node-cache": "^5.1.2",
     "playwright": "^1.52.0",
+    "postcss": "^8.5.4",
     "prettier": "^3.5.3",
     "prisma": "^6.8.2",
     "react": "^19.0.0",
@@ -87,6 +92,7 @@
     "sharp": "^0.34.2",
     "swr": "^2.3.3",
     "tailwind-merge": "^3.3.0",
+    "tailwindcss": "^3.4.17",
     "web-vitals": "^5.0.2",
     "zod": "^3.25.42",
     "zustand": "^5.0.5"
@@ -96,7 +102,6 @@
     "@eslint/eslintrc": "^3",
     "@playwright/test": "^1.52.0",
     "@svgr/webpack": "^8.1.0",
-    "@tailwindcss/postcss": "^4",
     "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^29.5.14",
     "@types/jest-axe": "^3.5.9",
@@ -111,8 +116,11 @@
     "jest-environment-jsdom": "^30.0.0-beta.3",
     "jest-html-reporter": "^4.1.0",
     "jest-junit": "^16.0.0",
-    "tailwindcss": "^4",
+    "tsx": "^4.19.4",
     "typescript": "^5",
     "webpack-bundle-analyzer": "^4.10.2"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   }
 }

@@ -1,8 +1,9 @@
-'use client';
+"use client";
 
-import React, { Suspense } from 'react';
-import { ToolCard, SearchInput, TagFilter } from '@/components/tools';
-import { useToolsWithState, useTagsWithState } from '@/hooks/useToolsWithState';
+import React, { Suspense } from "react";
+import { ToolCard, SearchInput, TagFilter } from "@/components/tools";
+import { useToolsWithState, useTagsWithState } from "@/hooks/useToolsWithState";
+import { Button } from "@/components/ui";
 
 function HomePageContent() {
   // Use enhanced hooks with URL synchronization
@@ -11,19 +12,19 @@ function HomePageContent() {
     isLoading: toolsLoading,
     error: toolsError,
     filterState,
-    actions: {
-      setQuery,
-      setTags,
-      clearAllFilters,
-      retry: retryTools
-    }
+    actions: { setQuery, setTags, clearAllFilters, retry: retryTools },
   } = useToolsWithState();
 
-  const { tags, isLoading: tagsLoading, error: tagsError, retry: retryTags } = useTagsWithState();
+  const {
+    tags,
+    isLoading: tagsLoading,
+    error: tagsError,
+    retry: retryTags,
+  } = useTagsWithState();
 
   const handleTagToggle = (tagSlug: string) => {
     const newTags = filterState.tags.includes(tagSlug)
-      ? filterState.tags.filter(slug => slug !== tagSlug)
+      ? filterState.tags.filter((slug) => slug !== tagSlug)
       : [...filterState.tags, tagSlug];
     setTags(newTags);
   };
@@ -37,178 +38,405 @@ function HomePageContent() {
 
   if (hasError) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+      <div className="min-h-screen bg-neutral-100 flex items-center justify-center animate-fade-in">
+        <div className="text-center max-w-md mx-auto px-4">
+          <div className="w-16 h-16 bg-error-50 dark:bg-error-950/20 border border-error-200 dark:border-error-800/30 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-soft">
+            <svg
+              className="w-8 h-8 text-error-500 dark:text-error-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+              />
+            </svg>
+          </div>
+          <h2 className="text-title text-2xl font-bold text-primary mb-4">
             Something went wrong
-          </h1>
-          <p className="text-gray-600 mb-4">
+          </h2>
+          <p className="text-body text-secondary mb-6">
             We&apos;re having trouble loading the tools. Please try again later.
           </p>
-          <button
+          <Button
+            variant="primary"
             onClick={() => {
               retryTools();
               retryTags();
             }}
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="focus-ring"
+            data-testid="retry-button"
           >
-            Retry
-          </button>
+            Try Again
+          </Button>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-neutral-100 via-neutral-150 to-neutral-200" suppressHydrationWarning>
       {/* Hero Section */}
-      <section className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl md:text-6xl">
-              ToolChest
+      <header className="relative bg-gradient-to-br from-neutral-100 via-neutral-150 to-neutral-250 border-b border-neutral-300 overflow-hidden">
+        {/* Dramatic Background Layers */}
+        <div
+          className="absolute inset-0 bg-gradient-to-br from-brand-500/5 via-transparent to-accent-500/8"
+          aria-hidden="true"
+        ></div>
+        <div
+          className="absolute inset-0 bg-gradient-radial from-brand-400/10 via-transparent to-transparent"
+          aria-hidden="true"
+        ></div>
+        <div
+          className="absolute inset-0 bg-gradient-mesh opacity-30"
+          aria-hidden="true"
+        ></div>
+        <div className="absolute inset-0 bg-noise opacity-60" aria-hidden="true"></div>
+
+        {/* Animated Gradient Orbs */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-brand-400/20 to-transparent rounded-full blur-3xl animate-float" aria-hidden="true"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-br from-accent-400/15 to-transparent rounded-full blur-3xl animate-float" style={{ animationDelay: "1s" }} aria-hidden="true"></div>
+        <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-gradient-to-br from-success-400/10 to-transparent rounded-full blur-2xl animate-float" style={{ animationDelay: "2s" }} aria-hidden="true"></div>
+
+        <div className="relative container-wide px-6 sm:px-8 lg:px-12 py-20 sm:py-24 lg:py-32">
+          <div className="text-center animate-fade-in-up">
+            <h1 className="text-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8">
+              <span className="text-gradient-brand">tool-chest</span>
             </h1>
-            <p className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-              Your collection of essential web development tools.
-              Encode, decode, generate, and convert with ease.
+            <p className="text-body text-lg sm:text-xl lg:text-2xl text-secondary max-w-3xl mx-auto mb-12 leading-relaxed">
+              Your collection of essential computer tools.
+              <br className="hidden sm:block" />
+              <span className="text-gradient bg-gradient-to-r from-brand-600 to-accent-600 bg-clip-text text-transparent">
+                Encode, decode, generate, convert, and more with ease.
+              </span>
             </p>
-          </div>
 
-          {/* Search Section */}
-          <div className="mt-10 max-w-xl mx-auto">
-            <SearchInput
-              value={filterState.query}
-              onChange={setQuery}
-              placeholder="Search tools..."
-              isLoading={Boolean(toolsLoading && filterState.query)}
-              resultCount={filteredTools.length}
-              className="w-full"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="lg:grid lg:grid-cols-4 lg:gap-8">
-          {/* Sidebar - Filters */}
-          <aside className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 sticky top-8">
-              <TagFilter
-                tags={tags}
-                selectedTags={filterState.tags}
-                onTagToggle={handleTagToggle}
-                onClearAll={handleClearAllTags}
-                showCount={true}
+            {/* Search Section */}
+            <div
+              className="max-w-2xl mx-auto animate-fade-in-up mb-16"
+              style={{ animationDelay: "0.1s" }}
+            >
+              <SearchInput
+                value={filterState.query}
+                onChange={setQuery}
+                placeholder="Search tools..."
+                isLoading={Boolean(toolsLoading && filterState.query)}
+                resultCount={filteredTools.length}
+                className="w-full text-lg"
+                data-testid="search-input"
               />
             </div>
-          </aside>
 
-          {/* Tools Grid */}
-          <div className="mt-8 lg:mt-0 lg:col-span-3">
-            {/* Results Header */}
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h2 className="text-lg font-medium text-gray-900">
-                  {filterState.query ? 'Search Results' : 'All Tools'}
-                </h2>
-                <p className="text-sm text-gray-500">
-                  {isLoading ? 'Loading...' : `${filteredTools.length} tools found`}
-                </p>
-              </div>
-
-              {(filterState.query || filterState.tags.length > 0) && (
-                <button
-                  onClick={clearAllFilters}
-                  className="text-sm text-blue-600 hover:text-blue-800 focus:outline-none focus:underline"
+            {/* Stats */}
+            <div
+              className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12 animate-fade-in-up"
+              style={{ animationDelay: "0.2s" }}
+              role="region"
+              aria-label="tool-chest statistics"
+            >
+              <div className="text-center">
+                <div
+                  className="text-2xl sm:text-3xl font-bold text-gradient-brand"
+                  data-testid="tools-count"
                 >
-                  Clear all filters
-                </button>
-              )}
-            </div>
-
-            {/* Loading State */}
-            {isLoading && (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {[...Array(6)].map((_, i) => (
-                  <div key={i} className="animate-pulse">
-                    <div className="bg-gray-200 rounded-lg h-48"></div>
-                  </div>
-                ))}
+                  {isLoading ? "..." : filteredTools.length}
+                </div>
+                <div className="text-sm text-secondary font-medium">
+                  Tools Available
+                </div>
               </div>
-            )}
-
-            {/* Tools Grid */}
-            {!isLoading && (
-              <>
-                {filteredTools.length > 0 ? (
-                  <div
-                    className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
-                    role="grid"
-                    aria-label="Available tools"
-                  >
-                    {filteredTools.map((tool, index) => (
-                      <div key={tool.id} role="gridcell">
-                        <ToolCard
-                          tool={tool}
-                          showUsageCount={true}
-                          priority={index < 6}
-                          className="h-full"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-12">
-                    <svg
-                      className="mx-auto h-12 w-12 text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                      />
-                    </svg>
-                    <h3 className="mt-2 text-sm font-medium text-gray-900">
-                      No tools found
-                    </h3>
-                    <p className="mt-1 text-sm text-gray-500">
-                      {filterState.query
-                        ? `No tools match "${filterState.query}"`
-                        : 'No tools match your selected filters'
-                      }
-                    </p>
-                    <div className="mt-6">
-                      <button
-                        onClick={clearAllFilters}
-                        className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                      >
-                        Clear filters
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </>
-            )}
+              <div
+                className="hidden sm:block w-px h-8 bg-neutral-200"
+                aria-hidden="true"
+              ></div>
+              <div className="text-center">
+                <div className="text-2xl sm:text-3xl font-bold text-gradient bg-gradient-to-r from-success-500 to-warning-500 bg-clip-text text-transparent">
+                  100%
+                </div>
+                <div className="text-sm text-secondary font-medium">
+                  Client-side Processing
+                </div>
+              </div>
+              <div
+                className="hidden sm:block w-px h-8 bg-neutral-200"
+                aria-hidden="true"
+              ></div>
+              <div className="text-center">
+                <div className="text-2xl sm:text-3xl font-bold text-gradient bg-gradient-to-r from-accent-500 to-brand-500 bg-clip-text text-transparent">
+                  Free
+                </div>
+                <div className="text-sm text-secondary font-medium">
+                  Forever
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </main>
+      </header>
+
+      {/* Main Content */}
+      <div className="relative container-wide px-6 sm:px-8 lg:px-12 py-12 lg:py-16">
+        {/* Subtle background drama for main content */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-500/3 to-transparent pointer-events-none" aria-hidden="true"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-accent-500/2 to-transparent pointer-events-none" aria-hidden="true"></div>
+        <div className="relative z-10">
+          {/* Mobile: Show search summary and filters toggle */}
+          <div className="lg:hidden mb-10">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h2 className="text-heading text-xl font-semibold text-primary">
+                  {filterState.query ? "Search Results" : "All Tools"}
+                </h2>
+                <p
+                  className="text-body text-secondary mt-2"
+                  data-testid="results-summary-mobile"
+                >
+                  {isLoading
+                    ? "Loading..."
+                    : `${filteredTools.length} tools found`}
+                </p>
+              </div>
+            </div>
+
+            {/* Mobile filters in collapsible card */}
+            <details className="group">
+              <summary className="card p-6 cursor-pointer focus-ring rounded-lg list-none">
+                <div className="flex items-center justify-between">
+                  <span className="text-body font-medium text-primary">
+                    Filter Tools
+                    {filterState.tags.length > 0 && (
+                      <span className="ml-3 inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-brand-100 text-brand-800 dark:bg-brand-900/20 dark:text-brand-200">
+                        {filterState.tags.length} active
+                      </span>
+                    )}
+                  </span>
+                  <svg
+                    className="w-5 h-5 text-secondary transition-transform group-open:rotate-180"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+              </summary>
+              <div className="card p-8 mt-4">
+                <TagFilter
+                  tags={tags}
+                  selectedTags={filterState.tags}
+                  onTagToggle={handleTagToggle}
+                  onClearAll={handleClearAllTags}
+                  showCount={true}
+                  data-testid="tag-filters-mobile"
+                />
+              </div>
+            </details>
+          </div>
+
+          {/* Desktop Layout */}
+          <div className="lg:grid lg:grid-cols-4 lg:gap-12">
+            {/* Desktop Tools Grid - Move to first for better visual hierarchy */}
+            <main
+              className="lg:col-span-3 lg:order-2 animate-fade-in-up"
+              style={{ animationDelay: "0.1s" }}
+              role="main"
+              aria-label="Tools collection"
+            >
+              {/* Desktop Results Header */}
+              <div className="hidden lg:flex items-center justify-between mb-10">
+                <div>
+                  <h2 className="text-heading text-xl font-semibold text-primary">
+                    {filterState.query ? "Search Results" : "All Tools"}
+                  </h2>
+                  <p
+                    className="text-body text-secondary mt-2"
+                    data-testid="results-summary-desktop"
+                  >
+                    {isLoading
+                      ? "Loading..."
+                      : `${filteredTools.length} tools found`}
+                  </p>
+                </div>
+
+                {(filterState.query || filterState.tags.length > 0) && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={clearAllFilters}
+                    className="focus-ring"
+                    data-testid="clear-all-filters"
+                  >
+                    Clear all filters
+                  </Button>
+                )}
+              </div>
+
+              {/* Mobile Clear Filters Button */}
+              {(filterState.query || filterState.tags.length > 0) && (
+                <div className="lg:hidden mb-8">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={clearAllFilters}
+                    className="focus-ring w-full sm:w-auto"
+                    data-testid="clear-all-filters-mobile"
+                  >
+                    Clear all filters
+                  </Button>
+                </div>
+              )}
+
+              {/* Loading State */}
+              {isLoading && (
+                <div
+                  className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"
+                  role="status"
+                  aria-label="Loading tools"
+                >
+                  {[...Array(6)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="card h-48 animate-pulse"
+                      data-testid="tool-skeleton"
+                    >
+                      <div className="p-8 space-y-6">
+                        <div className="skeleton w-12 h-12 rounded-xl"></div>
+                        <div className="space-y-3">
+                          <div className="skeleton-title"></div>
+                          <div className="skeleton-text"></div>
+                          <div className="skeleton-text w-2/3"></div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  <span className="sr-only">Loading tools...</span>
+                </div>
+              )}
+
+              {/* Tools Grid */}
+              {!isLoading && (
+                <>
+                  {filteredTools.length > 0 ? (
+                    <div
+                      className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"
+                      role="region"
+                      aria-label="Available tools"
+                      data-testid="tools-grid"
+                    >
+                      {filteredTools.map((tool, index) => (
+                        <div
+                          key={tool.id}
+                          className="animate-fade-in-up"
+                          style={{ animationDelay: `${index * 0.03}s` }}
+                        >
+                          <ToolCard
+                            tool={tool}
+                            showUsageCount={true}
+                            priority={index < 6}
+                            className="h-full"
+                            data-testid="tool-card"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div
+                      className="text-center py-20 animate-fade-in"
+                      data-testid="no-results"
+                    >
+                      <div className="w-20 h-20 bg-neutral-100 dark:bg-neutral-800 rounded-2xl flex items-center justify-center mx-auto mb-8">
+                        <svg
+                          className="w-10 h-10 text-neutral-400"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={1.5}
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                          />
+                        </svg>
+                      </div>
+                      <h3 className="text-heading text-lg font-semibold text-primary mb-3">
+                        No tools found
+                      </h3>
+                      <p className="text-body text-secondary mb-10 max-w-md mx-auto">
+                        {filterState.query
+                          ? `No tools match "${filterState.query}"`
+                          : "No tools match your selected filters"}
+                      </p>
+                      <Button
+                        variant="primary"
+                        onClick={clearAllFilters}
+                        className="focus-ring"
+                        data-testid="clear-filters"
+                      >
+                        Clear filters
+                      </Button>
+                    </div>
+                  )}
+                </>
+              )}
+            </main>
+
+            {/* Desktop Sidebar - Filters */}
+            <aside
+              className="hidden lg:block lg:col-span-1 lg:order-1 animate-fade-in-up"
+              style={{ animationDelay: "0.2s" }}
+              role="complementary"
+              aria-label="Filter tools"
+            >
+              <div className="card p-8 sticky top-8">
+                <TagFilter
+                  tags={tags}
+                  selectedTags={filterState.tags}
+                  onTagToggle={handleTagToggle}
+                  onClearAll={handleClearAllTags}
+                  showCount={true}
+                  data-testid="tag-filters-desktop"
+                />
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
 
 export default function HomePage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div
+          className="min-h-screen bg-neutral-100 flex items-center justify-center"
+          role="status"
+          aria-label="Loading application"
+        >
+          <div className="text-center">
+            <div className="w-16 h-16 bg-brand-100 dark:bg-brand-900/20 rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse">
+              <div className="w-8 h-8 bg-brand-500 rounded-lg animate-bounce"></div>
+            </div>
+            <p className="text-body text-secondary">
+              Loading tool-chest...
+            </p>
+            <span className="sr-only">Loading application, please wait...</span>
+          </div>
+        </div>
+      }
+    >
       <HomePageContent />
     </Suspense>
   );

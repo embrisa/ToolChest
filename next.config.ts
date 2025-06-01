@@ -1,4 +1,4 @@
-import type { NextConfig } from 'next';
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* Performance Optimizations */
@@ -12,9 +12,9 @@ const nextConfig: NextConfig = {
   // Turbopack configuration (moved from experimental.turbo)
   turbopack: {
     rules: {
-      '*.svg': {
-        loaders: ['@svgr/webpack'],
-        as: '*.js',
+      "*.svg": {
+        loaders: ["@svgr/webpack"],
+        as: "*.js",
       },
     },
   },
@@ -24,12 +24,12 @@ const nextConfig: NextConfig = {
     // Enable optimization for external images
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '**',
+        protocol: "https",
+        hostname: "**",
       },
     ],
     // Optimize image formats
-    formats: ['image/webp', 'image/avif'],
+    formats: ["image/webp", "image/avif"],
     // Configure image sizes for responsive images
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
@@ -41,49 +41,47 @@ const nextConfig: NextConfig = {
   // Compression and output optimization
   compress: true,
 
-
-
   // Headers for better caching and security
   async headers() {
     return [
       {
-        source: '/(.*)',
+        source: "/(.*)",
         headers: [
           {
-            key: 'X-DNS-Prefetch-Control',
-            value: 'on'
+            key: "X-DNS-Prefetch-Control",
+            value: "on",
           },
           {
-            key: 'X-Frame-Options',
-            value: 'DENY'
+            key: "X-Frame-Options",
+            value: "DENY",
           },
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff'
+            key: "X-Content-Type-Options",
+            value: "nosniff",
           },
           {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin'
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
           },
         ],
       },
       {
         // Cache static assets aggressively
-        source: '/static/(.*)',
+        source: "/static/(.*)",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
       {
         // Cache API routes appropriately
-        source: '/api/tools/:path*',
+        source: "/api/tools/:path*",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=300, stale-while-revalidate=600',
+            key: "Cache-Control",
+            value: "public, max-age=300, stale-while-revalidate=600",
           },
         ],
       },
@@ -91,16 +89,16 @@ const nextConfig: NextConfig = {
   },
 
   // Enable bundle analyzer in development
-  ...(process.env.ANALYZE === 'true' && {
+  ...(process.env.ANALYZE === "true" && {
     webpack: (config: any) => {
-      if (process.env.ANALYZE === 'true') {
-        const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+      if (process.env.ANALYZE === "true") {
+        const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
         config.plugins.push(
           new BundleAnalyzerPlugin({
-            analyzerMode: 'server',
+            analyzerMode: "server",
             analyzerPort: 8888,
             openAnalyzer: true,
-          })
+          }),
         );
       }
       return config;
@@ -108,18 +106,18 @@ const nextConfig: NextConfig = {
   }),
 
   // Output configuration for better performance
-  output: 'standalone',
+  output: "standalone",
 
   // Reduce build output size
   generateEtags: false,
 
   // Optimize module resolution
   modularizeImports: {
-    '@heroicons/react/24/outline': {
-      transform: '@heroicons/react/24/outline/{{member}}',
+    "@heroicons/react/24/outline": {
+      transform: "@heroicons/react/24/outline/{{member}}",
     },
-    '@heroicons/react/24/solid': {
-      transform: '@heroicons/react/24/solid/{{member}}',
+    "@heroicons/react/24/solid": {
+      transform: "@heroicons/react/24/solid/{{member}}",
     },
   },
 };
