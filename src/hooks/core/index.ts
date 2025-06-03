@@ -1,5 +1,22 @@
-// Core hooks will be exported from here
-// TODO: Add actual core hooks as they are created
+import { useCallback, useEffect, useRef, useState } from "react";
 
-// Placeholder export to make this a valid module
-export const CORE_HOOKS_PLACEHOLDER = "core-hooks";
+/**
+ * Simple hook to manage boolean state.
+ */
+export function useToggle(initial = false) {
+  const [value, setValue] = useState(initial);
+  const toggle = useCallback(() => setValue((v) => !v), []);
+  return [value, toggle, setValue] as const;
+}
+
+/**
+ * Return the previous value of a variable.
+ */
+export function usePrevious<T>(value: T): T | undefined {
+  const ref = useRef<T>();
+  useEffect(() => {
+    ref.current = value;
+  }, [value]);
+  return ref.current;
+}
+
