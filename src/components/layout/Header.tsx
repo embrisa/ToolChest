@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   MagnifyingGlassIcon,
@@ -18,6 +19,7 @@ export function Header({ className }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,8 +53,17 @@ export function Header({ className }: HeaderProps) {
   }, [isMobileMenuOpen]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-    // TODO: Implement search functionality in Phase 3
+    const value = e.target.value;
+    setSearchQuery(value);
+
+    const trimmed = value.trim();
+    if (trimmed.length === 0) {
+      router.push("/");
+      return;
+    }
+
+    const query = encodeURIComponent(trimmed);
+    router.push(`/?query=${query}`);
   };
 
   const toggleMobileMenu = () => {
