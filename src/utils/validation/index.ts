@@ -1,5 +1,20 @@
-// Validation utilities will be exported from here
-// TODO: Add actual validation utilities as they are created
+/**
+ * Check if a string is a valid email address.
+ */
+export function isEmail(value: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
 
-// Placeholder export to make this a valid module
-export const VALIDATION_UTILS_PLACEHOLDER = "validation-utils";
+/**
+ * Check if a string is a valid URL.
+ */
+export function isUrl(value: string): boolean {
+  try {
+    // eslint-disable-next-line no-new
+    new URL(value);
+    return true;
+  } catch {
+    return false;
+  }
+}
+

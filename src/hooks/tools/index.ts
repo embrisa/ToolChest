@@ -1,5 +1,7 @@
-// Tool-specific hooks will be exported from here
-// TODO: Add actual tool hooks as they are created
+export { useTools, useToolsSearch, useTags, useToolsByTag, usePopularTools } from "../useTools";
+export {
+  useToolsWithState,
+  useTagsWithState,
+  useToolWithUsage,
+} from "../useToolsWithState";
 
-// Placeholder export to make this a valid module
-export const TOOL_HOOKS_PLACEHOLDER = "tool-hooks";
