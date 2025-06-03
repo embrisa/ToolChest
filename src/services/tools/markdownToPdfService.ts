@@ -18,8 +18,14 @@ import "highlight.js/lib/languages/rust";
 import "highlight.js/lib/languages/php";
 import "highlight.js/lib/languages/markdown";
 // Import markdown-it plugins for GFM support
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const markdownItTaskLists = require("markdown-it-task-lists");
+let markdownItTaskLists: any;
+try {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  markdownItTaskLists = require("markdown-it-task-lists");
+} catch (error) {
+  console.warn("Failed to load markdown-it-task-lists plugin:", error);
+  markdownItTaskLists = null;
+}
 import {
   MarkdownToPdfProgress,
   PdfGenerationResult,
@@ -49,43 +55,47 @@ export class MarkdownToPdfService {
 
   constructor() {
     // Configure highlight.js with security considerations and extended language support
-    hljs.configure({
-      ignoreUnescapedHTML: true,
-      throwUnescapedHTML: false,
-      languages: [
-        "javascript",
-        "typescript",
-        "python",
-        "java",
-        "cpp",
-        "c",
-        "bash",
-        "shell",
-        "json",
-        "xml",
-        "html",
-        "css",
-        "sql",
-        "go",
-        "rust",
-        "php",
-        "markdown",
-        "yaml",
-        "dockerfile",
-        "kotlin",
-        "swift",
-        "ruby",
-        "perl",
-        "scala",
-        "dart",
-        "lua",
-        "r",
-        "matlab",
-        "powershell",
-        "vim",
-        "makefile",
-      ],
-    });
+    try {
+      hljs.configure({
+        ignoreUnescapedHTML: true,
+        throwUnescapedHTML: false,
+        languages: [
+          "javascript",
+          "typescript",
+          "python",
+          "java",
+          "cpp",
+          "c",
+          "bash",
+          "shell",
+          "json",
+          "xml",
+          "html",
+          "css",
+          "sql",
+          "go",
+          "rust",
+          "php",
+          "markdown",
+          "yaml",
+          "dockerfile",
+          "kotlin",
+          "swift",
+          "ruby",
+          "perl",
+          "scala",
+          "dart",
+          "lua",
+          "r",
+          "matlab",
+          "powershell",
+          "vim",
+          "makefile",
+        ],
+      });
+    } catch (error) {
+      console.warn("Failed to configure highlight.js, syntax highlighting will be limited:", error);
+    }
 
     // Initialize with enhanced GFM-compatible configuration
     this.markdownProcessor = new MarkdownIt({
@@ -152,6 +162,17 @@ export class MarkdownToPdfService {
           : undefined,
       };
     } catch (error) {
+      // Special handling for hljs-related errors including isSpace
+      if (error instanceof Error && (
+        error.message.includes("isSpace") ||
+        error.message.includes("highlight") ||
+        error.stack?.includes("hljs") ||
+        error.stack?.includes("highlight.js")
+      )) {
+        console.warn("Syntax highlighting compatibility issue detected, falling back to basic markdown parsing:", error.message);
+        return this.parseMarkdownFallback(content, options);
+      }
+
       throw new Error(
         `Failed to parse markdown: ${error instanceof Error ? error.message : "Unknown error"}`,
       );
@@ -538,12 +559,17 @@ export class MarkdownToPdfService {
     }
 
     // Enable task lists with proper plugin
-    if (options.enableTaskLists) {
-      this.markdownProcessor.use(markdownItTaskLists, {
-        enabled: true,
-        label: true,
-        labelAfter: true,
-      });
+    if (options.enableTaskLists && markdownItTaskLists) {
+      try {
+        this.markdownProcessor.use(markdownItTaskLists, {
+          enabled: true,
+          label: true,
+          labelAfter: true,
+        });
+      } catch (error) {
+        console.warn("Failed to configure task lists plugin:", error);
+        // Continue without task lists
+      }
     }
 
     // Configure table rendering for better PDF output
@@ -552,29 +578,47 @@ export class MarkdownToPdfService {
       // Enhanced table processing happens in post-processing
     }
 
-    // Configure syntax highlighting
+    // Configure syntax highlighting with better error handling
     this.markdownProcessor.set({
       highlight: (str: string, lang: string) => {
-        if (lang && hljs.getLanguage(lang)) {
+        try {
+          // Check if hljs is properly initialized and language exists
+          let hasValidLanguage = false;
           try {
-            const result = hljs.highlight(str, {
-              language: lang,
-              ignoreIllegals: true,
-            });
-            return `<pre class="hljs"><code class="hljs language-${lang}">${result.value}</code></pre>`;
-          } catch {
-            // Fallback to auto-detection
+            hasValidLanguage = !!(lang && hljs.getLanguage(lang));
+          } catch (langError) {
+            console.warn("Failed to check language support:", langError);
+            hasValidLanguage = false;
+          }
+
+          if (hasValidLanguage) {
             try {
-              const autoResult = hljs.highlightAuto(str);
-              const detectedLang = autoResult.language || "plaintext";
-              return `<pre class="hljs"><code class="hljs language-${detectedLang}">${autoResult.value}</code></pre>`;
-            } catch {
-              // Return escaped content if highlighting fails
-              return `<pre class="hljs"><code class="hljs">${this.markdownProcessor.utils.escapeHtml(str)}</code></pre>`;
+              const result = hljs.highlight(str, {
+                language: lang,
+                ignoreIllegals: true,
+              });
+              return `<pre class="hljs"><code class="hljs language-${lang}">${result.value}</code></pre>`;
+            } catch (highlightError) {
+              // If specific language highlighting fails, try auto-detection
+              console.warn("Language-specific highlighting failed:", highlightError);
+              try {
+                const autoResult = hljs.highlightAuto(str);
+                const detectedLang = autoResult.language || "plaintext";
+                return `<pre class="hljs"><code class="hljs language-${detectedLang}">${autoResult.value}</code></pre>`;
+              } catch (autoError) {
+                // If auto-detection also fails, return escaped content
+                console.warn("Auto-detection highlighting failed:", autoError);
+                return `<pre class="hljs"><code class="hljs">${this.escapeHtml(str)}</code></pre>`;
+              }
             }
           }
+          // No language specified or language not found
+          return `<pre class="hljs"><code class="hljs">${this.escapeHtml(str)}</code></pre>`;
+        } catch (error) {
+          // Catch any hljs-related errors including isSpace issues
+          console.warn("Syntax highlighting failed:", error);
+          return `<pre class="hljs"><code class="hljs">${this.escapeHtml(str)}</code></pre>`;
         }
-        return `<pre class="hljs"><code class="hljs">${this.markdownProcessor.utils.escapeHtml(str)}</code></pre>`;
       },
     });
   }
@@ -626,6 +670,7 @@ export class MarkdownToPdfService {
 
       // Enhanced task list processing (plugin handles most of the work)
       if (options.enableTaskLists) {
+        // First try to find task items created by the plugin
         const taskItems = tempDiv.querySelectorAll(".task-list-item");
         taskItems.forEach((li) => {
           li.classList.add("pdf-task-item");
@@ -634,6 +679,11 @@ export class MarkdownToPdfService {
             checkbox.classList.add("pdf-task-checkbox");
           }
         });
+
+        // Fallback: manually process task lists if plugin didn't work
+        if (taskItems.length === 0) {
+          this.processTaskListsFallback(tempDiv);
+        }
       }
 
       // Enhanced code block processing for better PDF rendering
@@ -995,9 +1045,8 @@ export class MarkdownToPdfService {
                 color: ${colors.text};
             }
             
-            ${
-              syntaxHighlighting?.lineNumbers
-                ? `
+            ${syntaxHighlighting?.lineNumbers
+        ? `
             .pdf-code-block .hljs {
                 counter-reset: line-numbering;
             }
@@ -1019,8 +1068,8 @@ export class MarkdownToPdfService {
                 user-select: none;
             }
             `
-                : ""
-            }
+        : ""
+      }
             
             /* Enhanced strikethrough support (GFM) */
             .pdf-strikethrough {
@@ -1393,6 +1442,214 @@ export class MarkdownToPdfService {
       text: textColor || "#24292f",
       link: linkColor || "#0969da",
     };
+  }
+
+  /**
+   * Escape HTML characters to prevent XSS
+   */
+  private escapeHtml(unsafe: string): string {
+    return unsafe
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  /**
+ * Fallback method to manually process task lists when plugin fails
+ */
+  private processTaskListsFallback(container: Element): void {
+    const listItems = container.querySelectorAll("li");
+    listItems.forEach((li) => {
+      const text = li.textContent || "";
+      const isTaskItem = text.match(/^\s*\[[ xX]\]\s/);
+
+      if (isTaskItem) {
+        const isChecked = text.match(/^\s*\[[xX]\]\s/);
+        li.classList.add("pdf-task-item", "task-list-item");
+
+        // Create checkbox element
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = !!isChecked;
+        checkbox.disabled = true;
+        checkbox.classList.add("pdf-task-checkbox", "task-list-item-checkbox");
+
+        // Remove the markdown checkbox syntax from text
+        const cleanText = text.replace(/^\s*\[[ xX]\]\s/, "");
+        li.innerHTML = "";
+        li.appendChild(checkbox);
+        li.appendChild(document.createTextNode(" " + cleanText));
+      }
+    });
+  }
+
+  /**
+ * Fallback markdown parsing without any potentially problematic libraries
+ */
+  private parseMarkdownFallback(
+    content: string,
+    options: MarkdownOptions,
+  ): MarkdownParseResult {
+    try {
+      // Try to use a safe MarkdownIt configuration first
+      const fallbackProcessor = new MarkdownIt({
+        html: false, // Disable HTML to avoid issues
+        xhtmlOut: true,
+        breaks: options.breaks,
+        linkify: options.linkify,
+        typographer: false, // Disable typographer to avoid issues
+      });
+
+      // Don't enable any plugins or features that might cause issues
+      // Use a completely safe highlight function that doesn't call hljs
+      fallbackProcessor.set({
+        highlight: (str: string, lang: string) => {
+          // Simple highlighting without hljs to avoid isSpace issues
+          const escapedStr = this.escapeHtml(str);
+          return `<pre class="hljs"><code class="hljs language-${lang || 'plaintext'}">${escapedStr}</code></pre>`;
+        },
+      });
+
+      // Parse markdown with ultra-minimal processor
+      const html = fallbackProcessor.render(content);
+
+      // Skip post-processing that might cause issues
+      const processedHtml = html;
+
+      // Extract headings and statistics (safe operations)
+      const headings = this.extractHeadings(content);
+      const wordCount = this.calculateWordCount(content);
+      const readingTime = Math.ceil(wordCount / 200);
+
+      // Simple regex-based extraction to avoid DOM issues
+      const links: string[] = [];
+      const images: string[] = [];
+      const tables = (processedHtml.match(/<table/gi) || []).length;
+      const codeBlocks = (content.match(/```/g) || []).length / 2;
+
+      return {
+        html: processedHtml,
+        headings,
+        wordCount,
+        readingTime,
+        links,
+        images,
+        tables,
+        codeBlocks,
+        warnings: ["Used minimal fallback parser. Some features (syntax highlighting, task lists, etc.) are disabled."],
+      };
+    } catch (error) {
+      // If even the minimal MarkdownIt parser fails, use the emergency manual fallback
+      console.warn("MarkdownIt fallback failed, using emergency manual parser:", error);
+      return this.createBasicFallbackResult(content);
+    }
+  }
+
+  /**
+   * Create a basic fallback result without any markdown libraries - completely manual parsing
+   */
+  private createBasicFallbackResult(content: string): MarkdownParseResult {
+    try {
+      // Convert basic markdown manually without any libraries
+      let html = this.escapeHtml(content);
+
+      // Handle code blocks first (before other processing)
+      html = html.replace(/```(\w+)?\n([\s\S]*?)\n```/g, (match, lang, code) => {
+        const language = lang || 'plaintext';
+        return `<pre class="hljs"><code class="hljs language-${language}">${code}</code></pre>`;
+      });
+
+      // Convert basic markdown features manually
+      html = html
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
+        .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italic
+        .replace(/`([^`]+)`/g, '<code class="pdf-inline-code">$1</code>') // Inline code
+        .replace(/^#{6}\s+(.*$)/gm, '<h6 class="pdf-heading pdf-heading-h6">$1</h6>') // H6
+        .replace(/^#{5}\s+(.*$)/gm, '<h5 class="pdf-heading pdf-heading-h5">$1</h5>') // H5
+        .replace(/^#{4}\s+(.*$)/gm, '<h4 class="pdf-heading pdf-heading-h4">$1</h4>') // H4
+        .replace(/^#{3}\s+(.*$)/gm, '<h3 class="pdf-heading pdf-heading-h3">$1</h3>') // H3
+        .replace(/^#{2}\s+(.*$)/gm, '<h2 class="pdf-heading pdf-heading-h2">$1</h2>') // H2
+        .replace(/^#{1}\s+(.*$)/gm, '<h1 class="pdf-heading pdf-heading-h1">$1</h1>') // H1
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="pdf-link">$1</a>') // Links
+        .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="pdf-image">') // Images
+        .replace(/~~(.*?)~~/g, '<del class="pdf-strikethrough">$1</del>') // Strikethrough
+        .replace(/---/g, '<hr>') // Horizontal rules
+        .replace(/^\> (.*$)/gm, '<blockquote class="pdf-blockquote">$1</blockquote>') // Blockquotes
+        .replace(/^\* (.*$)/gm, '<li class="pdf-list-item">$1</li>') // Unordered lists
+        .replace(/^\d+\. (.*$)/gm, '<li class="pdf-list-item">$1</li>') // Ordered lists
+        .replace(/^- \[[ ]\] (.*$)/gm, '<li class="pdf-task-item"><input type="checkbox" disabled class="pdf-task-checkbox"> $1</li>') // Unchecked tasks
+        .replace(/^- \[[xX]\] (.*$)/gm, '<li class="pdf-task-item"><input type="checkbox" checked disabled class="pdf-task-checkbox"> $1</li>'); // Checked tasks
+
+      // Handle paragraphs - split by double newlines and wrap in <p> tags
+      const paragraphs = html.split(/\n\s*\n/);
+      const processedParagraphs = paragraphs.map(paragraph => {
+        paragraph = paragraph.trim();
+        if (!paragraph) return '';
+
+        // Don't wrap if it's already a block element
+        if (paragraph.match(/^<(h[1-6]|pre|blockquote|hr|li|ul|ol)/)) {
+          return paragraph;
+        }
+
+        // Handle line breaks within paragraphs
+        paragraph = paragraph.replace(/\n/g, '<br>');
+
+        return `<p class="pdf-paragraph">${paragraph}</p>`;
+      }).filter(p => p);
+
+      // Wrap list items in proper list containers
+      html = processedParagraphs.join('\n')
+        .replace(/(<li[^>]*>.*?<\/li>)\s*(<li[^>]*>.*?<\/li>)/g, (match, li1, li2) => {
+          // Group consecutive list items
+          return li1 + '\n' + li2;
+        });
+
+      // Wrap consecutive list items in ul/ol tags
+      html = html.replace(/(<li[^>]*>.*?<\/li>(?:\s*<li[^>]*>.*?<\/li>)*)/gs, (match) => {
+        if (match.includes('pdf-task-item')) {
+          return `<ul class="pdf-list task-list">${match}</ul>`;
+        }
+        return `<ul class="pdf-list">${match}</ul>`;
+      });
+
+      // Basic statistics
+      const wordCount = this.calculateWordCount(content);
+      const readingTime = Math.ceil(wordCount / 200);
+      const headings = this.extractHeadings(content);
+
+      // Count features
+      const tables = 0; // Manual parser doesn't support tables
+      const codeBlocks = (content.match(/```/g) || []).length / 2;
+
+      return {
+        html,
+        headings,
+        wordCount,
+        readingTime,
+        links: [],
+        images: [],
+        tables,
+        codeBlocks,
+        warnings: ["Used emergency manual parser. Advanced features like tables are not supported, but basic formatting is preserved."],
+      };
+    } catch (error) {
+      // If even the manual parsing fails, return minimal content
+      console.error("Emergency manual parser failed:", error);
+      const escapedContent = this.escapeHtml(content);
+      return {
+        html: `<div class="pdf-content"><pre>${escapedContent}</pre></div>`,
+        headings: [],
+        wordCount: this.calculateWordCount(content),
+        readingTime: Math.ceil(this.calculateWordCount(content) / 200),
+        links: [],
+        images: [],
+        tables: 0,
+        codeBlocks: 0,
+        warnings: ["All markdown parsing failed. Content displayed as plain text."],
+      };
+    }
   }
 }
 

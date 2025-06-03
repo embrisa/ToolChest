@@ -1,5 +1,3 @@
-import { SkeletonLoader } from "@/components/ui/SkeletonLoader";
-
 export default function AdminLoading() {
   return (
     <div className="min-h-screen bg-background">

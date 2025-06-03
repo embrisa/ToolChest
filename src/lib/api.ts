@@ -82,7 +82,7 @@ export async function apiGet<T>(endpoint: string): Promise<ApiResponse<T>> {
  */
 export async function apiPost<T>(
   endpoint: string,
-  data?: any,
+  data?: unknown,
 ): Promise<ApiResponse<T>> {
   return apiFetch<T>(endpoint, {
     method: "POST",
@@ -95,7 +95,7 @@ export async function apiPost<T>(
  */
 export async function apiPut<T>(
   endpoint: string,
-  data?: any,
+  data?: unknown,
 ): Promise<ApiResponse<T>> {
   return apiFetch<T>(endpoint, {
     method: "PUT",

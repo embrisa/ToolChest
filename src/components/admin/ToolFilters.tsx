@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { AdminToolsFilters } from "@/types/admin/tool";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { AdminToolsFilters } from "@/types/admin";
 import { TagDTO } from "@/types/tools/tool";
 import { Input, Button } from "@/components/ui";
 
@@ -19,29 +19,35 @@ export function ToolFilters({
   onReset,
 }: ToolFiltersProps) {
   const [searchInput, setSearchInput] = useState(filters.search || "");
-  const [debounceTimer, setDebounceTimer] = useState<NodeJS.Timeout | null>(
-    null,
+  const debounceTimer = useRef<NodeJS.Timeout | null>(null);
+
+  // Memoized debounced search function
+  const debouncedOnFiltersChange = useCallback(
+    (newFilters: AdminToolsFilters) => {
+      onFiltersChange(newFilters);
+    },
+    [onFiltersChange]
   );
 
   // Debounced search
   useEffect(() => {
-    if (debounceTimer) {
-      clearTimeout(debounceTimer);
+    if (debounceTimer.current) {
+      clearTimeout(debounceTimer.current);
     }
 
     const timer = setTimeout(() => {
-      onFiltersChange({
+      debouncedOnFiltersChange({
         ...filters,
         search: searchInput.trim() || undefined,
       });
     }, 300);
 
-    setDebounceTimer(timer);
+    debounceTimer.current = timer;
 
     return () => {
       if (timer) clearTimeout(timer);
     };
-  }, [searchInput]);
+  }, [searchInput, filters, debouncedOnFiltersChange]);
 
   const handleActiveFilterChange = (value: string) => {
     let isActive: boolean | undefined;
@@ -248,38 +254,34 @@ export function ToolFilters({
           <div className="flex flex-wrap gap-3">
             <button
               onClick={() => handleActiveFilterChange("active")}
-              className={`touch-target-comfortable px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 focus-ring ${
-                filters.isActive === true
-                  ? "bg-success-500 text-white shadow-colored border-2 border-success-600"
-                  : "bg-neutral-50 text-tertiary border-2 border-neutral-200 hover:bg-neutral-25 hover:border-neutral-300 hover:text-primary"
-              }`}
+              className={`touch-target-comfortable px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 focus-ring ${filters.isActive === true
+                ? "bg-success-500 text-white shadow-colored border-2 border-success-600"
+                : "bg-neutral-50 text-tertiary border-2 border-neutral-200 hover:bg-neutral-25 hover:border-neutral-300 hover:text-primary"
+                }`}
               aria-pressed={filters.isActive === true}
               aria-label="Filter to show only published tools"
             >
               <div className="flex items-center space-x-2">
                 <div
-                  className={`w-2 h-2 rounded-full ${
-                    filters.isActive === true ? "bg-white" : "bg-success-500"
-                  }`}
+                  className={`w-2 h-2 rounded-full ${filters.isActive === true ? "bg-white" : "bg-success-500"
+                    }`}
                 />
                 <span>Published</span>
               </div>
             </button>
             <button
               onClick={() => handleActiveFilterChange("inactive")}
-              className={`touch-target-comfortable px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 focus-ring ${
-                filters.isActive === false
-                  ? "bg-warning-500 text-white shadow-colored border-2 border-warning-600"
-                  : "bg-neutral-50 text-tertiary border-2 border-neutral-200 hover:bg-neutral-25 hover:border-neutral-300 hover:text-primary"
-              }`}
+              className={`touch-target-comfortable px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 focus-ring ${filters.isActive === false
+                ? "bg-warning-500 text-white shadow-colored border-2 border-warning-600"
+                : "bg-neutral-50 text-tertiary border-2 border-neutral-200 hover:bg-neutral-25 hover:border-neutral-300 hover:text-primary"
+                }`}
               aria-pressed={filters.isActive === false}
               aria-label="Filter to show only draft tools"
             >
               <div className="flex items-center space-x-2">
                 <div
-                  className={`w-2 h-2 rounded-full ${
-                    filters.isActive === false ? "bg-white" : "bg-warning-500"
-                  }`}
+                  className={`w-2 h-2 rounded-full ${filters.isActive === false ? "bg-white" : "bg-warning-500"
+                    }`}
                 />
                 <span>Drafts</span>
               </div>
@@ -326,18 +328,17 @@ export function ToolFilters({
                 <button
                   key={tag.id}
                   onClick={() => handleTagToggle(tag.id)}
-                  className={`touch-target-comfortable inline-flex items-center px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 focus-ring border-2 ${
-                    isSelected
-                      ? "bg-brand-500 text-white shadow-colored border-brand-600 transform hover:scale-105"
-                      : "bg-neutral-50 text-tertiary border-neutral-200 hover:bg-neutral-25 hover:border-neutral-300 hover:text-primary"
-                  }`}
+                  className={`touch-target-comfortable inline-flex items-center px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 focus-ring border-2 ${isSelected
+                    ? "bg-brand-500 text-white shadow-colored border-brand-600 transform hover:scale-105"
+                    : "bg-neutral-50 text-tertiary border-neutral-200 hover:bg-neutral-25 hover:border-neutral-300 hover:text-primary"
+                    }`}
                   style={
                     isSelected && tag.color
                       ? {
-                          backgroundColor: tag.color,
-                          borderColor: tag.color,
-                          color: "#ffffff",
-                        }
+                        backgroundColor: tag.color,
+                        borderColor: tag.color,
+                        color: "#ffffff",
+                      }
                       : {}
                   }
                   aria-pressed={isSelected}
@@ -416,28 +417,25 @@ export function ToolFilters({
                     />
                   </svg>
                   <span className="text-sm font-medium text-brand-700">
-                    Search: "{filters.search}"
+                    Search: &quot;{filters.search}&quot;
                   </span>
                 </div>
               )}
 
               {typeof filters.isActive === "boolean" && (
                 <div
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg border ${
-                    filters.isActive
-                      ? "bg-success-50 border-success-200"
-                      : "bg-warning-50 border-warning-200"
-                  }`}
+                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg border ${filters.isActive
+                    ? "bg-success-50 border-success-200"
+                    : "bg-warning-50 border-warning-200"
+                    }`}
                 >
                   <div
-                    className={`w-2 h-2 rounded-full ${
-                      filters.isActive ? "bg-success-500" : "bg-warning-500"
-                    }`}
+                    className={`w-2 h-2 rounded-full ${filters.isActive ? "bg-success-500" : "bg-warning-500"
+                      }`}
                   />
                   <span
-                    className={`text-sm font-medium ${
-                      filters.isActive ? "text-success-700" : "text-warning-700"
-                    }`}
+                    className={`text-sm font-medium ${filters.isActive ? "text-success-700" : "text-warning-700"
+                      }`}
                   >
                     {filters.isActive ? "Published Only" : "Drafts Only"}
                   </span>

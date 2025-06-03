@@ -79,7 +79,7 @@ export default function AdminTagsPage() {
     setFilters({});
   };
 
-  const handleDelete = async (id: string, name: string) => {
+  const handleDelete = async (id: string, _name: string) => {
     try {
       const response = await fetch(`/api/admin/tags/${id}`, {
         method: "DELETE",

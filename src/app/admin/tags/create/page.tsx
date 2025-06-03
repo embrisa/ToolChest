@@ -37,7 +37,7 @@ export default function CreateTagPage() {
 
       // Success - redirect to tags list
       router.push("/admin/tags");
-    } catch (error) {
+    } catch {
       setErrors({ general: "An unexpected error occurred" });
     } finally {
       setIsLoading(false);

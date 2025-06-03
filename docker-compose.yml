@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://postgres:password@db:5432/toolchest
+      - ADMIN_SECRET_TOKEN=dev-admin-token-123
+      - NEXT_PUBLIC_SITE_URL=http://localhost:3000
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      # Mount for development (optional - remove for production-like testing)
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=toolchest
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data: 

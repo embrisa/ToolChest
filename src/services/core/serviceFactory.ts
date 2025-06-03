@@ -11,6 +11,7 @@ import { RelationshipService } from "../admin/relationshipService";
  */
 export class ServiceFactory {
   private static instance: ServiceFactory;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private services: Map<string, any> = new Map();
   private prisma: PrismaClient;
   private toolService: ToolService | null = null;

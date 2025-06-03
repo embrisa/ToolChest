@@ -60,6 +60,35 @@ npm run test:e2e
 npm run test:a11y
 ```
 
+## 🚀 Deployment
+
+### Quick Deploy to Railway
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template)
+
+### Docker Deployment
+
+```bash
+# Build and run with Docker Compose (includes PostgreSQL)
+npm run docker:dev
+
+# Or build and run manually
+npm run docker:build
+npm run docker:run
+```
+
+### Environment Variables
+
+Copy `env.example` to `.env.local` and configure:
+
+```bash
+DATABASE_URL="postgresql://user:password@localhost:5432/toolchest"
+ADMIN_SECRET_TOKEN="your-secure-admin-token"
+NEXT_PUBLIC_SITE_URL="https://your-domain.com"
+```
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions.
+
 ## 📁 Project Structure
 
 ```

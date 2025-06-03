@@ -19,7 +19,7 @@ export interface FaviconPreviewProps {
 
 export function FaviconPreview({
   previewUrls,
-  selectedContext = "all",
+  selectedContext: _selectedContext = "all",
   onContextChange,
   title = "Favicon Preview",
   className = "",
@@ -42,6 +42,7 @@ export function FaviconPreview({
   }) => (
     <div className="bg-neutral-50 rounded-t-xl p-4 border-b-0 max-w-sm shadow-soft">
       <div className="flex items-center gap-3 bg-neutral-25 rounded-lg p-3 shadow-soft border border-neutral-200">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={faviconUrl}
           alt="Favicon in browser tab"
@@ -70,6 +71,7 @@ export function FaviconPreview({
   }) => (
     <div className="bg-neutral-50 rounded-xl p-4 shadow-soft max-w-sm hover:shadow-medium transition-all duration-200 border border-neutral-200">
       <div className="flex items-center gap-3">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={faviconUrl}
           alt="Favicon in bookmark"
@@ -98,6 +100,7 @@ export function FaviconPreview({
   }) => (
     <div className="flex flex-col items-center gap-3 p-6">
       <div className="relative group">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={faviconUrl}
           alt="Favicon as desktop icon"

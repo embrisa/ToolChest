@@ -57,7 +57,7 @@ export interface ApiErrorResponse {
   error: {
     code: string;
     message: string;
-    details?: any;
+    details?: Record<string, unknown>;
   };
   statusCode: number;
   timestamp: string;
@@ -274,7 +274,7 @@ export interface ErrorContext {
   sessionId?: string;
   buildVersion?: string;
   feature?: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 /**
@@ -308,7 +308,7 @@ export interface ErrorRecoveryConfig {
  */
 export interface ClientErrorHandlerOptions {
   component?: string;
-  context?: Record<string, any>;
+  context?: Record<string, unknown>;
   recoveryConfig?: ErrorRecoveryConfig;
   silent?: boolean; // Don't show notifications
   rethrow?: boolean; // Re-throw after handling
@@ -376,7 +376,7 @@ export interface NetworkErrorContext {
 export interface ErrorBoundaryContext {
   componentStack: string;
   errorBoundary?: string;
-  props?: Record<string, any>;
+  props?: Record<string, unknown>;
 }
 
 /**
@@ -391,7 +391,7 @@ export interface EnhancedErrorContext extends ErrorContext {
     height: number;
   };
   performance?: {
-    memory?: any;
-    timing?: any;
+    memory?: Record<string, number>;
+    timing?: Record<string, number>;
   };
 }

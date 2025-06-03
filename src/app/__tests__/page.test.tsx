@@ -29,7 +29,7 @@ jest.mock("@/components/tools", () => ({
     className,
     "data-testid": testId,
   }: {
-    tool: any;
+    tool: { name: string; description: string };
     className?: string;
     "data-testid"?: string;
   }) => (
@@ -76,14 +76,14 @@ jest.mock("@/components/tools", () => ({
     onClearAll,
     showCount,
   }: {
-    tags: any[];
+    tags: Array<{ id: string; name: string; slug: string; toolCount?: number }>;
     selectedTags: string[];
     onTagToggle: (slug: string) => void;
     onClearAll: () => void;
     showCount?: boolean;
   }) => (
     <div data-testid="tag-filters">
-      {tags.map((tag: any) => (
+      {tags.map((tag) => (
         <button
           key={tag.id}
           onClick={() => onTagToggle(tag.slug)}

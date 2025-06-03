@@ -45,14 +45,14 @@ export function MultiSelect({
   const filteredOptions =
     searchable && state.searchQuery
       ? options.filter(
-          (option) =>
-            option.label
-              .toLowerCase()
-              .includes(state.searchQuery.toLowerCase()) ||
-            option.description
-              ?.toLowerCase()
-              .includes(state.searchQuery.toLowerCase()),
-        )
+        (option) =>
+          option.label
+            .toLowerCase()
+            .includes(state.searchQuery.toLowerCase()) ||
+          option.description
+            ?.toLowerCase()
+            .includes(state.searchQuery.toLowerCase()),
+      )
       : options;
 
   // Get selected options for display
@@ -310,6 +310,7 @@ export function MultiSelect({
           tabIndex={disabled ? -1 : 0}
           role="combobox"
           aria-expanded={state.isExpanded}
+          aria-controls={`${listId.current}-listbox`}
           aria-haspopup="listbox"
           aria-labelledby={label ? `${listId.current}-label` : undefined}
           aria-invalid={error ? "true" : "false"}
@@ -366,6 +367,7 @@ export function MultiSelect({
               <ul
                 ref={listboxRef}
                 role="listbox"
+                id={`${listId.current}-listbox`}
                 aria-multiselectable="true"
                 className="py-2"
               >

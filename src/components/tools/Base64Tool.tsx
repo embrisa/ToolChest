@@ -203,16 +203,7 @@ export function Base64Tool() {
     announceToScreenReader,
   ]);
 
-  // Manual processing function for explicit user actions
-  const manualProcess = useCallback(() => {
-    // Clear the last processed input to allow reprocessing
-    lastProcessedInputRef.current = {
-      inputType: "",
-      textInput: "",
-      fileInput: null,
-    };
-    processBase64(true); // Track usage for manual processing
-  }, [processBase64]);
+
 
   // Clear last processed input when mode or variant changes
   useEffect(() => {
@@ -258,6 +249,7 @@ export function Base64Tool() {
     state.textInput,
     state.fileInput,
     state.isProcessing, // Include this to prevent processing when already processing
+    processBase64, // Include the processing function
   ]);
 
   // Enhanced file selection with validation

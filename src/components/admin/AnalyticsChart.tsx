@@ -12,7 +12,7 @@ export function AnalyticsChart({
 }: AnalyticsChartProps) {
   const maxValue = Math.max(...chart.data.map((d) => d.value));
 
-  const handleDataPointClick = (dataPoint: any) => {
+  const handleDataPointClick = (dataPoint: { label: string; value: number; metadata?: Record<string, unknown> }) => {
     if (interactive && onDataPointClick) {
       onDataPointClick(dataPoint);
     }
@@ -186,7 +186,7 @@ export function AnalyticsChart({
           const y = 250 - barHeight;
           const barColor =
             chart.options?.colors?.[
-              index % (chart.options?.colors?.length || 1)
+            index % (chart.options?.colors?.length || 1)
             ] || "rgb(14 165 233)";
 
           return (
@@ -298,7 +298,7 @@ export function AnalyticsChart({
 
             const sliceColor =
               chart.options?.colors?.[
-                index % (chart.options?.colors?.length || 1)
+              index % (chart.options?.colors?.length || 1)
               ] || `hsl(${(index * 360) / chart.data.length}, 70%, 60%)`;
 
             currentAngle += angle;
@@ -339,7 +339,7 @@ export function AnalyticsChart({
             const legendY = 50 + index * 25;
             const sliceColor =
               chart.options?.colors?.[
-                index % (chart.options?.colors?.length || 1)
+              index % (chart.options?.colors?.length || 1)
               ] || `hsl(${(index * 360) / chart.data.length}, 70%, 60%)`;
             const percentage = ((point.value / total) * 100).toFixed(1);
 
@@ -534,9 +534,9 @@ export function AnalyticsChart({
         <h3 className="text-title text-xl font-semibold text-neutral-900 dark:text-neutral-100">
           {chart.title}
         </h3>
-        {(chart as any).description && (
+        {chart.title && (
           <p className="text-body text-neutral-600 dark:text-neutral-400">
-            {(chart as any).description}
+            Chart displaying {chart.title.toLowerCase()}
           </p>
         )}
       </div>

@@ -68,7 +68,7 @@ export abstract class BaseService {
   /**
    * Validate required parameters
    */
-  protected validateRequired(params: Record<string, any>): void {
+  protected validateRequired(params: Record<string, unknown>): void {
     for (const [key, value] of Object.entries(params)) {
       if (value === undefined || value === null || value === "") {
         throw new ServiceError(

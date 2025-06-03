@@ -4,14 +4,14 @@ import { AnalyticsService } from "@/services/admin/analyticsService";
 /**
  * GET /api/admin/monitoring/alerts - Get all alerts with filtering
  */
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     const analyticsService = AnalyticsService.getInstance();
-    const { searchParams } = new URL(request.url);
+    // const { searchParams } = new URL(request.url);
 
     // In a real implementation, these would be used to filter alerts
-    const _severity = searchParams.get("severity");
-    const _resolved = searchParams.get("resolved");
+    // const _severity = searchParams.get("severity");
+    // const _resolved = searchParams.get("resolved");
 
     // For now, get all alerts from the dashboard data
     const dashboardData = await analyticsService.getSystemHealthDashboard();

@@ -28,6 +28,14 @@ export interface WebVitalMetric {
   timestamp: number;
 }
 
+interface RawWebVitalMetric {
+  name: string;
+  value: number;
+  delta?: number;
+  id: string;
+  entries?: PerformanceEntry[];
+}
+
 // Performance thresholds following Core Web Vitals standards
 const DEFAULT_THRESHOLDS = {
   lcp: 2500, // Good: ≤2.5s, Poor: >4.0s
@@ -41,7 +49,7 @@ const DEFAULT_THRESHOLDS = {
 export function WebVitals({
   debug = false,
   enableConsoleReporting = false,
-  enableAnalytics = true,
+  enableAnalytics: _enableAnalytics = true,
   performanceThresholds = DEFAULT_THRESHOLDS,
   onMetricReport,
 }: WebVitalsProps) {
@@ -49,13 +57,42 @@ export function WebVitals({
   const [metrics, setMetrics] = useState<WebVitalMetric[]>([]);
   const [isSupported, setIsSupported] = useState<boolean | null>(null);
 
+  // Get appropriate unit for metric display
+  const getUnit = useCallback((metricName: string): string => {
+    const name = metricName.toLowerCase();
+    if (name === "cls") return "";
+    if (
+      name.includes("time") ||
+      ["lcp", "fid", "inp", "fcp", "ttfb"].includes(name)
+    )
+      return "ms";
+    return "";
+  }, []);
+
+  // Announce performance issues to screen readers
+  const announcePerformanceIssue = useCallback((metric: WebVitalMetric) => {
+    const announcement = document.createElement("div");
+    announcement.setAttribute("role", "status");
+    announcement.setAttribute("aria-live", "polite");
+    announcement.setAttribute("aria-atomic", "true");
+    announcement.className = "sr-only";
+    announcement.textContent = `Performance alert: ${metric.name} has poor rating with value ${metric.value.toFixed(2)}${getUnit(metric.name)}`;
+
+    document.body.appendChild(announcement);
+
+    // Clean up after announcement
+    setTimeout(() => {
+      document.body.removeChild(announcement);
+    }, 1000);
+  }, [getUnit]);
+
   // Enhanced metric handler with rating calculation
   const handleMetric = useCallback(
-    (metric: any) => {
+    (metric: RawWebVitalMetric) => {
       const enhancedMetric: WebVitalMetric = {
         name: metric.name,
         value: metric.value,
-        delta: metric.delta,
+        delta: metric.delta ?? 0,
         id: metric.id,
         entries: metric.entries || [],
         timestamp: Date.now(),
@@ -107,6 +144,8 @@ export function WebVitals({
       enableConsoleReporting,
       debug,
       performanceThresholds,
+      announcePerformanceIssue,
+      getUnit,
     ],
   );
 
@@ -130,35 +169,6 @@ export function WebVitals({
     if (value <= threshold) return "good";
     if (value <= threshold * 2) return "needs-improvement";
     return "poor";
-  };
-
-  // Get appropriate unit for metric display
-  const getUnit = (metricName: string): string => {
-    const name = metricName.toLowerCase();
-    if (name === "cls") return "";
-    if (
-      name.includes("time") ||
-      ["lcp", "fid", "inp", "fcp", "ttfb"].includes(name)
-    )
-      return "ms";
-    return "";
-  };
-
-  // Announce performance issues to screen readers
-  const announcePerformanceIssue = (metric: WebVitalMetric) => {
-    const announcement = document.createElement("div");
-    announcement.setAttribute("role", "status");
-    announcement.setAttribute("aria-live", "polite");
-    announcement.setAttribute("aria-atomic", "true");
-    announcement.className = "sr-only";
-    announcement.textContent = `Performance alert: ${metric.name} has poor rating with value ${metric.value.toFixed(2)}${getUnit(metric.name)}`;
-
-    document.body.appendChild(announcement);
-
-    // Clean up after announcement
-    setTimeout(() => {
-      document.body.removeChild(announcement);
-    }, 1000);
   };
 
   useEffect(() => {

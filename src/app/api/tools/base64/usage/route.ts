@@ -165,10 +165,11 @@ export async function GET(request: NextRequest) {
     }
 
     // Calculate basic statistics
+    const toolStats = Array.isArray(tool.toolUsageStats) ? tool.toolUsageStats[0] : tool.toolUsageStats;
     const stats = {
-      totalUsages: tool.toolUsageStats?.[0]?.usageCount || 0,
+      totalUsages: toolStats?.usageCount || 0,
       recentUsageCount: recentUsages.length,
-      lastUsed: tool.toolUsageStats?.[0]?.lastUsed || null,
+      lastUsed: toolStats?.lastUsed || null,
       operations: {
         encode: recentUsages.filter(
           (u: any) => (u.metadata as UsageMetadata)?.operation === "encode",

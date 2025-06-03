@@ -75,7 +75,7 @@ export interface RetryConfig {
   baseDelay: number;
   maxDelay: number;
   backoffFactor: number;
-  retryCondition?: (error: any) => boolean;
+  retryCondition?: (error: Error | unknown) => boolean;
 }
 
 export interface RetryState {

@@ -24,13 +24,11 @@ import {
   FaviconGeneratorState,
   FaviconGenerationOptions,
   FaviconSizeKey,
-  GeneratedFavicon,
   FaviconA11yAnnouncement,
   DEFAULT_FAVICON_OPTIONS,
   FAVICON_SIZES,
   FAVICON_FILE_LIMITS,
 } from "@/types/tools/faviconGenerator";
-import { cn } from "@/utils";
 
 export function FaviconGeneratorTool() {
   const [state, setState] = useState<FaviconGeneratorState>({
@@ -50,7 +48,7 @@ export function FaviconGeneratorTool() {
     showPreview: false,
   });
 
-  const [announcement, setAnnouncement] = useState<FaviconA11yAnnouncement | null>(null);
+  const [announcement] = useState<FaviconA11yAnnouncement | null>(null);
   const [copySuccess, setCopySuccess] = useState<{ success: boolean; message: string } | null>(null);
 
   const { announceToScreenReader } = useAccessibilityAnnouncements();
@@ -190,27 +188,30 @@ export function FaviconGeneratorTool() {
   // Handle size presets
   const handleSizePresets = useCallback(
     (preset: "standard" | "all" | "clear") => {
-      const newSizes = (() => {
-        switch (preset) {
-          case "standard":
-            return ["png16", "png32", "png48", "android192"] as FaviconSizeKey[];
-          case "all":
-            return Object.keys(FAVICON_SIZES) as FaviconSizeKey[];
-          case "clear":
-            return [] as FaviconSizeKey[];
-          default:
-            return state.options.sizes;
+      setState((prev) => {
+        const newSizes = (() => {
+          switch (preset) {
+            case "standard":
+              return ["png16", "png32", "png48", "android192"] as FaviconSizeKey[];
+            case "all":
+              return Object.keys(FAVICON_SIZES) as FaviconSizeKey[];
+            case "clear":
+              return [] as FaviconSizeKey[];
+            default:
+              return prev.options.sizes;
+          }
+        })();
+
+        const newOptions = { ...prev.options, sizes: newSizes };
+
+        if (prev.sourceImage) {
+          generatePreview(prev.sourceImage, newOptions);
         }
-      })();
 
-      const newOptions = { ...state.options, sizes: newSizes };
-      setState((prev) => ({ ...prev, options: newOptions }));
-
-      if (state.sourceImage) {
-        generatePreview(state.sourceImage, newOptions);
-      }
+        return { ...prev, options: newOptions };
+      });
     },
-    [generatePreview, state.options.sizes, state.sourceImage],
+    [generatePreview],
   );
 
   // Handle options change
@@ -270,7 +271,7 @@ export function FaviconGeneratorTool() {
       announceToScreenReader("All favicon URLs copied to clipboard", "polite");
 
       setTimeout(() => setCopySuccess(null), 3000);
-    } catch (error) {
+    } catch {
       setCopySuccess({ success: false, message: "Failed to copy to clipboard" });
       announceToScreenReader("Failed to copy to clipboard", "assertive");
     }
@@ -293,7 +294,7 @@ export function FaviconGeneratorTool() {
       });
 
       announceToScreenReader("All favicons downloaded", "polite");
-    } catch (error) {
+    } catch {
       announceToScreenReader("Failed to download files", "assertive");
     }
   }, [state.result?.favicons, announceToScreenReader]);
@@ -677,6 +678,8 @@ export function FaviconGeneratorTool() {
       {/* Results Section */}
       <ResultsPanel
         title="Generated Favicons"
+        description="All favicon sizes and formats generated successfully from your source image."
+        variant="mixed"
         result={
           state.result?.favicons
             ? state.result.favicons
@@ -748,6 +751,7 @@ export function FaviconGeneratorTool() {
                   className="flex items-center gap-3 p-3 bg-background-tertiary rounded-lg border"
                 >
                   <div className="w-8 h-8 bg-neutral-100 dark:bg-neutral-800 rounded flex items-center justify-center overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={favicon.dataUrl}
                       alt={`${favicon.size.width}×${favicon.size.height}`}

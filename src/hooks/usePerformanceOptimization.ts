@@ -151,7 +151,7 @@ export function usePerformanceOptimization() {
 
   // Intelligent caching with SWR integration
   const optimizeCache = useCallback((strategy: CacheStrategy) => {
-    const { key, ttl = 300, staleWhileRevalidate = 600 } = strategy;
+    const { key, ttl = 300 } = strategy;
 
     // Track cache performance
     const trackCacheHit = () => {

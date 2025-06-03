@@ -3,10 +3,9 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/utils";
-import { ErrorNotification, ErrorSeverity } from "@/types/errors";
+import { ErrorNotification } from "@/types/errors";
 import {
   XMarkIcon,
-  CheckCircleIcon,
   ExclamationTriangleIcon,
   InformationCircleIcon,
   XCircleIcon,
@@ -47,6 +46,19 @@ export function Toast({ notification, onDismiss, onAction }: ToastProps) {
 
   const IconComponent = severityIcons[notification.severity];
 
+  const handleDismiss = useCallback(() => {
+    if (!notification.dismissible) return;
+
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+
+    setIsLeaving(true);
+    setTimeout(() => {
+      onDismiss(notification.id);
+    }, 300); // Match transition duration
+  }, [notification.dismissible, notification.id, onDismiss]);
+
   useEffect(() => {
     // Animate in with delay for better user experience
     const showTimer = setTimeout(() => {
@@ -74,20 +86,7 @@ export function Toast({ notification, onDismiss, onAction }: ToastProps) {
         clearTimeout(timerRef.current);
       }
     };
-  }, [notification.duration, notification.persistent, notification.severity]);
-
-  const handleDismiss = () => {
-    if (!notification.dismissible) return;
-
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-    }
-
-    setIsLeaving(true);
-    setTimeout(() => {
-      onDismiss(notification.id);
-    }, 300); // Match transition duration
-  };
+  }, [notification.duration, notification.persistent, notification.severity, handleDismiss]);
 
   const handleAction = (actionIndex: number) => {
     notification.actions?.[actionIndex]?.action();
@@ -230,12 +229,12 @@ interface ToastContainerProps {
   onDismiss: (id: string) => void;
   onAction?: (id: string, actionIndex: number) => void;
   position?:
-    | "top-right"
-    | "top-left"
-    | "bottom-right"
-    | "bottom-left"
-    | "top-center"
-    | "bottom-center";
+  | "top-right"
+  | "top-left"
+  | "bottom-right"
+  | "bottom-left"
+  | "top-center"
+  | "bottom-center";
   maxToasts?: number;
 }
 

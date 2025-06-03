@@ -222,12 +222,12 @@ export function SearchInput({
         >
           {resultCount === 0 ? (
             <span className="text-warning-600 font-medium">
-              No tools found for "{value}"
+              No tools found for &quot;{value}&quot;
             </span>
           ) : (
             <span>
               {resultCount} tool{resultCount !== 1 ? "s" : ""} found
-              {value && ` for "${value}"`}
+              {value && ` for &quot;${value}&quot;`}
             </span>
           )}
         </div>

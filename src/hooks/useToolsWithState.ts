@@ -1,14 +1,13 @@
-import { useCallback, useMemo, useEffect } from "react";
+import { useCallback, useMemo } from "react";
 import useSWR, { mutate } from "swr";
 import { ToolDTO, TagDTO } from "@/types/tools/tool";
-import { ApiResponse } from "@/types/api/common";
 import { swrFetcher } from "@/lib/api";
 import { useToolFilterState, ToolFilterState } from "./useUrlState";
 
 interface ToolsWithStateResult {
   tools: ToolDTO[];
   isLoading: boolean;
-  error: any;
+  error: Error | null;
   isEmpty: boolean;
   totalCount: number;
   filterState: ToolFilterState;

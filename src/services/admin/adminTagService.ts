@@ -44,7 +44,7 @@ export class AdminTagService extends BaseService implements IAdminTagService {
     const { search, hasTools } = filters;
 
     // Build where clause
-    let whereClause: any = {};
+    const whereClause: any = {};
 
     if (search) {
       whereClause.OR = [
@@ -409,7 +409,6 @@ export class AdminTagService extends BaseService implements IAdminTagService {
     }
 
     const toolNames = tag.tools.map((toolTag) => toolTag.tool.name);
-    const activeTools = tag.tools.filter((toolTag) => toolTag.tool.isActive);
 
     return {
       type: "error",

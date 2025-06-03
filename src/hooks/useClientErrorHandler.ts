@@ -143,9 +143,9 @@ export function useClientErrorHandler() {
       const performanceInfo =
         typeof window !== "undefined" && "performance" in window
           ? {
-              memory: (window.performance as any).memory,
-              timing: window.performance.timing,
-            }
+            memory: (window.performance as any).memory,
+            timing: window.performance.timing,
+          }
           : undefined;
 
       return {
@@ -156,9 +156,9 @@ export function useClientErrorHandler() {
         viewport:
           typeof window !== "undefined"
             ? {
-                width: window.innerWidth,
-                height: window.innerHeight,
-              }
+              width: window.innerWidth,
+              height: window.innerHeight,
+            }
             : undefined,
         performance: performanceInfo,
       };
@@ -181,7 +181,7 @@ export function useClientErrorHandler() {
 
       try {
         return await operation();
-      } catch (error) {
+      } catch {
         const delay = Math.min(baseDelay * Math.pow(2, attempt), 10000); // Cap at 10 seconds
 
         return new Promise((resolve, reject) => {
@@ -288,10 +288,10 @@ export function useClientErrorHandler() {
                     );
                     const body = encodeURIComponent(
                       `Error ID: ${error.requestId || "Unknown"}\n` +
-                        `Time: ${error.timestamp}\n` +
-                        `Component: ${error.component || "Unknown"}\n` +
-                        `Message: ${error.message}\n\n` +
-                        `Please describe what you were doing when this error occurred:\n\n`,
+                      `Time: ${error.timestamp}\n` +
+                      `Component: ${error.component || "Unknown"}\n` +
+                      `Message: ${error.message}\n\n` +
+                      `Please describe what you were doing when this error occurred:\n\n`,
                     );
                     window.location.href = `mailto:support@tool-chest.com?subject=${subject}&body=${body}`;
                   },
@@ -510,9 +510,10 @@ export function useClientErrorHandler() {
 
   // Cleanup on unmount
   useEffect(() => {
+    const timeouts = retryTimeoutsRef.current;
     return () => {
-      retryTimeoutsRef.current.forEach((timeout) => clearTimeout(timeout));
-      retryTimeoutsRef.current.clear();
+      timeouts.forEach((timeout) => clearTimeout(timeout));
+      timeouts.clear();
     };
   }, []);
 

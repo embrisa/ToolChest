@@ -479,119 +479,119 @@ export default function RelationshipValidationPage() {
       {/* Orphaned Entities */}
       {(orphans.orphanedTools.length > 0 ||
         orphans.orphanedTags.length > 0) && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Orphaned Tools */}
-          {orphans.orphanedTools.length > 0 && (
-            <div className="card">
-              <div className="px-8 py-6 border-b border-neutral-200 dark:border-neutral-800">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-warning-100 dark:bg-warning-950/30 rounded-xl flex items-center justify-center">
-                    <WrenchScrewdriverIcon className="w-5 h-5 text-warning-600 dark:text-warning-400" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Orphaned Tools */}
+            {orphans.orphanedTools.length > 0 && (
+              <div className="card">
+                <div className="px-8 py-6 border-b border-neutral-200 dark:border-neutral-800">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-warning-100 dark:bg-warning-950/30 rounded-xl flex items-center justify-center">
+                      <WrenchScrewdriverIcon className="w-5 h-5 text-warning-600 dark:text-warning-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-title text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+                        Untagged Tools ({orphans.orphanedTools.length})
+                      </h3>
+                      <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                        Tools that don&apos;t have any tags assigned
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-title text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-                      Untagged Tools ({orphans.orphanedTools.length})
-                    </h3>
-                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                      Tools that don't have any tags assigned
-                    </p>
+                </div>
+                <div className="p-8 max-h-80 overflow-y-auto scrollbar-thin">
+                  <div className="space-y-4">
+                    {orphans.orphanedTools.map((tool) => (
+                      <div
+                        key={tool.id}
+                        className="card-interactive p-4 flex items-center justify-between"
+                      >
+                        <div className="min-w-0 flex-1">
+                          <div className="font-medium text-neutral-900 dark:text-neutral-100 truncate">
+                            {tool.name}
+                          </div>
+                          <div className="text-sm text-neutral-500 dark:text-neutral-400 text-code">
+                            {tool.slug}
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3 flex-shrink-0">
+                          <span
+                            className={classNames(
+                              "px-3 py-1 text-xs rounded-lg font-medium",
+                              tool.isActive
+                                ? "bg-success-100 text-success-800 dark:bg-success-950/30 dark:text-success-400"
+                                : "bg-neutral-100 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-300",
+                            )}
+                          >
+                            {tool.isActive ? "Active" : "Inactive"}
+                          </span>
+                          <Link
+                            href={`/admin/tools/${tool.id}/edit`}
+                            className="text-xs text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 font-medium"
+                          >
+                            Edit
+                          </Link>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
-              <div className="p-8 max-h-80 overflow-y-auto scrollbar-thin">
-                <div className="space-y-4">
-                  {orphans.orphanedTools.map((tool) => (
-                    <div
-                      key={tool.id}
-                      className="card-interactive p-4 flex items-center justify-between"
-                    >
-                      <div className="min-w-0 flex-1">
-                        <div className="font-medium text-neutral-900 dark:text-neutral-100 truncate">
-                          {tool.name}
+            )}
+
+            {/* Orphaned Tags */}
+            {orphans.orphanedTags.length > 0 && (
+              <div className="card">
+                <div className="px-8 py-6 border-b border-neutral-200 dark:border-neutral-800">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-warning-100 dark:bg-warning-950/30 rounded-xl flex items-center justify-center">
+                      <TagIcon className="w-5 h-5 text-warning-600 dark:text-warning-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-title text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+                        Unused Tags ({orphans.orphanedTags.length})
+                      </h3>
+                      <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                        Tags that aren&apos;t assigned to any tools
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-8 max-h-80 overflow-y-auto scrollbar-thin">
+                  <div className="space-y-4">
+                    {orphans.orphanedTags.map((tag) => (
+                      <div
+                        key={tag.id}
+                        className="card-interactive p-4 flex items-center justify-between"
+                      >
+                        <div className="flex items-center gap-3 min-w-0 flex-1">
+                          <div
+                            className="w-4 h-4 rounded-xl border border-neutral-300 dark:border-neutral-600 flex-shrink-0"
+                            style={{ backgroundColor: tag.color || "#6B7280" }}
+                            aria-hidden="true"
+                          />
+                          <div className="min-w-0 flex-1">
+                            <div className="font-medium text-neutral-900 dark:text-neutral-100 truncate">
+                              {tag.name}
+                            </div>
+                            <div className="text-sm text-neutral-500 dark:text-neutral-400 text-code">
+                              {tag.slug}
+                            </div>
+                          </div>
                         </div>
-                        <div className="text-sm text-neutral-500 dark:text-neutral-400 text-code">
-                          {tool.slug}
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-3 flex-shrink-0">
-                        <span
-                          className={classNames(
-                            "px-3 py-1 text-xs rounded-lg font-medium",
-                            tool.isActive
-                              ? "bg-success-100 text-success-800 dark:bg-success-950/30 dark:text-success-400"
-                              : "bg-neutral-100 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-300",
-                          )}
-                        >
-                          {tool.isActive ? "Active" : "Inactive"}
-                        </span>
                         <Link
-                          href={`/admin/tools/${tool.id}/edit`}
-                          className="text-xs text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 font-medium"
+                          href={`/admin/tags/${tag.id}/edit`}
+                          className="text-xs text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 font-medium flex-shrink-0"
                         >
                           Edit
                         </Link>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Orphaned Tags */}
-          {orphans.orphanedTags.length > 0 && (
-            <div className="card">
-              <div className="px-8 py-6 border-b border-neutral-200 dark:border-neutral-800">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-warning-100 dark:bg-warning-950/30 rounded-xl flex items-center justify-center">
-                    <TagIcon className="w-5 h-5 text-warning-600 dark:text-warning-400" />
-                  </div>
-                  <div>
-                    <h3 className="text-title text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-                      Unused Tags ({orphans.orphanedTags.length})
-                    </h3>
-                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                      Tags that aren't assigned to any tools
-                    </p>
+                    ))}
                   </div>
                 </div>
               </div>
-              <div className="p-8 max-h-80 overflow-y-auto scrollbar-thin">
-                <div className="space-y-4">
-                  {orphans.orphanedTags.map((tag) => (
-                    <div
-                      key={tag.id}
-                      className="card-interactive p-4 flex items-center justify-between"
-                    >
-                      <div className="flex items-center gap-3 min-w-0 flex-1">
-                        <div
-                          className="w-4 h-4 rounded-xl border border-neutral-300 dark:border-neutral-600 flex-shrink-0"
-                          style={{ backgroundColor: tag.color || "#6B7280" }}
-                          aria-hidden="true"
-                        />
-                        <div className="min-w-0 flex-1">
-                          <div className="font-medium text-neutral-900 dark:text-neutral-100 truncate">
-                            {tag.name}
-                          </div>
-                          <div className="text-sm text-neutral-500 dark:text-neutral-400 text-code">
-                            {tag.slug}
-                          </div>
-                        </div>
-                      </div>
-                      <Link
-                        href={`/admin/tags/${tag.id}/edit`}
-                        className="text-xs text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 font-medium flex-shrink-0"
-                      >
-                        Edit
-                      </Link>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      )}
+            )}
+          </div>
+        )}
 
       {/* Suggested Actions */}
       {orphans.suggestedActions.length > 0 && (

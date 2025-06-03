@@ -11,7 +11,6 @@ import {
   useAccessibilityAnnouncements,
   Alert,
   AlertList,
-  Loading,
   ResultsPanel,
   ResultBadge,
 } from "@/components/ui";
@@ -250,18 +249,7 @@ export function HashGeneratorTool() {
     announceToScreenReader,
   ]);
 
-  // Manual processing function for explicit user actions
-  const manualProcess = useCallback(() => {
-    // Clear the last processed input to allow reprocessing
-    lastProcessedInputRef.current = {
-      inputType: "",
-      textInput: "",
-      fileInput: null,
-      generateAllHashes: false,
-      algorithm: "",
-    };
-    processHash(true); // Track usage for manual processing
-  }, [processHash]);
+
 
   // Clear last processed input when mode or algorithm changes
   useEffect(() => {
@@ -330,6 +318,7 @@ export function HashGeneratorTool() {
     generateAllHashes,
     state.algorithm,
     state.isProcessing, // Include this to prevent processing when already processing
+    processHash, // Include the processing function
   ]);
 
   // Enhanced file selection with validation

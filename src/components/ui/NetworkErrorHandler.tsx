@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { cn } from "@/utils";
 import { NetworkErrorProps, RetryConfig, RetryState } from "@/types/ui/loading";
 import { Button } from "./Button";
@@ -11,14 +11,17 @@ const defaultRetryConfig: RetryConfig = {
   baseDelay: 1000,
   maxDelay: 10000,
   backoffFactor: 2,
-  retryCondition: (error: any) => {
+  retryCondition: (error: Error | unknown) => {
     // Retry on network errors, timeouts, and 5xx status codes
-    return (
-      error.name === "NetworkError" ||
-      error.name === "TimeoutError" ||
-      (error.status && error.status >= 500) ||
-      !navigator.onLine
-    );
+    if (error instanceof Error) {
+      return (
+        error.name === "NetworkError" ||
+        error.name === "TimeoutError" ||
+        ((error as any).status && (error as any).status >= 500) ||
+        !navigator.onLine
+      );
+    }
+    return !navigator.onLine;
   },
 };
 
@@ -30,7 +33,7 @@ export function NetworkErrorHandler({
   isRetrying = false,
   className,
 }: NetworkErrorProps) {
-  const [countdown, setCountdown] = useState<number>(0);
+  const [countdown] = useState<number>(0);
   const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
 
   useEffect(() => {
@@ -206,8 +209,8 @@ export function NetworkErrorHandler({
 }
 
 // Hook for advanced retry logic with exponential backoff
-export function useRetryWithBackoff(
-  asyncFunction: () => Promise<any>,
+export function useRetryWithBackoff<T>(
+  asyncFunction: () => Promise<T>,
   config: Partial<RetryConfig> = {},
 ) {
   const [state, setState] = useState<RetryState>({
@@ -217,18 +220,18 @@ export function useRetryWithBackoff(
     nextRetryIn: undefined,
   });
 
-  const fullConfig = { ...defaultRetryConfig, ...config };
+  const fullConfig = useMemo(() => ({ ...defaultRetryConfig, ...config }), [config]);
 
-  const calculateDelay = (attempt: number): number => {
+  const calculateDelay = useCallback((attempt: number): number => {
     const delay = Math.min(
       fullConfig.baseDelay * Math.pow(fullConfig.backoffFactor, attempt),
       fullConfig.maxDelay,
     );
     // Add jitter to prevent thundering herd
     return delay + Math.random() * 0.1 * delay;
-  };
+  }, [fullConfig]);
 
-  const executeWithRetry = useCallback(async (): Promise<any> => {
+  const executeWithRetry = useCallback(async (): Promise<T> => {
     let lastError: Error;
 
     for (let attempt = 0; attempt <= fullConfig.maxAttempts; attempt++) {
@@ -265,7 +268,7 @@ export function useRetryWithBackoff(
 
     setState((prev) => ({ ...prev, isRetrying: false }));
     throw lastError!;
-  }, [asyncFunction, fullConfig]);
+  }, [asyncFunction, fullConfig, calculateDelay]);
 
   const reset = useCallback(() => {
     setState({ attempt: 0, isRetrying: false });

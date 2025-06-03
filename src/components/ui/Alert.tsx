@@ -119,7 +119,7 @@ export function Alert({
     );
 }
 
-export function AlertList({ items, variant }: { items: string[]; variant?: AlertProps["variant"] }) {
+export function AlertList({ items, variant: _variant }: { items: string[]; variant?: AlertProps["variant"] }) {
     return (
         <ul className="list-disc list-inside space-y-2">
             {items.map((item, index) => (

@@ -1,7 +1,7 @@
 /**
  * Standard API response wrapper
  */
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;
@@ -12,7 +12,7 @@ export interface ApiResponse<T = any> {
     offset?: number;
     sortBy?: string;
     sortOrder?: string;
-    [key: string]: any;
+    [key: string]: unknown;
   };
   timestamp: string;
 }

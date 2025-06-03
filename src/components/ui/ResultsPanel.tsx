@@ -26,6 +26,9 @@ export interface ResultsPanelProps {
     resultClassName?: string;
     readOnly?: boolean;
     rows?: number;
+    showTextarea?: boolean;
+    variant?: "text" | "file" | "mixed";
+    description?: string;
 }
 
 export function ResultsPanel({
@@ -45,53 +48,88 @@ export function ResultsPanel({
     resultClassName,
     readOnly = true,
     rows = 6,
+    showTextarea,
+    variant = "text",
+    description,
 }: ResultsPanelProps) {
-    const hasResult = Boolean(result);
+    // For file variants, consider the result "available" if we have metadata or badges (indicating successful operation)
+    // For other variants, use the traditional result text check
+    const hasResult = variant === "file"
+        ? Boolean(metadata?.length > 0 || badges?.length > 0)
+        : Boolean(result);
     const hasActions = Boolean(onCopy || onDownload);
+
+    // Auto-determine showTextarea based on variant if not explicitly set
+    const shouldShowTextarea = showTextarea !== undefined
+        ? showTextarea
+        : variant === "text" || variant === "mixed";
 
     const defaultPlaceholder = placeholder || (
         isProcessing
             ? "Processing..."
-            : "Result will appear here..."
+            : variant === "file"
+                ? "File generation result will appear here..."
+                : "Result will appear here..."
     );
 
     return (
         <Card variant="elevated" className={cn("animate-fade-in-up", className)}>
-            <CardHeader className="pb-8">
-                <div className="flex items-center justify-between">
-                    <div>
+            <CardHeader className={cn("pb-8", variant === "file" && "pb-6")}>
+                <div className={cn(
+                    "flex items-center justify-between",
+                    variant === "file" && "flex-col sm:flex-row gap-4 sm:gap-0"
+                )}>
+                    <div className={cn(variant === "file" && "text-center sm:text-left")}>
                         <h2 className="text-title text-xl font-semibold text-foreground mb-3">
                             {title}
                         </h2>
-                        {hasResult && metadata.length > 0 && (
-                            <div className="flex flex-wrap items-center gap-6 text-sm text-foreground-secondary">
+                        {description && (
+                            <p className="text-body text-foreground-secondary mb-3">
+                                {description}
+                            </p>
+                        )}
+                        {hasResult && (metadata.length > 0 || badges.length > 0) && (
+                            <div className={cn(
+                                "flex flex-wrap items-center gap-6 text-sm text-foreground-secondary",
+                                variant === "file" && "justify-center sm:justify-start gap-4"
+                            )}>
                                 {metadata.map((item, index) => (
-                                    <span key={index}>
-                                        {item.label}: {item.format ? item.format(item.value) : item.value}
+                                    <span key={index} className={cn(
+                                        variant === "file" && "bg-neutral-50 dark:bg-neutral-900/20 px-3 py-1 rounded-lg"
+                                    )}>
+                                        <span className="font-medium text-foreground">{item.label}:</span>{" "}
+                                        {item.format ? item.format(item.value) : item.value}
                                     </span>
                                 ))}
-                                {badges.map((badge, index) => (
-                                    <React.Fragment key={`badge-${index}`}>{badge}</React.Fragment>
-                                ))}
+                                {badges.length > 0 && (
+                                    <div className="flex flex-wrap gap-2">
+                                        {badges.map((badge, index) => (
+                                            <React.Fragment key={`badge-${index}`}>{badge}</React.Fragment>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
                         )}
-                        {!hasResult && (
+                        {!hasResult && !isProcessing && (
                             <p className="text-body text-foreground-secondary">
                                 {defaultPlaceholder}
                             </p>
                         )}
                     </div>
                     {hasActions && (
-                        <div className="flex gap-3">
+                        <div className={cn(
+                            "flex gap-3",
+                            variant === "file" && "mt-4 sm:mt-0 w-full sm:w-auto justify-center sm:justify-end"
+                        )}>
                             {onCopy && (
                                 <Button
                                     variant="secondary"
-                                    size="sm"
+                                    size={variant === "file" ? "lg" : "sm"}
                                     onClick={onCopy}
                                     disabled={!hasResult}
                                     aria-label="Copy result to clipboard"
                                     className={cn(
-                                        "h-10",
+                                        variant === "file" ? "h-12 px-6" : "h-10",
                                         copySuccess && "bg-success-100 text-success-800 dark:bg-success-950/40 dark:text-success-200"
                                     )}
                                 >
@@ -100,12 +138,12 @@ export function ResultsPanel({
                             )}
                             {onDownload && (
                                 <Button
-                                    variant="secondary"
-                                    size="sm"
+                                    variant={variant === "file" ? "primary" : "secondary"}
+                                    size={variant === "file" ? "lg" : "sm"}
                                     onClick={onDownload}
                                     disabled={!hasResult}
                                     aria-label="Download result as file"
-                                    className="h-10"
+                                    className={variant === "file" ? "h-12 px-6" : "h-10"}
                                 >
                                     {downloadLabel}
                                 </Button>
@@ -114,24 +152,31 @@ export function ResultsPanel({
                     )}
                 </div>
             </CardHeader>
-            <CardContent className="pt-0">
-                <div className="space-y-6">
-                    <textarea
-                        value={result || ""}
-                        readOnly={readOnly}
-                        placeholder={defaultPlaceholder}
-                        rows={rows}
-                        className={cn(
-                            "input-field resize-vertical text-code bg-background-tertiary",
-                            hasResult ? "cursor-text select-all" : "cursor-default",
-                            !hasResult && "placeholder:text-neutral-400 dark:placeholder:text-neutral-500",
-                            resultClassName
+            {(shouldShowTextarea || children) && (
+                <CardContent className="pt-0">
+                    <div className={cn(
+                        "space-y-6",
+                        variant === "file" && "space-y-4"
+                    )}>
+                        {shouldShowTextarea && (
+                            <textarea
+                                value={result || ""}
+                                readOnly={readOnly}
+                                placeholder={defaultPlaceholder}
+                                rows={rows}
+                                className={cn(
+                                    "input-field resize-vertical text-code bg-background-tertiary",
+                                    hasResult ? "cursor-text select-all" : "cursor-default",
+                                    !hasResult && "placeholder:text-neutral-400 dark:placeholder:text-neutral-500",
+                                    resultClassName
+                                )}
+                                aria-label="Result output"
+                            />
                         )}
-                        aria-label="Result output"
-                    />
-                    {children}
-                </div>
-            </CardContent>
+                        {children}
+                    </div>
+                </CardContent>
+            )}
         </Card>
     );
 }

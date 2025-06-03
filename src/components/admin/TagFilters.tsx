@@ -190,7 +190,7 @@ export function TagFilters({
             <div className="flex items-center justify-between">
               <div className="text-sm text-neutral-500 dark:text-neutral-400">
                 Use filters to narrow down the tag list and find exactly what
-                you're looking for.
+                you&apos;re looking for.
               </div>
               <div className="flex items-center space-x-3">
                 <Button

@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
   title: "Dashboard - Admin - tool-chest",

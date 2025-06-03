@@ -109,7 +109,7 @@ export function ToolForm({
             </h1>
             <p className="text-body text-secondary max-w-2xl mx-auto">
               {isEditing
-                ? "Update the tool's information, settings, and categories to keep it current and discoverable."
+                ? "Update the tool&apos;s information, settings, and categories to keep it current and discoverable."
                 : "Add a new tool to your collection. Fill out the basic information, configure display settings, and assign relevant categories."}
             </p>
           </div>
@@ -221,11 +221,10 @@ export function ToolForm({
                 <button
                   type="button"
                   onClick={() => setAutoGenerateSlug(!autoGenerateSlug)}
-                  className={`touch-target-min px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 focus-ring border-2 ${
-                    autoGenerateSlug
-                      ? "bg-brand-500 text-white border-brand-600 shadow-soft"
-                      : "bg-neutral-50 text-tertiary border-neutral-200 hover:bg-neutral-25 hover:border-neutral-300 hover:text-primary"
-                  }`}
+                  className={`touch-target-min px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 focus-ring border-2 ${autoGenerateSlug
+                    ? "bg-brand-500 text-white border-brand-600 shadow-soft"
+                    : "bg-neutral-50 text-tertiary border-neutral-200 hover:bg-neutral-25 hover:border-neutral-300 hover:text-primary"
+                    }`}
                   aria-pressed={autoGenerateSlug}
                   aria-label={
                     autoGenerateSlug
@@ -245,9 +244,8 @@ export function ToolForm({
                   handleInputChange("slug", e.target.value);
                 }}
                 placeholder="e.g., base64-encoder-decoder"
-                className={`w-full text-code focus-ring text-primary ${
-                  autoGenerateSlug ? "bg-neutral-25 text-secondary" : ""
-                } ${errors.slug ? "input-error border-error-500" : ""}`}
+                className={`w-full text-code focus-ring text-primary ${autoGenerateSlug ? "bg-neutral-25 text-secondary" : ""
+                  } ${errors.slug ? "input-error border-error-500" : ""}`}
                 disabled={autoGenerateSlug}
                 required
                 aria-describedby="slug-help"
@@ -346,7 +344,7 @@ export function ToolForm({
                 Display Settings
               </h2>
               <p className="text-body text-secondary">
-                Configure how your tool appears in the interface and where it's
+                Configure how your tool appears in the interface and where it&apos;s
                 positioned in the list.
               </p>
             </div>
@@ -387,7 +385,7 @@ export function ToolForm({
                 aria-describedby="icon-help"
               />
               <p id="icon-help" className="text-small text-secondary">
-                CSS class for the tool's icon (optional)
+                CSS class for the tool&apos;s icon (optional)
               </p>
               {formData.iconClass && (
                 <div className="mt-4 p-4 bg-neutral-25 rounded-xl border border-neutral-200">
@@ -577,7 +575,7 @@ export function ToolForm({
                 groups that help users find what they need.
               </p>
               <p className="text-small text-tertiary">
-                Categories will appear here once you've created them in the tag
+                Categories will appear here once you&apos;ve created them in the tag
                 management section.
               </p>
             </div>
@@ -591,18 +589,17 @@ export function ToolForm({
                       key={tag.id}
                       type="button"
                       onClick={() => handleTagToggle(tag.id)}
-                      className={`touch-target-comfortable inline-flex items-center px-5 py-3 rounded-xl text-sm font-medium transition-all duration-200 focus-ring border-2 ${
-                        isSelected
-                          ? "bg-brand-500 text-white shadow-colored border-brand-600 transform hover:scale-105"
-                          : "bg-neutral-50 text-tertiary border-neutral-200 hover:bg-neutral-25 hover:border-neutral-300 hover:text-primary"
-                      }`}
+                      className={`touch-target-comfortable inline-flex items-center px-5 py-3 rounded-xl text-sm font-medium transition-all duration-200 focus-ring border-2 ${isSelected
+                        ? "bg-brand-500 text-white shadow-colored border-brand-600 transform hover:scale-105"
+                        : "bg-neutral-50 text-tertiary border-neutral-200 hover:bg-neutral-25 hover:border-neutral-300 hover:text-primary"
+                        }`}
                       style={
                         isSelected && tag.color
                           ? {
-                              backgroundColor: tag.color,
-                              borderColor: tag.color,
-                              color: "#ffffff",
-                            }
+                            backgroundColor: tag.color,
+                            borderColor: tag.color,
+                            color: "#ffffff",
+                          }
                           : {}
                       }
                       aria-pressed={isSelected}

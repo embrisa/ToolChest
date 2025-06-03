@@ -205,7 +205,7 @@ export function ToolTable({
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-neutral-150">
-            {tools.map((tool, index) => (
+            {tools.map((tool, _index) => (
               <tr
                 key={tool.id}
                 className="hover:bg-neutral-25 transition-colors duration-200 group"
@@ -311,11 +311,10 @@ export function ToolTable({
                 </td>
                 <td className="px-6 py-5 whitespace-nowrap" role="gridcell">
                   <span
-                    className={`inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold border ${
-                      tool.isActive
-                        ? "bg-success-50 text-success-700 border-success-200"
-                        : "bg-warning-50 text-warning-700 border-warning-200"
-                    }`}
+                    className={`inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold border ${tool.isActive
+                      ? "bg-success-50 text-success-700 border-success-200"
+                      : "bg-warning-50 text-warning-700 border-warning-200"
+                      }`}
                     aria-label={
                       tool.isActive
                         ? "Tool is published and visible to users"
@@ -323,9 +322,8 @@ export function ToolTable({
                     }
                   >
                     <div
-                      className={`w-2 h-2 rounded-full mr-2 ${
-                        tool.isActive ? "bg-success-500" : "bg-warning-500"
-                      }`}
+                      className={`w-2 h-2 rounded-full mr-2 ${tool.isActive ? "bg-success-500" : "bg-warning-500"
+                        }`}
                     />
                     {tool.isActive ? "Published" : "Draft"}
                   </span>

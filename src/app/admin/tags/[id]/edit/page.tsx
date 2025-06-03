@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AdminTagFormData, AdminTagValidationErrors } from "@/types/admin/tag";
@@ -31,13 +31,7 @@ export default function EditTagPage({ params }: EditTagPageProps) {
     loadParams();
   }, [params]);
 
-  useEffect(() => {
-    if (tagId) {
-      loadTag();
-    }
-  }, [tagId]);
-
-  const loadTag = async () => {
+  const loadTag = useCallback(async () => {
     try {
       setLoading(true);
       setLoadError(null);
@@ -55,12 +49,18 @@ export default function EditTagPage({ params }: EditTagPageProps) {
 
       const data = await response.json();
       setTag(data.tag);
-    } catch (error) {
+    } catch {
       setLoadError("An error occurred while loading the tag");
     } finally {
       setLoading(false);
     }
-  };
+  }, [tagId]);
+
+  useEffect(() => {
+    if (tagId) {
+      loadTag();
+    }
+  }, [tagId, loadTag]);
 
   const handleSubmit = async (data: AdminTagFormData) => {
     try {
@@ -88,7 +88,7 @@ export default function EditTagPage({ params }: EditTagPageProps) {
 
       // Success - redirect to tags list
       router.push("/admin/tags");
-    } catch (error) {
+    } catch {
       setErrors({ general: "An unexpected error occurred" });
     } finally {
       setIsSubmitting(false);
@@ -184,7 +184,7 @@ export default function EditTagPage({ params }: EditTagPageProps) {
             Tag not found
           </h3>
           <p className="text-neutral-600 dark:text-neutral-400 mb-6">
-            The tag you're looking for doesn't exist or may have been deleted.
+            The tag you&apos;re looking for doesn&apos;t exist or may have been deleted.
           </p>
           <Button onClick={() => router.push("/admin/tags")} variant="primary">
             Back to Tags
@@ -226,7 +226,7 @@ export default function EditTagPage({ params }: EditTagPageProps) {
           <p className="text-body text-neutral-600 dark:text-neutral-400 max-w-2xl">
             Update the details for{" "}
             <span className="font-medium text-neutral-900 dark:text-neutral-100">
-              "{tag.name}"
+              &quot;{tag.name}&quot;
             </span>
             . Changes will affect all tools using this tag.
           </p>

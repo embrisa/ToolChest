@@ -13,6 +13,7 @@ export interface FeatureCardProps {
     };
     className?: string;
     hoverEffect?: boolean;
+    compact?: boolean;
 }
 
 export function FeatureCard({
@@ -23,31 +24,43 @@ export function FeatureCard({
     badge,
     className,
     hoverEffect = true,
+    compact = false,
 }: FeatureCardProps) {
     return (
         <Card
             variant="interactive"
-            padding="md"
+            padding={compact ? "sm" : "md"}
             className={cn(
                 "group",
                 hoverEffect && "hover:shadow-colored transition-all duration-300",
                 className
             )}
         >
-            <CardContent className="space-y-4">
+            <CardContent className={compact ? "space-y-2" : "space-y-4"}>
                 <div className="flex items-center gap-3">
                     {icon && (
                         <div
                             className={cn(
-                                "w-10 h-10 rounded-lg flex items-center justify-center",
-                                iconBg
+                                "rounded-lg flex items-center justify-center flex-shrink-0",
+                                compact ? "w-8 h-8" : "w-10 h-10",
+                                // Only apply background color if icon is not a string (emoji)
+                                typeof icon === 'string' ? "bg-transparent" : iconBg
                             )}
                         >
-                            {icon}
+                            <div className={cn(
+                                typeof icon === 'string'
+                                    ? compact ? "text-lg" : "text-xl"
+                                    : compact ? "scale-75" : ""
+                            )}>
+                                {icon}
+                            </div>
                         </div>
                     )}
-                    <div className="flex-1">
-                        <h3 className="text-heading font-semibold text-foreground mb-1">
+                    <div className="flex-1 min-w-0">
+                        <h3 className={cn(
+                            "font-semibold text-foreground",
+                            compact ? "text-sm mb-0.5" : "text-heading mb-1"
+                        )}>
                             {title}
                         </h3>
                         {badge && (
@@ -63,7 +76,10 @@ export function FeatureCard({
                         )}
                     </div>
                 </div>
-                <p className="text-sm text-foreground-secondary leading-relaxed">
+                <p className={cn(
+                    "text-foreground-secondary leading-relaxed",
+                    compact ? "text-xs" : "text-sm"
+                )}>
                     {description}
                 </p>
             </CardContent>

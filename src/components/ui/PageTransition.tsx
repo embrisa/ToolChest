@@ -430,17 +430,9 @@ export function useRouterTransition() {
     usePageTransition();
 
   useEffect(() => {
-    const handleStart = () => {
-      startTransition("Navigating to page...");
-    };
-
-    const handleComplete = () => {
-      completeTransition();
-    };
-
-    const handleError = () => {
-      cancelTransition();
-    };
+    // Enhanced router integration would go here
+    // This provides a clean interface for Next.js router events
+    // when they become available in App Router
 
     // Enhanced router integration would go here
     // This provides a clean interface for Next.js router events

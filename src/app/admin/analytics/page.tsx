@@ -42,7 +42,7 @@ export default function AnalyticsPage() {
           </div>
           <div className="surface-glass rounded-xl p-4">
             <div className="text-sm text-neutral-500 dark:text-neutral-400">
-              Today's Sessions
+              Today&apos;s Sessions
             </div>
             <div className="text-2xl font-bold text-foreground mt-1">1,247</div>
           </div>

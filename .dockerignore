@@ -1,0 +1,81 @@
+# Dependencies
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Next.js build output
+.next
+out
+
+# Environment variables
+.env*
+!.env.example
+
+# Testing
+coverage
+test-results
+playwright-report
+.nyc_output
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Optional npm cache directory
+.npm
+
+# ESLint cache
+.eslintcache
+
+# Build outputs
+dist
+build
+
+# Archive folder (Express.js legacy)
+archive
+
+# Database files (development)
+*.db
+*.db-journal
+
+# Temporary files
+tmp
+temp
+
+# Git
+.git
+.gitignore
+README.md
+DEVELOPER_CHEAT_SHEET.md
+migrate_to_nextjs.md
+
+# Railway
+.railway
+
+# Docker
+Dockerfile*
+docker-compose* 

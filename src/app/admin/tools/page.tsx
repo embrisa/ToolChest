@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import {
   AdminToolListItem,
@@ -95,7 +95,7 @@ export default function AdminToolsPage() {
   }, []);
 
   const handleDelete = useCallback(
-    async (id: string, name: string) => {
+    async (id: string, _name: string) => {
       try {
         const response = await fetch(`/api/admin/tools/${id}`, {
           method: "DELETE",

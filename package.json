@@ -49,7 +49,14 @@
     "clean:test": "rm -rf test.db test-e2e.db test-results coverage playwright-report",
     "validate": "npm run lint && npm run type-check && npm run format:check && npm run env:validate",
     "prepare": "npm run db:generate",
-    "setup": "node scripts/setup.js"
+    "setup": "node scripts/setup.js",
+    "docker:build": "docker build -t tool-chest .",
+    "docker:run": "docker run -p 3000:3000 --env-file .env.local tool-chest",
+    "docker:dev": "docker-compose up --build",
+    "docker:dev:bg": "docker-compose up --build -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "docker:clean": "docker-compose down -v && docker system prune -f"
   },
   "dependencies": {
     "@axe-core/react": "^4.10.1",

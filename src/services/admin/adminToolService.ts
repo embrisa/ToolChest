@@ -1,5 +1,5 @@
 import { BaseService } from "../core/baseService";
-import { ToolDTO, TagDTO, ToolInput, toToolDTO } from "@/types/tools/tool";
+import { ToolDTO, toToolDTO } from "@/types/tools/tool";
 import {
   AdminToolFormData,
   AdminToolCreateRequest,
@@ -100,7 +100,7 @@ export class AdminToolService extends BaseService implements IAdminToolService {
         isActive: tool.isActive,
         createdAt: tool.createdAt,
         updatedAt: tool.updatedAt,
-        usageCount: tool.toolUsageStats?.[0]?.usageCount ?? 0,
+        usageCount: Array.isArray(tool.toolUsageStats) ? tool.toolUsageStats[0]?.usageCount ?? 0 : tool.toolUsageStats?.usageCount ?? 0,
         tagCount: tool._count.tags,
         tags: tool.tags.map((t) => ({
           id: t.tag.id,
@@ -158,10 +158,10 @@ export class AdminToolService extends BaseService implements IAdminToolService {
         tags:
           data.tagIds && data.tagIds.length > 0
             ? {
-                create: data.tagIds.map((tagId) => ({
-                  tagId,
-                })),
-              }
+              create: data.tagIds.map((tagId) => ({
+                tagId,
+              })),
+            }
             : undefined,
       },
       include: {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter, useParams } from "next/navigation";
 import {
   AdminToolFormData,
@@ -22,14 +22,7 @@ export default function EditToolPage() {
   const [errors, setErrors] = useState<AdminToolValidationErrors>({});
   const [notFound, setNotFound] = useState(false);
 
-  // Load tool data and available tags
-  useEffect(() => {
-    if (toolId) {
-      loadData();
-    }
-  }, [toolId]);
-
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     try {
       setInitialLoading(true);
       setNotFound(false);
@@ -63,7 +56,14 @@ export default function EditToolPage() {
     } finally {
       setInitialLoading(false);
     }
-  };
+  }, [toolId]);
+
+  // Load tool data and available tags
+  useEffect(() => {
+    if (toolId) {
+      loadData();
+    }
+  }, [toolId, loadData]);
 
   const handleSubmit = async (formData: AdminToolFormData) => {
     try {
@@ -142,7 +142,7 @@ export default function EditToolPage() {
             Tool Not Found
           </h1>
           <p className="text-lg text-secondary mb-8 max-w-lg mx-auto">
-            The tool you're looking for doesn't exist or has been deleted. It
+            The tool you&apos;re looking for doesn&apos;t exist or has been deleted. It
             may have been removed or the URL may be incorrect.
           </p>
           <Button
@@ -283,7 +283,7 @@ export default function EditToolPage() {
               <p className="text-lg text-secondary max-w-2xl">
                 Update the settings and configuration for{" "}
                 <span className="font-semibold text-primary">
-                  "{tool.name}"
+                  &quot;{tool.name}&quot;
                 </span>
                 . Modify properties, reassign tags, and adjust availability.
               </p>

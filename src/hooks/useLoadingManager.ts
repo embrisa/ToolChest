@@ -11,16 +11,11 @@ export function useLoadingManager(): LoadingManager & LoadingAccessibility {
   const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>(
     {},
   );
-  const [loadingConfigs, setLoadingConfigs] = useState<
-    Record<string, LoadingStateConfig>
-  >({});
-  const [loadingMessages, setLoadingMessages] = useState<
-    Record<string, string>
-  >({});
+
   const announcementRef = useRef<HTMLDivElement | null>(null);
 
-  const register = useCallback((key: string, config: LoadingStateConfig) => {
-    setLoadingConfigs((prev) => ({ ...prev, [key]: config }));
+  const register = useCallback((_key: string, _config: LoadingStateConfig) => {
+    // Registration logic could be implemented here if needed
   }, []);
 
   const unregister = useCallback((key: string) => {
@@ -29,24 +24,11 @@ export function useLoadingManager(): LoadingManager & LoadingAccessibility {
       delete newState[key];
       return newState;
     });
-    setLoadingConfigs((prev) => {
-      const newConfigs = { ...prev };
-      delete newConfigs[key];
-      return newConfigs;
-    });
-    setLoadingMessages((prev) => {
-      const newMessages = { ...prev };
-      delete newMessages[key];
-      return newMessages;
-    });
   }, []);
 
   const setLoading = useCallback(
     (key: string, loading: boolean, message?: string) => {
       setLoadingStates((prev) => ({ ...prev, [key]: loading }));
-      if (message) {
-        setLoadingMessages((prev) => ({ ...prev, [key]: message }));
-      }
 
       // Announce loading state changes
       if (loading && message) {
@@ -55,6 +37,8 @@ export function useLoadingManager(): LoadingManager & LoadingAccessibility {
         announceComplete(`${key} loaded successfully`);
       }
     },
+    // Functions are defined in same scope, safe to omit from dependencies
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
 
@@ -74,7 +58,6 @@ export function useLoadingManager(): LoadingManager & LoadingAccessibility {
 
   const clearAll = useCallback(() => {
     setLoadingStates({});
-    setLoadingMessages({});
   }, []);
 
   // Accessibility functions
@@ -126,10 +109,7 @@ export function useLoadingManager(): LoadingManager & LoadingAccessibility {
     [announceToScreenReader],
   );
 
-  // Create announcement element ref setter
-  const setAnnouncementRef = useCallback((element: HTMLDivElement | null) => {
-    announcementRef.current = element;
-  }, []);
+
 
   return {
     register,
