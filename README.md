@@ -112,7 +112,7 @@ src/
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is released under a custom Source Code License. You may read the code and copy small snippets, but hosting or redistributing the entire website is not allowed. See the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
