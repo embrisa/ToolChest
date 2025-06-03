@@ -107,12 +107,10 @@ function validateEnvironment(): EnvironmentConfig {
   const isPostgres =
     databaseUrl.startsWith("postgresql://") ||
     databaseUrl.startsWith("postgres://");
-  const isSqlite =
-    databaseUrl.startsWith("file:") || databaseUrl.startsWith("sqlite:");
 
-  if (!isPostgres && !isSqlite) {
+  if (!isPostgres) {
     throw new Error(
-      "DATABASE_URL must be a valid PostgreSQL connection string or SQLite file URL",
+      "DATABASE_URL must be a valid PostgreSQL connection string",
     );
   }
 

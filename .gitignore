@@ -3,6 +3,9 @@
 
 toolchest.db
 toolchest.db-journal
+prisma/dev.db
+prisma/prisma/dev.db
+prisma/prisma/dev.db-journal
 
 ### Node ###
 # Logs
