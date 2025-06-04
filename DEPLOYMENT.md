@@ -58,6 +58,9 @@ Railway will automatically:
 - Run database migrations
 - Deploy the application
 
+If you choose Railway's Node environment instead of Docker, make sure to
+apply migrations with `npm run db:deploy` before starting the server.
+
 ### Environment Variables Reference
 
 | Variable               | Required | Description                   | Example                               |
