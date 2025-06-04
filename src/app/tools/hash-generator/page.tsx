@@ -52,33 +52,38 @@ export default function HashGeneratorPage() {
           {
             id: "md5",
             title: "MD5",
-            description: "128-bit hash function. Fast but not cryptographically secure. Use for checksums only.",
+            description:
+              "128-bit hash function. Fast but not cryptographically secure. Use for checksums only.",
             icon: <span className="text-sm font-bold text-white">MD5</span>,
             iconBg: "bg-gradient-to-br from-warning-500 to-warning-600",
           },
           {
             id: "sha1",
             title: "SHA-1",
-            description: "160-bit hash function. Legacy algorithm, use SHA-256+ for security applications.",
+            description:
+              "160-bit hash function. Legacy algorithm, use SHA-256+ for security applications.",
             icon: <span className="text-xs font-bold text-white">SHA1</span>,
             iconBg: "bg-gradient-to-br from-error-500 to-error-600",
           },
           {
             id: "sha256",
             title: "SHA-256",
-            description: "256-bit hash function. Secure and widely used standard for modern applications.",
+            description:
+              "256-bit hash function. Secure and widely used standard for modern applications.",
             icon: <span className="text-xs font-bold text-white">256</span>,
             iconBg: "bg-gradient-to-br from-success-500 to-success-600",
             badge: {
               text: "Recommended",
-              className: "bg-success-100 text-success-800 dark:bg-success-900/30 dark:text-success-400",
+              className:
+                "bg-success-100 text-success-800 dark:bg-success-900/30 dark:text-success-400",
             },
             className: "border-success-200/50 dark:border-success-800/50",
           },
           {
             id: "sha512",
             title: "SHA-512",
-            description: "512-bit hash function. Maximum security for sensitive data and critical applications.",
+            description:
+              "512-bit hash function. Maximum security for sensitive data and critical applications.",
             icon: <span className="text-xs font-bold text-white">512</span>,
             iconBg: "bg-gradient-to-br from-brand-500 to-brand-600",
           },
@@ -124,8 +129,12 @@ export default function HashGeneratorPage() {
             className:
               "surface p-6 rounded-xl border border-warning-200/50 dark:border-warning-800/50 bg-warning-50/50 dark:bg-warning-950/20",
             items: [
-              { text: "MD5 and SHA-1 are cryptographically broken and should not be used for security-critical applications" },
-              { text: "Use SHA-256 or SHA-512 for all security-sensitive applications and modern systems" },
+              {
+                text: "MD5 and SHA-1 are cryptographically broken and should not be used for security-critical applications",
+              },
+              {
+                text: "Use SHA-256 or SHA-512 for all security-sensitive applications and modern systems",
+              },
             ],
           },
         ],

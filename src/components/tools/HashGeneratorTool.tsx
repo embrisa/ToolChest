@@ -47,7 +47,9 @@ export function HashGeneratorTool() {
 
   const [dragActive, setDragActive] = useState(false);
   const [copySuccess, setCopySuccess] = useState<ClipboardResult | null>(null);
-  const [announcement, setAnnouncement] = useState<A11yAnnouncement | null>(null);
+  const [announcement, setAnnouncement] = useState<A11yAnnouncement | null>(
+    null,
+  );
   const [generateAllHashes, setGenerateAllHashes] = useState(false);
 
   const { announceToScreenReader } = useAccessibilityAnnouncements();
@@ -58,7 +60,7 @@ export function HashGeneratorTool() {
     textInput: string;
     fileInput: File | null;
     generateAllHashes: boolean;
-    algorithm: string
+    algorithm: string;
   }>({
     inputType: "",
     textInput: "",
@@ -73,183 +75,188 @@ export function HashGeneratorTool() {
   }, [state]);
 
   // Process hash generation with enhanced error handling and progress
-  const processHash = useCallback(async (shouldTrackUsage = true) => {
-    // Get current state values to avoid stale closures
-    const currentState = stateRef.current;
+  const processHash = useCallback(
+    async (shouldTrackUsage = true) => {
+      // Get current state values to avoid stale closures
+      const currentState = stateRef.current;
 
-    if (currentState.inputType === "text" && !currentState.textInput.trim()) {
-      setState((prev) => ({
-        ...prev,
-        results: generateAllHashes
-          ? { MD5: null, "SHA-1": null, "SHA-256": null, "SHA-512": null }
-          : { ...prev.results, [currentState.algorithm]: null },
-        error: null,
-        progress: null,
-        warnings: [],
-        validationErrors: [],
-      }));
-      return;
-    }
-
-    if (currentState.inputType === "file" && !currentState.fileInput) {
-      setState((prev) => ({
-        ...prev,
-        results: generateAllHashes
-          ? { MD5: null, "SHA-1": null, "SHA-256": null, "SHA-512": null }
-          : { ...prev.results, [currentState.algorithm]: null },
-        error: null,
-        progress: null,
-        warnings: [],
-        validationErrors: [],
-      }));
-      return;
-    }
-
-    // Validate input before processing
-    if (currentState.inputType === "file" && currentState.fileInput) {
-      const validation = HashGeneratorService.validateFile(currentState.fileInput);
-      if (!validation.isValid) {
+      if (currentState.inputType === "text" && !currentState.textInput.trim()) {
         setState((prev) => ({
           ...prev,
-          error: validation.error || "File validation failed",
-          validationErrors: validation.validationErrors || [],
-          warnings: validation.warnings || [],
+          results: generateAllHashes
+            ? { MD5: null, "SHA-1": null, "SHA-256": null, "SHA-512": null }
+            : { ...prev.results, [currentState.algorithm]: null },
+          error: null,
+          progress: null,
+          warnings: [],
+          validationErrors: [],
+        }));
+        return;
+      }
+
+      if (currentState.inputType === "file" && !currentState.fileInput) {
+        setState((prev) => ({
+          ...prev,
+          results: generateAllHashes
+            ? { MD5: null, "SHA-1": null, "SHA-256": null, "SHA-512": null }
+            : { ...prev.results, [currentState.algorithm]: null },
+          error: null,
+          progress: null,
+          warnings: [],
+          validationErrors: [],
+        }));
+        return;
+      }
+
+      // Validate input before processing
+      if (currentState.inputType === "file" && currentState.fileInput) {
+        const validation = HashGeneratorService.validateFile(
+          currentState.fileInput,
+        );
+        if (!validation.isValid) {
+          setState((prev) => ({
+            ...prev,
+            error: validation.error || "File validation failed",
+            validationErrors: validation.validationErrors || [],
+            warnings: validation.warnings || [],
+          }));
+
+          setAnnouncement(
+            announceToScreenReader(
+              `File validation failed: ${validation.error}`,
+              "assertive",
+            ),
+          );
+          return;
+        }
+      }
+
+      setState((prev) => ({
+        ...prev,
+        isProcessing: true,
+        error: null,
+        progress: null,
+        validationErrors: [],
+      }));
+
+      const algorithmsToProcess = generateAllHashes
+        ? HASH_ALGORITHMS
+        : [currentState.algorithm];
+
+      // Announce start of processing to screen readers
+      setAnnouncement(
+        announceToScreenReader(
+          `Starting hash generation for ${algorithmsToProcess.join(", ")}`,
+          "polite",
+        ),
+      );
+
+      try {
+        const input =
+          currentState.inputType === "text"
+            ? currentState.textInput
+            : currentState.fileInput!;
+        const inputSize =
+          currentState.inputType === "text"
+            ? currentState.textInput.length
+            : currentState.fileInput!.size;
+
+        const results: Partial<Record<HashAlgorithm, HashResult>> = {};
+        let allWarnings: string[] = [];
+
+        for (const algo of algorithmsToProcess) {
+          const result: HashResult = await HashGeneratorService.generateHash({
+            algorithm: algo,
+            inputType: currentState.inputType,
+            input,
+            onProgress: (progress) => {
+              setState((prev) => ({ ...prev, progress }));
+            },
+          });
+
+          results[algo] = result;
+
+          if (result.warnings) {
+            allWarnings = [...allWarnings, ...result.warnings];
+          }
+
+          // Track usage analytics only when explicitly requested (privacy-compliant)
+          if (shouldTrackUsage && result.success && inputSize > 0) {
+            HashGeneratorService.trackUsage({
+              algorithm: algo,
+              inputType: currentState.inputType,
+              inputSize,
+              processingTime: result.processingTime || 0,
+              success: result.success,
+              clientSide: !result.serverSide,
+              error: result.success ? undefined : result.error,
+            });
+          }
+        }
+
+        setState((prev) => ({
+          ...prev,
+          results: generateAllHashes
+            ? ({ ...results } as Record<HashAlgorithm, HashResult | null>)
+            : {
+                ...prev.results,
+                [currentState.algorithm]:
+                  results[currentState.algorithm] || null,
+              },
+          error: null,
+          warnings: [...new Set(allWarnings)], // Remove duplicates
+          isProcessing: false,
+          progress: null,
+        }));
+
+        // Announce completion
+        const successCount = Object.values(results).filter(
+          (r) => r?.success,
+        ).length;
+        const failureCount = Object.values(results).filter(
+          (r) => !r?.success,
+        ).length;
+
+        if (failureCount === 0) {
+          setAnnouncement(
+            announceToScreenReader(
+              `Hash generation completed successfully for ${successCount} algorithm${successCount > 1 ? "s" : ""}`,
+              "polite",
+            ),
+          );
+        } else {
+          setAnnouncement(
+            announceToScreenReader(
+              `Hash generation completed with ${failureCount} error${failureCount > 1 ? "s" : ""}`,
+              "assertive",
+            ),
+          );
+        }
+      } catch (error) {
+        const errorMessage =
+          error instanceof Error ? error.message : "Hash generation failed";
+        setState((prev) => ({
+          ...prev,
+          error: errorMessage,
+          isProcessing: false,
+          progress: null,
         }));
 
         setAnnouncement(
           announceToScreenReader(
-            `File validation failed: ${validation.error}`,
-            "assertive",
-          ),
-        );
-        return;
-      }
-    }
-
-    setState((prev) => ({
-      ...prev,
-      isProcessing: true,
-      error: null,
-      progress: null,
-      validationErrors: [],
-    }));
-
-    const algorithmsToProcess = generateAllHashes
-      ? HASH_ALGORITHMS
-      : [currentState.algorithm];
-
-    // Announce start of processing to screen readers
-    setAnnouncement(
-      announceToScreenReader(
-        `Starting hash generation for ${algorithmsToProcess.join(", ")}`,
-        "polite",
-      ),
-    );
-
-    try {
-      const input =
-        currentState.inputType === "text" ? currentState.textInput : currentState.fileInput!;
-      const inputSize =
-        currentState.inputType === "text"
-          ? currentState.textInput.length
-          : currentState.fileInput!.size;
-
-      const results: Partial<Record<HashAlgorithm, HashResult>> = {};
-      let allWarnings: string[] = [];
-
-      for (const algo of algorithmsToProcess) {
-        const result: HashResult = await HashGeneratorService.generateHash({
-          algorithm: algo,
-          inputType: currentState.inputType,
-          input,
-          onProgress: (progress) => {
-            setState((prev) => ({ ...prev, progress }));
-          },
-        });
-
-        results[algo] = result;
-
-        if (result.warnings) {
-          allWarnings = [...allWarnings, ...result.warnings];
-        }
-
-        // Track usage analytics only when explicitly requested (privacy-compliant)
-        if (shouldTrackUsage && result.success && inputSize > 0) {
-          HashGeneratorService.trackUsage({
-            algorithm: algo,
-            inputType: currentState.inputType,
-            inputSize,
-            processingTime: result.processingTime || 0,
-            success: result.success,
-            clientSide: !result.serverSide,
-            error: result.success ? undefined : result.error,
-          });
-        }
-      }
-
-      setState((prev) => ({
-        ...prev,
-        results: generateAllHashes
-          ? ({ ...results } as Record<HashAlgorithm, HashResult | null>)
-          : {
-            ...prev.results,
-            [currentState.algorithm]:
-              results[currentState.algorithm] || null,
-          },
-        error: null,
-        warnings: [...new Set(allWarnings)], // Remove duplicates
-        isProcessing: false,
-        progress: null,
-      }));
-
-      // Announce completion
-      const successCount = Object.values(results).filter(
-        (r) => r?.success,
-      ).length;
-      const failureCount = Object.values(results).filter(
-        (r) => !r?.success,
-      ).length;
-
-      if (failureCount === 0) {
-        setAnnouncement(
-          announceToScreenReader(
-            `Hash generation completed successfully for ${successCount} algorithm${successCount > 1 ? "s" : ""}`,
-            "polite",
-          ),
-        );
-      } else {
-        setAnnouncement(
-          announceToScreenReader(
-            `Hash generation completed with ${failureCount} error${failureCount > 1 ? "s" : ""}`,
+            `Hash generation failed: ${errorMessage}`,
             "assertive",
           ),
         );
       }
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : "Hash generation failed";
-      setState((prev) => ({
-        ...prev,
-        error: errorMessage,
-        isProcessing: false,
-        progress: null,
-      }));
-
-      setAnnouncement(
-        announceToScreenReader(
-          `Hash generation failed: ${errorMessage}`,
-          "assertive",
-        ),
-      );
-    }
-  }, [
-    // Use a ref for state to avoid recreating this function on every state change
-    // This prevents the infinite loop since the callback won't change
-    generateAllHashes,
-    announceToScreenReader,
-  ]);
-
-
+    },
+    [
+      // Use a ref for state to avoid recreating this function on every state change
+      // This prevents the infinite loop since the callback won't change
+      generateAllHashes,
+      announceToScreenReader,
+    ],
+  );
 
   // Clear last processed input when mode or algorithm changes
   useEffect(() => {
@@ -389,13 +396,15 @@ export function HashGeneratorTool() {
   // Enhanced copy to clipboard with accessibility feedback
   const handleCopy = useCallback(async () => {
     // Get all successful hash results
-    const allHashes = HASH_ALGORITHMS
-      .filter(algorithm => state.results[algorithm]?.success && state.results[algorithm]?.hash)
-      .map(algorithm => {
+    const allHashes = HASH_ALGORITHMS.filter(
+      (algorithm) =>
+        state.results[algorithm]?.success && state.results[algorithm]?.hash,
+    )
+      .map((algorithm) => {
         const result = state.results[algorithm];
         return `${algorithm}: ${result?.hash}`;
       })
-      .join('\n\n');
+      .join("\n\n");
 
     if (!allHashes) return;
 
@@ -446,7 +455,9 @@ export function HashGeneratorTool() {
         <CardHeader className="pb-8">
           <div className="flex items-center gap-4 mb-6">
             <div className="tool-icon tool-icon-hash h-14 w-14 rounded-2xl bg-gradient-to-br from-accent-100 to-accent-200 dark:from-accent-900/30 dark:to-accent-800/30 flex items-center justify-center">
-              <span className="text-lg font-bold text-accent-700 dark:text-accent-300">#</span>
+              <span className="text-lg font-bold text-accent-700 dark:text-accent-300">
+                #
+              </span>
             </div>
             <div>
               <h2 className="text-title text-2xl font-semibold text-foreground mb-2">
@@ -462,7 +473,9 @@ export function HashGeneratorTool() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Algorithm Selection */}
             <div className="space-y-4">
-              <label className="text-body font-medium text-foreground">Hash Algorithm</label>
+              <label className="text-body font-medium text-foreground">
+                Hash Algorithm
+              </label>
               <div className="space-y-3">
                 <label className="flex items-center gap-3 cursor-pointer group">
                   <div className="relative">
@@ -485,7 +498,9 @@ export function HashGeneratorTool() {
                         className={cn(
                           "w-4 h-4 bg-white rounded-full shadow-sm transition-transform duration-200",
                           "transform translate-y-0.5",
-                          generateAllHashes ? "translate-x-6" : "translate-x-0.5",
+                          generateAllHashes
+                            ? "translate-x-6"
+                            : "translate-x-0.5",
                         )}
                       />
                     </div>
@@ -498,17 +513,25 @@ export function HashGeneratorTool() {
                 {!generateAllHashes && (
                   <select
                     value={state.algorithm}
-                    onChange={(e) => setState((prev) => ({
-                      ...prev,
-                      algorithm: e.target.value as HashAlgorithm,
-                      results: { MD5: null, "SHA-1": null, "SHA-256": null, "SHA-512": null }
-                    }))}
+                    onChange={(e) =>
+                      setState((prev) => ({
+                        ...prev,
+                        algorithm: e.target.value as HashAlgorithm,
+                        results: {
+                          MD5: null,
+                          "SHA-1": null,
+                          "SHA-256": null,
+                          "SHA-512": null,
+                        },
+                      }))
+                    }
                     className="input-field h-12"
                     aria-label="Select hash algorithm"
                   >
                     {HASH_ALGORITHMS.map((algo) => (
                       <option key={algo} value={algo}>
-                        {algo} - {ALGORITHM_INFO[algo]?.description || 'Hash function'}
+                        {algo} -{" "}
+                        {ALGORITHM_INFO[algo]?.description || "Hash function"}
                       </option>
                     ))}
                   </select>
@@ -518,7 +541,9 @@ export function HashGeneratorTool() {
 
             {/* Input Type Selection */}
             <div className="space-y-4">
-              <label className="text-body font-medium text-foreground">Input Type</label>
+              <label className="text-body font-medium text-foreground">
+                Input Type
+              </label>
               <div className="flex gap-3">
                 <Button
                   variant={state.inputType === "text" ? "primary" : "secondary"}
@@ -527,7 +552,12 @@ export function HashGeneratorTool() {
                     setState((prev) => ({
                       ...prev,
                       inputType: "text",
-                      results: { MD5: null, "SHA-1": null, "SHA-256": null, "SHA-512": null },
+                      results: {
+                        MD5: null,
+                        "SHA-1": null,
+                        "SHA-256": null,
+                        "SHA-512": null,
+                      },
                       fileInput: null,
                     }))
                   }
@@ -543,7 +573,12 @@ export function HashGeneratorTool() {
                     setState((prev) => ({
                       ...prev,
                       inputType: "file",
-                      results: { MD5: null, "SHA-1": null, "SHA-256": null, "SHA-512": null },
+                      results: {
+                        MD5: null,
+                        "SHA-1": null,
+                        "SHA-256": null,
+                        "SHA-512": null,
+                      },
                       textInput: "",
                     }))
                   }
@@ -557,21 +592,34 @@ export function HashGeneratorTool() {
 
             {/* Info Panel */}
             <div className="space-y-4">
-              <label className="text-body font-medium text-foreground">Security Level</label>
+              <label className="text-body font-medium text-foreground">
+                Security Level
+              </label>
               <div className="space-y-2">
                 {generateAllHashes ? (
                   <div className="text-sm text-foreground-secondary">
-                    <span className="text-success-600 font-medium">Secure:</span> SHA-256, SHA-512<br />
-                    <span className="text-warning-600 font-medium">Legacy:</span> MD5, SHA-1
+                    <span className="text-success-600 font-medium">
+                      Secure:
+                    </span>{" "}
+                    SHA-256, SHA-512
+                    <br />
+                    <span className="text-warning-600 font-medium">
+                      Legacy:
+                    </span>{" "}
+                    MD5, SHA-1
                   </div>
                 ) : (
-                  <div className={cn(
-                    "px-3 py-2 rounded-lg text-sm font-medium",
-                    ALGORITHM_INFO[state.algorithm]?.secure
-                      ? "bg-success-100 text-success-800 dark:bg-success-900/30 dark:text-success-200"
-                      : "bg-warning-100 text-warning-800 dark:bg-warning-900/30 dark:text-warning-200"
-                  )}>
-                    {ALGORITHM_INFO[state.algorithm]?.secure ? "Secure" : "Legacy - Not Recommended"}
+                  <div
+                    className={cn(
+                      "px-3 py-2 rounded-lg text-sm font-medium",
+                      ALGORITHM_INFO[state.algorithm]?.secure
+                        ? "bg-success-100 text-success-800 dark:bg-success-900/30 dark:text-success-200"
+                        : "bg-warning-100 text-warning-800 dark:bg-warning-900/30 dark:text-warning-200",
+                    )}
+                  >
+                    {ALGORITHM_INFO[state.algorithm]?.secure
+                      ? "Secure"
+                      : "Legacy - Not Recommended"}
                   </div>
                 )}
               </div>
@@ -601,7 +649,12 @@ export function HashGeneratorTool() {
                   setState((prev) => ({
                     ...prev,
                     textInput: e.target.value,
-                    results: { MD5: null, "SHA-1": null, "SHA-256": null, "SHA-512": null },
+                    results: {
+                      MD5: null,
+                      "SHA-1": null,
+                      "SHA-256": null,
+                      "SHA-512": null,
+                    },
                   }))
                 }
                 placeholder="Enter text to hash..."
@@ -615,7 +668,8 @@ export function HashGeneratorTool() {
               />
               {state.textInput && (
                 <div className="text-sm text-foreground-secondary">
-                  Input length: {state.textInput.length.toLocaleString()} characters
+                  Input length: {state.textInput.length.toLocaleString()}{" "}
+                  characters
                 </div>
               )}
             </div>
@@ -686,7 +740,11 @@ export function HashGeneratorTool() {
 
               {/* Selected File Info */}
               {state.fileInput && (
-                <div className={cn("bg-background-tertiary rounded-2xl p-6 animate-fade-in-up border border-border-secondary")}>
+                <div
+                  className={cn(
+                    "bg-background-tertiary rounded-2xl p-6 animate-fade-in-up border border-border-secondary",
+                  )}
+                >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-6">
                       <div className="flex-shrink-0">
@@ -819,17 +877,22 @@ export function HashGeneratorTool() {
         title="Hash Results"
         result={
           // Combine all successful hash results into a single output
-          HASH_ALGORITHMS
-            .filter(algorithm => state.results[algorithm]?.success && state.results[algorithm]?.hash)
-            .map(algorithm => {
+          HASH_ALGORITHMS.filter(
+            (algorithm) =>
+              state.results[algorithm]?.success &&
+              state.results[algorithm]?.hash,
+          )
+            .map((algorithm) => {
               const result = state.results[algorithm];
               return `${algorithm}: ${result?.hash}`;
             })
-            .join('\n\n') || ""
+            .join("\n\n") || ""
         }
         isProcessing={state.isProcessing}
         onCopy={handleCopy}
-        copySuccess={copySuccess?.success && copySuccess.message.includes('copied')}
+        copySuccess={
+          copySuccess?.success && copySuccess.message.includes("copied")
+        }
         copyLabel="Copy All Hashes"
         placeholder={
           state.isProcessing
@@ -837,38 +900,54 @@ export function HashGeneratorTool() {
             : "Hash results will appear here after processing your input"
         }
         metadata={
-          Object.values(state.results).some(r => r?.success)
+          Object.values(state.results).some((r) => r?.success)
             ? [
-              {
-                label: "Algorithms",
-                value: HASH_ALGORITHMS.filter(a => state.results[a]?.success).length,
-                format: (v: string | number) => `${v} hash${Number(v) === 1 ? '' : 'es'} generated`
-              },
-              ...(Object.values(state.results).find(r => r?.success && r.processingTime)
-                ? [{
-                  label: "Total Time",
-                  value: Object.values(state.results)
-                    .filter(r => r?.success && r.processingTime)
-                    .reduce((sum, r) => sum + (r?.processingTime || 0), 0),
-                  format: (v: string | number) => `${v}ms`
-                }]
-                : []),
-              ...(Object.values(state.results).some(r => r?.success && r.serverSide)
-                ? [{ label: "Processing", value: "Mixed (Client + Server)" }]
-                : Object.values(state.results).some(r => r?.success && !r.serverSide)
-                  ? [{ label: "Processing", value: "Client-side" }]
-                  : [])
-            ]
+                {
+                  label: "Algorithms",
+                  value: HASH_ALGORITHMS.filter(
+                    (a) => state.results[a]?.success,
+                  ).length,
+                  format: (v: string | number) =>
+                    `${v} hash${Number(v) === 1 ? "" : "es"} generated`,
+                },
+                ...(Object.values(state.results).find(
+                  (r) => r?.success && r.processingTime,
+                )
+                  ? [
+                      {
+                        label: "Total Time",
+                        value: Object.values(state.results)
+                          .filter((r) => r?.success && r.processingTime)
+                          .reduce(
+                            (sum, r) => sum + (r?.processingTime || 0),
+                            0,
+                          ),
+                        format: (v: string | number) => `${v}ms`,
+                      },
+                    ]
+                  : []),
+                ...(Object.values(state.results).some(
+                  (r) => r?.success && r.serverSide,
+                )
+                  ? [{ label: "Processing", value: "Mixed (Client + Server)" }]
+                  : Object.values(state.results).some(
+                        (r) => r?.success && !r.serverSide,
+                      )
+                    ? [{ label: "Processing", value: "Client-side" }]
+                    : []),
+              ]
             : []
         }
         badges={
-          Object.values(state.results).some(r => r?.success)
-            ? HASH_ALGORITHMS
-              .filter(algorithm => state.results[algorithm]?.success)
-              .map(algorithm => (
+          Object.values(state.results).some((r) => r?.success)
+            ? HASH_ALGORITHMS.filter(
+                (algorithm) => state.results[algorithm]?.success,
+              ).map((algorithm) => (
                 <ResultBadge
                   key={algorithm}
-                  variant={ALGORITHM_INFO[algorithm]?.secure ? "success" : "warning"}
+                  variant={
+                    ALGORITHM_INFO[algorithm]?.secure ? "success" : "warning"
+                  }
                 >
                   {algorithm}
                 </ResultBadge>

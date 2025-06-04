@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { AnalyticsService } from "@/services/admin/analyticsService";
+import type { MonitoringFilter } from "@/types/admin/analytics";
 
 /**
  * GET /api/admin/monitoring/errors - Get error logs with filtering
@@ -16,7 +17,7 @@ export async function GET(request: NextRequest) {
     const resolved = searchParams.get("resolved");
 
     // Build filter object
-    const filter: any = {};
+    const filter: Partial<MonitoringFilter> = {};
 
     if (startDate && endDate) {
       filter.timeRange = {
@@ -27,14 +28,16 @@ export async function GET(request: NextRequest) {
     }
 
     if (levels?.length) {
-      filter.errorLevels = levels;
+      filter.errorLevels = levels as MonitoringFilter["errorLevels"];
     }
 
     if (resolved !== null) {
       filter.resolved = resolved === "true";
     }
 
-    const errorLogs = await analyticsService.getErrorLogs(filter);
+    const errorLogs = await analyticsService.getErrorLogs(
+      filter as MonitoringFilter,
+    );
 
     return NextResponse.json({
       success: true,

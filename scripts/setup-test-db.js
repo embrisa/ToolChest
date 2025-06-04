@@ -18,37 +18,39 @@ process.env.DATABASE_URL = "file:./test.db";
 process.env.NODE_ENV = "test";
 
 try {
-    // Clean up existing database
-    const testDbPath = path.join(__dirname, "../test.db");
-    if (fs.existsSync(testDbPath)) {
-        fs.unlinkSync(testDbPath);
-        console.log("✅ Cleaned up existing test database");
-    }
+  // Clean up existing database
+  const testDbPath = path.join(__dirname, "../test.db");
+  if (fs.existsSync(testDbPath)) {
+    fs.unlinkSync(testDbPath);
+    console.log("✅ Cleaned up existing test database");
+  }
 
-    // Generate Prisma client for SQLite using test schema
-    console.log("🔧 Generating Prisma client...");
-    execSync("npx prisma generate --schema=prisma/schema.test.prisma", {
-        stdio: "inherit",
-        env: {
-            ...process.env,
-            DATABASE_URL: "file:./test.db",
-        },
-    });
+  // Generate Prisma client for SQLite using test schema
+  console.log("🔧 Generating Prisma client...");
+  execSync("npx prisma generate --schema=prisma/schema.test.prisma", {
+    stdio: "inherit",
+    env: {
+      ...process.env,
+      DATABASE_URL: "file:./test.db",
+    },
+  });
 
-    // Create database schema using test schema
-    console.log("🗄️  Creating database schema...");
-    execSync("npx prisma db push --force-reset --schema=prisma/schema.test.prisma", {
-        stdio: "inherit",
-        env: {
-            ...process.env,
-            DATABASE_URL: "file:./test.db",
-        },
-    });
+  // Create database schema using test schema
+  console.log("🗄️  Creating database schema...");
+  execSync(
+    "npx prisma db push --force-reset --schema=prisma/schema.test.prisma",
+    {
+      stdio: "inherit",
+      env: {
+        ...process.env,
+        DATABASE_URL: "file:./test.db",
+      },
+    },
+  );
 
-    console.log("✅ Test database setup completed successfully!");
-    console.log("🚀 Ready for testing with SQLite database");
-
+  console.log("✅ Test database setup completed successfully!");
+  console.log("🚀 Ready for testing with SQLite database");
 } catch (error) {
-    console.error("❌ Test database setup failed:", error.message);
-    process.exit(1);
-} 
+  console.error("❌ Test database setup failed:", error.message);
+  process.exit(1);
+}

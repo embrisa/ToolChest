@@ -35,13 +35,16 @@ module.exports = async () => {
 
     // Run database migrations for test database
     console.log("🗄️  Setting up test database...");
-    execSync("npx prisma db push --force-reset --schema=prisma/schema.test.prisma", {
-      stdio: "pipe",
-      env: {
-        ...process.env,
-        DATABASE_URL: "file:./test.db",
+    execSync(
+      "npx prisma db push --force-reset --schema=prisma/schema.test.prisma",
+      {
+        stdio: "pipe",
+        env: {
+          ...process.env,
+          DATABASE_URL: "file:./test.db",
+        },
       },
-    });
+    );
 
     // Seed test database with sample data
     console.log("🌱 Seeding test database...");

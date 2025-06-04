@@ -184,7 +184,8 @@ export default function EditTagPage({ params }: EditTagPageProps) {
             Tag not found
           </h3>
           <p className="text-neutral-600 dark:text-neutral-400 mb-6">
-            The tag you&apos;re looking for doesn&apos;t exist or may have been deleted.
+            The tag you&apos;re looking for doesn&apos;t exist or may have been
+            deleted.
           </p>
           <Button onClick={() => router.push("/admin/tags")} variant="primary">
             Back to Tags

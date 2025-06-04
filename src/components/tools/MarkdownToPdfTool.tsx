@@ -136,7 +136,9 @@ export function MarkdownToPdfTool() {
     type: "polite" | "assertive";
     timestamp: number;
   } | null>(null);
-  const [parseResult, setParseResult] = useState<MarkdownParseResult | null>(null);
+  const [parseResult, setParseResult] = useState<MarkdownParseResult | null>(
+    null,
+  );
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
 
@@ -178,7 +180,12 @@ export function MarkdownToPdfTool() {
   // Handle mode change
   const handleModeChange = useCallback(
     (mode: string) => {
-      setState((prev) => ({ ...prev, mode: mode as MarkdownMode, error: null, warnings: [] }));
+      setState((prev) => ({
+        ...prev,
+        mode: mode as MarkdownMode,
+        error: null,
+        warnings: [],
+      }));
       addAnnouncement(`Switched to ${mode} mode`);
     },
     [addAnnouncement],
@@ -201,7 +208,8 @@ export function MarkdownToPdfTool() {
         }));
         addAnnouncement("Validating uploaded file...");
 
-        const validation = await markdownToPdfService.validateMarkdownFile(file);
+        const validation =
+          await markdownToPdfService.validateMarkdownFile(file);
 
         if (!validation.isValid) {
           setState((prev) => ({
@@ -398,7 +406,10 @@ export function MarkdownToPdfTool() {
           <Card>
             <CardContent className="p-8">
               {state.markdownFile ? (
-                <FileInfo file={state.markdownFile} onRemove={handleFileRemove} />
+                <FileInfo
+                  file={state.markdownFile}
+                  onRemove={handleFileRemove}
+                />
               ) : (
                 <FileUpload
                   onFileSelect={handleFileUpload}
@@ -431,10 +442,6 @@ export function MarkdownToPdfTool() {
             </ul>
           </Alert>
         )}
-
-
-
-
 
         {/* Main Editor/Preview Area */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -558,8 +565,14 @@ export function MarkdownToPdfTool() {
             variant="file"
             metadata={[
               { label: "Pages", value: state.pdfResult.pageCount || 0 },
-              { label: "File Size", value: `${Math.round((state.pdfResult.fileSize || 0) / 1024)} KB` },
-              { label: "Processing Time", value: `${state.pdfResult.processingTime}ms` },
+              {
+                label: "File Size",
+                value: `${Math.round((state.pdfResult.fileSize || 0) / 1024)} KB`,
+              },
+              {
+                label: "Processing Time",
+                value: `${state.pdfResult.processingTime}ms`,
+              },
             ]}
             onDownload={handleDownloadPdf}
             downloadLabel="Download PDF"

@@ -40,8 +40,7 @@ export default function FaviconGeneratorPage() {
       description={
         <>
           Generate favicons in all standard sizes from any image. Create
-          complete favicon packages with PNG, ICO formats and web app
-          manifest.
+          complete favicon packages with PNG, ICO formats and web app manifest.
           <span className="block mt-2 text-success-600 dark:text-success-400 font-medium">
             All processing happens in your browser using Canvas API.
           </span>
@@ -76,7 +75,8 @@ export default function FaviconGeneratorPage() {
           {
             id: "browser-icons",
             title: "Browser Icons",
-            description: "16×16, 32×32, 48×48 favicons for browser tabs, bookmarks, and desktop shortcuts.",
+            description:
+              "16×16, 32×32, 48×48 favicons for browser tabs, bookmarks, and desktop shortcuts.",
             icon: (
               <svg
                 className="w-6 h-6 text-white"
@@ -98,7 +98,8 @@ export default function FaviconGeneratorPage() {
           {
             id: "apple-touch",
             title: "Apple Touch Icons",
-            description: "180×180 icons for iOS home screen and Safari bookmark icons with rounded corners.",
+            description:
+              "180×180 icons for iOS home screen and Safari bookmark icons with rounded corners.",
             icon: (
               <svg
                 className="w-6 h-6 text-white"
@@ -114,7 +115,8 @@ export default function FaviconGeneratorPage() {
           {
             id: "android-icons",
             title: "Android Icons",
-            description: "192×192, 512×512 icons for Android home screen and Progressive Web Apps.",
+            description:
+              "192×192, 512×512 icons for Android home screen and Progressive Web Apps.",
             icon: (
               <svg
                 className="w-6 h-6 text-white"
@@ -130,7 +132,8 @@ export default function FaviconGeneratorPage() {
           {
             id: "web-manifest",
             title: "Web App Manifest",
-            description: "Complete manifest.json for Progressive Web Apps with all required metadata.",
+            description:
+              "Complete manifest.json for Progressive Web Apps with all required metadata.",
             icon: (
               <svg
                 className="w-6 h-6 text-white"
@@ -150,7 +153,8 @@ export default function FaviconGeneratorPage() {
             iconBg: "bg-gradient-to-br from-accent-500 to-accent-600",
             badge: {
               text: "PWA Ready",
-              className: "bg-accent-100 text-accent-800 dark:bg-accent-900/30 dark:text-accent-400",
+              className:
+                "bg-accent-100 text-accent-800 dark:bg-accent-900/30 dark:text-accent-400",
             },
             className: "border-accent-200/50 dark:border-accent-800/50",
           },

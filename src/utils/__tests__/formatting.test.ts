@@ -11,7 +11,7 @@ describe("formatting utilities", () => {
       timeZone: "UTC",
       year: "numeric",
       month: "short",
-      day: "numeric"
+      day: "numeric",
     });
     expect(result).toBe("Jan 1, 2020");
   });

@@ -142,8 +142,8 @@ export default function EditToolPage() {
             Tool Not Found
           </h1>
           <p className="text-lg text-secondary mb-8 max-w-lg mx-auto">
-            The tool you&apos;re looking for doesn&apos;t exist or has been deleted. It
-            may have been removed or the URL may be incorrect.
+            The tool you&apos;re looking for doesn&apos;t exist or has been
+            deleted. It may have been removed or the URL may be incorrect.
           </p>
           <Button
             onClick={() => router.push("/admin/tools")}

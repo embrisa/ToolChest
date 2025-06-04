@@ -70,21 +70,24 @@ export function WebVitals({
   }, []);
 
   // Announce performance issues to screen readers
-  const announcePerformanceIssue = useCallback((metric: WebVitalMetric) => {
-    const announcement = document.createElement("div");
-    announcement.setAttribute("role", "status");
-    announcement.setAttribute("aria-live", "polite");
-    announcement.setAttribute("aria-atomic", "true");
-    announcement.className = "sr-only";
-    announcement.textContent = `Performance alert: ${metric.name} has poor rating with value ${metric.value.toFixed(2)}${getUnit(metric.name)}`;
+  const announcePerformanceIssue = useCallback(
+    (metric: WebVitalMetric) => {
+      const announcement = document.createElement("div");
+      announcement.setAttribute("role", "status");
+      announcement.setAttribute("aria-live", "polite");
+      announcement.setAttribute("aria-atomic", "true");
+      announcement.className = "sr-only";
+      announcement.textContent = `Performance alert: ${metric.name} has poor rating with value ${metric.value.toFixed(2)}${getUnit(metric.name)}`;
 
-    document.body.appendChild(announcement);
+      document.body.appendChild(announcement);
 
-    // Clean up after announcement
-    setTimeout(() => {
-      document.body.removeChild(announcement);
-    }, 1000);
-  }, [getUnit]);
+      // Clean up after announcement
+      setTimeout(() => {
+        document.body.removeChild(announcement);
+      }, 1000);
+    },
+    [getUnit],
+  );
 
   // Enhanced metric handler with rating calculation
   const handleMetric = useCallback(

@@ -23,4 +23,3 @@ export function useAdminMode() {
 
   return { isAdmin, enable, disable } as const;
 }
-

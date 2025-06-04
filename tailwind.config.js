@@ -242,7 +242,6 @@ module.exports = {
         gradient: "gradient 6s ease infinite",
         float: "float 3s ease-in-out infinite",
         glow: "glow 2s ease-in-out infinite alternate",
-
       },
 
       keyframes: {
@@ -308,7 +307,6 @@ module.exports = {
           "0%": { boxShadow: "0 0 20px rgb(14 165 233 / 0.1)" },
           "100%": { boxShadow: "0 0 30px rgb(14 165 233 / 0.2)" },
         },
-
       },
 
       backdropBlur: {

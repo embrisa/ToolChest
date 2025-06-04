@@ -100,10 +100,16 @@ export default function RootLayout({
         <WebVitals debug={process.env.NODE_ENV === "development"} />
 
         {/* Animated Background */}
-        <div className="fixed inset-0 -z-10 bg-gradient-shift" aria-hidden="true" />
+        <div
+          className="fixed inset-0 -z-10 bg-gradient-shift"
+          aria-hidden="true"
+        />
 
         {/* Subtle noise texture overlay */}
-        <div className="fixed inset-0 -z-10 bg-noise opacity-20" aria-hidden="true" />
+        <div
+          className="fixed inset-0 -z-10 bg-noise opacity-20"
+          aria-hidden="true"
+        />
 
         <Header />
 
