@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Prisma } from "@prisma/client";
 import { BaseService } from "../core/baseService";
 import { TagDTO, toTagDTO } from "@/types/tools/tool";
 import {
@@ -44,13 +44,13 @@ export class AdminTagService extends BaseService implements IAdminTagService {
     const { search, hasTools } = filters;
 
     // Build where clause
-    const whereClause: any = {};
+    const whereClause: Prisma.TagWhereInput = {};
 
     if (search) {
       whereClause.OR = [
-        { name: { contains: search, mode: "insensitive" } },
-        { description: { contains: search, mode: "insensitive" } },
-        { slug: { contains: search, mode: "insensitive" } },
+        { name: { contains: search } },
+        { description: { contains: search } },
+        { slug: { contains: search } },
       ];
     }
 
@@ -67,13 +67,15 @@ export class AdminTagService extends BaseService implements IAdminTagService {
     }
 
     // Build order by clause
-    let orderBy: any = {};
+    let orderBy: Prisma.TagOrderByWithRelationInput;
     switch (field) {
       case "name":
       case "slug":
       case "createdAt":
+        orderBy = { [field]: direction } as Prisma.TagOrderByWithRelationInput;
+        break;
       case "updatedAt":
-        orderBy[field] = direction;
+        orderBy = { createdAt: direction };
         break;
       case "toolCount":
         orderBy = {
@@ -82,6 +84,8 @@ export class AdminTagService extends BaseService implements IAdminTagService {
           },
         };
         break;
+      default:
+        orderBy = {} as Prisma.TagOrderByWithRelationInput;
     }
 
     const tags = await this.prisma.tag.findMany({
@@ -346,7 +350,7 @@ export class AdminTagService extends BaseService implements IAdminTagService {
       throw new Error("Tag not found");
     }
 
-    const tools = tag.tools.map((toolTag: any) => ({
+    const tools = tag.tools.map((toolTag) => ({
       id: toolTag.tool.id,
       name: toolTag.tool.name,
       slug: toolTag.tool.slug,
@@ -354,8 +358,8 @@ export class AdminTagService extends BaseService implements IAdminTagService {
       usageCount: 0, // Simplified to 0 since usageCount field access has type issues
     }));
 
-    const activeTools = tools.filter((tool: any) => tool.isActive);
-    const inactiveTools = tools.filter((tool: any) => !tool.isActive);
+    const activeTools = tools.filter((tool) => tool.isActive);
+    const inactiveTools = tools.filter((tool) => !tool.isActive);
 
     // Calculate popularity rank (simplified - could be more sophisticated)
     const allTags = await this.prisma.tag.findMany({
@@ -368,7 +372,7 @@ export class AdminTagService extends BaseService implements IAdminTagService {
       },
     });
 
-    const popularityRank = allTags.findIndex((t: any) => t.id === id) + 1;
+    const popularityRank = allTags.findIndex((t) => t.id === id) + 1;
 
     return {
       toolCount: tools.length,
