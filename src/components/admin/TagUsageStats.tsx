@@ -204,7 +204,9 @@ export function TagUsageStats({ onTagSelect, className }: TagUsageStatsProps) {
           <select
             id="sort-select"
             value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as any)}
+            onChange={(e) =>
+              setSortBy(e.target.value as "usage" | "popularity" | "recent")
+            }
             className="select text-sm"
           >
             <option value="usage">Total Usage</option>
@@ -360,17 +362,19 @@ export function TagUsageStats({ onTagSelect, className }: TagUsageStatsProps) {
                         Top Tools Using This Tag
                       </h5>
                       <div className="space-y-1">
-                        {stat.tools.slice(0, 3).map((tool: any) => (
-                          <div
-                            key={tool.id}
-                            className="flex items-center gap-2 text-xs"
-                          >
-                            <div className="w-2 h-2 rounded-full bg-brand-500 flex-shrink-0" />
-                            <span className="text-neutral-600 dark:text-neutral-400 truncate">
-                              {tool.name}
-                            </span>
-                          </div>
-                        ))}
+                        {stat.tools
+                          .slice(0, 3)
+                          .map((tool: TagUsageStatistics["tools"][number]) => (
+                            <div
+                              key={tool.id}
+                              className="flex items-center gap-2 text-xs"
+                            >
+                              <div className="w-2 h-2 rounded-full bg-brand-500 flex-shrink-0" />
+                              <span className="text-neutral-600 dark:text-neutral-400 truncate">
+                                {tool.name}
+                              </span>
+                            </div>
+                          ))}
                         {stat.tools.length > 3 && (
                           <div className="text-xs text-neutral-500 dark:text-neutral-400 pl-4">
                             +{stat.tools.length - 3} more
