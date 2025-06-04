@@ -4,6 +4,7 @@ import {
   PrismaToolWithRelations,
   PrismaTagWithToolCount,
 } from "@/types/tools/tool";
+import { Prisma } from "@prisma/client";
 
 export interface PaginationOptions {
   limit?: number;
@@ -342,7 +343,7 @@ export class ToolService extends BaseService implements IToolService {
       const where = { isActive: true };
 
       // Build the orderBy clause based on sortBy
-      let orderBy: any;
+      let orderBy: Prisma.ToolOrderByWithRelationInput;
       if (sortBy === "usageCount") {
         // Special handling for usage count sorting using raw query
         const orderedToolIdResults: Array<{ id: string }> = await this.prisma
@@ -364,7 +365,7 @@ export class ToolService extends BaseService implements IToolService {
 
         const orderedToolIds = orderedToolIdResults.map((r) => r.id);
 
-        const tools = (await this.prisma.tool.findMany({
+        const tools = await this.prisma.tool.findMany({
           where: {
             id: { in: orderedToolIds },
           },
@@ -372,7 +373,7 @@ export class ToolService extends BaseService implements IToolService {
             tags: { include: { tag: true } },
             toolUsageStats: true,
           },
-        })) as PrismaToolWithRelations[];
+        });
 
         // Re-sort to match the order from the raw query
         const toolsMap = new Map(
@@ -390,14 +391,16 @@ export class ToolService extends BaseService implements IToolService {
         };
       } else {
         // Standard sorting for other fields
-        orderBy = { [sortBy]: sortOrder };
+        orderBy = {
+          [sortBy]: sortOrder,
+        } as Prisma.ToolOrderByWithRelationInput;
       }
 
       // Get total count for pagination
       const total = await this.prisma.tool.count({ where });
 
       // Get the paginated tools
-      const queryOptions: any = {
+      const queryOptions: Prisma.ToolFindManyArgs = {
         where,
         orderBy,
         include: {
@@ -412,7 +415,9 @@ export class ToolService extends BaseService implements IToolService {
       const tools = await this.prisma.tool.findMany(queryOptions);
 
       return {
-        tools: tools.map((tool: any) => toToolDTO(tool)),
+        tools: tools.map((tool) =>
+          toToolDTO(tool as unknown as PrismaToolWithRelations),
+        ),
         total,
       };
     });
