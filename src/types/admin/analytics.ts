@@ -64,7 +64,7 @@ export interface AnalyticsSummary {
     timestamp: Date;
     action: string;
     toolName: string;
-    metadata?: Record<string, any>;
+    metadata?: Record<string, unknown>;
   }>;
   periodComparison: {
     currentPeriod: {
@@ -98,14 +98,16 @@ export interface AnalyticsFilter {
   includeInactive?: boolean;
 }
 
+export interface AnalyticsDataPoint {
+  label: string;
+  value: number;
+  metadata?: Record<string, unknown>;
+}
+
 export interface AnalyticsChart {
   type: "line" | "bar" | "pie" | "area";
   title: string;
-  data: Array<{
-    label: string;
-    value: number;
-    metadata?: Record<string, any>;
-  }>;
+  data: AnalyticsDataPoint[];
   options?: {
     colors?: string[];
     showLegend?: boolean;
@@ -141,7 +143,7 @@ export interface AnalyticsError {
     | "EXPORT_FAILED"
     | "SERVICE_ERROR";
   message: string;
-  details?: Record<string, any>;
+  details?: Record<string, unknown>;
 }
 
 // Validation and utility types
@@ -174,7 +176,7 @@ export interface AnalyticsChartProps {
   className?: string;
   height?: number;
   interactive?: boolean;
-  onDataPointClick?: (dataPoint: any) => void;
+  onDataPointClick?: (dataPoint: AnalyticsDataPoint) => void;
 }
 
 export interface AnalyticsFiltersProps {
@@ -211,7 +213,7 @@ export interface ErrorLogEntry {
   level: "error" | "warn" | "info" | "debug";
   message: string;
   stack?: string;
-  metadata: Record<string, any>;
+  metadata: Record<string, unknown>;
   endpoint?: string;
   userId?: string;
   ipAddress?: string;
@@ -238,7 +240,7 @@ export interface SystemAlert {
   resolved?: Date;
   acknowledgedBy?: string;
   acknowledgedAt?: Date;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export interface RealTimeMetrics {
@@ -261,7 +263,7 @@ export interface SystemHealthCheck {
   status: "healthy" | "degraded" | "unhealthy";
   responseTime: number;
   lastCheck: Date;
-  details?: Record<string, any>;
+  details?: Record<string, unknown>;
   dependencies?: SystemHealthCheck[];
 }
 
