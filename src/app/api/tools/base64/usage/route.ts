@@ -165,37 +165,39 @@ export async function GET(request: NextRequest) {
     }
 
     // Calculate basic statistics
-    const toolStats = Array.isArray(tool.toolUsageStats) ? tool.toolUsageStats[0] : tool.toolUsageStats;
+    const toolStats = Array.isArray(tool.toolUsageStats)
+      ? tool.toolUsageStats[0]
+      : tool.toolUsageStats;
     const stats = {
       totalUsages: toolStats?.usageCount || 0,
       recentUsageCount: recentUsages.length,
       lastUsed: toolStats?.lastUsed || null,
       operations: {
         encode: recentUsages.filter(
-          (u: any) => (u.metadata as UsageMetadata)?.operation === "encode",
+          (u) => (u.metadata as UsageMetadata)?.operation === "encode",
         ).length,
         decode: recentUsages.filter(
-          (u: any) => (u.metadata as UsageMetadata)?.operation === "decode",
+          (u) => (u.metadata as UsageMetadata)?.operation === "decode",
         ).length,
       },
       inputTypes: {
         text: recentUsages.filter(
-          (u: any) => (u.metadata as UsageMetadata)?.inputType === "text",
+          (u) => (u.metadata as UsageMetadata)?.inputType === "text",
         ).length,
         file: recentUsages.filter(
-          (u: any) => (u.metadata as UsageMetadata)?.inputType === "file",
+          (u) => (u.metadata as UsageMetadata)?.inputType === "file",
         ).length,
       },
       performance: {
         averageProcessingTime:
           recentUsages.reduce(
-            (sum: number, u: any) =>
+            (sum: number, u) =>
               sum + ((u.metadata as UsageMetadata)?.processingTime || 0),
             0,
           ) / recentUsages.length || 0,
         successRate:
           recentUsages.filter(
-            (u: any) => (u.metadata as UsageMetadata)?.success === true,
+            (u) => (u.metadata as UsageMetadata)?.success === true,
           ).length / recentUsages.length || 0,
       },
     };

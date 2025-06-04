@@ -8,8 +8,15 @@ import type {
   AnalyticsSummary,
   AnalyticsChart as AnalyticsChartType,
   SystemPerformanceMetrics,
+  RealTimeMetrics,
   AnalyticsDashboardProps,
 } from "@/types/admin/analytics";
+
+type ExtendedSystemMetrics = SystemPerformanceMetrics & {
+  cpuUsage?: number;
+  uptime?: number;
+  metrics?: RealTimeMetrics;
+};
 
 export function AnalyticsDashboard({ initialData }: AnalyticsDashboardProps) {
   const [summary, setSummary] = useState<AnalyticsSummary | null>(
@@ -17,7 +24,7 @@ export function AnalyticsDashboard({ initialData }: AnalyticsDashboardProps) {
   );
   const [charts, setCharts] = useState<AnalyticsChartType[]>([]);
   const [systemMetrics, setSystemMetrics] =
-    useState<SystemPerformanceMetrics | null>(null);
+    useState<ExtendedSystemMetrics | null>(null);
   const [loading, setLoading] = useState(!initialData);
   const [error, setError] = useState<string | null>(null);
 
@@ -174,6 +181,11 @@ export function AnalyticsDashboard({ initialData }: AnalyticsDashboardProps) {
       </div>
     );
   }
+
+  const uptime = systemMetrics.uptime ?? systemMetrics.systemHealth.uptime;
+
+  const cpuUsage =
+    systemMetrics.cpuUsage ?? systemMetrics.metrics?.cpuUsage ?? 0;
 
   return (
     <div className="space-y-8">
@@ -349,7 +361,7 @@ export function AnalyticsDashboard({ initialData }: AnalyticsDashboardProps) {
                   Uptime
                 </span>
                 <span className="text-sm font-mono text-success-600 dark:text-success-400">
-                  {formatUptime((systemMetrics as any).uptime || 86400)}
+                  {formatUptime(uptime || 86400)}
                 </span>
               </div>
               <div className="w-full bg-neutral-200 dark:bg-neutral-700 rounded-full h-2">
@@ -398,19 +410,19 @@ export function AnalyticsDashboard({ initialData }: AnalyticsDashboardProps) {
                   CPU
                 </span>
                 <span className="text-sm font-mono text-neutral-600 dark:text-neutral-400">
-                  {((systemMetrics as any).cpuUsage || 0).toFixed(1)}%
+                  {cpuUsage.toFixed(1)}%
                 </span>
               </div>
               <div className="w-full bg-neutral-200 dark:bg-neutral-700 rounded-full h-2">
                 <div
                   className={`h-2 rounded-full transition-all duration-300 ${
-                    ((systemMetrics as any).cpuUsage || 0) > 80
+                    cpuUsage > 80
                       ? "bg-error-500"
-                      : ((systemMetrics as any).cpuUsage || 0) > 60
+                      : cpuUsage > 60
                         ? "bg-warning-500"
                         : "bg-brand-500"
                   }`}
-                  style={{ width: `${(systemMetrics as any).cpuUsage || 0}%` }}
+                  style={{ width: `${cpuUsage}%` }}
                 />
               </div>
             </div>
