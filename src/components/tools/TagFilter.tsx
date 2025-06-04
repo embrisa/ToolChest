@@ -126,9 +126,9 @@ export function TagFilter({
                 "focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2",
                 isSelected
                   ? cn(
-                    "border-brand-300 bg-gradient-to-r from-brand-50 to-brand-100/50",
-                    "shadow-colored",
-                  )
+                      "border-brand-300 bg-gradient-to-r from-brand-50 to-brand-100/50",
+                      "shadow-colored",
+                    )
                   : "hover:bg-neutral-25",
               )}
               aria-pressed={isSelected}

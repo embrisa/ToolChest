@@ -122,7 +122,9 @@ Each tool has its own identity color for consistency:
 #### **Primary Font: Inter Variable**
 
 ```css
-font-family: "Inter Variable", "Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
+font-family:
+  "Inter Variable", "Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI",
+  "Roboto", "Helvetica Neue", "Arial", sans-serif;
 ```
 
 - **Usage**: Body text, headings, UI elements
@@ -132,7 +134,10 @@ font-family: "Inter Variable", "Inter", "-apple-system", "BlinkMacSystemFont", "
 #### **Monospace Font: JetBrains Mono Variable**
 
 ```css
-font-family: "JetBrains Mono Variable", "JetBrains Mono", "Fira Code", "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", "Source Code Pro", "Menlo", "Consolas", "DejaVu Sans Mono", monospace;
+font-family:
+  "JetBrains Mono Variable", "JetBrains Mono", "Fira Code", "SF Mono", "Monaco",
+  "Inconsolata", "Roboto Mono", "Source Code Pro", "Menlo", "Consolas",
+  "DejaVu Sans Mono", monospace;
 ```
 
 - **Usage**: Code blocks, file names, technical data, input fields with technical content
@@ -141,7 +146,9 @@ font-family: "JetBrains Mono Variable", "JetBrains Mono", "Fira Code", "SF Mono"
 #### **Heading Font: Clash Display Variable**
 
 ```css
-font-family: "Clash Display Variable", "Clash Display", "Inter Variable", "Inter", system-ui, sans-serif;
+font-family:
+  "Clash Display Variable", "Clash Display", "Inter Variable", "Inter",
+  system-ui, sans-serif;
 ```
 
 - **Usage**: Display headings, hero titles, major section headers
@@ -573,27 +580,49 @@ Before implementing any layout, ensure:
 #### **Typography Utilities**
 
 ```css
-.text-primary { @apply text-neutral-700; /* 9.2:1 contrast ratio */ }
-.text-secondary { @apply text-neutral-500; /* 7.1:1 contrast ratio */ }
-.text-tertiary { @apply text-neutral-600; /* 8.1:1 contrast ratio */ }
-.text-muted { @apply text-neutral-400; /* 4.8:1 contrast ratio */ }
+.text-primary {
+  @apply text-neutral-700; /* 9.2:1 contrast ratio */
+}
+.text-secondary {
+  @apply text-neutral-500; /* 7.1:1 contrast ratio */
+}
+.text-tertiary {
+  @apply text-neutral-600; /* 8.1:1 contrast ratio */
+}
+.text-muted {
+  @apply text-neutral-400; /* 4.8:1 contrast ratio */
+}
 ```
 
 #### **Layout Components**
 
 ```css
-.container-wide { @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-12; }
-.container-narrow { @apply max-w-4xl mx-auto px-6 sm:px-8 lg:px-12; }
-.container-text { @apply max-w-3xl mx-auto px-6 sm:px-8; }
+.container-wide {
+  @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-12;
+}
+.container-narrow {
+  @apply max-w-4xl mx-auto px-6 sm:px-8 lg:px-12;
+}
+.container-text {
+  @apply max-w-3xl mx-auto px-6 sm:px-8;
+}
 ```
 
 #### **Section Spacing**
 
 ```css
-.section-spacing-sm { @apply py-12 lg:py-16; }
-.section-spacing-md { @apply py-16 lg:py-20; }
-.section-spacing-lg { @apply py-20 lg:py-24; }
-.section-spacing-xl { @apply py-24 lg:py-32; }
+.section-spacing-sm {
+  @apply py-12 lg:py-16;
+}
+.section-spacing-md {
+  @apply py-16 lg:py-20;
+}
+.section-spacing-lg {
+  @apply py-20 lg:py-24;
+}
+.section-spacing-xl {
+  @apply py-24 lg:py-32;
+}
 ```
 
 #### **Special Effects**
@@ -613,7 +642,13 @@ Before implementing any layout, ensure:
 }
 
 .bg-gradient-shift {
-  background: linear-gradient(-45deg, rgba(14, 165, 233, 0.15), rgba(147, 51, 234, 0.12), rgba(6, 182, 212, 0.15), rgba(59, 130, 246, 0.12));
+  background: linear-gradient(
+    -45deg,
+    rgba(14, 165, 233, 0.15),
+    rgba(147, 51, 234, 0.12),
+    rgba(6, 182, 212, 0.15),
+    rgba(59, 130, 246, 0.12)
+  );
   background-size: 400% 400%;
   animation: colorShift 120s ease-in-out infinite;
 }
@@ -928,8 +963,12 @@ Colors are mapped to semantic purposes for consistent usage:
 #### **Text Wrapping Utilities**
 
 ```css
-.text-balance { text-wrap: balance; }
-.text-pretty { text-wrap: pretty; }
+.text-balance {
+  text-wrap: balance;
+}
+.text-pretty {
+  text-wrap: pretty;
+}
 ```
 
 #### **Glass Effect Utilities**

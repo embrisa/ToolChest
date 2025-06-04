@@ -47,7 +47,11 @@ export function Base64Tool() {
   const { announceToScreenReader } = useAccessibilityAnnouncements();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const stateRef = useRef(state);
-  const lastProcessedInputRef = useRef<{ inputType: string; textInput: string; fileInput: File | null }>({
+  const lastProcessedInputRef = useRef<{
+    inputType: string;
+    textInput: string;
+    fileInput: File | null;
+  }>({
     inputType: "",
     textInput: "",
     fileInput: null,
@@ -59,151 +63,157 @@ export function Base64Tool() {
   }, [state]);
 
   // Process Base64 operation with enhanced error handling and progress
-  const processBase64 = useCallback(async (shouldTrackUsage = true) => {
-    // Get current state values to avoid stale closures
-    const currentState = stateRef.current;
+  const processBase64 = useCallback(
+    async (shouldTrackUsage = true) => {
+      // Get current state values to avoid stale closures
+      const currentState = stateRef.current;
 
-    if (currentState.inputType === "text" && !currentState.textInput.trim()) {
-      setState((prev) => ({
-        ...prev,
-        result: null,
-        error: null,
-        progress: null,
-        warnings: [],
-        validationErrors: [],
-      }));
-      return;
-    }
-
-    if (currentState.inputType === "file" && !currentState.fileInput) {
-      setState((prev) => ({
-        ...prev,
-        result: null,
-        error: null,
-        progress: null,
-        warnings: [],
-        validationErrors: [],
-      }));
-      return;
-    }
-
-    // Validate input before processing
-    if (currentState.inputType === "file" && currentState.fileInput) {
-      const validation = Base64Service.validateFile(currentState.fileInput);
-      if (!validation.isValid) {
+      if (currentState.inputType === "text" && !currentState.textInput.trim()) {
         setState((prev) => ({
           ...prev,
-          error: validation.error || "File validation failed",
-          validationErrors: validation.validationErrors || [],
-          warnings: validation.warnings || [],
+          result: null,
+          error: null,
+          progress: null,
+          warnings: [],
+          validationErrors: [],
+        }));
+        return;
+      }
+
+      if (currentState.inputType === "file" && !currentState.fileInput) {
+        setState((prev) => ({
+          ...prev,
+          result: null,
+          error: null,
+          progress: null,
+          warnings: [],
+          validationErrors: [],
+        }));
+        return;
+      }
+
+      // Validate input before processing
+      if (currentState.inputType === "file" && currentState.fileInput) {
+        const validation = Base64Service.validateFile(currentState.fileInput);
+        if (!validation.isValid) {
+          setState((prev) => ({
+            ...prev,
+            error: validation.error || "File validation failed",
+            validationErrors: validation.validationErrors || [],
+            warnings: validation.warnings || [],
+          }));
+
+          setAnnouncement(
+            announceToScreenReader(
+              `File validation failed: ${validation.error}`,
+              "assertive",
+            ),
+          );
+          return;
+        }
+      }
+
+      setState((prev) => ({
+        ...prev,
+        isProcessing: true,
+        error: null,
+        progress: null,
+        validationErrors: [],
+      }));
+
+      // Announce start of processing to screen readers
+      setAnnouncement(
+        announceToScreenReader(
+          `Starting ${currentState.mode} operation`,
+          "polite",
+        ),
+      );
+
+      try {
+        const input =
+          currentState.inputType === "text"
+            ? currentState.textInput
+            : currentState.fileInput!;
+        const inputSize =
+          currentState.inputType === "text"
+            ? currentState.textInput.length
+            : currentState.fileInput!.size;
+
+        const result: Base64Result = await Base64Service[currentState.mode]({
+          mode: currentState.mode,
+          variant: currentState.variant,
+          inputType: currentState.inputType,
+          input,
+          onProgress: (progress) => {
+            setState((prev) => ({ ...prev, progress }));
+          },
+        });
+
+        setState((prev) => ({
+          ...prev,
+          result,
+          error: result.success ? null : result.error || "Operation failed",
+          warnings: result.warnings || [],
+          isProcessing: false,
+          progress: null,
+        }));
+
+        // Track usage analytics only when explicitly requested (privacy-compliant)
+        if (shouldTrackUsage && result.success && inputSize > 0) {
+          Base64Service.trackUsage({
+            operation: currentState.mode,
+            inputType: currentState.inputType,
+            variant: currentState.variant,
+            inputSize,
+            outputSize: result.success ? result.data?.length || 0 : 0,
+            processingTime: result.processingTime || 0,
+            success: result.success,
+            clientSide: !result.serverSide,
+            error: result.success ? undefined : result.error,
+          });
+        }
+
+        // Announce completion
+        if (result.success) {
+          setAnnouncement(
+            announceToScreenReader(
+              `${currentState.mode} operation completed successfully`,
+              "polite",
+            ),
+          );
+        } else {
+          setAnnouncement(
+            announceToScreenReader(
+              `${currentState.mode} operation failed: ${result.error}`,
+              "assertive",
+            ),
+          );
+        }
+      } catch (error) {
+        const errorMessage =
+          error instanceof Error ? error.message : "Operation failed";
+        setState((prev) => ({
+          ...prev,
+          result: null,
+          error: errorMessage,
+          isProcessing: false,
+          progress: null,
         }));
 
         setAnnouncement(
           announceToScreenReader(
-            `File validation failed: ${validation.error}`,
-            "assertive",
-          ),
-        );
-        return;
-      }
-    }
-
-    setState((prev) => ({
-      ...prev,
-      isProcessing: true,
-      error: null,
-      progress: null,
-      validationErrors: [],
-    }));
-
-    // Announce start of processing to screen readers
-    setAnnouncement(
-      announceToScreenReader(`Starting ${currentState.mode} operation`, "polite"),
-    );
-
-    try {
-      const input =
-        currentState.inputType === "text" ? currentState.textInput : currentState.fileInput!;
-      const inputSize =
-        currentState.inputType === "text"
-          ? currentState.textInput.length
-          : currentState.fileInput!.size;
-
-      const result: Base64Result = await Base64Service[currentState.mode]({
-        mode: currentState.mode,
-        variant: currentState.variant,
-        inputType: currentState.inputType,
-        input,
-        onProgress: (progress) => {
-          setState((prev) => ({ ...prev, progress }));
-        },
-      });
-
-      setState((prev) => ({
-        ...prev,
-        result,
-        error: result.success ? null : result.error || "Operation failed",
-        warnings: result.warnings || [],
-        isProcessing: false,
-        progress: null,
-      }));
-
-      // Track usage analytics only when explicitly requested (privacy-compliant)
-      if (shouldTrackUsage && result.success && inputSize > 0) {
-        Base64Service.trackUsage({
-          operation: currentState.mode,
-          inputType: currentState.inputType,
-          variant: currentState.variant,
-          inputSize,
-          outputSize: result.success ? result.data?.length || 0 : 0,
-          processingTime: result.processingTime || 0,
-          success: result.success,
-          clientSide: !result.serverSide,
-          error: result.success ? undefined : result.error,
-        });
-      }
-
-      // Announce completion
-      if (result.success) {
-        setAnnouncement(
-          announceToScreenReader(
-            `${currentState.mode} operation completed successfully`,
-            "polite",
-          ),
-        );
-      } else {
-        setAnnouncement(
-          announceToScreenReader(
-            `${currentState.mode} operation failed: ${result.error}`,
+            `Operation failed: ${errorMessage}`,
             "assertive",
           ),
         );
       }
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : "Operation failed";
-      setState((prev) => ({
-        ...prev,
-        result: null,
-        error: errorMessage,
-        isProcessing: false,
-        progress: null,
-      }));
-
-      setAnnouncement(
-        announceToScreenReader(
-          `Operation failed: ${errorMessage}`,
-          "assertive",
-        ),
-      );
-    }
-  }, [
-    // Use a ref for state to avoid recreating this function on every state change
-    // This prevents the infinite loop since the callback won't change
-    announceToScreenReader,
-  ]);
-
-
+    },
+    [
+      // Use a ref for state to avoid recreating this function on every state change
+      // This prevents the infinite loop since the callback won't change
+      announceToScreenReader,
+    ],
+  );
 
   // Clear last processed input when mode or variant changes
   useEffect(() => {
@@ -393,7 +403,9 @@ export function Base64Tool() {
         <CardHeader className="pb-8">
           <div className="flex items-center gap-4 mb-6">
             <div className="tool-icon tool-icon-base64 h-14 w-14 rounded-2xl bg-gradient-to-br from-brand-100 to-brand-200 dark:from-brand-900/30 dark:to-brand-800/30 flex items-center justify-center">
-              <span className="text-lg font-bold text-brand-700 dark:text-brand-300">B64</span>
+              <span className="text-lg font-bold text-brand-700 dark:text-brand-300">
+                B64
+              </span>
             </div>
             <div>
               <h2 className="text-title text-2xl font-semibold text-foreground mb-2">
@@ -409,7 +421,9 @@ export function Base64Tool() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Mode Selection */}
             <div className="space-y-4">
-              <label className="text-body font-medium text-foreground">Operation Mode</label>
+              <label className="text-body font-medium text-foreground">
+                Operation Mode
+              </label>
               <div className="flex gap-3">
                 <Button
                   variant={state.mode === "encode" ? "primary" : "secondary"}
@@ -446,7 +460,9 @@ export function Base64Tool() {
 
             {/* Input Type Selection */}
             <div className="space-y-4">
-              <label className="text-body font-medium text-foreground">Input Type</label>
+              <label className="text-body font-medium text-foreground">
+                Input Type
+              </label>
               <div className="flex gap-3">
                 <Button
                   variant={state.inputType === "text" ? "primary" : "secondary"}
@@ -485,7 +501,9 @@ export function Base64Tool() {
 
             {/* Variant Selection */}
             <div className="space-y-4">
-              <label className="text-body font-medium text-foreground">Base64 Variant</label>
+              <label className="text-body font-medium text-foreground">
+                Base64 Variant
+              </label>
               <div className="flex gap-3">
                 <Button
                   variant={
@@ -647,7 +665,9 @@ export function Base64Tool() {
               {/* Selected File Info */}
               {state.fileInput && (
                 <div
-                  className={cn("bg-background-tertiary rounded-2xl p-6 animate-fade-in-up border border-border-secondary")}
+                  className={cn(
+                    "bg-background-tertiary rounded-2xl p-6 animate-fade-in-up border border-border-secondary",
+                  )}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-6">
@@ -707,7 +727,9 @@ export function Base64Tool() {
               title={`Validation Error${state.validationErrors.length > 1 ? "s" : ""}`}
               className="mt-8"
             >
-              <AlertList items={state.validationErrors.map(error => error.message)} />
+              <AlertList
+                items={state.validationErrors.map((error) => error.message)}
+              />
             </Alert>
           )}
 
@@ -774,9 +796,7 @@ export function Base64Tool() {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-title text-xl font-semibold text-foreground mb-3">
-                {state.mode === "encode"
-                  ? "Encoded Result"
-                  : "Decoded Result"}
+                {state.mode === "encode" ? "Encoded Result" : "Decoded Result"}
               </h2>
               {state.result?.success && state.result.data ? (
                 <div className="flex flex-wrap items-center gap-6 text-sm text-foreground-secondary">
@@ -818,13 +838,17 @@ export function Base64Tool() {
                 variant="secondary"
                 size="sm"
                 onClick={handleCopy}
-                disabled={state.isProcessing || !state.result?.success || !state.result.data}
+                disabled={
+                  state.isProcessing ||
+                  !state.result?.success ||
+                  !state.result.data
+                }
                 aria-label="Copy result to clipboard"
                 className={cn(
                   "h-10",
                   copySuccess?.success
                     ? "bg-success-100 text-success-800 dark:bg-success-950/40 dark:text-success-200"
-                    : ""
+                    : "",
                 )}
                 isLoading={state.isProcessing}
               >
@@ -834,7 +858,11 @@ export function Base64Tool() {
                 variant="secondary"
                 size="sm"
                 onClick={handleDownload}
-                disabled={state.isProcessing || !state.result?.success || !state.result.data}
+                disabled={
+                  state.isProcessing ||
+                  !state.result?.success ||
+                  !state.result.data
+                }
                 aria-label="Download result as file"
                 className="h-10"
                 isLoading={state.isProcessing}
@@ -853,7 +881,11 @@ export function Base64Tool() {
               aria-label={`${state.mode} operation in progress`}
             >
               <textarea
-                value={state.result?.success && state.result.data ? state.result.data : ""}
+                value={
+                  state.result?.success && state.result.data
+                    ? state.result.data
+                    : ""
+                }
                 readOnly
                 placeholder={
                   state.mode === "encode"
@@ -867,7 +899,7 @@ export function Base64Tool() {
                     : "cursor-default",
                   !state.result?.success || !state.result.data
                     ? "placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
-                    : ""
+                    : "",
                 )}
                 aria-label={`${state.mode} result`}
               />
@@ -884,11 +916,13 @@ export function Base64Tool() {
             )}
 
             {/* Result Warnings */}
-            {state.result?.success && state.result.warnings && state.result.warnings.length > 0 && (
-              <Alert variant="warning" title="Processing Notes">
-                <AlertList items={state.result.warnings} />
-              </Alert>
-            )}
+            {state.result?.success &&
+              state.result.warnings &&
+              state.result.warnings.length > 0 && (
+                <Alert variant="warning" title="Processing Notes">
+                  <AlertList items={state.result.warnings} />
+                </Alert>
+              )}
           </div>
         </CardContent>
       </Card>

@@ -87,8 +87,6 @@
     /* 4.8:1 contrast ratio */
   }
 
-
-
   /* Enhanced Noise Patterns */
   .noise-texture {
     position: relative;
@@ -135,18 +133,19 @@
 
   /* Simple color-shifting gradient background */
   .bg-gradient-shift {
-    background: linear-gradient(-45deg,
-        rgba(14, 165, 233, 0.15),
-        rgba(147, 51, 234, 0.12),
-        rgba(6, 182, 212, 0.15),
-        rgba(59, 130, 246, 0.12));
+    background: linear-gradient(
+      -45deg,
+      rgba(14, 165, 233, 0.15),
+      rgba(147, 51, 234, 0.12),
+      rgba(6, 182, 212, 0.15),
+      rgba(59, 130, 246, 0.12)
+    );
     background-size: 400% 400%;
     animation: colorShift 120s ease-in-out infinite;
   }
 
   /* Simple color shifting animation */
   @keyframes colorShift {
-
     0%,
     100% {
       background-position: 0% 50%;
@@ -164,6 +163,4 @@
       background-position: 0% 100%;
     }
   }
-
-
 }

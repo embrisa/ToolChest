@@ -163,52 +163,47 @@ export function useClientErrorHandler() {
       const performanceInfo =
         typeof window !== "undefined" && "performance" in window
           ? {
-              memory: (window.performance as PerformanceWithMemory).memory
-                ? (() => {
-                    const perf = window.performance as PerformanceWithMemory;
-                    return {
-                      usedJSHeapSize: perf.memory!.usedJSHeapSize || 0,
-                      totalJSHeapSize: perf.memory!.totalJSHeapSize || 0,
-                      jsHeapSizeLimit: perf.memory!.jsHeapSizeLimit || 0,
-                    };
-                  })()
-                : undefined,
-              timing: window.performance.timing
-                ? {
-                    navigationStart:
-                      window.performance.timing.navigationStart || 0,
-                    unloadEventStart:
-                      window.performance.timing.unloadEventStart || 0,
-                    unloadEventEnd:
-                      window.performance.timing.unloadEventEnd || 0,
-                    redirectStart: window.performance.timing.redirectStart || 0,
-                    redirectEnd: window.performance.timing.redirectEnd || 0,
-                    fetchStart: window.performance.timing.fetchStart || 0,
-                    domainLookupStart:
-                      window.performance.timing.domainLookupStart || 0,
-                    domainLookupEnd:
-                      window.performance.timing.domainLookupEnd || 0,
-                    connectStart: window.performance.timing.connectStart || 0,
-                    connectEnd: window.performance.timing.connectEnd || 0,
-                    secureConnectionStart:
-                      window.performance.timing.secureConnectionStart || 0,
-                    requestStart: window.performance.timing.requestStart || 0,
-                    responseStart: window.performance.timing.responseStart || 0,
-                    responseEnd: window.performance.timing.responseEnd || 0,
-                    domLoading: window.performance.timing.domLoading || 0,
-                    domInteractive:
-                      window.performance.timing.domInteractive || 0,
-                    domContentLoadedEventStart:
-                      window.performance.timing.domContentLoadedEventStart || 0,
-                    domContentLoadedEventEnd:
-                      window.performance.timing.domContentLoadedEventEnd || 0,
-                    domComplete: window.performance.timing.domComplete || 0,
-                    loadEventStart:
-                      window.performance.timing.loadEventStart || 0,
-                    loadEventEnd: window.performance.timing.loadEventEnd || 0,
-                  }
-                : undefined,
-            }
+            memory: (window.performance as PerformanceWithMemory).memory
+              ? (() => {
+                const perf = window.performance as PerformanceWithMemory;
+                return {
+                  usedJSHeapSize: perf.memory!.usedJSHeapSize || 0,
+                  totalJSHeapSize: perf.memory!.totalJSHeapSize || 0,
+                  jsHeapSizeLimit: perf.memory!.jsHeapSizeLimit || 0,
+                };
+              })()
+              : undefined,
+            timing: (() => {
+              try {
+                const navEntries = window.performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
+                const navTiming = navEntries[0];
+                return navTiming ? {
+                  navigationStart: navTiming.startTime || 0,
+                  unloadEventStart: navTiming.unloadEventStart || 0,
+                  unloadEventEnd: navTiming.unloadEventEnd || 0,
+                  redirectStart: navTiming.redirectStart || 0,
+                  redirectEnd: navTiming.redirectEnd || 0,
+                  fetchStart: navTiming.fetchStart || 0,
+                  domainLookupStart: navTiming.domainLookupStart || 0,
+                  domainLookupEnd: navTiming.domainLookupEnd || 0,
+                  connectStart: navTiming.connectStart || 0,
+                  connectEnd: navTiming.connectEnd || 0,
+                  secureConnectionStart: navTiming.secureConnectionStart || 0,
+                  requestStart: navTiming.requestStart || 0,
+                  responseStart: navTiming.responseStart || 0,
+                  responseEnd: navTiming.responseEnd || 0,
+                  domInteractive: navTiming.domInteractive || 0,
+                  domContentLoadedEventStart: navTiming.domContentLoadedEventStart || 0,
+                  domContentLoadedEventEnd: navTiming.domContentLoadedEventEnd || 0,
+                  domComplete: navTiming.domComplete || 0,
+                  loadEventStart: navTiming.loadEventStart || 0,
+                  loadEventEnd: navTiming.loadEventEnd || 0,
+                } : undefined;
+              } catch {
+                return undefined;
+              }
+            })(),
+          }
           : undefined;
 
       return {
@@ -219,9 +214,9 @@ export function useClientErrorHandler() {
         viewport:
           typeof window !== "undefined"
             ? {
-                width: window.innerWidth,
-                height: window.innerHeight,
-              }
+              width: window.innerWidth,
+              height: window.innerHeight,
+            }
             : undefined,
         performance: performanceInfo,
       };
@@ -351,10 +346,10 @@ export function useClientErrorHandler() {
                     );
                     const body = encodeURIComponent(
                       `Error ID: ${error.requestId || "Unknown"}\n` +
-                        `Time: ${error.timestamp}\n` +
-                        `Component: ${error.component || "Unknown"}\n` +
-                        `Message: ${error.message}\n\n` +
-                        `Please describe what you were doing when this error occurred:\n\n`,
+                      `Time: ${error.timestamp}\n` +
+                      `Component: ${error.component || "Unknown"}\n` +
+                      `Message: ${error.message}\n\n` +
+                      `Please describe what you were doing when this error occurred:\n\n`,
                     );
                     window.location.href = `mailto:support@tool-chest.com?subject=${subject}&body=${body}`;
                   },

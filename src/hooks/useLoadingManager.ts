@@ -109,8 +109,6 @@ export function useLoadingManager(): LoadingManager & LoadingAccessibility {
     [announceToScreenReader],
   );
 
-
-
   return {
     register,
     unregister,

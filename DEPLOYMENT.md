@@ -52,6 +52,7 @@ NODE_ENV=production
 #### 4. Deploy the Application
 
 Railway will automatically:
+
 - Detect the `Dockerfile`
 - Build the Docker image
 - Run database migrations
@@ -59,13 +60,13 @@ Railway will automatically:
 
 ### Environment Variables Reference
 
-| Variable | Required | Description | Example |
-|----------|----------|-------------|---------|
-| `DATABASE_URL` | ✅ | PostgreSQL connection string | `postgresql://user:pass@host:5432/db` |
-| `ADMIN_SECRET_TOKEN` | ✅ | Secret token for admin access | `your-super-secure-token-123` |
-| `NEXT_PUBLIC_SITE_URL` | ❌ | Your site URL for SEO | `https://tool-chest.railway.app` |
-| `NEXT_PUBLIC_GA_ID` | ❌ | Google Analytics ID | `G-XXXXXXXXXX` |
-| `NODE_ENV` | ❌ | Node environment | `production` |
+| Variable               | Required | Description                   | Example                               |
+| ---------------------- | -------- | ----------------------------- | ------------------------------------- |
+| `DATABASE_URL`         | ✅       | PostgreSQL connection string  | `postgresql://user:pass@host:5432/db` |
+| `ADMIN_SECRET_TOKEN`   | ✅       | Secret token for admin access | `your-super-secure-token-123`         |
+| `NEXT_PUBLIC_SITE_URL` | ❌       | Your site URL for SEO         | `https://tool-chest.railway.app`      |
+| `NEXT_PUBLIC_GA_ID`    | ❌       | Google Analytics ID           | `G-XXXXXXXXXX`                        |
+| `NODE_ENV`             | ❌       | Node environment              | `production`                          |
 
 ### Post-Deployment Steps
 
@@ -76,6 +77,7 @@ curl https://your-app.railway.app/api/health
 ```
 
 Expected response:
+
 ```json
 {
   "status": "healthy",
@@ -111,6 +113,7 @@ Railway PostgreSQL includes automatic backups. Access them in the Railway dashbo
 #### Logs
 
 View application logs in Railway dashboard:
+
 ```bash
 # Or via CLI
 railway logs
@@ -133,14 +136,17 @@ Railway will automatically redeploy when you push to your connected Git reposito
 #### Common Issues
 
 1. **Database Connection Failed**
+
    - Verify `DATABASE_URL` is set correctly
    - Check Railway PostgreSQL service is running
 
 2. **Build Failures**
+
    - Check build logs in Railway dashboard
    - Verify all dependencies are in `package.json`
 
 3. **Health Check Failures**
+
    - Verify application starts without errors
    - Check database connectivity
 
@@ -182,4 +188,4 @@ railway connect postgresql
 
 - Railway Documentation: [docs.railway.app](https://docs.railway.app)
 - Railway Discord: [discord.gg/railway](https://discord.gg/railway)
-- Project Issues: GitHub Issues tab 
+- Project Issues: GitHub Issues tab

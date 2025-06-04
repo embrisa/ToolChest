@@ -98,7 +98,10 @@ jest.mock("@/components/tools", () => ({
           {showCount && tag.toolCount && ` (${tag.toolCount})`}
         </button>
       ))}
-      <button onClick={onClearAll} data-testid={`${testIdPrefix}clear-all-tags`}>
+      <button
+        onClick={onClearAll}
+        data-testid={`${testIdPrefix}clear-all-tags`}
+      >
         Clear All
       </button>
     </div>
@@ -297,7 +300,9 @@ describe("HomePage", () => {
         screen.getByText(/Your collection of essential computer tools/),
       ).toBeInTheDocument();
       expect(
-        screen.getByText(/Encode, decode, generate, convert, and more with ease/),
+        screen.getByText(
+          /Encode, decode, generate, convert, and more with ease/,
+        ),
       ).toBeInTheDocument();
     });
 
@@ -434,7 +439,9 @@ describe("HomePage", () => {
 
       render(<HomePage />);
 
-      const clearButtons = screen.getAllByRole("button", { name: /clear all filters/i });
+      const clearButtons = screen.getAllByRole("button", {
+        name: /clear all filters/i,
+      });
       expect(clearButtons).toHaveLength(2); // Mobile and desktop versions
     });
 
@@ -544,7 +551,9 @@ describe("HomePage", () => {
       // Check if either mobile or desktop tag button has focus (depends on viewport)
       const mobileTagButton = screen.getByTestId("mobile-tag-encoding");
       const desktopTagButton = screen.getByTestId("desktop-tag-encoding");
-      const hasFocus = mobileTagButton === document.activeElement || desktopTagButton === document.activeElement;
+      const hasFocus =
+        mobileTagButton === document.activeElement ||
+        desktopTagButton === document.activeElement;
       expect(hasFocus).toBe(true);
     });
   });

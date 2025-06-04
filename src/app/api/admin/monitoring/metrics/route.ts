@@ -1,5 +1,41 @@
 import { NextRequest, NextResponse } from "next/server";
 import { AnalyticsService } from "@/services/admin/analyticsService";
+import type { RealTimeMetrics } from "@/types/admin/analytics";
+
+interface MetricTrends {
+  apiResponseTime: string;
+  errorRate: string;
+  memoryUsage: string;
+  cpuUsage: string;
+}
+
+interface MetricsSummary {
+  total: number;
+  averages: {
+    apiResponseTime: number;
+    errorRate: number;
+    memoryUsagePercentage: number;
+    activeConnections: number;
+    requestsPerMinute: number;
+    cpuUsage: number;
+    diskUsage: number;
+  };
+  peaks: {
+    maxApiResponseTime: number;
+    maxErrorRate: number;
+    maxMemoryUsage: number;
+    maxActiveConnections: number;
+    maxRequestsPerMinute: number;
+    maxCpuUsage: number;
+    maxDiskUsage: number;
+  };
+  timeRange: {
+    start: Date;
+    end: Date;
+    duration: number;
+  } | null;
+  trends: MetricTrends;
+}
 
 const analyticsService = AnalyticsService.getInstance();
 
@@ -169,13 +205,35 @@ export async function GET(request: NextRequest) {
   }
 }
 
-function calculateMetricsSummary(metrics: any[]): any {
+function calculateMetricsSummary(metrics: RealTimeMetrics[]): MetricsSummary {
   if (metrics.length === 0) {
     return {
       total: 0,
-      averages: {},
-      peaks: {},
+      averages: {
+        apiResponseTime: 0,
+        errorRate: 0,
+        memoryUsagePercentage: 0,
+        activeConnections: 0,
+        requestsPerMinute: 0,
+        cpuUsage: 0,
+        diskUsage: 0,
+      },
+      peaks: {
+        maxApiResponseTime: 0,
+        maxErrorRate: 0,
+        maxMemoryUsage: 0,
+        maxActiveConnections: 0,
+        maxRequestsPerMinute: 0,
+        maxCpuUsage: 0,
+        maxDiskUsage: 0,
+      },
       timeRange: null,
+      trends: {
+        apiResponseTime: "stable",
+        errorRate: "stable",
+        memoryUsage: "stable",
+        cpuUsage: "stable",
+      },
     };
   }
 
@@ -191,9 +249,10 @@ function calculateMetricsSummary(metrics: any[]): any {
       metrics.reduce((sum, m) => sum + m.activeConnections, 0) / metrics.length,
     requestsPerMinute:
       metrics.reduce((sum, m) => sum + m.requestsPerMinute, 0) / metrics.length,
-    cpuUsage: metrics.reduce((sum, m) => sum + m.cpuUsage, 0) / metrics.length,
+    cpuUsage:
+      metrics.reduce((sum, m) => sum + (m.cpuUsage ?? 0), 0) / metrics.length,
     diskUsage:
-      metrics.reduce((sum, m) => sum + m.diskUsage, 0) / metrics.length,
+      metrics.reduce((sum, m) => sum + (m.diskUsage ?? 0), 0) / metrics.length,
   };
 
   const peaks = {
@@ -202,8 +261,8 @@ function calculateMetricsSummary(metrics: any[]): any {
     maxMemoryUsage: Math.max(...metrics.map((m) => m.memoryUsage.percentage)),
     maxActiveConnections: Math.max(...metrics.map((m) => m.activeConnections)),
     maxRequestsPerMinute: Math.max(...metrics.map((m) => m.requestsPerMinute)),
-    maxCpuUsage: Math.max(...metrics.map((m) => m.cpuUsage)),
-    maxDiskUsage: Math.max(...metrics.map((m) => m.diskUsage)),
+    maxCpuUsage: Math.max(...metrics.map((m) => m.cpuUsage ?? 0)),
+    maxDiskUsage: Math.max(...metrics.map((m) => m.diskUsage ?? 0)),
   };
 
   const timeRange = {
@@ -214,21 +273,27 @@ function calculateMetricsSummary(metrics: any[]): any {
       new Date(metrics[metrics.length - 1].timestamp).getTime(),
   };
 
+  const roundedAverages: MetricsSummary["averages"] = {
+    apiResponseTime: Math.round(averages.apiResponseTime * 100) / 100,
+    errorRate: Math.round(averages.errorRate * 100) / 100,
+    memoryUsagePercentage:
+      Math.round(averages.memoryUsagePercentage * 100) / 100,
+    activeConnections: Math.round(averages.activeConnections * 100) / 100,
+    requestsPerMinute: Math.round(averages.requestsPerMinute * 100) / 100,
+    cpuUsage: Math.round(averages.cpuUsage * 100) / 100,
+    diskUsage: Math.round(averages.diskUsage * 100) / 100,
+  };
+
   return {
     total: metrics.length,
-    averages: Object.fromEntries(
-      Object.entries(averages).map(([key, value]) => [
-        key,
-        Math.round(value * 100) / 100,
-      ]),
-    ),
+    averages: roundedAverages,
     peaks,
     timeRange,
     trends: calculateTrends(metrics),
   };
 }
 
-function calculateTrends(metrics: any[]): any {
+function calculateTrends(metrics: RealTimeMetrics[]): MetricTrends {
   if (metrics.length < 2) {
     return {
       apiResponseTime: "stable",
@@ -259,6 +324,6 @@ function calculateTrends(metrics: any[]): any {
       first.memoryUsage.percentage,
       last.memoryUsage.percentage,
     ),
-    cpuUsage: calculateTrend(first.cpuUsage, last.cpuUsage),
+    cpuUsage: calculateTrend(first.cpuUsage ?? 0, last.cpuUsage ?? 0),
   };
 }

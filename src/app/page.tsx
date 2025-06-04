@@ -79,10 +79,7 @@ function HomePageContent() {
   }
 
   return (
-    <div
-      className="min-h-screen"
-      suppressHydrationWarning
-    >
+    <div className="min-h-screen" suppressHydrationWarning>
       {/* Hero Section */}
       <header className="relative overflow-hidden">
         <div className="relative container-wide px-6 sm:px-8 lg:px-12 py-20 sm:py-24 lg:py-16">

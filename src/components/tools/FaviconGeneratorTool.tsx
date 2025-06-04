@@ -49,7 +49,10 @@ export function FaviconGeneratorTool() {
   });
 
   const [announcement] = useState<FaviconA11yAnnouncement | null>(null);
-  const [copySuccess, setCopySuccess] = useState<{ success: boolean; message: string } | null>(null);
+  const [copySuccess, setCopySuccess] = useState<{
+    success: boolean;
+    message: string;
+  } | null>(null);
 
   const { announceToScreenReader } = useAccessibilityAnnouncements();
   const stateRef = useRef(state);
@@ -82,7 +85,10 @@ export function FaviconGeneratorTool() {
             canvas.width = size.width;
             canvas.height = size.height;
 
-            if (options.backgroundColor && options.backgroundColor !== "transparent") {
+            if (
+              options.backgroundColor &&
+              options.backgroundColor !== "transparent"
+            ) {
               ctx.fillStyle = options.backgroundColor;
               ctx.fillRect(0, 0, canvas.width, canvas.height);
             }
@@ -143,14 +149,19 @@ export function FaviconGeneratorTool() {
         sourceImages: [file],
         error: validation.isValid ? null : validation.error || "Invalid file",
         warnings: validation.warnings || [],
-        validationErrors: validation.isValid ? [] : [validation.error || "Invalid file"],
+        validationErrors: validation.isValid
+          ? []
+          : [validation.error || "Invalid file"],
         result: null,
         batchResults: [],
         showPreview: false,
       }));
 
       if (!validation.isValid) {
-        announceToScreenReader(`File validation failed: ${validation.error}`, "assertive");
+        announceToScreenReader(
+          `File validation failed: ${validation.error}`,
+          "assertive",
+        );
       } else {
         const warnings = validation.warnings?.join(". ") || "";
         const sizeText = (file.size / (1024 * 1024)).toFixed(1);
@@ -192,7 +203,12 @@ export function FaviconGeneratorTool() {
         const newSizes = (() => {
           switch (preset) {
             case "standard":
-              return ["png16", "png32", "png48", "android192"] as FaviconSizeKey[];
+              return [
+                "png16",
+                "png32",
+                "png48",
+                "android192",
+              ] as FaviconSizeKey[];
             case "all":
               return Object.keys(FAVICON_SIZES) as FaviconSizeKey[];
             case "clear":
@@ -245,9 +261,13 @@ export function FaviconGeneratorTool() {
       );
 
       setState((prev) => ({ ...prev, result, isProcessing: false }));
-      announceToScreenReader("Favicon generation completed successfully!", "polite");
+      announceToScreenReader(
+        "Favicon generation completed successfully!",
+        "polite",
+      );
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : "Generation failed";
+      const errorMessage =
+        error instanceof Error ? error.message : "Generation failed";
       setState((prev) => ({
         ...prev,
         error: errorMessage,
@@ -264,15 +284,21 @@ export function FaviconGeneratorTool() {
     try {
       const faviconData = state.result.favicons
         .map((favicon) => `${favicon.size.name}: ${favicon.dataUrl}`)
-        .join('\n\n');
+        .join("\n\n");
 
       await navigator.clipboard.writeText(faviconData);
-      setCopySuccess({ success: true, message: "All favicon URLs copied to clipboard" });
+      setCopySuccess({
+        success: true,
+        message: "All favicon URLs copied to clipboard",
+      });
       announceToScreenReader("All favicon URLs copied to clipboard", "polite");
 
       setTimeout(() => setCopySuccess(null), 3000);
     } catch {
-      setCopySuccess({ success: false, message: "Failed to copy to clipboard" });
+      setCopySuccess({
+        success: false,
+        message: "Failed to copy to clipboard",
+      });
       announceToScreenReader("Failed to copy to clipboard", "assertive");
     }
   }, [state.result?.favicons, announceToScreenReader]);
@@ -327,7 +353,7 @@ export function FaviconGeneratorTool() {
         height: size.height,
         recommended: ["png16", "png32", "png48", "android192"].includes(key),
       },
-    ])
+    ]),
   );
 
   return (
@@ -340,7 +366,9 @@ export function FaviconGeneratorTool() {
         <CardHeader className="pb-8">
           <div className="flex items-center gap-4 mb-6">
             <div className="tool-icon tool-icon-favicon h-14 w-14 rounded-2xl bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-900/30 dark:to-purple-800/30 flex items-center justify-center">
-              <span className="text-lg font-bold text-purple-700 dark:text-purple-300">🎨</span>
+              <span className="text-lg font-bold text-purple-700 dark:text-purple-300">
+                🎨
+              </span>
             </div>
             <div>
               <h2 className="text-title text-2xl font-semibold text-foreground mb-2">
@@ -356,7 +384,9 @@ export function FaviconGeneratorTool() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Size Selection */}
             <div className="space-y-4">
-              <label className="text-body font-medium text-foreground">Favicon Sizes</label>
+              <label className="text-body font-medium text-foreground">
+                Favicon Sizes
+              </label>
               <SizeSelector
                 sizes={sizeOptions}
                 selectedSizes={state.options.sizes}
@@ -373,7 +403,9 @@ export function FaviconGeneratorTool() {
               <div className="space-y-4">
                 <ColorPicker
                   value={state.options.backgroundColor || "transparent"}
-                  onChange={(color) => handleOptionsChange({ backgroundColor: color })}
+                  onChange={(color) =>
+                    handleOptionsChange({ backgroundColor: color })
+                  }
                   label="Background Color"
                   disabled={state.isProcessing}
                 />
@@ -389,7 +421,9 @@ export function FaviconGeneratorTool() {
                   min="0"
                   max="32"
                   value={state.options.padding || 0}
-                  onChange={(e) => handleOptionsChange({ padding: parseInt(e.target.value) })}
+                  onChange={(e) =>
+                    handleOptionsChange({ padding: parseInt(e.target.value) })
+                  }
                   className="w-full h-2 bg-neutral-200 dark:bg-neutral-700 rounded-lg appearance-none cursor-pointer"
                   aria-label="Padding amount"
                   disabled={state.isProcessing}
@@ -402,7 +436,9 @@ export function FaviconGeneratorTool() {
 
               {/* Output Format */}
               <div className="space-y-3">
-                <label className="text-body font-medium text-foreground">Output Format</label>
+                <label className="text-body font-medium text-foreground">
+                  Output Format
+                </label>
                 <select
                   value={state.options.outputFormat || "png"}
                   onChange={(e) =>
@@ -431,7 +467,9 @@ export function FaviconGeneratorTool() {
                   max="1.0"
                   step="0.1"
                   value={state.options.quality || 0.9}
-                  onChange={(e) => handleOptionsChange({ quality: parseFloat(e.target.value) })}
+                  onChange={(e) =>
+                    handleOptionsChange({ quality: parseFloat(e.target.value) })
+                  }
                   className="w-full h-2 bg-neutral-200 dark:bg-neutral-700 rounded-lg appearance-none cursor-pointer"
                   aria-label="Output quality"
                   disabled={state.isProcessing}
@@ -448,21 +486,31 @@ export function FaviconGeneratorTool() {
                   <input
                     type="checkbox"
                     checked={state.options.generateManifest}
-                    onChange={(e) => handleOptionsChange({ generateManifest: e.target.checked })}
+                    onChange={(e) =>
+                      handleOptionsChange({
+                        generateManifest: e.target.checked,
+                      })
+                    }
                     className="checkbox"
                     disabled={state.isProcessing}
                   />
-                  <span className="text-sm text-foreground">Generate web app manifest.json</span>
+                  <span className="text-sm text-foreground">
+                    Generate web app manifest.json
+                  </span>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={state.options.generateICO}
-                    onChange={(e) => handleOptionsChange({ generateICO: e.target.checked })}
+                    onChange={(e) =>
+                      handleOptionsChange({ generateICO: e.target.checked })
+                    }
                     className="checkbox"
                     disabled={state.isProcessing}
                   />
-                  <span className="text-sm text-foreground">Generate .ico files</span>
+                  <span className="text-sm text-foreground">
+                    Generate .ico files
+                  </span>
                 </label>
               </div>
             </div>
@@ -559,18 +607,24 @@ export function FaviconGeneratorTool() {
 
       {/* Enhanced Real-time Preview */}
       {state.showPreview && Object.keys(state.previewUrls).length > 0 && (
-        <Card variant="elevated" className="tool-card-favicon animate-fade-in-up">
+        <Card
+          variant="elevated"
+          className="tool-card-favicon animate-fade-in-up"
+        >
           <CardHeader className="pb-8">
             <div className="flex items-center gap-4 mb-6">
               <div className="tool-icon tool-icon-favicon h-14 w-14 rounded-2xl bg-gradient-to-br from-emerald-100 to-green-200 dark:from-emerald-900/30 dark:to-green-800/30 flex items-center justify-center">
-                <span className="text-lg font-bold text-emerald-700 dark:text-emerald-300">👁️</span>
+                <span className="text-lg font-bold text-emerald-700 dark:text-emerald-300">
+                  👁️
+                </span>
               </div>
               <div>
                 <h2 className="text-title text-2xl font-semibold text-foreground mb-2">
                   Real-time Preview
                 </h2>
                 <p className="text-body text-foreground-secondary">
-                  See how your favicons will look in different browser contexts and sizes
+                  See how your favicons will look in different browser contexts
+                  and sizes
                 </p>
               </div>
             </div>
@@ -583,7 +637,11 @@ export function FaviconGeneratorTool() {
                 selectedContext={state.options.previewContext}
                 onContextChange={(context) =>
                   handleOptionsChange({
-                    previewContext: context as "browser" | "bookmark" | "desktop" | "all",
+                    previewContext: context as
+                      | "browser"
+                      | "bookmark"
+                      | "desktop"
+                      | "all",
                   })
                 }
                 title="Context Preview"
@@ -656,7 +714,8 @@ export function FaviconGeneratorTool() {
               {state.progress.estimatedTimeRemaining &&
                 state.progress.estimatedTimeRemaining > 1 && (
                   <p className="text-sm text-foreground-secondary">
-                    Estimated time remaining: {Math.round(state.progress.estimatedTimeRemaining / 1000)}s
+                    Estimated time remaining:{" "}
+                    {Math.round(state.progress.estimatedTimeRemaining / 1000)}s
                   </p>
                 )}
             </div>
@@ -683,8 +742,11 @@ export function FaviconGeneratorTool() {
         result={
           state.result?.favicons
             ? state.result.favicons
-              .map((favicon) => `${favicon.size.name} (${favicon.size.width}×${favicon.size.height}): ${favicon.filename}`)
-              .join('\n')
+                .map(
+                  (favicon) =>
+                    `${favicon.size.name} (${favicon.size.width}×${favicon.size.height}): ${favicon.filename}`,
+                )
+                .join("\n")
             : ""
         }
         isProcessing={state.isProcessing}
@@ -699,31 +761,34 @@ export function FaviconGeneratorTool() {
         metadata={
           state.result?.success
             ? [
-              {
-                label: "Favicons",
-                value: state.result.favicons?.length || 0,
-                format: (v: string | number) => `${v} size${Number(v) === 1 ? '' : 's'} generated`
-              },
-              ...(state.result.processingTime
-                ? [{
-                  label: "Processing Time",
-                  value: state.result.processingTime,
-                  format: (v: string | number) => `${v}ms`
-                }]
-                : []),
-              ...(state.result.manifestJson
-                ? [{ label: "Manifest", value: "Generated" }]
-                : [])
-            ]
+                {
+                  label: "Favicons",
+                  value: state.result.favicons?.length || 0,
+                  format: (v: string | number) =>
+                    `${v} size${Number(v) === 1 ? "" : "s"} generated`,
+                },
+                ...(state.result.processingTime
+                  ? [
+                      {
+                        label: "Processing Time",
+                        value: state.result.processingTime,
+                        format: (v: string | number) => `${v}ms`,
+                      },
+                    ]
+                  : []),
+                ...(state.result.manifestJson
+                  ? [{ label: "Manifest", value: "Generated" }]
+                  : []),
+              ]
             : []
         }
         badges={
           state.result?.success && state.result.favicons
             ? state.result.favicons.slice(0, 6).map((favicon, index) => (
-              <ResultBadge key={index} variant="success">
-                {favicon.size.name}
-              </ResultBadge>
-            ))
+                <ResultBadge key={index} variant="success">
+                  {favicon.size.name}
+                </ResultBadge>
+              ))
             : []
         }
         rows={8}
@@ -759,7 +824,8 @@ export function FaviconGeneratorTool() {
                       style={{
                         width: Math.min(favicon.size.width, 32),
                         height: Math.min(favicon.size.height, 32),
-                        imageRendering: favicon.size.width <= 32 ? "pixelated" : "auto",
+                        imageRendering:
+                          favicon.size.width <= 32 ? "pixelated" : "auto",
                       }}
                     />
                   </div>

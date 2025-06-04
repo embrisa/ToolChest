@@ -5,14 +5,20 @@ import type { AnalyticsFilter, AnalyticsChart } from "@/types/admin/analytics";
 const analyticsService = AnalyticsService.getInstance();
 
 // Simple in-memory cache for chart data
-const chartCache = new Map<string, { data: AnalyticsChart[]; timestamp: number }>();
+const chartCache = new Map<
+  string,
+  { data: AnalyticsChart[]; timestamp: number }
+>();
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
 function getCacheKey(filter?: AnalyticsFilter): string {
   return JSON.stringify(filter || {});
 }
 
-function isValidCacheEntry(entry: { data: AnalyticsChart[]; timestamp: number }): boolean {
+function isValidCacheEntry(entry: {
+  data: AnalyticsChart[];
+  timestamp: number;
+}): boolean {
   return Date.now() - entry.timestamp < CACHE_DURATION;
 }
 

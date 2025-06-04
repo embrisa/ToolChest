@@ -1,10 +1,7 @@
 /**
  * Convert a base64 string to a Blob.
  */
-export function base64ToBlob(
-  base64: string,
-  contentType = "",
-): Blob {
+export function base64ToBlob(base64: string, contentType = ""): Blob {
   const binary = atob(base64);
   const bytes = new Uint8Array(binary.length);
   for (let i = 0; i < binary.length; i++) {
@@ -28,4 +25,3 @@ export function downloadBlob(blob: Blob, filename: string) {
     a.remove();
   }, 0);
 }
-

@@ -90,37 +90,46 @@ Use `@/` prefix for all imports: `@/components/ui`, `@/services/tools`, `@/types
 ### Base UI Components (`@/components/ui`)
 
 #### Core Interactive Components
+
 - **`Button`** - Primary interactive element with 6 variants (`primary`, `secondary`, `ghost`, `danger`, `outline`, `gradient`)
+
   - Sizes: `sm`, `md`, `lg`, `xl`
   - Features: Loading states, icons, full-width mode
   - Usage: `<Button variant="primary" size="md" isLoading={loading}>Save</Button>`
 
 - **`Input`** - Text input with validation and accessibility features
+
   - Built-in error states and ARIA support
   - Usage: `<Input placeholder="Enter text" aria-label="Search input" />`
 
 - **`MultiSelect`** - Multi-value selection component with search and keyboard navigation
+
   - Usage: `<MultiSelect options={options} value={selected} onChange={setSelected} />`
 
 - **`ColorPicker`** - Advanced color selection with multiple format support
   - Supports HSL, RGB, HEX formats with accessibility compliance
 
 #### Layout & Structure Components
+
 - **`Card`** - Flexible container with variants (`default`, `interactive`, `elevated`)
   - Sub-components: `CardHeader`, `CardTitle`, `CardContent`, `CardFooter`
   - Padding options: `none`, `sm`, `md`, `lg`
   - Usage: `<Card variant="interactive"><CardTitle>Title</CardTitle><CardContent>Content</CardContent></Card>`
 
 #### Loading & State Components
+
 - **`Loading`** - Consistent loading indicators
+
   - `LoadingSkeleton` for content placeholders
   - Usage: `<Loading size="lg" />` or `<LoadingSkeleton />`
 
 - **`SkeletonLoader`** - Multiple skeleton variants for different content types
+
   - `ToolCardSkeleton`, `TableSkeleton`, `FormSkeleton`, `DashboardSkeleton`
   - Usage: `<ToolCardSkeleton count={6} />`
 
 - **`ProgressIndicator`** - Visual progress feedback for long operations
+
   - Usage: `<ProgressIndicator value={75} max={100} />`
 
 - **`SuspenseFallback`** - Specialized fallbacks for different page types
@@ -128,11 +137,14 @@ Use `@/` prefix for all imports: `@/components/ui`, `@/services/tools`, `@/types
   - HOC: `withSuspense(Component, FallbackComponent)`
 
 #### Performance & Optimization Components
+
 - **`OptimizedImage`** - Next.js Image wrapper with performance optimizations
+
   - Variants: `ToolIcon`, `HeroImage`, `Thumbnail`
   - Usage: `<OptimizedImage src="/icon.png" alt="Tool icon" variant="ToolIcon" />`
 
 - **`LazyLoader`** - Component lazy loading with preloading capabilities
+
   - HOC: `withLazyLoading(Component, LoadingComponent)`
   - Hook: `useComponentPreloader(componentImport)`
 
@@ -140,12 +152,15 @@ Use `@/` prefix for all imports: `@/components/ui`, `@/services/tools`, `@/types
   - Hooks: `usePageTransition()`, `useRouterTransition()`
 
 #### Interaction & Feedback Components
+
 - **`Alert`** - Reusable alert/message component with consistent styling across all tools
+
   - Variants: `error`, `warning`, `success`, `info`
   - Features: Built-in icons, optional titles, list support with `AlertList`
   - Usage: `<Alert variant="warning" title="Warning">Message</Alert>`
 
 - **`Toast`** - Toast notification system with multiple severity levels
+
   - Functions: `createSuccessToast()`, `createErrorToast()`, `createWarningToast()`, `createCriticalToast()`
   - Usage: `<ToastContainer />` + `createSuccessToast("Operation completed")`
 
@@ -154,7 +169,9 @@ Use `@/` prefix for all imports: `@/components/ui`, `@/services/tools`, `@/types
   - Usage: `<AriaLiveRegion />` + `announceToScreenReader("Status updated")`
 
 #### Error Handling & Network Components
+
 - **`NetworkErrorHandler`** - Automatic retry logic with backoff strategy
+
   - Components: `ToolLoadingError`, `AdminDataError`
   - Hooks: `useRetryWithBackoff()`, `useNetworkRetry()`
 
@@ -177,22 +194,27 @@ Use `@/` prefix for all imports: `@/components/ui`, `@/services/tools`, `@/types
 ### Tool Workflow Components (`@/components/ui`)
 
 - **`ToolHeader`** - Consistent tool header with icon, title, and description
+
   - Features: Custom icons, gradient backgrounds, flexible styling
   - Usage: `<ToolHeader title="Base64 Tool" description="Encode and decode" iconText="B64" />`
 
 - **`FileUpload`** - Drag-and-drop file upload with visual feedback
+
   - Features: Drag states, file validation, accessibility, custom styling
   - Usage: `<FileUpload onFileSelect={handleFile} accept="image/*" maxSize={10} />`
 
 - **`FileInfo`** - Selected file information display with remove functionality
+
   - Features: File size formatting, type display, remove button
   - Usage: `<FileInfo file={selectedFile} onRemove={handleRemove} />`
 
 - **`OptionGroup`** - Toggle button groups for tool settings
+
   - Features: Single selection, disabled states, custom styling
   - Usage: `<OptionGroup label="Mode" value={mode} options={modeOptions} onChange={setMode} />`
 
 - **`ResultsPanel`** - Tool results display with copy/download actions
+
   - Features: Metadata display, action buttons, status feedback, badges
   - Usage: `<ResultsPanel title="Result" result={data} onCopy={copy} onDownload={download} />`
 
@@ -203,26 +225,32 @@ Use `@/` prefix for all imports: `@/components/ui`, `@/services/tools`, `@/types
 ### Tool Page Template Components (`@/components/ui`)
 
 - **`ToolPageTemplate`** - Complete tool page template combining all common elements
+
   - Features: Hero, privacy badge, feature grid, info section, animations
   - Usage: `<ToolPageTemplate title="Tool Name" description="..." infoSection={{...}}><ToolComponent /></ToolPageTemplate>`
 
 - **`ToolPageLayout`** - Common layout structure with background patterns
+
   - Features: Background mesh, noise overlay, responsive container
   - Usage: `<ToolPageLayout><content /></ToolPageLayout>`
 
 - **`ToolPageHero`** - Hero section with icon, title, and description
+
   - Features: Customizable icons, gradient text, responsive sizing
   - Usage: `<ToolPageHero title="Tool Name" description="..." iconText="T" />`
 
 - **`PrivacyBadge`** - Privacy-first messaging with customizable colors
+
   - Features: Animated pulse, customizable styling, consistent messaging
   - Usage: `<PrivacyBadge message="🔒 Privacy-First • Client-Side Processing" />`
 
 - **`FeatureCard`** - Individual feature display card
+
   - Features: Icon support, badges, hover effects, consistent styling
   - Usage: `<FeatureCard title="Feature" description="..." icon={<Icon />} />`
 
 - **`FeatureGrid`** - Responsive grid layout for feature cards
+
   - Features: Responsive columns, optional title/description, animation delays
   - Usage: `<FeatureGrid features={[...]} columns={{md: 2, lg: 4}} />`
 
@@ -240,6 +268,7 @@ Use `@/` prefix for all imports: `@/components/ui`, `@/services/tools`, `@/types
 ### Component Usage Patterns
 
 #### Standard Tool Wrapper Pattern
+
 ```typescript
 import { ErrorBoundary, Card, Button, Loading } from '@/components/ui';
 
@@ -265,18 +294,19 @@ export function MyTool() {
 ```
 
 #### Form Component Pattern
+
 ```typescript
 import { Input, Button, MultiSelect, Toast } from '@/components/ui';
 
 export function ToolForm({ onSubmit }) {
   return (
     <form onSubmit={handleSubmit}>
-      <Input 
-        label="Input Text" 
+      <Input
+        label="Input Text"
         aria-describedby="input-help"
         aria-invalid={hasError}
       />
-      <MultiSelect 
+      <MultiSelect
         options={tagOptions}
         placeholder="Select tags..."
       />
@@ -289,10 +319,11 @@ export function ToolForm({ onSubmit }) {
 ```
 
 #### Loading State Pattern
-```typescript
-import { withSuspense, ToolPageFallback } from '@/components/ui';
 
-const LazyTool = lazy(() => import('./MyTool'));
+```typescript
+import { withSuspense, ToolPageFallback } from "@/components/ui";
+
+const LazyTool = lazy(() => import("./MyTool"));
 
 export const MyToolWithSuspense = withSuspense(LazyTool, ToolPageFallback);
 ```
@@ -402,21 +433,29 @@ Standard REST API patterns:
 
 ```typescript
 // ❌ BAD - Object dependencies cause infinite loops
-useEffect(() => { loadData(); }, [sortOptions, filters]);
+useEffect(() => {
+  loadData();
+}, [sortOptions, filters]);
 
-// ✅ GOOD - Memoized function with primitive dependencies  
+// ✅ GOOD - Memoized function with primitive dependencies
 const loadData = useCallback(async () => {
   // implementation
 }, [sortOptions.field, sortOptions.direction, filters.search]);
 
-useEffect(() => { loadData(); }, [loadData]);
+useEffect(() => {
+  loadData();
+}, [loadData]);
 
 // ❌ BAD - Error throwing in useEffect
 const captureError = (error) => setError(error);
-useEffect(() => { if (error) throw error; }, [error]);
+useEffect(() => {
+  if (error) throw error;
+}, [error]);
 
 // ✅ GOOD - Immediate error throwing
-const captureError = useCallback((error) => { throw error; }, []);
+const captureError = useCallback((error) => {
+  throw error;
+}, []);
 ```
 
 ---

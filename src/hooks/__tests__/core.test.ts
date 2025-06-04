@@ -10,10 +10,9 @@ describe("core hooks", () => {
   });
 
   it("provides previous value", () => {
-    const { result, rerender } = renderHook(
-      ({ value }) => usePrevious(value),
-      { initialProps: { value: 1 } },
-    );
+    const { result, rerender } = renderHook(({ value }) => usePrevious(value), {
+      initialProps: { value: 1 },
+    });
     expect(result.current).toBeUndefined();
     rerender({ value: 2 });
     expect(result.current).toBe(1);

@@ -86,7 +86,9 @@ export function FaviconPreview({
             tool-chest.com
           </p>
         </div>
-        <div className="text-amber-500 text-sm" aria-label="Bookmarked">⭐</div>
+        <div className="text-amber-500 text-sm" aria-label="Bookmarked">
+          ⭐
+        </div>
       </div>
     </div>
   );
@@ -205,7 +207,9 @@ export function FaviconPreview({
 
                 <div
                   className="flex justify-center p-6 rounded-2xl border border-neutral-200 transition-all duration-200 hover:border-neutral-300 hover:shadow-soft"
-                  style={{ backgroundColor: context.backgroundColor || '#f8f9fa' }}
+                  style={{
+                    backgroundColor: context.backgroundColor || "#f8f9fa",
+                  }}
                 >
                   {context.id === "browser" && (
                     <BrowserTabPreview faviconUrl={url!} size={size.width} />
@@ -246,11 +250,16 @@ export function FaviconPreview({
               <>
                 <p className="flex items-center">
                   <span className="w-2 h-2 bg-emerald-500 rounded-full mr-3 flex-shrink-0"></span>
-                  <span><strong>16×16px:</strong> Standard browser favicon for tabs</span>
+                  <span>
+                    <strong>16×16px:</strong> Standard browser favicon for tabs
+                  </span>
                 </p>
                 <p className="flex items-center">
                   <span className="w-2 h-2 bg-emerald-500 rounded-full mr-3 flex-shrink-0"></span>
-                  <span><strong>32×32px:</strong> High-DPI browser displays and shortcuts</span>
+                  <span>
+                    <strong>32×32px:</strong> High-DPI browser displays and
+                    shortcuts
+                  </span>
                 </p>
               </>
             )}
@@ -258,15 +267,21 @@ export function FaviconPreview({
               <>
                 <p className="flex items-center">
                   <span className="w-2 h-2 bg-sky-500 rounded-full mr-3 flex-shrink-0"></span>
-                  <span><strong>16×16px:</strong> Basic bookmark icon in toolbars</span>
+                  <span>
+                    <strong>16×16px:</strong> Basic bookmark icon in toolbars
+                  </span>
                 </p>
                 <p className="flex items-center">
                   <span className="w-2 h-2 bg-sky-500 rounded-full mr-3 flex-shrink-0"></span>
-                  <span><strong>32×32px:</strong> Standard bookmark bar display</span>
+                  <span>
+                    <strong>32×32px:</strong> Standard bookmark bar display
+                  </span>
                 </p>
                 <p className="flex items-center">
                   <span className="w-2 h-2 bg-sky-500 rounded-full mr-3 flex-shrink-0"></span>
-                  <span><strong>48×48px:</strong> Large bookmark grid views</span>
+                  <span>
+                    <strong>48×48px:</strong> Large bookmark grid views
+                  </span>
                 </p>
               </>
             )}
@@ -274,19 +289,27 @@ export function FaviconPreview({
               <>
                 <p className="flex items-center">
                   <span className="w-2 h-2 bg-purple-500 rounded-full mr-3 flex-shrink-0"></span>
-                  <span><strong>64×64px:</strong> Small desktop icons and taskbar</span>
+                  <span>
+                    <strong>64×64px:</strong> Small desktop icons and taskbar
+                  </span>
                 </p>
                 <p className="flex items-center">
                   <span className="w-2 h-2 bg-purple-500 rounded-full mr-3 flex-shrink-0"></span>
-                  <span><strong>128×128px:</strong> Standard desktop icons</span>
+                  <span>
+                    <strong>128×128px:</strong> Standard desktop icons
+                  </span>
                 </p>
                 <p className="flex items-center">
                   <span className="w-2 h-2 bg-purple-500 rounded-full mr-3 flex-shrink-0"></span>
-                  <span><strong>192×192px:</strong> Android home screen icons</span>
+                  <span>
+                    <strong>192×192px:</strong> Android home screen icons
+                  </span>
                 </p>
                 <p className="flex items-center">
                   <span className="w-2 h-2 bg-purple-500 rounded-full mr-3 flex-shrink-0"></span>
-                  <span><strong>512×512px:</strong> iOS and high-resolution displays</span>
+                  <span>
+                    <strong>512×512px:</strong> iOS and high-resolution displays
+                  </span>
                 </p>
               </>
             )}

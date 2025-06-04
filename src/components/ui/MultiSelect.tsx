@@ -45,14 +45,14 @@ export function MultiSelect({
   const filteredOptions =
     searchable && state.searchQuery
       ? options.filter(
-        (option) =>
-          option.label
-            .toLowerCase()
-            .includes(state.searchQuery.toLowerCase()) ||
-          option.description
-            ?.toLowerCase()
-            .includes(state.searchQuery.toLowerCase()),
-      )
+          (option) =>
+            option.label
+              .toLowerCase()
+              .includes(state.searchQuery.toLowerCase()) ||
+            option.description
+              ?.toLowerCase()
+              .includes(state.searchQuery.toLowerCase()),
+        )
       : options;
 
   // Get selected options for display

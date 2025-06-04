@@ -86,7 +86,12 @@ export function Toast({ notification, onDismiss, onAction }: ToastProps) {
         clearTimeout(timerRef.current);
       }
     };
-  }, [notification.duration, notification.persistent, notification.severity, handleDismiss]);
+  }, [
+    notification.duration,
+    notification.persistent,
+    notification.severity,
+    handleDismiss,
+  ]);
 
   const handleAction = (actionIndex: number) => {
     notification.actions?.[actionIndex]?.action();
@@ -229,12 +234,12 @@ interface ToastContainerProps {
   onDismiss: (id: string) => void;
   onAction?: (id: string, actionIndex: number) => void;
   position?:
-  | "top-right"
-  | "top-left"
-  | "bottom-right"
-  | "bottom-left"
-  | "top-center"
-  | "bottom-center";
+    | "top-right"
+    | "top-left"
+    | "bottom-right"
+    | "bottom-left"
+    | "top-center"
+    | "bottom-center";
   maxToasts?: number;
 }
 

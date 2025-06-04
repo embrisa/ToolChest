@@ -124,10 +124,10 @@ export class ErrorBoundary extends Component<
     );
     const body = encodeURIComponent(
       `Error ID: ${this.errorId || "Unknown"}\n` +
-      `Time: ${new Date().toISOString()}\n` +
-      `URL: ${window.location.href}\n` +
-      `Error: ${this.state.error?.message || "Unknown error"}\n\n` +
-      `Please describe what you were doing when this error occurred:\n\n`,
+        `Time: ${new Date().toISOString()}\n` +
+        `URL: ${window.location.href}\n` +
+        `Error: ${this.state.error?.message || "Unknown error"}\n\n` +
+        `Please describe what you were doing when this error occurred:\n\n`,
     );
     window.location.href = `mailto:support@tool-chest.com?subject=${subject}&body=${body}`;
   };

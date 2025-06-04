@@ -8,7 +8,7 @@ interface ErrorLogData {
   timestamp: string;
   url: string;
   userAgent: string;
-  context?: any;
+  context?: Record<string, unknown>;
   viewport?: {
     width: number;
     height: number;

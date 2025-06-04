@@ -135,7 +135,9 @@ const infoSection = {
     {
       title: "How to Use",
       items: [
-        { text: "Choose between typing in the editor or uploading a markdown file" },
+        {
+          text: "Choose between typing in the editor or uploading a markdown file",
+        },
         { text: "Write or paste your markdown content in the editor" },
         { text: "Use the live preview to see how your document will look" },
         { text: "Select a template or customize styling options" },
