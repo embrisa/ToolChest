@@ -147,7 +147,7 @@ export interface MultiSelectOption {
   description?: string;
   color?: string;
   isActive?: boolean;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export interface MultiSelectState {

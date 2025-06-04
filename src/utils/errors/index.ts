@@ -193,8 +193,16 @@ export function getUserFriendlyMessage(error: Error): string {
 /**
  * Log error to console with structured format
  */
-export function logError(error: Error, context?: Record<string, any>) {
-  const errorData = createStandardError(error, context);
+export function logError(error: Error, context?: unknown) {
+  const errorData = createStandardError(
+    error,
+    context as {
+      component?: string;
+      path?: string;
+      userId?: string;
+      requestId?: string;
+    },
+  );
 
   console.error("Error occurred:", {
     ...errorData,
