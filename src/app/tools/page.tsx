@@ -1,55 +1,37 @@
-import React, { Suspense } from "react";
+'use client'
+
+import React, { useState, useEffect } from "react";
 import { Metadata } from "next";
 import { ToolCard } from "@/components/tools";
-
-import { ServiceFactory } from "@/services/core/serviceFactory";
-import { ToolService } from "@/services/tools";
 import { ToolDTO } from "@/types/tools/tool";
 
-// Enable ISR with 5 minute revalidation
-export const revalidate = 300;
+// Note: metadata export removed since this is now a client component
+// Consider adding metadata in a parent server component or layout
 
-export const metadata: Metadata = {
-  title: "All Tools | tool-chest",
-  description:
-    "Browse all available tools in our collection. Base64 encoding/decoding, hash generation, favicon creation, and more utility tools for developers.",
-  keywords: [
-    "tools",
-    "utilities",
-    "developer tools",
-    "base64",
-    "hash",
-    "favicon",
-    "markdown",
-    "converter",
-    "encoder",
-    "decoder",
-  ],
-  openGraph: {
-    title: "All Tools | tool-chest",
-    description:
-      "Browse all available tools in our collection. Base64 encoding/decoding, hash generation, favicon creation, and more.",
-    type: "website",
-    url: "/tools",
-  },
-  alternates: {
-    canonical: "/tools",
-  },
-};
-
-// Static data fetching with ISR
-async function getTools(): Promise<ToolDTO[]> {
-  try {
-    const prisma = ServiceFactory.getInstance().getPrisma();
-    const toolService = new ToolService(prisma);
-    return await toolService.getAllTools();
-  } catch (error) {
-    console.error("Error fetching tools for static generation:", error);
-    return [];
+function ToolGrid({ tools, loading }: { tools: ToolDTO[]; loading: boolean }) {
+  if (loading) {
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        {[...Array(6)].map((_, i) => (
+          <div key={i} className="card h-48 animate-pulse">
+            <div className="p-6 space-y-4">
+              <div className="skeleton w-12 h-12 rounded-xl"></div>
+              <div className="space-y-2">
+                <div className="skeleton-title"></div>
+                <div className="skeleton-text"></div>
+                <div className="skeleton-text w-2/3"></div>
+              </div>
+              <div className="flex gap-2 pt-2">
+                <div className="skeleton w-16 h-6 rounded-lg"></div>
+                <div className="skeleton w-20 h-6 rounded-lg"></div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
   }
-}
 
-function ToolGrid({ tools }: { tools: ToolDTO[] }) {
   if (tools.length === 0) {
     return (
       <div className="text-center py-16 animate-fade-in">
@@ -105,32 +87,31 @@ function ToolGrid({ tools }: { tools: ToolDTO[] }) {
   );
 }
 
-function LoadingGrid() {
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-      {[...Array(6)].map((_, i) => (
-        <div key={i} className="card h-48 animate-pulse">
-          <div className="p-6 space-y-4">
-            <div className="skeleton w-12 h-12 rounded-xl"></div>
-            <div className="space-y-2">
-              <div className="skeleton-title"></div>
-              <div className="skeleton-text"></div>
-              <div className="skeleton-text w-2/3"></div>
-            </div>
-            <div className="flex gap-2 pt-2">
-              <div className="skeleton w-16 h-6 rounded-lg"></div>
-              <div className="skeleton w-20 h-6 rounded-lg"></div>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
+export default function ToolsPage() {
+  const [tools, setTools] = useState<ToolDTO[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
-export default async function ToolsPage() {
-  // Get tools at build time with ISR
-  const tools = await getTools();
+  useEffect(() => {
+    setMounted(true);
+
+    // Fetch tools client-side for privacy-first approach
+    fetch('/api/tools')
+      .then(res => res.json())
+      .then((data: ToolDTO[]) => {
+        setTools(data);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching tools:', error);
+        setLoading(false);
+      });
+  }, []);
+
+  // Prevent hydration mismatch by not rendering until mounted
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -162,7 +143,7 @@ export default async function ToolsPage() {
             >
               <div className="w-2 h-2 bg-brand-500 rounded-full animate-pulse"></div>
               <span className="text-sm font-medium text-brand-700 dark:text-brand-300">
-                {tools.length} tools available
+                {loading ? 'Loading tools...' : `${tools.length} tools available`}
               </span>
             </div>
           </div>
@@ -200,13 +181,11 @@ export default async function ToolsPage() {
         </div>
 
         <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-          <Suspense fallback={<LoadingGrid />}>
-            <ToolGrid tools={tools} />
-          </Suspense>
+          <ToolGrid tools={tools} loading={loading} />
         </div>
 
         {/* Additional Info Section */}
-        {tools.length > 0 && (
+        {tools.length > 0 && !loading && (
           <div
             className="mt-16 pt-12 border-t border-border animate-fade-in-up"
             style={{ animationDelay: "0.3s" }}
