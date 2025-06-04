@@ -1,11 +1,11 @@
 # tool-chest - Essential Computer Tools Collection
 
-A modern, privacy-focused collection of essential computer tools built with Next.js 14+. All processing happens client-side to ensure your data never leaves your browser.
+A modern, privacy-focused collection of essential computer tools built with Next.js 15+. All processing happens client-side to ensure your data never leaves your browser.
 
 ## 🚀 Features
 
 - **Privacy-First**: All tools run entirely in your browser
-- **Modern UI**: Built with Next.js 14+ and Tailwind CSS
+- **Modern UI**: Built with Next.js 15+ and Tailwind CSS
 - **Accessibility**: WCAG 2.1 AA compliant
 - **Performance**: Optimized for speed and efficiency
 - **Mobile-Friendly**: Responsive design for all devices

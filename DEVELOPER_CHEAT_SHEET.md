@@ -2,11 +2,11 @@
 
 ## 🚀 Tech Stack & Architecture
 
-**tool-chest** is a Next.js 14+ web application providing privacy-focused computer tools with professional light mode design.
+**tool-chest** is a Next.js 15+ web application providing privacy-focused computer tools with professional light mode design.
 
 **Core Technologies:**
 
-- **Framework:** Next.js 14+ (App Router)
+- **Framework:** Next.js 15+ (App Router)
 - **Frontend:** React 18+ with TypeScript
 - **Styling:** Tailwind CSS + Custom Design System
 - **Database:** PostgreSQL + Prisma ORM
