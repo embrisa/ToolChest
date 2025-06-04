@@ -23,7 +23,10 @@ export function TagFilters({
     setLocalFilters(filters);
   }, [filters]);
 
-  const handleFilterChange = (key: keyof AdminTagsFilters, value: any) => {
+  const handleFilterChange = (
+    key: keyof AdminTagsFilters,
+    value: AdminTagsFilters[keyof AdminTagsFilters],
+  ) => {
     const newFilters = { ...localFilters, [key]: value };
     setLocalFilters(newFilters);
     onFiltersChange(newFilters);

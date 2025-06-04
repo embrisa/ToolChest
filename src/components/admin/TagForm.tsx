@@ -61,7 +61,10 @@ export function TagForm({
     }
   }, [formData.name, autoGenerateSlug]);
 
-  const handleInputChange = (field: keyof AdminTagFormData, value: any) => {
+  const handleInputChange = (
+    field: keyof AdminTagFormData,
+    value: AdminTagFormData[keyof AdminTagFormData],
+  ) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value,

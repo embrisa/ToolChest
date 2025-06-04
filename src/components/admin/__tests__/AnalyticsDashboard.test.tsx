@@ -15,9 +15,9 @@ describe("AnalyticsDashboard", () => {
     periodComparison: {
       currentPeriod: { usage: 5, newUsers: 2, averageSessionTime: 1 },
       previousPeriod: { usage: 3, newUsers: 1, averageSessionTime: 1 },
-      growthRates: { usageGrowth: 0, userGrowth: 0, sessionGrowth: 0 },
+      growthRates: { usage: 0, newUsers: 0, averageSessionTime: 0 },
     },
-  } as any;
+  };
 
   it("renders summary stats", () => {
     render(<AnalyticsDashboard initialData={summary} />);
