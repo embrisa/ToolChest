@@ -86,10 +86,10 @@ export interface PrismaToolWithRelations {
       createdAt: Date;
     };
   }>;
-  toolUsageStats: Array<{
+  toolUsageStats: {
     usageCount: number;
     lastUsed: Date;
-  }>;
+  } | null;
 }
 
 /**
@@ -133,7 +133,7 @@ export function toToolDTO(tool: PrismaToolWithRelations): ToolDTO {
     isActive: tool.isActive,
     createdAt: tool.createdAt,
     updatedAt: tool.updatedAt,
-    usageCount: tool.toolUsageStats?.[0]?.usageCount ?? 0,
+    usageCount: tool.toolUsageStats?.usageCount ?? 0,
     tags: tool.tags?.map((toolTag) => toTagDTO(toolTag.tag)) ?? [],
   };
 }

@@ -496,7 +496,7 @@ export class AnalyticsService extends BaseService {
     const cleanup = () => {
       const cutoffDate = new Date(
         Date.now() -
-          this.monitoringConfig.retentionPeriod * 24 * 60 * 60 * 1000,
+        this.monitoringConfig.retentionPeriod * 24 * 60 * 60 * 1000,
       );
 
       // Clean up old error logs
@@ -624,7 +624,7 @@ export class AnalyticsService extends BaseService {
                   tool.id,
                   timeRange,
                 ),
-                lastUsed: tool.toolUsageStats?.[0]?.lastUsed || new Date(0),
+                lastUsed: tool.toolUsageStats?.lastUsed || new Date(0),
                 trend,
                 growth,
               };

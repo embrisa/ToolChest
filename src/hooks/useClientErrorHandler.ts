@@ -143,8 +143,38 @@ export function useClientErrorHandler() {
       const performanceInfo =
         typeof window !== "undefined" && "performance" in window
           ? {
-            memory: (window.performance as any).memory,
-            timing: window.performance.timing,
+            memory: (window.performance as any).memory
+              ? {
+                usedJSHeapSize: (window.performance as any).memory.usedJSHeapSize || 0,
+                totalJSHeapSize: (window.performance as any).memory.totalJSHeapSize || 0,
+                jsHeapSizeLimit: (window.performance as any).memory.jsHeapSizeLimit || 0,
+              }
+              : undefined,
+            timing: window.performance.timing
+              ? {
+                navigationStart: window.performance.timing.navigationStart || 0,
+                unloadEventStart: window.performance.timing.unloadEventStart || 0,
+                unloadEventEnd: window.performance.timing.unloadEventEnd || 0,
+                redirectStart: window.performance.timing.redirectStart || 0,
+                redirectEnd: window.performance.timing.redirectEnd || 0,
+                fetchStart: window.performance.timing.fetchStart || 0,
+                domainLookupStart: window.performance.timing.domainLookupStart || 0,
+                domainLookupEnd: window.performance.timing.domainLookupEnd || 0,
+                connectStart: window.performance.timing.connectStart || 0,
+                connectEnd: window.performance.timing.connectEnd || 0,
+                secureConnectionStart: window.performance.timing.secureConnectionStart || 0,
+                requestStart: window.performance.timing.requestStart || 0,
+                responseStart: window.performance.timing.responseStart || 0,
+                responseEnd: window.performance.timing.responseEnd || 0,
+                domLoading: window.performance.timing.domLoading || 0,
+                domInteractive: window.performance.timing.domInteractive || 0,
+                domContentLoadedEventStart: window.performance.timing.domContentLoadedEventStart || 0,
+                domContentLoadedEventEnd: window.performance.timing.domContentLoadedEventEnd || 0,
+                domComplete: window.performance.timing.domComplete || 0,
+                loadEventStart: window.performance.timing.loadEventStart || 0,
+                loadEventEnd: window.performance.timing.loadEventEnd || 0,
+              }
+              : undefined,
           }
           : undefined;
 
