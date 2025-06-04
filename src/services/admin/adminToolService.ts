@@ -1,5 +1,10 @@
 import { BaseService } from "../core/baseService";
-import { ToolDTO, toToolDTO } from "@/types/tools/tool";
+import {
+  ToolDTO,
+  toToolDTO,
+  PrismaToolWithRelations,
+} from "@/types/tools/tool";
+import { Prisma } from "@prisma/client";
 import {
   AdminToolFormData,
   AdminToolCreateRequest,
@@ -36,13 +41,13 @@ export class AdminToolService extends BaseService implements IAdminToolService {
 
     return this.getCached(cacheKey, async () => {
       // Build where clause for filters
-      const where: any = {};
+      const where: Prisma.ToolWhereInput = {};
 
       if (filters.search) {
         where.OR = [
-          { name: { contains: filters.search, mode: "insensitive" } },
-          { description: { contains: filters.search, mode: "insensitive" } },
-          { slug: { contains: filters.search, mode: "insensitive" } },
+          { name: { contains: filters.search } },
+          { description: { contains: filters.search } },
+          { slug: { contains: filters.search } },
         ];
       }
 
@@ -59,7 +64,7 @@ export class AdminToolService extends BaseService implements IAdminToolService {
       }
 
       // Build order by clause
-      const orderBy: any = {};
+      const orderBy: Prisma.ToolOrderByWithRelationInput = {};
       orderBy[sortOptions.field] = sortOptions.direction;
 
       const tools = await this.prisma.tool.findMany({
@@ -100,7 +105,9 @@ export class AdminToolService extends BaseService implements IAdminToolService {
         isActive: tool.isActive,
         createdAt: tool.createdAt,
         updatedAt: tool.updatedAt,
-        usageCount: Array.isArray(tool.toolUsageStats) ? tool.toolUsageStats[0]?.usageCount ?? 0 : tool.toolUsageStats?.usageCount ?? 0,
+        usageCount: Array.isArray(tool.toolUsageStats)
+          ? (tool.toolUsageStats[0]?.usageCount ?? 0)
+          : (tool.toolUsageStats?.usageCount ?? 0),
         tagCount: tool._count.tags,
         tags: tool.tags.map((t) => ({
           id: t.tag.id,
@@ -126,7 +133,7 @@ export class AdminToolService extends BaseService implements IAdminToolService {
       return null;
     }
 
-    return toToolDTO(tool as any);
+    return toToolDTO(tool as PrismaToolWithRelations);
   }
 
   async createTool(data: AdminToolCreateRequest): Promise<ToolDTO> {
@@ -158,10 +165,10 @@ export class AdminToolService extends BaseService implements IAdminToolService {
         tags:
           data.tagIds && data.tagIds.length > 0
             ? {
-              create: data.tagIds.map((tagId) => ({
-                tagId,
-              })),
-            }
+                create: data.tagIds.map((tagId) => ({
+                  tagId,
+                })),
+              }
             : undefined,
       },
       include: {
@@ -174,7 +181,7 @@ export class AdminToolService extends BaseService implements IAdminToolService {
     this.invalidateCache("allTools");
     this.invalidateCache("adminTools:*");
 
-    return toToolDTO(tool as any);
+    return toToolDTO(tool as PrismaToolWithRelations);
   }
 
   async updateTool(data: AdminToolUpdateRequest): Promise<ToolDTO> {
@@ -215,7 +222,7 @@ export class AdminToolService extends BaseService implements IAdminToolService {
     this.invalidateCache("adminTools:*");
     this.invalidateCache(`toolBySlug:${data.slug}`);
 
-    return toToolDTO(tool as any);
+    return toToolDTO(tool as PrismaToolWithRelations);
   }
 
   async deleteTool(id: string): Promise<void> {
@@ -293,7 +300,7 @@ export class AdminToolService extends BaseService implements IAdminToolService {
   }
 
   async checkSlugAvailable(slug: string, excludeId?: string): Promise<boolean> {
-    const where: any = { slug };
+    const where: Prisma.ToolWhereInput = { slug };
     if (excludeId) {
       where.id = { not: excludeId };
     }
