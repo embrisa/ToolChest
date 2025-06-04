@@ -76,7 +76,10 @@ describe("useToolsWithState", () => {
       mutate: mutateMock,
     });
 
-    global.fetch = jest.fn(() => Promise.resolve({ ok: true })) as any;
+    const fetchMock: jest.MockedFunction<typeof fetch> = jest
+      .fn()
+      .mockResolvedValue(new Response(null, { status: 200 }));
+    global.fetch = fetchMock;
     const { result } = renderHook(() => useToolsWithState());
 
     expect(mockUseSWR).toHaveBeenCalledWith(
