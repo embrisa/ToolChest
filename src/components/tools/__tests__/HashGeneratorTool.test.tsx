@@ -10,11 +10,11 @@ jest.mock("@/services/tools/hashGeneratorService", () => ({
     copyToClipboard: jest.fn(),
     trackUsage: jest.fn(),
     downloadAsFile: jest.fn(),
-  }
+  },
 }));
 
-// Import the mocked service
-const { HashGeneratorService } = require("@/services/tools/hashGeneratorService");
+// Import the mocked service using ES module syntax
+import { HashGeneratorService } from "@/services/tools/hashGeneratorService";
 const genMock = HashGeneratorService.generateHash as jest.Mock;
 const validateMock = HashGeneratorService.validateFile as jest.Mock;
 const trackUsageMock = HashGeneratorService.trackUsage as jest.Mock;
@@ -27,17 +27,17 @@ genMock.mockResolvedValue({
   algorithm: "SHA-256",
   inputSize: 3,
   processingTime: 1,
-  warnings: []
+  warnings: [],
 });
 validateMock.mockReturnValue({
   isValid: true,
   warnings: [],
-  validationErrors: []
+  validationErrors: [],
 });
 trackUsageMock.mockResolvedValue(undefined);
 copyMock.mockResolvedValue({
   success: true,
-  message: "Copied to clipboard"
+  message: "Copied to clipboard",
 });
 
 describe("HashGeneratorTool", () => {
@@ -56,8 +56,11 @@ describe("HashGeneratorTool", () => {
     await waitFor(() => expect(genMock).toHaveBeenCalled(), { timeout: 5000 });
 
     // Look for the hash result in the component
-    await waitFor(() => {
-      expect(screen.getByText(/deadbeef/i)).toBeInTheDocument();
-    }, { timeout: 5000 });
+    await waitFor(
+      () => {
+        expect(screen.getByText(/deadbeef/i)).toBeInTheDocument();
+      },
+      { timeout: 5000 },
+    );
   });
 });

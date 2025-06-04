@@ -11,11 +11,11 @@ jest.mock("@/services/tools/base64Service", () => ({
     copyToClipboard: jest.fn(),
     trackUsage: jest.fn(),
     downloadAsFile: jest.fn(),
-  }
+  },
 }));
 
-// Import the mocked service
-const { Base64Service } = require("@/services/tools/base64Service");
+// Import the mocked service using ES module syntax
+import { Base64Service } from "@/services/tools/base64Service";
 const encodeMock = Base64Service.encode as jest.Mock;
 const validateMock = Base64Service.validateFile as jest.Mock;
 const copyMock = Base64Service.copyToClipboard as jest.Mock;
@@ -26,16 +26,16 @@ encodeMock.mockResolvedValue({
   success: true,
   data: "YWJj",
   processingTime: 1,
-  warnings: []
+  warnings: [],
 });
 validateMock.mockReturnValue({
   isValid: true,
   warnings: [],
-  validationErrors: []
+  validationErrors: [],
 });
 copyMock.mockResolvedValue({
   success: true,
-  message: "Copied to clipboard"
+  message: "Copied to clipboard",
 });
 trackUsageMock.mockResolvedValue(undefined);
 
@@ -51,11 +51,16 @@ describe("Base64Tool", () => {
     const textarea = screen.getByLabelText(/text input/i);
     await userEvent.type(textarea, "abc");
 
-    await waitFor(() => expect(encodeMock).toHaveBeenCalled(), { timeout: 3000 });
+    await waitFor(() => expect(encodeMock).toHaveBeenCalled(), {
+      timeout: 3000,
+    });
 
     // Look for the result in the output area instead of display value
-    await waitFor(() => {
-      expect(screen.getByText(/YWJj/)).toBeInTheDocument();
-    }, { timeout: 3000 });
+    await waitFor(
+      () => {
+        expect(screen.getByText(/YWJj/)).toBeInTheDocument();
+      },
+      { timeout: 3000 },
+    );
   });
 });
