@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Prisma } from "@prisma/client";
 import { BaseService } from "../core/baseService";
 import {
   ToolTagRelationship,
@@ -71,7 +71,7 @@ export class RelationshipService
 
     return this.getCached(cacheKey, async () => {
       // Build where clause
-      const where: any = {};
+      const where: Prisma.ToolTagWhereInput = {};
 
       if (filters.toolIds && filters.toolIds.length > 0) {
         where.toolId = { in: filters.toolIds };
@@ -93,7 +93,7 @@ export class RelationshipService
       }
 
       // Build order by
-      let orderBy: any = {};
+      let orderBy: Prisma.ToolTagOrderByWithRelationInput = {};
       switch (sortOptions.field) {
         case "toolName":
           orderBy = { tool: { name: sortOptions.direction } };
