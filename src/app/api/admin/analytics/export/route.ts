@@ -1,6 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { AnalyticsService } from "@/services/admin/analyticsService";
-import type { AnalyticsFilter, ExportOptions } from "@/types/admin/analytics";
+import type {
+  AnalyticsFilter,
+  ExportOptions,
+  AnalyticsExport,
+  ToolUsageAnalytics,
+  AnalyticsChart,
+  AnalyticsDataPoint
+} from "@/types/admin/analytics";
 
 const analyticsService = AnalyticsService.getInstance();
 
@@ -10,10 +17,42 @@ const EXPORT_RATE_LIMIT = 10; // exports per window
 const EXPORT_RATE_WINDOW = 60 * 60 * 1000; // 1 hour
 
 // Export cache (exports are expensive operations)
-const exportCache = new Map<
-  string,
-  { data: any; timestamp: number; format: string }
->();
+interface ExportCacheEntry {
+  data: string | AnalyticsExport | EnhancedJsonExport | PdfExportData;
+  timestamp: number;
+  format: string;
+}
+
+interface EnhancedJsonExport {
+  metadata: {
+    exportedAt: string;
+    includeCharts: boolean;
+    includeRawData: boolean;
+    filter: AnalyticsFilter | null;
+    processingTime: string;
+    totalRecords: number;
+  };
+  data: AnalyticsExport;
+}
+
+interface PdfExportData {
+  title: string;
+  generatedAt: string;
+  filter: AnalyticsFilter | null;
+  includeCharts: boolean;
+  includeRawData: boolean;
+  data: AnalyticsExport;
+  summary: {
+    totalTools: number;
+    totalCharts: number;
+    hasSummary: boolean;
+    hasSystemMetrics: boolean;
+    exportedSections: number;
+    dataIntegrity: string;
+  };
+}
+
+const exportCache = new Map<string, ExportCacheEntry>();
 const EXPORT_CACHE_DURATION = 10 * 60 * 1000; // 10 minutes
 
 function getClientIP(request: NextRequest): string {
@@ -56,7 +95,7 @@ function getExportCacheKey(
   return JSON.stringify({ exportOptions, filter });
 }
 
-function isValidExportCache(entry: { data: any; timestamp: number }): boolean {
+function isValidExportCache(entry: ExportCacheEntry): boolean {
   return Date.now() - entry.timestamp < EXPORT_CACHE_DURATION;
 }
 
@@ -123,7 +162,9 @@ export async function POST(request: NextRequest) {
         : EXPORT_RATE_LIMIT - 1;
 
       if (exportOptions.format === "csv") {
-        return new NextResponse(cached.data, {
+        // For CSV, cached data should be a string
+        const csvData = typeof cached.data === 'string' ? cached.data : '';
+        return new NextResponse(csvData, {
           headers: {
             "Content-Type": "text/csv",
             "Content-Disposition": `attachment; filename="${exportOptions.filename || "analytics_export"}.csv"`,
@@ -292,7 +333,7 @@ export async function POST(request: NextRequest) {
 }
 
 function convertToEnhancedCSV(
-  exportData: any,
+  exportData: AnalyticsExport,
   includeCharts: boolean,
   includeRawData: boolean,
 ): string {
@@ -315,7 +356,7 @@ function convertToEnhancedCSV(
     sections.push(
       "Tool Name,Usage Count,Unique Users,Last Used,Daily Growth %,Weekly Growth %",
     );
-    exportData.toolUsage.forEach((tool: any) => {
+    exportData.toolUsage.forEach((tool: ToolUsageAnalytics) => {
       sections.push(
         [
           tool.toolName,
@@ -325,7 +366,7 @@ function convertToEnhancedCSV(
           tool.growth?.dailyGrowth?.toFixed(2) || "0.00",
           tool.growth?.weeklyGrowth?.toFixed(2) || "0.00",
         ]
-          .map((field: any) => `"${field}"`)
+          .map((field: string | number | Date) => `"${field}"`)
           .join(","),
       );
     });
@@ -360,10 +401,10 @@ function convertToEnhancedCSV(
   // Include charts data if requested
   if (includeCharts && exportData.charts) {
     sections.push("# Charts Data");
-    exportData.charts.forEach((chart: any) => {
+    exportData.charts.forEach((chart: AnalyticsChart) => {
       sections.push(`## ${chart.title}`);
       sections.push("Label,Value");
-      chart.data.forEach((point: any) => {
+      chart.data.forEach((point: AnalyticsDataPoint) => {
         sections.push(`"${point.label}","${point.value}"`);
       });
       sections.push("");
@@ -373,7 +414,7 @@ function convertToEnhancedCSV(
   return sections.join("\n");
 }
 
-function getTotalRecordsCount(exportData: any): number {
+function getTotalRecordsCount(exportData: AnalyticsExport): number {
   let total = 0;
   if (exportData.toolUsage) total += exportData.toolUsage.length;
   if (exportData.summary) total += 1; // Summary counts as 1 record
@@ -381,7 +422,14 @@ function getTotalRecordsCount(exportData: any): number {
   return total;
 }
 
-function generateExportSummary(exportData: any): any {
+function generateExportSummary(exportData: AnalyticsExport): {
+  totalTools: number;
+  totalCharts: number;
+  hasSummary: boolean;
+  hasSystemMetrics: boolean;
+  exportedSections: number;
+  dataIntegrity: string;
+} {
   return {
     totalTools: exportData.toolUsage?.length || 0,
     totalCharts: exportData.charts?.length || 0,
