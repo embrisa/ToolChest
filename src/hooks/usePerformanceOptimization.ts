@@ -22,6 +22,14 @@ export interface CacheStrategy {
   strategy?: "cache-first" | "network-first" | "cache-only" | "network-only";
 }
 
+export interface WebVitalsReportMetric {
+  name: string;
+  value: number;
+  delta?: number;
+  id: string;
+  entries?: PerformanceEntry[];
+}
+
 export function usePerformanceOptimization() {
   const [metrics, setMetrics] = useState<PerformanceMetrics>({
     loadTime: 0,
@@ -256,7 +264,7 @@ export function usePerformanceOptimization() {
   }, [metrics]);
 
   // Report Core Web Vitals
-  const reportWebVitals = useCallback((metric: any) => {
+  const reportWebVitals = useCallback((metric: WebVitalsReportMetric) => {
     // Log to console in development
     if (process.env.NODE_ENV === "development") {
       console.log(`[Performance] ${metric.name}:`, metric.value, metric);

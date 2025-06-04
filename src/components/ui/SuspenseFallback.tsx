@@ -264,10 +264,13 @@ export function FormFallback({
 }
 
 // Higher-order component for wrapping components with suspense
-export function withSuspense<P extends object>(
+export function withSuspense<
+  P extends object,
+  FProps extends object = Record<string, unknown>,
+>(
   Component: React.ComponentType<P>,
-  fallback?: React.ComponentType<any>,
-  fallbackProps?: any,
+  fallback?: React.ComponentType<FProps>,
+  fallbackProps?: FProps,
 ) {
   const WrappedComponent = (props: P) => (
     <React.Suspense

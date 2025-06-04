@@ -14,10 +14,11 @@ const defaultRetryConfig: RetryConfig = {
   retryCondition: (error: Error | unknown) => {
     // Retry on network errors, timeouts, and 5xx status codes
     if (error instanceof Error) {
+      const status = (error as { status?: number }).status;
       return (
         error.name === "NetworkError" ||
         error.name === "TimeoutError" ||
-        ((error as any).status && (error as any).status >= 500) ||
+        (typeof status === "number" && status >= 500) ||
         !navigator.onLine
       );
     }
@@ -220,16 +221,22 @@ export function useRetryWithBackoff<T>(
     nextRetryIn: undefined,
   });
 
-  const fullConfig = useMemo(() => ({ ...defaultRetryConfig, ...config }), [config]);
+  const fullConfig = useMemo(
+    () => ({ ...defaultRetryConfig, ...config }),
+    [config],
+  );
 
-  const calculateDelay = useCallback((attempt: number): number => {
-    const delay = Math.min(
-      fullConfig.baseDelay * Math.pow(fullConfig.backoffFactor, attempt),
-      fullConfig.maxDelay,
-    );
-    // Add jitter to prevent thundering herd
-    return delay + Math.random() * 0.1 * delay;
-  }, [fullConfig]);
+  const calculateDelay = useCallback(
+    (attempt: number): number => {
+      const delay = Math.min(
+        fullConfig.baseDelay * Math.pow(fullConfig.backoffFactor, attempt),
+        fullConfig.maxDelay,
+      );
+      // Add jitter to prevent thundering herd
+      return delay + Math.random() * 0.1 * delay;
+    },
+    [fullConfig],
+  );
 
   const executeWithRetry = useCallback(async (): Promise<T> => {
     let lastError: Error;
