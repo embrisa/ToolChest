@@ -81,7 +81,8 @@ export function useUrlState(options: UseUrlStateOptions = {}) {
         }
       });
 
-      const newUrl = `${pathname}?${newParams.toString()}`;
+      const paramsString = newParams.toString();
+      const newUrl = paramsString ? `${pathname}?${paramsString}` : pathname;
 
       if (replace) {
         router.replace(newUrl);

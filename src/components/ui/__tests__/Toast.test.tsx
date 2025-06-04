@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe, toHaveNoViolations } from "jest-axe";
 import { Toast } from "../Toast";
@@ -24,7 +24,7 @@ describe("Toast component", () => {
     expect(screen.getByText(/world/i)).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: /dismiss/i }));
-    expect(onDismiss).toHaveBeenCalledWith("1");
+    await waitFor(() => expect(onDismiss).toHaveBeenCalledWith("1"));
   });
 
   it("has no accessibility violations", async () => {

@@ -16,6 +16,7 @@ const customJestConfig = {
   // Module name mapping for path aliases
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
+    "^@prisma/client$": "<rootDir>/node_modules/@prisma/client/index.js",
   },
 
   // Coverage configuration
