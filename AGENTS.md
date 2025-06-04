@@ -32,6 +32,7 @@ Run `npm run env:validate` whenever you modify `.env.local`.
 ## Database utilities
 
 - `npm run db:migrate` – run migrations in development.
+- `npm run db:deploy` – apply migrations in production.
 - `npm run db:seed` – seed local data.
 
 ## Pull requests
