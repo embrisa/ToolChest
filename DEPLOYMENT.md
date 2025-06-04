@@ -58,6 +58,9 @@ Railway will automatically:
 - Run database migrations
 - Deploy the application
 
+If you choose Railway's Node environment instead of Docker, make sure to
+apply migrations with `npm run db:deploy` before starting the server.
+
 ### Environment Variables Reference
 
 | Variable               | Required | Description                   | Example                               |
@@ -151,8 +154,16 @@ Railway will automatically redeploy when you push to your connected Git reposito
    - Check database connectivity
 
 4. **Admin Access Issues**
+
    - Verify `ADMIN_SECRET_TOKEN` is set
    - Clear browser cookies and try again
+
+5. **Migration Failure (P3018)**
+   - This occurs if your database already has the schema but no migration record. Mark the migration as applied:
+   ```bash
+   npx prisma migrate resolve --applied 20250601140917_init
+   ```
+   - Run `npm run db:deploy` again after resolving.
 
 #### Debug Commands
 

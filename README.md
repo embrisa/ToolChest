@@ -66,6 +66,15 @@ npm run test:a11y
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template)
 
+If you use Railway's Node environment instead of Docker, be sure to run
+database migrations with:
+
+```bash
+npm run db:deploy
+```
+
+before starting the server.
+
 ### Docker Deployment
 
 ```bash
@@ -88,6 +97,16 @@ NEXT_PUBLIC_SITE_URL="https://your-domain.com"
 ```
 
 See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions.
+
+### Troubleshooting Database Migrations
+
+If `npm run db:deploy` fails with a `P3018` error complaining that a table already exists, the database schema is ahead of your migration history. Mark the initial migration as applied:
+
+```bash
+npx prisma migrate resolve --applied 20250601140917_init
+```
+
+Then run `npm run db:deploy` again.
 
 ## 📁 Project Structure
 
