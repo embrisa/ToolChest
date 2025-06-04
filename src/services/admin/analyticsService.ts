@@ -245,7 +245,7 @@ export class AnalyticsService extends BaseService {
   public logError(
     message: string,
     error: Error,
-    metadata: Record<string, any> = {},
+    metadata: Record<string, unknown> = {},
   ): void {
     const errorEntry: ErrorLogEntry = {
       id: `error_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
@@ -496,7 +496,7 @@ export class AnalyticsService extends BaseService {
     const cleanup = () => {
       const cutoffDate = new Date(
         Date.now() -
-        this.monitoringConfig.retentionPeriod * 24 * 60 * 60 * 1000,
+          this.monitoringConfig.retentionPeriod * 24 * 60 * 60 * 1000,
       );
 
       // Clean up old error logs
@@ -836,7 +836,7 @@ export class AnalyticsService extends BaseService {
       timestamp: usage.timestamp,
       action: "tool_used",
       toolName: usage.tool.name,
-      metadata: (usage.metadata as Record<string, any>) || {},
+      metadata: (usage.metadata as Record<string, unknown>) || {},
     }));
   }
 
@@ -910,7 +910,7 @@ export class AnalyticsService extends BaseService {
   }
 
   private groupUsagesByPeriod(
-    usages: any[],
+    usages: Array<{ timestamp: Date }>,
     period: "day" | "week" | "month",
   ): number[] {
     // Simple implementation - group usages by period and count
