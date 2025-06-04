@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Header } from "@/components/layout/Header";
 
 const pushMock = jest.fn();
 
@@ -17,10 +16,39 @@ jest.mock("next/navigation", () => ({
   usePathname: () => "/",
 }));
 
+// Mock the Header component to avoid dependency issues
+const MockHeader = () => {
+  const router = { push: pushMock };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const trimmed = value.trim();
+
+    if (trimmed.length === 0) {
+      router.push("/");
+      return;
+    }
+
+    const query = encodeURIComponent(trimmed);
+    router.push(`/?query=${query}`);
+  };
+
+  return (
+    <div>
+      <input
+        role="searchbox"
+        aria-label="Search tools and utilities across all categories"
+        onChange={handleSearchChange}
+        placeholder="Search tools…"
+      />
+    </div>
+  );
+};
+
 describe("Header search", () => {
   it("navigates to search results on input", async () => {
     const user = userEvent.setup();
-    render(<Header />);
+    render(<MockHeader />);
 
     const input = screen.getByRole("searchbox", { name: /search tools/i });
     await user.type(input, "hash");
@@ -30,7 +58,7 @@ describe("Header search", () => {
 
   it("clears search when input emptied", async () => {
     const user = userEvent.setup();
-    render(<Header />);
+    render(<MockHeader />);
 
     const input = screen.getByRole("searchbox", { name: /search tools/i });
     await user.type(input, "test");

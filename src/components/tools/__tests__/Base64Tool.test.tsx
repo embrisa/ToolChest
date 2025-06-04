@@ -2,7 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Base64Tool } from "../Base64Tool";
 
-// Mock the entire Base64Service class
+// Mock the Base64Service module with proper static methods
 jest.mock("@/services/tools/base64Service", () => ({
   Base64Service: {
     encode: jest.fn(),
@@ -10,52 +10,93 @@ jest.mock("@/services/tools/base64Service", () => ({
     validateFile: jest.fn(),
     copyToClipboard: jest.fn(),
     trackUsage: jest.fn(),
-    downloadAsFile: jest.fn(),
+    generateDownload: jest.fn(),
   },
 }));
 
-// Import the mocked service using ES module syntax
+// Import the mocked service to get access to the mock functions
 import { Base64Service } from "@/services/tools/base64Service";
-const encodeMock = Base64Service.encode as jest.Mock;
-const validateMock = Base64Service.validateFile as jest.Mock;
-const copyMock = Base64Service.copyToClipboard as jest.Mock;
-const trackUsageMock = Base64Service.trackUsage as jest.Mock;
 
-// Set up comprehensive mocks
-encodeMock.mockResolvedValue({
-  success: true,
-  data: "YWJj",
-  processingTime: 1,
-  warnings: [],
-});
-validateMock.mockReturnValue({
-  isValid: true,
-  warnings: [],
-  validationErrors: [],
-});
-copyMock.mockResolvedValue({
-  success: true,
-  message: "Copied to clipboard",
-});
-trackUsageMock.mockResolvedValue(undefined);
+// Type cast to get access to the mock functions
+const mockEncode = Base64Service.encode as jest.Mock;
+const mockValidateFile = Base64Service.validateFile as jest.Mock;
+const mockCopyToClipboard = Base64Service.copyToClipboard as jest.Mock;
+const mockTrackUsage = Base64Service.trackUsage as jest.Mock;
 
 describe("Base64Tool", () => {
   beforeEach(() => {
     jest.clearAllMocks();
-  });
 
-  it("encodes text input", async () => {
-    render(<Base64Tool />);
-
-    // Find the textarea with a more specific selector
-    const textarea = screen.getByLabelText(/text input/i);
-    await userEvent.type(textarea, "abc");
-
-    await waitFor(() => expect(encodeMock).toHaveBeenCalled(), {
-      timeout: 3000,
+    // Set up the mocks with proper return values
+    mockEncode.mockResolvedValue({
+      success: true,
+      data: "YWJj",
+      originalSize: 3,
+      outputSize: 4,
+      processingTime: 1,
+      warnings: [],
     });
 
-    // Look for the result in the output area instead of display value
+    mockValidateFile.mockReturnValue({
+      isValid: true,
+      warnings: [],
+      validationErrors: [],
+    });
+
+    mockCopyToClipboard.mockResolvedValue({
+      success: true,
+      method: "modern",
+      message: "Copied to clipboard",
+    });
+
+    mockTrackUsage.mockResolvedValue(undefined);
+  });
+
+  it("renders without crashing", () => {
+    render(<Base64Tool />);
+    expect(screen.getByLabelText(/text input/i)).toBeInTheDocument();
+  });
+
+  it("calls encode service when text is entered", async () => {
+    render(<Base64Tool />);
+
+    // Find the textarea
+    const textarea = screen.getByLabelText(/text input/i);
+
+    // Type some text (the service is called on each keystroke)
+    await userEvent.type(textarea, "abc");
+
+    // Wait for the service to be called
+    await waitFor(() => {
+      expect(mockEncode).toHaveBeenCalled();
+    }, { timeout: 3000 });
+
+    // Verify the service was called (it may be called multiple times due to keystroke processing)
+    expect(mockEncode).toHaveBeenCalledWith(
+      expect.objectContaining({
+        mode: "encode",
+        variant: "standard",
+        inputType: "text",
+        // Don't check exact input since it's called on each keystroke
+      })
+    );
+  });
+
+  it("displays encoded result", async () => {
+    render(<Base64Tool />);
+
+    // Find the textarea
+    const textarea = screen.getByLabelText(/text input/i);
+
+    // Type some text
+    await userEvent.type(textarea, "abc");
+
+    // Wait for the service to be called
+    await waitFor(() => {
+      expect(mockEncode).toHaveBeenCalled();
+    }, { timeout: 3000 });
+
+    // Look for the result in the component
     await waitFor(
       () => {
         expect(screen.getByText(/YWJj/)).toBeInTheDocument();

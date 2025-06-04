@@ -4,6 +4,27 @@ import { useToolsWithState } from "../useToolsWithState";
 import { useToolFilterState } from "../useUrlState";
 import { swrFetcher } from "@/lib/api";
 
+// Mock Response for Node.js environment
+(global as any).Response = class MockResponse {
+  private _body: any;
+  public status: number;
+  public statusText: string;
+  public headers: Map<string, string>;
+  public ok: boolean;
+
+  constructor(body?: any, init: { status?: number; statusText?: string; headers?: Record<string, string> } = {}) {
+    this._body = body;
+    this.status = init.status || 200;
+    this.statusText = init.statusText || 'OK';
+    this.headers = new Map(Object.entries(init.headers || {}));
+    this.ok = this.status >= 200 && this.status < 300;
+  }
+
+  async json() { return JSON.parse(this._body || '{}'); }
+  async text() { return this._body?.toString() || ''; }
+  async arrayBuffer() { return new ArrayBuffer(0); }
+};
+
 jest.mock("swr", () => ({
   __esModule: true,
   default: jest.fn(),
