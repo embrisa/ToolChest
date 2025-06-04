@@ -121,12 +121,32 @@ export function useClientErrorHandler() {
   const retryTimeoutsRef = useRef<Map<string, NodeJS.Timeout>>(new Map());
   const recoveryAttemptsRef = useRef<Map<string, number>>(new Map());
 
+  type PerformanceWithMemory = Performance & {
+    memory?: {
+      usedJSHeapSize: number;
+      totalJSHeapSize: number;
+      jsHeapSizeLimit: number;
+    };
+  };
+
+  interface NetworkInformation {
+    type?: string;
+    effectiveType?: string;
+    downlink?: number;
+    rtt?: number;
+  }
+
   // Get network context information
   const getNetworkContext = useCallback((): NetworkErrorContext => {
+    type NavWithConnection = Navigator & {
+      connection?: Partial<NetworkInformation>;
+      mozConnection?: Partial<NetworkInformation>;
+      webkitConnection?: Partial<NetworkInformation>;
+    };
+
+    const nav = navigator as NavWithConnection;
     const connection =
-      (navigator as any).connection ||
-      (navigator as any).mozConnection ||
-      (navigator as any).webkitConnection;
+      nav.connection || nav.mozConnection || nav.webkitConnection;
 
     return {
       isOnline: navigator.onLine,
@@ -139,43 +159,56 @@ export function useClientErrorHandler() {
 
   // Get enhanced error context
   const getEnhancedContext = useCallback(
-    (context?: Record<string, any>): EnhancedErrorContext => {
+    (context?: Record<string, unknown>): EnhancedErrorContext => {
       const performanceInfo =
         typeof window !== "undefined" && "performance" in window
           ? {
-            memory: (window.performance as any).memory
-              ? {
-                usedJSHeapSize: (window.performance as any).memory.usedJSHeapSize || 0,
-                totalJSHeapSize: (window.performance as any).memory.totalJSHeapSize || 0,
-                jsHeapSizeLimit: (window.performance as any).memory.jsHeapSizeLimit || 0,
-              }
-              : undefined,
-            timing: window.performance.timing
-              ? {
-                navigationStart: window.performance.timing.navigationStart || 0,
-                unloadEventStart: window.performance.timing.unloadEventStart || 0,
-                unloadEventEnd: window.performance.timing.unloadEventEnd || 0,
-                redirectStart: window.performance.timing.redirectStart || 0,
-                redirectEnd: window.performance.timing.redirectEnd || 0,
-                fetchStart: window.performance.timing.fetchStart || 0,
-                domainLookupStart: window.performance.timing.domainLookupStart || 0,
-                domainLookupEnd: window.performance.timing.domainLookupEnd || 0,
-                connectStart: window.performance.timing.connectStart || 0,
-                connectEnd: window.performance.timing.connectEnd || 0,
-                secureConnectionStart: window.performance.timing.secureConnectionStart || 0,
-                requestStart: window.performance.timing.requestStart || 0,
-                responseStart: window.performance.timing.responseStart || 0,
-                responseEnd: window.performance.timing.responseEnd || 0,
-                domLoading: window.performance.timing.domLoading || 0,
-                domInteractive: window.performance.timing.domInteractive || 0,
-                domContentLoadedEventStart: window.performance.timing.domContentLoadedEventStart || 0,
-                domContentLoadedEventEnd: window.performance.timing.domContentLoadedEventEnd || 0,
-                domComplete: window.performance.timing.domComplete || 0,
-                loadEventStart: window.performance.timing.loadEventStart || 0,
-                loadEventEnd: window.performance.timing.loadEventEnd || 0,
-              }
-              : undefined,
-          }
+              memory: (window.performance as PerformanceWithMemory).memory
+                ? (() => {
+                    const perf = window.performance as PerformanceWithMemory;
+                    return {
+                      usedJSHeapSize: perf.memory!.usedJSHeapSize || 0,
+                      totalJSHeapSize: perf.memory!.totalJSHeapSize || 0,
+                      jsHeapSizeLimit: perf.memory!.jsHeapSizeLimit || 0,
+                    };
+                  })()
+                : undefined,
+              timing: window.performance.timing
+                ? {
+                    navigationStart:
+                      window.performance.timing.navigationStart || 0,
+                    unloadEventStart:
+                      window.performance.timing.unloadEventStart || 0,
+                    unloadEventEnd:
+                      window.performance.timing.unloadEventEnd || 0,
+                    redirectStart: window.performance.timing.redirectStart || 0,
+                    redirectEnd: window.performance.timing.redirectEnd || 0,
+                    fetchStart: window.performance.timing.fetchStart || 0,
+                    domainLookupStart:
+                      window.performance.timing.domainLookupStart || 0,
+                    domainLookupEnd:
+                      window.performance.timing.domainLookupEnd || 0,
+                    connectStart: window.performance.timing.connectStart || 0,
+                    connectEnd: window.performance.timing.connectEnd || 0,
+                    secureConnectionStart:
+                      window.performance.timing.secureConnectionStart || 0,
+                    requestStart: window.performance.timing.requestStart || 0,
+                    responseStart: window.performance.timing.responseStart || 0,
+                    responseEnd: window.performance.timing.responseEnd || 0,
+                    domLoading: window.performance.timing.domLoading || 0,
+                    domInteractive:
+                      window.performance.timing.domInteractive || 0,
+                    domContentLoadedEventStart:
+                      window.performance.timing.domContentLoadedEventStart || 0,
+                    domContentLoadedEventEnd:
+                      window.performance.timing.domContentLoadedEventEnd || 0,
+                    domComplete: window.performance.timing.domComplete || 0,
+                    loadEventStart:
+                      window.performance.timing.loadEventStart || 0,
+                    loadEventEnd: window.performance.timing.loadEventEnd || 0,
+                  }
+                : undefined,
+            }
           : undefined;
 
       return {
@@ -186,9 +219,9 @@ export function useClientErrorHandler() {
         viewport:
           typeof window !== "undefined"
             ? {
-              width: window.innerWidth,
-              height: window.innerHeight,
-            }
+                width: window.innerWidth,
+                height: window.innerHeight,
+              }
             : undefined,
         performance: performanceInfo,
       };
@@ -198,13 +231,13 @@ export function useClientErrorHandler() {
 
   // Retry with exponential backoff
   const retryWithBackoff = useCallback(
-    async (
-      operation: () => Promise<any>,
+    async <T>(
+      operation: () => Promise<T>,
       errorId: string,
       attempt: number = 0,
       maxRetries: number = 3,
       baseDelay: number = 1000,
-    ): Promise<any> => {
+    ): Promise<T> => {
       if (attempt >= maxRetries) {
         throw new Error(`Max retry attempts (${maxRetries}) exceeded`);
       }
@@ -239,11 +272,11 @@ export function useClientErrorHandler() {
 
   // Execute recovery strategy
   const executeRecoveryStrategy = useCallback(
-    async (
+    async <T>(
       strategy: ErrorRecoveryStrategy,
       error: ClientError,
       config: ErrorRecoveryConfig,
-      operation?: () => Promise<any>,
+      operation?: () => Promise<T>,
     ): Promise<boolean> => {
       dispatch({ type: "SET_RECOVERING", payload: true });
 
@@ -318,10 +351,10 @@ export function useClientErrorHandler() {
                     );
                     const body = encodeURIComponent(
                       `Error ID: ${error.requestId || "Unknown"}\n` +
-                      `Time: ${error.timestamp}\n` +
-                      `Component: ${error.component || "Unknown"}\n` +
-                      `Message: ${error.message}\n\n` +
-                      `Please describe what you were doing when this error occurred:\n\n`,
+                        `Time: ${error.timestamp}\n` +
+                        `Component: ${error.component || "Unknown"}\n` +
+                        `Message: ${error.message}\n\n` +
+                        `Please describe what you were doing when this error occurred:\n\n`,
                     );
                     window.location.href = `mailto:support@tool-chest.com?subject=${subject}&body=${body}`;
                   },
