@@ -3,6 +3,7 @@ import {
   HashValidationResult,
   HashOperationParams,
   HashUsageMetrics,
+  HashProgress,
   ALGORITHM_INFO,
   FILE_SIZE_LIMITS,
   ALL_ALLOWED_FILE_TYPES,
@@ -338,7 +339,9 @@ export class HashGeneratorService {
     const fileExtension = file.name.split(".").pop()?.toLowerCase();
 
     if (file.type) {
-      const isAllowed = ALL_ALLOWED_FILE_TYPES.includes(file.type as any);
+      const isAllowed = ALL_ALLOWED_FILE_TYPES.includes(
+        file.type as (typeof ALL_ALLOWED_FILE_TYPES)[number],
+      );
       const category =
         FILE_TYPE_CATEGORIES[file.type as keyof typeof FILE_TYPE_CATEGORIES];
 
@@ -614,7 +617,7 @@ export class HashGeneratorService {
    */
   private static async readFileWithProgress(
     file: File,
-    onProgress?: (progress: any) => void,
+    onProgress?: (progress: HashProgress) => void,
   ): Promise<Uint8Array> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();

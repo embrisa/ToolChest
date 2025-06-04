@@ -18,7 +18,8 @@ import "highlight.js/lib/languages/rust";
 import "highlight.js/lib/languages/php";
 import "highlight.js/lib/languages/markdown";
 // Import markdown-it plugins for GFM support
-let markdownItTaskLists: any;
+import type { PluginWithOptions } from "markdown-it";
+let markdownItTaskLists: PluginWithOptions<Record<string, unknown>> | null;
 try {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   markdownItTaskLists = require("markdown-it-task-lists");
@@ -94,7 +95,10 @@ export class MarkdownToPdfService {
         ],
       });
     } catch (error) {
-      console.warn("Failed to configure highlight.js, syntax highlighting will be limited:", error);
+      console.warn(
+        "Failed to configure highlight.js, syntax highlighting will be limited:",
+        error,
+      );
     }
 
     // Initialize with enhanced GFM-compatible configuration
@@ -163,13 +167,17 @@ export class MarkdownToPdfService {
       };
     } catch (error) {
       // Special handling for hljs-related errors including isSpace
-      if (error instanceof Error && (
-        error.message.includes("isSpace") ||
-        error.message.includes("highlight") ||
-        error.stack?.includes("hljs") ||
-        error.stack?.includes("highlight.js")
-      )) {
-        console.warn("Syntax highlighting compatibility issue detected, falling back to basic markdown parsing:", error.message);
+      if (
+        error instanceof Error &&
+        (error.message.includes("isSpace") ||
+          error.message.includes("highlight") ||
+          error.stack?.includes("hljs") ||
+          error.stack?.includes("highlight.js"))
+      ) {
+        console.warn(
+          "Syntax highlighting compatibility issue detected, falling back to basic markdown parsing:",
+          error.message,
+        );
         return this.parseMarkdownFallback(content, options);
       }
 
@@ -289,7 +297,7 @@ export class MarkdownToPdfService {
 
       // Force garbage collection hint
       if (typeof window !== "undefined" && "gc" in window) {
-        (window as any).gc();
+        (window as Window & { gc: () => void }).gc();
       }
     }
 
@@ -600,7 +608,10 @@ export class MarkdownToPdfService {
               return `<pre class="hljs"><code class="hljs language-${lang}">${result.value}</code></pre>`;
             } catch (highlightError) {
               // If specific language highlighting fails, try auto-detection
-              console.warn("Language-specific highlighting failed:", highlightError);
+              console.warn(
+                "Language-specific highlighting failed:",
+                highlightError,
+              );
               try {
                 const autoResult = hljs.highlightAuto(str);
                 const detectedLang = autoResult.language || "plaintext";
@@ -1045,8 +1056,9 @@ export class MarkdownToPdfService {
                 color: ${colors.text};
             }
             
-            ${syntaxHighlighting?.lineNumbers
-        ? `
+            ${
+              syntaxHighlighting?.lineNumbers
+                ? `
             .pdf-code-block .hljs {
                 counter-reset: line-numbering;
             }
@@ -1068,8 +1080,8 @@ export class MarkdownToPdfService {
                 user-select: none;
             }
             `
-        : ""
-      }
+                : ""
+            }
             
             /* Enhanced strikethrough support (GFM) */
             .pdf-strikethrough {
@@ -1457,8 +1469,8 @@ export class MarkdownToPdfService {
   }
 
   /**
- * Fallback method to manually process task lists when plugin fails
- */
+   * Fallback method to manually process task lists when plugin fails
+   */
   private processTaskListsFallback(container: Element): void {
     const listItems = container.querySelectorAll("li");
     listItems.forEach((li) => {
@@ -1486,8 +1498,8 @@ export class MarkdownToPdfService {
   }
 
   /**
- * Fallback markdown parsing without any potentially problematic libraries
- */
+   * Fallback markdown parsing without any potentially problematic libraries
+   */
   private parseMarkdownFallback(
     content: string,
     options: MarkdownOptions,
@@ -1508,7 +1520,7 @@ export class MarkdownToPdfService {
         highlight: (str: string, lang: string) => {
           // Simple highlighting without hljs to avoid isSpace issues
           const escapedStr = this.escapeHtml(str);
-          return `<pre class="hljs"><code class="hljs language-${lang || 'plaintext'}">${escapedStr}</code></pre>`;
+          return `<pre class="hljs"><code class="hljs language-${lang || "plaintext"}">${escapedStr}</code></pre>`;
         },
       });
 
@@ -1538,11 +1550,16 @@ export class MarkdownToPdfService {
         images,
         tables,
         codeBlocks,
-        warnings: ["Used minimal fallback parser. Some features (syntax highlighting, task lists, etc.) are disabled."],
+        warnings: [
+          "Used minimal fallback parser. Some features (syntax highlighting, task lists, etc.) are disabled.",
+        ],
       };
     } catch (error) {
       // If even the minimal MarkdownIt parser fails, use the emergency manual fallback
-      console.warn("MarkdownIt fallback failed, using emergency manual parser:", error);
+      console.warn(
+        "MarkdownIt fallback failed, using emergency manual parser:",
+        error,
+      );
       return this.createBasicFallbackResult(content);
     }
   }
@@ -1556,63 +1573,108 @@ export class MarkdownToPdfService {
       let html = this.escapeHtml(content);
 
       // Handle code blocks first (before other processing)
-      html = html.replace(/```(\w+)?\n([\s\S]*?)\n```/g, (match, lang, code) => {
-        const language = lang || 'plaintext';
-        return `<pre class="hljs"><code class="hljs language-${language}">${code}</code></pre>`;
-      });
+      html = html.replace(
+        /```(\w+)?\n([\s\S]*?)\n```/g,
+        (match, lang, code) => {
+          const language = lang || "plaintext";
+          return `<pre class="hljs"><code class="hljs language-${language}">${code}</code></pre>`;
+        },
+      );
 
       // Convert basic markdown features manually
       html = html
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
-        .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italic
+        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // Bold
+        .replace(/\*(.*?)\*/g, "<em>$1</em>") // Italic
         .replace(/`([^`]+)`/g, '<code class="pdf-inline-code">$1</code>') // Inline code
-        .replace(/^#{6}\s+(.*$)/gm, '<h6 class="pdf-heading pdf-heading-h6">$1</h6>') // H6
-        .replace(/^#{5}\s+(.*$)/gm, '<h5 class="pdf-heading pdf-heading-h5">$1</h5>') // H5
-        .replace(/^#{4}\s+(.*$)/gm, '<h4 class="pdf-heading pdf-heading-h4">$1</h4>') // H4
-        .replace(/^#{3}\s+(.*$)/gm, '<h3 class="pdf-heading pdf-heading-h3">$1</h3>') // H3
-        .replace(/^#{2}\s+(.*$)/gm, '<h2 class="pdf-heading pdf-heading-h2">$1</h2>') // H2
-        .replace(/^#{1}\s+(.*$)/gm, '<h1 class="pdf-heading pdf-heading-h1">$1</h1>') // H1
-        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="pdf-link">$1</a>') // Links
-        .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="pdf-image">') // Images
+        .replace(
+          /^#{6}\s+(.*$)/gm,
+          '<h6 class="pdf-heading pdf-heading-h6">$1</h6>',
+        ) // H6
+        .replace(
+          /^#{5}\s+(.*$)/gm,
+          '<h5 class="pdf-heading pdf-heading-h5">$1</h5>',
+        ) // H5
+        .replace(
+          /^#{4}\s+(.*$)/gm,
+          '<h4 class="pdf-heading pdf-heading-h4">$1</h4>',
+        ) // H4
+        .replace(
+          /^#{3}\s+(.*$)/gm,
+          '<h3 class="pdf-heading pdf-heading-h3">$1</h3>',
+        ) // H3
+        .replace(
+          /^#{2}\s+(.*$)/gm,
+          '<h2 class="pdf-heading pdf-heading-h2">$1</h2>',
+        ) // H2
+        .replace(
+          /^#{1}\s+(.*$)/gm,
+          '<h1 class="pdf-heading pdf-heading-h1">$1</h1>',
+        ) // H1
+        .replace(
+          /\[([^\]]+)\]\(([^)]+)\)/g,
+          '<a href="$2" class="pdf-link">$1</a>',
+        ) // Links
+        .replace(
+          /!\[([^\]]*)\]\(([^)]+)\)/g,
+          '<img src="$2" alt="$1" class="pdf-image">',
+        ) // Images
         .replace(/~~(.*?)~~/g, '<del class="pdf-strikethrough">$1</del>') // Strikethrough
-        .replace(/---/g, '<hr>') // Horizontal rules
-        .replace(/^\> (.*$)/gm, '<blockquote class="pdf-blockquote">$1</blockquote>') // Blockquotes
+        .replace(/---/g, "<hr>") // Horizontal rules
+        .replace(
+          /^\> (.*$)/gm,
+          '<blockquote class="pdf-blockquote">$1</blockquote>',
+        ) // Blockquotes
         .replace(/^\* (.*$)/gm, '<li class="pdf-list-item">$1</li>') // Unordered lists
         .replace(/^\d+\. (.*$)/gm, '<li class="pdf-list-item">$1</li>') // Ordered lists
-        .replace(/^- \[[ ]\] (.*$)/gm, '<li class="pdf-task-item"><input type="checkbox" disabled class="pdf-task-checkbox"> $1</li>') // Unchecked tasks
-        .replace(/^- \[[xX]\] (.*$)/gm, '<li class="pdf-task-item"><input type="checkbox" checked disabled class="pdf-task-checkbox"> $1</li>'); // Checked tasks
+        .replace(
+          /^- \[[ ]\] (.*$)/gm,
+          '<li class="pdf-task-item"><input type="checkbox" disabled class="pdf-task-checkbox"> $1</li>',
+        ) // Unchecked tasks
+        .replace(
+          /^- \[[xX]\] (.*$)/gm,
+          '<li class="pdf-task-item"><input type="checkbox" checked disabled class="pdf-task-checkbox"> $1</li>',
+        ); // Checked tasks
 
       // Handle paragraphs - split by double newlines and wrap in <p> tags
       const paragraphs = html.split(/\n\s*\n/);
-      const processedParagraphs = paragraphs.map(paragraph => {
-        paragraph = paragraph.trim();
-        if (!paragraph) return '';
+      const processedParagraphs = paragraphs
+        .map((paragraph) => {
+          paragraph = paragraph.trim();
+          if (!paragraph) return "";
 
-        // Don't wrap if it's already a block element
-        if (paragraph.match(/^<(h[1-6]|pre|blockquote|hr|li|ul|ol)/)) {
-          return paragraph;
-        }
+          // Don't wrap if it's already a block element
+          if (paragraph.match(/^<(h[1-6]|pre|blockquote|hr|li|ul|ol)/)) {
+            return paragraph;
+          }
 
-        // Handle line breaks within paragraphs
-        paragraph = paragraph.replace(/\n/g, '<br>');
+          // Handle line breaks within paragraphs
+          paragraph = paragraph.replace(/\n/g, "<br>");
 
-        return `<p class="pdf-paragraph">${paragraph}</p>`;
-      }).filter(p => p);
+          return `<p class="pdf-paragraph">${paragraph}</p>`;
+        })
+        .filter((p) => p);
 
       // Wrap list items in proper list containers
-      html = processedParagraphs.join('\n')
-        .replace(/(<li[^>]*>.*?<\/li>)\s*(<li[^>]*>.*?<\/li>)/g, (match, li1, li2) => {
-          // Group consecutive list items
-          return li1 + '\n' + li2;
-        });
+      html = processedParagraphs
+        .join("\n")
+        .replace(
+          /(<li[^>]*>.*?<\/li>)\s*(<li[^>]*>.*?<\/li>)/g,
+          (match, li1, li2) => {
+            // Group consecutive list items
+            return li1 + "\n" + li2;
+          },
+        );
 
       // Wrap consecutive list items in ul/ol tags
-      html = html.replace(/(<li[^>]*>.*?<\/li>(?:\s*<li[^>]*>.*?<\/li>)*)/gs, (match) => {
-        if (match.includes('pdf-task-item')) {
-          return `<ul class="pdf-list task-list">${match}</ul>`;
-        }
-        return `<ul class="pdf-list">${match}</ul>`;
-      });
+      html = html.replace(
+        /(<li[^>]*>.*?<\/li>(?:\s*<li[^>]*>.*?<\/li>)*)/gs,
+        (match) => {
+          if (match.includes("pdf-task-item")) {
+            return `<ul class="pdf-list task-list">${match}</ul>`;
+          }
+          return `<ul class="pdf-list">${match}</ul>`;
+        },
+      );
 
       // Basic statistics
       const wordCount = this.calculateWordCount(content);
@@ -1632,7 +1694,9 @@ export class MarkdownToPdfService {
         images: [],
         tables,
         codeBlocks,
-        warnings: ["Used emergency manual parser. Advanced features like tables are not supported, but basic formatting is preserved."],
+        warnings: [
+          "Used emergency manual parser. Advanced features like tables are not supported, but basic formatting is preserved.",
+        ],
       };
     } catch (error) {
       // If even the manual parsing fails, return minimal content
@@ -1647,7 +1711,9 @@ export class MarkdownToPdfService {
         images: [],
         tables: 0,
         codeBlocks: 0,
-        warnings: ["All markdown parsing failed. Content displayed as plain text."],
+        warnings: [
+          "All markdown parsing failed. Content displayed as plain text.",
+        ],
       };
     }
   }
