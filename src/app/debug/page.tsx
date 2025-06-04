@@ -9,7 +9,9 @@ import { ApiResponse } from "@/types/api/common";
 export default function DebugPage() {
   const [mounted, setMounted] = useState(false);
   const [simpleClientTest, setSimpleClientTest] = useState("not set");
-  const [directApiData, setDirectApiData] = useState<any>(null);
+  const [directApiData, setDirectApiData] = useState<ApiResponse<
+    ToolDTO[]
+  > | null>(null);
   const [directApiError, setDirectApiError] = useState<string | null>(null);
 
   // Simple client-side test to verify React hydration
@@ -20,10 +22,11 @@ export default function DebugPage() {
   }, []);
 
   // Test SWR directly
-  const { data: swrData, error: swrError, isLoading: swrLoading } = useSWR<ApiResponse<ToolDTO[]>>(
-    "/api/tools",
-    swrFetcher
-  );
+  const {
+    data: swrData,
+    error: swrError,
+    isLoading: swrLoading,
+  } = useSWR<ApiResponse<ToolDTO[]>>("/api/tools", swrFetcher);
 
   // Direct API test effect
   useEffect(() => {
@@ -47,7 +50,9 @@ export default function DebugPage() {
 
       <h2>Direct API Call</h2>
       <pre>{JSON.stringify(directApiData, null, 2)}</pre>
-      {directApiError && <p style={{ color: "red" }}>Error: {directApiError}</p>}
+      {directApiError && (
+        <p style={{ color: "red" }}>Error: {directApiError}</p>
+      )}
 
       <h2>SWR Test</h2>
       <div>
