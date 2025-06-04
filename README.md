@@ -66,6 +66,15 @@ npm run test:a11y
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template)
 
+If you use Railway's Node environment instead of Docker, be sure to run
+database migrations with:
+
+```bash
+npm run db:deploy
+```
+
+before starting the server.
+
 ### Docker Deployment
 
 ```bash
