@@ -46,7 +46,7 @@ interface ErrorRecoveryProviderProps {
     | "bottom-center";
   maxToasts?: number;
   enableGlobalErrorHandler?: boolean;
-  onError?: (error: Error, errorInfo?: any) => void;
+  onError?: (error: Error, errorInfo?: React.ErrorInfo) => void;
 }
 
 export function ErrorRecoveryProvider({
@@ -187,7 +187,9 @@ export function ErrorRecoveryProvider({
   // Call onError callback when errors occur
   useEffect(() => {
     if (onError && lastError) {
-      onError(new Error(lastError.message), lastError);
+      onError(new Error(lastError.message), {
+        componentStack: lastError.stack ?? "",
+      });
     }
   }, [onError, lastError]);
 
@@ -233,7 +235,7 @@ export function withErrorRecovery<P extends object>(
   WrappedComponent: React.ComponentType<P>,
   options: {
     fallback?: React.ComponentType<{ error: Error; retry: () => void }>;
-    onError?: (error: Error, errorInfo: any) => void;
+    onError?: (error: Error, errorInfo: React.ErrorInfo) => void;
     enableRetry?: boolean;
   } = {},
 ) {
@@ -242,7 +244,7 @@ export function withErrorRecovery<P extends object>(
   const WithErrorRecoveryComponent = (props: P) => {
     const { handleError } = useErrorRecovery();
 
-    const handleComponentError = (error: Error, errorInfo: any) => {
+    const handleComponentError = (error: Error, errorInfo: React.ErrorInfo) => {
       handleError(error, {
         component:
           WrappedComponent.displayName || WrappedComponent.name || "Component",
@@ -286,16 +288,18 @@ export function withErrorRecovery<P extends object>(
 }
 
 // Simple error boundary for the HOC
+interface ErrorBoundaryProps {
+  children: React.ReactNode;
+  fallback?: React.ReactNode;
+  onError?: (error: Error, errorInfo: React.ErrorInfo) => void;
+  canRecover?: boolean;
+}
+
 class ErrorBoundary extends React.Component<
-  {
-    children: React.ReactNode;
-    fallback?: React.ReactNode;
-    onError?: (error: Error, errorInfo: any) => void;
-    canRecover?: boolean;
-  },
+  ErrorBoundaryProps,
   { hasError: boolean; error?: Error }
 > {
-  constructor(props: any) {
+  constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
   }
@@ -304,7 +308,7 @@ class ErrorBoundary extends React.Component<
     return { hasError: true, error };
   }
 
-  componentDidCatch(error: Error, errorInfo: any) {
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     this.props.onError?.(error, errorInfo);
   }
 

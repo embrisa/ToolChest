@@ -8,11 +8,11 @@ import { SkeletonLoader } from "./SkeletonLoader";
 import { ErrorBoundary } from "../errors/ErrorBoundary";
 import { Loading } from "./Loading";
 
-export interface LazyLoaderProps {
-  component: LazyExoticComponent<ComponentType<any>>;
+export interface LazyLoaderProps<P extends object = Record<string, never>> {
+  component: LazyExoticComponent<ComponentType<P>>;
   fallback?: React.ReactNode;
   errorFallback?: React.ReactNode;
-  props?: any;
+  props?: P;
   loadingType?: "skeleton" | "spinner" | "custom";
   skeletonVariant?:
     | "text"
@@ -24,15 +24,15 @@ export interface LazyLoaderProps {
   className?: string;
 }
 
-export function LazyLoader({
+export function LazyLoader<P extends object = Record<string, never>>({
   component: Component,
   fallback,
   errorFallback,
-  props = {},
+  props = {} as P,
   loadingType = "skeleton",
   skeletonVariant = "card",
   className,
-}: LazyLoaderProps) {
+}: LazyLoaderProps<P>) {
   // Default loading fallback
   const defaultFallback = React.useMemo(() => {
     if (fallback) return fallback;
@@ -91,8 +91,8 @@ export function LazyLoader({
 
 // Higher-order component for creating lazy-loaded components
 export function withLazyLoading<P extends object>(
-  componentImport: () => Promise<any>,
-  options: Omit<LazyLoaderProps, "component" | "props"> = {},
+  componentImport: () => Promise<{ default: ComponentType<P> }>,
+  options: Omit<LazyLoaderProps<P>, "component" | "props"> = {},
 ) {
   const LazyComponent = lazy(componentImport);
 
@@ -106,11 +106,13 @@ export function withLazyLoading<P extends object>(
 // For now, we'll comment these out and use direct lazy imports in the actual pages
 
 // Utility function for preloading components
-export function preloadComponent(componentImport: () => Promise<any>) {
+export function preloadComponent(componentImport: () => Promise<unknown>) {
   if (typeof window !== "undefined") {
     // Use requestIdleCallback if available for non-critical preloading
     if ("requestIdleCallback" in window) {
-      (window as any).requestIdleCallback(() => {
+      const ric = (window as { requestIdleCallback: (cb: () => void) => void })
+        .requestIdleCallback;
+      ric(() => {
         componentImport().catch(console.warn);
       });
     } else {
