@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { AnalyticsService } from "@/services/admin/analyticsService";
+import type {
+  SystemHealthDashboard,
+  SystemPerformanceMetrics,
+  RealTimeMetrics,
+} from "@/types/admin/analytics";
 
 const analyticsService = AnalyticsService.getInstance();
 
@@ -73,7 +78,9 @@ export async function GET(request: NextRequest) {
     const detailed = searchParams.get("detailed") === "true";
     const includeHistory = searchParams.get("includeHistory") === "true";
 
-    let systemMetrics;
+    let systemMetrics: (SystemHealthDashboard | SystemPerformanceMetrics) & {
+      metricsHistory?: RealTimeMetrics[];
+    };
 
     if (detailed) {
       // Get comprehensive system health dashboard
@@ -86,7 +93,7 @@ export async function GET(request: NextRequest) {
     // Add real-time metrics if requested
     if (includeHistory) {
       const metricsHistory = await analyticsService.getRealTimeMetrics(100);
-      (systemMetrics as any).metricsHistory = metricsHistory;
+      systemMetrics = { ...systemMetrics, metricsHistory };
     }
 
     const current = requestCounts.get(clientIP);

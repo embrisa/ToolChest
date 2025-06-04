@@ -1,8 +1,67 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import type { Prisma } from "@prisma/client";
+
+interface UsageMetadata {
+  operationType?: string;
+  inputSize?: number;
+  outputSize?: number;
+  processingTime?: number;
+  success?: boolean;
+  errorMessage?: string | null;
+}
+
+interface UsageRecord {
+  id: string;
+  toolId: string;
+  toolName?: string | null;
+  toolSlug?: string | null;
+  timestamp: Date;
+  operationType: string;
+  inputSize: number;
+  outputSize: number;
+  processingTime: number;
+  success: boolean;
+  errorMessage: string | null;
+}
+
+interface AggregatedUsageRecord {
+  period: string;
+  totalUsage: number;
+  successfulUsage: number;
+  errorCount: number;
+  totalProcessingTime: number;
+  averageInputSize: number;
+  averageOutputSize: number;
+  uniqueToolsCount: number;
+  averageProcessingTime: number;
+  successRate: number;
+}
+
+interface UsageSummary {
+  totalUsage: number;
+  totalCount: number;
+  uniqueTools: number;
+  dateRange: { start: Date | null; end: Date | null };
+  pagination: {
+    limit: number;
+    offset: number;
+    total: number;
+    hasMore: boolean;
+  };
+}
+
+interface UsageResponse {
+  usage: UsageRecord[];
+  aggregated: AggregatedUsageRecord[];
+  summary: UsageSummary;
+}
 
 // Simple caching for usage data
-const usageCache = new Map<string, { data: any; timestamp: number }>();
+const usageCache = new Map<
+  string,
+  { data: UsageResponse; timestamp: number }
+>();
 const CACHE_DURATION = 2 * 60 * 1000; // 2 minutes
 
 // Rate limiting
@@ -40,11 +99,14 @@ function checkRateLimit(clientIP: string): boolean {
   return true;
 }
 
-function getCacheKey(params: any): string {
+function getCacheKey(params: Record<string, unknown>): string {
   return JSON.stringify(params);
 }
 
-function isValidCacheEntry(entry: { data: any; timestamp: number }): boolean {
+function isValidCacheEntry(entry: {
+  data: UsageResponse;
+  timestamp: number;
+}): boolean {
   return Date.now() - entry.timestamp < CACHE_DURATION;
 }
 
@@ -128,7 +190,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Build date filter
-    const dateFilter: any = {};
+    const dateFilter: Record<string, Date> = {};
     if (startDate) {
       dateFilter.gte = new Date(startDate);
     }
@@ -137,7 +199,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Build where clause
-    const whereClause: any = {};
+    const whereClause: Record<string, unknown> = {};
     if (toolId) {
       whereClause.toolId = toolId;
     }
@@ -146,7 +208,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Get usage data
-    const usageData = await prisma.toolUsage.findMany({
+    const usageData = (await prisma.toolUsage.findMany({
       where: whereClause,
       include: {
         tool: {
@@ -163,7 +225,18 @@ export async function GET(request: NextRequest) {
       },
       skip: offset,
       take: Math.min(limit, 1000), // Max 1000 records
-    });
+    })) as Array<{
+      id: string;
+      toolId: string;
+      timestamp: Date;
+      metadata: Prisma.JsonValue | null;
+      tool: {
+        id: string;
+        name: string;
+        slug: string;
+        isActive: boolean;
+      } | null;
+    }>;
 
     // Get total count for pagination
     const totalCount = await prisma.toolUsage.count({
@@ -194,9 +267,9 @@ export async function GET(request: NextRequest) {
     };
 
     // Prepare response data
-    const responseData = {
+    const responseData: UsageResponse = {
       usage: usageData.map((u) => {
-        const metadata = u.metadata as any;
+        const metadata = u.metadata as UsageMetadata | null;
         return {
           id: u.id,
           toolId: u.toolId,
@@ -262,10 +335,23 @@ export async function GET(request: NextRequest) {
   }
 }
 
-function aggregateUsageData(usageData: any[], aggregation: string): any[] {
+function aggregateUsageData(
+  usageData: Array<{
+    toolId: string;
+    timestamp: Date;
+    metadata: Prisma.JsonValue | null;
+  }>,
+  aggregation: string,
+): AggregatedUsageRecord[] {
   if (usageData.length === 0) return [];
 
-  const aggregated = new Map<string, any>();
+  const aggregated = new Map<
+    string,
+    Omit<
+      AggregatedUsageRecord,
+      "averageProcessingTime" | "uniqueToolsCount" | "successRate"
+    > & { uniqueTools: Set<string> }
+  >();
 
   for (const usage of usageData) {
     const date = new Date(usage.timestamp);
@@ -300,7 +386,7 @@ function aggregateUsageData(usageData: any[], aggregation: string): any[] {
     }
 
     const agg = aggregated.get(key)!;
-    const metadata = usage.metadata as any;
+    const metadata = usage.metadata as UsageMetadata | null;
 
     agg.totalUsage++;
     if (metadata?.success !== false) {

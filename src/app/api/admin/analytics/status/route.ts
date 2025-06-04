@@ -1,5 +1,52 @@
 import { NextRequest, NextResponse } from "next/server";
 import { AnalyticsService } from "@/services/admin/analyticsService";
+import type { SystemHealthDashboard } from "@/types/admin/analytics";
+
+interface ServiceStatus {
+  name: string;
+  status: "healthy" | "unhealthy";
+  responseTime: number | null;
+  lastCheck: string;
+  error?: string;
+}
+
+interface DetailedStatus {
+  services: ServiceStatus[];
+  systemHealth: {
+    overallStatus: SystemHealthDashboard["overallStatus"];
+    activeAlerts: number;
+    recentErrors: number;
+    uptime: number;
+    lastUpdated: Date;
+  };
+  metrics: {
+    memoryUsage: SystemHealthDashboard["metrics"]["memoryUsage"];
+    apiResponseTime: number;
+    errorRate: number;
+    activeConnections: number;
+  };
+  capabilities: {
+    analytics: boolean;
+    charts: boolean;
+    export: boolean;
+    monitoring: boolean;
+    realTimeMetrics: boolean;
+  };
+}
+
+interface StatusResponse {
+  status: "healthy" | "degraded" | "unhealthy";
+  timestamp: string;
+  responseTime: string;
+  services: {
+    healthy: number;
+    total: number;
+    availability: string;
+  };
+  uptime: number;
+  version: string;
+  detailed?: DetailedStatus;
+}
 
 const analyticsService = AnalyticsService.getInstance();
 
@@ -85,7 +132,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Basic status response
-    const statusResponse = {
+    const statusResponse: StatusResponse = {
       status: overallStatus,
       timestamp: new Date().toISOString(),
       responseTime: `${responseTime}ms`,
@@ -102,8 +149,8 @@ export async function GET(request: NextRequest) {
     if (detailed) {
       const systemHealth = await analyticsService.getSystemHealthDashboard();
 
-      (statusResponse as any).detailed = {
-        services: services,
+      statusResponse.detailed = {
+        services,
         systemHealth: {
           overallStatus: systemHealth.overallStatus,
           activeAlerts: systemHealth.activeAlerts.length,
