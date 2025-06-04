@@ -18,6 +18,13 @@ import {
   PERFORMANCE_THRESHOLDS,
 } from "@/types/tools/faviconGenerator";
 
+interface WebAppManifestIcon {
+  src: string;
+  sizes: string;
+  type: string;
+  purpose?: string;
+}
+
 /**
  * Service for client-side favicon generation using Canvas API with enhanced performance features
  */
@@ -934,12 +941,12 @@ export class FaviconGeneratorService {
    * Generate comprehensive web app manifest.json
    */
   private static generateWebAppManifest(favicons: GeneratedFavicon[]): string {
-    const icons = favicons
+    const icons: WebAppManifestIcon[] = favicons
       .filter(
         (favicon) => favicon.size.format === "png" && favicon.size.width >= 192,
       )
       .map((favicon) => {
-        const icon: any = {
+        const icon: WebAppManifestIcon = {
           src: `/${favicon.filename}`,
           sizes: `${favicon.size.width}x${favicon.size.height}`,
           type: "image/png",
