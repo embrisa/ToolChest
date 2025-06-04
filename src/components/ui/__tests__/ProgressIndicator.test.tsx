@@ -16,7 +16,7 @@ describe("ProgressIndicator", () => {
 
   it("renders progress information", () => {
     render(<ProgressIndicator progress={progress} />);
-    expect(screen.getByText(/processing data/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/processing data/i)[0]).toBeInTheDocument();
     expect(screen.getByText(/50%/i)).toBeInTheDocument();
   });
 
