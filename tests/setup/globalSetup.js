@@ -4,8 +4,9 @@ const path = require("path");
 module.exports = async () => {
   console.log("🧪 Setting up global test environment...");
 
-  // Set test environment variables
+  // Set test environment variables for SQLite
   process.env.NODE_ENV = "test";
+  process.env.DATABASE_PROVIDER = "sqlite";
   process.env.DATABASE_URL = "file:./test.db";
   process.env.ADMIN_SECRET_TOKEN = "test-admin-token";
 
@@ -22,9 +23,9 @@ module.exports = async () => {
       // Database file might not exist, which is fine
     }
 
-    // Run database migrations for test database
-    console.log("🗄️  Setting up test database...");
-    execSync("npx prisma migrate deploy", {
+    // Generate Prisma client with SQLite provider
+    console.log("🔧 Generating Prisma client for SQLite...");
+    execSync("npx prisma generate --schema=prisma/schema.test.prisma", {
       stdio: "pipe",
       env: {
         ...process.env,
@@ -32,9 +33,14 @@ module.exports = async () => {
       },
     });
 
-    // Generate Prisma client
-    execSync("npx prisma generate", {
+    // Run database migrations for test database
+    console.log("🗄️  Setting up test database...");
+    execSync("npx prisma db push --force-reset --schema=prisma/schema.test.prisma", {
       stdio: "pipe",
+      env: {
+        ...process.env,
+        DATABASE_URL: "file:./test.db",
+      },
     });
 
     // Seed test database with sample data

@@ -75,26 +75,30 @@ jest.mock("@/components/tools", () => ({
     onTagToggle,
     onClearAll,
     showCount,
+    testIdPrefix = "",
+    "data-testid": testId,
   }: {
     tags: Array<{ id: string; name: string; slug: string; toolCount?: number }>;
     selectedTags: string[];
     onTagToggle: (slug: string) => void;
     onClearAll: () => void;
     showCount?: boolean;
+    testIdPrefix?: string;
+    "data-testid"?: string;
   }) => (
-    <div data-testid="tag-filters">
+    <div data-testid={testId}>
       {tags.map((tag) => (
         <button
           key={tag.id}
           onClick={() => onTagToggle(tag.slug)}
           className={selectedTags.includes(tag.slug) ? "selected" : ""}
-          data-testid={`tag-${tag.slug}`}
+          data-testid={`${testIdPrefix}tag-${tag.slug}`}
         >
           {tag.name}
           {showCount && tag.toolCount && ` (${tag.toolCount})`}
         </button>
       ))}
-      <button onClick={onClearAll} data-testid="clear-all-tags">
+      <button onClick={onClearAll} data-testid={`${testIdPrefix}clear-all-tags`}>
         Clear All
       </button>
     </div>
@@ -290,10 +294,10 @@ describe("HomePage", () => {
         "tool-chest",
       );
       expect(
-        screen.getByText(/Your collection of essential web development tools/),
+        screen.getByText(/Your collection of essential computer tools/),
       ).toBeInTheDocument();
       expect(
-        screen.getByText(/Encode, decode, generate, and convert with ease/),
+        screen.getByText(/Encode, decode, generate, convert, and more with ease/),
       ).toBeInTheDocument();
     });
 
@@ -308,11 +312,11 @@ describe("HomePage", () => {
     it("should render tag filters", () => {
       render(<HomePage />);
 
-      expect(screen.getByTestId("tag-filters")).toBeInTheDocument();
-      expect(screen.getByTestId("tag-encoding")).toHaveTextContent(
+      expect(screen.getAllByTestId("tag-filters")).toHaveLength(2); // Mobile and desktop
+      expect(screen.getByTestId("desktop-tag-encoding")).toHaveTextContent(
         "Encoding (3)",
       );
-      expect(screen.getByTestId("tag-security")).toHaveTextContent(
+      expect(screen.getByTestId("desktop-tag-security")).toHaveTextContent(
         "Security (2)",
       );
     });
@@ -380,8 +384,9 @@ describe("HomePage", () => {
 
       render(<HomePage />);
 
-      expect(screen.getByText("Search Results")).toBeInTheDocument();
-      expect(screen.getByText("2 tools found")).toBeInTheDocument();
+      // Use getAllByText to handle responsive duplicates
+      expect(screen.getAllByText("Search Results")).toHaveLength(2); // Mobile and desktop
+      expect(screen.getAllByText("2 tools found")).toHaveLength(2); // Mobile and desktop
     });
   });
 
@@ -396,7 +401,8 @@ describe("HomePage", () => {
       const user = userEvent.setup();
       render(<HomePage />);
 
-      const encodingTag = screen.getByTestId("tag-encoding");
+      // Use the desktop tag specifically to avoid responsive duplicate issues
+      const encodingTag = screen.getByTestId("desktop-tag-encoding");
       await user.click(encodingTag);
 
       expect(setTags).toHaveBeenCalledWith(["encoding"]);
@@ -413,7 +419,8 @@ describe("HomePage", () => {
       const user = userEvent.setup();
       render(<HomePage />);
 
-      const encodingTag = screen.getByTestId("tag-encoding");
+      // Use the desktop tag specifically to avoid responsive duplicate issues
+      const encodingTag = screen.getByTestId("desktop-tag-encoding");
       await user.click(encodingTag);
 
       expect(setTags).toHaveBeenCalledWith([]);
@@ -427,9 +434,8 @@ describe("HomePage", () => {
 
       render(<HomePage />);
 
-      expect(
-        screen.getByRole("button", { name: /clear all filters/i }),
-      ).toBeInTheDocument();
+      const clearButtons = screen.getAllByRole("button", { name: /clear all filters/i });
+      expect(clearButtons).toHaveLength(2); // Mobile and desktop versions
     });
 
     it("should clear all filters when clear button is clicked", async () => {
@@ -443,10 +449,10 @@ describe("HomePage", () => {
       const user = userEvent.setup();
       render(<HomePage />);
 
-      const clearButton = screen.getByRole("button", {
+      const clearButtons = screen.getAllByRole("button", {
         name: /clear all filters/i,
       });
-      await user.click(clearButton);
+      await user.click(clearButtons[0]); // Click the first one (desktop)
 
       expect(clearAllFilters).toHaveBeenCalledTimes(1);
     });
@@ -514,8 +520,8 @@ describe("HomePage", () => {
       const h1 = screen.getByRole("heading", { level: 1 });
       expect(h1).toHaveTextContent("tool-chest");
 
-      const h2 = screen.getByRole("heading", { level: 2 });
-      expect(h2).toHaveTextContent("All Tools");
+      const h2Elements = screen.getAllByRole("heading", { level: 2 });
+      expect(h2Elements[0]).toHaveTextContent("All Tools");
     });
 
     it("should have proper landmark roles", () => {
@@ -535,8 +541,11 @@ describe("HomePage", () => {
 
       // Should be able to navigate to tag filters
       await user.tab();
-      const firstTag = screen.getByTestId("tag-encoding");
-      expect(firstTag).toHaveFocus();
+      // Check if either mobile or desktop tag button has focus (depends on viewport)
+      const mobileTagButton = screen.getByTestId("mobile-tag-encoding");
+      const desktopTagButton = screen.getByTestId("desktop-tag-encoding");
+      const hasFocus = mobileTagButton === document.activeElement || desktopTagButton === document.activeElement;
+      expect(hasFocus).toBe(true);
     });
   });
 
@@ -554,7 +563,8 @@ describe("HomePage", () => {
       // Should still render all essential elements
       expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
       expect(screen.getByRole("searchbox")).toBeInTheDocument();
-      expect(screen.getByTestId("tag-filters")).toBeInTheDocument();
+      // Use getAllByTestId to handle both mobile and desktop versions
+      expect(screen.getAllByTestId(/tag-filters/)).toHaveLength(2);
     });
   });
 
@@ -606,7 +616,8 @@ describe("HomePage", () => {
 
       // Should reflect URL state in UI
       expect(screen.getByDisplayValue("base64")).toBeInTheDocument();
-      expect(screen.getByTestId("tag-encoding")).toHaveClass("selected");
+      const desktopEncodingTag = screen.getByTestId("desktop-tag-encoding");
+      expect(desktopEncodingTag).toHaveClass("selected");
     });
 
     it("should handle concurrent filter updates gracefully", async () => {
@@ -623,11 +634,11 @@ describe("HomePage", () => {
 
       // Simulate rapid filter updates
       const searchInput = screen.getByRole("searchbox");
-      const tagButton = screen.getByTestId("tag-encoding");
+      const desktopTagButton = screen.getByTestId("desktop-tag-encoding");
 
       // Type in search and click tag simultaneously
       await user.type(searchInput, "t");
-      await user.click(tagButton);
+      await user.click(desktopTagButton);
 
       expect(setQuery).toHaveBeenCalled();
       expect(setTags).toHaveBeenCalled();

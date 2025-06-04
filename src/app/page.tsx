@@ -215,7 +215,8 @@ function HomePageContent() {
                 onTagToggle={handleTagToggle}
                 onClearAll={handleClearAllTags}
                 showCount={true}
-                data-testid="tag-filters-mobile"
+                data-testid="tag-filters"
+                testIdPrefix="mobile-"
               />
             </div>
           </details>
@@ -384,7 +385,8 @@ function HomePageContent() {
                 onTagToggle={handleTagToggle}
                 onClearAll={handleClearAllTags}
                 showCount={true}
-                data-testid="tag-filters-desktop"
+                data-testid="tag-filters"
+                testIdPrefix="desktop-"
               />
             </div>
           </aside>

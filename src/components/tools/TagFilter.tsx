@@ -12,6 +12,7 @@ export interface TagFilterProps {
   className?: string;
   showCount?: boolean;
   "data-testid"?: string;
+  testIdPrefix?: string;
 }
 
 export function TagFilter({
@@ -22,6 +23,7 @@ export function TagFilter({
   className,
   showCount = true,
   "data-testid": testId,
+  testIdPrefix = "",
 }: TagFilterProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -94,7 +96,7 @@ export function TagFilter({
             onClick={onClearAll}
             className="btn-secondary text-sm"
             aria-label="Clear all selected filters"
-            data-testid="clear-all-tags"
+            data-testid={`${testIdPrefix}clear-all-tags`}
           >
             Clear all
           </button>
@@ -117,16 +119,16 @@ export function TagFilter({
               tabIndex={0}
               onClick={() => onTagToggle(tag.slug)}
               onKeyDown={(e) => handleKeyDown(e, tag.slug)}
-              data-testid={`tag-${tag.slug}`}
+              data-testid={`${testIdPrefix}tag-${tag.slug}`}
               className={cn(
                 "card-interactive p-6",
                 "min-h-[80px]", // Generous touch target with room for stacked content
                 "focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2",
                 isSelected
                   ? cn(
-                      "border-brand-300 bg-gradient-to-r from-brand-50 to-brand-100/50",
-                      "shadow-colored",
-                    )
+                    "border-brand-300 bg-gradient-to-r from-brand-50 to-brand-100/50",
+                    "shadow-colored",
+                  )
                   : "hover:bg-neutral-25",
               )}
               aria-pressed={isSelected}
