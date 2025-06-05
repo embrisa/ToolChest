@@ -9,6 +9,7 @@ A modern, privacy-focused collection of essential computer tools built with Next
 - **Accessibility**: WCAG 2.1 AA compliant
 - **Performance**: Optimized for speed and efficiency
 - **Mobile-Friendly**: Responsive design for all devices
+- **Multilingual**: English and Spanish translations using next-intl
 
 ## 🛠️ Available Tools
 

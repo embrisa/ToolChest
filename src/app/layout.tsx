@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { Header, Footer } from "@/components/layout";
+import { LocaleSwitcher } from "@/components";
 import { WebVitals } from "@/components/ui";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 import "./globals.css";
 
 const inter = Inter({
@@ -76,13 +79,19 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+    <html
+      lang={locale}
+      className={`${inter.variable} ${jetbrainsMono.variable}`}
+    >
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -111,11 +120,16 @@ export default function RootLayout({
           aria-hidden="true"
         />
 
-        <Header />
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <Header />
+          <div className="absolute top-2 right-4">
+            <LocaleSwitcher />
+          </div>
 
-        <main className="flex-grow relative">{children}</main>
+          <main className="flex-grow relative">{children}</main>
 
-        <Footer />
+          <Footer />
+        </NextIntlClientProvider>
       </body>
     </html>
   );
