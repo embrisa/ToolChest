@@ -7,9 +7,82 @@ The project already uses `next-intl` for layout and a few components. The goal i
 - **Task 1A – Audit Pages**
   - Identify all pages in `src/app` that contain hard-coded English text.
   - Document which components or sections need translation keys.
+
+### Pages with Hard-coded English Text
+
+- `src/app/page.tsx` – hero section (titles, slogans, search placeholder, stats labels), tools grid messages, loading/error text.
+- `src/app/not-found.tsx` – entire 404 page content, suggestions, actions.
+- `src/app/error.tsx` – error page strings including title, description, suggestions and action labels.
+- `src/app/loading.tsx` – skeleton page text "Loading tools...".
+- `src/app/layout.tsx` – metadata titles/descriptions.
+- `src/app/debug/page.tsx` – debug page headings and labels.
+- `src/app/tools` directory:
+  - `layout.tsx` – metadata for "All Tools" page.
+  - `page.tsx` – hero section, headings, stats labels, info section.
+  - `loading.tsx` – loading message.
+  - `base64/page.tsx` – metadata and content describing the tool and its features.
+  - `hash-generator/page.tsx` – metadata, feature descriptions, privacy message, info sections.
+  - `favicon-generator/page.tsx` – metadata, feature descriptions, privacy message, info sections.
+  - `markdown-to-pdf/page.tsx` – metadata, feature/usage texts.
+- `src/app/admin` directory pages contain numerous admin UI strings:
+  - `layout.tsx` – navigation labels and logout/view site.
+  - `dashboard/page.tsx` – stats titles, headers, quick actions.
+  - `analytics/page.tsx` – dashboard headings and metric labels.
+  - `auth/page.tsx` – admin login form labels and error messages.
+  - `loading.tsx` – admin loading message.
+  - `monitoring/page.tsx` – monitoring page headings.
+  - `tools/page.tsx`, `tools/create/page.tsx`, `tools/[id]/edit/page.tsx` – tool management headings, buttons, table labels.
+  - `tags/page.tsx`, `tags/create/page.tsx`, `tags/[id]/edit/page.tsx` – tag management headings, buttons, table labels.
+  - `relationships/page.tsx`, `relationships/bulk/page.tsx`, `relationships/validation/page.tsx` – relationship management copy and button text.
+
 - **Task 1B – Audit Components**
   - Inspect files in `src/components` (and subdirectories) for hard-coded strings.
   - List components requiring translation support.
+
+### Components Requiring Translation
+
+The following components contain user facing text that is currently hard-coded and should be refactored to use `next-intl` translations:
+
+- `src/components/layout/Header.tsx`
+- `src/components/layout/Footer.tsx`
+- `src/components/errors/ErrorBoundary.tsx`
+- `src/components/errors/ErrorPage.tsx`
+- `src/components/errors/ErrorTemplates.tsx`
+- `src/components/errors/ErrorRecoveryProvider.tsx`
+- `src/components/admin/AnalyticsDashboard.tsx`
+- `src/components/admin/AnalyticsChart.tsx`
+- `src/components/admin/BulkOperations.tsx`
+- `src/components/admin/TagForm.tsx`
+- `src/components/admin/TagFilters.tsx`
+- `src/components/admin/TagTable.tsx`
+- `src/components/admin/TagUsageStats.tsx`
+- `src/components/admin/ToolForm.tsx`
+- `src/components/admin/ToolFilters.tsx`
+- `src/components/admin/ToolTable.tsx`
+- `src/components/admin/SystemHealthDashboard.tsx`
+- `src/components/tools/Base64Tool.tsx`
+- `src/components/tools/FaviconGeneratorTool.tsx`
+- `src/components/tools/FaviconPreview.tsx`
+- `src/components/tools/HashGeneratorTool.tsx`
+- `src/components/tools/MarkdownToPdfTool.tsx`
+- `src/components/tools/PdfCustomizationPanel.tsx`
+- `src/components/tools/SearchInput.tsx`
+- `src/components/tools/TagFilter.tsx`
+- `src/components/tools/ToolCard.tsx`
+- `src/components/ui/Alert.tsx`
+- `src/components/ui/Button.tsx`
+- `src/components/ui/FileUpload.tsx`
+- `src/components/ui/NetworkErrorHandler.tsx`
+- `src/components/ui/ProgressCard.tsx`
+- `src/components/ui/ResultsPanel.tsx`
+- `src/components/ui/Toast.tsx`
+- `src/components/ui/ToolHeader.tsx`
+- `src/components/ui/ToolInfoSection.tsx`
+- `src/components/ui/ToolPageHero.tsx`
+- `src/components/ui/ToolPageLayout.tsx`
+- `src/components/ui/ToolPageTemplate.tsx`
+
+(Other UI components were inspected but contain little or no user-facing text.)
 
 ## 2. Prepare Translation Files
 
