@@ -21,6 +21,9 @@ jest.mock("next/navigation", () => ({
   },
 }));
 
+// Mock next-intl to avoid ESM issues in tests
+jest.mock("next-intl");
+
 // Mock Next.js Image component
 jest.mock("next/image", () => ({
   __esModule: true,

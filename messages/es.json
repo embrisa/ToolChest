@@ -1,11 +1,27 @@
 {
-  "Header": {
-    "tools": "Herramientas",
-    "about": "Acerca de"
-  },
-  "LocaleSwitcher": {
-    "label": "Idioma",
-    "en": "Inglés",
-    "es": "Español"
+  "Components": {
+    "Header": {
+      "tools": "Herramientas",
+      "about": "Acerca de"
+    },
+    "LocaleSwitcher": {
+      "label": "Idioma",
+      "en": "Inglés",
+      "es": "Español",
+      "zh": "Chino",
+      "hi": "Hindi",
+      "pt": "Portugués",
+      "ru": "Ruso",
+      "ja": "Japonés",
+      "de": "Alemán",
+      "fr": "Francés",
+      "ko": "Coreano",
+      "it": "Italiano",
+      "tr": "Turco",
+      "pl": "Polaco",
+      "nl": "Neerlandés",
+      "vi": "Vietnamita",
+      "uk": "Ucraniano"
+    }
   }
 }

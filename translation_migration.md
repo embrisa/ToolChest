@@ -25,6 +25,7 @@ The project already uses `next-intl` for layout and a few components. The goal i
   - `favicon-generator/page.tsx` – metadata, feature descriptions, privacy message, info sections.
   - `markdown-to-pdf/page.tsx` – metadata, feature/usage texts.
 - `src/app/admin` directory pages contain numerous admin UI strings:
+
   - `layout.tsx` – navigation labels and logout/view site.
   - `dashboard/page.tsx` – stats titles, headers, quick actions.
   - `analytics/page.tsx` – dashboard headings and metric labels.
@@ -92,6 +93,12 @@ The following components contain user facing text that is currently hard-coded a
   - Create or extend `messages/en.json` with keys from the audit.
 - **Task 2C – Populate Spanish Messages**
   - Provide Spanish translations in `messages/es.json` for each key.
+
+### Progress
+
+- **Task 2A Completed**: Message keys now follow the `Page.*` and `Components.*` hierarchy.
+- Added placeholder message files for 16 languages targeting major developer communities:
+  `en`, `es`, `zh`, `hi`, `pt`, `ru`, `ja`, `de`, `fr`, `ko`, `it`, `tr`, `pl`, `nl`, `vi`, `uk`.
 
 ## 3. Refactor Pages
 
