@@ -86,9 +86,16 @@ export class RelationshipService
       }
 
       if (filters.search) {
+        const nameFilter: Record<string, unknown> = {
+          contains: filters.search,
+        };
+        if (process.env.DATABASE_PROVIDER !== "sqlite") {
+          nameFilter.mode = "insensitive";
+        }
+
         where.OR = [
-          { tool: { name: { contains: filters.search, mode: "insensitive" } } },
-          { tag: { name: { contains: filters.search, mode: "insensitive" } } },
+          { tool: { name: nameFilter } } as unknown as Prisma.ToolTagWhereInput,
+          { tag: { name: nameFilter } } as unknown as Prisma.ToolTagWhereInput,
         ];
       }
 
