@@ -41,4 +41,4 @@ Run `npm run env:validate` whenever you modify `.env.local`.
 - Ensure linting, type checks and tests succeed before opening a PR.
 - Document new environment variables or scripts in the README.
 
-Refer to `DESIGN_PHILOSOPHY.md`, `DEVELOPER_CHEAT_SHEET.md`, `TESTING_FOR_AGENTS.md` and `TESTING.md` for more guidance.
+Refer to `DESIGN_PHILOSOPHY.md`, `DEVELOPER_CHEAT_SHEET.md` and `TESTING.md` for more guidance.
