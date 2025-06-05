@@ -1035,7 +1035,7 @@ export class AnalyticsService extends BaseService {
   private async generateTrendsChart(
     timeRange: AnalyticsTimeRange,
   ): Promise<AnalyticsChart> {
-    // Generate a pie chart showing usage distribution by tool category
+    // Generate a pie chart showing usage distribution by tool tag
     const tools = await this.prisma.tool.findMany({
       include: {
         tags: {
@@ -1054,17 +1054,16 @@ export class AnalyticsService extends BaseService {
       },
     });
 
-    const categoryUsage: Record<string, number> = {};
+    const tagUsage: Record<string, number> = {};
     tools.forEach((tool) => {
-      const category = tool.tags[0]?.tag.name || "Uncategorized";
-      categoryUsage[category] =
-        (categoryUsage[category] || 0) + tool.usages.length;
+      const tag = tool.tags[0]?.tag.name || "Untagged";
+      tagUsage[tag] = (tagUsage[tag] || 0) + tool.usages.length;
     });
 
     return {
       type: "pie",
-      title: "Usage by Category",
-      data: Object.entries(categoryUsage).map(([label, value]) => ({
+      title: "Usage by Tag",
+      data: Object.entries(tagUsage).map(([label, value]) => ({
         label,
         value,
       })),

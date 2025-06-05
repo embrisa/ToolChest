@@ -112,8 +112,8 @@ export function ToolForm({
             </h1>
             <p className="text-body text-secondary max-w-2xl mx-auto">
               {isEditing
-                ? "Update the tool&apos;s information, settings, and categories to keep it current and discoverable."
-                : "Add a new tool to your collection. Fill out the basic information, configure display settings, and assign relevant categories."}
+                ? "Update the tool&apos;s information, settings, and tags to keep it current and discoverable."
+                : "Add a new tool to your collection. Fill out the basic information, configure display settings, and assign relevant tags."}
             </p>
           </div>
         </div>
@@ -516,7 +516,7 @@ export function ToolForm({
           </div>
         </div>
 
-        {/* Categories Section */}
+        {/* Tags Section */}
         <div className="surface rounded-2xl p-8 space-y-8">
           <div className="flex items-start justify-between">
             <div className="flex items-start space-x-4">
@@ -538,18 +538,18 @@ export function ToolForm({
               </div>
               <div className="flex-1">
                 <h2 className="text-heading text-2xl font-semibold text-primary mb-2">
-                  Categories & Tags
+                  Tags
                 </h2>
                 <p className="text-body text-secondary">
-                  Assign relevant categories to help users discover your tool
-                  more easily.
+                  Assign relevant tags to help users discover your tool more
+                  easily.
                 </p>
               </div>
             </div>
             {formData.tagIds.length > 0 && (
               <div className="bg-success-50 text-success-700 px-4 py-2 rounded-full text-sm font-medium border border-success-200">
-                {formData.tagIds.length} categor
-                {formData.tagIds.length !== 1 ? "ies" : "y"} selected
+                {formData.tagIds.length} tag
+                {formData.tagIds.length !== 1 ? "s" : ""} selected
               </div>
             )}
           </div>
@@ -573,15 +573,15 @@ export function ToolForm({
                 </svg>
               </div>
               <h3 className="text-heading text-lg font-semibold text-primary mb-3">
-                No Categories Available
+                No Tags Available
               </h3>
               <p className="text-body text-secondary mb-6 max-w-md mx-auto">
-                Create categories first to organize your tools into logical
-                groups that help users find what they need.
+                Create tags first to organize your tools into logical groups
+                that help users find what they need.
               </p>
               <p className="text-small text-tertiary">
-                Categories will appear here once you&apos;ve created them in the
-                tag management section.
+                Tags will appear here once you&apos;ve created them in the tag
+                management section.
               </p>
             </div>
           ) : (
@@ -609,7 +609,7 @@ export function ToolForm({
                           : {}
                       }
                       aria-pressed={isSelected}
-                      aria-label={`${isSelected ? "Remove" : "Add"} ${tag.name} category`}
+                      aria-label={`${isSelected ? "Remove" : "Add"} ${tag.name} tag`}
                     >
                       <span className="font-medium">{tag.name}</span>
                       {isSelected && (
@@ -655,11 +655,11 @@ export function ToolForm({
                       </div>
                       <div>
                         <p className="text-sm font-medium text-brand-700 mb-1">
-                          Categories help with discoverability
+                          Tags help with discoverability
                         </p>
                         <p className="text-small text-brand-600">
-                          Selected categories will make this tool easier for
-                          users to find when browsing or filtering.
+                          Selected tags will make this tool easier for users to
+                          find when browsing or filtering.
                         </p>
                       </div>
                     </div>

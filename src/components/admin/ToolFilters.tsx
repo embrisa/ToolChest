@@ -108,7 +108,7 @@ export function ToolFilters({
               Filter Tools
             </h3>
             <p className="text-small text-secondary">
-              Refine your tool list with search and category filters
+              Refine your tool list with search and tag filters
             </p>
           </div>
         </div>
@@ -314,13 +314,13 @@ export function ToolFilters({
                     d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
                   />
                 </svg>
-                <span>Filter by Categories</span>
+                <span>Filter by Tags</span>
               </div>
             </label>
             {filters.tagIds && filters.tagIds.length > 0 && (
               <div className="bg-accent-50 text-accent-700 px-3 py-1.5 rounded-full text-sm font-medium border border-accent-200">
-                {filters.tagIds.length} categor
-                {filters.tagIds.length !== 1 ? "ies" : "y"} selected
+                {filters.tagIds.length} tag
+                {filters.tagIds.length !== 1 ? "s" : ""} selected
               </div>
             )}
           </div>
@@ -347,7 +347,7 @@ export function ToolFilters({
                       : {}
                   }
                   aria-pressed={isSelected}
-                  aria-label={`${isSelected ? "Remove" : "Add"} ${tag.name} category filter`}
+                  aria-label={`${isSelected ? "Remove" : "Add"} ${tag.name} tag filter`}
                 >
                   <span>{tag.name}</span>
                   {tag.toolCount !== undefined && (

@@ -77,7 +77,7 @@ export function TagFilter({
       {/* Header with enhanced spacing */}
       <div className="flex items-center justify-between mb-8">
         <h2 className="text-primary text-xl font-semibold">
-          Filter by Category
+          Filter by Tag
           {selectedCount > 0 && (
             <span
               className={cn(
@@ -104,11 +104,7 @@ export function TagFilter({
       </div>
 
       {/* Tag List with generous spacing */}
-      <div
-        role="group"
-        aria-label="Tool category filters"
-        className="space-y-4"
-      >
+      <div role="group" aria-label="Tool tag filters" className="space-y-4">
         {tagsToShow.map((tag) => {
           const isSelected = selectedTags.includes(tag.slug);
 
@@ -199,8 +195,8 @@ export function TagFilter({
             <div className="flex items-center justify-center gap-3">
               <span className="font-medium text-lg">
                 {isExpanded
-                  ? `Show fewer categories`
-                  : `Show ${hiddenTags.length} more categories`}
+                  ? `Show fewer tags`
+                  : `Show ${hiddenTags.length} more tags`}
               </span>
               <svg
                 className={cn(
@@ -228,7 +224,7 @@ export function TagFilter({
       {/* Selected Tags Summary for Screen Readers */}
       <div className="sr-only" aria-live="polite" aria-atomic="true">
         {selectedCount > 0 &&
-          `${selectedCount} categories selected: ${selectedTags
+          `${selectedCount} tags selected: ${selectedTags
             .map((slug) => tags.find((tag) => tag.slug === slug)?.name)
             .filter(Boolean)
             .join(", ")}`}

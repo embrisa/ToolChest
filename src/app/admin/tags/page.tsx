@@ -161,8 +161,8 @@ export default function AdminTagsPage() {
             Tags Management
           </h1>
           <p className="text-body text-neutral-600 dark:text-neutral-400 max-w-2xl">
-            Organize your tools with tags. Create, edit, and manage tag
-            categories to help users discover and filter tools effectively.
+            Organize your tools with tags. Create, edit, and manage tags to help
+            users discover and filter tools effectively.
           </p>
         </div>
         <Link href="/admin/tags/create">

@@ -143,7 +143,7 @@ export function ToolTable({
                 scope="col"
                 className="px-6 py-5 text-left text-xs font-bold text-primary uppercase tracking-wider"
               >
-                Categories
+                Tags
               </th>
               <th
                 scope="col"
@@ -274,7 +274,7 @@ export function ToolTable({
                       ))
                     ) : (
                       <span className="text-tertiary italic text-sm">
-                        No categories
+                        No tags
                       </span>
                     )}
                   </div>
@@ -445,7 +445,7 @@ export function ToolTable({
           </h3>
           <p className="text-body text-secondary mb-8 max-w-md mx-auto">
             Get started by creating your first tool. Tools help users accomplish
-            specific tasks and can be organized into categories.
+            specific tasks and can be organized with tags.
           </p>
           <Link href="/admin/tools/create">
             <Button className="touch-target-comfortable shadow-medium">
