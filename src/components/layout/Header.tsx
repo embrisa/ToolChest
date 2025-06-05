@@ -113,7 +113,7 @@ export function Header({ className }: HeaderProps) {
               {/* Enhanced Search Bar with improved contrast */}
               <div className="relative">
                 <label htmlFor="header-search" className="sr-only">
-                  Search tools and utilities across all categories
+                  Search tools and utilities across all tags
                 </label>
                 <input
                   id="header-search"

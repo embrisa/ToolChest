@@ -68,7 +68,7 @@ Use `@/` prefix for all imports: `@/components/ui`, `@/services/tools`, `@/types
 - Use `<ClientOnlyTool>` wrapper for hydration-safe client components
 - Include proper TypeScript interfaces for all props
 
-### Tool Categories
+### Tool Tags
 
 - **Encoding/Decoding**: Base64, URL encoding, HTML entities
 - **Hashing/Crypto**: MD5, SHA variants, password generators

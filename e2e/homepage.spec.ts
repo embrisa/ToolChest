@@ -239,7 +239,7 @@ test.describe("Homepage E2E Tests", () => {
 
       // Should have the section heading
       const filterHeading = page.getByRole("heading", {
-        name: /Filter by Category/i,
+        name: /Filter by Tag/i,
       });
       await expect(filterHeading).toBeVisible();
     });

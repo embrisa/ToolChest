@@ -137,7 +137,7 @@ export function ToolCard({
             <div
               className="flex flex-wrap gap-3"
               role="list"
-              aria-label="Tool categories"
+              aria-label="Tool tags"
             >
               {tool.tags.slice(0, 3).map((tag) => (
                 <span

@@ -37,7 +37,7 @@ const MockHeader = () => {
     <div>
       <input
         role="searchbox"
-        aria-label="Search tools and utilities across all categories"
+        aria-label="Search tools and utilities across all tags"
         onChange={handleSearchChange}
         placeholder="Search tools…"
       />
