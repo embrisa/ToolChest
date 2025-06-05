@@ -10,6 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import { cn } from "@/utils";
+import { useTranslations } from "next-intl";
 
 export interface HeaderProps {
   className?: string;
@@ -20,6 +21,7 @@ export function Header({ className }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
+  const t = useTranslations("Header");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -153,7 +155,7 @@ export function Header({ className }: HeaderProps) {
                     "hover:bg-background-secondary hover:text-brand-600",
                   )}
                 >
-                  All Tools
+                  {t("tools")}
                 </Link>
                 <Link
                   href="/about"
@@ -162,7 +164,7 @@ export function Header({ className }: HeaderProps) {
                     "hover:bg-background-secondary hover:text-brand-600",
                   )}
                 >
-                  About
+                  {t("about")}
                 </Link>
               </nav>
             </div>
@@ -285,7 +287,7 @@ export function Header({ className }: HeaderProps) {
                     )}
                     onClick={toggleMobileMenu}
                   >
-                    <span>All Tools</span>
+                    <span>{t("tools")}</span>
                     <span className="text-foreground-secondary text-sm">
                       Browse collection
                     </span>
@@ -301,7 +303,7 @@ export function Header({ className }: HeaderProps) {
                     )}
                     onClick={toggleMobileMenu}
                   >
-                    <span>About</span>
+                    <span>{t("about")}</span>
                     <span className="text-foreground-secondary text-sm">
                       Learn more
                     </span>

@@ -12,3 +12,4 @@ export * from "./tools";
 
 // Error Components
 export * from "./errors";
+export { default as LocaleSwitcher } from "./LocaleSwitcher";
