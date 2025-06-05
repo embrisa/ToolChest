@@ -25,18 +25,21 @@ async function globalSetup(config: FullConfig) {
       // Database file might not exist, which is fine
     }
 
-    // Set up E2E test database
+    // Set up E2E test database using the SQLite test schema
     console.log("🗄️  Setting up E2E test database...");
-    execSync("npx prisma migrate deploy", {
-      stdio: "pipe",
-      env: {
-        ...process.env,
-        DATABASE_URL: "file:./test-e2e.db",
+    execSync(
+      "npx prisma db push --force-reset --schema=prisma/schema.test.prisma",
+      {
+        stdio: "pipe",
+        env: {
+          ...process.env,
+          DATABASE_URL: "file:./test-e2e.db",
+        },
       },
-    });
+    );
 
-    // Generate Prisma client
-    execSync("npx prisma generate", {
+    // Generate Prisma client using the test schema
+    execSync("npx prisma generate --schema=prisma/schema.test.prisma", {
       stdio: "pipe",
     });
 
