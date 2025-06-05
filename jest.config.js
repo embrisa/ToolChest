@@ -17,6 +17,7 @@ const customJestConfig = {
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
     "^@prisma/client$": "<rootDir>/node_modules/@prisma/client/index.js",
+    "^next-intl(.*)$": "<rootDir>/node_modules/next-intl/dist/cjs$1",
   },
 
   // Coverage configuration
@@ -73,7 +74,7 @@ const customJestConfig = {
 
   // Transform ignore patterns for node_modules
   transformIgnorePatterns: [
-    "/node_modules/",
+    "node_modules/(?!next-intl)",
     "^.+\\.module\\.(css|sass|scss)$",
   ],
 

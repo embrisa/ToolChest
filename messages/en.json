@@ -1,0 +1,11 @@
+{
+  "Header": {
+    "tools": "All Tools",
+    "about": "About"
+  },
+  "LocaleSwitcher": {
+    "label": "Language",
+    "en": "English",
+    "es": "Spanish"
+  }
+}
