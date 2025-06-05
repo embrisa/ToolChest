@@ -21,7 +21,7 @@ export function Header({ className }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
-  const t = useTranslations("Header");
+  const t = useTranslations("Components.Header");
 
   useEffect(() => {
     const handleScroll = () => {

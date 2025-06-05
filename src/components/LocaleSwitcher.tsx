@@ -1,10 +1,11 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
+import { locales } from "@/i18n/config";
 import { useTransition } from "react";
 
 export default function LocaleSwitcher() {
-  const t = useTranslations("LocaleSwitcher");
+  const t = useTranslations("Components.LocaleSwitcher");
   const locale = useLocale();
   const [isPending, startTransition] = useTransition();
 
@@ -29,8 +30,11 @@ export default function LocaleSwitcher() {
         disabled={isPending}
         className="border rounded p-1 text-sm"
       >
-        <option value="en">{t("en")}</option>
-        <option value="es">{t("es")}</option>
+        {locales.map((l) => (
+          <option key={l} value={l}>
+            {t(l)}
+          </option>
+        ))}
       </select>
     </label>
   );
