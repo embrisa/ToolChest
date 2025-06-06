@@ -1,0 +1,100 @@
+{
+  "dashboard": {
+    "title": "Panel",
+    "description": "Przegląd wydajności i analizy aplikacji narzędzi",
+    "stats": {
+      "totalTools": "Całkowite narzędzia",
+      "totalTags": "Całkowite tagi",
+      "totalUsage": "Całkowite użycie",
+      "thisMonth": "W tym miesiącu",
+      "applicationStats": "Statystyka aplikacji"
+    },
+    "usage": {
+      "title": "Przegląd użycia narzędzia",
+      "table": {
+        "tool": "Narzędzie",
+        "usageCount": "Liczba użytkowania",
+        "change": "Zmiana",
+        "actions": "Działania"
+      }
+    },
+    "quickActions": {
+      "title": "Szybkie działania",
+      "viewAnalytics": "Zobacz analitykę",
+      "manageTools": "Zarządzaj narzędziami",
+      "manageTags": "Zarządzaj tagami",
+      "viewSite": "Zobacz stronę",
+      "systemHealth": "Zdrowie systemu"
+    }
+  },
+  "tools": {
+    "title": "Zarządzanie narzędziami",
+    "description": "Zarządzaj narzędziami, ich metadanami i relacjami",
+    "actions": {
+      "createTool": "Utwórz narzędzie",
+      "editTool": "Narzędzie do edycji",
+      "deleteTool": "Usuń narzędzie",
+      "bulkActions": "Działania masowe"
+    },
+    "table": {
+      "name": "Nazwa",
+      "slug": "Ślimak",
+      "status": "Status",
+      "tags": "Tagi",
+      "usage": "Stosowanie",
+      "lastModified": "Ostatni zmodyfikowany",
+      "actions": "Działania"
+    }
+  },
+  "tags": {
+    "title": "Zarządzanie tagami",
+    "description": "Organizuj narzędzia z tagami i zarządzaj relacjami",
+    "actions": {
+      "createTag": "Utwórz tag",
+      "editTag": "Edytuj tag",
+      "deleteTag": "Usuń tag",
+      "bulkActions": "Działania masowe"
+    },
+    "table": {
+      "name": "Nazwa",
+      "slug": "Ślimak",
+      "color": "Kolor",
+      "toolCount": "Narzędzia",
+      "description": "Opis",
+      "actions": "Działania"
+    }
+  },
+  "analytics": {
+    "title": "Analityka",
+    "description": "Wyświetl szczegółowe statystyki analityczne i użytkowania",
+    "charts": {
+      "usageOverTime": "Użycie w czasie",
+      "topTools": "Najlepsze narzędzia",
+      "userMetrics": "Metryki użytkownika"
+    }
+  },
+  "auth": {
+    "title": "Logowanie administracyjne",
+    "description": "Uzyskaj dostęp do panelu administracyjnego",
+    "form": {
+      "token": "Token administratora",
+      "tokenPlaceholder": "Wprowadź token administratora",
+      "login": "Login",
+      "loginError": "Nieprawidłowy token administratora"
+    }
+  },
+  "loading": {
+    "panel": "Ładowanie panelu administracyjnego ...",
+    "dashboard": "Ładowanie pulpitu nawigacyjnego ...",
+    "analytics": "Ładowanie analizy ..."
+  },
+  "navigation": {
+    "dashboard": "Panel",
+    "tools": "Narzędzia",
+    "tags": "Tagi",
+    "analytics": "Analityka",
+    "monitoring": "Monitorowanie",
+    "logout": "Logout",
+    "viewSite": "Zobacz stronę"
+  }
+}

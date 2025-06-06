@@ -1,0 +1,100 @@
+{
+    "dashboard": {
+        "title": "Painel",
+        "description": "Visão geral do desempenho e análises do tool-chest",
+        "stats": {
+            "totalTools": "Total de Ferramentas",
+            "totalTags": "Total de Tags",
+            "totalUsage": "Uso Total",
+            "thisMonth": "Este Mês",
+            "applicationStats": "Estatísticas da Aplicação"
+        },
+        "usage": {
+            "title": "Visão Geral de Uso das Ferramentas",
+            "table": {
+                "tool": "Ferramenta",
+                "usageCount": "Número de Usos",
+                "change": "Variação",
+                "actions": "Ações"
+            }
+        },
+        "quickActions": {
+            "title": "Ações Rápidas",
+            "viewAnalytics": "Ver Analíticas",
+            "manageTools": "Gerenciar Ferramentas",
+            "manageTags": "Gerenciar Tags",
+            "viewSite": "Ver Site",
+            "systemHealth": "Saúde do Sistema"
+        }
+    },
+    "tools": {
+        "title": "Gerenciamento de Ferramentas",
+        "description": "Gerencie ferramentas, seus metadados e relacionamentos",
+        "actions": {
+            "createTool": "Criar Ferramenta",
+            "editTool": "Editar Ferramenta",
+            "deleteTool": "Excluir Ferramenta",
+            "bulkActions": "Ações em Lote"
+        },
+        "table": {
+            "name": "Nome",
+            "slug": "Slug",
+            "status": "Status",
+            "tags": "Tags",
+            "usage": "Uso",
+            "lastModified": "Última Modificação",
+            "actions": "Ações"
+        }
+    },
+    "tags": {
+        "title": "Gerenciamento de Tags",
+        "description": "Organize ferramentas com tags e gerencie relacionamentos",
+        "actions": {
+            "createTag": "Criar Tag",
+            "editTag": "Editar Tag",
+            "deleteTag": "Excluir Tag",
+            "bulkActions": "Ações em Lote"
+        },
+        "table": {
+            "name": "Nome",
+            "slug": "Slug",
+            "color": "Cor",
+            "toolCount": "Ferramentas",
+            "description": "Descrição",
+            "actions": "Ações"
+        }
+    },
+    "analytics": {
+        "title": "Análises",
+        "description": "Veja análises detalhadas e estatísticas de uso",
+        "charts": {
+            "usageOverTime": "Uso ao Longo do Tempo",
+            "topTools": "Ferramentas Principais",
+            "userMetrics": "Métricas de Usuário"
+        }
+    },
+    "auth": {
+        "title": "Login de Admin",
+        "description": "Acesse o painel de administração",
+        "form": {
+            "token": "Token de Admin",
+            "tokenPlaceholder": "Digite o token de admin",
+            "login": "Entrar",
+            "loginError": "Token de admin inválido"
+        }
+    },
+    "loading": {
+        "panel": "Carregando painel de administração...",
+        "dashboard": "Carregando painel...",
+        "analytics": "Carregando análises..."
+    },
+    "navigation": {
+        "dashboard": "Painel",
+        "tools": "Ferramentas",
+        "tags": "Tags",
+        "analytics": "Análises",
+        "monitoring": "Monitoramento",
+        "logout": "Sair",
+        "viewSite": "Ver Site"
+    }
+}

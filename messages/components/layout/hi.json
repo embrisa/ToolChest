@@ -1,0 +1,58 @@
+{
+  "header": {
+    "brand": "उपकरण-चेस्ट",
+    "navigation": {
+      "home": "घर",
+      "tools": "औजार",
+      "admin": "व्यवस्थापक"
+    },
+    "mobile": {
+      "toggleMenu": "टॉगल मेनू",
+      "openMenu": "खुला नेविगेशन मेनू",
+      "closeMenu": "बंद नेविगेशन मेनू"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 टूल-चेस्ट",
+    "links": {
+      "privacy": "गोपनीयता नीति",
+      "terms": "सेवा की शर्तें",
+      "contact": "संपर्क",
+      "about": "के बारे में"
+    },
+    "description": "गोपनीयता-केंद्रित डेवलपर टूल।"
+  },
+  "breadcrumbs": {
+    "home": "घर",
+    "tools": "औजार",
+    "admin": "व्यवस्थापक",
+    "dashboard": "चकरानेवाला",
+    "analytics": "एनालिटिक्स",
+    "tags": "टैग",
+    "monitoring": "निगरानी",
+    "relationships": "संबंध"
+  },
+  "localeSwitcher": {
+    "label": "भाषा",
+    "current": "वर्तमान भाषा",
+    "selectLanguage": "भाषा चुने",
+    "languages": {
+      "en": "अंग्रेज़ी",
+      "es": "एस्पानोल",
+      "zh": "中文",
+      "hi": "हिन्दी",
+      "pt": "पुर्तगू",
+      "ru": "Русский",
+      "ja": "日本語",
+      "de": "deutsch",
+      "fr": "फ्रांकाइस",
+      "ko": "한국어",
+      "it": "Italiano",
+      "tr": "तुर्के",
+      "pl": "पोल्स्की",
+      "nl": "नेडरलैंड",
+      "vi": "Tiếng việt",
+      "uk": "आप"
+    }
+  }
+}

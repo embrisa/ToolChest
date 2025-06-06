@@ -1,0 +1,89 @@
+{
+  "buttons": {
+    "save": "Ratować",
+    "cancel": "Anulować",
+    "delete": "Usuwać",
+    "edit": "Redagować",
+    "create": "Tworzyć",
+    "update": "Aktualizacja",
+    "submit": "Składać",
+    "close": "Zamknąć",
+    "copy": "Kopia",
+    "download": "Pobierać",
+    "upload": "Wgrywać",
+    "reset": "Nastawić",
+    "clear": "Jasne",
+    "loading": "Załadunek...",
+    "processing": "Przetwarzanie...",
+    "copied": "Skopiowane!",
+    "selectFiles": "Wybierz pliki",
+    "chooseFile": "Wybierz plik",
+    "removeFile": "Usuń plik"
+  },
+  "alerts": {
+    "success": "Sukces",
+    "error": "Błąd",
+    "warning": "Ostrzeżenie",
+    "info": "Informacja",
+    "dismiss": "Odrzuć alert"
+  },
+  "modals": {
+    "close": "Zamknij modalny",
+    "confirm": "Potwierdzać",
+    "confirmDelete": "Potwierdź Usuń",
+    "deleteWarning": "Czy na pewno chcesz usunąć ten element? Tego działania nie można cofnąć.",
+    "unsavedChanges": "Masz niezbawione zmiany. Czy na pewno chcesz odejść?",
+    "title": "Modalny"
+  },
+  "tooltips": {
+    "copy": "Kopiuj do schowka",
+    "download": "Plik do pobrania",
+    "edit": "Edytuj element",
+    "delete": "Usuń element",
+    "info": "Więcej informacji",
+    "help": "Uzyskaj pomoc"
+  },
+  "progress": {
+    "uploading": "Przesyłanie ... xyz0xyz%",
+    "processing": "Przetwarzanie ... {progress}%",
+    "downloading": "Pobieranie ... {progress}%",
+    "complete": "Kompletny"
+  },
+  "fileUpload": {
+    "dragDrop": "Przeciągnij i upuść swoje pliki tutaj",
+    "or": "Lub",
+    "browse": "Przeglądaj pliki",
+    "selectedFiles": "Wybrane pliki",
+    "maxSize": "Max rozmiar pliku: xyz0xyz",
+    "supportedFormats": "Obsługiwane formaty: {formats}",
+    "fileTooLarge": "Plik za duży. Maksymalny rozmiar to {maxSize}.",
+    "invalidFileType": "Nieprawidłowy typ pliku. Obsługiwane formaty: {formats}",
+    "uploadFailed": "Prześlij nie powiodło się. Spróbuj ponownie.",
+    "removeFile": "Usuń plik"
+  },
+  "toast": {
+    "close": "Zamknij powiadomienie",
+    "success": "Sukces",
+    "error": "Błąd",
+    "warning": "Ostrzeżenie",
+    "info": "Informacje"
+  },
+  "pagination": {
+    "previous": "Poprzedni",
+    "next": "Następny",
+    "page": "Strona {page}",
+    "of": "{total}",
+    "showing": "Pokazanie {from} do {to} z wyników {total}",
+    "perPage": "na stronę"
+  },
+  "table": {
+    "noData": "Brak dostępnych danych",
+    "loading": "Ładowanie danych ...",
+    "sortBy": "Sortuj przez {column}",
+    "ascending": "Wznoszący się",
+    "descending": "Schodzenie",
+    "selectAll": "Wybierz wszystko",
+    "selectRow": "Wybierz wiersz",
+    "actions": "Działania"
+  }
+}

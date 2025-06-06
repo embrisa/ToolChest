@@ -1,0 +1,72 @@
+{
+  "metadata": {
+    "title": "Hash Generator | tool-chest",
+    "description": "Generate MD5, SHA-1, SHA-256, and other hashes online. Fast, secure, client-side hash generation for text and files.",
+    "keywords": [
+      "hash",
+      "md5",
+      "sha1",
+      "sha256",
+      "checksum",
+      "generator",
+      "text",
+      "file",
+      "security",
+      "verification"
+    ]
+  },
+  "page": {
+    "title": "Hash Generator",
+    "description": "Generate cryptographic hashes for text and files using various algorithms."
+  },
+  "tool": {
+    "algorithms": {
+      "md5": "MD5",
+      "sha1": "SHA-1",
+      "sha256": "SHA-256",
+      "sha512": "SHA-512",
+      "crc32": "CRC32"
+    },
+    "placeholders": {
+      "textInput": "Enter text to hash...",
+      "fileUpload": "Select a file to generate hash"
+    }
+  },
+  "validation": {
+    "algorithmRequired": "Please select a hash algorithm",
+    "inputRequired": "Please enter text or select a file"
+  },
+  "info": {
+    "title": "About Hash Functions",
+    "description": "Hash functions convert input data into fixed-size strings of characters, which are typically used for data integrity verification, password storage, and digital signatures.",
+    "keyFeatures": {
+      "title": "Key Features",
+      "items": [
+        "Multiple hash algorithms support",
+        "Text and file hashing",
+        "Batch processing capability",
+        "Hash comparison tools",
+        "Uppercase/lowercase output options"
+      ]
+    },
+    "useCases": {
+      "title": "Common Use Cases",
+      "items": [
+        "File integrity verification",
+        "Password hashing",
+        "Data deduplication",
+        "Digital signatures",
+        "Checksum generation"
+      ]
+    },
+    "security": {
+      "title": "Security Notes",
+      "items": [
+        "MD5 and SHA-1 are deprecated for security use",
+        "Use SHA-256 or higher for cryptographic purposes",
+        "All hashing happens locally in your browser",
+        "No data is transmitted to external servers"
+      ]
+    }
+  }
+}

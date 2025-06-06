@@ -1,0 +1,50 @@
+{
+  "hero": {
+    "title": "cajón de herramientas",
+    "subtitle": "Su colección de herramientas de computadora esenciales.",
+    "description": "Codificar, decodificar, generar, convertir y más con facilidad.",
+    "searchPlaceholder": "Herramientas de búsqueda ..."
+  },
+  "stats": {
+    "toolsAvailable": "Herramientas disponibles",
+    "clientSideProcessing": "Procesamiento del lado del cliente",
+    "clientSideValue": "100%",
+    "freeForever": "Gratis",
+    "freeValue": "Para siempre"
+  },
+  "sections": {
+    "allTools": "Todas las herramientas",
+    "searchResults": "Resultados de la búsqueda",
+    "filterTools": "Herramientas de filtro",
+    "active": "activo"
+  },
+  "loading": {
+    "loadingTools": "Herramientas de carga ...",
+    "toolsFound": "Herramientas encontradas"
+  },
+  "noResults": {
+    "title": "No hay herramientas encontradas",
+    "description": "Ninguna herramienta coincide con \"{consulta}\"",
+    "descriptionFilters": "No hay herramientas que coincidan con sus filtros seleccionados"
+  },
+  "errors": {
+    "troubleLoading": "Tenemos problemas para cargar las herramientas. Vuelva a intentarlo más tarde."
+  },
+  "search": {
+    "placeholder": "Herramientas de búsqueda ...",
+    "clearSearch": "Búsqueda clara",
+    "searchResults": "Resultados de la búsqueda"
+  },
+  "filtering": {
+    "filterByTags": "Filtrar por etiquetas",
+    "allTags": "Todas las etiquetas",
+    "selectedTags": "Etiquetas seleccionadas",
+    "clearAll": "Despejar todo",
+    "noTags": "No hay etiquetas disponibles"
+  },
+  "toolCard": {
+    "newTool": "Nuevo",
+    "popularTool": "Popular",
+    "openTool": "Herramienta abierta"
+  }
+}
