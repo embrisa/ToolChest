@@ -1,0 +1,64 @@
+{
+  "labels": {
+    "name": "Nombre",
+    "slug": "Babosa",
+    "description": "Descripción",
+    "color": "Color",
+    "status": "Estado",
+    "tags": "Etiquetas",
+    "url": "Url",
+    "file": "Archivo",
+    "text": "Texto",
+    "options": "Opción",
+    "settings": "Ajustes"
+  },
+  "placeholders": {
+    "enterName": "Ingrese el nombre",
+    "enterDescription": "Ingrese la descripción",
+    "selectColor": "Seleccionar color",
+    "selectTags": "Seleccionar etiquetas",
+    "enterUrl": "Ingrese URL",
+    "chooseFile": "Elija archivo",
+    "enterText": "Ingresar texto"
+  },
+  "validation": {
+    "nameRequired": "Se requiere el nombre",
+    "slugRequired": "Se requiere una babosa",
+    "descriptionRequired": "Se requiere una descripción",
+    "invalidSlug": "La babosa solo puede contener letras, números y guiones",
+    "slugTooShort": "Slug debe ser al menos 3 caracteres",
+    "slugTooLong": "La babosa debe ser menos de 50 caracteres",
+    "nameTooShort": "El nombre debe ser al menos 2 caracteres",
+    "nameTooLong": "El nombre debe ser menos de 100 caracteres",
+    "descriptionTooLong": "La descripción debe ser menos de 500 caracteres",
+    "invalidColor": "Seleccione un color válido",
+    "invalidEmail": "Por favor, introduce una dirección de correo electrónico válida",
+    "invalidUrl": "Ingrese una URL válida"
+  },
+  "help": {
+    "slug": "Identificador amigable con la URL (generado automáticamente desde el nombre)",
+    "description": "Breve descripción del artículo",
+    "color": "Color utilizado para la identificación visual",
+    "tags": "Organizar elementos con etiquetas relevantes",
+    "status": "Estado actual del artículo"
+  },
+  "actions": {
+    "save": "Ahorrar",
+    "cancel": "Cancelar",
+    "submit": "Entregar",
+    "reset": "Reiniciar",
+    "clear": "Claro",
+    "delete": "Borrar",
+    "edit": "Editar",
+    "create": "Crear",
+    "update": "Actualizar"
+  },
+  "states": {
+    "saving": "Ahorro...",
+    "loading": "Cargando...",
+    "saved": "Guardado con éxito",
+    "error": "Ocurrió un error",
+    "required": "Campo requerido",
+    "optional": "Campo opcional"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "header": {
+    "brand": "pêche à l'outil",
+    "navigation": {
+      "home": "Maison",
+      "tools": "Outils",
+      "admin": "Administrer"
+    },
+    "mobile": {
+      "toggleMenu": "Menu à bascule",
+      "openMenu": "Ouvrir le menu de navigation",
+      "closeMenu": "Fermer le menu de navigation"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024-Tool-Chest",
+    "links": {
+      "privacy": "politique de confidentialité",
+      "terms": "Conditions de service",
+      "contact": "Contact",
+      "about": "À propos"
+    },
+    "description": "Outils de développement axés sur la confidentialité."
+  },
+  "breadcrumbs": {
+    "home": "Maison",
+    "tools": "Outils",
+    "admin": "Administrer",
+    "dashboard": "Tableau de bord",
+    "analytics": "Analytique",
+    "tags": "Balises",
+    "monitoring": "Surveillance",
+    "relationships": "Relations"
+  },
+  "localeSwitcher": {
+    "label": "Langue",
+    "current": "Langue actuelle",
+    "selectLanguage": "Sélectionner la langue",
+    "languages": {
+      "en": "Anglais",
+      "es": "Español",
+      "zh": "中文",
+      "hi": "हिन्दी",
+      "pt": "Portuguêts",
+      "ru": "Русский",
+      "ja": "日本語",
+      "de": "Deutsch",
+      "fr": "Français",
+      "ko": "한국어",
+      "it": "Italiano",
+      "tr": "Türkçe",
+      "pl": "Polski",
+      "nl": "Néderlands",
+      "vi": "Tiếng việt",
+      "uk": "OUT"
+    }
+  }
+}

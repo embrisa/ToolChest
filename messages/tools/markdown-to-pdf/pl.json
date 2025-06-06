@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "title": "Markadds to PDF konwerter | Chest narzędzi",
+    "description": "Konwertuj pliki Markdown na PDF z niestandardowymi opcjami stylizacji. Profesjonalne generowanie dokumentów z przetwarzaniem po stronie klienta w zakresie prywatności.",
+    "keywords": [
+      "obniżka cen",
+      "PDF",
+      "przetwornik",
+      "dokument",
+      "eksport",
+      "Stylizacja",
+      "format",
+      "pobierać",
+      "prywatność",
+      "po stronie klienta"
+    ]
+  },
+  "page": {
+    "title": "Markdown to PDF",
+    "description": "Konwertuj pliki Markdown na PDF z niestandardowymi opcjami stylizacji."
+  },
+  "tool": {
+    "input": {
+      "markdown": "Treść Markdown",
+      "file": "Plik Markdown",
+      "placeholder": "Wprowadź tutaj swoją zawartość Markdown ..."
+    },
+    "customization": {
+      "title": "Dostosowywanie PDF",
+      "pageSize": "Rozmiar strony",
+      "margins": "Marginesy",
+      "theme": "Temat",
+      "fontSize": "Rozmiar czcionki",
+      "fontFamily": "Rodzina czcionek",
+      "lineHeight": "Wysokość linii",
+      "headerFooter": "Nagłówek i stopa"
+    },
+    "themes": {
+      "default": "Domyślny",
+      "github": "Girub",
+      "minimal": "Minimalny",
+      "academic": "Akademicki",
+      "professional": "Profesjonalny"
+    },
+    "pageSizes": {
+      "a4": "Różowy",
+      "letter": "List",
+      "legal": "Prawny",
+      "a3": "Być",
+      "tabloid": "Tabletka"
+    },
+    "margins": {
+      "none": "Nic",
+      "narrow": "Wąski",
+      "normal": "Normalna",
+      "wide": "Szeroki",
+      "custom": "Zwyczaj"
+    }
+  },
+  "validation": {
+    "markdownRequired": "Wpisz treść Markdown lub wybierz plik",
+    "invalidMarkdownFile": "Wybierz prawidłowy plik Markdown (.md, .Markdown)",
+    "fileTooLarge": "Plik zbyt duży (maks. 10 MB)",
+    "emptyContent": "Treść Markdown nie może być pusta"
+  },
+  "info": {
+    "title": "O konwersji Markdown do PDF",
+    "description": "Konwertuj dokumenty Markdown na profesjonalnie sformatowane pliki PDF z opcjami stylizacji konfigurowalnych. Idealny do dokumentacji, raportów, artykułów i prezentacji.",
+    "keyFeatures": {
+      "title": "Kluczowe funkcje",
+      "items": [
+        "Pełna obsługa składni Markdown",
+        "Niestandardowy styl pdf i motywy",
+        "Wiele stron i orientacje",
+        "Podświetlanie składni dla bloków kodu",
+        "Obsługa tabeli i obrazu",
+        "Dostosowanie nagłówka i stopki"
+      ]
+    },
+    "useCases": {
+      "title": "Powszechne przypadki użycia",
+      "items": [
+        "Dokumentacja techniczna",
+        "Dokumenty badawcze i raporty",
+        "Pliki Readme do drukowania",
+        "Notatki i programy spotkania",
+        "Propozycje projektu",
+        "Posty na blogu do czytania offline"
+      ]
+    },
+    "supportedSyntax": {
+      "title": "Obsługiwane funkcje Markdown",
+      "items": [
+        "Formatowanie nagłówków i tekstu",
+        "Listy (uporządkowane i nieopisane)",
+        "Linki i obrazy",
+        "Tabele i bloki kodu",
+        "Blokady i zasady poziome",
+        "Lateksowe wyrażenia matematyczne (opcjonalnie)"
+      ]
+    }
+  }
+}

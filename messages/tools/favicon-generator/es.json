@@ -1,0 +1,85 @@
+{
+  "metadata": {
+    "title": "Generador Favicon | cajón de herramientas",
+    "description": "Cree favicones a partir de imágenes en múltiples tamaños y formatos. Genere paquetes de Favicon completos para aplicaciones web con procesamiento del lado del cliente.",
+    "keywords": [
+      "favicón",
+      "generador",
+      "icono",
+      "web",
+      "imagen",
+      "cambiar de tamaño",
+      "convertir",
+      "ICO",
+      "png",
+      "desarrollo web"
+    ]
+  },
+  "page": {
+    "title": "Generador de favicón",
+    "description": "Cree favicones a partir de imágenes en múltiples tamaños y formatos."
+  },
+  "tool": {
+    "sizes": {
+      "16x16": "16x16 (pestaña del navegador)",
+      "32x32": "32x32 (pestaña del navegador)",
+      "48x48": "48x48 (Windows)",
+      "57x57": "57x57 (iOS)",
+      "72x72": "72x72 (iPad)",
+      "96x96": "96x96 (Android)",
+      "120x120": "120x120 (iPhone Retina)",
+      "152x152": "152x152 (iPad retina)",
+      "180x180": "180x180 (iPhone 6 Plus)",
+      "192x192": "192x192 (Android Chrome)",
+      "512x512": "512x512 (Android Chrome)"
+    },
+    "formats": {
+      "ico": "ICO (Windows)",
+      "png": "PNG (Universal)",
+      "svg": "SVG (escalable)"
+    },
+    "placeholders": {
+      "fileUpload": "Seleccione un archivo de imagen o arrastre y suelte"
+    }
+  },
+  "validation": {
+    "imageRequired": "Seleccione un archivo de imagen",
+    "invalidImageFormat": "Seleccione un formato de imagen válido (PNG, JPG, SVG)",
+    "imageTooLarge": "Archivo de imagen demasiado grande (máximo 10MB)",
+    "imageTooSmall": "La imagen debe ser al menos 32x32 píxeles para obtener los mejores resultados"
+  },
+  "info": {
+    "title": "Sobre la generación de favicon",
+    "description": "Un favicon es un pequeño icono que representa su sitio web en las pestañas, marcadores y atajos. Las aplicaciones web modernas requieren múltiples tamaños y formatos de Favicon para admitir diferentes dispositivos y plataformas.",
+    "keyFeatures": {
+      "title": "Características clave",
+      "items": [
+        "Generación de tamaño múltiple (16x16 a 512x512)",
+        "Soporte de varios formatos (ICO, PNG, SVG)",
+        "Optimización específica del dispositivo",
+        "Descarga por lotes como paquete zip",
+        "Vista previa antes de descargar"
+      ]
+    },
+    "useCases": {
+      "title": "Casos de uso comunes",
+      "items": [
+        "Sitio web Favicon Creation",
+        "Íconos de la aplicación web progresiva",
+        "Íconos de marcadores de navegador",
+        "Atajos de aplicaciones móviles",
+        "Iconos de aplicación de escritorio"
+      ]
+    },
+    "bestPractices": {
+      "title": "Mejores prácticas",
+      "items": [
+        "Use imágenes cuadradas (relación de aspecto 1: 1)",
+        "Comience con alta resolución (512x512 o más)",
+        "Los diseños simples funcionan mejor en tamaños pequeños",
+        "Prueba en diferentes orígenes",
+        "Incluir múltiples tamaños para la compatibilidad del dispositivo"
+      ]
+    }
+  }
+}

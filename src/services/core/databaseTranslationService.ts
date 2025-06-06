@@ -1,15 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import { Tool, Tag } from "@prisma/client";
 
-interface ToolWithKeys extends Tool {
-  nameKey?: string;
-  descriptionKey?: string | null;
-}
-
-interface TagWithKeys extends Tag {
-  nameKey?: string;
-  descriptionKey?: string | null;
-}
+type ToolWithKeys = Tool & { nameKey?: string; descriptionKey?: string | null };
+type TagWithKeys = Tag & { nameKey?: string; descriptionKey?: string | null };
 
 export interface TranslatedTool
   extends Omit<ToolWithKeys, "nameKey" | "descriptionKey"> {
@@ -116,7 +109,10 @@ export class DatabaseTranslationService {
   /**
    * Generate database records with proper translation keys
    */
-  static generateToolRecord(toolKey: string, additionalData?: Partial<Tool>) {
+  static generateToolRecord(
+    toolKey: string,
+    additionalData?: Partial<ToolWithKeys>,
+  ) {
     return {
       toolKey,
       slug: toolKey,
@@ -129,7 +125,10 @@ export class DatabaseTranslationService {
   /**
    * Generate database records with proper translation keys
    */
-  static generateTagRecord(tagKey: string, additionalData?: Partial<Tag>) {
+  static generateTagRecord(
+    tagKey: string,
+    additionalData?: Partial<TagWithKeys>,
+  ) {
     return {
       tagKey,
       slug: tagKey,
@@ -144,14 +143,14 @@ export class DatabaseTranslationService {
  * Hook-like function for server components to get translated database content
  */
 export async function getTranslatedTools(
-  tools: Tool[],
+  tools: ToolWithKeys[],
   locale: string = "en",
 ): Promise<TranslatedTool[]> {
   return DatabaseTranslationService.translateTools(tools, locale);
 }
 
 export async function getTranslatedTags(
-  tags: Tag[],
+  tags: TagWithKeys[],
   locale: string = "en",
 ): Promise<TranslatedTag[]> {
   return DatabaseTranslationService.translateTags(tags, locale);

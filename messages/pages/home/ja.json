@@ -1,0 +1,50 @@
+{
+  "hero": {
+    "title": "ツールチェスト",
+    "subtitle": "重要なコンピューターツールのコレクション。",
+    "description": "エンコード、デコード、生成、変換、その他。",
+    "searchPlaceholder": "検索ツール..."
+  },
+  "stats": {
+    "toolsAvailable": "利用可能なツール",
+    "clientSideProcessing": "クライアント側の処理",
+    "clientSideValue": "100％",
+    "freeForever": "無料",
+    "freeValue": "永遠に"
+  },
+  "sections": {
+    "allTools": "すべてのツール",
+    "searchResults": "検索結果",
+    "filterTools": "フィルターツール",
+    "active": "アクティブ"
+  },
+  "loading": {
+    "loadingTools": "ロードツール...",
+    "toolsFound": "見つかったツール"
+  },
+  "noResults": {
+    "title": "ツールは見つかりません",
+    "description": "「{Query}」と一致するツールなし",
+    "descriptionFilters": "選択したフィルターに一致するツールはありません"
+  },
+  "errors": {
+    "troubleLoading": "ツールのロードに問題があります。後でもう一度やり直してください。"
+  },
+  "search": {
+    "placeholder": "検索ツール...",
+    "clearSearch": "クリア検索",
+    "searchResults": "検索結果"
+  },
+  "filtering": {
+    "filterByTags": "タグでフィルター",
+    "allTags": "すべてのタグ",
+    "selectedTags": "選択したタグ",
+    "clearAll": "すべてをクリアします",
+    "noTags": "タグはありません"
+  },
+  "toolCard": {
+    "newTool": "新しい",
+    "popularTool": "人気のある",
+    "openTool": "オープンツール"
+  }
+}
