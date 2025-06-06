@@ -1,0 +1,85 @@
+{
+    "metadata": {
+        "title": "Favicon Generator | tool-chest",
+        "description": "Create favicons from images in multiple sizes and formats. Generate complete favicon packages for web applications with client-side processing.",
+        "keywords": [
+            "favicon",
+            "generator",
+            "icon",
+            "web",
+            "image",
+            "resize",
+            "convert",
+            "ico",
+            "png",
+            "web development"
+        ]
+    },
+    "page": {
+        "title": "Favicon Generator",
+        "description": "Create favicons from images in multiple sizes and formats."
+    },
+    "tool": {
+        "sizes": {
+            "16x16": "16x16 (Browser Tab)",
+            "32x32": "32x32 (Browser Tab)",
+            "48x48": "48x48 (Windows)",
+            "57x57": "57x57 (iOS)",
+            "72x72": "72x72 (iPad)",
+            "96x96": "96x96 (Android)",
+            "120x120": "120x120 (iPhone Retina)",
+            "152x152": "152x152 (iPad Retina)",
+            "180x180": "180x180 (iPhone 6 Plus)",
+            "192x192": "192x192 (Android Chrome)",
+            "512x512": "512x512 (Android Chrome)"
+        },
+        "formats": {
+            "ico": "ICO (Windows)",
+            "png": "PNG (Universal)",
+            "svg": "SVG (Scalable)"
+        },
+        "placeholders": {
+            "fileUpload": "Select an image file or drag and drop"
+        }
+    },
+    "validation": {
+        "imageRequired": "Please select an image file",
+        "invalidImageFormat": "Please select a valid image format (PNG, JPG, SVG)",
+        "imageTooLarge": "Image file too large (max 10MB)",
+        "imageTooSmall": "Image should be at least 32x32 pixels for best results"
+    },
+    "info": {
+        "title": "About Favicon Generation",
+        "description": "A favicon is a small icon that represents your website in browser tabs, bookmarks, and shortcuts. Modern web applications require multiple favicon sizes and formats to support different devices and platforms.",
+        "keyFeatures": {
+            "title": "Key Features",
+            "items": [
+                "Multiple size generation (16x16 to 512x512)",
+                "Various format support (ICO, PNG, SVG)",
+                "Device-specific optimization",
+                "Batch download as ZIP package",
+                "Preview before download"
+            ]
+        },
+        "useCases": {
+            "title": "Common Use Cases",
+            "items": [
+                "Website favicon creation",
+                "Progressive web app icons",
+                "Browser bookmark icons",
+                "Mobile app shortcuts",
+                "Desktop application icons"
+            ]
+        },
+        "bestPractices": {
+            "title": "Best Practices",
+            "items": [
+                "Use square images (1:1 aspect ratio)",
+                "Start with high resolution (512x512 or larger)",
+                "Simple designs work better at small sizes",
+                "Test on different backgrounds",
+                "Include multiple sizes for device compatibility"
+            ]
+        }
+    }
+}
