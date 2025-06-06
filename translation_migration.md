@@ -298,8 +298,7 @@ Each language task should be tackled independently and includes:
   - Balance between French technical terms and accepted English terms
   - Translate tag names for tool organization (encodage, génération, sécurité, etc.)
 
-- **Task 2L – Korean (ko) ✅ COMPLETED**
-
+- **Task 2L – Korean (ko)**
 
   - `messages/common/ko.json` (shared strings: actions, status, validation, privacy)
   - `messages/pages/home/ko.json` (home page: hero, stats, search, filtering)
@@ -337,7 +336,7 @@ Each language task should be tackled independently and includes:
   - Maintain clarity in technical documentation terms
   - Translate tag names for tool organization (codifica, generazione, sicurezza, etc.)
 
-- **Task 2N – Turkish (tr)**
+- **Task 2N – Turkish (tr) ✅ COMPLETED**
 
   **Create 12 Turkish Translation Files**:
 
@@ -536,6 +535,7 @@ Each language task should be tackled independently and includes:
   - `messages/components/ui/en.json` ✅ 
   - `messages/database/en.json` ✅ 
   - `messages/tools/common/en.json` ✅
+
   - `messages/tools/{tool}/en.json` ✅ (base64, hash-generator, favicon-generator, markdown-to-pdf)
 - **Task 2D - Spanish Language ✅ NEWLY COMPLETED**: All Spanish translation files added
   - `messages/common/es.json` ✅
@@ -837,6 +837,6 @@ Each language task now includes **enhanced modular translation files**:
 
 1. **Tool Component Integration**: Focus on Base64Tool first as the template for other tools
 2. **Admin Integration**: Update admin dashboard and management pages
-4. **Testing**: Ensure all translation integrations work correctly
+3. **Testing**: Ensure all translation integrations work correctly
 
 Each numbered task group can be tackled independently, minimizing merge conflicts. The foundation is solid and ready for language expansion.

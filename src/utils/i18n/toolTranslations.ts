@@ -73,6 +73,7 @@ export async function getToolTranslations(
       return getToolTranslations(toolSlug, "en");
     }
 
+    console.error(error);
     throw new Error(`Tool translations not found for: ${toolSlug}`);
   }
 }
