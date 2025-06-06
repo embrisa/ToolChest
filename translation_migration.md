@@ -318,7 +318,7 @@ Each language task should be tackled independently and includes:
   - Ensure appropriate formality levels and technical accuracy
   - Translate tag names for tool organization (인코딩, 생성, 보안, etc.)
 
-- **Task 2M – Italian (it)**
+- **Task 2M – Italian (it) ✅**
 
   **Create 12 Italian Translation Files**:
 
@@ -493,6 +493,20 @@ Each language task should be tackled independently and includes:
   - `messages/tools/common/nl.json` ✅
   - `messages/tools/{tool}/nl.json` ✅
 
+
+**Task 2M - Italian Language Files ✅**
+  - `messages/common/it.json` ✅
+  - `messages/pages/home/it.json` ✅
+  - `messages/pages/tools/it.json` ✅
+  - `messages/pages/error/it.json` ✅
+  - `messages/pages/admin/it.json` ✅
+  - `messages/pages/loading/it.json` ✅
+  - `messages/components/layout/it.json` ✅
+  - `messages/components/forms/it.json` ✅
+  - `messages/components/ui/it.json` ✅
+  - `messages/database/it.json` ✅
+  - `messages/tools/common/it.json` ✅
+  - `messages/tools/{tool}/it.json` ✅ (base64, hash-generator, favicon-generator, markdown-to-pdf)
 
 **Phase 3 - Integration ⚠️ PARTIALLY COMPLETED**
 
