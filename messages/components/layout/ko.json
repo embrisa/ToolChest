@@ -4,7 +4,8 @@
     "navigation": {
       "home": "집",
       "tools": "도구",
-      "admin": "관리자"
+      "admin": "관리자",
+      "about": "소개"
     },
     "mobile": {
       "toggleMenu": "토글 메뉴",

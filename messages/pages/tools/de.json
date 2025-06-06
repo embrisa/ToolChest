@@ -1,33 +1,33 @@
 {
   "page": {
-    "title": "All Tools",
-    "subtitle": "Explore our complete collection of utility tools designed to make your development workflow more efficient.",
-    "loading": "Loading tools...",
-    "toolsAvailable": "tools available",
-    "availableTools": "Available Tools",
-    "description": "Professional-grade utilities for web development"
+    "title": "Alle Werkzeuge",
+    "subtitle": "Entdecken Sie unsere vollständige Sammlung von Dienstprogrammen, die Ihren Entwicklungs-Workflow effizienter gestalten sollen.",
+    "loading": "Werkzeuge werden geladen...",
+    "toolsAvailable": "Werkzeuge verfügbar",
+    "availableTools": "Verfügbare Werkzeuge",
+    "description": "Professionelle Dienstprogramme für die Web-Entwicklung"
   },
   "stats": {
-    "allToolsFree": "All tools free",
-    "clientSideProcessing": "Client-side processing"
+    "allToolsFree": "Alle Werkzeuge kostenlos",
+    "clientSideProcessing": "Client-seitige Verarbeitung"
   },
   "states": {
-    "noToolsAvailable": "No tools available",
-    "noToolsDescription": "Tools are being loaded. Please check back soon or try refreshing the page.",
-    "loadingGrid": "Loading available tools..."
+    "noToolsAvailable": "Keine Werkzeuge verfügbar",
+    "noToolsDescription": "Werkzeuge werden geladen. Bitte schauen Sie bald wieder vorbei oder versuchen Sie, die Seite zu aktualisieren.",
+    "loadingGrid": "Verfügbare Werkzeuge werden geladen..."
   },
   "features": {
     "privacy": {
-      "title": "Privacy First",
-      "description": "All tools process data locally in your browser"
+      "title": "Datenschutz an erster Stelle",
+      "description": "Alle Werkzeuge verarbeiten Daten lokal in Ihrem Browser"
     },
     "free": {
-      "title": "Always Free",
-      "description": "No subscriptions, no hidden costs, completely free"
+      "title": "Immer kostenlos",
+      "description": "Keine Abonnements, keine versteckten Kosten, völlig kostenlos"
     },
     "fast": {
-      "title": "Lightning Fast",
-      "description": "Instant results with optimized performance"
+      "title": "Blitzschnell",
+      "description": "Sofortige Ergebnisse mit optimierter Leistung"
     }
   }
 }

@@ -26,7 +26,45 @@
     "settings": "Ajustes",
     "tryAgain": "Intentar otra vez",
     "clearAllFilters": "Borrar todos los filtros",
-    "clearFilters": "Filtros claros"
+    "clearFilters": "Filtros claros",
+    "assign": "Asignar",
+    "remove": "Eliminar"
+  },
+  "ui": {
+    "status": {
+      "loading": "Cargando",
+      "saving": "Guardando...",
+      "success": "Éxito",
+      "error": "Error",
+      "warning": "Advertencia",
+      "info": "Información",
+      "completed": "Completado",
+      "failed": "Fallido",
+      "processing": "Procesando...",
+      "validating": "Validando...",
+      "uploading": "Subiendo...",
+      "downloading": "Descargando...",
+      "ready": "Listo",
+      "waiting": "Esperando entrada"
+    },
+    "actions": {
+      "tryAgain": "Intentar de nuevo"
+    },
+    "confirmations": {
+      "deleteItem": "¿Estás seguro de que quieres eliminar \"{name}\"? Esta acción no se puede deshacer.",
+      "deleteItems": "¿Estás seguro de que quieres eliminar {count} elementos? Esta acción no se puede deshacer.",
+      "unsavedChanges": "Tienes cambios sin guardar. ¿Estás seguro de que quieres salir?",
+      "resetForm": "¿Estás seguro de que quieres restablecer el formulario? Se perderán todos los cambios."
+    },
+    "labels": {
+      "order": "Orden",
+      "lastUpdated": "Última Actualización",
+      "active": "Publicado",
+      "inactive": "Borrador",
+      "noItems": "No se encontraron elementos",
+      "noDescription": "Sin descripción proporcionada",
+      "noTags": "Sin etiquetas"
+    }
   },
   "status": {
     "loading": "Cargando...",
@@ -65,7 +103,9 @@
     "forbidden": "Acceso denegado",
     "timeout": "Tiempo de espera de solicitud",
     "unknownError": "Error desconocido",
-    "somethingWentWrong": "Algo salió mal"
+    "somethingWentWrong": "Algo salió mal",
+    "loadingFailed": "Error al cargar datos",
+    "processingFailed": "Procesamiento fallido"
   },
   "navigation": {
     "home": "Hogar",

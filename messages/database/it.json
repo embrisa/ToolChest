@@ -1,78 +1,86 @@
 {
   "tools": {
     "base64": {
-      "name": "Base64 Tool",
-      "description": "Encode and decode Base64 data with support for text and files"
+      "name": "Strumento Base64",
+      "description": "Codifica e decodifica dati Base64 con supporto per testo e file"
     },
-    "hashGenerator": {
-      "name": "Hash Generator",
-      "description": "Generate MD5, SHA-1, SHA-256, and other cryptographic hashes"
+    "hash-generator": {
+      "name": "Generatore di Hash",
+      "description": "Genera hash MD5, SHA-1, SHA-256 e altri hash crittografici"
     },
-    "faviconGenerator": {
-      "name": "Favicon Generator",
-      "description": "Create favicons from images in multiple sizes and formats"
+    "favicon-generator": {
+      "name": "Generatore di Favicon",
+      "description": "Crea favicon da immagini in diverse dimensioni e formati"
     },
-    "markdownToPdf": {
-      "name": "Markdown to PDF",
-      "description": "Convert Markdown files to PDF with custom styling options"
+    "markdown-to-pdf": {
+      "name": "Da Markdown a PDF",
+      "description": "Converte file Markdown in PDF con opzioni di stile personalizzate"
     },
     "urlShortener": {
-      "name": "URL Shortener",
-      "description": "Create short URLs for easy sharing and tracking"
+      "name": "Abbreviatore di URL",
+      "description": "Crea URL brevi per una facile condivisione e tracciamento"
     },
     "qrGenerator": {
-      "name": "QR Code Generator",
-      "description": "Generate QR codes for text, URLs, and other data"
+      "name": "Generatore di Codici QR",
+      "description": "Genera codici QR per testo, URL e altri dati"
     },
     "imageCompressor": {
-      "name": "Image Compressor",
-      "description": "Compress images while maintaining quality"
+      "name": "Compressore di Immagini",
+      "description": "Comprime le immagini mantenendo la qualità"
     },
     "textDiff": {
-      "name": "Text Diff Tool",
-      "description": "Compare and highlight differences between text files"
+      "name": "Strumento di Confronto Testo",
+      "description": "Confronta ed evidenzia le differenze tra file di testo"
     }
   },
   "tags": {
     "encoding": {
-      "name": "Encoding",
-      "description": "Tools for encoding and decoding data in various formats"
-    },
-    "generation": {
-      "name": "Generation",
-      "description": "Tools for generating content, codes, and files"
-    },
-    "conversion": {
-      "name": "Conversion",
-      "description": "Tools for converting between different file formats"
+      "name": "Codifica",
+      "description": "Strumenti per codificare e decodificare dati in vari formati"
     },
     "security": {
-      "name": "Security",
-      "description": "Tools for cryptographic operations and security analysis"
+      "name": "Sicurezza",
+      "description": "Strumenti per operazioni crittografiche e analisi di sicurezza"
+    },
+    "design": {
+      "name": "Design",
+      "description": "Strumenti di design e grafica"
+    },
+    "document": {
+      "name": "Documento",
+      "description": "Strumenti per l'elaborazione di documenti"
+    },
+    "generation": {
+      "name": "Generazione",
+      "description": "Strumenti per generare contenuti, codici e file"
+    },
+    "conversion": {
+      "name": "Conversione",
+      "description": "Strumenti per convertire tra diversi formati di file"
     },
     "compression": {
-      "name": "Compression",
-      "description": "Tools for reducing file sizes and optimizing content"
+      "name": "Compressione",
+      "description": "Strumenti per ridurre le dimensioni dei file e ottimizzare i contenuti"
     },
     "analysis": {
-      "name": "Analysis",
-      "description": "Tools for analyzing and comparing data and files"
+      "name": "Analisi",
+      "description": "Strumenti per analizzare e confrontare dati e file"
     },
     "web": {
-      "name": "Web Development",
-      "description": "Tools specifically designed for web developers"
+      "name": "Sviluppo Web",
+      "description": "Strumenti specificamente progettati per gli sviluppatori web"
     },
     "image": {
-      "name": "Image Processing",
-      "description": "Tools for working with images and graphics"
+      "name": "Elaborazione Immagini",
+      "description": "Strumenti per lavorare con immagini e grafici"
     },
     "text": {
-      "name": "Text Processing",
-      "description": "Tools for manipulating and analyzing text content"
+      "name": "Elaborazione Testo",
+      "description": "Strumenti per manipolare e analizzare contenuti testuali"
     },
     "utility": {
-      "name": "Utility",
-      "description": "General-purpose tools for common tasks"
+      "name": "Utilità",
+      "description": "Strumenti di uso generale per attività comuni"
     }
   }
 }

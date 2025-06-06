@@ -26,7 +26,45 @@
     "settings": "설정",
     "tryAgain": "다시 시도하십시오",
     "clearAllFilters": "모든 필터를 지우십시오",
-    "clearFilters": "클리어 필터"
+    "clearFilters": "클리어 필터",
+    "assign": "Assign",
+    "remove": "Remove"
+  },
+  "ui": {
+    "status": {
+      "loading": "Loading",
+      "saving": "Saving...",
+      "success": "Success",
+      "error": "Error",
+      "warning": "Warning",
+      "info": "Information",
+      "completed": "Completed",
+      "failed": "Failed",
+      "processing": "Processing...",
+      "validating": "Validating...",
+      "uploading": "Uploading...",
+      "downloading": "Downloading...",
+      "ready": "Ready",
+      "waiting": "Waiting for input"
+    },
+    "actions": {
+      "tryAgain": "Try Again"
+    },
+    "confirmations": {
+      "deleteItem": "Are you sure you want to delete \"{name}\"? This action cannot be undone.",
+      "deleteItems": "Are you sure you want to delete {count} items? This action cannot be undone.",
+      "unsavedChanges": "You have unsaved changes. Are you sure you want to leave?",
+      "resetForm": "Are you sure you want to reset the form? All changes will be lost."
+    },
+    "labels": {
+      "order": "Order",
+      "lastUpdated": "Last Updated",
+      "active": "Published",
+      "inactive": "Draft",
+      "noItems": "No items found",
+      "noDescription": "No description provided",
+      "noTags": "No tags"
+    }
   },
   "status": {
     "loading": "로딩 ...",
@@ -65,7 +103,9 @@
     "forbidden": "접근 불가",
     "timeout": "시간 초과 요청",
     "unknownError": "알 수없는 오류",
-    "somethingWentWrong": "뭔가 잘못되었습니다"
+    "somethingWentWrong": "뭔가 잘못되었습니다",
+    "loadingFailed": "Error Loading Data",
+    "processingFailed": "Processing failed"
   },
   "navigation": {
     "home": "집",

@@ -1,67 +1,74 @@
 {
-    "notFound": {
-        "errorCode": "404",
-        "title": "Page Not Found",
-        "description": "The page you're looking for doesn't exist. It may have been moved, deleted, or you may have typed the URL incorrectly.",
-        "suggestions": {
-            "title": "Here's what you can do:",
-            "checkUrl": "Check the URL for typos",
-            "useNavigation": "Use the navigation menu to find what you're looking for",
-            "returnHome": "Return to the home page",
-            "searchTools": "Search for tools using the search feature"
-        },
-        "actions": {
-            "goToHome": "Go to Home",
-            "goBack": "Go Back"
-        },
-        "popularTools": {
-            "title": "Popular Tools",
-            "base64": {
-                "title": "Base64 Tool",
-                "description": "Encode and decode Base64 data"
-            },
-            "hashGenerator": {
-                "title": "Hash Generator",
-                "description": "Generate MD5, SHA hashes"
-            },
-            "faviconGenerator": {
-                "title": "Favicon Generator",
-                "description": "Create favicons from images"
-            },
-            "markdownToPdf": {
-                "title": "Markdown to PDF",
-                "description": "Convert Markdown to PDF"
-            }
-        }
+  "notFound": {
+    "errorCode": "404",
+    "title": "Page Not Found",
+    "description": "The page you're looking for doesn't exist. It may have been moved, deleted, or you may have typed the URL incorrectly.",
+    "suggestions": {
+      "title": "Here's what you can do:",
+      "checkUrl": "Check the URL for typos",
+      "useNavigation": "Use the navigation menu to find what you're looking for",
+      "returnHome": "Return to the home page",
+      "searchTools": "Search for tools using the search feature"
     },
-    "serverError": {
-        "title": "Something went wrong",
-        "message": "An unexpected error occurred",
-        "description": "We're sorry, but something went wrong while loading this page. Our team has been notified and is working to resolve the issue.",
-        "suggestions": {
-            "0": "Try refreshing the page",
-            "1": "Go back to the previous page",
-            "2": "Return to the home page",
-            "3": "Contact support if the problem persists"
-        },
-        "actions": {
-            "refreshPage": "Refresh Page",
-            "goBack": "Go Back",
-            "goToHome": "Go to Home",
-            "contactSupport": "Contact Support"
-        },
-        "technical": {
-            "title": "Technical Details",
-            "errorInfo": "Error Information",
-            "copyDetails": "Copy Details",
-            "copiedToClipboard": "Copied to clipboard"
-        }
+    "actions": {
+      "goToHome": "Go to Home",
+      "goBack": "Go Back"
     },
-    "boundary": {
-        "title": "Something went wrong",
-        "description": "An unexpected error occurred in this component.",
-        "details": "Show error details",
-        "reload": "Reload component",
-        "reportIssue": "Report this issue"
+    "popularTools": {
+      "title": "Popular Tools",
+      "base64": {
+        "title": "Base64 Tool",
+        "description": "Encode and decode Base64 data"
+      },
+      "hashGenerator": {
+        "title": "Hash Generator",
+        "description": "Generate MD5, SHA hashes"
+      },
+      "faviconGenerator": {
+        "title": "Favicon Generator",
+        "description": "Create favicons from images"
+      },
+      "markdownToPdf": {
+        "title": "Markdown to PDF",
+        "description": "Convert Markdown to PDF"
+      }
+    },
+    "contact": {
+      "prompt": "Need help?",
+      "link": "Contact support"
+    },
+    "screenReader": {
+      "announcement": "Page not found. Please navigate using the links below."
     }
+  },
+  "serverError": {
+    "title": "Something went wrong",
+    "message": "An unexpected error occurred",
+    "description": "We're sorry, but something went wrong while loading this page. Our team has been notified and is working to resolve the issue.",
+    "suggestions": {
+      "0": "Try refreshing the page",
+      "1": "Go back to the previous page",
+      "2": "Return to the home page",
+      "3": "Contact support if the problem persists"
+    },
+    "actions": {
+      "refreshPage": "Refresh Page",
+      "goBack": "Go Back",
+      "goToHome": "Go to Home",
+      "contactSupport": "Contact Support"
+    },
+    "technical": {
+      "title": "Technical Details",
+      "errorInfo": "Error Information",
+      "copyDetails": "Copy Details",
+      "copiedToClipboard": "Copied to clipboard"
+    }
+  },
+  "boundary": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred in this component.",
+    "details": "Show error details",
+    "reload": "Reload component",
+    "reportIssue": "Report this issue"
+  }
 }

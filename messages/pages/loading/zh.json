@@ -1,25 +1,25 @@
 {
-    "page": {
-        "message": "Loading tools...",
-        "application": "Loading tool-chest...",
-        "pleaseWait": "Loading application, please wait..."
-    },
-    "components": {
-        "tools": "Loading tools...",
-        "tags": "Loading tags...",
-        "search": "Searching...",
-        "processing": "Processing...",
-        "saving": "Saving...",
-        "uploading": "Uploading..."
-    },
-    "admin": {
-        "panel": "Loading admin panel...",
-        "dashboard": "Loading dashboard...",
-        "analytics": "Loading analytics..."
-    },
-    "skeleton": {
-        "toolCard": "Loading tool information...",
-        "toolGrid": "Loading available tools...",
-        "tagFilters": "Loading filter options..."
-    }
+  "page": {
+    "message": "Loading tools...",
+    "application": "Loading tool-chest...",
+    "pleaseWait": "Loading application, please wait..."
+  },
+  "components": {
+    "tools": "Loading tools...",
+    "tags": "Loading tags...",
+    "search": "Searching...",
+    "processing": "Processing...",
+    "saving": "Saving...",
+    "uploading": "Uploading..."
+  },
+  "admin": {
+    "panel": "Loading admin panel...",
+    "dashboard": "Loading dashboard...",
+    "analytics": "Loading analytics..."
+  },
+  "skeleton": {
+    "toolCard": "Loading tool information...",
+    "toolGrid": "Loading available tools...",
+    "tagFilters": "Loading filter options..."
+  }
 }

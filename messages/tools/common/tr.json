@@ -1,72 +1,72 @@
 {
   "ui": {
     "modes": {
-      "encode": "Encode",
-      "decode": "Decode",
-      "generate": "Generate",
-      "convert": "Convert",
-      "process": "Process",
-      "analyze": "Analyze"
+      "encode": "Kodla",
+      "decode": "Kodu Çöz",
+      "generate": "Oluştur",
+      "convert": "Dönüştür",
+      "process": "İşle",
+      "analyze": "Analiz Et"
     },
     "inputTypes": {
-      "text": "Text",
-      "file": "File",
+      "text": "Metin",
+      "file": "Dosya",
       "url": "URL",
-      "upload": "Upload"
+      "upload": "Yükle"
     },
     "actions": {
-      "process": "Process",
-      "copy": "Copy Result",
-      "download": "Download",
-      "upload": "Upload",
-      "clear": "Clear",
-      "reset": "Reset",
-      "retry": "Retry",
-      "save": "Save",
-      "export": "Export"
+      "process": "İşle",
+      "copy": "Sonucu Kopyala",
+      "download": "İndir",
+      "upload": "Yükle",
+      "clear": "Temizle",
+      "reset": "Sıfırla",
+      "retry": "Tekrar Dene",
+      "save": "Kaydet",
+      "export": "Dışa Aktar"
     },
     "status": {
-      "processing": "Processing...",
-      "success": "Operation completed successfully",
-      "copied": "Copied to clipboard",
-      "error": "Operation failed",
-      "ready": "Ready",
-      "waiting": "Waiting for input"
+      "processing": "İşleniyor...",
+      "success": "İşlem başarıyla tamamlandı",
+      "copied": "Panoya kopyalandı",
+      "error": "İşlem başarısız oldu",
+      "ready": "Hazır",
+      "waiting": "Giriş bekleniyor"
     },
     "placeholders": {
-      "textInput": "Enter text here...",
-      "fileUpload": "Select a file or drag and drop",
-      "urlInput": "Enter URL here...",
-      "searchInput": "Search..."
+      "textInput": "Metni buraya girin...",
+      "fileUpload": "Bir dosya seçin veya sürükleyip bırakın",
+      "urlInput": "URL'yi buraya girin...",
+      "searchInput": "Ara..."
     }
   },
   "validation": {
-    "required": "This field is required",
-    "invalidInput": "Invalid input",
-    "fileTooLarge": "File too large (max {maxSize})",
-    "unsupportedFileType": "Unsupported file type",
-    "invalidFormat": "Invalid format",
-    "emptyInput": "Please enter some text or select a file",
-    "invalidUrl": "Please enter a valid URL"
+    "required": "Bu alan zorunludur",
+    "invalidInput": "Geçersiz giriş",
+    "fileTooLarge": "Dosya çok büyük (maksimum {maxSize})",
+    "unsupportedFileType": "Desteklenmeyen dosya türü",
+    "invalidFormat": "Geçersiz format",
+    "emptyInput": "Lütfen bir metin girin veya bir dosya seçin",
+    "invalidUrl": "Lütfen geçerli bir URL girin"
   },
   "privacy": {
-    "clientSideNote": "All processing happens in your browser for maximum privacy.",
-    "noDataSent": "No data sent to servers",
-    "filesStayLocal": "Files stay on your device",
-    "noLogging": "No data storage or logging"
+    "clientSideNote": "Maksimum gizlilik için tüm işlemler tarayıcınızda gerçekleşir.",
+    "noDataSent": "Sunuculara veri gönderilmedi",
+    "filesStayLocal": "Dosyalar cihazınızda kalır",
+    "noLogging": "Veri depolama veya günlük kaydı yok"
   },
   "features": {
-    "clientSideProcessing": "Client-side processing for privacy",
-    "copyToClipboard": "Copy to clipboard functionality",
-    "downloadResults": "Download results",
-    "realTimeProcessing": "Real-time processing",
-    "multipleFormats": "Multiple format support",
-    "batchProcessing": "Batch processing support"
+    "clientSideProcessing": "Gizlilik için istemci tarafında işleme",
+    "copyToClipboard": "Panoya kopyalama işlevselliği",
+    "downloadResults": "Sonuçları indir",
+    "realTimeProcessing": "Gerçek zamanlı işleme",
+    "multipleFormats": "Çoklu format desteği",
+    "batchProcessing": "Toplu işleme desteği"
   },
   "errors": {
-    "processingFailed": "Processing failed",
-    "fileReadError": "Error reading file",
-    "networkError": "Network error occurred",
-    "unknownError": "An unknown error occurred"
+    "processingFailed": "İşleme başarısız oldu",
+    "fileReadError": "Dosya okunurken hata oluştu",
+    "networkError": "Ağ hatası oluştu",
+    "unknownError": "Bilinmeyen bir hata oluştu"
   }
 }

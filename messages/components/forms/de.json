@@ -2,63 +2,63 @@
   "labels": {
     "name": "Name",
     "slug": "Slug",
-    "description": "Description",
-    "color": "Color",
+    "description": "Beschreibung",
+    "color": "Farbe",
     "status": "Status",
     "tags": "Tags",
     "url": "URL",
-    "file": "File",
+    "file": "Datei",
     "text": "Text",
-    "options": "Options",
-    "settings": "Settings"
+    "options": "Optionen",
+    "settings": "Einstellungen"
   },
   "placeholders": {
-    "enterName": "Enter name",
-    "enterDescription": "Enter description",
-    "selectColor": "Select color",
-    "selectTags": "Select tags",
-    "enterUrl": "Enter URL",
-    "chooseFile": "Choose file",
-    "enterText": "Enter text"
+    "enterName": "Name eingeben",
+    "enterDescription": "Beschreibung eingeben",
+    "selectColor": "Farbe auswählen",
+    "selectTags": "Tags auswählen",
+    "enterUrl": "URL eingeben",
+    "chooseFile": "Datei auswählen",
+    "enterText": "Text eingeben"
   },
   "validation": {
-    "nameRequired": "Name is required",
-    "slugRequired": "Slug is required",
-    "descriptionRequired": "Description is required",
-    "invalidSlug": "Slug can only contain letters, numbers, and hyphens",
-    "slugTooShort": "Slug must be at least 3 characters",
-    "slugTooLong": "Slug must be less than 50 characters",
-    "nameTooShort": "Name must be at least 2 characters",
-    "nameTooLong": "Name must be less than 100 characters",
-    "descriptionTooLong": "Description must be less than 500 characters",
-    "invalidColor": "Please select a valid color",
-    "invalidEmail": "Please enter a valid email address",
-    "invalidUrl": "Please enter a valid URL"
+    "nameRequired": "Name ist erforderlich",
+    "slugRequired": "Slug ist erforderlich",
+    "descriptionRequired": "Beschreibung ist erforderlich",
+    "invalidSlug": "Slug darf nur Buchstaben, Zahlen und Bindestriche enthalten",
+    "slugTooShort": "Slug muss mindestens 3 Zeichen lang sein",
+    "slugTooLong": "Slug muss weniger als 50 Zeichen lang sein",
+    "nameTooShort": "Name muss mindestens 2 Zeichen lang sein",
+    "nameTooLong": "Name muss weniger als 100 Zeichen lang sein",
+    "descriptionTooLong": "Beschreibung muss weniger als 500 Zeichen lang sein",
+    "invalidColor": "Bitte wählen Sie eine gültige Farbe",
+    "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+    "invalidUrl": "Bitte geben Sie eine gültige URL ein"
   },
   "help": {
-    "slug": "URL-friendly identifier (auto-generated from name)",
-    "description": "Brief description of the item",
-    "color": "Color used for visual identification",
-    "tags": "Organize items with relevant tags",
-    "status": "Current state of the item"
+    "slug": "URL-freundlicher Bezeichner (wird automatisch aus dem Namen generiert)",
+    "description": "Kurze Beschreibung des Elements",
+    "color": "Farbe zur visuellen Identifizierung",
+    "tags": "Elemente mit relevanten Tags organisieren",
+    "status": "Aktueller Status des Elements"
   },
   "actions": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "submit": "Submit",
-    "reset": "Reset",
-    "clear": "Clear",
-    "delete": "Delete",
-    "edit": "Edit",
-    "create": "Create",
-    "update": "Update"
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "submit": "Senden",
+    "reset": "Zurücksetzen",
+    "clear": "Löschen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "create": "Erstellen",
+    "update": "Aktualisieren"
   },
   "states": {
-    "saving": "Saving...",
-    "loading": "Loading...",
-    "saved": "Saved successfully",
-    "error": "Error occurred",
-    "required": "Required field",
-    "optional": "Optional field"
+    "saving": "Wird gespeichert...",
+    "loading": "Wird geladen...",
+    "saved": "Erfolgreich gespeichert",
+    "error": "Fehler aufgetreten",
+    "required": "Pflichtfeld",
+    "optional": "Optionales Feld"
   }
 }

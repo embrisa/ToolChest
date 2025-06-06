@@ -17,44 +17,55 @@
     ]
   },
   "page": {
-    "title": "Base64 Encoder & Decoder",
-    "description": "Encode and decode Base64 data with support for text and files."
+    "title": "Кодувальник та декодувальник Base64",
+    "description": "Кодуйте та декодуйте дані Base64 з підтримкою тексту та файлів.",
+    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
   },
   "tool": {
     "variants": {
-      "standard": "Standard",
+      "standard": "Стандартний",
       "urlSafe": "URL-Safe"
     },
     "placeholders": {
-      "textInput": "Enter text to encode/decode...",
-      "fileUpload": "Select a file or drag and drop"
+      "textInput": "Введіть текст для кодування/декодування...",
+      "fileUpload": "Виберіть файл або перетягніть його"
     }
   },
   "validation": {
-    "invalidBase64": "Invalid Base64 input",
-    "fileTooLarge": "File too large (max 10MB)"
+    "invalidBase64": "Неправильні дані Base64",
+    "fileTooLarge": "Файл завеликий (макс. 10 МБ)"
   },
   "info": {
-    "title": "About Base64 Encoding",
-    "description": "Base64 is a binary-to-text encoding scheme that converts binary data into a text format using a set of 64 characters. It's commonly used for encoding data in email, web pages, and data URLs, ensuring safe transmission over text-based protocols.",
+    "title": "Про кодування Base64",
+    "description": "Base64 — це схема кодування двійкових даних у текстовий формат, яка перетворює двійкові дані на текстове представлення за допомогою набору з 64 символів. Вона часто використовується для кодування даних в електронній пошті, на веб-сторінках та в URL-адресах даних, забезпечуючи безпечну передачу через текстові протоколи.",
     "keyFeatures": {
-      "title": "Key Features",
+      "title": "Ключові особливості",
       "items": [
-        "Text and file encoding/decoding",
-        "URL-safe Base64 encoding option",
-        "Copy to clipboard functionality",
-        "Download encoded/decoded results",
+        "Кодування/декодування тексту та файлів",
+        "Опція кодування URL-safe Base64",
+        "Функціональність копіювання в буфер обміну",
+        "Завантаження закодованих/декодованих результатів",
+        "Кодування/декодування в реальному часі",
         "Real-time encoding/decoding"
       ]
     },
-    "useCases": {
-      "title": "Common Use Cases",
+    "securityAndPrivacy": {
+      "title": "Security & Privacy",
       "items": [
-        "Email attachments encoding",
-        "Web data URLs",
-        "API data transmission",
-        "Database blob storage",
-        "Configuration file encoding"
+        "No data sent to servers",
+        "Processing happens in your browser",
+        "Files stay on your device",
+        "No data storage or logging"
+      ]
+    },
+    "useCases": {
+      "title": "Поширені випадки використання",
+      "items": [
+        "Кодування вкладень електронної пошти",
+        "Веб-адреси даних",
+        "Передача даних API",
+        "Зберігання BLOB-об'єктів у базі даних",
+        "Кодування файлів конфігурації"
       ]
     }
   }

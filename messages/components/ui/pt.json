@@ -1,89 +1,89 @@
 {
-    "buttons": {
-        "save": "Salvar",
-        "cancel": "Cancelar",
-        "delete": "Excluir",
-        "edit": "Editar",
-        "create": "Criar",
-        "update": "Atualizar",
-        "submit": "Enviar",
-        "close": "Fechar",
-        "copy": "Copiar",
-        "download": "Baixar",
-        "upload": "Enviar",
-        "reset": "Redefinir",
-        "clear": "Limpar",
-        "loading": "Carregando...",
-        "processing": "Processando...",
-        "copied": "Copiado!",
-        "selectFiles": "Selecionar Arquivos",
-        "chooseFile": "Escolher Arquivo",
-        "removeFile": "Remover Arquivo"
-    },
-    "alerts": {
-        "success": "Sucesso",
-        "error": "Erro",
-        "warning": "Aviso",
-        "info": "Informação",
-        "dismiss": "Dispensar alerta"
-    },
-    "modals": {
-        "close": "Fechar modal",
-        "confirm": "Confirmar",
-        "confirmDelete": "Confirmar Exclusão",
-        "deleteWarning": "Tem certeza de que deseja excluir este item? Essa ação não pode ser desfeita.",
-        "unsavedChanges": "Você tem alterações não salvas. Tem certeza de que deseja sair?",
-        "title": "Modal"
-    },
-    "tooltips": {
-        "copy": "Copiar para a área de transferência",
-        "download": "Baixar arquivo",
-        "edit": "Editar item",
-        "delete": "Excluir item",
-        "info": "Mais informações",
-        "help": "Obter ajuda"
-    },
-    "progress": {
-        "uploading": "Enviando... {progress}%",
-        "processing": "Processando... {progress}%",
-        "downloading": "Baixando... {progress}%",
-        "complete": "Concluído"
-    },
-    "fileUpload": {
-        "dragDrop": "Arraste e solte seus arquivos aqui",
-        "or": "ou",
-        "browse": "Procurar arquivos",
-        "selectedFiles": "Arquivos selecionados",
-        "maxSize": "Tamanho máximo do arquivo: {size}",
-        "supportedFormats": "Formatos suportados: {formats}",
-        "fileTooLarge": "Arquivo muito grande. Tamanho máximo é {maxSize}.",
-        "invalidFileType": "Tipo de arquivo inválido. Formatos suportados: {formats}",
-        "uploadFailed": "Falha no envio. Tente novamente.",
-        "removeFile": "Remover arquivo"
-    },
-    "toast": {
-        "close": "Fechar notificação",
-        "success": "Sucesso",
-        "error": "Erro",
-        "warning": "Aviso",
-        "info": "Info"
-    },
-    "pagination": {
-        "previous": "Anterior",
-        "next": "Próximo",
-        "page": "Página {page}",
-        "of": "de {total}",
-        "showing": "Mostrando {from} a {to} de {total} resultados",
-        "perPage": "por página"
-    },
-    "table": {
-        "noData": "Nenhum dado disponível",
-        "loading": "Carregando dados...",
-        "sortBy": "Ordenar por {column}",
-        "ascending": "Ascendente",
-        "descending": "Descendente",
-        "selectAll": "Selecionar tudo",
-        "selectRow": "Selecionar linha",
-        "actions": "Ações"
-    }
+  "buttons": {
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "create": "Criar",
+    "update": "Atualizar",
+    "submit": "Enviar",
+    "close": "Fechar",
+    "copy": "Copiar",
+    "download": "Baixar",
+    "upload": "Enviar",
+    "reset": "Redefinir",
+    "clear": "Limpar",
+    "loading": "Carregando...",
+    "processing": "Processando...",
+    "copied": "Copiado!",
+    "selectFiles": "Selecionar Arquivos",
+    "chooseFile": "Escolher Arquivo",
+    "removeFile": "Remover Arquivo"
+  },
+  "alerts": {
+    "success": "Sucesso",
+    "error": "Erro",
+    "warning": "Aviso",
+    "info": "Informação",
+    "dismiss": "Dispensar alerta"
+  },
+  "modals": {
+    "close": "Fechar modal",
+    "confirm": "Confirmar",
+    "confirmDelete": "Confirmar Exclusão",
+    "deleteWarning": "Tem certeza de que deseja excluir este item? Essa ação não pode ser desfeita.",
+    "unsavedChanges": "Você tem alterações não salvas. Tem certeza de que deseja sair?",
+    "title": "Modal"
+  },
+  "tooltips": {
+    "copy": "Copiar para a área de transferência",
+    "download": "Baixar arquivo",
+    "edit": "Editar item",
+    "delete": "Excluir item",
+    "info": "Mais informações",
+    "help": "Obter ajuda"
+  },
+  "progress": {
+    "uploading": "Enviando... {progress}%",
+    "processing": "Processando... {progress}%",
+    "downloading": "Baixando... {progress}%",
+    "complete": "Concluído"
+  },
+  "fileUpload": {
+    "dragDrop": "Arraste e solte seus arquivos aqui",
+    "or": "ou",
+    "browse": "Procurar arquivos",
+    "selectedFiles": "Arquivos selecionados",
+    "maxSize": "Tamanho máximo do arquivo: {size}",
+    "supportedFormats": "Formatos suportados: {formats}",
+    "fileTooLarge": "Arquivo muito grande. Tamanho máximo é {maxSize}.",
+    "invalidFileType": "Tipo de arquivo inválido. Formatos suportados: {formats}",
+    "uploadFailed": "Falha no envio. Tente novamente.",
+    "removeFile": "Remover arquivo"
+  },
+  "toast": {
+    "close": "Fechar notificação",
+    "success": "Sucesso",
+    "error": "Erro",
+    "warning": "Aviso",
+    "info": "Info"
+  },
+  "pagination": {
+    "previous": "Anterior",
+    "next": "Próximo",
+    "page": "Página {page}",
+    "of": "de {total}",
+    "showing": "Mostrando {from} a {to} de {total} resultados",
+    "perPage": "por página"
+  },
+  "table": {
+    "noData": "Nenhum dado disponível",
+    "loading": "Carregando dados...",
+    "sortBy": "Ordenar por {column}",
+    "ascending": "Ascendente",
+    "descending": "Descendente",
+    "selectAll": "Selecionar tudo",
+    "selectRow": "Selecionar linha",
+    "actions": "Ações"
+  }
 }

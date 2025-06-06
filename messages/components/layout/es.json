@@ -4,7 +4,8 @@
     "navigation": {
       "home": "Hogar",
       "tools": "Herramientas",
-      "admin": "Administración"
+      "admin": "Administración",
+      "about": "Acerca de"
     },
     "mobile": {
       "toggleMenu": "Menú de palanca",

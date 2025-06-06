@@ -1,72 +1,72 @@
 {
   "ui": {
     "modes": {
-      "encode": "Encode",
-      "decode": "Decode",
-      "generate": "Generate",
-      "convert": "Convert",
-      "process": "Process",
-      "analyze": "Analyze"
+      "encode": "Encoder",
+      "decode": "Décoder",
+      "generate": "Générer",
+      "convert": "Convertir",
+      "process": "Traiter",
+      "analyze": "Analyser"
     },
     "inputTypes": {
-      "text": "Text",
-      "file": "File",
+      "text": "Texte",
+      "file": "Fichier",
       "url": "URL",
-      "upload": "Upload"
+      "upload": "Téléverser"
     },
     "actions": {
-      "process": "Process",
-      "copy": "Copy Result",
-      "download": "Download",
-      "upload": "Upload",
-      "clear": "Clear",
-      "reset": "Reset",
-      "retry": "Retry",
-      "save": "Save",
-      "export": "Export"
+      "process": "Traiter",
+      "copy": "Copier le résultat",
+      "download": "Télécharger",
+      "upload": "Téléverser",
+      "clear": "Effacer",
+      "reset": "Réinitialiser",
+      "retry": "Réessayer",
+      "save": "Enregistrer",
+      "export": "Exporter"
     },
     "status": {
-      "processing": "Processing...",
-      "success": "Operation completed successfully",
-      "copied": "Copied to clipboard",
-      "error": "Operation failed",
-      "ready": "Ready",
-      "waiting": "Waiting for input"
+      "processing": "Traitement...",
+      "success": "Opération terminée avec succès",
+      "copied": "Copié dans le presse-papiers",
+      "error": "L'opération a échoué",
+      "ready": "Prêt",
+      "waiting": "En attente d'entrée"
     },
     "placeholders": {
-      "textInput": "Enter text here...",
-      "fileUpload": "Select a file or drag and drop",
-      "urlInput": "Enter URL here...",
-      "searchInput": "Search..."
+      "textInput": "Saisir le texte ici...",
+      "fileUpload": "Sélectionner un fichier ou glisser-déposer",
+      "urlInput": "Saisir l'URL ici...",
+      "searchInput": "Rechercher..."
     }
   },
   "validation": {
-    "required": "This field is required",
-    "invalidInput": "Invalid input",
-    "fileTooLarge": "File too large (max {maxSize})",
-    "unsupportedFileType": "Unsupported file type",
-    "invalidFormat": "Invalid format",
-    "emptyInput": "Please enter some text or select a file",
-    "invalidUrl": "Please enter a valid URL"
+    "required": "Ce champ est requis",
+    "invalidInput": "Entrée invalide",
+    "fileTooLarge": "Fichier trop volumineux (max {maxSize})",
+    "unsupportedFileType": "Type de fichier non supporté",
+    "invalidFormat": "Format invalide",
+    "emptyInput": "Veuillez saisir du texte ou sélectionner un fichier",
+    "invalidUrl": "Veuillez saisir une URL valide"
   },
   "privacy": {
-    "clientSideNote": "All processing happens in your browser for maximum privacy.",
-    "noDataSent": "No data sent to servers",
-    "filesStayLocal": "Files stay on your device",
-    "noLogging": "No data storage or logging"
+    "clientSideNote": "Tout le traitement se fait dans votre navigateur pour une confidentialité maximale.",
+    "noDataSent": "Aucune donnée n'est envoyée aux serveurs",
+    "filesStayLocal": "Les fichiers restent sur votre appareil",
+    "noLogging": "Aucun stockage ou journalisation des données"
   },
   "features": {
-    "clientSideProcessing": "Client-side processing for privacy",
-    "copyToClipboard": "Copy to clipboard functionality",
-    "downloadResults": "Download results",
-    "realTimeProcessing": "Real-time processing",
-    "multipleFormats": "Multiple format support",
-    "batchProcessing": "Batch processing support"
+    "clientSideProcessing": "Traitement côté client pour la confidentialité",
+    "copyToClipboard": "Fonctionnalité de copie dans le presse-papiers",
+    "downloadResults": "Télécharger les résultats",
+    "realTimeProcessing": "Traitement en temps réel",
+    "multipleFormats": "Prise en charge de plusieurs formats",
+    "batchProcessing": "Prise en charge du traitement par lots"
   },
   "errors": {
-    "processingFailed": "Processing failed",
-    "fileReadError": "Error reading file",
-    "networkError": "Network error occurred",
-    "unknownError": "An unknown error occurred"
+    "processingFailed": "Le traitement a échoué",
+    "fileReadError": "Erreur de lecture du fichier",
+    "networkError": "Une erreur réseau est survenue",
+    "unknownError": "Une erreur inconnue est survenue"
   }
 }

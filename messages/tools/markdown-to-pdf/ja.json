@@ -1,67 +1,66 @@
 {
   "metadata": {
-    "title": "PDFコンバーターへのマークダウン|ツールチェスト",
-    "description": "カスタムスタイリングオプションを使用して、マークダウンファイルをPDFに変換します。プライバシーのためのクライアント側の処理を伴う専門文書生成。",
+    "title": "Markdown to PDF Converter | tool-chest",
+    "description": "Convert Markdown to professional PDF documents with syntax highlighting, custom styling, and support for tables, code blocks, and images. Privacy-first client-side processing.",
     "keywords": [
-      "マークダウン",
-      "PDF",
-      "コンバータ",
-      "書類",
-      "輸出",
-      "スタイリング",
-      "形式",
-      "ダウンロード",
-      "プライバシー",
-      "クライアント側"
+      "markdown to pdf",
+      "markdown converter",
+      "pdf generator",
+      "markdown pdf",
+      "syntax highlighting",
+      "code blocks",
+      "tables",
+      "document converter",
+      "markdown export",
+      "free tool"
     ]
   },
   "page": {
     "title": "PDFへのマークダウン",
-    "description": "カスタムスタイリングオプションを使用して、マークダウンファイルをPDFに変換します。"
+    "description": "カスタムスタイリングオプションを使用して、マークダウンファイルをPDFに変換します。",
+    "privacyMessage": "🔒 Privacy-First • GitHub Flavored Markdown • Client-Side Processing"
   },
-  "tool": {
-    "input": {
-      "markdown": "マークダウンコンテンツ",
-      "file": "マークダウンファイル",
-      "placeholder": "ここにマークダウンコンテンツを入力してください..."
+  "featureGrid": {
+    "live-preview": {
+      "title": "Live Preview",
+      "description": "Real-time markdown preview with instant rendering",
+      "icon": "👁️"
     },
-    "customization": {
-      "title": "PDFカスタマイズ",
-      "pageSize": "ページサイズ",
-      "margins": "マージン",
-      "theme": "テーマ",
-      "fontSize": "フォントサイズ",
-      "fontFamily": "フォントファミリー",
-      "lineHeight": "線の高さ",
-      "headerFooter": "ヘッダーとフッター"
+    "templates": {
+      "title": "Multiple Templates",
+      "description": "PDF templates and themes for different use cases",
+      "icon": "🎨"
     },
-    "themes": {
-      "default": "デフォルト",
-      "github": "ギルブ",
-      "minimal": "最小限",
-      "academic": "アカデミック",
-      "professional": "プロ"
+    "gfm-support": {
+      "title": "GitHub Flavored Markdown",
+      "description": "Full GFM support including tables and task lists",
+      "icon": "📝"
     },
-    "pageSizes": {
-      "a4": "ピンク",
-      "letter": "手紙",
-      "legal": "法律上の",
-      "a3": "なれ",
-      "tabloid": "タブロイド"
+    "syntax-highlighting": {
+      "title": "Syntax Highlighting",
+      "description": "Code blocks with syntax highlighting for multiple languages",
+      "icon": "💻"
     },
-    "margins": {
-      "none": "なし",
-      "narrow": "狭い",
-      "normal": "普通",
-      "wide": "広い",
-      "custom": "カスタム"
+    "custom-styling": {
+      "title": "Custom Styling",
+      "description": "Customize fonts, colors, and layout options",
+      "icon": "⚙️"
+    },
+    "file-upload": {
+      "title": "File Upload",
+      "description": "Upload .md, .markdown, or .txt files directly",
+      "icon": "📁"
+    },
+    "professional-output": {
+      "title": "Professional Output",
+      "description": "High-quality PDF generation with metadata",
+      "icon": "📄"
+    },
+    "privacy-first": {
+      "title": "Privacy-First",
+      "description": "All processing happens in your browser",
+      "icon": "🔒"
     }
-  },
-  "validation": {
-    "markdownRequired": "マークダウンコンテンツを入力するか、ファイルを選択してください",
-    "invalidMarkdownFile": "有効なマークダウンファイル（.md、.markdown）を選択してください",
-    "fileTooLarge": "ファイルが大きすぎる（最大10MB）",
-    "emptyContent": "マークダウンコンテンツを空にすることはできません"
   },
   "info": {
     "title": "PDF変換へのマークダウンについて",
@@ -74,29 +73,44 @@
         "複数のページサイズとオリエンテーション",
         "コードブロックの構文強調表示",
         "テーブルと画像のサポート",
-        "ヘッダーとフッターのカスタマイズ"
+        "ヘッダーとフッターのカスタマイズ",
+        "File upload support (.md, .markdown, .txt)",
+        "Drag and drop file upload",
+        "Real-time word count and statistics",
+        "Professional PDF output with metadata"
       ]
     },
-    "useCases": {
-      "title": "一般的なユースケース",
+    "supportedFeatures": {
+      "title": "Supported Markdown Features",
       "items": [
-        "技術文書",
-        "研究論文と報告",
-        "印刷用のreadmeファイル",
-        "会議メモとアジェンダ",
-        "プロジェクト提案",
-        "オフライン読書のためのブログ投稿"
+        "Headings (H1-H6) with automatic numbering",
+        "Bold and italic text formatting",
+        "Links and images with captions",
+        "Code blocks with syntax highlighting",
+        "Tables with proper formatting",
+        "Blockquotes and nested lists",
+        "Task lists with checkboxes",
+        "Auto-linking of URLs"
       ]
     },
-    "supportedSyntax": {
-      "title": "サポートされているマークダウン機能",
+    "pdfTemplates": {
+      "title": "PDF Templates",
       "items": [
-        "ヘッダーとテキストのフォーマット",
-        "リスト（注文および順序付けられていない）",
-        "リンクと画像",
-        "テーブルとコードブロック",
-        "ブロッククォートと水平ルール",
-        "ラテックス数学式（オプション）"
+        "Default: Clean and simple design for general use",
+        "Academic: Professional format for research papers",
+        "Minimal: Clean design with lots of white space",
+        "Professional: Business-ready with headers and footers"
+      ]
+    },
+    "howToUse": {
+      "title": "How to Use",
+      "items": [
+        "Choose between typing in the editor or uploading a markdown file",
+        "Write or paste your markdown content in the editor",
+        "Use the live preview to see how your document will look",
+        "Select a template or customize styling options",
+        "Click 'Generate PDF' to create your document",
+        "Download your professional PDF file"
       ]
     }
   }

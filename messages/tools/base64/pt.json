@@ -1,24 +1,25 @@
 {
   "metadata": {
-    "title": "Codificador e Decodificador Base64 | tool-chest",
-    "description": "Codificador e decodificador Base64 online gratuito. Converta texto para Base64 e decodifique Base64 para texto. Suporta codificação/decodificação de arquivos com opção URL-safe. Privacidade garantida com processamento no cliente.",
+    "title": "Base64 Encoder & Decoder | tool-chest",
+    "description": "Free online Base64 encoder and decoder. Convert text to Base64 and decode Base64 to text. Supports file encoding/decoding with URL-safe options. Privacy-first with client-side processing.",
     "keywords": [
       "base64",
-      "codificador",
-      "decodificador",
-      "codificar",
-      "decodificar",
-      "texto",
-      "arquivo",
+      "encoder",
+      "decoder",
+      "encode",
+      "decode",
+      "text",
+      "file",
       "url-safe",
-      "ferramenta online",
-      "grátis",
-      "privacidade"
+      "online tool",
+      "free",
+      "privacy"
     ]
   },
   "page": {
     "title": "Codificador e Decodificador Base64",
-    "description": "Codifique e decodifique dados em Base64 com suporte para textos e arquivos."
+    "description": "Codifique e decodifique dados em Base64 com suporte para textos e arquivos.",
+    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
   },
   "tool": {
     "variants": {
@@ -44,7 +45,17 @@
         "Opção de codificação Base64 URL-safe",
         "Funcionalidade de copiar para a área de transferência",
         "Baixar resultados codificados/decodificados",
-        "Codificação/decodificação em tempo real"
+        "Codificação/decodificação em tempo real",
+        "Real-time encoding/decoding"
+      ]
+    },
+    "securityAndPrivacy": {
+      "title": "Security & Privacy",
+      "items": [
+        "No data sent to servers",
+        "Processing happens in your browser",
+        "Files stay on your device",
+        "No data storage or logging"
       ]
     },
     "useCases": {

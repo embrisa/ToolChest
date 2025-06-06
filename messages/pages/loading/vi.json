@@ -1,25 +1,25 @@
 {
-    "page": {
-        "message": "Loading tools...",
-        "application": "Loading tool-chest...",
-        "pleaseWait": "Loading application, please wait..."
-    },
-    "components": {
-        "tools": "Loading tools...",
-        "tags": "Loading tags...",
-        "search": "Searching...",
-        "processing": "Processing...",
-        "saving": "Saving...",
-        "uploading": "Uploading..."
-    },
-    "admin": {
-        "panel": "Loading admin panel...",
-        "dashboard": "Loading dashboard...",
-        "analytics": "Loading analytics..."
-    },
-    "skeleton": {
-        "toolCard": "Loading tool information...",
-        "toolGrid": "Loading available tools...",
-        "tagFilters": "Loading filter options..."
-    }
+  "page": {
+    "message": "Đang tải công cụ...",
+    "application": "Đang tải tool-chest...",
+    "pleaseWait": "Đang tải ứng dụng, vui lòng đợi..."
+  },
+  "components": {
+    "tools": "Đang tải công cụ...",
+    "tags": "Đang tải thẻ...",
+    "search": "Đang tìm kiếm...",
+    "processing": "Đang xử lý...",
+    "saving": "Đang lưu...",
+    "uploading": "Đang tải lên..."
+  },
+  "admin": {
+    "panel": "Đang tải bảng quản trị...",
+    "dashboard": "Đang tải bảng điều khiển...",
+    "analytics": "Đang tải phân tích..."
+  },
+  "skeleton": {
+    "toolCard": "Đang tải thông tin công cụ...",
+    "toolGrid": "Đang tải các công cụ có sẵn...",
+    "tagFilters": "Đang tải các tùy chọn lọc..."
+  }
 }

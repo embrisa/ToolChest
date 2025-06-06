@@ -1,5 +1,5 @@
 import { getRequestConfig } from "next-intl/server";
-import { getUserLocale } from "@/services/locale";
+import { locales, defaultLocale } from "./config";
 
 async function loadModularMessages(locale: string) {
   const modules = [
@@ -41,18 +41,22 @@ async function loadModularMessages(locale: string) {
 
       current[parts[parts.length - 1]] = moduleMessages;
     } catch (error) {
-      console.warn(
-        `Failed to load module ${moduleName} for locale ${locale}:`,
-        error,
-      );
+      // It's okay if a message file for a specific module doesn't exist.
+      // console.warn(
+      //   `Could not load messages for module ${moduleName} for locale ${locale}:`,
+      //   error,
+      // );
     }
   }
 
   return messages;
 }
 
-export default getRequestConfig(async () => {
-  const locale = await getUserLocale();
+export default getRequestConfig(async ({ locale: rawLocale }) => {
+  const locale =
+    rawLocale && (locales as readonly string[]).includes(rawLocale)
+      ? rawLocale
+      : defaultLocale;
 
   return {
     locale,

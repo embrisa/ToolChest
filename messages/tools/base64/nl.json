@@ -18,43 +18,54 @@
   },
   "page": {
     "title": "Base64 Encoder & Decoder",
-    "description": "Encode and decode Base64 data with support for text and files."
+    "description": "Codeer en decodeer Base64-gegevens met ondersteuning voor tekst en bestanden.",
+    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
   },
   "tool": {
     "variants": {
-      "standard": "Standard",
-      "urlSafe": "URL-Safe"
+      "standard": "Standaard",
+      "urlSafe": "URL-veilig"
     },
     "placeholders": {
-      "textInput": "Enter text to encode/decode...",
-      "fileUpload": "Select a file or drag and drop"
+      "textInput": "Voer tekst in om te coderen/decoderen...",
+      "fileUpload": "Selecteer een bestand of sleep het hierheen"
     }
   },
   "validation": {
-    "invalidBase64": "Invalid Base64 input",
-    "fileTooLarge": "File too large (max 10MB)"
+    "invalidBase64": "Ongeldige Base64-invoer",
+    "fileTooLarge": "Bestand te groot (max 10MB)"
   },
   "info": {
-    "title": "About Base64 Encoding",
-    "description": "Base64 is a binary-to-text encoding scheme that converts binary data into a text format using a set of 64 characters. It's commonly used for encoding data in email, web pages, and data URLs, ensuring safe transmission over text-based protocols.",
+    "title": "Over Base64-codering",
+    "description": "Base64 is een binair-naar-tekst-coderingsschema dat binaire gegevens omzet in een tekstformaat met behulp van een set van 64 tekens. Het wordt vaak gebruikt voor het coderen van gegevens in e-mail, webpagina's en data-URL's, waardoor een veilige overdracht via op tekst gebaseerde protocollen wordt gegarandeerd.",
     "keyFeatures": {
-      "title": "Key Features",
+      "title": "Belangrijkste kenmerken",
       "items": [
-        "Text and file encoding/decoding",
-        "URL-safe Base64 encoding option",
-        "Copy to clipboard functionality",
-        "Download encoded/decoded results",
+        "Tekst- en bestandscodering/-decodering",
+        "URL-veilige Base64-coderingsoptie",
+        "Kopieer naar klembord functionaliteit",
+        "Download gecodeerde/gedecodeerde resultaten",
+        "Real-time codering/decodering",
         "Real-time encoding/decoding"
       ]
     },
-    "useCases": {
-      "title": "Common Use Cases",
+    "securityAndPrivacy": {
+      "title": "Security & Privacy",
       "items": [
-        "Email attachments encoding",
-        "Web data URLs",
-        "API data transmission",
-        "Database blob storage",
-        "Configuration file encoding"
+        "No data sent to servers",
+        "Processing happens in your browser",
+        "Files stay on your device",
+        "No data storage or logging"
+      ]
+    },
+    "useCases": {
+      "title": "Veelvoorkomende gebruiksscenario's",
+      "items": [
+        "E-mailbijlagen coderen",
+        "Web data URL's",
+        "API-gegevensoverdracht",
+        "Database blob-opslag",
+        "Configuratiebestand codering"
       ]
     }
   }

@@ -210,20 +210,19 @@ export default function NotFound() {
           style={{ animationDelay: "0.5s" }}
         >
           <p className="text-sm text-foreground-secondary">
-            Still can&apos;t find what you&apos;re looking for?{" "}
+            {t("contact.prompt")}{" "}
             <a
               href="mailto:support@tool-chest.com"
               className="text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300 underline focus-ring rounded-sm transition-colors duration-200"
             >
-              Contact Support
+              {t("contact.link")}
             </a>
           </p>
         </div>
 
         {/* Screen Reader Announcement */}
         <div className="sr-only" aria-live="polite" aria-atomic="true">
-          Error 404: Page Not Found. The page you&apos;re looking for
-          doesn&apos;t exist. 4 suggestions and 2 recovery actions available.
+          {t("screenReader.announcement")}
         </div>
       </div>
     </div>

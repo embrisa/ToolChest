@@ -2,40 +2,41 @@
   "header": {
     "brand": "tool-chest",
     "navigation": {
-      "home": "Home",
-      "tools": "Tools",
-      "admin": "Admin"
+      "home": "Головна",
+      "tools": "Інструменти",
+      "admin": "Адмін",
+      "about": "Про нас"
     },
     "mobile": {
-      "toggleMenu": "Toggle menu",
-      "openMenu": "Open navigation menu",
-      "closeMenu": "Close navigation menu"
+      "toggleMenu": "Перемкнути меню",
+      "openMenu": "Відкрити меню навігації",
+      "closeMenu": "Закрити меню навігації"
     }
   },
   "footer": {
     "copyright": "© 2024 tool-chest",
     "links": {
-      "privacy": "Privacy Policy",
-      "terms": "Terms of Service",
-      "contact": "Contact",
-      "about": "About"
+      "privacy": "Політика конфіденційності",
+      "terms": "Умови надання послуг",
+      "contact": "Контакти",
+      "about": "Про нас"
     },
-    "description": "Privacy-focused developer tools."
+    "description": "Інструменти для розробників з фокусом на конфіденційність."
   },
   "breadcrumbs": {
-    "home": "Home",
-    "tools": "Tools",
-    "admin": "Admin",
-    "dashboard": "Dashboard",
-    "analytics": "Analytics",
-    "tags": "Tags",
-    "monitoring": "Monitoring",
-    "relationships": "Relationships"
+    "home": "Головна",
+    "tools": "Інструменти",
+    "admin": "Адмін",
+    "dashboard": "Панель приладів",
+    "analytics": "Аналітика",
+    "tags": "Теги",
+    "monitoring": "Моніторинг",
+    "relationships": "Зв'язки"
   },
   "localeSwitcher": {
-    "label": "Language",
-    "current": "Current language",
-    "selectLanguage": "Select language",
+    "label": "Мова",
+    "current": "Поточна мова",
+    "selectLanguage": "Вибрати мову",
     "languages": {
       "en": "English",
       "es": "Español",

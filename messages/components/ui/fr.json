@@ -1,39 +1,39 @@
 {
   "buttons": {
-    "save": "Sauvegarder",
+    "save": "Enregistrer",
     "cancel": "Annuler",
     "delete": "Supprimer",
     "edit": "Modifier",
     "create": "Créer",
-    "update": "Mise à jour",
+    "update": "Mettre à jour",
     "submit": "Soumettre",
     "close": "Fermer",
-    "copy": "Copie",
+    "copy": "Copier",
     "download": "Télécharger",
-    "upload": "Télécharger",
+    "upload": "Téléverser",
     "reset": "Réinitialiser",
-    "clear": "Clair",
+    "clear": "Effacer",
     "loading": "Chargement...",
     "processing": "Traitement...",
-    "copied": "Copié!",
+    "copied": "Copié !",
     "selectFiles": "Sélectionner des fichiers",
-    "chooseFile": "Choisir le fichier",
-    "removeFile": "Supprimer le fichier"
+    "chooseFile": "Choisir un fichier",
+    "removeFile": "Retirer le fichier"
   },
   "alerts": {
     "success": "Succès",
     "error": "Erreur",
     "warning": "Avertissement",
     "info": "Information",
-    "dismiss": "Rejeter l'alerte"
+    "dismiss": "Fermer l'alerte"
   },
   "modals": {
-    "close": "Fermer Modal",
+    "close": "Fermer la modale",
     "confirm": "Confirmer",
     "confirmDelete": "Confirmer la suppression",
-    "deleteWarning": "Êtes-vous sûr de vouloir supprimer cet élément? Cette action ne peut pas être annulée.",
-    "unsavedChanges": "Vous avez des changements non sauvés. Êtes-vous sûr de vouloir partir?",
-    "title": "Modal"
+    "deleteWarning": "Êtes-vous sûr de vouloir supprimer cet élément ? Cette action est irréversible.",
+    "unsavedChanges": "Vous avez des modifications non enregistrées. Êtes-vous sûr de vouloir quitter ?",
+    "title": "Modale"
   },
   "tooltips": {
     "copy": "Copier dans le presse-papiers",
@@ -41,49 +41,49 @@
     "edit": "Modifier",
     "delete": "Supprimer",
     "info": "Plus d'informations",
-    "help": "Obtenir de l'aide"
+    "help": "Aide"
   },
   "progress": {
-    "uploading": "Téléchargement ... {progress}%",
-    "processing": "Traitement ... {progress}%",
-    "downloading": "Téléchargement ... {progress}%",
-    "complete": "Complet"
+    "uploading": "Téléversement... {progress}%",
+    "processing": "Traitement... {progress}%",
+    "downloading": "Téléchargement... {progress}%",
+    "complete": "Terminé"
   },
   "fileUpload": {
-    "dragDrop": "Faites glisser et déposez vos fichiers ici",
+    "dragDrop": "Glissez-déposez vos fichiers ici",
     "or": "ou",
     "browse": "Parcourir les fichiers",
     "selectedFiles": "Fichiers sélectionnés",
-    "maxSize": "Taille du fichier maximum: {size}",
-    "supportedFormats": "Formats pris en charge: {formats}",
-    "fileTooLarge": "Fichier trop grand. La taille maximale est {maxSize}.",
-    "invalidFileType": "Type de fichier non valide. Formats pris en charge: {formats}",
-    "uploadFailed": "Le téléchargement a échoué. Veuillez réessayer.",
-    "removeFile": "Supprimer le fichier"
+    "maxSize": "Taille maximale du fichier : {size}",
+    "supportedFormats": "Formats supportés : {formats}",
+    "fileTooLarge": "Fichier trop volumineux. La taille maximale est de {maxSize}.",
+    "invalidFileType": "Type de fichier invalide. Formats supportés : {formats}.",
+    "uploadFailed": "Le téléversement a échoué. Veuillez réessayer.",
+    "removeFile": "Retirer le fichier"
   },
   "toast": {
-    "close": "Notification étroite",
+    "close": "Fermer la notification",
     "success": "Succès",
     "error": "Erreur",
     "warning": "Avertissement",
-    "info": "Informations"
+    "info": "Information"
   },
   "pagination": {
     "previous": "Précédent",
     "next": "Suivant",
-    "page": "Page Ph0",
-    "of": "de Ph0",
-    "showing": "Montrant les résultats {from} à {to} de {total}",
+    "page": "Page {page}",
+    "of": "sur {count}",
+    "showing": "Affiche {from}-{to} sur {total} résultats",
     "perPage": "par page"
   },
   "table": {
     "noData": "Aucune donnée disponible",
-    "loading": "Chargement de données ...",
+    "loading": "Chargement des données...",
     "sortBy": "Trier par {column}",
     "ascending": "Ascendant",
     "descending": "Descendant",
-    "selectAll": "Sélectionnez tout",
+    "selectAll": "Tout sélectionner",
     "selectRow": "Sélectionner la ligne",
-    "actions": "Actes"
+    "actions": "Actions"
   }
 }

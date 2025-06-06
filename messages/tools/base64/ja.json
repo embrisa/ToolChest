@@ -1,24 +1,25 @@
 {
   "metadata": {
-    "title": "base64エンコーダー＆デコーダー|ツールチェスト",
-    "description": "無料のオンラインBase64エンコーダーとデコーダー。テキストをbase64に変換し、base64をテキストにデコードします。 URLセーフオプションを使用したファイルエンコード/デコードをサポートします。クライアント側の処理を使用したプライバシーファースト。",
+    "title": "Base64 Encoder & Decoder | tool-chest",
+    "description": "Free online Base64 encoder and decoder. Convert text to Base64 and decode Base64 to text. Supports file encoding/decoding with URL-safe options. Privacy-first with client-side processing.",
     "keywords": [
       "base64",
-      "エンコーダー",
-      "デコーダ",
-      "エンコード",
-      "デコード",
-      "文章",
-      "ファイル",
+      "encoder",
+      "decoder",
+      "encode",
+      "decode",
+      "text",
+      "file",
       "url-safe",
-      "オンラインツール",
-      "無料",
-      "プライバシー"
+      "online tool",
+      "free",
+      "privacy"
     ]
   },
   "page": {
     "title": "base64エンコーダーとデコーダー",
-    "description": "テキストとファイルのサポートを備えたBase64データをエンコードおよびデコードします。"
+    "description": "テキストとファイルのサポートを備えたBase64データをエンコードおよびデコードします。",
+    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
   },
   "tool": {
     "variants": {
@@ -44,7 +45,17 @@
         "URLセーフBase64エンコードオプション",
         "クリップボード機能にコピーします",
         "エンコード/デコードされた結果をダウンロードします",
-        "リアルタイムエンコード/デコード"
+        "リアルタイムエンコード/デコード",
+        "Real-time encoding/decoding"
+      ]
+    },
+    "securityAndPrivacy": {
+      "title": "Security & Privacy",
+      "items": [
+        "No data sent to servers",
+        "Processing happens in your browser",
+        "Files stay on your device",
+        "No data storage or logging"
       ]
     },
     "useCases": {

@@ -1,33 +1,33 @@
 {
-    "page": {
-        "title": "Todas as Ferramentas",
-        "subtitle": "Explore nossa coleção completa de utilitários projetados para tornar seu fluxo de trabalho mais eficiente.",
-        "loading": "Carregando ferramentas...",
-        "toolsAvailable": "ferramentas disponíveis",
-        "availableTools": "Ferramentas Disponíveis",
-        "description": "Utilitários de nível profissional para desenvolvimento web"
+  "page": {
+    "title": "Todas as Ferramentas",
+    "subtitle": "Explore nossa coleção completa de utilitários projetados para tornar seu fluxo de trabalho mais eficiente.",
+    "loading": "Carregando ferramentas...",
+    "toolsAvailable": "ferramentas disponíveis",
+    "availableTools": "Ferramentas Disponíveis",
+    "description": "Utilitários de nível profissional para desenvolvimento web"
+  },
+  "stats": {
+    "allToolsFree": "Todas as ferramentas grátis",
+    "clientSideProcessing": "Processamento no cliente"
+  },
+  "states": {
+    "noToolsAvailable": "Nenhuma ferramenta disponível",
+    "noToolsDescription": "As ferramentas estão sendo carregadas. Volte em breve ou tente atualizar a página.",
+    "loadingGrid": "Carregando ferramentas disponíveis..."
+  },
+  "features": {
+    "privacy": {
+      "title": "Privacidade em Primeiro Lugar",
+      "description": "Todas as ferramentas processam dados localmente no seu navegador"
     },
-    "stats": {
-        "allToolsFree": "Todas as ferramentas grátis",
-        "clientSideProcessing": "Processamento no cliente"
+    "free": {
+      "title": "Sempre Grátis",
+      "description": "Sem assinaturas, sem custos ocultos, completamente gratuito"
     },
-    "states": {
-        "noToolsAvailable": "Nenhuma ferramenta disponível",
-        "noToolsDescription": "As ferramentas estão sendo carregadas. Volte em breve ou tente atualizar a página.",
-        "loadingGrid": "Carregando ferramentas disponíveis..."
-    },
-    "features": {
-        "privacy": {
-            "title": "Privacidade em Primeiro Lugar",
-            "description": "Todas as ferramentas processam dados localmente no seu navegador"
-        },
-        "free": {
-            "title": "Sempre Grátis",
-            "description": "Sem assinaturas, sem custos ocultos, completamente gratuito"
-        },
-        "fast": {
-            "title": "Muito Rápido",
-            "description": "Resultados instantâneos com desempenho otimizado"
-        }
+    "fast": {
+      "title": "Muito Rápido",
+      "description": "Resultados instantâneos com desempenho otimizado"
     }
+  }
 }

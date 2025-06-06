@@ -1,33 +1,33 @@
 {
   "page": {
-    "title": "All Tools",
-    "subtitle": "Explore our complete collection of utility tools designed to make your development workflow more efficient.",
-    "loading": "Loading tools...",
-    "toolsAvailable": "tools available",
-    "availableTools": "Available Tools",
-    "description": "Professional-grade utilities for web development"
+    "title": "Tüm Araçlar",
+    "subtitle": "Geliştirme iş akışınızı daha verimli hale getirmek için tasarlanmış eksiksiz yardımcı araç koleksiyonumuzu keşfedin.",
+    "loading": "Araçlar yükleniyor...",
+    "toolsAvailable": "araç mevcut",
+    "availableTools": "Mevcut Araçlar",
+    "description": "Web geliştirme için profesyonel düzeyde yardımcı programlar"
   },
   "stats": {
-    "allToolsFree": "All tools free",
-    "clientSideProcessing": "Client-side processing"
+    "allToolsFree": "Tüm araçlar ücretsiz",
+    "clientSideProcessing": "İstemci tarafında işleme"
   },
   "states": {
-    "noToolsAvailable": "No tools available",
-    "noToolsDescription": "Tools are being loaded. Please check back soon or try refreshing the page.",
-    "loadingGrid": "Loading available tools..."
+    "noToolsAvailable": "Kullanılabilir araç yok",
+    "noToolsDescription": "Araçlar yükleniyor. Lütfen daha sonra tekrar kontrol edin veya sayfayı yenilemeyi deneyin.",
+    "loadingGrid": "Mevcut araçlar yükleniyor..."
   },
   "features": {
     "privacy": {
-      "title": "Privacy First",
-      "description": "All tools process data locally in your browser"
+      "title": "Önce Gizlilik",
+      "description": "Tüm araçlar verileri yerel olarak tarayıcınızda işler"
     },
     "free": {
-      "title": "Always Free",
-      "description": "No subscriptions, no hidden costs, completely free"
+      "title": "Her Zaman Ücretsiz",
+      "description": "Abonelik yok, gizli maliyet yok, tamamen ücretsiz"
     },
     "fast": {
-      "title": "Lightning Fast",
-      "description": "Instant results with optimized performance"
+      "title": "Şimşek Hızında",
+      "description": "Optimize edilmiş performansla anında sonuçlar"
     }
   }
 }

@@ -1,78 +1,86 @@
 {
   "tools": {
     "base64": {
-      "name": "Outil de base64",
-      "description": "Encoder et décoder les données de base64 avec prise en charge du texte et des fichiers"
+      "name": "Outil Base64",
+      "description": "Encoder et décoder des données Base64 avec prise en charge du texte et des fichiers."
     },
-    "hashGenerator": {
+    "hash-generator": {
       "name": "Générateur de hachage",
-      "description": "Générez MD5, SHA-1, SHA-256 et d'autres hachages cryptographiques"
+      "description": "Générer des hachages cryptographiques MD5, SHA-1, SHA-256 et autres."
     },
-    "faviconGenerator": {
-      "name": "Générateur de favori",
-      "description": "Créer des favicons à partir d'images en plusieurs tailles et formats"
+    "favicon-generator": {
+      "name": "Générateur de favicon",
+      "description": "Créer des favicons à partir d'images en plusieurs tailles et formats."
     },
-    "markdownToPdf": {
-      "name": "Markdown à PDF",
-      "description": "Convertir les fichiers de marque en PDF avec des options de style personnalisées"
+    "markdown-to-pdf": {
+      "name": "Markdown vers PDF",
+      "description": "Convertir des fichiers Markdown en PDF avec des options de style personnalisées."
     },
     "urlShortener": {
-      "name": "Raccourcissement URL",
-      "description": "Créer des URL courtes pour un partage et un suivi faciles"
+      "name": "Raccourcisseur d'URL",
+      "description": "Créer des URL courtes pour un partage et un suivi faciles."
     },
     "qrGenerator": {
       "name": "Générateur de code QR",
-      "description": "Générer des codes QR pour le texte, les URL et autres données"
+      "description": "Générer des codes QR pour du texte, des URL et d'autres données."
     },
     "imageCompressor": {
       "name": "Compresseur d'image",
-      "description": "Compresser les images tout en maintenant la qualité"
+      "description": "Compresser les images tout en maintenant la qualité."
     },
     "textDiff": {
-      "name": "Outil de différence de texte",
-      "description": "Comparez et mettez en surbrillance les différences entre les fichiers texte"
+      "name": "Outil de comparaison de texte",
+      "description": "Comparer et mettre en évidence les différences entre les fichiers texte."
     }
   },
   "tags": {
     "encoding": {
-      "name": "Codage",
-      "description": "Outils pour le codage et le décodage des données dans divers formats"
-    },
-    "generation": {
-      "name": "Génération",
-      "description": "Outils pour générer du contenu, des codes et des fichiers"
-    },
-    "conversion": {
-      "name": "Conversion",
-      "description": "Outils pour convertir entre différents formats de fichiers"
+      "name": "Encodage",
+      "description": "Outils pour l'encodage et le décodage de données dans divers formats."
     },
     "security": {
       "name": "Sécurité",
-      "description": "Outils pour les opérations cryptographiques et l'analyse de la sécurité"
+      "description": "Outils pour les opérations cryptographiques et l'analyse de sécurité."
+    },
+    "design": {
+      "name": "Design",
+      "description": "Outils de design et de graphisme"
+    },
+    "document": {
+      "name": "Document",
+      "description": "Outils de traitement de documents"
+    },
+    "generation": {
+      "name": "Génération",
+      "description": "Outils pour générer du contenu, des codes et des fichiers."
+    },
+    "conversion": {
+      "name": "Conversion",
+      "description": "Outils pour convertir entre différents formats de fichiers."
     },
     "compression": {
       "name": "Compression",
-      "description": "Outils pour réduire les tailles de fichiers et optimiser le contenu"
+      "description": "Outils pour réduire la taille des fichiers et optimiser le contenu."
     },
     "analysis": {
       "name": "Analyse",
-      "description": "Outils pour analyser et comparer les données et les fichiers"
+      "description": "Outils pour analyser et comparer des données et des fichiers."
     },
     "web": {
       "name": "Développement Web",
-      "description": "Outils spécialement conçus pour les développeurs Web"
+      "description": "Outils spécialement conçus pour les développeurs web."
     },
     "image": {
       "name": "Traitement d'image",
-      "description": "Outils pour travailler avec des images et des graphiques"
+      "description": "Outils pour travailler avec des images et des graphiques."
     },
     "text": {
-      "name": "Traitement du texte",
-      "description": "Outils pour manipuler et analyser le contenu texte"
+      "name": "Traitement de texte",
+      "description": "Outils pour manipuler et analyser le contenu texte."
     },
     "utility": {
       "name": "Utilitaire",
-      "description": "Outils à usage général pour les tâches communes"
+      "description": "Outils à usage général pour les tâches courantes."
     }
   }
 }

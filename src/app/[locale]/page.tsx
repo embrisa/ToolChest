@@ -169,7 +169,9 @@ function HomePageContent() {
           <div className="flex items-center justify-between mb-6">
             <div>
               <h2 className="text-heading text-xl font-semibold text-primary">
-                {filterState.query ? t("sections.searchResults") : t("sections.allTools")}
+                {filterState.query
+                  ? t("sections.searchResults")
+                  : t("sections.allTools")}
               </h2>
               <p
                 className="text-body text-secondary mt-2"

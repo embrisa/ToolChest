@@ -1,33 +1,33 @@
 {
   "page": {
-    "title": "All Tools",
-    "subtitle": "Explore our complete collection of utility tools designed to make your development workflow more efficient.",
-    "loading": "Loading tools...",
-    "toolsAvailable": "tools available",
-    "availableTools": "Available Tools",
-    "description": "Professional-grade utilities for web development"
+    "title": "Всі інструменти",
+    "subtitle": "Ознайомтеся з нашою повною колекцією утиліт, розроблених для підвищення ефективності вашого робочого процесу розробки.",
+    "loading": "Завантаження інструментів...",
+    "toolsAvailable": "інструментів доступно",
+    "availableTools": "Доступні інструменти",
+    "description": "Професійні утиліти для веб-розробки"
   },
   "stats": {
-    "allToolsFree": "All tools free",
-    "clientSideProcessing": "Client-side processing"
+    "allToolsFree": "Всі інструменти безкоштовні",
+    "clientSideProcessing": "Обробка на стороні клієнта"
   },
   "states": {
-    "noToolsAvailable": "No tools available",
-    "noToolsDescription": "Tools are being loaded. Please check back soon or try refreshing the page.",
-    "loadingGrid": "Loading available tools..."
+    "noToolsAvailable": "Немає доступних інструментів",
+    "noToolsDescription": "Інструменти завантажуються. Будь ласка, зайдіть пізніше або спробуйте оновити сторінку.",
+    "loadingGrid": "Завантаження доступних інструментів..."
   },
   "features": {
     "privacy": {
-      "title": "Privacy First",
-      "description": "All tools process data locally in your browser"
+      "title": "Конфіденційність перш за все",
+      "description": "Всі інструменти обробляють дані локально у вашому браузері"
     },
     "free": {
-      "title": "Always Free",
-      "description": "No subscriptions, no hidden costs, completely free"
+      "title": "Завжди безкоштовно",
+      "description": "Без підписок, без прихованих витрат, повністю безкоштовно"
     },
     "fast": {
-      "title": "Lightning Fast",
-      "description": "Instant results with optimized performance"
+      "title": "Блискавично швидко",
+      "description": "Миттєві результати з оптимізованою продуктивністю"
     }
   }
 }

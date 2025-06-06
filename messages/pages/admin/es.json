@@ -24,7 +24,14 @@
       "manageTools": "Administrar herramientas",
       "manageTags": "Administrar etiquetas",
       "viewSite": "Ver sitio",
-      "systemHealth": "Salud del sistema"
+      "systemHealth": "Salud del sistema",
+      "addTool": "Agregar herramienta",
+      "addTag": "Agregar etiqueta",
+      "manageRelationships": "Gestionar relaciones",
+      "createToolDescription": "Crear nueva herramienta en el sistema",
+      "createTagDescription": "Crear nueva etiqueta para categorización",
+      "manageRelationshipsDescription": "Configurar asociaciones herramienta-etiqueta",
+      "viewSiteDescription": "Abrir sitio público tool-chest"
     }
   },
   "tools": {
@@ -44,6 +51,32 @@
       "usage": "Uso",
       "lastModified": "Última modificación",
       "actions": "Comportamiento"
+    },
+    "emptyState": {
+      "description": "Comienza creando tu primera herramienta. Las herramientas ayudan a los usuarios a realizar tareas específicas y pueden organizarse con etiquetas."
+    },
+    "bulkOperations": {
+      "title": "{operation} Etiquetas en Lote",
+      "selectedCount": "{count, plural, =1 {# herramienta} other {# herramientas}} seleccionadas",
+      "operationType": "Seleccionar Operación",
+      "selectTags": "Seleccionar Etiquetas",
+      "selectedTools": "Herramientas Seleccionadas",
+      "previewChanges": "Vista Previa de Cambios",
+      "operationSummary": "Resumen de Operación",
+      "totalChanges": "Cambios Totales",
+      "toolsToUpdate": "Herramientas a Actualizar",
+      "warnings": "Advertencias",
+      "executing": "Ejecutando Operación",
+      "executingMessage": "Por favor espera mientras procesamos tu operación en lote...",
+      "completed": "Operación Completada",
+      "failed": "Operación Fallida",
+      "successMessage": "Tu operación en lote se ha completado exitosamente",
+      "errorMessage": "Hubo un error ejecutando tu operación en lote",
+      "results": "Resultados de Operación",
+      "toolsAffected": "Herramientas Afectadas",
+      "tagsAffected": "Etiquetas Afectadas",
+      "errors": "Errores Encontrados",
+      "startNew": "Iniciar Nueva Operación"
     }
   },
   "tags": {
@@ -62,6 +95,9 @@
       "toolCount": "Herramientas",
       "description": "Descripción",
       "actions": "Comportamiento"
+    },
+    "emptyState": {
+      "description": "Comienza creando tu primera etiqueta para organizar tus herramientas."
     }
   },
   "analytics": {
@@ -92,6 +128,7 @@
     "dashboard": "Panel",
     "tools": "Herramientas",
     "tags": "Etiquetas",
+    "relationships": "Relaciones",
     "analytics": "Analítica",
     "monitoring": "Escucha",
     "logout": "Cierre de sesión",

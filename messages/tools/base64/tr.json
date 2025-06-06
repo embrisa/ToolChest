@@ -17,44 +17,55 @@
     ]
   },
   "page": {
-    "title": "Base64 Encoder & Decoder",
-    "description": "Encode and decode Base64 data with support for text and files."
+    "title": "Base64 Kodlayıcı ve Kod Çözücü",
+    "description": "Metin ve dosyalar için destekle Base64 verilerini kodlayın ve kodunu çözün.",
+    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
   },
   "tool": {
     "variants": {
-      "standard": "Standard",
-      "urlSafe": "URL-Safe"
+      "standard": "Standart",
+      "urlSafe": "URL Güvenli"
     },
     "placeholders": {
-      "textInput": "Enter text to encode/decode...",
-      "fileUpload": "Select a file or drag and drop"
+      "textInput": "Kodlamak/kodu çözmek için metin girin...",
+      "fileUpload": "Bir dosya seçin veya sürükleyip bırakın"
     }
   },
   "validation": {
-    "invalidBase64": "Invalid Base64 input",
-    "fileTooLarge": "File too large (max 10MB)"
+    "invalidBase64": "Geçersiz Base64 girişi",
+    "fileTooLarge": "Dosya çok büyük (maksimum 10MB)"
   },
   "info": {
-    "title": "About Base64 Encoding",
-    "description": "Base64 is a binary-to-text encoding scheme that converts binary data into a text format using a set of 64 characters. It's commonly used for encoding data in email, web pages, and data URLs, ensuring safe transmission over text-based protocols.",
+    "title": "Base64 Kodlama Hakkında",
+    "description": "Base64, ikili verileri 64 karakterlik bir set kullanarak bir metin biçimine dönüştüren bir ikili-metin kodlama şemasıdır. Genellikle e-posta, web sayfaları ve veri URL'lerindeki verileri kodlamak için kullanılır ve metin tabanlı protokoller üzerinden güvenli iletim sağlar.",
     "keyFeatures": {
-      "title": "Key Features",
+      "title": "Ana Özellikler",
       "items": [
-        "Text and file encoding/decoding",
-        "URL-safe Base64 encoding option",
-        "Copy to clipboard functionality",
-        "Download encoded/decoded results",
+        "Metin ve dosya kodlama/kod çözme",
+        "URL güvenli Base64 kodlama seçeneği",
+        "Panoya kopyalama işlevselliği",
+        "Kodlanmış/kodu çözülmüş sonuçları indirme",
+        "Gerçek zamanlı kodlama/kod çözme",
         "Real-time encoding/decoding"
       ]
     },
-    "useCases": {
-      "title": "Common Use Cases",
+    "securityAndPrivacy": {
+      "title": "Security & Privacy",
       "items": [
-        "Email attachments encoding",
-        "Web data URLs",
-        "API data transmission",
-        "Database blob storage",
-        "Configuration file encoding"
+        "No data sent to servers",
+        "Processing happens in your browser",
+        "Files stay on your device",
+        "No data storage or logging"
+      ]
+    },
+    "useCases": {
+      "title": "Yaygın Kullanım Alanları",
+      "items": [
+        "E-posta eklerinin kodlanması",
+        "Web veri URL'leri",
+        "API veri iletimi",
+        "Veritabanı blob depolama",
+        "Yapılandırma dosyası kodlaması"
       ]
     }
   }

@@ -1,64 +1,64 @@
 {
-    "labels": {
-        "name": "Name",
-        "slug": "Slug",
-        "description": "Description",
-        "color": "Color",
-        "status": "Status",
-        "tags": "Tags",
-        "url": "URL",
-        "file": "File",
-        "text": "Text",
-        "options": "Options",
-        "settings": "Settings"
-    },
-    "placeholders": {
-        "enterName": "Enter name",
-        "enterDescription": "Enter description",
-        "selectColor": "Select color",
-        "selectTags": "Select tags",
-        "enterUrl": "Enter URL",
-        "chooseFile": "Choose file",
-        "enterText": "Enter text"
-    },
-    "validation": {
-        "nameRequired": "Name is required",
-        "slugRequired": "Slug is required",
-        "descriptionRequired": "Description is required",
-        "invalidSlug": "Slug can only contain letters, numbers, and hyphens",
-        "slugTooShort": "Slug must be at least 3 characters",
-        "slugTooLong": "Slug must be less than 50 characters",
-        "nameTooShort": "Name must be at least 2 characters",
-        "nameTooLong": "Name must be less than 100 characters",
-        "descriptionTooLong": "Description must be less than 500 characters",
-        "invalidColor": "Please select a valid color",
-        "invalidEmail": "Please enter a valid email address",
-        "invalidUrl": "Please enter a valid URL"
-    },
-    "help": {
-        "slug": "URL-friendly identifier (auto-generated from name)",
-        "description": "Brief description of the item",
-        "color": "Color used for visual identification",
-        "tags": "Organize items with relevant tags",
-        "status": "Current state of the item"
-    },
-    "actions": {
-        "save": "Save",
-        "cancel": "Cancel",
-        "submit": "Submit",
-        "reset": "Reset",
-        "clear": "Clear",
-        "delete": "Delete",
-        "edit": "Edit",
-        "create": "Create",
-        "update": "Update"
-    },
-    "states": {
-        "saving": "Saving...",
-        "loading": "Loading...",
-        "saved": "Saved successfully",
-        "error": "Error occurred",
-        "required": "Required field",
-        "optional": "Optional field"
-    }
+  "labels": {
+    "name": "Naam",
+    "slug": "Slug",
+    "description": "Beschrijving",
+    "color": "Kleur",
+    "status": "Status",
+    "tags": "Tags",
+    "url": "URL",
+    "file": "Bestand",
+    "text": "Tekst",
+    "options": "Opties",
+    "settings": "Instellingen"
+  },
+  "placeholders": {
+    "enterName": "Voer naam in",
+    "enterDescription": "Voer beschrijving in",
+    "selectColor": "Selecteer kleur",
+    "selectTags": "Selecteer tags",
+    "enterUrl": "Voer URL in",
+    "chooseFile": "Kies bestand",
+    "enterText": "Voer tekst in"
+  },
+  "validation": {
+    "nameRequired": "Naam is verplicht",
+    "slugRequired": "Slug is verplicht",
+    "descriptionRequired": "Beschrijving is verplicht",
+    "invalidSlug": "Slug mag alleen letters, cijfers en koppeltekens bevatten",
+    "slugTooShort": "Slug moet minstens 3 tekens lang zijn",
+    "slugTooLong": "Slug moet minder dan 50 tekens lang zijn",
+    "nameTooShort": "Naam moet minstens 2 tekens lang zijn",
+    "nameTooLong": "Naam moet minder dan 100 tekens lang zijn",
+    "descriptionTooLong": "Beschrijving moet minder dan 500 tekens lang zijn",
+    "invalidColor": "Selecteer een geldige kleur",
+    "invalidEmail": "Voer een geldig e-mailadres in",
+    "invalidUrl": "Voer een geldige URL in"
+  },
+  "help": {
+    "slug": "URL-vriendelijke identificatie (automatisch gegenereerd op basis van naam)",
+    "description": "Korte beschrijving van het item",
+    "color": "Kleur gebruikt voor visuele identificatie",
+    "tags": "Organiseer items met relevante tags",
+    "status": "Huidige staat van het item"
+  },
+  "actions": {
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "submit": "Verzenden",
+    "reset": "Resetten",
+    "clear": "Wissen",
+    "delete": "Verwijderen",
+    "edit": "Bewerken",
+    "create": "Aanmaken",
+    "update": "Bijwerken"
+  },
+  "states": {
+    "saving": "Opslaan...",
+    "loading": "Laden...",
+    "saved": "Succesvol opgeslagen",
+    "error": "Fout opgetreden",
+    "required": "Verplicht veld",
+    "optional": "Optioneel veld"
+  }
 }

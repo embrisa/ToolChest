@@ -32,6 +32,13 @@
         "title": "PDF에 마크 다운",
         "description": "Markdown을 PDF로 변환하십시오"
       }
+    },
+    "contact": {
+      "prompt": "Need help?",
+      "link": "Contact support"
+    },
+    "screenReader": {
+      "announcement": "Page not found. Please navigate using the links below."
     }
   },
   "serverError": {

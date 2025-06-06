@@ -1,58 +1,59 @@
 {
-    "header": {
-        "brand": "tool-chest",
-        "navigation": {
-            "home": "Início",
-            "tools": "Ferramentas",
-            "admin": "Admin"
-        },
-        "mobile": {
-            "toggleMenu": "Alternar menu",
-            "openMenu": "Abrir menu de navegação",
-            "closeMenu": "Fechar menu de navegação"
-        }
+  "header": {
+    "brand": "tool-chest",
+    "navigation": {
+      "home": "Início",
+      "tools": "Ferramentas",
+      "admin": "Admin",
+      "about": "Sobre"
     },
-    "footer": {
-        "copyright": "© 2024 tool-chest",
-        "links": {
-            "privacy": "Política de Privacidade",
-            "terms": "Termos de Serviço",
-            "contact": "Contato",
-            "about": "Sobre"
-        },
-        "description": "Ferramentas de desenvolvimento focadas em privacidade."
-    },
-    "breadcrumbs": {
-        "home": "Início",
-        "tools": "Ferramentas",
-        "admin": "Admin",
-        "dashboard": "Painel",
-        "analytics": "Análises",
-        "tags": "Tags",
-        "monitoring": "Monitoramento",
-        "relationships": "Relacionamentos"
-    },
-    "localeSwitcher": {
-        "label": "Idioma",
-        "current": "Idioma atual",
-        "selectLanguage": "Selecionar idioma",
-        "languages": {
-            "en": "English",
-            "es": "Español",
-            "zh": "中文",
-            "hi": "हिन्दी",
-            "pt": "Português",
-            "ru": "Русский",
-            "ja": "日本語",
-            "de": "Deutsch",
-            "fr": "Français",
-            "ko": "한국어",
-            "it": "Italiano",
-            "tr": "Türkçe",
-            "pl": "Polski",
-            "nl": "Nederlands",
-            "vi": "Tiếng Việt",
-            "uk": "Українська"
-        }
+    "mobile": {
+      "toggleMenu": "Alternar menu",
+      "openMenu": "Abrir menu de navegação",
+      "closeMenu": "Fechar menu de navegação"
     }
+  },
+  "footer": {
+    "copyright": "© 2024 tool-chest",
+    "links": {
+      "privacy": "Política de Privacidade",
+      "terms": "Termos de Serviço",
+      "contact": "Contato",
+      "about": "Sobre"
+    },
+    "description": "Ferramentas de desenvolvimento focadas em privacidade."
+  },
+  "breadcrumbs": {
+    "home": "Início",
+    "tools": "Ferramentas",
+    "admin": "Admin",
+    "dashboard": "Painel",
+    "analytics": "Análises",
+    "tags": "Tags",
+    "monitoring": "Monitoramento",
+    "relationships": "Relacionamentos"
+  },
+  "localeSwitcher": {
+    "label": "Idioma",
+    "current": "Idioma atual",
+    "selectLanguage": "Selecionar idioma",
+    "languages": {
+      "en": "English",
+      "es": "Español",
+      "zh": "中文",
+      "hi": "हिन्दी",
+      "pt": "Português",
+      "ru": "Русский",
+      "ja": "日本語",
+      "de": "Deutsch",
+      "fr": "Français",
+      "ko": "한국어",
+      "it": "Italiano",
+      "tr": "Türkçe",
+      "pl": "Polski",
+      "nl": "Nederlands",
+      "vi": "Tiếng Việt",
+      "uk": "Українська"
+    }
+  }
 }

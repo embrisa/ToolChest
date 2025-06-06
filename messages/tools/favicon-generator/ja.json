@@ -1,74 +1,59 @@
 {
   "metadata": {
-    "title": "ファビコンジェネレーター|ツールチェスト",
-    "description": "複数のサイズと形式の画像からファビコンを作成します。クライアント側の処理を使用して、Webアプリケーション用の完全なFaviconパッケージを生成します。",
+    "title": "Favicon Generator - Create Favicons in All Sizes | tool-chest",
+    "description": "Free online favicon generator. Create favicons in all standard sizes (16x16, 32x32, 192x192, 512x512) from any image. Generate complete favicon packages with manifest files.",
     "keywords": [
-      "ファビコン",
-      "ジェネレータ",
-      "アイコン",
-      "ウェブ",
-      "画像",
-      "サイズ",
-      "変換する",
-      "ICO",
-      "PNG",
-      "Web開発"
+      "favicon generator",
+      "favicon",
+      "icon generator",
+      "website icon",
+      "app icon",
+      "16x16",
+      "32x32",
+      "192x192",
+      "512x512",
+      "ico file",
+      "png icon",
+      "web app manifest",
+      "free tool"
     ]
   },
   "page": {
     "title": "ファビコンジェネレーター",
-    "description": "複数のサイズと形式の画像からファビコンを作成します。"
+    "description": "複数のサイズと形式の画像からファビコンを作成します。",
+    "privacyNotice": "All processing happens in your browser using <bold>Canvas API</bold>.",
+    "privacyMessage": "🔒 Privacy-First • Canvas API • Client-Side Processing"
   },
-  "tool": {
-    "sizes": {
-      "16x16": "16x16（ブラウザタブ）",
-      "32x32": "32x32（ブラウザタブ）",
-      "48x48": "48x48（Windows）",
-      "57x57": "57x57（iOS）",
-      "72x72": "72x72（iPad）",
-      "96x96": "96x96（Android）",
-      "120x120": "120x120（iPhone Retina）",
-      "152x152": "152x152（iPad Retina）",
-      "180x180": "180x180（iPhone 6 Plus）",
-      "192x192": "192x192（Android Chrome）",
-      "512x512": "512x512（Android Chrome）"
+  "featureGrid": {
+    "browserIcons": {
+      "title": "Browser Icons",
+      "description": "16×16, 32×32, 48×48 favicons for browser tabs, bookmarks, and desktop shortcuts."
     },
-    "formats": {
-      "ico": "ICO（Windows）",
-      "png": "PNG（ユニバーサル）",
-      "svg": "SVG（スケーラブル）"
+    "appleTouch": {
+      "title": "Apple Touch Icons",
+      "description": "180×180 icons for iOS home screen and Safari bookmark icons with rounded corners."
     },
-    "placeholders": {
-      "fileUpload": "画像ファイルを選択するか、ドラッグアンドドロップします"
+    "androidIcons": {
+      "title": "Android Icons",
+      "description": "192×192, 512×512 icons for Android home screen and Progressive Web Apps."
+    },
+    "webManifest": {
+      "title": "Web App Manifest",
+      "description": "Complete manifest.json for Progressive Web Apps with all required metadata.",
+      "badge": "PWA Ready"
     }
-  },
-  "validation": {
-    "imageRequired": "画像ファイルを選択してください",
-    "invalidImageFormat": "有効な画像形式（PNG、JPG、SVG）を選択してください",
-    "imageTooLarge": "画像ファイルが大きすぎる（最大10MB）",
-    "imageTooSmall": "最良の結果を得るには、画像は少なくとも32x32ピクセルでなければなりません"
   },
   "info": {
     "title": "ファビコン世代について",
     "description": "Faviconは、ブラウザタブ、ブックマーク、ショートカットでWebサイトを表す小さなアイコンです。最新のWebアプリケーションでは、さまざまなデバイスやプラットフォームをサポートするために、複数のFaviconサイズとフォーマットが必要です。",
-    "keyFeatures": {
-      "title": "重要な機能",
+    "standardSizes": {
+      "title": "Standard Sizes",
       "items": [
-        "複数のサイズの生成（16x16〜512x512）",
-        "さまざまなフォーマットサポート（ICO、PNG、SVG）",
-        "デバイス固有の最適化",
-        "zipパッケージとしてバッチダウンロード",
-        "ダウンロードする前にプレビューします"
-      ]
-    },
-    "useCases": {
-      "title": "一般的なユースケース",
-      "items": [
-        "ウェブサイトFavicon作成",
-        "プログレッシブWebアプリアイコン",
-        "ブラウザのブックマークアイコン",
-        "モバイルアプリショートカット",
-        "デスクトップアプリケーションアイコン"
+        "16×16, 32×32 - Browser tabs and bookmarks",
+        "48×48, 64×64 - Desktop shortcuts and apps",
+        "96×96, 128×128 - High-DPI and retina displays",
+        "180×180 - Apple touch icon for iOS",
+        "192×192, 512×512 - Android and PWA icons"
       ]
     },
     "bestPractices": {

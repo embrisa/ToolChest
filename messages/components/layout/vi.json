@@ -1,58 +1,59 @@
 {
-    "header": {
-        "brand": "tool-chest",
-        "navigation": {
-            "home": "Home",
-            "tools": "Tools",
-            "admin": "Admin"
-        },
-        "mobile": {
-            "toggleMenu": "Toggle menu",
-            "openMenu": "Open navigation menu",
-            "closeMenu": "Close navigation menu"
-        }
+  "header": {
+    "brand": "tool-chest",
+    "navigation": {
+      "home": "Trang chủ",
+      "tools": "Công cụ",
+      "admin": "Quản trị",
+      "about": "Giới thiệu"
     },
-    "footer": {
-        "copyright": "© 2024 tool-chest",
-        "links": {
-            "privacy": "Privacy Policy",
-            "terms": "Terms of Service",
-            "contact": "Contact",
-            "about": "About"
-        },
-        "description": "Privacy-focused developer tools."
-    },
-    "breadcrumbs": {
-        "home": "Home",
-        "tools": "Tools",
-        "admin": "Admin",
-        "dashboard": "Dashboard",
-        "analytics": "Analytics",
-        "tags": "Tags",
-        "monitoring": "Monitoring",
-        "relationships": "Relationships"
-    },
-    "localeSwitcher": {
-        "label": "Language",
-        "current": "Current language",
-        "selectLanguage": "Select language",
-        "languages": {
-            "en": "English",
-            "es": "Español",
-            "zh": "中文",
-            "hi": "हिन्दी",
-            "pt": "Português",
-            "ru": "Русский",
-            "ja": "日本語",
-            "de": "Deutsch",
-            "fr": "Français",
-            "ko": "한국어",
-            "it": "Italiano",
-            "tr": "Türkçe",
-            "pl": "Polski",
-            "nl": "Nederlands",
-            "vi": "Tiếng Việt",
-            "uk": "Українська"
-        }
+    "mobile": {
+      "toggleMenu": "Chuyển đổi menu",
+      "openMenu": "Mở menu điều hướng",
+      "closeMenu": "Đóng menu điều hướng"
     }
+  },
+  "footer": {
+    "copyright": "© 2024 tool-chest",
+    "links": {
+      "privacy": "Chính sách Bảo mật",
+      "terms": "Điều khoản Dịch vụ",
+      "contact": "Liên hệ",
+      "about": "Giới thiệu"
+    },
+    "description": "Các công cụ dành cho nhà phát triển tập trung vào quyền riêng tư."
+  },
+  "breadcrumbs": {
+    "home": "Trang chủ",
+    "tools": "Công cụ",
+    "admin": "Quản trị",
+    "dashboard": "Bảng điều khiển",
+    "analytics": "Phân tích",
+    "tags": "Thẻ",
+    "monitoring": "Giám sát",
+    "relationships": "Các mối quan hệ"
+  },
+  "localeSwitcher": {
+    "label": "Ngôn ngữ",
+    "current": "Ngôn ngữ hiện tại",
+    "selectLanguage": "Chọn ngôn ngữ",
+    "languages": {
+      "en": "English",
+      "es": "Español",
+      "zh": "中文",
+      "hi": "हिन्दी",
+      "pt": "Português",
+      "ru": "Русский",
+      "ja": "日本語",
+      "de": "Deutsch",
+      "fr": "Français",
+      "ko": "한국어",
+      "it": "Italiano",
+      "tr": "Türkçe",
+      "pl": "Polski",
+      "nl": "Nederlands",
+      "vi": "Tiếng Việt",
+      "uk": "Українська"
+    }
+  }
 }

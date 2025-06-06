@@ -4,15 +4,15 @@
       "name": "Ferramenta Base64",
       "description": "Codifique e decodifique dados Base64 com suporte para texto e arquivos"
     },
-    "hashGenerator": {
+    "hash-generator": {
       "name": "Gerador de Hash",
       "description": "Gere hashes MD5, SHA-1, SHA-256 e outros algoritmos criptográficos"
     },
-    "faviconGenerator": {
+    "favicon-generator": {
       "name": "Gerador de Favicon",
       "description": "Crie favicons a partir de imagens em vários tamanhos e formatos"
     },
-    "markdownToPdf": {
+    "markdown-to-pdf": {
       "name": "Markdown para PDF",
       "description": "Converta arquivos Markdown para PDF com opções de estilo personalizadas"
     },
@@ -38,6 +38,18 @@
       "name": "Codificação",
       "description": "Ferramentas para codificar e decodificar dados em vários formatos"
     },
+    "security": {
+      "name": "Segurança",
+      "description": "Ferramentas para operações criptográficas e análise de segurança"
+    },
+    "design": {
+      "name": "Design",
+      "description": "Ferramentas de design e gráficos"
+    },
+    "document": {
+      "name": "Documento",
+      "description": "Ferramentas de processamento de documentos"
+    },
     "generation": {
       "name": "Geração",
       "description": "Ferramentas para gerar conteúdo, códigos e arquivos"
@@ -45,10 +57,6 @@
     "conversion": {
       "name": "Conversão",
       "description": "Ferramentas para converter entre diferentes formatos de arquivo"
-    },
-    "security": {
-      "name": "Segurança",
-      "description": "Ferramentas para operações criptográficas e análise de segurança"
     },
     "compression": {
       "name": "Compressão",

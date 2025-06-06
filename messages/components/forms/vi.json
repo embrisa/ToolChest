@@ -1,64 +1,64 @@
 {
-    "labels": {
-        "name": "Name",
-        "slug": "Slug",
-        "description": "Description",
-        "color": "Color",
-        "status": "Status",
-        "tags": "Tags",
-        "url": "URL",
-        "file": "File",
-        "text": "Text",
-        "options": "Options",
-        "settings": "Settings"
-    },
-    "placeholders": {
-        "enterName": "Enter name",
-        "enterDescription": "Enter description",
-        "selectColor": "Select color",
-        "selectTags": "Select tags",
-        "enterUrl": "Enter URL",
-        "chooseFile": "Choose file",
-        "enterText": "Enter text"
-    },
-    "validation": {
-        "nameRequired": "Name is required",
-        "slugRequired": "Slug is required",
-        "descriptionRequired": "Description is required",
-        "invalidSlug": "Slug can only contain letters, numbers, and hyphens",
-        "slugTooShort": "Slug must be at least 3 characters",
-        "slugTooLong": "Slug must be less than 50 characters",
-        "nameTooShort": "Name must be at least 2 characters",
-        "nameTooLong": "Name must be less than 100 characters",
-        "descriptionTooLong": "Description must be less than 500 characters",
-        "invalidColor": "Please select a valid color",
-        "invalidEmail": "Please enter a valid email address",
-        "invalidUrl": "Please enter a valid URL"
-    },
-    "help": {
-        "slug": "URL-friendly identifier (auto-generated from name)",
-        "description": "Brief description of the item",
-        "color": "Color used for visual identification",
-        "tags": "Organize items with relevant tags",
-        "status": "Current state of the item"
-    },
-    "actions": {
-        "save": "Save",
-        "cancel": "Cancel",
-        "submit": "Submit",
-        "reset": "Reset",
-        "clear": "Clear",
-        "delete": "Delete",
-        "edit": "Edit",
-        "create": "Create",
-        "update": "Update"
-    },
-    "states": {
-        "saving": "Saving...",
-        "loading": "Loading...",
-        "saved": "Saved successfully",
-        "error": "Error occurred",
-        "required": "Required field",
-        "optional": "Optional field"
-    }
+  "labels": {
+    "name": "Tên",
+    "slug": "Slug",
+    "description": "Mô tả",
+    "color": "Màu sắc",
+    "status": "Trạng thái",
+    "tags": "Thẻ",
+    "url": "URL",
+    "file": "Tệp",
+    "text": "Văn bản",
+    "options": "Tùy chọn",
+    "settings": "Cài đặt"
+  },
+  "placeholders": {
+    "enterName": "Nhập tên",
+    "enterDescription": "Nhập mô tả",
+    "selectColor": "Chọn màu",
+    "selectTags": "Chọn thẻ",
+    "enterUrl": "Nhập URL",
+    "chooseFile": "Chọn tệp",
+    "enterText": "Nhập văn bản"
+  },
+  "validation": {
+    "nameRequired": "Tên là bắt buộc",
+    "slugRequired": "Slug là bắt buộc",
+    "descriptionRequired": "Mô tả là bắt buộc",
+    "invalidSlug": "Slug chỉ có thể chứa chữ cái, số và dấu gạch ngang",
+    "slugTooShort": "Slug phải có ít nhất 3 ký tự",
+    "slugTooLong": "Slug phải ít hơn 50 ký tự",
+    "nameTooShort": "Tên phải có ít nhất 2 ký tự",
+    "nameTooLong": "Tên phải ít hơn 100 ký tự",
+    "descriptionTooLong": "Mô tả phải ít hơn 500 ký tự",
+    "invalidColor": "Vui lòng chọn một màu hợp lệ",
+    "invalidEmail": "Vui lòng nhập một địa chỉ email hợp lệ",
+    "invalidUrl": "Vui lòng nhập một URL hợp lệ"
+  },
+  "help": {
+    "slug": "Định danh thân thiện với URL (tự động tạo từ tên)",
+    "description": "Mô tả ngắn gọn về mục",
+    "color": "Màu sắc được sử dụng để nhận dạng trực quan",
+    "tags": "Sắp xếp các mục bằng các thẻ liên quan",
+    "status": "Trạng thái hiện tại của mục"
+  },
+  "actions": {
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "submit": "Gửi",
+    "reset": "Đặt lại",
+    "clear": "Xóa",
+    "delete": "Xóa",
+    "edit": "Chỉnh sửa",
+    "create": "Tạo",
+    "update": "Cập nhật"
+  },
+  "states": {
+    "saving": "Đang lưu...",
+    "loading": "Đang tải...",
+    "saved": "Đã lưu thành công",
+    "error": "Đã xảy ra lỗi",
+    "required": "Trường bắt buộc",
+    "optional": "Trường tùy chọn"
+  }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 import {
   Button,
   Card,
@@ -27,6 +28,9 @@ import { A11yAnnouncement } from "@/types/tools/base64";
 import { cn } from "@/utils";
 
 export function HashGeneratorTool() {
+  const tCommon = useTranslations("tools.common");
+  const tHash = useTranslations("tools.hash-generator");
+
   const [state, setState] = useState<HashState>({
     algorithm: "SHA-256",
     inputType: "text",
@@ -116,14 +120,14 @@ export function HashGeneratorTool() {
         if (!validation.isValid) {
           setState((prev) => ({
             ...prev,
-            error: validation.error || "File validation failed",
+            error: validation.error || tCommon("errors.processingFailed"),
             validationErrors: validation.validationErrors || [],
             warnings: validation.warnings || [],
           }));
 
           setAnnouncement(
             announceToScreenReader(
-              `File validation failed: ${validation.error}`,
+              `${tCommon("errors.processingFailed")}: ${validation.error}`,
               "assertive",
             ),
           );
@@ -146,7 +150,7 @@ export function HashGeneratorTool() {
       // Announce start of processing to screen readers
       setAnnouncement(
         announceToScreenReader(
-          `Starting hash generation for ${algorithmsToProcess.join(", ")}`,
+          `${tCommon("ui.status.processing")} hash generation for ${algorithmsToProcess.join(", ")}`,
           "polite",
         ),
       );
@@ -220,7 +224,7 @@ export function HashGeneratorTool() {
         if (failureCount === 0) {
           setAnnouncement(
             announceToScreenReader(
-              `Hash generation completed successfully for ${successCount} algorithm${successCount > 1 ? "s" : ""}`,
+              `Hash generation ${tCommon("ui.status.success").toLowerCase()} for ${successCount} algorithm${successCount > 1 ? "s" : ""}`,
               "polite",
             ),
           );
@@ -234,7 +238,7 @@ export function HashGeneratorTool() {
         }
       } catch (error) {
         const errorMessage =
-          error instanceof Error ? error.message : "Hash generation failed";
+          error instanceof Error ? error.message : tCommon("ui.status.error");
         setState((prev) => ({
           ...prev,
           error: errorMessage,
@@ -244,7 +248,7 @@ export function HashGeneratorTool() {
 
         setAnnouncement(
           announceToScreenReader(
-            `Hash generation failed: ${errorMessage}`,
+            `Hash generation ${tCommon("ui.status.error").toLowerCase()}: ${errorMessage}`,
             "assertive",
           ),
         );
@@ -255,6 +259,7 @@ export function HashGeneratorTool() {
       // This prevents the infinite loop since the callback won't change
       generateAllHashes,
       announceToScreenReader,
+      tCommon,
     ],
   );
 
@@ -564,7 +569,7 @@ export function HashGeneratorTool() {
                   aria-pressed={state.inputType === "text"}
                   className="flex-1 h-12"
                 >
-                  Text
+                  {tCommon("ui.inputTypes.text")}
                 </Button>
                 <Button
                   variant={state.inputType === "file" ? "primary" : "secondary"}
@@ -585,7 +590,7 @@ export function HashGeneratorTool() {
                   aria-pressed={state.inputType === "file"}
                   className="flex-1 h-12"
                 >
-                  File
+                  {tCommon("ui.inputTypes.file")}
                 </Button>
               </div>
             </div>
@@ -632,12 +637,14 @@ export function HashGeneratorTool() {
       <Card variant="default">
         <CardHeader className="pb-8">
           <h2 className="text-title text-xl font-semibold text-foreground mb-2">
-            {state.inputType === "text" ? "Text Input" : "File Upload"}
+            {state.inputType === "text"
+              ? tCommon("ui.inputTypes.text") + " Input"
+              : tCommon("ui.inputTypes.file") + " Upload"}
           </h2>
           <p className="text-body text-foreground-secondary">
             {state.inputType === "text"
-              ? "Enter the text you want to hash"
-              : "Upload a file to generate hash values"}
+              ? tHash("tool.placeholders.textInput")
+              : tHash("tool.placeholders.fileUpload")}
           </p>
         </CardHeader>
         <CardContent className="pt-0">
@@ -657,7 +664,7 @@ export function HashGeneratorTool() {
                     },
                   }))
                 }
-                placeholder="Enter text to hash..."
+                placeholder={tHash("tool.placeholders.textInput")}
                 className={cn(
                   "input-field h-40 resize-vertical text-code",
                   "placeholder:text-neutral-400 dark:placeholder:text-neutral-500",

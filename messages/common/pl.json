@@ -26,7 +26,45 @@
     "settings": "Ustawienia",
     "tryAgain": "Spróbuj ponownie",
     "clearAllFilters": "Wyczyść wszystkie filtry",
-    "clearFilters": "Jasne filtry"
+    "clearFilters": "Jasne filtry",
+    "assign": "Assign",
+    "remove": "Remove"
+  },
+  "ui": {
+    "status": {
+      "loading": "Loading",
+      "saving": "Saving...",
+      "success": "Success",
+      "error": "Error",
+      "warning": "Warning",
+      "info": "Information",
+      "completed": "Completed",
+      "failed": "Failed",
+      "processing": "Processing...",
+      "validating": "Validating...",
+      "uploading": "Uploading...",
+      "downloading": "Downloading...",
+      "ready": "Ready",
+      "waiting": "Waiting for input"
+    },
+    "actions": {
+      "tryAgain": "Try Again"
+    },
+    "confirmations": {
+      "deleteItem": "Are you sure you want to delete \"{name}\"? This action cannot be undone.",
+      "deleteItems": "Are you sure you want to delete {count} items? This action cannot be undone.",
+      "unsavedChanges": "You have unsaved changes. Are you sure you want to leave?",
+      "resetForm": "Are you sure you want to reset the form? All changes will be lost."
+    },
+    "labels": {
+      "order": "Order",
+      "lastUpdated": "Last Updated",
+      "active": "Published",
+      "inactive": "Draft",
+      "noItems": "No items found",
+      "noDescription": "No description provided",
+      "noTags": "No tags"
+    }
   },
   "status": {
     "loading": "Załadunek...",
@@ -65,7 +103,9 @@
     "forbidden": "Odmowa dostępu",
     "timeout": "Poproś o limit czasu",
     "unknownError": "Nieznany błąd",
-    "somethingWentWrong": "Coś poszło nie tak"
+    "somethingWentWrong": "Coś poszło nie tak",
+    "loadingFailed": "Error Loading Data",
+    "processingFailed": "Processing failed"
   },
   "navigation": {
     "home": "Dom",

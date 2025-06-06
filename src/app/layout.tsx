@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import { Header, Footer } from "@/components/layout";
-import { LocaleSwitcher } from "@/components";
-import { WebVitals } from "@/components/ui";
-import { NextIntlClientProvider } from "next-intl";
-import { getLocale, getMessages } from "next-intl/server";
-import "./globals.css";
+import { getLocale } from "next-intl/server";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -85,13 +80,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const locale = await getLocale();
-  const messages = await getMessages();
-
   return (
-    <html
-      lang={locale}
-      className={`${inter.variable} ${jetbrainsMono.variable}`}
-    >
+    <html lang={locale}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -105,31 +95,10 @@ export default async function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className="flex flex-col min-h-screen bg-background text-foreground font-sans antialiased transition-colors duration-300">
-        <WebVitals debug={process.env.NODE_ENV === "development"} />
-
-        {/* Animated Background */}
-        <div
-          className="fixed inset-0 -z-10 bg-gradient-shift"
-          aria-hidden="true"
-        />
-
-        {/* Subtle noise texture overlay */}
-        <div
-          className="fixed inset-0 -z-10 bg-noise opacity-20"
-          aria-hidden="true"
-        />
-
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <Header />
-          <div className="absolute top-2 right-4">
-            <LocaleSwitcher />
-          </div>
-
-          <main className="flex-grow relative">{children}</main>
-
-          <Footer />
-        </NextIntlClientProvider>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} flex flex-col min-h-screen bg-background text-foreground font-sans antialiased transition-colors duration-300`}>
+        <div className="fixed inset-0 -z-10 bg-gradient-shift" aria-hidden="true" />
+        <div className="fixed inset-0 -z-10 bg-noise opacity-20" aria-hidden="true" />
+        {children}
       </body>
     </html>
   );

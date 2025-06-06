@@ -32,6 +32,13 @@
         "title": "पीडीएफ को मार्कडाउन",
         "description": "पीडीएफ में मार्कडाउन कन्वर्ट करें"
       }
+    },
+    "contact": {
+      "prompt": "Need help?",
+      "link": "Contact support"
+    },
+    "screenReader": {
+      "announcement": "Page not found. Please navigate using the links below."
     }
   },
   "serverError": {

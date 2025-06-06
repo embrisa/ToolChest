@@ -1,20 +1,20 @@
 {
   "tools": {
     "base64": {
-      "name": "Base64 Tool",
-      "description": "Encode and decode Base64 data with support for text and files"
+      "name": "Base64 Encoder/Decoder",
+      "description": "Encode and decode text and files to/from Base64 format with URL-safe options"
     },
-    "hashGenerator": {
+    "hash-generator": {
       "name": "Hash Generator",
-      "description": "Generate MD5, SHA-1, SHA-256, and other cryptographic hashes"
+      "description": "Generate MD5, SHA-1, SHA-256, SHA-512 hashes for text and files"
     },
-    "faviconGenerator": {
+    "favicon-generator": {
       "name": "Favicon Generator",
-      "description": "Create favicons from images in multiple sizes and formats"
+      "description": "Create favicons in all standard sizes from any image"
     },
-    "markdownToPdf": {
+    "markdown-to-pdf": {
       "name": "Markdown to PDF",
-      "description": "Convert Markdown files to PDF with custom styling options"
+      "description": "Convert Markdown to professional PDFs with syntax highlighting"
     },
     "urlShortener": {
       "name": "URL Shortener",
@@ -36,7 +36,19 @@
   "tags": {
     "encoding": {
       "name": "Encoding",
-      "description": "Tools for encoding and decoding data in various formats"
+      "description": "Text and data encoding tools"
+    },
+    "security": {
+      "name": "Security",
+      "description": "Security and cryptography tools"
+    },
+    "design": {
+      "name": "Design",
+      "description": "Design and graphics tools"
+    },
+    "document": {
+      "name": "Document",
+      "description": "Document processing tools"
     },
     "generation": {
       "name": "Generation",
@@ -45,10 +57,6 @@
     "conversion": {
       "name": "Conversion",
       "description": "Tools for converting between different file formats"
-    },
-    "security": {
-      "name": "Security",
-      "description": "Tools for cryptographic operations and security analysis"
     },
     "compression": {
       "name": "Compression",

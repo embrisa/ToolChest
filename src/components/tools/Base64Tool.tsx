@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 import {
   Button,
   Card,
@@ -24,6 +25,9 @@ import {
 import { cn } from "@/utils";
 
 export function Base64Tool() {
+  const tCommon = useTranslations("tools.common");
+  const tBase64 = useTranslations("tools.base64");
+
   const [state, setState] = useState<Base64State>({
     mode: "encode",
     variant: "standard",
@@ -98,14 +102,14 @@ export function Base64Tool() {
         if (!validation.isValid) {
           setState((prev) => ({
             ...prev,
-            error: validation.error || "File validation failed",
+            error: validation.error || tCommon("errors.processingFailed"),
             validationErrors: validation.validationErrors || [],
             warnings: validation.warnings || [],
           }));
 
           setAnnouncement(
             announceToScreenReader(
-              `File validation failed: ${validation.error}`,
+              `${tCommon("errors.processingFailed")}: ${validation.error}`,
               "assertive",
             ),
           );
@@ -124,7 +128,7 @@ export function Base64Tool() {
       // Announce start of processing to screen readers
       setAnnouncement(
         announceToScreenReader(
-          `Starting ${currentState.mode} operation`,
+          `${tCommon("ui.status.processing")} ${tCommon(`ui.modes.${currentState.mode}`)}`,
           "polite",
         ),
       );
@@ -152,7 +156,9 @@ export function Base64Tool() {
         setState((prev) => ({
           ...prev,
           result,
-          error: result.success ? null : result.error || "Operation failed",
+          error: result.success
+            ? null
+            : result.error || tCommon("ui.status.error"),
           warnings: result.warnings || [],
           isProcessing: false,
           progress: null,
@@ -177,21 +183,21 @@ export function Base64Tool() {
         if (result.success) {
           setAnnouncement(
             announceToScreenReader(
-              `${currentState.mode} operation completed successfully`,
+              `${tCommon(`ui.modes.${currentState.mode}`)} ${tCommon("ui.status.success")}`,
               "polite",
             ),
           );
         } else {
           setAnnouncement(
             announceToScreenReader(
-              `${currentState.mode} operation failed: ${result.error}`,
+              `${tCommon(`ui.modes.${currentState.mode}`)} ${tCommon("ui.status.error")}: ${result.error}`,
               "assertive",
             ),
           );
         }
       } catch (error) {
         const errorMessage =
-          error instanceof Error ? error.message : "Operation failed";
+          error instanceof Error ? error.message : tCommon("ui.status.error");
         setState((prev) => ({
           ...prev,
           result: null,
@@ -202,7 +208,7 @@ export function Base64Tool() {
 
         setAnnouncement(
           announceToScreenReader(
-            `Operation failed: ${errorMessage}`,
+            `${tCommon("ui.status.error")}: ${errorMessage}`,
             "assertive",
           ),
         );
@@ -212,6 +218,7 @@ export function Base64Tool() {
       // Use a ref for state to avoid recreating this function on every state change
       // This prevents the infinite loop since the callback won't change
       announceToScreenReader,
+      tCommon,
     ],
   );
 
@@ -270,7 +277,9 @@ export function Base64Tool() {
       setState((prev) => ({
         ...prev,
         fileInput: file,
-        error: validation.isValid ? null : validation.error || "Invalid file",
+        error: validation.isValid
+          ? null
+          : validation.error || tCommon("validation.invalidInput"),
         warnings: validation.warnings || [],
         validationErrors: validation.validationErrors || [],
         result: null,
@@ -279,7 +288,7 @@ export function Base64Tool() {
       if (!validation.isValid) {
         setAnnouncement(
           announceToScreenReader(
-            `File validation failed: ${validation.error}`,
+            `${tCommon("errors.processingFailed")}: ${validation.error}`,
             "assertive",
           ),
         );
@@ -293,7 +302,7 @@ export function Base64Tool() {
         );
       }
     },
-    [announceToScreenReader],
+    [announceToScreenReader, tCommon],
   );
 
   // Enhanced drag and drop handlers with accessibility
@@ -438,7 +447,7 @@ export function Base64Tool() {
                   aria-pressed={state.mode === "encode"}
                   className="flex-1 h-12"
                 >
-                  Encode
+                  {tCommon("ui.modes.encode")}
                 </Button>
                 <Button
                   variant={state.mode === "decode" ? "primary" : "secondary"}
@@ -453,7 +462,7 @@ export function Base64Tool() {
                   aria-pressed={state.mode === "decode"}
                   className="flex-1 h-12"
                 >
-                  Decode
+                  {tCommon("ui.modes.decode")}
                 </Button>
               </div>
             </div>
@@ -461,7 +470,7 @@ export function Base64Tool() {
             {/* Input Type Selection */}
             <div className="space-y-4">
               <label className="text-body font-medium text-foreground">
-                Input Type
+                {tCommon("ui.inputTypes.text")}/{tCommon("ui.inputTypes.file")}
               </label>
               <div className="flex gap-3">
                 <Button
@@ -478,7 +487,7 @@ export function Base64Tool() {
                   aria-pressed={state.inputType === "text"}
                   className="flex-1 h-12"
                 >
-                  Text
+                  {tCommon("ui.inputTypes.text")}
                 </Button>
                 <Button
                   variant={state.inputType === "file" ? "primary" : "secondary"}
@@ -494,7 +503,7 @@ export function Base64Tool() {
                   aria-pressed={state.inputType === "file"}
                   className="flex-1 h-12"
                 >
-                  File
+                  {tCommon("ui.inputTypes.file")}
                 </Button>
               </div>
             </div>
@@ -521,7 +530,7 @@ export function Base64Tool() {
                   className="flex-1 h-12"
                   title="Standard Base64 encoding with +, /, and = characters"
                 >
-                  Standard
+                  {tBase64("tool.variants.standard")}
                 </Button>
                 <Button
                   variant={
@@ -539,7 +548,7 @@ export function Base64Tool() {
                   className="flex-1 h-12"
                   title="URL-safe Base64 encoding with -, _, and no padding"
                 >
-                  URL-Safe
+                  {tBase64("tool.variants.urlSafe")}
                 </Button>
               </div>
             </div>
@@ -552,13 +561,13 @@ export function Base64Tool() {
         <CardHeader className="pb-8">
           <h2 className="text-title text-xl font-semibold text-foreground mb-2">
             {state.mode === "encode"
-              ? "Input to Encode"
-              : "Base64 Data to Decode"}
+              ? `Input to ${tCommon("ui.modes.encode")}`
+              : `Base64 Data to ${tCommon("ui.modes.decode")}`}
           </h2>
           <p className="text-body text-foreground-secondary">
             {state.inputType === "text"
               ? `Enter ${state.mode === "encode" ? "text" : "Base64 data"} below`
-              : `Upload a file to ${state.mode}`}
+              : `Upload a file to ${tCommon(`ui.modes.${state.mode}`)}`}
           </p>
         </CardHeader>
         <CardContent className="pt-0">
@@ -575,8 +584,8 @@ export function Base64Tool() {
                 }
                 placeholder={
                   state.mode === "encode"
-                    ? "Enter text to encode..."
-                    : "Enter Base64 data to decode..."
+                    ? tBase64("tool.placeholders.textInput")
+                    : tBase64("tool.placeholders.textInput")
                 }
                 className={cn(
                   "input-field h-40 resize-vertical text-code",
@@ -585,8 +594,8 @@ export function Base64Tool() {
                 )}
                 aria-label={
                   state.mode === "encode"
-                    ? "Text input for encoding"
-                    : "Base64 input for decoding"
+                    ? `Text input for ${tCommon("ui.modes.encode").toLowerCase()}`
+                    : `Base64 input for ${tCommon("ui.modes.decode").toLowerCase()}`
                 }
                 disabled={state.isProcessing}
               />
@@ -753,10 +762,12 @@ export function Base64Tool() {
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <span className="text-body font-medium text-foreground">
-                  {state.progress.stage === "reading" && "Reading file..."}
+                  {state.progress.stage === "reading" &&
+                    tCommon("ui.status.processing")}
                   {state.progress.stage === "processing" &&
-                    `${state.mode === "encode" ? "Encoding" : "Decoding"}...`}
-                  {state.progress.stage === "complete" && "Complete!"}
+                    `${tCommon(`ui.modes.${state.mode}`)}...`}
+                  {state.progress.stage === "complete" &&
+                    tCommon("ui.status.success")}
                 </span>
                 <span className="text-body text-foreground-secondary">
                   {state.progress.progress}%
@@ -783,7 +794,7 @@ export function Base64Tool() {
       {state.error && (
         <Card variant="default" className="animate-fade-in-up">
           <CardContent className="p-8">
-            <Alert variant="error" title="Operation Failed">
+            <Alert variant="error" title={tCommon("ui.status.error")}>
               {state.error}
             </Alert>
           </CardContent>
@@ -796,7 +807,9 @@ export function Base64Tool() {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-title text-xl font-semibold text-foreground mb-3">
-                {state.mode === "encode" ? "Encoded Result" : "Decoded Result"}
+                {state.mode === "encode"
+                  ? `${tCommon("ui.modes.encode")}d Result`
+                  : `${tCommon("ui.modes.decode")}d Result`}
               </h2>
               {state.result?.success && state.result.data ? (
                 <div className="flex flex-wrap items-center gap-6 text-sm text-foreground-secondary">
@@ -825,11 +838,11 @@ export function Base64Tool() {
               ) : state.isProcessing ? (
                 <div className="flex items-center gap-3 text-body text-foreground-secondary">
                   <Loading size="sm" variant="dots" />
-                  <span>Processing your input...</span>
+                  <span>{tCommon("ui.status.processing")}</span>
                 </div>
               ) : (
                 <p className="text-body text-foreground-secondary">
-                  {`Result will appear here after ${state.mode === "encode" ? "encoding" : "decoding"}`}
+                  {`Result will appear here after ${tCommon(`ui.modes.${state.mode}`).toLowerCase()}`}
                 </p>
               )}
             </div>
@@ -852,7 +865,9 @@ export function Base64Tool() {
                 )}
                 isLoading={state.isProcessing}
               >
-                {copySuccess?.success ? "Copied!" : "Copy"}
+                {copySuccess?.success
+                  ? tCommon("ui.status.copied")
+                  : tCommon("ui.actions.copy")}
               </Button>
               <Button
                 variant="secondary"
@@ -867,7 +882,7 @@ export function Base64Tool() {
                 className="h-10"
                 isLoading={state.isProcessing}
               >
-                Download
+                {tCommon("ui.actions.download")}
               </Button>
             </div>
           </div>
@@ -876,7 +891,7 @@ export function Base64Tool() {
           <div className="space-y-6">
             <TextareaLoadingWrapper
               isLoading={state.isProcessing}
-              loadingText={`${state.mode === "encode" ? "Encoding" : "Decoding"}...`}
+              loadingText={`${tCommon(`ui.modes.${state.mode}`)}...`}
               minDisplayTime={800}
               aria-label={`${state.mode} operation in progress`}
             >
@@ -889,8 +904,8 @@ export function Base64Tool() {
                 readOnly
                 placeholder={
                   state.mode === "encode"
-                    ? "Encoded data will appear here..."
-                    : "Decoded data will appear here..."
+                    ? `${tCommon("ui.modes.encode")}d data will appear here...`
+                    : `${tCommon("ui.modes.decode")}d data will appear here...`
                 }
                 className={cn(
                   "input-field h-40 resize-vertical text-code bg-background-tertiary",

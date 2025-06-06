@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/utils";
 
@@ -11,14 +12,15 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const t = useTranslations("pages.admin.navigation");
 
   const navigationItems = [
-    { name: "Dashboard", href: "/admin/dashboard", icon: "📊" },
-    { name: "Tools", href: "/admin/tools", icon: "🛠️" },
-    { name: "Tags", href: "/admin/tags", icon: "🏷️" },
-    { name: "Relationships", href: "/admin/relationships", icon: "🔗" },
-    { name: "Analytics", href: "/admin/analytics", icon: "📈" },
-    { name: "Monitoring", href: "/admin/monitoring", icon: "👁️" },
+    { name: t("dashboard"), href: "/admin/dashboard", icon: "📊" },
+    { name: t("tools"), href: "/admin/tools", icon: "🛠️" },
+    { name: t("tags"), href: "/admin/tags", icon: "🏷️" },
+    { name: t("relationships"), href: "/admin/relationships", icon: "🔗" },
+    { name: t("analytics"), href: "/admin/analytics", icon: "📈" },
+    { name: t("monitoring"), href: "/admin/monitoring", icon: "👁️" },
   ];
 
   const isActiveLink = (href: string) => {
@@ -83,7 +85,7 @@ export default function AdminLayout({
                 rel="noopener noreferrer"
                 aria-label="View public site (opens in new tab)"
               >
-                <span className="hidden sm:inline">View Site</span>
+                <span className="hidden sm:inline">{t("viewSite")}</span>
                 <span className="text-base" aria-hidden="true">
                   🔗
                 </span>
@@ -96,7 +98,7 @@ export default function AdminLayout({
                 className="text-sm min-h-[44px]"
                 aria-label="Logout from admin panel"
               >
-                <span className="hidden sm:inline">Logout</span>
+                <span className="hidden sm:inline">{t("logout")}</span>
                 <span className="sm:hidden text-base" aria-hidden="true">
                   🚪
                 </span>

@@ -1,50 +1,50 @@
 {
-    "hero": {
-        "title": "tool-chest",
-        "subtitle": "Sua coleção de ferramentas essenciais de computação.",
-        "description": "Codifique, decodifique, gere, converta e muito mais com facilidade.",
-        "searchPlaceholder": "Pesquisar ferramentas..."
-    },
-    "stats": {
-        "toolsAvailable": "Ferramentas Disponíveis",
-        "clientSideProcessing": "Processamento no Cliente",
-        "clientSideValue": "100%",
-        "freeForever": "Grátis",
-        "freeValue": "Para sempre"
-    },
-    "sections": {
-        "allTools": "Todas as Ferramentas",
-        "searchResults": "Resultados da Pesquisa",
-        "filterTools": "Filtrar Ferramentas",
-        "active": "ativo"
-    },
-    "loading": {
-        "loadingTools": "Carregando ferramentas...",
-        "toolsFound": "ferramentas encontradas"
-    },
-    "noResults": {
-        "title": "Nenhuma ferramenta encontrada",
-        "description": "Nenhuma ferramenta corresponde a \"{query}\"",
-        "descriptionFilters": "Nenhuma ferramenta corresponde aos filtros selecionados"
-    },
-    "errors": {
-        "troubleLoading": "Estamos com problemas para carregar as ferramentas. Tente novamente mais tarde."
-    },
-    "search": {
-        "placeholder": "Pesquisar ferramentas...",
-        "clearSearch": "Limpar pesquisa",
-        "searchResults": "resultados de busca"
-    },
-    "filtering": {
-        "filterByTags": "Filtrar por Tags",
-        "allTags": "Todas as Tags",
-        "selectedTags": "Tags Selecionadas",
-        "clearAll": "Limpar Tudo",
-        "noTags": "Nenhuma tag disponível"
-    },
-    "toolCard": {
-        "newTool": "Novo",
-        "popularTool": "Popular",
-        "openTool": "Abrir ferramenta"
-    }
+  "hero": {
+    "title": "tool-chest",
+    "subtitle": "Sua coleção de ferramentas essenciais de computação.",
+    "description": "Codifique, decodifique, gere, converta e muito mais com facilidade.",
+    "searchPlaceholder": "Pesquisar ferramentas..."
+  },
+  "stats": {
+    "toolsAvailable": "Ferramentas Disponíveis",
+    "clientSideProcessing": "Processamento no Cliente",
+    "clientSideValue": "100%",
+    "freeForever": "Grátis",
+    "freeValue": "Para sempre"
+  },
+  "sections": {
+    "allTools": "Todas as Ferramentas",
+    "searchResults": "Resultados da Pesquisa",
+    "filterTools": "Filtrar Ferramentas",
+    "active": "ativo"
+  },
+  "loading": {
+    "loadingTools": "Carregando ferramentas...",
+    "toolsFound": "ferramentas encontradas"
+  },
+  "noResults": {
+    "title": "Nenhuma ferramenta encontrada",
+    "description": "Nenhuma ferramenta corresponde a \"{query}\"",
+    "descriptionFilters": "Nenhuma ferramenta corresponde aos filtros selecionados"
+  },
+  "errors": {
+    "troubleLoading": "Estamos com problemas para carregar as ferramentas. Tente novamente mais tarde."
+  },
+  "search": {
+    "placeholder": "Pesquisar ferramentas...",
+    "clearSearch": "Limpar pesquisa",
+    "searchResults": "resultados de busca"
+  },
+  "filtering": {
+    "filterByTags": "Filtrar por Tags",
+    "allTags": "Todas as Tags",
+    "selectedTags": "Tags Selecionadas",
+    "clearAll": "Limpar Tudo",
+    "noTags": "Nenhuma tag disponível"
+  },
+  "toolCard": {
+    "newTool": "Novo",
+    "popularTool": "Popular",
+    "openTool": "Abrir ferramenta"
+  }
 }

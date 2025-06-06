@@ -32,6 +32,13 @@
         "title": "Markdown a PDF",
         "description": "Convertir markdown a pdf"
       }
+    },
+    "contact": {
+      "prompt": "¿Necesita ayuda?",
+      "link": "Contactar soporte"
+    },
+    "screenReader": {
+      "announcement": "Página no encontrada. Use los enlaces de abajo para navegar."
     }
   },
   "serverError": {

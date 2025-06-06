@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import {
   PdfStylingOptions,
   PdfTemplate,
@@ -33,6 +34,7 @@ export function PdfCustomizationPanel({
   onPreviewChange,
   showPreview = true,
 }: PdfCustomizationPanelProps) {
+  const tMarkdown = useTranslations("tools.markdown-to-pdf");
   const updateStyling = (updates: Partial<PdfStylingOptions>) => {
     onStylingChange({ ...stylingOptions, ...updates });
   };
@@ -324,12 +326,22 @@ export function PdfCustomizationPanel({
                 className="select"
                 aria-label="Select color theme"
               >
-                <option value="default">Default</option>
-                <option value="github">GitHub</option>
-                <option value="academic">Academic</option>
-                <option value="minimal">Minimal</option>
+                <option value="default">
+                  {tMarkdown("tool.themes.default")}
+                </option>
+                <option value="github">
+                  {tMarkdown("tool.themes.github")}
+                </option>
+                <option value="academic">
+                  {tMarkdown("tool.themes.academic")}
+                </option>
+                <option value="minimal">
+                  {tMarkdown("tool.themes.minimal")}
+                </option>
                 <option value="dark">Dark</option>
-                <option value="professional">Professional</option>
+                <option value="professional">
+                  {tMarkdown("tool.themes.professional")}
+                </option>
               </select>
             </div>
             <div>
@@ -377,9 +389,13 @@ export function PdfCustomizationPanel({
                 className="select"
                 aria-label="Select page format"
               >
-                <option value="a4">A4</option>
-                <option value="letter">Letter</option>
-                <option value="legal">Legal</option>
+                <option value="a4">{tMarkdown("tool.pageSizes.a4")}</option>
+                <option value="letter">
+                  {tMarkdown("tool.pageSizes.letter")}
+                </option>
+                <option value="legal">
+                  {tMarkdown("tool.pageSizes.legal")}
+                </option>
               </select>
             </div>
             <div>

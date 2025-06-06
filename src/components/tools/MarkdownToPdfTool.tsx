@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useCallback, useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 import {
   DocumentTextIcon,
   DocumentArrowDownIcon,
@@ -31,10 +32,7 @@ import {
   PDF_TEMPLATES,
 } from "@/types/tools/markdownToPdf";
 
-const MODE_OPTIONS = [
-  { value: "editor", label: "Editor" },
-  { value: "upload", label: "Upload File" },
-];
+// MODE_OPTIONS will be dynamically generated using translations
 
 const DEFAULT_MARKDOWN_CONTENT = `# Welcome to Markdown-to-PDF
 
@@ -114,6 +112,13 @@ if __name__ == "__main__":
 *Ready to create your PDF? Edit this content or upload your own markdown file!*`;
 
 export function MarkdownToPdfTool() {
+  const tCommon = useTranslations("tools.common");
+
+  const MODE_OPTIONS = [
+    { value: "editor", label: "Editor" },
+    { value: "upload", label: tCommon("ui.inputTypes.upload") },
+  ];
+
   const [state, setState] = useState<MarkdownToPdfState>({
     mode: "editor",
     markdownContent: DEFAULT_MARKDOWN_CONTENT,
@@ -153,10 +158,12 @@ export function MarkdownToPdfTool() {
       setState((prev) => ({ ...prev, previewHtml: result.html, error: null }));
     } catch (error) {
       const errorMessage =
-        error instanceof Error ? error.message : "Failed to parse markdown";
+        error instanceof Error
+          ? error.message
+          : tCommon("errors.processingFailed");
       setState((prev) => ({ ...prev, error: errorMessage }));
     }
-  }, [state.markdownContent, state.markdownOptions]);
+  }, [state.markdownContent, state.markdownOptions, tCommon]);
 
   // Update preview when content or options change
   useEffect(() => {
@@ -206,7 +213,7 @@ export function MarkdownToPdfTool() {
           error: null,
           warnings: [],
         }));
-        addAnnouncement("Validating uploaded file...");
+        addAnnouncement(tCommon("ui.status.processing"));
 
         const validation =
           await markdownToPdfService.validateMarkdownFile(file);
@@ -217,7 +224,9 @@ export function MarkdownToPdfTool() {
             isProcessing: false,
             error: validation.error || null,
           }));
-          addAnnouncement(`File validation failed: ${validation.error}`);
+          addAnnouncement(
+            `${tCommon("errors.processingFailed")}: ${validation.error}`,
+          );
           return;
         }
 
@@ -251,16 +260,16 @@ export function MarkdownToPdfTool() {
         );
       } catch (error) {
         const errorMessage =
-          error instanceof Error ? error.message : "Failed to upload file";
+          error instanceof Error ? error.message : tCommon("ui.status.error");
         setState((prev) => ({
           ...prev,
           isProcessing: false,
           error: errorMessage,
         }));
-        addAnnouncement(`Upload failed: ${errorMessage}`);
+        addAnnouncement(`${tCommon("ui.status.error")}: ${errorMessage}`);
       }
     },
-    [addAnnouncement],
+    [addAnnouncement, tCommon],
   );
 
   // Handle file remove
@@ -276,7 +285,7 @@ export function MarkdownToPdfTool() {
   // Generate PDF
   const handleGeneratePdf = useCallback(async () => {
     if (!state.markdownContent.trim()) {
-      addAnnouncement("Please enter some markdown content first");
+      addAnnouncement(tCommon("validation.emptyInput"));
       return;
     }
 
@@ -287,7 +296,7 @@ export function MarkdownToPdfTool() {
         progress: null,
         error: null,
       }));
-      addAnnouncement("Starting PDF generation...");
+      addAnnouncement(`${tCommon("ui.status.processing")} PDF generation...`);
 
       const onProgress = (progress: MarkdownToPdfProgress) => {
         setState((prev) => ({ ...prev, progress }));
@@ -311,24 +320,27 @@ export function MarkdownToPdfTool() {
           `PDF generated successfully! ${result.pageCount} pages, ${Math.round((result.fileSize || 0) / 1024)} KB`,
         );
       } else {
-        throw new Error(result.error || "PDF generation failed");
+        throw new Error(result.error || tCommon("ui.status.error"));
       }
     } catch (error) {
       const errorMessage =
-        error instanceof Error ? error.message : "Failed to generate PDF";
+        error instanceof Error ? error.message : tCommon("ui.status.error");
       setState((prev) => ({
         ...prev,
         isProcessing: false,
         progress: null,
         error: errorMessage,
       }));
-      addAnnouncement(`PDF generation failed: ${errorMessage}`);
+      addAnnouncement(
+        `PDF generation ${tCommon("ui.status.error").toLowerCase()}: ${errorMessage}`,
+      );
     }
   }, [
     state.markdownContent,
     state.previewHtml,
     state.stylingOptions,
     addAnnouncement,
+    tCommon,
   ]);
 
   // Download PDF

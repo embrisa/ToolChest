@@ -1,67 +1,74 @@
 {
   "notFound": {
     "errorCode": "404",
-    "title": "Page Not Found",
-    "description": "The page you're looking for doesn't exist. It may have been moved, deleted, or you may have typed the URL incorrectly.",
+    "title": "Сторінку не знайдено",
+    "description": "Сторінка, яку ви шукаєте, не існує. Можливо, її перемістили, видалили, або ви неправильно ввели URL-адресу.",
     "suggestions": {
-      "title": "Here's what you can do:",
-      "checkUrl": "Check the URL for typos",
-      "useNavigation": "Use the navigation menu to find what you're looking for",
-      "returnHome": "Return to the home page",
-      "searchTools": "Search for tools using the search feature"
+      "title": "Ось що ви можете зробити:",
+      "checkUrl": "Перевірте URL на наявність помилок",
+      "useNavigation": "Використовуйте меню навігації, щоб знайти те, що ви шукаєте",
+      "returnHome": "Повернутися на головну сторінку",
+      "searchTools": "Шукайте інструменти за допомогою функції пошуку"
     },
     "actions": {
-      "goToHome": "Go to Home",
-      "goBack": "Go Back"
+      "goToHome": "На головну",
+      "goBack": "Назад"
     },
     "popularTools": {
-      "title": "Popular Tools",
+      "title": "Популярні інструменти",
       "base64": {
-        "title": "Base64 Tool",
-        "description": "Encode and decode Base64 data"
+        "title": "Інструмент Base64",
+        "description": "Кодування та декодування даних Base64"
       },
       "hashGenerator": {
-        "title": "Hash Generator",
-        "description": "Generate MD5, SHA hashes"
+        "title": "Генератор хешів",
+        "description": "Генеруйте хеші MD5, SHA"
       },
       "faviconGenerator": {
-        "title": "Favicon Generator",
-        "description": "Create favicons from images"
+        "title": "Генератор Favicon",
+        "description": "Створюйте favicon з зображень"
       },
       "markdownToPdf": {
-        "title": "Markdown to PDF",
-        "description": "Convert Markdown to PDF"
+        "title": "Markdown в PDF",
+        "description": "Конвертуйте Markdown в PDF"
       }
+    },
+    "contact": {
+      "prompt": "Need help?",
+      "link": "Contact support"
+    },
+    "screenReader": {
+      "announcement": "Page not found. Please navigate using the links below."
     }
   },
   "serverError": {
-    "title": "Something went wrong",
-    "message": "An unexpected error occurred",
-    "description": "We're sorry, but something went wrong while loading this page. Our team has been notified and is working to resolve the issue.",
+    "title": "Щось пішло не так",
+    "message": "Сталася неочікувана помилка",
+    "description": "На жаль, під час завантаження цієї сторінки сталася помилка. Наша команда була сповіщена і працює над вирішенням проблеми.",
     "suggestions": {
-      "0": "Try refreshing the page",
-      "1": "Go back to the previous page",
-      "2": "Return to the home page",
-      "3": "Contact support if the problem persists"
+      "0": "Спробуйте оновити сторінку",
+      "1": "Поверніться на попередню сторінку",
+      "2": "Поверніться на головну сторінку",
+      "3": "Зв'яжіться з підтримкою, якщо проблема не зникає"
     },
     "actions": {
-      "refreshPage": "Refresh Page",
-      "goBack": "Go Back",
-      "goToHome": "Go to Home",
-      "contactSupport": "Contact Support"
+      "refreshPage": "Оновити сторінку",
+      "goBack": "Назад",
+      "goToHome": "На головну",
+      "contactSupport": "Зв'язатися з підтримкою"
     },
     "technical": {
-      "title": "Technical Details",
-      "errorInfo": "Error Information",
-      "copyDetails": "Copy Details",
-      "copiedToClipboard": "Copied to clipboard"
+      "title": "Технічні деталі",
+      "errorInfo": "Інформація про помилку",
+      "copyDetails": "Копіювати деталі",
+      "copiedToClipboard": "Скопійовано в буфер обміну"
     }
   },
   "boundary": {
-    "title": "Something went wrong",
-    "description": "An unexpected error occurred in this component.",
-    "details": "Show error details",
-    "reload": "Reload component",
-    "reportIssue": "Report this issue"
+    "title": "Щось пішло не так",
+    "description": "У цьому компоненті сталася неочікувана помилка.",
+    "details": "Показати деталі помилки",
+    "reload": "Перезавантажити компонент",
+    "reportIssue": "Повідомити про цю проблему"
   }
 }

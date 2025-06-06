@@ -1,100 +1,137 @@
 {
   "dashboard": {
-    "title": "Dashboard",
-    "description": "Overview of your tool-chest application performance and analytics",
+    "title": "Tableau de bord",
+    "description": "Aperçu des performances et des analyses de votre application tool-chest",
     "stats": {
-      "totalTools": "Total Tools",
-      "totalTags": "Total Tags",
-      "totalUsage": "Total Usage",
-      "thisMonth": "This Month",
-      "applicationStats": "Application Statistics"
+      "totalTools": "Total des outils",
+      "totalTags": "Total des étiquettes",
+      "totalUsage": "Utilisation totale",
+      "thisMonth": "Ce mois-ci",
+      "applicationStats": "Statistiques de l'application"
     },
     "usage": {
-      "title": "Tool Usage Overview",
+      "title": "Aperçu de l'utilisation des outils",
       "table": {
-        "tool": "Tool",
-        "usageCount": "Usage Count",
-        "change": "Change",
+        "tool": "Outil",
+        "usageCount": "Nombre d'utilisations",
+        "change": "Changement",
         "actions": "Actions"
       }
     },
     "quickActions": {
-      "title": "Quick Actions",
-      "viewAnalytics": "View Analytics",
-      "manageTools": "Manage Tools",
-      "manageTags": "Manage Tags",
-      "viewSite": "View Site",
-      "systemHealth": "System Health"
+      "title": "Actions rapides",
+      "viewAnalytics": "Voir les analyses",
+      "manageTools": "Gérer les outils",
+      "manageTags": "Gérer les étiquettes",
+      "viewSite": "Voir le site",
+      "systemHealth": "Santé du système",
+      "addTool": "Ajouter un outil",
+      "addTag": "Ajouter une étiquette",
+      "manageRelationships": "Gérer les relations",
+      "createToolDescription": "Créer un nouvel outil dans le système",
+      "createTagDescription": "Créer une nouvelle étiquette pour la catégorisation",
+      "manageRelationshipsDescription": "Configurer les associations outil-étiquette",
+      "viewSiteDescription": "Ouvrir le site public tool-chest"
     }
   },
   "tools": {
-    "title": "Tool Management",
-    "description": "Manage tools, their metadata, and relationships",
+    "title": "Gestion des outils",
+    "description": "Gérer les outils, leurs métadonnées et leurs relations",
     "actions": {
-      "createTool": "Create Tool",
-      "editTool": "Edit Tool",
-      "deleteTool": "Delete Tool",
-      "bulkActions": "Bulk Actions"
+      "createTool": "Créer un outil",
+      "editTool": "Modifier l'outil",
+      "deleteTool": "Supprimer l'outil",
+      "bulkActions": "Actions groupées"
     },
     "table": {
-      "name": "Name",
+      "name": "Nom",
       "slug": "Slug",
-      "status": "Status",
-      "tags": "Tags",
-      "usage": "Usage",
-      "lastModified": "Last Modified",
+      "status": "Statut",
+      "tags": "Étiquettes",
+      "usage": "Utilisation",
+      "lastModified": "Dernière modification",
       "actions": "Actions"
+    },
+    "emptyState": {
+      "description": "Commencez par créer votre premier outil. Les outils aident les utilisateurs à accomplir des tâches spécifiques et peuvent être organisés avec des tags."
+    },
+    "bulkOperations": {
+      "title": "{operation} de Tags en Lot",
+      "selectedCount": "{count, plural, =1 {# outil} other {# outils}} sélectionnés",
+      "operationType": "Sélectionner Opération",
+      "selectTags": "Sélectionner Tags",
+      "selectedTools": "Outils Sélectionnés",
+      "previewChanges": "Aperçu des Modifications",
+      "operationSummary": "Résumé de l'Opération",
+      "totalChanges": "Modifications Totales",
+      "toolsToUpdate": "Outils à Mettre à Jour",
+      "warnings": "Avertissements",
+      "executing": "Exécution de l'Opération",
+      "executingMessage": "Veuillez patienter pendant que nous traitons votre opération en lot...",
+      "completed": "Opération Terminée",
+      "failed": "Opération Échouée",
+      "successMessage": "Votre opération en lot a été terminée avec succès",
+      "errorMessage": "Il y a eu une erreur lors de l'exécution de votre opération en lot",
+      "results": "Résultats de l'Opération",
+      "toolsAffected": "Outils Affectés",
+      "tagsAffected": "Tags Affectés",
+      "errors": "Erreurs Rencontrées",
+      "startNew": "Démarrer Nouvelle Opération"
     }
   },
   "tags": {
-    "title": "Tag Management",
-    "description": "Organize tools with tags and manage relationships",
+    "title": "Gestion des étiquettes",
+    "description": "Organiser les outils avec des étiquettes et gérer les relations",
     "actions": {
-      "createTag": "Create Tag",
-      "editTag": "Edit Tag",
-      "deleteTag": "Delete Tag",
-      "bulkActions": "Bulk Actions"
+      "createTag": "Créer une étiquette",
+      "editTag": "Modifier l'étiquette",
+      "deleteTag": "Supprimer l'étiquette",
+      "bulkActions": "Actions groupées"
     },
     "table": {
-      "name": "Name",
+      "name": "Nom",
       "slug": "Slug",
-      "color": "Color",
-      "toolCount": "Tools",
+      "color": "Couleur",
+      "toolCount": "Outils",
       "description": "Description",
       "actions": "Actions"
+    },
+    "emptyState": {
+      "description": "Commencez par créer votre premier tag pour organiser vos outils."
     }
   },
   "analytics": {
-    "title": "Analytics",
-    "description": "View detailed analytics and usage statistics",
+    "title": "Analyses",
+    "description": "Voir les analyses détaillées et les statistiques d'utilisation",
     "charts": {
-      "usageOverTime": "Usage Over Time",
-      "topTools": "Top Tools",
-      "userMetrics": "User Metrics"
+      "usageOverTime": "Utilisation au fil du temps",
+      "topTools": "Outils principaux",
+      "userMetrics": "Métriques utilisateur"
     }
   },
   "auth": {
-    "title": "Admin Login",
-    "description": "Access the administration panel",
+    "title": "Connexion administrateur",
+    "description": "Accéder au panneau d'administration",
     "form": {
-      "token": "Admin Token",
-      "tokenPlaceholder": "Enter admin token",
-      "login": "Login",
-      "loginError": "Invalid admin token"
+      "token": "Jeton d'administrateur",
+      "tokenPlaceholder": "Saisir le jeton d'administrateur",
+      "login": "Connexion",
+      "loginError": "Jeton d'administrateur invalide"
     }
   },
   "loading": {
-    "panel": "Loading admin panel...",
-    "dashboard": "Loading dashboard...",
-    "analytics": "Loading analytics..."
+    "panel": "Chargement du panneau d'administration...",
+    "dashboard": "Chargement du tableau de bord...",
+    "analytics": "Chargement des analyses..."
   },
   "navigation": {
-    "dashboard": "Dashboard",
-    "tools": "Tools",
-    "tags": "Tags",
-    "analytics": "Analytics",
-    "monitoring": "Monitoring",
-    "logout": "Logout",
-    "viewSite": "View Site"
+    "dashboard": "Tableau de bord",
+    "tools": "Outils",
+    "tags": "Étiquettes",
+    "relationships": "Relations",
+    "analytics": "Analyses",
+    "monitoring": "Surveillance",
+    "logout": "Déconnexion",
+    "viewSite": "Voir le site"
   }
 }

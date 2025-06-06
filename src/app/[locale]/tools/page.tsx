@@ -206,11 +206,10 @@ export default function ToolsPage() {
                   </svg>
                 </div>
                 <h3 className="text-heading font-semibold text-foreground">
-                  Privacy First
+                  {t("features.privacy.title")}
                 </h3>
                 <p className="text-body text-foreground-secondary text-sm">
-                  All processing happens in your browser. Your data never leaves
-                  your device.
+                  {t("features.privacy.description")}
                 </p>
               </div>
 
@@ -231,11 +230,10 @@ export default function ToolsPage() {
                   </svg>
                 </div>
                 <h3 className="text-heading font-semibold text-foreground">
-                  Lightning Fast
+                  {t("features.fast.title")}
                 </h3>
                 <p className="text-body text-foreground-secondary text-sm">
-                  Optimized for performance with instant processing and minimal
-                  loading times.
+                  {t("features.fast.description")}
                 </p>
               </div>
 
@@ -251,16 +249,15 @@ export default function ToolsPage() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={2}
-                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                      d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
                     />
                   </svg>
                 </div>
                 <h3 className="text-heading font-semibold text-foreground">
-                  Always Free
+                  {t("features.free.title")}
                 </h3>
                 <p className="text-body text-foreground-secondary text-sm">
-                  Complete access to all tools, forever. No hidden fees or
-                  premium tiers.
+                  {t("features.free.description")}
                 </p>
               </div>
             </div>

@@ -2,40 +2,41 @@
   "header": {
     "brand": "tool-chest",
     "navigation": {
-      "home": "Home",
-      "tools": "Tools",
-      "admin": "Admin"
+      "home": "Anasayfa",
+      "tools": "Araçlar",
+      "admin": "Yönetici",
+      "about": "Hakkında"
     },
     "mobile": {
-      "toggleMenu": "Toggle menu",
-      "openMenu": "Open navigation menu",
-      "closeMenu": "Close navigation menu"
+      "toggleMenu": "Menüyü değiştir",
+      "openMenu": "Gezinme menüsünü aç",
+      "closeMenu": "Gezinme menüsünü kapat"
     }
   },
   "footer": {
     "copyright": "© 2024 tool-chest",
     "links": {
-      "privacy": "Privacy Policy",
-      "terms": "Terms of Service",
-      "contact": "Contact",
-      "about": "About"
+      "privacy": "Gizlilik Politikası",
+      "terms": "Hizmet Şartları",
+      "contact": "İletişim",
+      "about": "Hakkında"
     },
-    "description": "Privacy-focused developer tools."
+    "description": "Gizlilik odaklı geliştirici araçları."
   },
   "breadcrumbs": {
-    "home": "Home",
-    "tools": "Tools",
-    "admin": "Admin",
-    "dashboard": "Dashboard",
-    "analytics": "Analytics",
-    "tags": "Tags",
-    "monitoring": "Monitoring",
-    "relationships": "Relationships"
+    "home": "Anasayfa",
+    "tools": "Araçlar",
+    "admin": "Yönetici",
+    "dashboard": "Kontrol Paneli",
+    "analytics": "Analitik",
+    "tags": "Etiketler",
+    "monitoring": "İzleme",
+    "relationships": "İlişkiler"
   },
   "localeSwitcher": {
-    "label": "Language",
-    "current": "Current language",
-    "selectLanguage": "Select language",
+    "label": "Dil",
+    "current": "Mevcut dil",
+    "selectLanguage": "Dil seçin",
     "languages": {
       "en": "English",
       "es": "Español",

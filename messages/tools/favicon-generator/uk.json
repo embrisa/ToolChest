@@ -1,84 +1,69 @@
 {
   "metadata": {
-    "title": "Favicon Generator | tool-chest",
-    "description": "Create favicons from images in multiple sizes and formats. Generate complete favicon packages for web applications with client-side processing.",
+    "title": "Favicon Generator - Create Favicons in All Sizes | tool-chest",
+    "description": "Free online favicon generator. Create favicons in all standard sizes (16x16, 32x32, 192x192, 512x512) from any image. Generate complete favicon packages with manifest files.",
     "keywords": [
+      "favicon generator",
       "favicon",
-      "generator",
-      "icon",
-      "web",
-      "image",
-      "resize",
-      "convert",
-      "ico",
-      "png",
-      "web development"
+      "icon generator",
+      "website icon",
+      "app icon",
+      "16x16",
+      "32x32",
+      "192x192",
+      "512x512",
+      "ico file",
+      "png icon",
+      "web app manifest",
+      "free tool"
     ]
   },
   "page": {
-    "title": "Favicon Generator",
-    "description": "Create favicons from images in multiple sizes and formats."
+    "title": "Генератор Favicon",
+    "description": "Створюйте favicon з зображень у різних розмірах та форматах.",
+    "privacyNotice": "All processing happens in your browser using <bold>Canvas API</bold>.",
+    "privacyMessage": "🔒 Privacy-First • Canvas API • Client-Side Processing"
   },
-  "tool": {
-    "sizes": {
-      "16x16": "16x16 (Browser Tab)",
-      "32x32": "32x32 (Browser Tab)",
-      "48x48": "48x48 (Windows)",
-      "57x57": "57x57 (iOS)",
-      "72x72": "72x72 (iPad)",
-      "96x96": "96x96 (Android)",
-      "120x120": "120x120 (iPhone Retina)",
-      "152x152": "152x152 (iPad Retina)",
-      "180x180": "180x180 (iPhone 6 Plus)",
-      "192x192": "192x192 (Android Chrome)",
-      "512x512": "512x512 (Android Chrome)"
+  "featureGrid": {
+    "browserIcons": {
+      "title": "Browser Icons",
+      "description": "16×16, 32×32, 48×48 favicons for browser tabs, bookmarks, and desktop shortcuts."
     },
-    "formats": {
-      "ico": "ICO (Windows)",
-      "png": "PNG (Universal)",
-      "svg": "SVG (Scalable)"
+    "appleTouch": {
+      "title": "Apple Touch Icons",
+      "description": "180×180 icons for iOS home screen and Safari bookmark icons with rounded corners."
     },
-    "placeholders": {
-      "fileUpload": "Select an image file or drag and drop"
+    "androidIcons": {
+      "title": "Android Icons",
+      "description": "192×192, 512×512 icons for Android home screen and Progressive Web Apps."
+    },
+    "webManifest": {
+      "title": "Web App Manifest",
+      "description": "Complete manifest.json for Progressive Web Apps with all required metadata.",
+      "badge": "PWA Ready"
     }
   },
-  "validation": {
-    "imageRequired": "Please select an image file",
-    "invalidImageFormat": "Please select a valid image format (PNG, JPG, SVG)",
-    "imageTooLarge": "Image file too large (max 10MB)",
-    "imageTooSmall": "Image should be at least 32x32 pixels for best results"
-  },
   "info": {
-    "title": "About Favicon Generation",
-    "description": "A favicon is a small icon that represents your website in browser tabs, bookmarks, and shortcuts. Modern web applications require multiple favicon sizes and formats to support different devices and platforms.",
-    "keyFeatures": {
-      "title": "Key Features",
+    "title": "Про генерацію Favicon",
+    "description": "Favicon - це маленька іконка, яка представляє ваш веб-сайт у вкладках браузера, закладках та ярликах. Сучасним веб-додаткам потрібні favicon різних розмірів та форматів для підтримки різних пристроїв та платформ.",
+    "standardSizes": {
+      "title": "Standard Sizes",
       "items": [
-        "Multiple size generation (16x16 to 512x512)",
-        "Various format support (ICO, PNG, SVG)",
-        "Device-specific optimization",
-        "Batch download as ZIP package",
-        "Preview before download"
-      ]
-    },
-    "useCases": {
-      "title": "Common Use Cases",
-      "items": [
-        "Website favicon creation",
-        "Progressive web app icons",
-        "Browser bookmark icons",
-        "Mobile app shortcuts",
-        "Desktop application icons"
+        "16×16, 32×32 - Browser tabs and bookmarks",
+        "48×48, 64×64 - Desktop shortcuts and apps",
+        "96×96, 128×128 - High-DPI and retina displays",
+        "180×180 - Apple touch icon for iOS",
+        "192×192, 512×512 - Android and PWA icons"
       ]
     },
     "bestPractices": {
-      "title": "Best Practices",
+      "title": "Найкращі практики",
       "items": [
-        "Use square images (1:1 aspect ratio)",
-        "Start with high resolution (512x512 or larger)",
-        "Simple designs work better at small sizes",
-        "Test on different backgrounds",
-        "Include multiple sizes for device compatibility"
+        "Використовуйте квадратні зображення (співвідношення сторін 1:1)",
+        "Починайте з високої роздільної здатності (512x512 або більше)",
+        "Прості дизайни краще виглядають у малих розмірах",
+        "Тестуйте на різних фонах",
+        "Включайте кілька розмірів для сумісності з пристроями"
       ]
     }
   }

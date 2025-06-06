@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
+    "qa:translations": "node scripts/qa-translations.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "type-check": "tsc --noEmit",
@@ -41,7 +42,7 @@
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
-    "db:deploy": "prisma migrate deploy",
+    "db:deploy": "npm run db:migrate:deploy",
     "db:studio": "prisma studio",
     "db:seed": "prisma db seed",
     "db:test-setup": "DATABASE_URL=file:./test.db npx prisma migrate deploy && DATABASE_URL=file:./test.db npx prisma generate",
@@ -50,7 +51,7 @@
     "health": "curl -f http://localhost:3000/api/health || echo 'Health check failed'",
     "clean": "rm -rf .next out dist node_modules/.cache test-results coverage playwright-report",
     "clean:test": "rm -rf test.db test-e2e.db test-results coverage playwright-report",
-    "validate": "npm run lint && npm run type-check && npm run format:check && npm run env:validate",
+    "validate": "npm-run-all --parallel validate:*",
     "prepare": "npm run db:generate",
     "setup": "node scripts/setup.js",
     "docker:build": "docker build -t tool-chest .",
@@ -59,7 +60,8 @@
     "docker:dev:bg": "docker-compose up --build -d",
     "docker:down": "docker-compose down",
     "docker:logs": "docker-compose logs -f",
-    "docker:clean": "docker-compose down -v && docker system prune -f"
+    "docker:clean": "docker-compose down -v && docker system prune -f",
+    "i18n:addkey": "node scripts/add-translation-key.mjs"
   },
   "dependencies": {
     "@axe-core/react": "^4.10.1",
@@ -80,6 +82,7 @@
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.4.1",
+    "glob": "^11.0.2",
     "highlight.js": "^11.11.1",
     "html2canvas": "^1.4.1",
     "jest": "^29.7.0",

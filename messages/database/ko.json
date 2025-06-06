@@ -4,15 +4,15 @@
       "name": "Base64 도구",
       "description": "텍스트 및 파일을 지원하는 Base64 데이터 인코딩 및 디코딩"
     },
-    "hashGenerator": {
+    "hash-generator": {
       "name": "해시 생성기",
       "description": "MD5, SHA-1, SHA-256 및 기타 암호화 해시를 생성하십시오"
     },
-    "faviconGenerator": {
+    "favicon-generator": {
       "name": "Favicon 생성기",
       "description": "여러 크기와 형식의 이미지에서 Favicon을 만듭니다"
     },
-    "markdownToPdf": {
+    "markdown-to-pdf": {
       "name": "PDF에 마크 다운",
       "description": "사용자 정의 스타일 옵션으로 Markdown 파일을 PDF로 변환하십시오"
     },
@@ -38,6 +38,18 @@
       "name": "부호화",
       "description": "다양한 형식으로 데이터를 인코딩하고 디코딩하는 도구"
     },
+    "security": {
+      "name": "보안",
+      "description": "암호화 작업 및 보안 분석 도구"
+    },
+    "design": {
+      "name": "디자인",
+      "description": "디자인 및 그래픽 도구"
+    },
+    "document": {
+      "name": "문서",
+      "description": "문서 처리 도구"
+    },
     "generation": {
       "name": "세대",
       "description": "컨텐츠, 코드 및 파일을 생성하기위한 도구"
@@ -45,10 +57,6 @@
     "conversion": {
       "name": "변환",
       "description": "다른 파일 형식으로 변환하기위한 도구"
-    },
-    "security": {
-      "name": "보안",
-      "description": "암호화 작업 및 보안 분석 도구"
     },
     "compression": {
       "name": "압축",

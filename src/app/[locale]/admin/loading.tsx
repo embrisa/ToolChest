@@ -1,4 +1,8 @@
-export default function AdminLoading() {
+import { getTranslations } from "next-intl/server";
+
+export default async function AdminLoading() {
+  const t = await getTranslations("pages.admin.loading");
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container-wide py-8">
@@ -49,9 +53,7 @@ export default function AdminLoading() {
           <div className="text-center py-8">
             <div className="inline-flex items-center space-x-3 text-neutral-600 dark:text-neutral-400">
               <div className="animate-spin w-5 h-5 border-2 border-brand-500 border-t-transparent rounded-full"></div>
-              <span className="text-sm font-medium">
-                Loading admin dashboard...
-              </span>
+              <span className="text-sm font-medium">{t("dashboard")}</span>
             </div>
           </div>
         </div>

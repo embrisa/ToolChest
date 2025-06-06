@@ -1,50 +1,50 @@
 {
   "hero": {
     "title": "tool-chest",
-    "subtitle": "Your collection of essential computer tools.",
-    "description": "Encode, decode, generate, convert, and more with ease.",
-    "searchPlaceholder": "Search tools..."
+    "subtitle": "Ihre Sammlung wichtiger Computer-Werkzeuge.",
+    "description": "Kodieren, dekodieren, generieren, konvertieren und mehr mit Leichtigkeit.",
+    "searchPlaceholder": "Werkzeuge suchen..."
   },
   "stats": {
-    "toolsAvailable": "Tools Available",
-    "clientSideProcessing": "Client-side Processing",
+    "toolsAvailable": "Verfügbare Werkzeuge",
+    "clientSideProcessing": "Client-seitige Verarbeitung",
     "clientSideValue": "100%",
-    "freeForever": "Free",
-    "freeValue": "Forever"
+    "freeForever": "Kostenlos",
+    "freeValue": "Für immer"
   },
   "sections": {
-    "allTools": "All Tools",
-    "searchResults": "Search Results",
-    "filterTools": "Filter Tools",
-    "active": "active"
+    "allTools": "Alle Werkzeuge",
+    "searchResults": "Suchergebnisse",
+    "filterTools": "Werkzeuge filtern",
+    "active": "aktiv"
   },
   "loading": {
-    "loadingTools": "Loading tools...",
-    "toolsFound": "tools found"
+    "loadingTools": "Werkzeuge werden geladen...",
+    "toolsFound": "Werkzeuge gefunden"
   },
   "noResults": {
-    "title": "No tools found",
-    "description": "No tools match \"{query}\"",
-    "descriptionFilters": "No tools match your selected filters"
+    "title": "Keine Werkzeuge gefunden",
+    "description": "Keine Werkzeuge entsprechen \"{query}\"",
+    "descriptionFilters": "Keine Werkzeuge entsprechen Ihren ausgewählten Filtern"
   },
   "errors": {
-    "troubleLoading": "We're having trouble loading the tools. Please try again later."
+    "troubleLoading": "Wir haben Probleme beim Laden der Werkzeuge. Bitte versuchen Sie es später erneut."
   },
   "search": {
-    "placeholder": "Search tools...",
-    "clearSearch": "Clear search",
-    "searchResults": "search results"
+    "placeholder": "Werkzeuge suchen...",
+    "clearSearch": "Suche löschen",
+    "searchResults": "Suchergebnisse"
   },
   "filtering": {
-    "filterByTags": "Filter by Tags",
-    "allTags": "All Tags",
-    "selectedTags": "Selected Tags",
-    "clearAll": "Clear All",
-    "noTags": "No tags available"
+    "filterByTags": "Nach Tags filtern",
+    "allTags": "Alle Tags",
+    "selectedTags": "Ausgewählte Tags",
+    "clearAll": "Alle löschen",
+    "noTags": "Keine Tags verfügbar"
   },
   "toolCard": {
-    "newTool": "New",
-    "popularTool": "Popular",
-    "openTool": "Open tool"
+    "newTool": "Neu",
+    "popularTool": "Beliebt",
+    "openTool": "Werkzeug öffnen"
   }
 }

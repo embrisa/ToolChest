@@ -1,78 +1,86 @@
 {
   "tools": {
     "base64": {
-      "name": "Base64 Tool",
-      "description": "Encode and decode Base64 data with support for text and files"
+      "name": "Інструмент Base64",
+      "description": "Кодування та декодування даних Base64 з підтримкою тексту та файлів"
     },
-    "hashGenerator": {
-      "name": "Hash Generator",
-      "description": "Generate MD5, SHA-1, SHA-256, and other cryptographic hashes"
+    "hash-generator": {
+      "name": "Генератор хешів",
+      "description": "Генеруйте MD5, SHA-1, SHA-256 та інші криптографічні хеші"
     },
-    "faviconGenerator": {
-      "name": "Favicon Generator",
-      "description": "Create favicons from images in multiple sizes and formats"
+    "favicon-generator": {
+      "name": "Генератор Favicon",
+      "description": "Створюйте favicon з зображень у різних розмірах та форматах"
     },
-    "markdownToPdf": {
-      "name": "Markdown to PDF",
-      "description": "Convert Markdown files to PDF with custom styling options"
+    "markdown-to-pdf": {
+      "name": "Markdown в PDF",
+      "description": "Конвертуйте файли Markdown в PDF з налаштуванням стилів"
     },
     "urlShortener": {
-      "name": "URL Shortener",
-      "description": "Create short URLs for easy sharing and tracking"
+      "name": "Скорочувач URL",
+      "description": "Створюйте короткі URL-адреси для легкого обміну та відстеження"
     },
     "qrGenerator": {
-      "name": "QR Code Generator",
-      "description": "Generate QR codes for text, URLs, and other data"
+      "name": "Генератор QR-кодів",
+      "description": "Генеруйте QR-коди для тексту, URL-адрес та інших даних"
     },
     "imageCompressor": {
-      "name": "Image Compressor",
-      "description": "Compress images while maintaining quality"
+      "name": "Компресор зображень",
+      "description": "Стискайте зображення, зберігаючи якість"
     },
     "textDiff": {
-      "name": "Text Diff Tool",
-      "description": "Compare and highlight differences between text files"
+      "name": "Інструмент порівняння тексту",
+      "description": "Порівнюйте та виділяйте відмінності між текстовими файлами"
     }
   },
   "tags": {
     "encoding": {
-      "name": "Encoding",
-      "description": "Tools for encoding and decoding data in various formats"
-    },
-    "generation": {
-      "name": "Generation",
-      "description": "Tools for generating content, codes, and files"
-    },
-    "conversion": {
-      "name": "Conversion",
-      "description": "Tools for converting between different file formats"
+      "name": "Кодування",
+      "description": "Інструменти для кодування та декодування даних у різних форматах"
     },
     "security": {
-      "name": "Security",
-      "description": "Tools for cryptographic operations and security analysis"
+      "name": "Безпека",
+      "description": "Інструменти для криптографічних операцій та аналізу безпеки"
+    },
+    "design": {
+      "name": "Дизайн",
+      "description": "Інструменти для дизайну та графіки"
+    },
+    "document": {
+      "name": "Документ",
+      "description": "Інструменти для обробки документів"
+    },
+    "generation": {
+      "name": "Генерація",
+      "description": "Інструменти для генерації контенту, кодів та файлів"
+    },
+    "conversion": {
+      "name": "Конвертація",
+      "description": "Інструменти для конвертації між різними форматами файлів"
     },
     "compression": {
-      "name": "Compression",
-      "description": "Tools for reducing file sizes and optimizing content"
+      "name": "Стиснення",
+      "description": "Інструменти для зменшення розміру файлів та оптимізації контенту"
     },
     "analysis": {
-      "name": "Analysis",
-      "description": "Tools for analyzing and comparing data and files"
+      "name": "Аналіз",
+      "description": "Інструменти для аналізу та порівняння даних та файлів"
     },
     "web": {
-      "name": "Web Development",
-      "description": "Tools specifically designed for web developers"
+      "name": "Веб-розробка",
+      "description": "Інструменти, спеціально розроблені для веб-розробників"
     },
     "image": {
-      "name": "Image Processing",
-      "description": "Tools for working with images and graphics"
+      "name": "Обробка зображень",
+      "description": "Інструменти для роботи з зображеннями та графікою"
     },
     "text": {
-      "name": "Text Processing",
-      "description": "Tools for manipulating and analyzing text content"
+      "name": "Обробка тексту",
+      "description": "Інструменти для маніпулювання та аналізу текстового контенту"
     },
     "utility": {
-      "name": "Utility",
-      "description": "General-purpose tools for common tasks"
+      "name": "Утиліта",
+      "description": "Інструменти загального призначення для поширених завдань"
     }
   }
 }

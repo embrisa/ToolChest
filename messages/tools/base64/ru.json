@@ -1,24 +1,25 @@
 {
   "metadata": {
-    "title": "Base64 Encoder & Decoder |Инструментальная связка",
-    "description": "Бесплатный онлайн -база64 Encoder и декодер.Преобразовать текст в BASE64 и декодировать BASE64 в текст.Поддерживает кодирование/декодирование файла с помощью опций, безопасных для URL.Конфиденциальность-в первую очередь с обработкой на стороне клиента.",
+    "title": "Base64 Encoder & Decoder | tool-chest",
+    "description": "Free online Base64 encoder and decoder. Convert text to Base64 and decode Base64 to text. Supports file encoding/decoding with URL-safe options. Privacy-first with client-side processing.",
     "keywords": [
-      "База64",
-      "энкодер",
-      "декодер",
-      "кодировать",
-      "декодировать",
-      "текст",
-      "файл",
-      "URL-безопасность",
-      "онлайн -инструмент",
-      "бесплатно",
-      "конфиденциальность"
+      "base64",
+      "encoder",
+      "decoder",
+      "encode",
+      "decode",
+      "text",
+      "file",
+      "url-safe",
+      "online tool",
+      "free",
+      "privacy"
     ]
   },
   "page": {
     "title": "Base64 Encoder & Decoder",
-    "description": "Кодировать и декодировать данные Base64 с поддержкой текста и файлов."
+    "description": "Кодировать и декодировать данные Base64 с поддержкой текста и файлов.",
+    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
   },
   "tool": {
     "variants": {
@@ -44,7 +45,17 @@
         "Опция кодирования BASE64 URL BASE64",
         "Скопировать функциональность буфера обмена",
         "Загрузите кодированные/декодированные результаты",
-        "Кодирование/декодирование в реальном времени"
+        "Кодирование/декодирование в реальном времени",
+        "Real-time encoding/decoding"
+      ]
+    },
+    "securityAndPrivacy": {
+      "title": "Security & Privacy",
+      "items": [
+        "No data sent to servers",
+        "Processing happens in your browser",
+        "Files stay on your device",
+        "No data storage or logging"
       ]
     },
     "useCases": {

@@ -1,50 +1,50 @@
 {
   "hero": {
     "title": "tool-chest",
-    "subtitle": "Your collection of essential computer tools.",
-    "description": "Encode, decode, generate, convert, and more with ease.",
-    "searchPlaceholder": "Search tools..."
+    "subtitle": "Ваша колекція основних комп'ютерних інструментів.",
+    "description": "Кодуйте, декодуйте, генеруйте, конвертуйте та багато іншого з легкістю.",
+    "searchPlaceholder": "Пошук інструментів..."
   },
   "stats": {
-    "toolsAvailable": "Tools Available",
-    "clientSideProcessing": "Client-side Processing",
+    "toolsAvailable": "Доступні інструменти",
+    "clientSideProcessing": "Обробка на стороні клієнта",
     "clientSideValue": "100%",
-    "freeForever": "Free",
-    "freeValue": "Forever"
+    "freeForever": "Безкоштовно",
+    "freeValue": "Назавжди"
   },
   "sections": {
-    "allTools": "All Tools",
-    "searchResults": "Search Results",
-    "filterTools": "Filter Tools",
-    "active": "active"
+    "allTools": "Всі інструменти",
+    "searchResults": "Результати пошуку",
+    "filterTools": "Фільтрувати інструменти",
+    "active": "активний"
   },
   "loading": {
-    "loadingTools": "Loading tools...",
-    "toolsFound": "tools found"
+    "loadingTools": "Завантаження інструментів...",
+    "toolsFound": "інструментів знайдено"
   },
   "noResults": {
-    "title": "No tools found",
-    "description": "No tools match \"{query}\"",
-    "descriptionFilters": "No tools match your selected filters"
+    "title": "Інструменти не знайдено",
+    "description": "Не знайдено інструментів, що відповідають \"{query}\"",
+    "descriptionFilters": "Немає інструментів, що відповідають вашим вибраним фільтрам"
   },
   "errors": {
-    "troubleLoading": "We're having trouble loading the tools. Please try again later."
+    "troubleLoading": "Виникла проблема із завантаженням інструментів. Будь ласка, спробуйте пізніше."
   },
   "search": {
-    "placeholder": "Search tools...",
-    "clearSearch": "Clear search",
-    "searchResults": "search results"
+    "placeholder": "Пошук інструментів...",
+    "clearSearch": "Очистити пошук",
+    "searchResults": "результати пошуку"
   },
   "filtering": {
-    "filterByTags": "Filter by Tags",
-    "allTags": "All Tags",
-    "selectedTags": "Selected Tags",
-    "clearAll": "Clear All",
-    "noTags": "No tags available"
+    "filterByTags": "Фільтрувати за тегами",
+    "allTags": "Всі теги",
+    "selectedTags": "Вибрані теги",
+    "clearAll": "Очистити все",
+    "noTags": "Теги недоступні"
   },
   "toolCard": {
-    "newTool": "New",
-    "popularTool": "Popular",
-    "openTool": "Open tool"
+    "newTool": "Новий",
+    "popularTool": "Популярний",
+    "openTool": "Відкрити інструмент"
   }
 }

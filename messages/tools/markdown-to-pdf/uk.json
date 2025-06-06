@@ -1,102 +1,116 @@
 {
   "metadata": {
-    "title": "Markdown to PDF Converter | tool-chest",
-    "description": "Convert Markdown files to PDF with custom styling options. Professional document generation with client-side processing for privacy.",
+    "title": "Конвертер Markdown в PDF | tool-chest",
+    "description": "Конвертуйте Markdown в професійні PDF документи з підсвічуванням синтаксису, налаштуванням стилів та підтримкою таблиць, блоків коду і зображень. Обробка на стороні клієнта.",
     "keywords": [
-      "markdown",
-      "pdf",
-      "converter",
-      "document",
-      "export",
-      "styling",
-      "format",
-      "download",
-      "privacy",
-      "client-side"
+      "markdown в pdf",
+      "конвертер markdown",
+      "генератор pdf",
+      "markdown pdf",
+      "підсвічування синтаксису",
+      "блоки коду",
+      "таблиці",
+      "конвертер документів",
+      "експорт markdown",
+      "безкоштовний інструмент"
     ]
   },
   "page": {
-    "title": "Markdown to PDF",
-    "description": "Convert Markdown files to PDF with custom styling options."
+    "title": "Markdown в PDF",
+    "description": "Конвертуйте файли Markdown в PDF з налаштуванням стилів.",
+    "privacyMessage": "🔒 Privacy-First • GitHub Flavored Markdown • Client-Side Processing"
   },
-  "tool": {
-    "input": {
-      "markdown": "Markdown Content",
-      "file": "Markdown File",
-      "placeholder": "Enter your Markdown content here..."
+  "featureGrid": {
+    "live-preview": {
+      "title": "Live Preview",
+      "description": "Real-time markdown preview with instant rendering",
+      "icon": "👁️"
     },
-    "customization": {
-      "title": "PDF Customization",
-      "pageSize": "Page Size",
-      "margins": "Margins",
-      "theme": "Theme",
-      "fontSize": "Font Size",
-      "fontFamily": "Font Family",
-      "lineHeight": "Line Height",
-      "headerFooter": "Header & Footer"
+    "templates": {
+      "title": "Multiple Templates",
+      "description": "PDF templates and themes for different use cases",
+      "icon": "🎨"
     },
-    "themes": {
-      "default": "Default",
-      "github": "GitHub",
-      "minimal": "Minimal",
-      "academic": "Academic",
-      "professional": "Professional"
+    "gfm-support": {
+      "title": "GitHub Flavored Markdown",
+      "description": "Full GFM support including tables and task lists",
+      "icon": "📝"
     },
-    "pageSizes": {
-      "a4": "A4",
-      "letter": "Letter",
-      "legal": "Legal",
-      "a3": "A3",
-      "tabloid": "Tabloid"
+    "syntax-highlighting": {
+      "title": "Syntax Highlighting",
+      "description": "Code blocks with syntax highlighting for multiple languages",
+      "icon": "💻"
     },
-    "margins": {
-      "none": "None",
-      "narrow": "Narrow",
-      "normal": "Normal",
-      "wide": "Wide",
-      "custom": "Custom"
+    "custom-styling": {
+      "title": "Custom Styling",
+      "description": "Customize fonts, colors, and layout options",
+      "icon": "⚙️"
+    },
+    "file-upload": {
+      "title": "File Upload",
+      "description": "Upload .md, .markdown, or .txt files directly",
+      "icon": "📁"
+    },
+    "professional-output": {
+      "title": "Professional Output",
+      "description": "High-quality PDF generation with metadata",
+      "icon": "📄"
+    },
+    "privacy-first": {
+      "title": "Privacy-First",
+      "description": "All processing happens in your browser",
+      "icon": "🔒"
     }
   },
-  "validation": {
-    "markdownRequired": "Please enter Markdown content or select a file",
-    "invalidMarkdownFile": "Please select a valid Markdown file (.md, .markdown)",
-    "fileTooLarge": "File too large (max 10MB)",
-    "emptyContent": "Markdown content cannot be empty"
-  },
   "info": {
-    "title": "About Markdown to PDF Conversion",
-    "description": "Convert your Markdown documents to professionally formatted PDF files with customizable styling options. Perfect for documentation, reports, articles, and presentations.",
+    "title": "Про конвертацію Markdown в PDF",
+    "description": "Конвертуйте ваші документи Markdown у професійно відформатовані PDF-файли з можливістю налаштування стилів. Ідеально підходить для документації, звітів, статей та презентацій.",
     "keyFeatures": {
-      "title": "Key Features",
+      "title": "Ключові особливості",
       "items": [
-        "Full Markdown syntax support",
-        "Custom PDF styling and themes",
-        "Multiple page sizes and orientations",
-        "Syntax highlighting for code blocks",
-        "Table and image support",
-        "Header and footer customization"
+        "Повна підтримка синтаксису Markdown",
+        "Налаштування стилів та тем PDF",
+        "Кілька розмірів та орієнтацій сторінок",
+        "Підсвічування синтаксису для блоків коду",
+        "Підтримка таблиць та зображень",
+        "Налаштування колонтитулів",
+        "Підтримка завантаження файлів (.md, .markdown, .txt)",
+        "Перетягування файлів",
+        "Підрахунок слів та статистика в реальному часі",
+        "Професійний PDF з метаданими"
       ]
     },
-    "useCases": {
-      "title": "Common Use Cases",
+    "supportedFeatures": {
+      "title": "Підтримувані функції Markdown",
       "items": [
-        "Technical documentation",
-        "Research papers and reports",
-        "README files for printing",
-        "Meeting notes and agendas",
-        "Project proposals",
-        "Blog posts for offline reading"
+        "Заголовки (H1-H6) з автоматичною нумерацією",
+        "Жирний та курсивний текст",
+        "Посилання та зображення з підписами",
+        "Блоки коду з підсвічуванням синтаксису",
+        "Таблиці з правильним форматуванням",
+        "Цитати та вкладені списки",
+        "Списки завдань з прапорцями",
+        "Автоматичне перетворення URL в посилання"
       ]
     },
-    "supportedSyntax": {
-      "title": "Supported Markdown Features",
+    "pdfTemplates": {
+      "title": "Шаблони PDF",
       "items": [
-        "Headers and text formatting",
-        "Lists (ordered and unordered)",
-        "Links and images",
-        "Tables and code blocks",
-        "Blockquotes and horizontal rules",
-        "LaTeX math expressions (optional)"
+        "За замовчуванням: Чистий і простий дизайн для загального використання",
+        "Академічний: Професійний формат для наукових робіт",
+        "Мінімальний: Чистий дизайн з великою кількістю білого простору",
+        "Професійний: Готовий для бізнесу з колонтитулами"
+      ]
+    },
+    "howToUse": {
+      "title": "Як використовувати",
+      "items": [
+        "Виберіть між введенням в редакторі або завантаженням markdown файлу",
+        "Напишіть або вставте ваш markdown вміст в редактор",
+        "Використовуйте попередній перегляд щоб побачити як виглядатиме документ",
+        "Виберіть шаблон або налаштуйте параметри стилю",
+        "Натисніть 'Генерувати PDF' щоб створити документ",
+        "Завантажте ваш професійний PDF файл"
       ]
     }
   }

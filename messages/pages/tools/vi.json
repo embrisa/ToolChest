@@ -1,33 +1,33 @@
 {
-    "page": {
-        "title": "All Tools",
-        "subtitle": "Explore our complete collection of utility tools designed to make your development workflow more efficient.",
-        "loading": "Loading tools...",
-        "toolsAvailable": "tools available",
-        "availableTools": "Available Tools",
-        "description": "Professional-grade utilities for web development"
+  "page": {
+    "title": "Tất cả công cụ",
+    "subtitle": "Khám phá bộ sưu tập đầy đủ các công cụ tiện ích của chúng tôi được thiết kế để làm cho quy trình phát triển của bạn hiệu quả hơn.",
+    "loading": "Đang tải công cụ...",
+    "toolsAvailable": "công cụ có sẵn",
+    "availableTools": "Các công cụ có sẵn",
+    "description": "Các tiện ích cấp chuyên nghiệp để phát triển web"
+  },
+  "stats": {
+    "allToolsFree": "Tất cả các công cụ đều miễn phí",
+    "clientSideProcessing": "Xử lý phía máy khách"
+  },
+  "states": {
+    "noToolsAvailable": "Không có công cụ nào",
+    "noToolsDescription": "Các công cụ đang được tải. Vui lòng quay lại sau hoặc thử làm mới trang.",
+    "loadingGrid": "Đang tải các công cụ có sẵn..."
+  },
+  "features": {
+    "privacy": {
+      "title": "Ưu tiên quyền riêng tư",
+      "description": "Tất cả các công cụ xử lý dữ liệu cục bộ trong trình duyệt của bạn"
     },
-    "stats": {
-        "allToolsFree": "All tools free",
-        "clientSideProcessing": "Client-side processing"
+    "free": {
+      "title": "Luôn miễn phí",
+      "description": "Không đăng ký, không chi phí ẩn, hoàn toàn miễn phí"
     },
-    "states": {
-        "noToolsAvailable": "No tools available",
-        "noToolsDescription": "Tools are being loaded. Please check back soon or try refreshing the page.",
-        "loadingGrid": "Loading available tools..."
-    },
-    "features": {
-        "privacy": {
-            "title": "Privacy First",
-            "description": "All tools process data locally in your browser"
-        },
-        "free": {
-            "title": "Always Free",
-            "description": "No subscriptions, no hidden costs, completely free"
-        },
-        "fast": {
-            "title": "Lightning Fast",
-            "description": "Instant results with optimized performance"
-        }
+    "fast": {
+      "title": "Nhanh như chớp",
+      "description": "Kết quả tức thì với hiệu suất được tối ưu hóa"
     }
+  }
 }

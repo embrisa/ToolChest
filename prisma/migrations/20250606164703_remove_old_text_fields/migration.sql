@@ -1,0 +1,32 @@
+/*
+  Warnings:
+
+  - You are about to drop the column `color` on the `Tag` table. All the data in the column will be lost.
+  - You are about to drop the column `description` on the `Tag` table. All the data in the column will be lost.
+  - You are about to drop the column `name` on the `Tag` table. All the data in the column will be lost.
+  - You are about to drop the column `description` on the `Tool` table. All the data in the column will be lost.
+  - You are about to drop the column `name` on the `Tool` table. All the data in the column will be lost.
+  - Made the column `nameKey` on table `Tag` required. This step will fail if there are existing NULL values in that column.
+  - Made the column `tagKey` on table `Tag` required. This step will fail if there are existing NULL values in that column.
+  - Made the column `nameKey` on table `Tool` required. This step will fail if there are existing NULL values in that column.
+  - Made the column `toolKey` on table `Tool` required. This step will fail if there are existing NULL values in that column.
+
+*/
+-- DropIndex
+DROP INDEX "Tag_name_key";
+
+-- DropIndex
+DROP INDEX "Tool_name_key";
+
+-- AlterTable
+ALTER TABLE "Tag" DROP COLUMN "color",
+DROP COLUMN "description",
+DROP COLUMN "name",
+ALTER COLUMN "nameKey" SET NOT NULL,
+ALTER COLUMN "tagKey" SET NOT NULL;
+
+-- AlterTable
+ALTER TABLE "Tool" DROP COLUMN "description",
+DROP COLUMN "name",
+ALTER COLUMN "nameKey" SET NOT NULL,
+ALTER COLUMN "toolKey" SET NOT NULL;

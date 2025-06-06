@@ -1,33 +1,33 @@
 {
-    "page": {
-        "title": "All Tools",
-        "subtitle": "Explore our complete collection of utility tools designed to make your development workflow more efficient.",
-        "loading": "Loading tools...",
-        "toolsAvailable": "tools available",
-        "availableTools": "Available Tools",
-        "description": "Professional-grade utilities for web development"
+  "page": {
+    "title": "Alle tools",
+    "subtitle": "Verken onze complete verzameling hulpprogramma's die zijn ontworpen om uw ontwikkelingsworkflow efficiënter te maken.",
+    "loading": "Tools laden...",
+    "toolsAvailable": "tools beschikbaar",
+    "availableTools": "Beschikbare tools",
+    "description": "Professionele hulpprogramma's voor webontwikkeling"
+  },
+  "stats": {
+    "allToolsFree": "Alle tools gratis",
+    "clientSideProcessing": "Verwerking aan de clientzijde"
+  },
+  "states": {
+    "noToolsAvailable": "Geen tools beschikbaar",
+    "noToolsDescription": "Tools worden geladen. Kom snel terug of probeer de pagina te vernieuwen.",
+    "loadingGrid": "Beschikbare tools laden..."
+  },
+  "features": {
+    "privacy": {
+      "title": "Privacy eerst",
+      "description": "Alle tools verwerken gegevens lokaal in uw browser"
     },
-    "stats": {
-        "allToolsFree": "All tools free",
-        "clientSideProcessing": "Client-side processing"
+    "free": {
+      "title": "Altijd gratis",
+      "description": "Geen abonnementen, geen verborgen kosten, volledig gratis"
     },
-    "states": {
-        "noToolsAvailable": "No tools available",
-        "noToolsDescription": "Tools are being loaded. Please check back soon or try refreshing the page.",
-        "loadingGrid": "Loading available tools..."
-    },
-    "features": {
-        "privacy": {
-            "title": "Privacy First",
-            "description": "All tools process data locally in your browser"
-        },
-        "free": {
-            "title": "Always Free",
-            "description": "No subscriptions, no hidden costs, completely free"
-        },
-        "fast": {
-            "title": "Lightning Fast",
-            "description": "Instant results with optimized performance"
-        }
+    "fast": {
+      "title": "Bliksemsnel",
+      "description": "Directe resultaten met geoptimaliseerde prestaties"
     }
+  }
 }

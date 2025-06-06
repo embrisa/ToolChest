@@ -1,23 +1,66 @@
 {
   "metadata": {
-    "title": "Gerador de Hash | tool-chest",
-    "description": "Gere hashes MD5, SHA-1, SHA-256 e outros online. Geração de hash rápida e segura no cliente para textos e arquivos.",
+    "title": "Hash Generator - Generate MD5, SHA-1, SHA-256, SHA-512 Hashes | tool-chest",
+    "description": "Free online hash generator for MD5, SHA-1, SHA-256, SHA-512, and other hash algorithms. Generate secure hashes for text and files with client-side processing.",
     "keywords": [
-      "hash",
+      "hash generator",
       "md5",
       "sha1",
       "sha256",
+      "sha512",
       "checksum",
-      "gerador",
-      "texto",
-      "arquivo",
-      "segurança",
-      "verificação"
+      "crypto",
+      "security",
+      "file hash",
+      "text hash",
+      "online tool",
+      "free"
     ]
   },
   "page": {
     "title": "Gerador de Hash",
-    "description": "Gere hashes criptográficos para textos e arquivos usando vários algoritmos."
+    "description": "Gere hashes criptográficos para textos e arquivos usando vários algoritmos.",
+    "privacyMessage": "🔒 Privacy-First • Web Crypto API • Client-Side Processing"
+  },
+  "featureGrid": {
+    "md5": {
+      "title": "MD5",
+      "description": "128-bit hash function. Fast but not cryptographically secure. Use for checksums only."
+    },
+    "sha1": {
+      "title": "SHA-1",
+      "description": "160-bit hash function. Legacy algorithm, use SHA-256+ for security applications."
+    },
+    "sha256": {
+      "title": "SHA-256",
+      "description": "256-bit hash function. Secure and widely used standard for modern applications.",
+      "badge": "Recommended"
+    },
+    "sha512": {
+      "title": "SHA-512",
+      "description": "512-bit hash function. Maximum security for sensitive data and critical applications."
+    }
+  },
+  "info": {
+    "title": "Sobre Funções de Hash",
+    "description": "Funções de hash convertem dados de entrada em cadeias de caracteres de tamanho fixo, normalmente usadas para verificação de integridade, armazenamento de senhas e assinaturas digitais.",
+    "useCases": {
+      "title": "Casos de Uso Comuns",
+      "items": [
+        "Verificação de integridade de arquivos",
+        "Hash de senhas",
+        "Deduplicação de dados",
+        "Assinaturas digitais",
+        "Geração de checksums"
+      ]
+    },
+    "securityGuidelines": {
+      "title": "Security Guidelines",
+      "items": [
+        "MD5 and SHA-1 are cryptographically broken and should not be used for security-critical applications",
+        "Use SHA-256 or SHA-512 for all security-sensitive applications and modern systems"
+      ]
+    }
   },
   "tool": {
     "algorithms": {
@@ -35,38 +78,5 @@
   "validation": {
     "algorithmRequired": "Selecione um algoritmo de hash",
     "inputRequired": "Insira um texto ou selecione um arquivo"
-  },
-  "info": {
-    "title": "Sobre Funções de Hash",
-    "description": "Funções de hash convertem dados de entrada em cadeias de caracteres de tamanho fixo, normalmente usadas para verificação de integridade, armazenamento de senhas e assinaturas digitais.",
-    "keyFeatures": {
-      "title": "Principais Recursos",
-      "items": [
-        "Suporte a vários algoritmos de hash",
-        "Hash de texto e arquivos",
-        "Capacidade de processamento em lote",
-        "Ferramentas de comparação de hashes",
-        "Opções de saída em maiúsculas/minúsculas"
-      ]
-    },
-    "useCases": {
-      "title": "Casos de Uso Comuns",
-      "items": [
-        "Verificação de integridade de arquivos",
-        "Hash de senhas",
-        "Deduplicação de dados",
-        "Assinaturas digitais",
-        "Geração de checksums"
-      ]
-    },
-    "security": {
-      "title": "Notas de Segurança",
-      "items": [
-        "MD5 e SHA-1 estão obsoletos para uso seguro",
-        "Use SHA-256 ou superior para fins criptográficos",
-        "Todo hashing acontece localmente no seu navegador",
-        "Nenhum dado é transmitido para servidores externos"
-      ]
-    }
   }
 }

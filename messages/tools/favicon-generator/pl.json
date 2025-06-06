@@ -1,74 +1,59 @@
 {
   "metadata": {
-    "title": "Favicon Generator | Chest narzędzi",
-    "description": "Twórz favicons z obrazów w wielu rozmiarach i formatach. Wygeneruj kompletne pakiety Favicon dla aplikacji internetowych z przetwarzaniem po stronie klienta.",
+    "title": "Favicon Generator - Create Favicons in All Sizes | tool-chest",
+    "description": "Free online favicon generator. Create favicons in all standard sizes (16x16, 32x32, 192x192, 512x512) from any image. Generate complete favicon packages with manifest files.",
     "keywords": [
-      "Favicon",
-      "generator",
-      "ikona",
-      "sieć",
-      "obraz",
-      "rozmiar",
-      "konwertować",
-      "ICO",
-      "png",
-      "Opracowywanie stron internetowych"
+      "favicon generator",
+      "favicon",
+      "icon generator",
+      "website icon",
+      "app icon",
+      "16x16",
+      "32x32",
+      "192x192",
+      "512x512",
+      "ico file",
+      "png icon",
+      "web app manifest",
+      "free tool"
     ]
   },
   "page": {
     "title": "Generator Favicon",
-    "description": "Twórz favicons z obrazów w wielu rozmiarach i formatach."
+    "description": "Twórz favicons z obrazów w wielu rozmiarach i formatach.",
+    "privacyNotice": "All processing happens in your browser using <bold>Canvas API</bold>.",
+    "privacyMessage": "🔒 Privacy-First • Canvas API • Client-Side Processing"
   },
-  "tool": {
-    "sizes": {
-      "16x16": "16x16 (zakładka przeglądarki)",
-      "32x32": "32x32 (zakładka przeglądarki)",
-      "48x48": "48x48 (Windows)",
-      "57x57": "57x57 (iOS)",
-      "72x72": "72x72 (iPad)",
-      "96x96": "96x96 (Android)",
-      "120x120": "120x120 (siatkówka iPhone)",
-      "152x152": "152x152 (siatkówka iPad)",
-      "180x180": "180x180 (iPhone 6 Plus)",
-      "192x192": "192x192 (Android Chrome)",
-      "512x512": "512x512 (Android Chrome)"
+  "featureGrid": {
+    "browserIcons": {
+      "title": "Browser Icons",
+      "description": "16×16, 32×32, 48×48 favicons for browser tabs, bookmarks, and desktop shortcuts."
     },
-    "formats": {
-      "ico": "ICO (Windows)",
-      "png": "PNG (Universal)",
-      "svg": "SVG (skalowalne)"
+    "appleTouch": {
+      "title": "Apple Touch Icons",
+      "description": "180×180 icons for iOS home screen and Safari bookmark icons with rounded corners."
     },
-    "placeholders": {
-      "fileUpload": "Wybierz plik obrazu lub przeciągnij i upuść"
+    "androidIcons": {
+      "title": "Android Icons",
+      "description": "192×192, 512×512 icons for Android home screen and Progressive Web Apps."
+    },
+    "webManifest": {
+      "title": "Web App Manifest",
+      "description": "Complete manifest.json for Progressive Web Apps with all required metadata.",
+      "badge": "PWA Ready"
     }
-  },
-  "validation": {
-    "imageRequired": "Wybierz plik obrazu",
-    "invalidImageFormat": "Wybierz prawidłowy format obrazu (PNG, JPG, SVG)",
-    "imageTooLarge": "Plik obrazu zbyt duży (maks. 10 MB)",
-    "imageTooSmall": "Obraz powinien wynosić co najmniej 32 x 32 pikseli, aby uzyskać najlepsze wyniki"
   },
   "info": {
     "title": "O pokoleniu Favicon",
     "description": "Favicon to mała ikona reprezentująca twoją stronę w zakładkach, zakładkach i skrótach. Nowoczesne aplikacje internetowe wymagają wielu fawiconów i formatów do obsługi różnych urządzeń i platform.",
-    "keyFeatures": {
-      "title": "Kluczowe funkcje",
+    "standardSizes": {
+      "title": "Standard Sizes",
       "items": [
-        "Wytwarzanie wielkości (16x16 do 512x512)",
-        "Różne obsługa formatu (ICO, PNG, SVG)",
-        "Optymalizacja specyficzna dla urządzenia",
-        "Pobierz partię jako pakiet zip",
-        "Podgląd przed pobraniem"
-      ]
-    },
-    "useCases": {
-      "title": "Powszechne przypadki użycia",
-      "items": [
-        "Witryna Favicon Creation",
-        "Progresywne ikony aplikacji internetowych",
-        "Ikony zakładek do zakładek przeglądarki",
-        "Skróty aplikacji mobilnych",
-        "Ikony aplikacji komputerowych"
+        "16×16, 32×32 - Browser tabs and bookmarks",
+        "48×48, 64×64 - Desktop shortcuts and apps",
+        "96×96, 128×128 - High-DPI and retina displays",
+        "180×180 - Apple touch icon for iOS",
+        "192×192, 512×512 - Android and PWA icons"
       ]
     },
     "bestPractices": {

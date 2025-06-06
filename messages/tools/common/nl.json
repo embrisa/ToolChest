@@ -1,72 +1,72 @@
 {
   "ui": {
     "modes": {
-      "encode": "Encode",
-      "decode": "Decode",
-      "generate": "Generate",
-      "convert": "Convert",
-      "process": "Process",
-      "analyze": "Analyze"
+      "encode": "Coderen",
+      "decode": "Decoderen",
+      "generate": "Genereren",
+      "convert": "Converteren",
+      "process": "Verwerken",
+      "analyze": "Analyseren"
     },
     "inputTypes": {
-      "text": "Text",
-      "file": "File",
+      "text": "Tekst",
+      "file": "Bestand",
       "url": "URL",
-      "upload": "Upload"
+      "upload": "Uploaden"
     },
     "actions": {
-      "process": "Process",
-      "copy": "Copy Result",
-      "download": "Download",
-      "upload": "Upload",
-      "clear": "Clear",
-      "reset": "Reset",
-      "retry": "Retry",
-      "save": "Save",
-      "export": "Export"
+      "process": "Verwerken",
+      "copy": "Resultaat kopiëren",
+      "download": "Downloaden",
+      "upload": "Uploaden",
+      "clear": "Wissen",
+      "reset": "Resetten",
+      "retry": "Opnieuw proberen",
+      "save": "Opslaan",
+      "export": "Exporteren"
     },
     "status": {
-      "processing": "Processing...",
-      "success": "Operation completed successfully",
-      "copied": "Copied to clipboard",
-      "error": "Operation failed",
-      "ready": "Ready",
-      "waiting": "Waiting for input"
+      "processing": "Verwerken...",
+      "success": "Bewerking succesvol voltooid",
+      "copied": "Gekopieerd naar klembord",
+      "error": "Bewerking mislukt",
+      "ready": "Klaar",
+      "waiting": "Wachten op invoer"
     },
     "placeholders": {
-      "textInput": "Enter text here...",
-      "fileUpload": "Select a file or drag and drop",
-      "urlInput": "Enter URL here...",
-      "searchInput": "Search..."
+      "textInput": "Voer hier tekst in...",
+      "fileUpload": "Selecteer een bestand of sleep het hierheen",
+      "urlInput": "Voer hier URL in...",
+      "searchInput": "Zoeken..."
     }
   },
   "validation": {
-    "required": "This field is required",
-    "invalidInput": "Invalid input",
-    "fileTooLarge": "File too large (max {maxSize})",
-    "unsupportedFileType": "Unsupported file type",
-    "invalidFormat": "Invalid format",
-    "emptyInput": "Please enter some text or select a file",
-    "invalidUrl": "Please enter a valid URL"
+    "required": "Dit veld is verplicht",
+    "invalidInput": "Ongeldige invoer",
+    "fileTooLarge": "Bestand te groot (max {maxSize})",
+    "unsupportedFileType": "Niet-ondersteund bestandstype",
+    "invalidFormat": "Ongeldig formaat",
+    "emptyInput": "Voer tekst in of selecteer een bestand",
+    "invalidUrl": "Voer een geldige URL in"
   },
   "privacy": {
-    "clientSideNote": "All processing happens in your browser for maximum privacy.",
-    "noDataSent": "No data sent to servers",
-    "filesStayLocal": "Files stay on your device",
-    "noLogging": "No data storage or logging"
+    "clientSideNote": "Alle verwerking gebeurt in uw browser voor maximale privacy.",
+    "noDataSent": "Geen gegevens naar servers verzonden",
+    "filesStayLocal": "Bestanden blijven op uw apparaat",
+    "noLogging": "Geen gegevensopslag of logging"
   },
   "features": {
-    "clientSideProcessing": "Client-side processing for privacy",
-    "copyToClipboard": "Copy to clipboard functionality",
-    "downloadResults": "Download results",
-    "realTimeProcessing": "Real-time processing",
-    "multipleFormats": "Multiple format support",
-    "batchProcessing": "Batch processing support"
+    "clientSideProcessing": "Client-side verwerking voor privacy",
+    "copyToClipboard": "Kopieer naar klembord functionaliteit",
+    "downloadResults": "Resultaten downloaden",
+    "realTimeProcessing": "Real-time verwerking",
+    "multipleFormats": "Ondersteuning voor meerdere formaten",
+    "batchProcessing": "Ondersteuning voor batchverwerking"
   },
   "errors": {
-    "processingFailed": "Processing failed",
-    "fileReadError": "Error reading file",
-    "networkError": "Network error occurred",
-    "unknownError": "An unknown error occurred"
+    "processingFailed": "Verwerking mislukt",
+    "fileReadError": "Fout bij het lezen van het bestand",
+    "networkError": "Er is een netwerkfout opgetreden",
+    "unknownError": "Er is een onbekende fout opgetreden"
   }
 }

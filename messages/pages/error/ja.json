@@ -32,6 +32,13 @@
         "title": "PDFへのマークダウン",
         "description": "マークダウンをPDFに変換します"
       }
+    },
+    "contact": {
+      "prompt": "Need help?",
+      "link": "Contact support"
+    },
+    "screenReader": {
+      "announcement": "Page not found. Please navigate using the links below."
     }
   },
   "serverError": {

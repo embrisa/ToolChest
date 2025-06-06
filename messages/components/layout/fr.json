@@ -1,34 +1,35 @@
 {
   "header": {
-    "brand": "pêche à l'outil",
+    "brand": "Coffre à Outils",
     "navigation": {
-      "home": "Maison",
+      "home": "Accueil",
       "tools": "Outils",
-      "admin": "Administrer"
+      "admin": "Admin",
+      "about": "À propos"
     },
     "mobile": {
-      "toggleMenu": "Menu à bascule",
+      "toggleMenu": "Basculer le menu",
       "openMenu": "Ouvrir le menu de navigation",
       "closeMenu": "Fermer le menu de navigation"
     }
   },
   "footer": {
-    "copyright": "© 2024-Tool-Chest",
+    "copyright": "© 2024 Tool-Chest",
     "links": {
-      "privacy": "politique de confidentialité",
-      "terms": "Conditions de service",
+      "privacy": "Politique de confidentialité",
+      "terms": "Conditions d'utilisation",
       "contact": "Contact",
       "about": "À propos"
     },
     "description": "Outils de développement axés sur la confidentialité."
   },
   "breadcrumbs": {
-    "home": "Maison",
+    "home": "Accueil",
     "tools": "Outils",
-    "admin": "Administrer",
+    "admin": "Admin",
     "dashboard": "Tableau de bord",
-    "analytics": "Analytique",
-    "tags": "Balises",
+    "analytics": "Analyses",
+    "tags": "Étiquettes",
     "monitoring": "Surveillance",
     "relationships": "Relations"
   },
@@ -38,21 +39,21 @@
     "selectLanguage": "Sélectionner la langue",
     "languages": {
       "en": "Anglais",
-      "es": "Español",
-      "zh": "中文",
-      "hi": "हिन्दी",
-      "pt": "Portuguêts",
-      "ru": "Русский",
-      "ja": "日本語",
-      "de": "Deutsch",
+      "es": "Espagnol",
+      "zh": "Chinois",
+      "hi": "Hindi",
+      "pt": "Portugais",
+      "ru": "Russe",
+      "ja": "Japonais",
+      "de": "Allemand",
       "fr": "Français",
-      "ko": "한국어",
-      "it": "Italiano",
-      "tr": "Türkçe",
-      "pl": "Polski",
-      "nl": "Néderlands",
-      "vi": "Tiếng việt",
-      "uk": "OUT"
+      "ko": "Coréen",
+      "it": "Italien",
+      "tr": "Turc",
+      "pl": "Polonais",
+      "nl": "Néerlandais",
+      "vi": "Vietnamien",
+      "uk": "Ukrainien"
     }
   }
 }

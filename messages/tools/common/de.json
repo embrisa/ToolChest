@@ -1,72 +1,72 @@
 {
   "ui": {
     "modes": {
-      "encode": "Encode",
-      "decode": "Decode",
-      "generate": "Generate",
-      "convert": "Convert",
-      "process": "Process",
-      "analyze": "Analyze"
+      "encode": "Kodieren",
+      "decode": "Dekodieren",
+      "generate": "Generieren",
+      "convert": "Konvertieren",
+      "process": "Verarbeiten",
+      "analyze": "Analysieren"
     },
     "inputTypes": {
       "text": "Text",
-      "file": "File",
+      "file": "Datei",
       "url": "URL",
-      "upload": "Upload"
+      "upload": "Hochladen"
     },
     "actions": {
-      "process": "Process",
-      "copy": "Copy Result",
-      "download": "Download",
-      "upload": "Upload",
-      "clear": "Clear",
-      "reset": "Reset",
-      "retry": "Retry",
-      "save": "Save",
-      "export": "Export"
+      "process": "Verarbeiten",
+      "copy": "Ergebnis kopieren",
+      "download": "Herunterladen",
+      "upload": "Hochladen",
+      "clear": "Löschen",
+      "reset": "Zurücksetzen",
+      "retry": "Erneut versuchen",
+      "save": "Speichern",
+      "export": "Exportieren"
     },
     "status": {
-      "processing": "Processing...",
-      "success": "Operation completed successfully",
-      "copied": "Copied to clipboard",
-      "error": "Operation failed",
-      "ready": "Ready",
-      "waiting": "Waiting for input"
+      "processing": "Wird verarbeitet...",
+      "success": "Vorgang erfolgreich abgeschlossen",
+      "copied": "In die Zwischenablage kopiert",
+      "error": "Vorgang fehlgeschlagen",
+      "ready": "Bereit",
+      "waiting": "Warte auf Eingabe"
     },
     "placeholders": {
-      "textInput": "Enter text here...",
-      "fileUpload": "Select a file or drag and drop",
-      "urlInput": "Enter URL here...",
-      "searchInput": "Search..."
+      "textInput": "Text hier eingeben...",
+      "fileUpload": "Datei auswählen oder per Drag & Drop hierher ziehen",
+      "urlInput": "URL hier eingeben...",
+      "searchInput": "Suchen..."
     }
   },
   "validation": {
-    "required": "This field is required",
-    "invalidInput": "Invalid input",
-    "fileTooLarge": "File too large (max {maxSize})",
-    "unsupportedFileType": "Unsupported file type",
-    "invalidFormat": "Invalid format",
-    "emptyInput": "Please enter some text or select a file",
-    "invalidUrl": "Please enter a valid URL"
+    "required": "Dieses Feld ist erforderlich",
+    "invalidInput": "Ungültige Eingabe",
+    "fileTooLarge": "Datei zu groß (max. {maxSize})",
+    "unsupportedFileType": "Nicht unterstützter Dateityp",
+    "invalidFormat": "Ungültiges Format",
+    "emptyInput": "Bitte geben Sie Text ein oder wählen Sie eine Datei aus",
+    "invalidUrl": "Bitte geben Sie eine gültige URL ein"
   },
   "privacy": {
-    "clientSideNote": "All processing happens in your browser for maximum privacy.",
-    "noDataSent": "No data sent to servers",
-    "filesStayLocal": "Files stay on your device",
-    "noLogging": "No data storage or logging"
+    "clientSideNote": "Alle Verarbeitungsschritte finden für maximalen Datenschutz in Ihrem Browser statt.",
+    "noDataSent": "Keine Daten werden an Server gesendet",
+    "filesStayLocal": "Dateien bleiben auf Ihrem Gerät",
+    "noLogging": "Keine Datenspeicherung oder Protokollierung"
   },
   "features": {
-    "clientSideProcessing": "Client-side processing for privacy",
-    "copyToClipboard": "Copy to clipboard functionality",
-    "downloadResults": "Download results",
-    "realTimeProcessing": "Real-time processing",
-    "multipleFormats": "Multiple format support",
-    "batchProcessing": "Batch processing support"
+    "clientSideProcessing": "Client-seitige Verarbeitung für Datenschutz",
+    "copyToClipboard": "In die Zwischenablage kopieren",
+    "downloadResults": "Ergebnisse herunterladen",
+    "realTimeProcessing": "Echtzeit-Verarbeitung",
+    "multipleFormats": "Unterstützung mehrerer Formate",
+    "batchProcessing": "Stapelverarbeitungs-Unterstützung"
   },
   "errors": {
-    "processingFailed": "Processing failed",
-    "fileReadError": "Error reading file",
-    "networkError": "Network error occurred",
-    "unknownError": "An unknown error occurred"
+    "processingFailed": "Verarbeitung fehlgeschlagen",
+    "fileReadError": "Fehler beim Lesen der Datei",
+    "networkError": "Netzwerkfehler aufgetreten",
+    "unknownError": "Ein unbekannter Fehler ist aufgetreten"
   }
 }

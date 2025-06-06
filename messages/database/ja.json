@@ -4,15 +4,15 @@
       "name": "base64ツール",
       "description": "テキストとファイルをサポートしてbase64データをエンコードおよびデコードする"
     },
-    "hashGenerator": {
+    "hash-generator": {
       "name": "ハッシュジェネレーター",
       "description": "MD5、SHA-1、SHA-256、およびその他の暗号化ハッシュを生成します"
     },
-    "faviconGenerator": {
+    "favicon-generator": {
       "name": "ファビコンジェネレーター",
       "description": "複数のサイズと形式の画像からファビコンを作成します"
     },
-    "markdownToPdf": {
+    "markdown-to-pdf": {
       "name": "PDFへのマークダウン",
       "description": "カスタムスタイリングオプションを使用して、マークダウンファイルをPDFに変換します"
     },
@@ -38,6 +38,18 @@
       "name": "エンコーディング",
       "description": "さまざまな形式でデータをエンコードおよびデコードするためのツール"
     },
+    "security": {
+      "name": "安全",
+      "description": "暗号化の操作とセキュリティ分析のためのツール"
+    },
+    "design": {
+      "name": "デザイン",
+      "description": "デザインおよびグラフィックツール"
+    },
+    "document": {
+      "name": "ドキュメント",
+      "description": "ドキュメント処理ツール"
+    },
     "generation": {
       "name": "世代",
       "description": "コンテンツ、コード、ファイルを生成するためのツール"
@@ -45,10 +57,6 @@
     "conversion": {
       "name": "変換",
       "description": "異なるファイル形式間を変換するためのツール"
-    },
-    "security": {
-      "name": "安全",
-      "description": "暗号化の操作とセキュリティ分析のためのツール"
     },
     "compression": {
       "name": "圧縮",

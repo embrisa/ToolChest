@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import {
   AdminToolListItem,
   AdminToolsSortOptions,
@@ -12,6 +13,9 @@ import { ToolTable, ToolFilters } from "@/components/admin";
 import { Button } from "@/components/ui";
 
 export default function AdminToolsPage() {
+  const t = useTranslations("pages.admin.tools");
+  const tCommon = useTranslations("common");
+
   const [tools, setTools] = useState<AdminToolListItem[]>([]);
   const [availableTags, setAvailableTags] = useState<TagDTO[]>([]);
   const [loading, setLoading] = useState(true);
@@ -120,7 +124,9 @@ export default function AdminToolsPage() {
         <div className="flex items-center justify-center py-20">
           <div className="text-center animate-fade-in-up">
             <div className="w-12 h-12 border-3 border-neutral-200 border-t-brand-500 rounded-full animate-spin mx-auto mb-6"></div>
-            <p className="text-secondary text-lg">Loading tools...</p>
+            <p className="text-secondary text-lg">
+              {tCommon("ui.status.loading")}...
+            </p>
           </div>
         </div>
       </div>
@@ -150,7 +156,7 @@ export default function AdminToolsPage() {
             </div>
             <div className="flex-1">
               <h3 className="text-xl font-semibold text-error-900 mb-3">
-                Error Loading Tools
+                {tCommon("errors.loadingFailed")}
               </h3>
               <p className="text-base text-error-700 mb-6">{error}</p>
               <Button
@@ -159,7 +165,7 @@ export default function AdminToolsPage() {
                 size="md"
                 className="focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
               >
-                Try Again
+                {tCommon("ui.actions.tryAgain")}
               </Button>
             </div>
           </div>
@@ -174,13 +180,9 @@ export default function AdminToolsPage() {
         {/* Header Section */}
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
           <div className="space-y-4">
-            <h1 className="text-4xl font-bold text-primary">
-              Tools Management
-            </h1>
+            <h1 className="text-4xl font-bold text-primary">{t("title")}</h1>
             <p className="text-lg text-secondary max-w-2xl">
-              Manage your tools collection, configure settings, and organize
-              with tags. Create new tools or modify existing ones to enhance
-              your tool-chest.
+              {t("description")}
             </p>
           </div>
           <div className="flex-shrink-0">
@@ -207,7 +209,7 @@ export default function AdminToolsPage() {
                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                   />
                 </svg>
-                Create New Tool
+                {t("actions.createTool")}
               </Button>
             </Link>
           </div>

@@ -1,67 +1,74 @@
 {
-    "notFound": {
-        "errorCode": "404",
-        "title": "Page Not Found",
-        "description": "The page you're looking for doesn't exist. It may have been moved, deleted, or you may have typed the URL incorrectly.",
-        "suggestions": {
-            "title": "Here's what you can do:",
-            "checkUrl": "Check the URL for typos",
-            "useNavigation": "Use the navigation menu to find what you're looking for",
-            "returnHome": "Return to the home page",
-            "searchTools": "Search for tools using the search feature"
-        },
-        "actions": {
-            "goToHome": "Go to Home",
-            "goBack": "Go Back"
-        },
-        "popularTools": {
-            "title": "Popular Tools",
-            "base64": {
-                "title": "Base64 Tool",
-                "description": "Encode and decode Base64 data"
-            },
-            "hashGenerator": {
-                "title": "Hash Generator",
-                "description": "Generate MD5, SHA hashes"
-            },
-            "faviconGenerator": {
-                "title": "Favicon Generator",
-                "description": "Create favicons from images"
-            },
-            "markdownToPdf": {
-                "title": "Markdown to PDF",
-                "description": "Convert Markdown to PDF"
-            }
-        }
+  "notFound": {
+    "errorCode": "404",
+    "title": "Pagina niet gevonden",
+    "description": "De pagina die u zoekt, bestaat niet. Mogelijk is deze verplaatst, verwijderd of heeft u de URL onjuist getypt.",
+    "suggestions": {
+      "title": "Dit kunt u doen:",
+      "checkUrl": "Controleer de URL op typefouten",
+      "useNavigation": "Gebruik het navigatiemenu om te vinden wat u zoekt",
+      "returnHome": "Terugkeren naar de startpagina",
+      "searchTools": "Zoek naar tools met de zoekfunctie"
     },
-    "serverError": {
-        "title": "Something went wrong",
-        "message": "An unexpected error occurred",
-        "description": "We're sorry, but something went wrong while loading this page. Our team has been notified and is working to resolve the issue.",
-        "suggestions": {
-            "0": "Try refreshing the page",
-            "1": "Go back to the previous page",
-            "2": "Return to the home page",
-            "3": "Contact support if the problem persists"
-        },
-        "actions": {
-            "refreshPage": "Refresh Page",
-            "goBack": "Go Back",
-            "goToHome": "Go to Home",
-            "contactSupport": "Contact Support"
-        },
-        "technical": {
-            "title": "Technical Details",
-            "errorInfo": "Error Information",
-            "copyDetails": "Copy Details",
-            "copiedToClipboard": "Copied to clipboard"
-        }
+    "actions": {
+      "goToHome": "Naar de startpagina",
+      "goBack": "Ga terug"
     },
-    "boundary": {
-        "title": "Something went wrong",
-        "description": "An unexpected error occurred in this component.",
-        "details": "Show error details",
-        "reload": "Reload component",
-        "reportIssue": "Report this issue"
+    "popularTools": {
+      "title": "Populaire tools",
+      "base64": {
+        "title": "Base64 Tool",
+        "description": "Codeer en decodeer Base64-gegevens"
+      },
+      "hashGenerator": {
+        "title": "Hash Generator",
+        "description": "Genereer MD5, SHA-hashes"
+      },
+      "faviconGenerator": {
+        "title": "Favicon Generator",
+        "description": "Maak favicons van afbeeldingen"
+      },
+      "markdownToPdf": {
+        "title": "Markdown naar PDF",
+        "description": "Converteer Markdown naar PDF"
+      }
+    },
+    "contact": {
+      "prompt": "Need help?",
+      "link": "Contact support"
+    },
+    "screenReader": {
+      "announcement": "Page not found. Please navigate using the links below."
     }
+  },
+  "serverError": {
+    "title": "Er is iets misgegaan",
+    "message": "Er is een onverwachte fout opgetreden",
+    "description": "Onze excuses, er is iets misgegaan bij het laden van deze pagina. Ons team is op de hoogte gesteld en werkt aan een oplossing.",
+    "suggestions": {
+      "0": "Probeer de pagina te vernieuwen",
+      "1": "Ga terug naar de vorige pagina",
+      "2": "Terugkeren naar de startpagina",
+      "3": "Neem contact op met de ondersteuning als het probleem aanhoudt"
+    },
+    "actions": {
+      "refreshPage": "Pagina vernieuwen",
+      "goBack": "Ga terug",
+      "goToHome": "Naar de startpagina",
+      "contactSupport": "Contact opnemen met ondersteuning"
+    },
+    "technical": {
+      "title": "Technische details",
+      "errorInfo": "Foutinformatie",
+      "copyDetails": "Details kopiëren",
+      "copiedToClipboard": "Gekopieerd naar klembord"
+    }
+  },
+  "boundary": {
+    "title": "Er is iets misgegaan",
+    "description": "Er is een onverwachte fout opgetreden in dit component.",
+    "details": "Foutdetails weergeven",
+    "reload": "Component opnieuw laden",
+    "reportIssue": "Meld dit probleem"
+  }
 }

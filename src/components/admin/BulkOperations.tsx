@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { MultiSelect } from "@/components/ui/MultiSelect";
 import {
@@ -27,6 +28,9 @@ export function BulkOperations({
   onOperationComplete,
   onClose,
 }: BulkOperationsProps) {
+  const tAdmin = useTranslations("pages.admin");
+  const tForms = useTranslations("components.forms");
+  const tCommon = useTranslations("common");
   const [step, setStep] = useState<OperationStep>("select");
   const [operationType, setOperationType] = useState<"assign" | "remove">(
     "assign",
@@ -165,11 +169,10 @@ export function BulkOperations({
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <div
-              className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                operationType === "assign"
-                  ? "bg-brand-100 dark:bg-brand-900/20"
-                  : "bg-error-100 dark:bg-error-900/20"
-              }`}
+              className={`w-12 h-12 rounded-xl flex items-center justify-center ${operationType === "assign"
+                ? "bg-brand-100 dark:bg-brand-900/20"
+                : "bg-error-100 dark:bg-error-900/20"
+                }`}
             >
               {operationType === "assign" ? (
                 <svg
@@ -205,10 +208,10 @@ export function BulkOperations({
             </div>
             <div>
               <h2 className="text-title text-2xl font-semibold text-neutral-900 dark:text-neutral-100">
-                Bulk {operationType === "assign" ? "Assign" : "Remove"} Tags
+                {tAdmin("tools.bulkOperations.title", { operation: operationType === "assign" ? tCommon("actions.assign") : tCommon("actions.remove") })}
               </h2>
               <p className="text-body text-neutral-600 dark:text-neutral-400 mt-1">
-                {toolCount} tool{toolCount !== 1 ? "s" : ""} selected
+                {tAdmin("tools.bulkOperations.selectedCount", { count: toolCount })}
               </p>
             </div>
           </div>
@@ -245,16 +248,15 @@ export function BulkOperations({
             {/* Operation Type Selection */}
             <div className="space-y-4">
               <h3 className="text-title text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-                Select Operation
+                {tAdmin("tools.bulkOperations.operationType")}
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <button
                   onClick={() => setOperationType("assign")}
-                  className={`card-interactive p-6 text-left ${
-                    operationType === "assign"
-                      ? "ring-2 ring-brand-500 border-brand-200 dark:border-brand-700 bg-brand-50 dark:bg-brand-900/10"
-                      : ""
-                  }`}
+                  className={`card-interactive p-6 text-left ${operationType === "assign"
+                    ? "ring-2 ring-brand-500 border-brand-200 dark:border-brand-700 bg-brand-50 dark:bg-brand-900/10"
+                    : ""
+                    }`}
                 >
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-brand-100 dark:bg-brand-900/20 rounded-lg flex items-center justify-center">
@@ -285,11 +287,10 @@ export function BulkOperations({
 
                 <button
                   onClick={() => setOperationType("remove")}
-                  className={`card-interactive p-6 text-left ${
-                    operationType === "remove"
-                      ? "ring-2 ring-error-500 border-error-200 dark:border-error-700 bg-error-50 dark:bg-error-900/10"
-                      : ""
-                  }`}
+                  className={`card-interactive p-6 text-left ${operationType === "remove"
+                    ? "ring-2 ring-error-500 border-error-200 dark:border-error-700 bg-error-50 dark:bg-error-900/10"
+                    : ""
+                    }`}
                 >
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-error-100 dark:bg-error-900/20 rounded-lg flex items-center justify-center">
@@ -323,7 +324,7 @@ export function BulkOperations({
             {/* Tag Selection */}
             <div className="space-y-4">
               <h3 className="text-title text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-                Select Tags
+                {tAdmin("tools.bulkOperations.selectTags")}
               </h3>
               <div className="space-y-2">
                 <MultiSelect
@@ -423,11 +424,10 @@ export function BulkOperations({
                     Operation Type
                   </p>
                   <p
-                    className={`text-lg font-semibold capitalize ${
-                      operationType === "assign"
-                        ? "text-brand-600 dark:text-brand-400"
-                        : "text-error-600 dark:text-error-400"
-                    }`}
+                    className={`text-lg font-semibold capitalize ${operationType === "assign"
+                      ? "text-brand-600 dark:text-brand-400"
+                      : "text-error-600 dark:text-error-400"
+                      }`}
                   >
                     {operationType} Tags
                   </p>
@@ -565,11 +565,10 @@ export function BulkOperations({
           <div className="space-y-8">
             <div className="text-center space-y-4">
               <div
-                className={`w-16 h-16 mx-auto rounded-2xl flex items-center justify-center ${
-                  result.success
-                    ? "bg-success-100 dark:bg-success-900/20"
-                    : "bg-error-100 dark:bg-error-900/20"
-                }`}
+                className={`w-16 h-16 mx-auto rounded-2xl flex items-center justify-center ${result.success
+                  ? "bg-success-100 dark:bg-success-900/20"
+                  : "bg-error-100 dark:bg-error-900/20"
+                  }`}
               >
                 {result.success ? (
                   <svg
@@ -603,11 +602,10 @@ export function BulkOperations({
               </div>
               <div className="space-y-2">
                 <h3
-                  className={`text-title text-xl font-semibold ${
-                    result.success
-                      ? "text-success-900 dark:text-success-100"
-                      : "text-error-900 dark:text-error-100"
-                  }`}
+                  className={`text-title text-xl font-semibold ${result.success
+                    ? "text-success-900 dark:text-success-100"
+                    : "text-error-900 dark:text-error-100"
+                    }`}
                 >
                   {result.success ? "Operation Completed" : "Operation Failed"}
                 </h3>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useRef, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import {
   Button,
   Card,
@@ -31,6 +32,8 @@ import {
 } from "@/types/tools/faviconGenerator";
 
 export function FaviconGeneratorTool() {
+  const tCommon = useTranslations("tools.common");
+
   const [state, setState] = useState<FaviconGeneratorState>({
     sourceImage: null,
     sourceImages: [],
@@ -147,11 +150,13 @@ export function FaviconGeneratorTool() {
         ...prev,
         sourceImage: file,
         sourceImages: [file],
-        error: validation.isValid ? null : validation.error || "Invalid file",
+        error: validation.isValid
+          ? null
+          : validation.error || tCommon("validation.invalidInput"),
         warnings: validation.warnings || [],
         validationErrors: validation.isValid
           ? []
-          : [validation.error || "Invalid file"],
+          : [validation.error || tCommon("validation.invalidInput")],
         result: null,
         batchResults: [],
         showPreview: false,
@@ -159,7 +164,7 @@ export function FaviconGeneratorTool() {
 
       if (!validation.isValid) {
         announceToScreenReader(
-          `File validation failed: ${validation.error}`,
+          `${tCommon("errors.processingFailed")}: ${validation.error}`,
           "assertive",
         );
       } else {
@@ -173,7 +178,7 @@ export function FaviconGeneratorTool() {
         generatePreview(file, state.options);
       }
     },
-    [announceToScreenReader, generatePreview, state.options],
+    [announceToScreenReader, generatePreview, state.options, tCommon],
   );
 
   // Handle size selection
@@ -252,7 +257,10 @@ export function FaviconGeneratorTool() {
 
     try {
       setState((prev) => ({ ...prev, isProcessing: true, error: null }));
-      announceToScreenReader("Starting favicon generation...", "polite");
+      announceToScreenReader(
+        `${tCommon("ui.status.processing")} favicon generation...`,
+        "polite",
+      );
 
       const result = await FaviconGeneratorService.generateFavicons(
         state.sourceImage,
@@ -262,20 +270,23 @@ export function FaviconGeneratorTool() {
 
       setState((prev) => ({ ...prev, result, isProcessing: false }));
       announceToScreenReader(
-        "Favicon generation completed successfully!",
+        `Favicon generation ${tCommon("ui.status.success").toLowerCase()}!`,
         "polite",
       );
     } catch (error) {
       const errorMessage =
-        error instanceof Error ? error.message : "Generation failed";
+        error instanceof Error ? error.message : tCommon("ui.status.error");
       setState((prev) => ({
         ...prev,
         error: errorMessage,
         isProcessing: false,
       }));
-      announceToScreenReader(`Generation failed: ${errorMessage}`, "assertive");
+      announceToScreenReader(
+        `Generation ${tCommon("ui.status.error").toLowerCase()}: ${errorMessage}`,
+        "assertive",
+      );
     }
-  }, [state.sourceImage, state.options, announceToScreenReader]);
+  }, [state.sourceImage, state.options, announceToScreenReader, tCommon]);
 
   // Copy all favicons to clipboard
   const handleCopyAll = useCallback(async () => {
@@ -289,26 +300,29 @@ export function FaviconGeneratorTool() {
       await navigator.clipboard.writeText(faviconData);
       setCopySuccess({
         success: true,
-        message: "All favicon URLs copied to clipboard",
+        message: tCommon("ui.status.copied"),
       });
-      announceToScreenReader("All favicon URLs copied to clipboard", "polite");
+      announceToScreenReader(tCommon("ui.status.copied"), "polite");
 
       setTimeout(() => setCopySuccess(null), 3000);
     } catch {
       setCopySuccess({
         success: false,
-        message: "Failed to copy to clipboard",
+        message: tCommon("ui.status.error"),
       });
-      announceToScreenReader("Failed to copy to clipboard", "assertive");
+      announceToScreenReader(tCommon("ui.status.error"), "assertive");
     }
-  }, [state.result?.favicons, announceToScreenReader]);
+  }, [state.result?.favicons, announceToScreenReader, tCommon]);
 
   // Download all favicons
   const downloadAllFavicons = useCallback(async () => {
     if (!state.result?.favicons) return;
 
     try {
-      announceToScreenReader("Starting downloads...", "polite");
+      announceToScreenReader(
+        `${tCommon("ui.status.processing")} downloads...`,
+        "polite",
+      );
 
       state.result.favicons.forEach((favicon) => {
         const link = document.createElement("a");
@@ -323,7 +337,7 @@ export function FaviconGeneratorTool() {
     } catch {
       announceToScreenReader("Failed to download files", "assertive");
     }
-  }, [state.result?.favicons, announceToScreenReader]);
+  }, [state.result?.favicons, announceToScreenReader, tCommon]);
 
   // Clear file input
   const handleClearFile = useCallback(() => {
@@ -599,7 +613,9 @@ export function FaviconGeneratorTool() {
               size="lg"
               className="min-w-48"
             >
-              {state.isProcessing ? "Generating..." : "Generate Favicons"}
+              {state.isProcessing
+                ? `${tCommon("ui.modes.generate")}...`
+                : `${tCommon("ui.modes.generate")} Favicons`}
             </Button>
           </div>
         </CardContent>

@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Base64 Encoder & Decoder | tool-chest",
-    "description": "Free online Base64 encoder and decoder. Convert text to Base64 and decode Base64 to text. Supports file encoding/decoding with URL-safe options. Privacy-first with client-side processing.",
+    "title": "Encodeur et Décodeur Base64 | tool-chest",
+    "description": "Encodeur et décodeur Base64 gratuit en ligne. Convertit le texte en Base64 et décode Base64 en texte. Prend en charge l'encodage/décodage de fichiers avec options URL-safe. Traitement côté client privilégiant la confidentialité.",
     "keywords": [
       "base64",
       "encoder",
@@ -17,8 +17,9 @@
     ]
   },
   "page": {
-    "title": "Base64 Encoder & Decoder",
-    "description": "Encode and decode Base64 data with support for text and files."
+    "title": "Encodeur & Décodeur Base64",
+    "description": "Encodez et décodez des données Base64 avec prise en charge du texte et des fichiers.",
+    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
   },
   "tool": {
     "variants": {
@@ -26,35 +27,45 @@
       "urlSafe": "URL-Safe"
     },
     "placeholders": {
-      "textInput": "Enter text to encode/decode...",
-      "fileUpload": "Select a file or drag and drop"
+      "textInput": "Saisir le texte à encoder/décoder...",
+      "fileUpload": "Sélectionner un fichier ou glisser-déposer"
     }
   },
   "validation": {
-    "invalidBase64": "Invalid Base64 input",
-    "fileTooLarge": "File too large (max 10MB)"
+    "invalidBase64": "Entrée Base64 invalide",
+    "fileTooLarge": "Fichier trop volumineux (max 10 Mo)"
   },
   "info": {
-    "title": "About Base64 Encoding",
-    "description": "Base64 is a binary-to-text encoding scheme that converts binary data into a text format using a set of 64 characters. It's commonly used for encoding data in email, web pages, and data URLs, ensuring safe transmission over text-based protocols.",
+    "title": "À propos de l'encodage Base64",
+    "description": "Base64 est un schéma d'encodage de binaire à texte qui convertit des données binaires en un format texte à l'aide d'un jeu de 64 caractères. Il est couramment utilisé pour l'encodage de données dans les e-mails, les pages web et les URL de données, garantissant une transmission sûre sur les protocoles basés sur le texte.",
     "keyFeatures": {
-      "title": "Key Features",
+      "title": "Fonctionnalités clés",
       "items": [
-        "Text and file encoding/decoding",
-        "URL-safe Base64 encoding option",
-        "Copy to clipboard functionality",
-        "Download encoded/decoded results",
+        "Encodage/décodage de texte et de fichiers",
+        "Option d'encodage Base64 URL-safe",
+        "Fonctionnalité de copie dans le presse-papiers",
+        "Téléchargement des résultats encodés/décodés",
+        "Encodage/décodage en temps réel",
         "Real-time encoding/decoding"
       ]
     },
-    "useCases": {
-      "title": "Common Use Cases",
+    "securityAndPrivacy": {
+      "title": "Security & Privacy",
       "items": [
-        "Email attachments encoding",
-        "Web data URLs",
-        "API data transmission",
-        "Database blob storage",
-        "Configuration file encoding"
+        "No data sent to servers",
+        "Processing happens in your browser",
+        "Files stay on your device",
+        "No data storage or logging"
+      ]
+    },
+    "useCases": {
+      "title": "Cas d'utilisation courants",
+      "items": [
+        "Encodage des pièces jointes d'e-mails",
+        "URL de données web",
+        "Transmission de données d'API",
+        "Stockage de blobs de base de données",
+        "Encodage de fichiers de configuration"
       ]
     }
   }

@@ -4,7 +4,8 @@
     "navigation": {
       "home": "家",
       "tools": "ツール",
-      "admin": "管理者"
+      "admin": "管理者",
+      "about": "について"
     },
     "mobile": {
       "toggleMenu": "トグルメニュー",

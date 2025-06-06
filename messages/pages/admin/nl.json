@@ -1,100 +1,137 @@
 {
-    "dashboard": {
-        "title": "Dashboard",
-        "description": "Overview of your tool-chest application performance and analytics",
-        "stats": {
-            "totalTools": "Total Tools",
-            "totalTags": "Total Tags",
-            "totalUsage": "Total Usage",
-            "thisMonth": "This Month",
-            "applicationStats": "Application Statistics"
-        },
-        "usage": {
-            "title": "Tool Usage Overview",
-            "table": {
-                "tool": "Tool",
-                "usageCount": "Usage Count",
-                "change": "Change",
-                "actions": "Actions"
-            }
-        },
-        "quickActions": {
-            "title": "Quick Actions",
-            "viewAnalytics": "View Analytics",
-            "manageTools": "Manage Tools",
-            "manageTags": "Manage Tags",
-            "viewSite": "View Site",
-            "systemHealth": "System Health"
-        }
+  "dashboard": {
+    "title": "Dashboard",
+    "description": "Overzicht van de prestaties en analyses van uw tool-chest-applicatie",
+    "stats": {
+      "totalTools": "Totaal aantal tools",
+      "totalTags": "Totaal aantal tags",
+      "totalUsage": "Totaal gebruik",
+      "thisMonth": "Deze maand",
+      "applicationStats": "Applicatiestatistieken"
     },
-    "tools": {
-        "title": "Tool Management",
-        "description": "Manage tools, their metadata, and relationships",
-        "actions": {
-            "createTool": "Create Tool",
-            "editTool": "Edit Tool",
-            "deleteTool": "Delete Tool",
-            "bulkActions": "Bulk Actions"
-        },
-        "table": {
-            "name": "Name",
-            "slug": "Slug",
-            "status": "Status",
-            "tags": "Tags",
-            "usage": "Usage",
-            "lastModified": "Last Modified",
-            "actions": "Actions"
-        }
+    "usage": {
+      "title": "Overzicht van toolgebruik",
+      "table": {
+        "tool": "Tool",
+        "usageCount": "Aantal keer gebruikt",
+        "change": "Verandering",
+        "actions": "Acties"
+      }
     },
-    "tags": {
-        "title": "Tag Management",
-        "description": "Organize tools with tags and manage relationships",
-        "actions": {
-            "createTag": "Create Tag",
-            "editTag": "Edit Tag",
-            "deleteTag": "Delete Tag",
-            "bulkActions": "Bulk Actions"
-        },
-        "table": {
-            "name": "Name",
-            "slug": "Slug",
-            "color": "Color",
-            "toolCount": "Tools",
-            "description": "Description",
-            "actions": "Actions"
-        }
-    },
-    "analytics": {
-        "title": "Analytics",
-        "description": "View detailed analytics and usage statistics",
-        "charts": {
-            "usageOverTime": "Usage Over Time",
-            "topTools": "Top Tools",
-            "userMetrics": "User Metrics"
-        }
-    },
-    "auth": {
-        "title": "Admin Login",
-        "description": "Access the administration panel",
-        "form": {
-            "token": "Admin Token",
-            "tokenPlaceholder": "Enter admin token",
-            "login": "Login",
-            "loginError": "Invalid admin token"
-        }
-    },
-    "loading": {
-        "panel": "Loading admin panel...",
-        "dashboard": "Loading dashboard...",
-        "analytics": "Loading analytics..."
-    },
-    "navigation": {
-        "dashboard": "Dashboard",
-        "tools": "Tools",
-        "tags": "Tags",
-        "analytics": "Analytics",
-        "monitoring": "Monitoring",
-        "logout": "Logout",
-        "viewSite": "View Site"
+    "quickActions": {
+      "title": "Snelle acties",
+      "viewAnalytics": "Analyses bekijken",
+      "manageTools": "Tools beheren",
+      "manageTags": "Tags beheren",
+      "viewSite": "Site bekijken",
+      "systemHealth": "Systeemstatus",
+      "addTool": "Add Tool",
+      "addTag": "Add Tag",
+      "manageRelationships": "Manage Relationships",
+      "createToolDescription": "Create new tool in the system",
+      "createTagDescription": "Create new tag for categorization",
+      "manageRelationshipsDescription": "Configure tool-tag associations",
+      "viewSiteDescription": "Open the public tool-chest site"
     }
+  },
+  "tools": {
+    "title": "Toolbeheer",
+    "description": "Beheer tools, hun metadata en relaties",
+    "actions": {
+      "createTool": "Tool aanmaken",
+      "editTool": "Tool bewerken",
+      "deleteTool": "Tool verwijderen",
+      "bulkActions": "Bulkacties"
+    },
+    "table": {
+      "name": "Naam",
+      "slug": "Slug",
+      "status": "Status",
+      "tags": "Tags",
+      "usage": "Gebruik",
+      "lastModified": "Laatst gewijzigd",
+      "actions": "Acties"
+    },
+    "emptyState": {
+      "description": "Get started by creating your first tool. Tools help users accomplish specific tasks and can be organized with tags."
+    },
+    "bulkOperations": {
+      "title": "Bulk {operation} Tags",
+      "selectedCount": "{count, plural, =1 {# tool} other {# tools}} selected",
+      "operationType": "Select Operation",
+      "selectTags": "Select Tags",
+      "selectedTools": "Selected Tools",
+      "previewChanges": "Preview Changes",
+      "operationSummary": "Operation Summary",
+      "totalChanges": "Total Changes",
+      "toolsToUpdate": "Tools to Update",
+      "warnings": "Warnings",
+      "executing": "Executing Operation",
+      "executingMessage": "Please wait while we process your bulk operation...",
+      "completed": "Operation Completed",
+      "failed": "Operation Failed",
+      "successMessage": "Your bulk operation has been completed successfully",
+      "errorMessage": "There was an error executing your bulk operation",
+      "results": "Operation Results",
+      "toolsAffected": "Tools Affected",
+      "tagsAffected": "Tags Affected",
+      "errors": "Errors Encountered",
+      "startNew": "Start New Operation"
+    }
+  },
+  "tags": {
+    "title": "Tagbeheer",
+    "description": "Organiseer tools met tags en beheer relaties",
+    "actions": {
+      "createTag": "Tag aanmaken",
+      "editTag": "Tag bewerken",
+      "deleteTag": "Tag verwijderen",
+      "bulkActions": "Bulkacties"
+    },
+    "table": {
+      "name": "Naam",
+      "slug": "Slug",
+      "color": "Kleur",
+      "toolCount": "Tools",
+      "description": "Beschrijving",
+      "actions": "Acties"
+    },
+    "emptyState": {
+      "description": "Get started by creating your first tag to organize your tools."
+    }
+  },
+  "analytics": {
+    "title": "Analyses",
+    "description": "Bekijk gedetailleerde analyses en gebruiksstatistieken",
+    "charts": {
+      "usageOverTime": "Gebruik in de loop der tijd",
+      "topTools": "Top tools",
+      "userMetrics": "Gebruikersstatistieken"
+    }
+  },
+  "auth": {
+    "title": "Admin login",
+    "description": "Toegang tot het beheerpaneel",
+    "form": {
+      "token": "Admin token",
+      "tokenPlaceholder": "Voer admin token in",
+      "login": "Inloggen",
+      "loginError": "Ongeldig admin token"
+    }
+  },
+  "loading": {
+    "panel": "Beheerpaneel laden...",
+    "dashboard": "Dashboard laden...",
+    "analytics": "Analyses laden..."
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "tools": "Tools",
+    "tags": "Tags",
+    "relationships": "Relationships",
+    "analytics": "Analyses",
+    "monitoring": "Monitoring",
+    "logout": "Uitloggen",
+    "viewSite": "Site bekijken"
+  }
 }

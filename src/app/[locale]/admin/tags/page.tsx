@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import {
   AdminTagListItem,
   AdminTagsSortOptions,
@@ -11,6 +12,9 @@ import { TagTable, TagFilters } from "@/components/admin";
 import { Button, Loading } from "@/components/ui";
 
 export default function AdminTagsPage() {
+  const t = useTranslations("pages.admin.tags");
+  const tCommon = useTranslations("common");
+
   const [tags, setTags] = useState<AdminTagListItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -104,7 +108,7 @@ export default function AdminTagsPage() {
           <div className="text-center">
             <Loading size="lg" className="mx-auto mb-4" />
             <p className="text-neutral-600 dark:text-neutral-400 text-body">
-              Loading tags...
+              {tCommon("ui.status.loading")}...
             </p>
           </div>
         </div>
@@ -135,14 +139,14 @@ export default function AdminTagsPage() {
             </div>
             <div className="ml-4 flex-1">
               <h3 className="text-sm font-semibold text-error-800 dark:text-error-200">
-                Error loading tags
+                {tCommon("errors.loadingFailed")}
               </h3>
               <div className="mt-2 text-sm text-error-700 dark:text-error-300">
                 <p>{error}</p>
               </div>
               <div className="mt-4">
                 <Button onClick={loadData} variant="secondary" size="sm">
-                  Try Again
+                  {tCommon("ui.actions.tryAgain")}
                 </Button>
               </div>
             </div>
@@ -158,11 +162,10 @@ export default function AdminTagsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-display text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-2">
-            Tags Management
+            {t("title")}
           </h1>
           <p className="text-body text-neutral-600 dark:text-neutral-400 max-w-2xl">
-            Organize your tools with tags. Create, edit, and manage tags to help
-            users discover and filter tools effectively.
+            {t("description")}
           </p>
         </div>
         <Link href="/admin/tags/create">
@@ -181,7 +184,7 @@ export default function AdminTagsPage() {
                 d="M12 4v16m8-8H4"
               />
             </svg>
-            Create New Tag
+            {t("actions.createTag")}
           </Button>
         </Link>
       </div>
@@ -198,15 +201,16 @@ export default function AdminTagsPage() {
         <div className="px-6 py-5 border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50">
           <div className="flex items-center justify-between">
             <h2 className="text-title text-xl font-semibold text-neutral-900 dark:text-neutral-100">
-              Tags
+              Tags Collection
             </h2>
-            <div className="text-sm text-neutral-500 dark:text-neutral-400">
-              {tags.length === 1
-                ? "1 tag"
-                : `${tags.length.toLocaleString()} tags`}
+            <div className="bg-brand-50 dark:bg-brand-950/30 px-3 py-1.5 rounded-lg border border-brand-200 dark:border-brand-800">
+              <span className="text-sm font-medium text-brand-700 dark:text-brand-300">
+                {tags.length} {tags.length === 1 ? "tag" : "tags"}
+              </span>
             </div>
           </div>
         </div>
+
         <TagTable
           tags={tags}
           sortOptions={sortOptions}

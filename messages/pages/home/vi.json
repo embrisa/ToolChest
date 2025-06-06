@@ -1,50 +1,50 @@
 {
-    "hero": {
-        "title": "tool-chest",
-        "subtitle": "Your collection of essential computer tools.",
-        "description": "Encode, decode, generate, convert, and more with ease.",
-        "searchPlaceholder": "Search tools..."
-    },
-    "stats": {
-        "toolsAvailable": "Tools Available",
-        "clientSideProcessing": "Client-side Processing",
-        "clientSideValue": "100%",
-        "freeForever": "Free",
-        "freeValue": "Forever"
-    },
-    "sections": {
-        "allTools": "All Tools",
-        "searchResults": "Search Results",
-        "filterTools": "Filter Tools",
-        "active": "active"
-    },
-    "loading": {
-        "loadingTools": "Loading tools...",
-        "toolsFound": "tools found"
-    },
-    "noResults": {
-        "title": "No tools found",
-        "description": "No tools match \"{query}\"",
-        "descriptionFilters": "No tools match your selected filters"
-    },
-    "errors": {
-        "troubleLoading": "We're having trouble loading the tools. Please try again later."
-    },
-    "search": {
-        "placeholder": "Search tools...",
-        "clearSearch": "Clear search",
-        "searchResults": "search results"
-    },
-    "filtering": {
-        "filterByTags": "Filter by Tags",
-        "allTags": "All Tags",
-        "selectedTags": "Selected Tags",
-        "clearAll": "Clear All",
-        "noTags": "No tags available"
-    },
-    "toolCard": {
-        "newTool": "New",
-        "popularTool": "Popular",
-        "openTool": "Open tool"
-    }
+  "hero": {
+    "title": "tool-chest",
+    "subtitle": "Bộ sưu tập các công cụ máy tính cần thiết của bạn.",
+    "description": "Mã hóa, giải mã, tạo, chuyển đổi và nhiều hơn nữa một cách dễ dàng.",
+    "searchPlaceholder": "Tìm kiếm công cụ..."
+  },
+  "stats": {
+    "toolsAvailable": "Công cụ có sẵn",
+    "clientSideProcessing": "Xử lý phía máy khách",
+    "clientSideValue": "100%",
+    "freeForever": "Miễn phí",
+    "freeValue": "Mãi mãi"
+  },
+  "sections": {
+    "allTools": "Tất cả công cụ",
+    "searchResults": "Kết quả tìm kiếm",
+    "filterTools": "Lọc công cụ",
+    "active": "hoạt động"
+  },
+  "loading": {
+    "loadingTools": "Đang tải công cụ...",
+    "toolsFound": "công cụ được tìm thấy"
+  },
+  "noResults": {
+    "title": "Không tìm thấy công cụ nào",
+    "description": "Không có công cụ nào khớp với \"{query}\"",
+    "descriptionFilters": "Không có công cụ nào phù hợp với bộ lọc bạn đã chọn"
+  },
+  "errors": {
+    "troubleLoading": "Chúng tôi đang gặp sự cố khi tải các công cụ. Vui lòng thử lại sau."
+  },
+  "search": {
+    "placeholder": "Tìm kiếm công cụ...",
+    "clearSearch": "Xóa tìm kiếm",
+    "searchResults": "kết quả tìm kiếm"
+  },
+  "filtering": {
+    "filterByTags": "Lọc theo thẻ",
+    "allTags": "Tất cả các thẻ",
+    "selectedTags": "Các thẻ đã chọn",
+    "clearAll": "Xóa tất cả",
+    "noTags": "Không có thẻ nào"
+  },
+  "toolCard": {
+    "newTool": "Mới",
+    "popularTool": "Phổ biến",
+    "openTool": "Mở công cụ"
+  }
 }

@@ -2,40 +2,41 @@
   "header": {
     "brand": "tool-chest",
     "navigation": {
-      "home": "Home",
-      "tools": "Tools",
-      "admin": "Admin"
+      "home": "Startseite",
+      "tools": "Werkzeuge",
+      "admin": "Admin",
+      "about": "Über"
     },
     "mobile": {
-      "toggleMenu": "Toggle menu",
-      "openMenu": "Open navigation menu",
-      "closeMenu": "Close navigation menu"
+      "toggleMenu": "Menü umschalten",
+      "openMenu": "Navigationsmenü öffnen",
+      "closeMenu": "Navigationsmenü schließen"
     }
   },
   "footer": {
     "copyright": "© 2024 tool-chest",
     "links": {
-      "privacy": "Privacy Policy",
-      "terms": "Terms of Service",
-      "contact": "Contact",
-      "about": "About"
+      "privacy": "Datenschutz-Bestimmungen",
+      "terms": "Nutzungsbedingungen",
+      "contact": "Kontakt",
+      "about": "Über"
     },
-    "description": "Privacy-focused developer tools."
+    "description": "Datenschutzorientierte Entwicklerwerkzeuge."
   },
   "breadcrumbs": {
-    "home": "Home",
-    "tools": "Tools",
+    "home": "Startseite",
+    "tools": "Werkzeuge",
     "admin": "Admin",
     "dashboard": "Dashboard",
-    "analytics": "Analytics",
+    "analytics": "Analytik",
     "tags": "Tags",
-    "monitoring": "Monitoring",
-    "relationships": "Relationships"
+    "monitoring": "Überwachung",
+    "relationships": "Beziehungen"
   },
   "localeSwitcher": {
-    "label": "Language",
-    "current": "Current language",
-    "selectLanguage": "Select language",
+    "label": "Sprache",
+    "current": "Aktuelle Sprache",
+    "selectLanguage": "Sprache auswählen",
     "languages": {
       "en": "English",
       "es": "Español",

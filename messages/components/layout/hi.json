@@ -4,7 +4,8 @@
     "navigation": {
       "home": "घर",
       "tools": "औजार",
-      "admin": "व्यवस्थापक"
+      "admin": "व्यवस्थापक",
+      "about": "के बारे में"
     },
     "mobile": {
       "toggleMenu": "टॉगल मेनू",

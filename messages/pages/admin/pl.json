@@ -24,7 +24,14 @@
       "manageTools": "Zarządzaj narzędziami",
       "manageTags": "Zarządzaj tagami",
       "viewSite": "Zobacz stronę",
-      "systemHealth": "Zdrowie systemu"
+      "systemHealth": "Zdrowie systemu",
+      "addTool": "Add Tool",
+      "addTag": "Add Tag",
+      "manageRelationships": "Manage Relationships",
+      "createToolDescription": "Create new tool in the system",
+      "createTagDescription": "Create new tag for categorization",
+      "manageRelationshipsDescription": "Configure tool-tag associations",
+      "viewSiteDescription": "Open the public tool-chest site"
     }
   },
   "tools": {
@@ -44,6 +51,32 @@
       "usage": "Stosowanie",
       "lastModified": "Ostatni zmodyfikowany",
       "actions": "Działania"
+    },
+    "emptyState": {
+      "description": "Get started by creating your first tool. Tools help users accomplish specific tasks and can be organized with tags."
+    },
+    "bulkOperations": {
+      "title": "Bulk {operation} Tags",
+      "selectedCount": "{count, plural, =1 {# tool} other {# tools}} selected",
+      "operationType": "Select Operation",
+      "selectTags": "Select Tags",
+      "selectedTools": "Selected Tools",
+      "previewChanges": "Preview Changes",
+      "operationSummary": "Operation Summary",
+      "totalChanges": "Total Changes",
+      "toolsToUpdate": "Tools to Update",
+      "warnings": "Warnings",
+      "executing": "Executing Operation",
+      "executingMessage": "Please wait while we process your bulk operation...",
+      "completed": "Operation Completed",
+      "failed": "Operation Failed",
+      "successMessage": "Your bulk operation has been completed successfully",
+      "errorMessage": "There was an error executing your bulk operation",
+      "results": "Operation Results",
+      "toolsAffected": "Tools Affected",
+      "tagsAffected": "Tags Affected",
+      "errors": "Errors Encountered",
+      "startNew": "Start New Operation"
     }
   },
   "tags": {
@@ -62,6 +95,9 @@
       "toolCount": "Narzędzia",
       "description": "Opis",
       "actions": "Działania"
+    },
+    "emptyState": {
+      "description": "Get started by creating your first tag to organize your tools."
     }
   },
   "analytics": {
@@ -92,6 +128,7 @@
     "dashboard": "Panel",
     "tools": "Narzędzia",
     "tags": "Tagi",
+    "relationships": "Relationships",
     "analytics": "Analityka",
     "monitoring": "Monitorowanie",
     "logout": "Logout",

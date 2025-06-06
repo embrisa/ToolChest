@@ -1,24 +1,25 @@
 {
   "metadata": {
-    "title": "Base64 enkoder i dekoder | Chest narzędzi",
-    "description": "Bezpłatny enkoder i dekoder Base64. Konwertuj tekst na base64 i dekoduj base64 na tekst. Obsługuje kodowanie/dekodowanie plików za pomocą opcji bezpiecznych URL. Prywatność z przetwarzaniem po stronie klienta.",
+    "title": "Base64 Encoder & Decoder | tool-chest",
+    "description": "Free online Base64 encoder and decoder. Convert text to Base64 and decode Base64 to text. Supports file encoding/decoding with URL-safe options. Privacy-first with client-side processing.",
     "keywords": [
-      "Base64",
-      "enkoder",
-      "dekoder",
-      "kodować",
-      "rozszyfrować",
-      "tekst",
-      "plik",
-      "Safe URL",
-      "narzędzie online",
-      "bezpłatny",
-      "prywatność"
+      "base64",
+      "encoder",
+      "decoder",
+      "encode",
+      "decode",
+      "text",
+      "file",
+      "url-safe",
+      "online tool",
+      "free",
+      "privacy"
     ]
   },
   "page": {
     "title": "Base64 enkoder i dekoder",
-    "description": "Koduj i dekoduj dane Base64 z obsługą tekstu i plików."
+    "description": "Koduj i dekoduj dane Base64 z obsługą tekstu i plików.",
+    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
   },
   "tool": {
     "variants": {
@@ -44,7 +45,17 @@
         "Opcja kodowania Base64 bezpieczna dla URL",
         "Kopiuj do funkcji schowka",
         "Pobierz zakodowane/zdekodowane wyniki",
-        "Kodowanie/dekodowanie w czasie rzeczywistym"
+        "Kodowanie/dekodowanie w czasie rzeczywistym",
+        "Real-time encoding/decoding"
+      ]
+    },
+    "securityAndPrivacy": {
+      "title": "Security & Privacy",
+      "items": [
+        "No data sent to servers",
+        "Processing happens in your browser",
+        "Files stay on your device",
+        "No data storage or logging"
       ]
     },
     "useCases": {

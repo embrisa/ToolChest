@@ -1,64 +1,64 @@
 {
   "labels": {
-    "name": "Name",
-    "slug": "Slug",
-    "description": "Description",
-    "color": "Color",
-    "status": "Status",
-    "tags": "Tags",
+    "name": "Назва",
+    "slug": "Слаг",
+    "description": "Опис",
+    "color": "Колір",
+    "status": "Статус",
+    "tags": "Теги",
     "url": "URL",
-    "file": "File",
-    "text": "Text",
-    "options": "Options",
-    "settings": "Settings"
+    "file": "Файл",
+    "text": "Текст",
+    "options": "Опції",
+    "settings": "Налаштування"
   },
   "placeholders": {
-    "enterName": "Enter name",
-    "enterDescription": "Enter description",
-    "selectColor": "Select color",
-    "selectTags": "Select tags",
-    "enterUrl": "Enter URL",
-    "chooseFile": "Choose file",
-    "enterText": "Enter text"
+    "enterName": "Введіть назву",
+    "enterDescription": "Введіть опис",
+    "selectColor": "Виберіть колір",
+    "selectTags": "Виберіть теги",
+    "enterUrl": "Введіть URL",
+    "chooseFile": "Виберіть файл",
+    "enterText": "Введіть текст"
   },
   "validation": {
-    "nameRequired": "Name is required",
-    "slugRequired": "Slug is required",
-    "descriptionRequired": "Description is required",
-    "invalidSlug": "Slug can only contain letters, numbers, and hyphens",
-    "slugTooShort": "Slug must be at least 3 characters",
-    "slugTooLong": "Slug must be less than 50 characters",
-    "nameTooShort": "Name must be at least 2 characters",
-    "nameTooLong": "Name must be less than 100 characters",
-    "descriptionTooLong": "Description must be less than 500 characters",
-    "invalidColor": "Please select a valid color",
-    "invalidEmail": "Please enter a valid email address",
-    "invalidUrl": "Please enter a valid URL"
+    "nameRequired": "Назва є обов'язковою",
+    "slugRequired": "Слаг є обов'язковим",
+    "descriptionRequired": "Опис є обов'язковим",
+    "invalidSlug": "Слаг може містити лише літери, цифри та дефіси",
+    "slugTooShort": "Слаг має містити щонайменше 3 символи",
+    "slugTooLong": "Слаг має містити менше 50 символів",
+    "nameTooShort": "Назва має містити щонайменше 2 символи",
+    "nameTooLong": "Назва має містити менше 100 символів",
+    "descriptionTooLong": "Опис має містити менше 500 символів",
+    "invalidColor": "Будь ласка, виберіть дійсний колір",
+    "invalidEmail": "Будь ласка, введіть дійсну адресу електронної пошти",
+    "invalidUrl": "Будь ласка, введіть дійсну URL-адресу"
   },
   "help": {
-    "slug": "URL-friendly identifier (auto-generated from name)",
-    "description": "Brief description of the item",
-    "color": "Color used for visual identification",
-    "tags": "Organize items with relevant tags",
-    "status": "Current state of the item"
+    "slug": "URL-дружній ідентифікатор (автоматично генерується з назви)",
+    "description": "Короткий опис елемента",
+    "color": "Колір, що використовується для візуальної ідентифікації",
+    "tags": "Організуйте елементи за відповідними тегами",
+    "status": "Поточний стан елемента"
   },
   "actions": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "submit": "Submit",
-    "reset": "Reset",
-    "clear": "Clear",
-    "delete": "Delete",
-    "edit": "Edit",
-    "create": "Create",
-    "update": "Update"
+    "save": "Зберегти",
+    "cancel": "Скасувати",
+    "submit": "Надіслати",
+    "reset": "Скинути",
+    "clear": "Очистити",
+    "delete": "Видалити",
+    "edit": "Редагувати",
+    "create": "Створити",
+    "update": "Оновити"
   },
   "states": {
-    "saving": "Saving...",
-    "loading": "Loading...",
-    "saved": "Saved successfully",
-    "error": "Error occurred",
-    "required": "Required field",
-    "optional": "Optional field"
+    "saving": "Збереження...",
+    "loading": "Завантаження...",
+    "saved": "Успішно збережено",
+    "error": "Сталася помилка",
+    "required": "Обов'язкове поле",
+    "optional": "Необов'язкове поле"
   }
 }

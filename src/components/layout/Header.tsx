@@ -21,7 +21,7 @@ export function Header({ className }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
-  const t = useTranslations("Components.Header");
+  const t = useTranslations("components.layout.header");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -155,7 +155,7 @@ export function Header({ className }: HeaderProps) {
                     "hover:bg-background-secondary hover:text-brand-600",
                   )}
                 >
-                  {t("tools")}
+                  {t("navigation.tools")}
                 </Link>
                 <Link
                   href="/about"
@@ -164,7 +164,7 @@ export function Header({ className }: HeaderProps) {
                     "hover:bg-background-secondary hover:text-brand-600",
                   )}
                 >
-                  {t("about")}
+                  {t("navigation.about")}
                 </Link>
               </nav>
             </div>
@@ -287,7 +287,7 @@ export function Header({ className }: HeaderProps) {
                     )}
                     onClick={toggleMobileMenu}
                   >
-                    <span>{t("tools")}</span>
+                    <span>{t("navigation.tools")}</span>
                     <span className="text-foreground-secondary text-sm">
                       Browse collection
                     </span>
@@ -303,7 +303,7 @@ export function Header({ className }: HeaderProps) {
                     )}
                     onClick={toggleMobileMenu}
                   >
-                    <span>{t("about")}</span>
+                    <span>{t("navigation.about")}</span>
                     <span className="text-foreground-secondary text-sm">
                       Learn more
                     </span>

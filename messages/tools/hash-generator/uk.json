@@ -1,23 +1,66 @@
 {
   "metadata": {
-    "title": "Hash Generator | tool-chest",
-    "description": "Generate MD5, SHA-1, SHA-256, and other hashes online. Fast, secure, client-side hash generation for text and files.",
+    "title": "Hash Generator - Generate MD5, SHA-1, SHA-256, SHA-512 Hashes | tool-chest",
+    "description": "Free online hash generator for MD5, SHA-1, SHA-256, SHA-512, and other hash algorithms. Generate secure hashes for text and files with client-side processing.",
     "keywords": [
-      "hash",
+      "hash generator",
       "md5",
       "sha1",
       "sha256",
+      "sha512",
       "checksum",
-      "generator",
-      "text",
-      "file",
+      "crypto",
       "security",
-      "verification"
+      "file hash",
+      "text hash",
+      "online tool",
+      "free"
     ]
   },
   "page": {
-    "title": "Hash Generator",
-    "description": "Generate cryptographic hashes for text and files using various algorithms."
+    "title": "Генератор хешів",
+    "description": "Генеруйте криптографічні хеші для тексту та файлів за допомогою різних алгоритмів.",
+    "privacyMessage": "🔒 Privacy-First • Web Crypto API • Client-Side Processing"
+  },
+  "featureGrid": {
+    "md5": {
+      "title": "MD5",
+      "description": "128-bit hash function. Fast but not cryptographically secure. Use for checksums only."
+    },
+    "sha1": {
+      "title": "SHA-1",
+      "description": "160-bit hash function. Legacy algorithm, use SHA-256+ for security applications."
+    },
+    "sha256": {
+      "title": "SHA-256",
+      "description": "256-bit hash function. Secure and widely used standard for modern applications.",
+      "badge": "Recommended"
+    },
+    "sha512": {
+      "title": "SHA-512",
+      "description": "512-bit hash function. Maximum security for sensitive data and critical applications."
+    }
+  },
+  "info": {
+    "title": "Про хеш-функції",
+    "description": "Хеш-функції перетворюють вхідні дані в рядки символів фіксованого розміру, які зазвичай використовуються для перевірки цілісності даних, зберігання паролів та цифрових підписів.",
+    "useCases": {
+      "title": "Поширені випадки використання",
+      "items": [
+        "Перевірка цілісності файлів",
+        "Хешування паролів",
+        "Дедуплікація даних",
+        "Цифрові підписи",
+        "Генерація контрольних сум"
+      ]
+    },
+    "securityGuidelines": {
+      "title": "Security Guidelines",
+      "items": [
+        "MD5 and SHA-1 are cryptographically broken and should not be used for security-critical applications",
+        "Use SHA-256 or SHA-512 for all security-sensitive applications and modern systems"
+      ]
+    }
   },
   "tool": {
     "algorithms": {
@@ -28,45 +71,12 @@
       "crc32": "CRC32"
     },
     "placeholders": {
-      "textInput": "Enter text to hash...",
-      "fileUpload": "Select a file to generate hash"
+      "textInput": "Введіть текст для хешування...",
+      "fileUpload": "Виберіть файл для генерації хешу"
     }
   },
   "validation": {
-    "algorithmRequired": "Please select a hash algorithm",
-    "inputRequired": "Please enter text or select a file"
-  },
-  "info": {
-    "title": "About Hash Functions",
-    "description": "Hash functions convert input data into fixed-size strings of characters, which are typically used for data integrity verification, password storage, and digital signatures.",
-    "keyFeatures": {
-      "title": "Key Features",
-      "items": [
-        "Multiple hash algorithms support",
-        "Text and file hashing",
-        "Batch processing capability",
-        "Hash comparison tools",
-        "Uppercase/lowercase output options"
-      ]
-    },
-    "useCases": {
-      "title": "Common Use Cases",
-      "items": [
-        "File integrity verification",
-        "Password hashing",
-        "Data deduplication",
-        "Digital signatures",
-        "Checksum generation"
-      ]
-    },
-    "security": {
-      "title": "Security Notes",
-      "items": [
-        "MD5 and SHA-1 are deprecated for security use",
-        "Use SHA-256 or higher for cryptographic purposes",
-        "All hashing happens locally in your browser",
-        "No data is transmitted to external servers"
-      ]
-    }
+    "algorithmRequired": "Будь ласка, виберіть алгоритм хешування",
+    "inputRequired": "Будь ласка, введіть текст або виберіть файл"
   }
 }

@@ -2,77 +2,85 @@
   "tools": {
     "base64": {
       "name": "Base64 Tool",
-      "description": "Encode and decode Base64 data with support for text and files"
+      "description": "Codeer en decodeer Base64-gegevens met ondersteuning voor tekst en bestanden"
     },
-    "hashGenerator": {
+    "hash-generator": {
       "name": "Hash Generator",
-      "description": "Generate MD5, SHA-1, SHA-256, and other cryptographic hashes"
+      "description": "Genereer MD5, SHA-1, SHA-256 en andere cryptografische hashes"
     },
-    "faviconGenerator": {
+    "favicon-generator": {
       "name": "Favicon Generator",
-      "description": "Create favicons from images in multiple sizes and formats"
+      "description": "Maak favicons van afbeeldingen in meerdere formaten en groottes"
     },
-    "markdownToPdf": {
-      "name": "Markdown to PDF",
-      "description": "Convert Markdown files to PDF with custom styling options"
+    "markdown-to-pdf": {
+      "name": "Markdown naar PDF",
+      "description": "Converteer Markdown-bestanden naar PDF met aangepaste stijlopties"
     },
     "urlShortener": {
-      "name": "URL Shortener",
-      "description": "Create short URLs for easy sharing and tracking"
+      "name": "URL-verkorter",
+      "description": "Maak korte URL's voor eenvoudig delen en volgen"
     },
     "qrGenerator": {
       "name": "QR Code Generator",
-      "description": "Generate QR codes for text, URLs, and other data"
+      "description": "Genereer QR-codes voor tekst, URL's en andere gegevens"
     },
     "imageCompressor": {
-      "name": "Image Compressor",
-      "description": "Compress images while maintaining quality"
+      "name": "Afbeeldingscompressor",
+      "description": "Comprimeer afbeeldingen met behoud van kwaliteit"
     },
     "textDiff": {
-      "name": "Text Diff Tool",
-      "description": "Compare and highlight differences between text files"
+      "name": "Tekstvergelijkingstool",
+      "description": "Vergelijk en markeer verschillen tussen tekstbestanden"
     }
   },
   "tags": {
     "encoding": {
-      "name": "Encoding",
-      "description": "Tools for encoding and decoding data in various formats"
-    },
-    "generation": {
-      "name": "Generation",
-      "description": "Tools for generating content, codes, and files"
-    },
-    "conversion": {
-      "name": "Conversion",
-      "description": "Tools for converting between different file formats"
+      "name": "Codering",
+      "description": "Tools voor het coderen en decoderen van gegevens in verschillende formaten"
     },
     "security": {
-      "name": "Security",
-      "description": "Tools for cryptographic operations and security analysis"
+      "name": "Beveiliging",
+      "description": "Tools voor cryptografische bewerkingen en beveiligingsanalyse"
+    },
+    "design": {
+      "name": "Ontwerp",
+      "description": "Hulpmiddelen voor ontwerp en afbeeldingen"
+    },
+    "document": {
+      "name": "Document",
+      "description": "Hulpmiddelen voor documentverwerking"
+    },
+    "generation": {
+      "name": "Generatie",
+      "description": "Tools voor het genereren van inhoud, codes en bestanden"
+    },
+    "conversion": {
+      "name": "Conversie",
+      "description": "Tools voor het converteren tussen verschillende bestandsformaten"
     },
     "compression": {
-      "name": "Compression",
-      "description": "Tools for reducing file sizes and optimizing content"
+      "name": "Compressie",
+      "description": "Tools voor het verkleinen van bestandsgroottes en het optimaliseren van inhoud"
     },
     "analysis": {
-      "name": "Analysis",
-      "description": "Tools for analyzing and comparing data and files"
+      "name": "Analyse",
+      "description": "Tools voor het analyseren en vergelijken van gegevens en bestanden"
     },
     "web": {
-      "name": "Web Development",
-      "description": "Tools specifically designed for web developers"
+      "name": "Webontwikkeling",
+      "description": "Tools speciaal ontworpen voor webontwikkelaars"
     },
     "image": {
-      "name": "Image Processing",
-      "description": "Tools for working with images and graphics"
+      "name": "Beeldverwerking",
+      "description": "Tools voor het werken met afbeeldingen en grafische bestanden"
     },
     "text": {
-      "name": "Text Processing",
-      "description": "Tools for manipulating and analyzing text content"
+      "name": "Tekstverwerking",
+      "description": "Tools voor het manipuleren en analyseren van tekstinhoud"
     },
     "utility": {
-      "name": "Utility",
-      "description": "General-purpose tools for common tasks"
+      "name": "Hulpprogramma",
+      "description": "Algemene tools voor veelvoorkomende taken"
     }
   }
 }

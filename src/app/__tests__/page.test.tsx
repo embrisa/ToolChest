@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe, toHaveNoViolations } from "jest-axe";
-import HomePage from "../page";
+import HomePage from "../[locale]/page";
 
 // Extend Jest matchers
 expect.extend(toHaveNoViolations);

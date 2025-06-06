@@ -27,6 +27,7 @@ npm run dev           # Development server
 ```bash
 npm run format        # Format with Prettier
 npm run lint:fix      # Auto-fix linting issues
+npm run qa:translations # Check translation file consistency and validity
 npm run validate      # Lint + type-check + format-check
 npm run type-check    # TypeScript validation only
 ```

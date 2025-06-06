@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { AdminToolListItem, AdminToolsSortOptions } from "@/types/admin/tool";
 import { Button } from "@/components/ui";
 
@@ -18,6 +19,9 @@ export function ToolTable({
   onSort,
   onDelete,
 }: ToolTableProps) {
+  const tAdmin = useTranslations("pages.admin.tools");
+  const tForms = useTranslations("components.forms");
+  const tCommon = useTranslations("common");
   const [deletingToolId, setDeletingToolId] = useState<string | null>(null);
 
   const handleSort = (field: AdminToolsSortOptions["field"]) => {
@@ -27,7 +31,7 @@ export function ToolTable({
   const handleDeleteClick = (id: string, name: string) => {
     if (
       window.confirm(
-        `Are you sure you want to delete "${name}"? This action cannot be undone.`,
+        tCommon("ui.confirmations.deleteItem", { name }),
       )
     ) {
       setDeletingToolId(id);
@@ -112,7 +116,7 @@ export function ToolTable({
                   className="flex items-center gap-3 hover:text-brand-600 focus:outline-none focus:text-brand-600 transition-colors group touch-target-min"
                   aria-label={`Sort by name ${sortOptions.field === "name" ? `(currently ${sortOptions.direction === "asc" ? "ascending" : "descending"})` : ""}`}
                 >
-                  <span>Tool Name</span>
+                  <span>{tAdmin("table.name")}</span>
                   <div className="opacity-60 group-hover:opacity-100 transition-opacity">
                     {getSortIcon("name")}
                   </div>
@@ -127,7 +131,7 @@ export function ToolTable({
                   className="flex items-center gap-3 hover:text-brand-600 focus:outline-none focus:text-brand-600 transition-colors group touch-target-min"
                   aria-label={`Sort by URL slug ${sortOptions.field === "slug" ? `(currently ${sortOptions.direction === "asc" ? "ascending" : "descending"})` : ""}`}
                 >
-                  <span>URL Slug</span>
+                  <span>{tAdmin("table.slug")}</span>
                   <div className="opacity-60 group-hover:opacity-100 transition-opacity">
                     {getSortIcon("slug")}
                   </div>
@@ -137,13 +141,13 @@ export function ToolTable({
                 scope="col"
                 className="px-6 py-5 text-left text-xs font-bold text-primary uppercase tracking-wider"
               >
-                Description
+                {tForms("labels.description")}
               </th>
               <th
                 scope="col"
                 className="px-6 py-5 text-left text-xs font-bold text-primary uppercase tracking-wider"
               >
-                Tags
+                {tForms("labels.tags")}
               </th>
               <th
                 scope="col"
@@ -154,7 +158,7 @@ export function ToolTable({
                   className="flex items-center gap-3 hover:text-brand-600 focus:outline-none focus:text-brand-600 transition-colors group touch-target-min"
                   aria-label={`Sort by display order ${sortOptions.field === "displayOrder" ? `(currently ${sortOptions.direction === "asc" ? "ascending" : "descending"})` : ""}`}
                 >
-                  <span>Order</span>
+                  <span>{tCommon("ui.labels.order")}</span>
                   <div className="opacity-60 group-hover:opacity-100 transition-opacity">
                     {getSortIcon("displayOrder")}
                   </div>
@@ -169,7 +173,7 @@ export function ToolTable({
                   className="flex items-center gap-3 hover:text-brand-600 focus:outline-none focus:text-brand-600 transition-colors group touch-target-min"
                   aria-label={`Sort by usage count ${sortOptions.field === "usageCount" ? `(currently ${sortOptions.direction === "asc" ? "ascending" : "descending"})` : ""}`}
                 >
-                  <span>Usage</span>
+                  <span>{tAdmin("table.usage")}</span>
                   <div className="opacity-60 group-hover:opacity-100 transition-opacity">
                     {getSortIcon("usageCount")}
                   </div>
@@ -179,7 +183,7 @@ export function ToolTable({
                 scope="col"
                 className="px-6 py-5 text-left text-xs font-bold text-primary uppercase tracking-wider"
               >
-                Status
+                {tAdmin("table.status")}
               </th>
               <th
                 scope="col"
@@ -190,7 +194,7 @@ export function ToolTable({
                   className="flex items-center gap-3 hover:text-brand-600 focus:outline-none focus:text-brand-600 transition-colors group touch-target-min"
                   aria-label={`Sort by last updated ${sortOptions.field === "updatedAt" ? `(currently ${sortOptions.direction === "asc" ? "ascending" : "descending"})` : ""}`}
                 >
-                  <span>Last Updated</span>
+                  <span>{tCommon("ui.labels.lastUpdated")}</span>
                   <div className="opacity-60 group-hover:opacity-100 transition-opacity">
                     {getSortIcon("updatedAt")}
                   </div>
@@ -249,7 +253,7 @@ export function ToolTable({
                       </div>
                     ) : (
                       <span className="text-tertiary italic text-sm">
-                        No description provided
+                        {tCommon("ui.labels.noDescription")}
                       </span>
                     )}
                   </div>
@@ -274,7 +278,7 @@ export function ToolTable({
                       ))
                     ) : (
                       <span className="text-tertiary italic text-sm">
-                        No tags
+                        {tCommon("ui.labels.noTags")}
                       </span>
                     )}
                   </div>
@@ -311,11 +315,10 @@ export function ToolTable({
                 </td>
                 <td className="px-6 py-5 whitespace-nowrap" role="gridcell">
                   <span
-                    className={`inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold border ${
-                      tool.isActive
-                        ? "bg-success-50 text-success-700 border-success-200"
-                        : "bg-warning-50 text-warning-700 border-warning-200"
-                    }`}
+                    className={`inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold border ${tool.isActive
+                      ? "bg-success-50 text-success-700 border-success-200"
+                      : "bg-warning-50 text-warning-700 border-warning-200"
+                      }`}
                     aria-label={
                       tool.isActive
                         ? "Tool is published and visible to users"
@@ -323,11 +326,10 @@ export function ToolTable({
                     }
                   >
                     <div
-                      className={`w-2 h-2 rounded-full mr-2 ${
-                        tool.isActive ? "bg-success-500" : "bg-warning-500"
-                      }`}
+                      className={`w-2 h-2 rounded-full mr-2 ${tool.isActive ? "bg-success-500" : "bg-warning-500"
+                        }`}
                     />
-                    {tool.isActive ? "Published" : "Draft"}
+                    {tool.isActive ? tCommon("ui.labels.active") : tCommon("ui.labels.inactive")}
                   </span>
                 </td>
                 <td
@@ -377,7 +379,7 @@ export function ToolTable({
                             d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                           />
                         </svg>
-                        <span>Edit</span>
+                        <span>{tForms("actions.edit")}</span>
                       </div>
                     </Link>
                     <button
@@ -390,7 +392,7 @@ export function ToolTable({
                         {deletingToolId === tool.id ? (
                           <>
                             <div className="w-4 h-4 border-2 border-error-400 border-t-error-600 rounded-full animate-spin" />
-                            <span>Deleting...</span>
+                            <span>{tCommon("ui.status.processing")}</span>
                           </>
                         ) : (
                           <>
@@ -408,7 +410,7 @@ export function ToolTable({
                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                               />
                             </svg>
-                            <span>Delete</span>
+                            <span>{tForms("actions.delete")}</span>
                           </>
                         )}
                       </div>
@@ -441,11 +443,10 @@ export function ToolTable({
             </svg>
           </div>
           <h3 className="text-heading text-xl font-semibold text-primary mb-3">
-            No Tools Found
+            {tCommon("ui.labels.noItems")}
           </h3>
           <p className="text-body text-secondary mb-8 max-w-md mx-auto">
-            Get started by creating your first tool. Tools help users accomplish
-            specific tasks and can be organized with tags.
+            {tAdmin("emptyState.description")}
           </p>
           <Link href="/admin/tools/create">
             <Button className="touch-target-comfortable shadow-medium">
@@ -463,7 +464,7 @@ export function ToolTable({
                   d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                 />
               </svg>
-              Create Your First Tool
+              {tAdmin("actions.createTool")}
             </Button>
           </Link>
         </div>

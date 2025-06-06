@@ -1,72 +1,72 @@
 {
   "ui": {
     "modes": {
-      "encode": "Encode",
-      "decode": "Decode",
-      "generate": "Generate",
-      "convert": "Convert",
-      "process": "Process",
-      "analyze": "Analyze"
+      "encode": "Mã hóa",
+      "decode": "Giải mã",
+      "generate": "Tạo",
+      "convert": "Chuyển đổi",
+      "process": "Xử lý",
+      "analyze": "Phân tích"
     },
     "inputTypes": {
-      "text": "Text",
-      "file": "File",
+      "text": "Văn bản",
+      "file": "Tệp",
       "url": "URL",
-      "upload": "Upload"
+      "upload": "Tải lên"
     },
     "actions": {
-      "process": "Process",
-      "copy": "Copy Result",
-      "download": "Download",
-      "upload": "Upload",
-      "clear": "Clear",
-      "reset": "Reset",
-      "retry": "Retry",
-      "save": "Save",
-      "export": "Export"
+      "process": "Xử lý",
+      "copy": "Sao chép kết quả",
+      "download": "Tải xuống",
+      "upload": "Tải lên",
+      "clear": "Xóa",
+      "reset": "Đặt lại",
+      "retry": "Thử lại",
+      "save": "Lưu",
+      "export": "Xuất"
     },
     "status": {
-      "processing": "Processing...",
-      "success": "Operation completed successfully",
-      "copied": "Copied to clipboard",
-      "error": "Operation failed",
-      "ready": "Ready",
-      "waiting": "Waiting for input"
+      "processing": "Đang xử lý...",
+      "success": "Thao tác đã hoàn tất thành công",
+      "copied": "Đã sao chép vào clipboard",
+      "error": "Thao tác thất bại",
+      "ready": "Sẵn sàng",
+      "waiting": "Đang chờ nhập liệu"
     },
     "placeholders": {
-      "textInput": "Enter text here...",
-      "fileUpload": "Select a file or drag and drop",
-      "urlInput": "Enter URL here...",
-      "searchInput": "Search..."
+      "textInput": "Nhập văn bản vào đây...",
+      "fileUpload": "Chọn một tệp hoặc kéo và thả",
+      "urlInput": "Nhập URL vào đây...",
+      "searchInput": "Tìm kiếm..."
     }
   },
   "validation": {
-    "required": "This field is required",
-    "invalidInput": "Invalid input",
-    "fileTooLarge": "File too large (max {maxSize})",
-    "unsupportedFileType": "Unsupported file type",
-    "invalidFormat": "Invalid format",
-    "emptyInput": "Please enter some text or select a file",
-    "invalidUrl": "Please enter a valid URL"
+    "required": "Trường này là bắt buộc",
+    "invalidInput": "Đầu vào không hợp lệ",
+    "fileTooLarge": "Tệp quá lớn (tối đa {maxSize})",
+    "unsupportedFileType": "Loại tệp không được hỗ trợ",
+    "invalidFormat": "Định dạng không hợp lệ",
+    "emptyInput": "Vui lòng nhập văn bản hoặc chọn một tệp",
+    "invalidUrl": "Vui lòng nhập một URL hợp lệ"
   },
   "privacy": {
-    "clientSideNote": "All processing happens in your browser for maximum privacy.",
-    "noDataSent": "No data sent to servers",
-    "filesStayLocal": "Files stay on your device",
-    "noLogging": "No data storage or logging"
+    "clientSideNote": "Tất cả quá trình xử lý diễn ra trong trình duyệt của bạn để đảm bảo quyền riêng tư tối đa.",
+    "noDataSent": "Không có dữ liệu nào được gửi đến máy chủ",
+    "filesStayLocal": "Các tệp được lưu trên thiết bị của bạn",
+    "noLogging": "Không lưu trữ hoặc ghi lại dữ liệu"
   },
   "features": {
-    "clientSideProcessing": "Client-side processing for privacy",
-    "copyToClipboard": "Copy to clipboard functionality",
-    "downloadResults": "Download results",
-    "realTimeProcessing": "Real-time processing",
-    "multipleFormats": "Multiple format support",
-    "batchProcessing": "Batch processing support"
+    "clientSideProcessing": "Xử lý phía máy khách để bảo vệ quyền riêng tư",
+    "copyToClipboard": "Chức năng sao chép vào clipboard",
+    "downloadResults": "Tải xuống kết quả",
+    "realTimeProcessing": "Xử lý thời gian thực",
+    "multipleFormats": "Hỗ trợ nhiều định dạng",
+    "batchProcessing": "Hỗ trợ xử lý hàng loạt"
   },
   "errors": {
-    "processingFailed": "Processing failed",
-    "fileReadError": "Error reading file",
-    "networkError": "Network error occurred",
-    "unknownError": "An unknown error occurred"
+    "processingFailed": "Xử lý thất bại",
+    "fileReadError": "Lỗi đọc tệp",
+    "networkError": "Đã xảy ra lỗi mạng",
+    "unknownError": "Đã xảy ra lỗi không xác định"
   }
 }

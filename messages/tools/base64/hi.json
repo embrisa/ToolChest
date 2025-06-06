@@ -1,24 +1,25 @@
 {
   "metadata": {
-    "title": "Base64 एनकोडर और डिकोडर | ",
-    "description": "मुफ्त ऑनलाइन बेस 64 एनकोडर और डिकोडर। ",
+    "title": "Base64 Encoder & Decoder | tool-chest",
+    "description": "Free online Base64 encoder and decoder. Convert text to Base64 and decode Base64 to text. Supports file encoding/decoding with URL-safe options. Privacy-first with client-side processing.",
     "keywords": [
-      "बेस 64",
-      "एनकोडर",
-      "कूटवाचक",
-      "एन्कोड",
-      "गूढ़वाचन करना",
-      "मूलपाठ",
-      "फ़ाइल",
+      "base64",
+      "encoder",
+      "decoder",
+      "encode",
+      "decode",
+      "text",
+      "file",
       "url-safe",
-      "ऑनलाइन उपकरण",
-      "मुक्त",
-      "गोपनीयता"
+      "online tool",
+      "free",
+      "privacy"
     ]
   },
   "page": {
     "title": "बेस 64 एनकोडर और डिकोडर",
-    "description": "पाठ और फ़ाइलों के लिए समर्थन के साथ बेस 64 डेटा को एनकोड और डिकोड करें।"
+    "description": "पाठ और फ़ाइलों के लिए समर्थन के साथ बेस 64 डेटा को एनकोड और डिकोड करें।",
+    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
   },
   "tool": {
     "variants": {
@@ -44,7 +45,17 @@
         "URL-safe बेस 64 एन्कोडिंग विकल्प",
         "क्लिपबोर्ड कार्यक्षमता के लिए कॉपी करें",
         "एन्कोडेड/डिकोड किए गए परिणाम डाउनलोड करें",
-        "वास्तविक समय एन्कोडिंग/डिकोडिंग"
+        "वास्तविक समय एन्कोडिंग/डिकोडिंग",
+        "Real-time encoding/decoding"
+      ]
+    },
+    "securityAndPrivacy": {
+      "title": "Security & Privacy",
+      "items": [
+        "No data sent to servers",
+        "Processing happens in your browser",
+        "Files stay on your device",
+        "No data storage or logging"
       ]
     },
     "useCases": {

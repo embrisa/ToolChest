@@ -1,58 +1,59 @@
 {
-    "header": {
-        "brand": "tool-chest",
-        "navigation": {
-            "home": "Home",
-            "tools": "Tools",
-            "admin": "Admin"
-        },
-        "mobile": {
-            "toggleMenu": "Toggle menu",
-            "openMenu": "Open navigation menu",
-            "closeMenu": "Close navigation menu"
-        }
+  "header": {
+    "brand": "tool-chest",
+    "navigation": {
+      "home": "Home",
+      "tools": "Tools",
+      "about": "About",
+      "admin": "Admin"
     },
-    "footer": {
-        "copyright": "© 2024 tool-chest",
-        "links": {
-            "privacy": "Privacy Policy",
-            "terms": "Terms of Service",
-            "contact": "Contact",
-            "about": "About"
-        },
-        "description": "Privacy-focused developer tools."
-    },
-    "breadcrumbs": {
-        "home": "Home",
-        "tools": "Tools",
-        "admin": "Admin",
-        "dashboard": "Dashboard",
-        "analytics": "Analytics",
-        "tags": "Tags",
-        "monitoring": "Monitoring",
-        "relationships": "Relationships"
-    },
-    "localeSwitcher": {
-        "label": "Language",
-        "current": "Current language",
-        "selectLanguage": "Select language",
-        "languages": {
-            "en": "English",
-            "es": "Español",
-            "zh": "中文",
-            "hi": "हिन्दी",
-            "pt": "Português",
-            "ru": "Русский",
-            "ja": "日本語",
-            "de": "Deutsch",
-            "fr": "Français",
-            "ko": "한국어",
-            "it": "Italiano",
-            "tr": "Türkçe",
-            "pl": "Polski",
-            "nl": "Nederlands",
-            "vi": "Tiếng Việt",
-            "uk": "Українська"
-        }
+    "mobile": {
+      "toggleMenu": "Toggle menu",
+      "openMenu": "Open navigation menu",
+      "closeMenu": "Close navigation menu"
     }
+  },
+  "footer": {
+    "copyright": "© 2024 tool-chest",
+    "links": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "contact": "Contact",
+      "about": "About"
+    },
+    "description": "Privacy-focused developer tools."
+  },
+  "breadcrumbs": {
+    "home": "Home",
+    "tools": "Tools",
+    "admin": "Admin",
+    "dashboard": "Dashboard",
+    "analytics": "Analytics",
+    "tags": "Tags",
+    "monitoring": "Monitoring",
+    "relationships": "Relationships"
+  },
+  "localeSwitcher": {
+    "label": "Language",
+    "current": "Current language",
+    "selectLanguage": "Select language",
+    "languages": {
+      "en": "English",
+      "es": "Español",
+      "zh": "中文",
+      "hi": "हिन्दी",
+      "pt": "Português",
+      "ru": "Русский",
+      "ja": "日本語",
+      "de": "Deutsch",
+      "fr": "Français",
+      "ko": "한국어",
+      "it": "Italiano",
+      "tr": "Türkçe",
+      "pl": "Polski",
+      "nl": "Nederlands",
+      "vi": "Tiếng Việt",
+      "uk": "Українська"
+    }
+  }
 }

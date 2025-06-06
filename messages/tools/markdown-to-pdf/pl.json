@@ -1,67 +1,66 @@
 {
   "metadata": {
-    "title": "Markadds to PDF konwerter | Chest narzędzi",
-    "description": "Konwertuj pliki Markdown na PDF z niestandardowymi opcjami stylizacji. Profesjonalne generowanie dokumentów z przetwarzaniem po stronie klienta w zakresie prywatności.",
+    "title": "Markdown to PDF Converter | tool-chest",
+    "description": "Convert Markdown to professional PDF documents with syntax highlighting, custom styling, and support for tables, code blocks, and images. Privacy-first client-side processing.",
     "keywords": [
-      "obniżka cen",
-      "PDF",
-      "przetwornik",
-      "dokument",
-      "eksport",
-      "Stylizacja",
-      "format",
-      "pobierać",
-      "prywatność",
-      "po stronie klienta"
+      "markdown to pdf",
+      "markdown converter",
+      "pdf generator",
+      "markdown pdf",
+      "syntax highlighting",
+      "code blocks",
+      "tables",
+      "document converter",
+      "markdown export",
+      "free tool"
     ]
   },
   "page": {
     "title": "Markdown to PDF",
-    "description": "Konwertuj pliki Markdown na PDF z niestandardowymi opcjami stylizacji."
+    "description": "Konwertuj pliki Markdown na PDF z niestandardowymi opcjami stylizacji.",
+    "privacyMessage": "🔒 Privacy-First • GitHub Flavored Markdown • Client-Side Processing"
   },
-  "tool": {
-    "input": {
-      "markdown": "Treść Markdown",
-      "file": "Plik Markdown",
-      "placeholder": "Wprowadź tutaj swoją zawartość Markdown ..."
+  "featureGrid": {
+    "live-preview": {
+      "title": "Live Preview",
+      "description": "Real-time markdown preview with instant rendering",
+      "icon": "👁️"
     },
-    "customization": {
-      "title": "Dostosowywanie PDF",
-      "pageSize": "Rozmiar strony",
-      "margins": "Marginesy",
-      "theme": "Temat",
-      "fontSize": "Rozmiar czcionki",
-      "fontFamily": "Rodzina czcionek",
-      "lineHeight": "Wysokość linii",
-      "headerFooter": "Nagłówek i stopa"
+    "templates": {
+      "title": "Multiple Templates",
+      "description": "PDF templates and themes for different use cases",
+      "icon": "🎨"
     },
-    "themes": {
-      "default": "Domyślny",
-      "github": "Girub",
-      "minimal": "Minimalny",
-      "academic": "Akademicki",
-      "professional": "Profesjonalny"
+    "gfm-support": {
+      "title": "GitHub Flavored Markdown",
+      "description": "Full GFM support including tables and task lists",
+      "icon": "📝"
     },
-    "pageSizes": {
-      "a4": "Różowy",
-      "letter": "List",
-      "legal": "Prawny",
-      "a3": "Być",
-      "tabloid": "Tabletka"
+    "syntax-highlighting": {
+      "title": "Syntax Highlighting",
+      "description": "Code blocks with syntax highlighting for multiple languages",
+      "icon": "💻"
     },
-    "margins": {
-      "none": "Nic",
-      "narrow": "Wąski",
-      "normal": "Normalna",
-      "wide": "Szeroki",
-      "custom": "Zwyczaj"
+    "custom-styling": {
+      "title": "Custom Styling",
+      "description": "Customize fonts, colors, and layout options",
+      "icon": "⚙️"
+    },
+    "file-upload": {
+      "title": "File Upload",
+      "description": "Upload .md, .markdown, or .txt files directly",
+      "icon": "📁"
+    },
+    "professional-output": {
+      "title": "Professional Output",
+      "description": "High-quality PDF generation with metadata",
+      "icon": "📄"
+    },
+    "privacy-first": {
+      "title": "Privacy-First",
+      "description": "All processing happens in your browser",
+      "icon": "🔒"
     }
-  },
-  "validation": {
-    "markdownRequired": "Wpisz treść Markdown lub wybierz plik",
-    "invalidMarkdownFile": "Wybierz prawidłowy plik Markdown (.md, .Markdown)",
-    "fileTooLarge": "Plik zbyt duży (maks. 10 MB)",
-    "emptyContent": "Treść Markdown nie może być pusta"
   },
   "info": {
     "title": "O konwersji Markdown do PDF",
@@ -74,29 +73,44 @@
         "Wiele stron i orientacje",
         "Podświetlanie składni dla bloków kodu",
         "Obsługa tabeli i obrazu",
-        "Dostosowanie nagłówka i stopki"
+        "Dostosowanie nagłówka i stopki",
+        "File upload support (.md, .markdown, .txt)",
+        "Drag and drop file upload",
+        "Real-time word count and statistics",
+        "Professional PDF output with metadata"
       ]
     },
-    "useCases": {
-      "title": "Powszechne przypadki użycia",
+    "supportedFeatures": {
+      "title": "Supported Markdown Features",
       "items": [
-        "Dokumentacja techniczna",
-        "Dokumenty badawcze i raporty",
-        "Pliki Readme do drukowania",
-        "Notatki i programy spotkania",
-        "Propozycje projektu",
-        "Posty na blogu do czytania offline"
+        "Headings (H1-H6) with automatic numbering",
+        "Bold and italic text formatting",
+        "Links and images with captions",
+        "Code blocks with syntax highlighting",
+        "Tables with proper formatting",
+        "Blockquotes and nested lists",
+        "Task lists with checkboxes",
+        "Auto-linking of URLs"
       ]
     },
-    "supportedSyntax": {
-      "title": "Obsługiwane funkcje Markdown",
+    "pdfTemplates": {
+      "title": "PDF Templates",
       "items": [
-        "Formatowanie nagłówków i tekstu",
-        "Listy (uporządkowane i nieopisane)",
-        "Linki i obrazy",
-        "Tabele i bloki kodu",
-        "Blokady i zasady poziome",
-        "Lateksowe wyrażenia matematyczne (opcjonalnie)"
+        "Default: Clean and simple design for general use",
+        "Academic: Professional format for research papers",
+        "Minimal: Clean design with lots of white space",
+        "Professional: Business-ready with headers and footers"
+      ]
+    },
+    "howToUse": {
+      "title": "How to Use",
+      "items": [
+        "Choose between typing in the editor or uploading a markdown file",
+        "Write or paste your markdown content in the editor",
+        "Use the live preview to see how your document will look",
+        "Select a template or customize styling options",
+        "Click 'Generate PDF' to create your document",
+        "Download your professional PDF file"
       ]
     }
   }

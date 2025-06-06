@@ -1,67 +1,66 @@
 {
   "metadata": {
-    "title": "PDF 변환기에 대한 마크 다운 | 도구 체력",
-    "description": "사용자 정의 스타일 옵션으로 Markdown 파일을 PDF로 변환하십시오. 개인 정보를위한 클라이언트 측 처리를 통해 전문 문서 생성.",
+    "title": "Markdown to PDF Converter | tool-chest",
+    "description": "Convert Markdown to professional PDF documents with syntax highlighting, custom styling, and support for tables, code blocks, and images. Privacy-first client-side processing.",
     "keywords": [
-      "가격 인하",
-      "PDF",
-      "변환기",
-      "문서",
-      "내보내다",
-      "스타일링",
-      "체재",
-      "다운로드",
-      "은둔",
-      "클라이언트 측"
+      "markdown to pdf",
+      "markdown converter",
+      "pdf generator",
+      "markdown pdf",
+      "syntax highlighting",
+      "code blocks",
+      "tables",
+      "document converter",
+      "markdown export",
+      "free tool"
     ]
   },
   "page": {
     "title": "PDF에 마크 다운",
-    "description": "사용자 정의 스타일 옵션으로 Markdown 파일을 PDF로 변환하십시오."
+    "description": "사용자 정의 스타일 옵션으로 Markdown 파일을 PDF로 변환하십시오.",
+    "privacyMessage": "🔒 Privacy-First • GitHub Flavored Markdown • Client-Side Processing"
   },
-  "tool": {
-    "input": {
-      "markdown": "마크 다운 컨텐츠",
-      "file": "마크 다운 파일",
-      "placeholder": "여기에 Markdown 콘텐츠를 입력하십시오 ..."
+  "featureGrid": {
+    "live-preview": {
+      "title": "Live Preview",
+      "description": "Real-time markdown preview with instant rendering",
+      "icon": "👁️"
     },
-    "customization": {
-      "title": "PDF 사용자 정의",
-      "pageSize": "페이지 크기",
-      "margins": "여백",
-      "theme": "주제",
-      "fontSize": "글꼴 크기",
-      "fontFamily": "글꼴 가족",
-      "lineHeight": "라인 높이",
-      "headerFooter": "헤더 및 바닥 글"
+    "templates": {
+      "title": "Multiple Templates",
+      "description": "PDF templates and themes for different use cases",
+      "icon": "🎨"
     },
-    "themes": {
-      "default": "기본",
-      "github": "github",
-      "minimal": "최소",
-      "academic": "학생",
-      "professional": "전문적인"
+    "gfm-support": {
+      "title": "GitHub Flavored Markdown",
+      "description": "Full GFM support including tables and task lists",
+      "icon": "📝"
     },
-    "pageSizes": {
-      "a4": "A4",
-      "letter": "편지",
-      "legal": "합법적인",
-      "a3": "A3",
-      "tabloid": "정제"
+    "syntax-highlighting": {
+      "title": "Syntax Highlighting",
+      "description": "Code blocks with syntax highlighting for multiple languages",
+      "icon": "💻"
     },
-    "margins": {
-      "none": "없음",
-      "narrow": "좁은",
-      "normal": "정상",
-      "wide": "넓은",
-      "custom": "관습"
+    "custom-styling": {
+      "title": "Custom Styling",
+      "description": "Customize fonts, colors, and layout options",
+      "icon": "⚙️"
+    },
+    "file-upload": {
+      "title": "File Upload",
+      "description": "Upload .md, .markdown, or .txt files directly",
+      "icon": "📁"
+    },
+    "professional-output": {
+      "title": "Professional Output",
+      "description": "High-quality PDF generation with metadata",
+      "icon": "📄"
+    },
+    "privacy-first": {
+      "title": "Privacy-First",
+      "description": "All processing happens in your browser",
+      "icon": "🔒"
     }
-  },
-  "validation": {
-    "markdownRequired": "마크 다운 내용을 입력하거나 파일을 선택하십시오",
-    "invalidMarkdownFile": "유효한 마크 다운 파일 (.md, .markdown)을 선택하십시오.",
-    "fileTooLarge": "너무 큰 파일 (최대 10MB)",
-    "emptyContent": "마크 다운 컨텐츠는 비어있을 수 없습니다"
   },
   "info": {
     "title": "PDF 변환에 대한 Markdown 정보",
@@ -74,29 +73,44 @@
         "여러 페이지 크기 및 방향",
         "코드 블록에 대한 구문 강조 표시",
         "테이블 및 이미지 지원",
-        "헤더 및 바닥 글로 사용자 정의"
+        "헤더 및 바닥 글로 사용자 정의",
+        "File upload support (.md, .markdown, .txt)",
+        "Drag and drop file upload",
+        "Real-time word count and statistics",
+        "Professional PDF output with metadata"
       ]
     },
-    "useCases": {
-      "title": "일반적인 사용 사례",
+    "supportedFeatures": {
+      "title": "Supported Markdown Features",
       "items": [
-        "기술 문서",
-        "연구 논문 및 보고서",
-        "인쇄 용 readme 파일",
-        "회의 메모 및 의제",
-        "프로젝트 제안",
-        "오프라인 읽기를위한 블로그 게시물"
+        "Headings (H1-H6) with automatic numbering",
+        "Bold and italic text formatting",
+        "Links and images with captions",
+        "Code blocks with syntax highlighting",
+        "Tables with proper formatting",
+        "Blockquotes and nested lists",
+        "Task lists with checkboxes",
+        "Auto-linking of URLs"
       ]
     },
-    "supportedSyntax": {
-      "title": "지원되는 마크 다운 기능",
+    "pdfTemplates": {
+      "title": "PDF Templates",
       "items": [
-        "헤더 및 텍스트 형식",
-        "목록 (주문 및 변수)",
-        "링크 및 이미지",
-        "테이블 및 코드 블록",
-        "블록 퀘스트 및 수평 규칙",
-        "라텍스 수학 표현 (선택 사항)"
+        "Default: Clean and simple design for general use",
+        "Academic: Professional format for research papers",
+        "Minimal: Clean design with lots of white space",
+        "Professional: Business-ready with headers and footers"
+      ]
+    },
+    "howToUse": {
+      "title": "How to Use",
+      "items": [
+        "Choose between typing in the editor or uploading a markdown file",
+        "Write or paste your markdown content in the editor",
+        "Use the live preview to see how your document will look",
+        "Select a template or customize styling options",
+        "Click 'Generate PDF' to create your document",
+        "Download your professional PDF file"
       ]
     }
   }

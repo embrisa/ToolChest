@@ -4,7 +4,8 @@
     "navigation": {
       "home": "Dom",
       "tools": "Narzędzia",
-      "admin": "Admin"
+      "admin": "Admin",
+      "about": "O nas"
     },
     "mobile": {
       "toggleMenu": "Przełącz menu",

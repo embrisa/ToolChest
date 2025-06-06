@@ -1,64 +1,64 @@
 {
-    "labels": {
-        "name": "Nome",
-        "slug": "Slug",
-        "description": "Descrição",
-        "color": "Cor",
-        "status": "Status",
-        "tags": "Tags",
-        "url": "URL",
-        "file": "Arquivo",
-        "text": "Texto",
-        "options": "Opções",
-        "settings": "Configurações"
-    },
-    "placeholders": {
-        "enterName": "Insira o nome",
-        "enterDescription": "Insira a descrição",
-        "selectColor": "Selecione a cor",
-        "selectTags": "Selecione as tags",
-        "enterUrl": "Insira a URL",
-        "chooseFile": "Escolher arquivo",
-        "enterText": "Insira o texto"
-    },
-    "validation": {
-        "nameRequired": "Nome é obrigatório",
-        "slugRequired": "Slug é obrigatório",
-        "descriptionRequired": "Descrição é obrigatória",
-        "invalidSlug": "Slug só pode conter letras, números e hífens",
-        "slugTooShort": "Slug deve ter ao menos 3 caracteres",
-        "slugTooLong": "Slug deve ter menos de 50 caracteres",
-        "nameTooShort": "Nome deve ter ao menos 2 caracteres",
-        "nameTooLong": "Nome deve ter menos de 100 caracteres",
-        "descriptionTooLong": "Descrição deve ter menos de 500 caracteres",
-        "invalidColor": "Selecione uma cor válida",
-        "invalidEmail": "Digite um e-mail válido",
-        "invalidUrl": "Digite uma URL válida"
-    },
-    "help": {
-        "slug": "Identificador amigável para URL (gerado automaticamente a partir do nome)",
-        "description": "Breve descrição do item",
-        "color": "Cor usada para identificação visual",
-        "tags": "Organize itens com tags relevantes",
-        "status": "Estado atual do item"
-    },
-    "actions": {
-        "save": "Salvar",
-        "cancel": "Cancelar",
-        "submit": "Enviar",
-        "reset": "Redefinir",
-        "clear": "Limpar",
-        "delete": "Excluir",
-        "edit": "Editar",
-        "create": "Criar",
-        "update": "Atualizar"
-    },
-    "states": {
-        "saving": "Salvando...",
-        "loading": "Carregando...",
-        "saved": "Salvo com sucesso",
-        "error": "Ocorreu um erro",
-        "required": "Campo obrigatório",
-        "optional": "Campo opcional"
-    }
+  "labels": {
+    "name": "Nome",
+    "slug": "Slug",
+    "description": "Descrição",
+    "color": "Cor",
+    "status": "Status",
+    "tags": "Tags",
+    "url": "URL",
+    "file": "Arquivo",
+    "text": "Texto",
+    "options": "Opções",
+    "settings": "Configurações"
+  },
+  "placeholders": {
+    "enterName": "Insira o nome",
+    "enterDescription": "Insira a descrição",
+    "selectColor": "Selecione a cor",
+    "selectTags": "Selecione as tags",
+    "enterUrl": "Insira a URL",
+    "chooseFile": "Escolher arquivo",
+    "enterText": "Insira o texto"
+  },
+  "validation": {
+    "nameRequired": "Nome é obrigatório",
+    "slugRequired": "Slug é obrigatório",
+    "descriptionRequired": "Descrição é obrigatória",
+    "invalidSlug": "Slug só pode conter letras, números e hífens",
+    "slugTooShort": "Slug deve ter ao menos 3 caracteres",
+    "slugTooLong": "Slug deve ter menos de 50 caracteres",
+    "nameTooShort": "Nome deve ter ao menos 2 caracteres",
+    "nameTooLong": "Nome deve ter menos de 100 caracteres",
+    "descriptionTooLong": "Descrição deve ter menos de 500 caracteres",
+    "invalidColor": "Selecione uma cor válida",
+    "invalidEmail": "Digite um e-mail válido",
+    "invalidUrl": "Digite uma URL válida"
+  },
+  "help": {
+    "slug": "Identificador amigável para URL (gerado automaticamente a partir do nome)",
+    "description": "Breve descrição do item",
+    "color": "Cor usada para identificação visual",
+    "tags": "Organize itens com tags relevantes",
+    "status": "Estado atual do item"
+  },
+  "actions": {
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "submit": "Enviar",
+    "reset": "Redefinir",
+    "clear": "Limpar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "create": "Criar",
+    "update": "Atualizar"
+  },
+  "states": {
+    "saving": "Salvando...",
+    "loading": "Carregando...",
+    "saved": "Salvo com sucesso",
+    "error": "Ocorreu um erro",
+    "required": "Campo obrigatório",
+    "optional": "Campo opcional"
+  }
 }

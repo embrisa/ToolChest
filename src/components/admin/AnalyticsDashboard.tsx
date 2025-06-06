@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { AnalyticsChart } from "./AnalyticsChart";
 import { Loading } from "@/components/ui/Loading";
 import { Button } from "@/components/ui/Button";
@@ -19,6 +20,9 @@ type ExtendedSystemMetrics = SystemPerformanceMetrics & {
 };
 
 export function AnalyticsDashboard({ initialData }: AnalyticsDashboardProps) {
+  const t = useTranslations("pages.admin.analytics");
+  const tCommon = useTranslations("common");
+
   const [summary, setSummary] = useState<AnalyticsSummary | null>(
     initialData || null,
   );
@@ -109,7 +113,7 @@ export function AnalyticsDashboard({ initialData }: AnalyticsDashboardProps) {
         <div className="text-center space-y-4">
           <Loading size="lg" />
           <p className="text-neutral-600 dark:text-neutral-400 text-body">
-            Loading analytics data...
+            {t("loading")}...
           </p>
         </div>
       </div>
@@ -141,14 +145,14 @@ export function AnalyticsDashboard({ initialData }: AnalyticsDashboardProps) {
           <div className="flex-1 space-y-3">
             <div>
               <h3 className="text-title text-lg font-semibold text-error-900 dark:text-error-200">
-                Error Loading Analytics
+                {tCommon("errors.loadingFailed")}
               </h3>
               <p className="mt-1 text-body text-error-700 dark:text-error-300">
                 {error}
               </p>
             </div>
             <Button onClick={loadAnalyticsData} variant="secondary" size="sm">
-              Try Again
+              {tCommon("ui.actions.tryAgain")}
             </Button>
           </div>
         </div>

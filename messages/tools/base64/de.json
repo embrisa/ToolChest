@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Base64 Encoder & Decoder | tool-chest",
-    "description": "Free online Base64 encoder and decoder. Convert text to Base64 and decode Base64 to text. Supports file encoding/decoding with URL-safe options. Privacy-first with client-side processing.",
+    "description": "Kostenloser Online-Base64-Encoder und -Decoder. Konvertiert Text zu Base64 und dekodiert Base64 zu Text. Unterstützt Datei-Encoding/Dekodierung mit URL-sicheren Optionen. Datenschutzorientierte clientseitige Verarbeitung.",
     "keywords": [
       "base64",
       "encoder",
@@ -17,44 +17,55 @@
     ]
   },
   "page": {
-    "title": "Base64 Encoder & Decoder",
-    "description": "Encode and decode Base64 data with support for text and files."
+    "title": "Base64-Kodierer & -Dekodierer",
+    "description": "Kodieren und dekodieren Sie Base64-Daten mit Unterstützung für Text und Dateien.",
+    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
   },
   "tool": {
     "variants": {
       "standard": "Standard",
-      "urlSafe": "URL-Safe"
+      "urlSafe": "URL-sicher"
     },
     "placeholders": {
-      "textInput": "Enter text to encode/decode...",
-      "fileUpload": "Select a file or drag and drop"
+      "textInput": "Text zum Kodieren/Dekodieren eingeben...",
+      "fileUpload": "Datei auswählen oder per Drag & Drop hierher ziehen"
     }
   },
   "validation": {
-    "invalidBase64": "Invalid Base64 input",
-    "fileTooLarge": "File too large (max 10MB)"
+    "invalidBase64": "Ungültige Base64-Eingabe",
+    "fileTooLarge": "Datei zu groß (max. 10 MB)"
   },
   "info": {
-    "title": "About Base64 Encoding",
-    "description": "Base64 is a binary-to-text encoding scheme that converts binary data into a text format using a set of 64 characters. It's commonly used for encoding data in email, web pages, and data URLs, ensuring safe transmission over text-based protocols.",
+    "title": "Über Base64-Kodierung",
+    "description": "Base64 ist ein Binär-zu-Text-Kodierungsschema, das Binärdaten mithilfe eines Satzes von 64 Zeichen in ein Textformat umwandelt. Es wird häufig zum Kodieren von Daten in E-Mails, Webseiten und Daten-URLs verwendet, um eine sichere Übertragung über textbasierte Protokolle zu gewährleisten.",
     "keyFeatures": {
-      "title": "Key Features",
+      "title": "Hauptmerkmale",
       "items": [
-        "Text and file encoding/decoding",
-        "URL-safe Base64 encoding option",
-        "Copy to clipboard functionality",
-        "Download encoded/decoded results",
+        "Text- und Datei-Kodierung/Dekodierung",
+        "URL-sichere Base64-Kodierungsoption",
+        "In die Zwischenablage kopieren",
+        "Kodierte/dekodierte Ergebnisse herunterladen",
+        "Echtzeit-Kodierung/Dekodierung",
         "Real-time encoding/decoding"
       ]
     },
-    "useCases": {
-      "title": "Common Use Cases",
+    "securityAndPrivacy": {
+      "title": "Security & Privacy",
       "items": [
-        "Email attachments encoding",
-        "Web data URLs",
-        "API data transmission",
-        "Database blob storage",
-        "Configuration file encoding"
+        "No data sent to servers",
+        "Processing happens in your browser",
+        "Files stay on your device",
+        "No data storage or logging"
+      ]
+    },
+    "useCases": {
+      "title": "Häufige Anwendungsfälle",
+      "items": [
+        "Kodierung von E-Mail-Anhängen",
+        "Web-Daten-URLs",
+        "API-Datenübertragung",
+        "Datenbank-Blob-Speicher",
+        "Kodierung von Konfigurationsdateien"
       ]
     }
   }

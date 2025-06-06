@@ -17,44 +17,55 @@
     ]
   },
   "page": {
-    "title": "Base64 Encoder & Decoder",
-    "description": "Encode and decode Base64 data with support for text and files."
+    "title": "Bộ mã hóa & giải mã Base64",
+    "description": "Mã hóa và giải mã dữ liệu Base64 với sự hỗ trợ cho văn bản và tệp.",
+    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
   },
   "tool": {
     "variants": {
-      "standard": "Standard",
-      "urlSafe": "URL-Safe"
+      "standard": "Tiêu chuẩn",
+      "urlSafe": "An toàn cho URL"
     },
     "placeholders": {
-      "textInput": "Enter text to encode/decode...",
-      "fileUpload": "Select a file or drag and drop"
+      "textInput": "Nhập văn bản để mã hóa/giải mã...",
+      "fileUpload": "Chọn một tệp hoặc kéo và thả"
     }
   },
   "validation": {
-    "invalidBase64": "Invalid Base64 input",
-    "fileTooLarge": "File too large (max 10MB)"
+    "invalidBase64": "Đầu vào Base64 không hợp lệ",
+    "fileTooLarge": "Tệp quá lớn (tối đa 10MB)"
   },
   "info": {
-    "title": "About Base64 Encoding",
-    "description": "Base64 is a binary-to-text encoding scheme that converts binary data into a text format using a set of 64 characters. It's commonly used for encoding data in email, web pages, and data URLs, ensuring safe transmission over text-based protocols.",
+    "title": "Về mã hóa Base64",
+    "description": "Base64 là một lược đồ mã hóa nhị phân sang văn bản chuyển đổi dữ liệu nhị phân thành định dạng văn bản bằng cách sử dụng một bộ 64 ký tự. Nó thường được sử dụng để mã hóa dữ liệu trong email, trang web và URL dữ liệu, đảm bảo truyền tải an toàn qua các giao thức dựa trên văn bản.",
     "keyFeatures": {
-      "title": "Key Features",
+      "title": "Các tính năng chính",
       "items": [
-        "Text and file encoding/decoding",
-        "URL-safe Base64 encoding option",
-        "Copy to clipboard functionality",
-        "Download encoded/decoded results",
+        "Mã hóa/giải mã văn bản và tệp",
+        "Tùy chọn mã hóa Base64 an toàn cho URL",
+        "Chức năng sao chép vào clipboard",
+        "Tải xuống kết quả đã mã hóa/giải mã",
+        "Mã hóa/giải mã thời gian thực",
         "Real-time encoding/decoding"
       ]
     },
-    "useCases": {
-      "title": "Common Use Cases",
+    "securityAndPrivacy": {
+      "title": "Security & Privacy",
       "items": [
-        "Email attachments encoding",
-        "Web data URLs",
-        "API data transmission",
-        "Database blob storage",
-        "Configuration file encoding"
+        "No data sent to servers",
+        "Processing happens in your browser",
+        "Files stay on your device",
+        "No data storage or logging"
+      ]
+    },
+    "useCases": {
+      "title": "Các trường hợp sử dụng phổ biến",
+      "items": [
+        "Mã hóa tệp đính kèm email",
+        "URL dữ liệu web",
+        "Truyền dữ liệu API",
+        "Lưu trữ blob cơ sở dữ liệu",
+        "Mã hóa tệp cấu hình"
       ]
     }
   }

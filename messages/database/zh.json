@@ -4,15 +4,15 @@
       "name": "Base64 Tool",
       "description": "Encode and decode Base64 data with support for text and files"
     },
-    "hashGenerator": {
+    "hash-generator": {
       "name": "Hash Generator",
       "description": "Generate MD5, SHA-1, SHA-256, and other cryptographic hashes"
     },
-    "faviconGenerator": {
+    "favicon-generator": {
       "name": "Favicon Generator",
       "description": "Create favicons from images in multiple sizes and formats"
     },
-    "markdownToPdf": {
+    "markdown-to-pdf": {
       "name": "Markdown to PDF",
       "description": "Convert Markdown files to PDF with custom styling options"
     },
@@ -38,6 +38,18 @@
       "name": "Encoding",
       "description": "Tools for encoding and decoding data in various formats"
     },
+    "security": {
+      "name": "Security",
+      "description": "Tools for cryptographic operations and security analysis"
+    },
+    "design": {
+      "name": "设计",
+      "description": "设计和图形工具"
+    },
+    "document": {
+      "name": "文档",
+      "description": "文档处理工具"
+    },
     "generation": {
       "name": "Generation",
       "description": "Tools for generating content, codes, and files"
@@ -45,10 +57,6 @@
     "conversion": {
       "name": "Conversion",
       "description": "Tools for converting between different file formats"
-    },
-    "security": {
-      "name": "Security",
-      "description": "Tools for cryptographic operations and security analysis"
     },
     "compression": {
       "name": "Compression",

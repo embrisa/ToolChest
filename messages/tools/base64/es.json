@@ -1,24 +1,25 @@
 {
   "metadata": {
-    "title": "Base64 codificador y decodificador | cajón de herramientas",
-    "description": "Codador y decodificador de base en línea gratuito. Convierta el texto a base64 y decodifique base64 a texto. Admite codificación/decodificación de archivos con opciones seguras a URL. Privacidad primero con procesamiento del lado del cliente.",
+    "title": "Codificador y Decodificador Base64 | tool-chest",
+    "description": "Codificador y decodificador Base64 gratuito en línea. Convierte texto a Base64 y decodifica Base64 a texto. Admite codificación/decodificación de archivos con opciones URL-safe. Procesamiento del lado del cliente que prioriza la privacidad.",
     "keywords": [
       "base64",
-      "codificador",
-      "descifrador",
-      "codificar",
-      "descodificar",
-      "texto",
-      "archivo",
-      "ausente",
-      "herramienta en línea",
-      "gratis",
-      "privacidad"
+      "encoder",
+      "decoder",
+      "encode",
+      "decode",
+      "text",
+      "file",
+      "url-safe",
+      "online tool",
+      "free",
+      "privacy"
     ]
   },
   "page": {
     "title": "Base64 codificador y decodificador",
-    "description": "Codificar y decodificar datos Base64 con soporte para texto y archivos."
+    "description": "Codificar y decodificar datos Base64 con soporte para texto y archivos.",
+    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
   },
   "tool": {
     "variants": {
@@ -44,7 +45,17 @@
         "Opción de codificación de Base64 de URL Safe",
         "Copiar a la funcionalidad del portapapeles",
         "Descargar resultados codificados/decodificados",
-        "Codificación/decodificación en tiempo real"
+        "Codificación/decodificación en tiempo real",
+        "Real-time encoding/decoding"
+      ]
+    },
+    "securityAndPrivacy": {
+      "title": "Security & Privacy",
+      "items": [
+        "No data sent to servers",
+        "Processing happens in your browser",
+        "Files stay on your device",
+        "No data storage or logging"
       ]
     },
     "useCases": {

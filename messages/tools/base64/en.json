@@ -18,7 +18,8 @@
   },
   "page": {
     "title": "Base64 Encoder & Decoder",
-    "description": "Encode and decode Base64 data with support for text and files."
+    "description": "Encode and decode Base64 data with support for text and files.",
+    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
   },
   "tool": {
     "variants": {
@@ -42,9 +43,19 @@
       "items": [
         "Text and file encoding/decoding",
         "URL-safe Base64 encoding option",
+        "Client-side processing for privacy",
         "Copy to clipboard functionality",
         "Download encoded/decoded results",
         "Real-time encoding/decoding"
+      ]
+    },
+    "securityAndPrivacy": {
+      "title": "Security & Privacy",
+      "items": [
+        "No data sent to servers",
+        "Processing happens in your browser",
+        "Files stay on your device",
+        "No data storage or logging"
       ]
     },
     "useCases": {

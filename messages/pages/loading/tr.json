@@ -1,25 +1,25 @@
 {
   "page": {
-    "message": "Loading tools...",
-    "application": "Loading tool-chest...",
-    "pleaseWait": "Loading application, please wait..."
+    "message": "Araçlar yükleniyor...",
+    "application": "tool-chest yükleniyor...",
+    "pleaseWait": "Uygulama yükleniyor, lütfen bekleyin..."
   },
   "components": {
-    "tools": "Loading tools...",
-    "tags": "Loading tags...",
-    "search": "Searching...",
-    "processing": "Processing...",
-    "saving": "Saving...",
-    "uploading": "Uploading..."
+    "tools": "Araçlar yükleniyor...",
+    "tags": "Etiketler yükleniyor...",
+    "search": "Aranıyor...",
+    "processing": "İşleniyor...",
+    "saving": "Kaydediliyor...",
+    "uploading": "Yükleniyor..."
   },
   "admin": {
-    "panel": "Loading admin panel...",
-    "dashboard": "Loading dashboard...",
-    "analytics": "Loading analytics..."
+    "panel": "Yönetici paneli yükleniyor...",
+    "dashboard": "Kontrol paneli yükleniyor...",
+    "analytics": "Analitik yükleniyor..."
   },
   "skeleton": {
-    "toolCard": "Loading tool information...",
-    "toolGrid": "Loading available tools...",
-    "tagFilters": "Loading filter options..."
+    "toolCard": "Araç bilgileri yükleniyor...",
+    "toolGrid": "Mevcut araçlar yükleniyor...",
+    "tagFilters": "Filtre seçenekleri yükleniyor..."
   }
 }

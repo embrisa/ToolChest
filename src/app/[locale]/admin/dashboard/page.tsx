@@ -1,11 +1,16 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = {
-  title: "Dashboard - Admin - tool-chest",
-  description: "tool-chest Admin Dashboard",
-  robots: "noindex, nofollow",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pages.admin.dashboard");
+
+  return {
+    title: `${t("title")} - Admin - tool-chest`,
+    description: t("description"),
+    robots: "noindex, nofollow",
+  };
+}
 
 // TODO: Replace with actual data fetching in future phases
 const mockStats = {
@@ -89,44 +94,44 @@ const QuickActionCard = ({
   </Link>
 );
 
-export default function AdminDashboardPage() {
+export default async function AdminDashboardPage() {
+  const t = await getTranslations("pages.admin.dashboard");
+
   return (
     <div className="space-y-12 animate-fade-in-up">
       {/* Page Header */}
       <div className="border-b border-neutral-200 pb-8">
-        <h1 className="text-4xl font-bold text-primary mb-4">Dashboard</h1>
-        <p className="text-lg text-secondary max-w-3xl">
-          Overview of your tool-chest application performance and analytics
-        </p>
+        <h1 className="text-4xl font-bold text-primary mb-4">{t("title")}</h1>
+        <p className="text-lg text-secondary max-w-3xl">{t("description")}</p>
       </div>
 
       {/* Stats Grid */}
       <section aria-labelledby="stats-heading">
         <h2 id="stats-heading" className="sr-only">
-          Application Statistics
+          {t("stats.applicationStats")}
         </h2>
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <StatCard
             icon="🛠️"
-            title="Total Tools"
+            title={t("stats.totalTools")}
             value={mockStats.totalTools}
             bgColor="bg-gradient-to-br from-brand-500 to-brand-600"
           />
           <StatCard
             icon="🏷️"
-            title="Total Tags"
+            title={t("stats.totalTags")}
             value={mockStats.totalTags}
             bgColor="bg-gradient-to-br from-success-500 to-success-600"
           />
           <StatCard
             icon="📊"
-            title="Total Usage"
+            title={t("stats.totalUsage")}
             value={mockStats.totalUsage}
             bgColor="bg-gradient-to-br from-warning-500 to-warning-600"
           />
           <StatCard
             icon="📈"
-            title="This Month"
+            title={t("stats.thisMonth")}
             value="+23%"
             bgColor="bg-gradient-to-br from-accent-500 to-accent-600"
           />
@@ -141,7 +146,7 @@ export default function AdminDashboardPage() {
               id="usage-heading"
               className="text-2xl font-semibold text-primary mb-8"
             >
-              Tool Usage Overview
+              {t("usage.title")}
             </h3>
             <div className="overflow-x-auto">
               <table
@@ -155,25 +160,25 @@ export default function AdminDashboardPage() {
                       scope="col"
                       className="px-0 py-6 text-left text-xs font-semibold text-secondary uppercase tracking-wider"
                     >
-                      Tool
+                      {t("usage.table.tool")}
                     </th>
                     <th
                       scope="col"
                       className="px-8 py-6 text-left text-xs font-semibold text-secondary uppercase tracking-wider"
                     >
-                      Usage Count
+                      {t("usage.table.usageCount")}
                     </th>
                     <th
                       scope="col"
                       className="px-8 py-6 text-left text-xs font-semibold text-secondary uppercase tracking-wider"
                     >
-                      Change
+                      {t("usage.table.change")}
                     </th>
                     <th
                       scope="col"
                       className="px-8 py-6 text-left text-xs font-semibold text-secondary uppercase tracking-wider"
                     >
-                      Actions
+                      {t("usage.table.actions")}
                     </th>
                   </tr>
                 </thead>
@@ -217,32 +222,32 @@ export default function AdminDashboardPage() {
             id="actions-heading"
             className="text-2xl font-semibold text-primary mb-8"
           >
-            Quick Actions
+            {t("quickActions.title")}
           </h3>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
             <QuickActionCard
               href="/admin/tools/create"
               icon="➕"
-              title="Add Tool"
-              description="Create new tool in the system"
+              title={t("quickActions.addTool")}
+              description={t("quickActions.createToolDescription")}
             />
             <QuickActionCard
               href="/admin/tags/create"
               icon="🏷️"
-              title="Add Tag"
-              description="Create new tag for categorization"
+              title={t("quickActions.addTag")}
+              description={t("quickActions.createTagDescription")}
             />
             <QuickActionCard
               href="/admin/relationships"
               icon="🔗"
-              title="Manage Relationships"
-              description="Configure tool-tag associations"
+              title={t("quickActions.manageRelationships")}
+              description={t("quickActions.manageRelationshipsDescription")}
             />
             <QuickActionCard
               href="/"
               icon="🔗"
-              title="View Public Site"
-              description="Open the public tool-chest site"
+              title={t("quickActions.viewSite")}
+              description={t("quickActions.viewSiteDescription")}
               target="_blank"
             />
           </div>

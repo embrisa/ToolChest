@@ -67,13 +67,13 @@ export async function getToolTranslations(
       common: commonMessages.default,
       tool: toolMessages.default,
     };
-  } catch {
+  } catch (err) {
     // Fallback to English if locale not found
     if (locale !== "en") {
       return getToolTranslations(toolSlug, "en");
     }
 
-    console.error(error);
+    console.error(err);
     throw new Error(`Tool translations not found for: ${toolSlug}`);
   }
 }

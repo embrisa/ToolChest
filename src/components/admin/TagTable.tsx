@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { AdminTagListItem, AdminTagsSortOptions } from "@/types/admin/tag";
 import { Button } from "@/components/ui";
 
@@ -18,6 +19,9 @@ export function TagTable({
   onSort,
   onDelete,
 }: TagTableProps) {
+  const tAdmin = useTranslations("pages.admin.tags");
+  const tForms = useTranslations("components.forms");
+  const tCommon = useTranslations("common");
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState<string | null>(
     null,
@@ -124,14 +128,14 @@ export function TagTable({
           </svg>
         </div>
         <h3 className="text-title text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-3">
-          No tags found
+          {tCommon("ui.labels.noItems")}
         </h3>
         <p className="text-body text-neutral-600 dark:text-neutral-400 mb-8 max-w-sm mx-auto">
-          Get started by creating your first tag to organize your tools.
+          {tAdmin("emptyState.description")}
         </p>
         <Link href="/admin/tags/create">
           <Button variant="primary" size="lg">
-            Create New Tag
+            {tAdmin("actions.createTag")}
           </Button>
         </Link>
       </div>
@@ -151,7 +155,7 @@ export function TagTable({
                   onClick={() => onSort("name")}
                 >
                   <div className="flex items-center gap-3">
-                    <span>Name</span>
+                    <span>{tAdmin("table.name")}</span>
                     <div className="opacity-60 group-hover:opacity-100 transition-opacity duration-200">
                       {getSortIcon("name")}
                     </div>
@@ -163,7 +167,7 @@ export function TagTable({
                   onClick={() => onSort("slug")}
                 >
                   <div className="flex items-center gap-3">
-                    <span>Slug</span>
+                    <span>{tAdmin("table.slug")}</span>
                     <div className="opacity-60 group-hover:opacity-100 transition-opacity duration-200">
                       {getSortIcon("slug")}
                     </div>
@@ -173,7 +177,7 @@ export function TagTable({
                   scope="col"
                   className="px-8 py-5 text-left text-xs font-semibold text-neutral-700 dark:text-neutral-300 uppercase tracking-wider"
                 >
-                  Description
+                  {tAdmin("table.description")}
                 </th>
                 <th
                   scope="col"
@@ -181,7 +185,7 @@ export function TagTable({
                   onClick={() => onSort("toolCount")}
                 >
                   <div className="flex items-center gap-3">
-                    <span>Tools</span>
+                    <span>{tAdmin("table.toolCount")}</span>
                     <div className="opacity-60 group-hover:opacity-100 transition-opacity duration-200">
                       {getSortIcon("toolCount")}
                     </div>
@@ -253,11 +257,10 @@ export function TagTable({
                           {tag.tools.slice(0, 3).map((tool) => (
                             <div
                               key={tool.id}
-                              className={`inline-flex items-center justify-center w-8 h-8 rounded-xl text-xs font-medium border-2 border-white dark:border-neutral-900 shadow-soft ${
-                                tool.isActive
-                                  ? "bg-success-100 text-success-700 dark:bg-success-950/30 dark:text-success-400"
-                                  : "bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300"
-                              }`}
+                              className={`inline-flex items-center justify-center w-8 h-8 rounded-xl text-xs font-medium border-2 border-white dark:border-neutral-900 shadow-soft ${tool.isActive
+                                ? "bg-success-100 text-success-700 dark:bg-success-950/30 dark:text-success-400"
+                                : "bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300"
+                                }`}
                               title={`${tool.name} (${tool.isActive ? "Active" : "Inactive"})`}
                             >
                               {tool.name.charAt(0).toUpperCase()}

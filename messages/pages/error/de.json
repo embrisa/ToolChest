@@ -1,67 +1,74 @@
 {
   "notFound": {
     "errorCode": "404",
-    "title": "Page Not Found",
-    "description": "The page you're looking for doesn't exist. It may have been moved, deleted, or you may have typed the URL incorrectly.",
+    "title": "Seite nicht gefunden",
+    "description": "Die von Ihnen gesuchte Seite existiert nicht. Möglicherweise wurde sie verschoben, gelöscht oder Sie haben die URL falsch eingegeben.",
     "suggestions": {
-      "title": "Here's what you can do:",
-      "checkUrl": "Check the URL for typos",
-      "useNavigation": "Use the navigation menu to find what you're looking for",
-      "returnHome": "Return to the home page",
-      "searchTools": "Search for tools using the search feature"
+      "title": "Das können Sie tun:",
+      "checkUrl": "Überprüfen Sie die URL auf Tippfehler",
+      "useNavigation": "Verwenden Sie das Navigationsmenü, um zu finden, was Sie suchen",
+      "returnHome": "Zurück zur Startseite",
+      "searchTools": "Suchen Sie mit der Suchfunktion nach Werkzeugen"
     },
     "actions": {
-      "goToHome": "Go to Home",
-      "goBack": "Go Back"
+      "goToHome": "Zur Startseite",
+      "goBack": "Zurück"
     },
     "popularTools": {
-      "title": "Popular Tools",
+      "title": "Beliebte Werkzeuge",
       "base64": {
-        "title": "Base64 Tool",
-        "description": "Encode and decode Base64 data"
+        "title": "Base64-Werkzeug",
+        "description": "Base64-Daten kodieren und dekodieren"
       },
       "hashGenerator": {
-        "title": "Hash Generator",
-        "description": "Generate MD5, SHA hashes"
+        "title": "Hash-Generator",
+        "description": "MD5-, SHA-Hashes generieren"
       },
       "faviconGenerator": {
-        "title": "Favicon Generator",
-        "description": "Create favicons from images"
+        "title": "Favicon-Generator",
+        "description": "Favicons aus Bildern erstellen"
       },
       "markdownToPdf": {
-        "title": "Markdown to PDF",
-        "description": "Convert Markdown to PDF"
+        "title": "Markdown zu PDF",
+        "description": "Markdown in PDF konvertieren"
       }
+    },
+    "contact": {
+      "prompt": "Brauchen Sie Hilfe?",
+      "link": "Support kontaktieren"
+    },
+    "screenReader": {
+      "announcement": "Seite nicht gefunden. Bitte navigieren Sie mit den Links unten."
     }
   },
   "serverError": {
-    "title": "Something went wrong",
-    "message": "An unexpected error occurred",
-    "description": "We're sorry, but something went wrong while loading this page. Our team has been notified and is working to resolve the issue.",
+    "title": "Etwas ist schiefgelaufen",
+    "message": "Ein unerwarteter Fehler ist aufgetreten",
+    "description": "Es tut uns leid, aber beim Laden dieser Seite ist etwas schiefgelaufen. Unser Team wurde benachrichtigt und arbeitet daran, das Problem zu beheben.",
     "suggestions": {
-      "0": "Try refreshing the page",
-      "1": "Go back to the previous page",
-      "2": "Return to the home page",
-      "3": "Contact support if the problem persists"
+      "0": "Versuchen Sie, die Seite zu aktualisieren",
+      "1": "Gehen Sie zur vorherigen Seite zurück",
+      "2": "Zurück zur Startseite",
+      "3": "Kontaktieren Sie den Support, wenn das Problem weiterhin besteht"
     },
     "actions": {
-      "refreshPage": "Refresh Page",
-      "goBack": "Go Back",
-      "goToHome": "Go to Home",
-      "contactSupport": "Contact Support"
+      "refreshPage": "Seite aktualisieren",
+      "goBack": "Zurück",
+      "goToHome": "Zur Startseite",
+      "contactSupport": "Support kontaktieren"
     },
     "technical": {
-      "title": "Technical Details",
-      "errorInfo": "Error Information",
-      "copyDetails": "Copy Details",
-      "copiedToClipboard": "Copied to clipboard"
+      "title": "Technische Details",
+      "errorInfo": "Fehlerinformationen",
+      "copyDetails": "Details kopieren",
+      "copiedToClipboard": "In die Zwischenablage kopiert"
     }
   },
   "boundary": {
-    "title": "Something went wrong",
-    "description": "An unexpected error occurred in this component.",
-    "details": "Show error details",
-    "reload": "Reload component",
-    "reportIssue": "Report this issue"
+    "title": "Etwas ist schiefgelaufen",
+    "description": "In dieser Komponente ist ein unerwarteter Fehler aufgetreten.",
+    "details": "Fehlerdetails anzeigen",
+    "reload": "Komponente neu laden",
+    "reportIssue": "Dieses Problem melden"
   }
 }

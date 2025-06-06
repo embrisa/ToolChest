@@ -17,8 +17,9 @@
     ]
   },
   "page": {
-    "title": "Base64 Encoder & Decoder",
-    "description": "Encode and decode Base64 data with support for text and files."
+    "title": "Codificatore e Decodificatore Base64",
+    "description": "Codifica e decodifica dati Base64 con supporto per testo e file.",
+    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
   },
   "tool": {
     "variants": {
@@ -26,35 +27,45 @@
       "urlSafe": "URL-Safe"
     },
     "placeholders": {
-      "textInput": "Enter text to encode/decode...",
-      "fileUpload": "Select a file or drag and drop"
+      "textInput": "Inserisci il testo da codificare/decodificare...",
+      "fileUpload": "Seleziona un file o trascinalo"
     }
   },
   "validation": {
-    "invalidBase64": "Invalid Base64 input",
-    "fileTooLarge": "File too large (max 10MB)"
+    "invalidBase64": "Input Base64 non valido",
+    "fileTooLarge": "File troppo grande (max 10MB)"
   },
   "info": {
-    "title": "About Base64 Encoding",
-    "description": "Base64 is a binary-to-text encoding scheme that converts binary data into a text format using a set of 64 characters. It's commonly used for encoding data in email, web pages, and data URLs, ensuring safe transmission over text-based protocols.",
+    "title": "Informazioni sulla Codifica Base64",
+    "description": "Base64 è uno schema di codifica da binario a testo che converte dati binari in un formato di testo utilizzando un set di 64 caratteri. È comunemente usato per codificare dati in email, pagine web e URL di dati, garantendo una trasmissione sicura su protocolli basati su testo.",
     "keyFeatures": {
-      "title": "Key Features",
+      "title": "Caratteristiche Principali",
       "items": [
-        "Text and file encoding/decoding",
-        "URL-safe Base64 encoding option",
-        "Copy to clipboard functionality",
-        "Download encoded/decoded results",
+        "Codifica/decodifica di testo e file",
+        "Opzione di codifica Base64 URL-safe",
+        "Funzionalità di copia negli appunti",
+        "Download dei risultati codificati/decodificati",
+        "Codifica/decodifica in tempo reale",
         "Real-time encoding/decoding"
       ]
     },
-    "useCases": {
-      "title": "Common Use Cases",
+    "securityAndPrivacy": {
+      "title": "Security & Privacy",
       "items": [
-        "Email attachments encoding",
-        "Web data URLs",
-        "API data transmission",
-        "Database blob storage",
-        "Configuration file encoding"
+        "No data sent to servers",
+        "Processing happens in your browser",
+        "Files stay on your device",
+        "No data storage or logging"
+      ]
+    },
+    "useCases": {
+      "title": "Casi d'Uso Comuni",
+      "items": [
+        "Codifica di allegati email",
+        "URL di dati web",
+        "Trasmissione dati API",
+        "Archiviazione di blob nel database",
+        "Codifica di file di configurazione"
       ]
     }
   }

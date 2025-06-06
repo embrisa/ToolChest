@@ -1,50 +1,50 @@
 {
-    "hero": {
-        "title": "tool-chest",
-        "subtitle": "Your collection of essential computer tools.",
-        "description": "Encode, decode, generate, convert, and more with ease.",
-        "searchPlaceholder": "Search tools..."
-    },
-    "stats": {
-        "toolsAvailable": "Tools Available",
-        "clientSideProcessing": "Client-side Processing",
-        "clientSideValue": "100%",
-        "freeForever": "Free",
-        "freeValue": "Forever"
-    },
-    "sections": {
-        "allTools": "All Tools",
-        "searchResults": "Search Results",
-        "filterTools": "Filter Tools",
-        "active": "active"
-    },
-    "loading": {
-        "loadingTools": "Loading tools...",
-        "toolsFound": "tools found"
-    },
-    "noResults": {
-        "title": "No tools found",
-        "description": "No tools match \"{query}\"",
-        "descriptionFilters": "No tools match your selected filters"
-    },
-    "errors": {
-        "troubleLoading": "We're having trouble loading the tools. Please try again later."
-    },
-    "search": {
-        "placeholder": "Search tools...",
-        "clearSearch": "Clear search",
-        "searchResults": "search results"
-    },
-    "filtering": {
-        "filterByTags": "Filter by Tags",
-        "allTags": "All Tags",
-        "selectedTags": "Selected Tags",
-        "clearAll": "Clear All",
-        "noTags": "No tags available"
-    },
-    "toolCard": {
-        "newTool": "New",
-        "popularTool": "Popular",
-        "openTool": "Open tool"
-    }
+  "hero": {
+    "title": "tool-chest",
+    "subtitle": "Uw verzameling essentiële computerhulpmiddelen.",
+    "description": "Codeer, decodeer, genereer, converteer en meer met gemak.",
+    "searchPlaceholder": "Zoek tools..."
+  },
+  "stats": {
+    "toolsAvailable": "Beschikbare tools",
+    "clientSideProcessing": "Verwerking aan de clientzijde",
+    "clientSideValue": "100%",
+    "freeForever": "Gratis",
+    "freeValue": "Voor altijd"
+  },
+  "sections": {
+    "allTools": "Alle tools",
+    "searchResults": "Zoekresultaten",
+    "filterTools": "Filter tools",
+    "active": "actief"
+  },
+  "loading": {
+    "loadingTools": "Tools laden...",
+    "toolsFound": "tools gevonden"
+  },
+  "noResults": {
+    "title": "Geen tools gevonden",
+    "description": "Geen tools komen overeen met \"{query}\"",
+    "descriptionFilters": "Geen tools komen overeen met uw geselecteerde filters"
+  },
+  "errors": {
+    "troubleLoading": "We hebben problemen met het laden van de tools. Probeer het later opnieuw."
+  },
+  "search": {
+    "placeholder": "Zoek tools...",
+    "clearSearch": "Zoekopdracht wissen",
+    "searchResults": "zoekresultaten"
+  },
+  "filtering": {
+    "filterByTags": "Filteren op tags",
+    "allTags": "Alle tags",
+    "selectedTags": "Geselecteerde tags",
+    "clearAll": "Alles wissen",
+    "noTags": "Geen tags beschikbaar"
+  },
+  "toolCard": {
+    "newTool": "Nieuw",
+    "popularTool": "Populair",
+    "openTool": "Open tool"
+  }
 }

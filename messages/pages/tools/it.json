@@ -1,33 +1,33 @@
 {
-    "page": {
-        "title": "All Tools",
-        "subtitle": "Explore our complete collection of utility tools designed to make your development workflow more efficient.",
-        "loading": "Loading tools...",
-        "toolsAvailable": "tools available",
-        "availableTools": "Available Tools",
-        "description": "Professional-grade utilities for web development"
+  "page": {
+    "title": "Tutti gli Strumenti",
+    "subtitle": "Esplora la nostra collezione completa di strumenti di utilità progettati per rendere più efficiente il tuo flusso di lavoro di sviluppo.",
+    "loading": "Caricamento strumenti...",
+    "toolsAvailable": "strumenti disponibili",
+    "availableTools": "Strumenti Disponibili",
+    "description": "Utilità di livello professionale per lo sviluppo web"
+  },
+  "stats": {
+    "allToolsFree": "Tutti gli strumenti gratuiti",
+    "clientSideProcessing": "Elaborazione lato client"
+  },
+  "states": {
+    "noToolsAvailable": "Nessuno strumento disponibile",
+    "noToolsDescription": "Gli strumenti sono in fase di caricamento. Riprova più tardi o prova ad aggiornare la pagina.",
+    "loadingGrid": "Caricamento strumenti disponibili..."
+  },
+  "features": {
+    "privacy": {
+      "title": "Privacy Prima di Tutto",
+      "description": "Tutti gli strumenti elaborano i dati localmente nel tuo browser"
     },
-    "stats": {
-        "allToolsFree": "All tools free",
-        "clientSideProcessing": "Client-side processing"
+    "free": {
+      "title": "Sempre Gratuito",
+      "description": "Nessun abbonamento, nessun costo nascosto, completamente gratuito"
     },
-    "states": {
-        "noToolsAvailable": "No tools available",
-        "noToolsDescription": "Tools are being loaded. Please check back soon or try refreshing the page.",
-        "loadingGrid": "Loading available tools..."
-    },
-    "features": {
-        "privacy": {
-            "title": "Privacy First",
-            "description": "All tools process data locally in your browser"
-        },
-        "free": {
-            "title": "Always Free",
-            "description": "No subscriptions, no hidden costs, completely free"
-        },
-        "fast": {
-            "title": "Lightning Fast",
-            "description": "Instant results with optimized performance"
-        }
+    "fast": {
+      "title": "Velocissimo",
+      "description": "Risultati istantanei con prestazioni ottimizzate"
     }
+  }
 }

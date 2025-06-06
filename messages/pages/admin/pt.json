@@ -1,100 +1,137 @@
 {
-    "dashboard": {
-        "title": "Painel",
-        "description": "Visão geral do desempenho e análises do tool-chest",
-        "stats": {
-            "totalTools": "Total de Ferramentas",
-            "totalTags": "Total de Tags",
-            "totalUsage": "Uso Total",
-            "thisMonth": "Este Mês",
-            "applicationStats": "Estatísticas da Aplicação"
-        },
-        "usage": {
-            "title": "Visão Geral de Uso das Ferramentas",
-            "table": {
-                "tool": "Ferramenta",
-                "usageCount": "Número de Usos",
-                "change": "Variação",
-                "actions": "Ações"
-            }
-        },
-        "quickActions": {
-            "title": "Ações Rápidas",
-            "viewAnalytics": "Ver Analíticas",
-            "manageTools": "Gerenciar Ferramentas",
-            "manageTags": "Gerenciar Tags",
-            "viewSite": "Ver Site",
-            "systemHealth": "Saúde do Sistema"
-        }
+  "dashboard": {
+    "title": "Painel",
+    "description": "Visão geral do desempenho e análises do tool-chest",
+    "stats": {
+      "totalTools": "Total de Ferramentas",
+      "totalTags": "Total de Tags",
+      "totalUsage": "Uso Total",
+      "thisMonth": "Este Mês",
+      "applicationStats": "Estatísticas da Aplicação"
     },
-    "tools": {
-        "title": "Gerenciamento de Ferramentas",
-        "description": "Gerencie ferramentas, seus metadados e relacionamentos",
-        "actions": {
-            "createTool": "Criar Ferramenta",
-            "editTool": "Editar Ferramenta",
-            "deleteTool": "Excluir Ferramenta",
-            "bulkActions": "Ações em Lote"
-        },
-        "table": {
-            "name": "Nome",
-            "slug": "Slug",
-            "status": "Status",
-            "tags": "Tags",
-            "usage": "Uso",
-            "lastModified": "Última Modificação",
-            "actions": "Ações"
-        }
+    "usage": {
+      "title": "Visão Geral de Uso das Ferramentas",
+      "table": {
+        "tool": "Ferramenta",
+        "usageCount": "Número de Usos",
+        "change": "Variação",
+        "actions": "Ações"
+      }
     },
-    "tags": {
-        "title": "Gerenciamento de Tags",
-        "description": "Organize ferramentas com tags e gerencie relacionamentos",
-        "actions": {
-            "createTag": "Criar Tag",
-            "editTag": "Editar Tag",
-            "deleteTag": "Excluir Tag",
-            "bulkActions": "Ações em Lote"
-        },
-        "table": {
-            "name": "Nome",
-            "slug": "Slug",
-            "color": "Cor",
-            "toolCount": "Ferramentas",
-            "description": "Descrição",
-            "actions": "Ações"
-        }
-    },
-    "analytics": {
-        "title": "Análises",
-        "description": "Veja análises detalhadas e estatísticas de uso",
-        "charts": {
-            "usageOverTime": "Uso ao Longo do Tempo",
-            "topTools": "Ferramentas Principais",
-            "userMetrics": "Métricas de Usuário"
-        }
-    },
-    "auth": {
-        "title": "Login de Admin",
-        "description": "Acesse o painel de administração",
-        "form": {
-            "token": "Token de Admin",
-            "tokenPlaceholder": "Digite o token de admin",
-            "login": "Entrar",
-            "loginError": "Token de admin inválido"
-        }
-    },
-    "loading": {
-        "panel": "Carregando painel de administração...",
-        "dashboard": "Carregando painel...",
-        "analytics": "Carregando análises..."
-    },
-    "navigation": {
-        "dashboard": "Painel",
-        "tools": "Ferramentas",
-        "tags": "Tags",
-        "analytics": "Análises",
-        "monitoring": "Monitoramento",
-        "logout": "Sair",
-        "viewSite": "Ver Site"
+    "quickActions": {
+      "title": "Ações Rápidas",
+      "viewAnalytics": "Ver Analíticas",
+      "manageTools": "Gerenciar Ferramentas",
+      "manageTags": "Gerenciar Tags",
+      "viewSite": "Ver Site",
+      "systemHealth": "Saúde do Sistema",
+      "addTool": "Add Tool",
+      "addTag": "Add Tag",
+      "manageRelationships": "Manage Relationships",
+      "createToolDescription": "Create new tool in the system",
+      "createTagDescription": "Create new tag for categorization",
+      "manageRelationshipsDescription": "Configure tool-tag associations",
+      "viewSiteDescription": "Open the public tool-chest site"
     }
+  },
+  "tools": {
+    "title": "Gerenciamento de Ferramentas",
+    "description": "Gerencie ferramentas, seus metadados e relacionamentos",
+    "actions": {
+      "createTool": "Criar Ferramenta",
+      "editTool": "Editar Ferramenta",
+      "deleteTool": "Excluir Ferramenta",
+      "bulkActions": "Ações em Lote"
+    },
+    "table": {
+      "name": "Nome",
+      "slug": "Slug",
+      "status": "Status",
+      "tags": "Tags",
+      "usage": "Uso",
+      "lastModified": "Última Modificação",
+      "actions": "Ações"
+    },
+    "emptyState": {
+      "description": "Get started by creating your first tool. Tools help users accomplish specific tasks and can be organized with tags."
+    },
+    "bulkOperations": {
+      "title": "Bulk {operation} Tags",
+      "selectedCount": "{count, plural, =1 {# tool} other {# tools}} selected",
+      "operationType": "Select Operation",
+      "selectTags": "Select Tags",
+      "selectedTools": "Selected Tools",
+      "previewChanges": "Preview Changes",
+      "operationSummary": "Operation Summary",
+      "totalChanges": "Total Changes",
+      "toolsToUpdate": "Tools to Update",
+      "warnings": "Warnings",
+      "executing": "Executing Operation",
+      "executingMessage": "Please wait while we process your bulk operation...",
+      "completed": "Operation Completed",
+      "failed": "Operation Failed",
+      "successMessage": "Your bulk operation has been completed successfully",
+      "errorMessage": "There was an error executing your bulk operation",
+      "results": "Operation Results",
+      "toolsAffected": "Tools Affected",
+      "tagsAffected": "Tags Affected",
+      "errors": "Errors Encountered",
+      "startNew": "Start New Operation"
+    }
+  },
+  "tags": {
+    "title": "Gerenciamento de Tags",
+    "description": "Organize ferramentas com tags e gerencie relacionamentos",
+    "actions": {
+      "createTag": "Criar Tag",
+      "editTag": "Editar Tag",
+      "deleteTag": "Excluir Tag",
+      "bulkActions": "Ações em Lote"
+    },
+    "table": {
+      "name": "Nome",
+      "slug": "Slug",
+      "color": "Cor",
+      "toolCount": "Ferramentas",
+      "description": "Descrição",
+      "actions": "Ações"
+    },
+    "emptyState": {
+      "description": "Get started by creating your first tag to organize your tools."
+    }
+  },
+  "analytics": {
+    "title": "Análises",
+    "description": "Veja análises detalhadas e estatísticas de uso",
+    "charts": {
+      "usageOverTime": "Uso ao Longo do Tempo",
+      "topTools": "Ferramentas Principais",
+      "userMetrics": "Métricas de Usuário"
+    }
+  },
+  "auth": {
+    "title": "Login de Admin",
+    "description": "Acesse o painel de administração",
+    "form": {
+      "token": "Token de Admin",
+      "tokenPlaceholder": "Digite o token de admin",
+      "login": "Entrar",
+      "loginError": "Token de admin inválido"
+    }
+  },
+  "loading": {
+    "panel": "Carregando painel de administração...",
+    "dashboard": "Carregando painel...",
+    "analytics": "Carregando análises..."
+  },
+  "navigation": {
+    "dashboard": "Painel",
+    "tools": "Ferramentas",
+    "tags": "Tags",
+    "relationships": "Relationships",
+    "analytics": "Análises",
+    "monitoring": "Monitoramento",
+    "logout": "Sair",
+    "viewSite": "Ver Site"
+  }
 }

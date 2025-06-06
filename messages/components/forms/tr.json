@@ -1,64 +1,64 @@
 {
   "labels": {
-    "name": "Name",
-    "slug": "Slug",
-    "description": "Description",
-    "color": "Color",
-    "status": "Status",
-    "tags": "Tags",
+    "name": "İsim",
+    "slug": "Kısa Ad",
+    "description": "Açıklama",
+    "color": "Renk",
+    "status": "Durum",
+    "tags": "Etiketler",
     "url": "URL",
-    "file": "File",
-    "text": "Text",
-    "options": "Options",
-    "settings": "Settings"
+    "file": "Dosya",
+    "text": "Metin",
+    "options": "Seçenekler",
+    "settings": "Ayarlar"
   },
   "placeholders": {
-    "enterName": "Enter name",
-    "enterDescription": "Enter description",
-    "selectColor": "Select color",
-    "selectTags": "Select tags",
-    "enterUrl": "Enter URL",
-    "chooseFile": "Choose file",
-    "enterText": "Enter text"
+    "enterName": "İsim girin",
+    "enterDescription": "Açıklama girin",
+    "selectColor": "Renk seçin",
+    "selectTags": "Etiketleri seçin",
+    "enterUrl": "URL girin",
+    "chooseFile": "Dosya seçin",
+    "enterText": "Metin girin"
   },
   "validation": {
-    "nameRequired": "Name is required",
-    "slugRequired": "Slug is required",
-    "descriptionRequired": "Description is required",
-    "invalidSlug": "Slug can only contain letters, numbers, and hyphens",
-    "slugTooShort": "Slug must be at least 3 characters",
-    "slugTooLong": "Slug must be less than 50 characters",
-    "nameTooShort": "Name must be at least 2 characters",
-    "nameTooLong": "Name must be less than 100 characters",
-    "descriptionTooLong": "Description must be less than 500 characters",
-    "invalidColor": "Please select a valid color",
-    "invalidEmail": "Please enter a valid email address",
-    "invalidUrl": "Please enter a valid URL"
+    "nameRequired": "İsim gereklidir",
+    "slugRequired": "Kısa ad gereklidir",
+    "descriptionRequired": "Açıklama gereklidir",
+    "invalidSlug": "Kısa ad yalnızca harf, rakam ve tire içerebilir",
+    "slugTooShort": "Kısa ad en az 3 karakter olmalıdır",
+    "slugTooLong": "Kısa ad 50 karakterden az olmalıdır",
+    "nameTooShort": "İsim en az 2 karakter olmalıdır",
+    "nameTooLong": "İsim 100 karakterden az olmalıdır",
+    "descriptionTooLong": "Açıklama 500 karakterden az olmalıdır",
+    "invalidColor": "Lütfen geçerli bir renk seçin",
+    "invalidEmail": "Lütfen geçerli bir e-posta adresi girin",
+    "invalidUrl": "Lütfen geçerli bir URL girin"
   },
   "help": {
-    "slug": "URL-friendly identifier (auto-generated from name)",
-    "description": "Brief description of the item",
-    "color": "Color used for visual identification",
-    "tags": "Organize items with relevant tags",
-    "status": "Current state of the item"
+    "slug": "URL dostu tanımlayıcı (isimden otomatik olarak oluşturulur)",
+    "description": "Öğenin kısa açıklaması",
+    "color": "Görsel tanımlama için kullanılan renk",
+    "tags": "Öğeleri ilgili etiketlerle düzenleyin",
+    "status": "Öğenin mevcut durumu"
   },
   "actions": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "submit": "Submit",
-    "reset": "Reset",
-    "clear": "Clear",
-    "delete": "Delete",
-    "edit": "Edit",
-    "create": "Create",
-    "update": "Update"
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "submit": "Gönder",
+    "reset": "Sıfırla",
+    "clear": "Temizle",
+    "delete": "Sil",
+    "edit": "Düzenle",
+    "create": "Oluştur",
+    "update": "Güncelle"
   },
   "states": {
-    "saving": "Saving...",
-    "loading": "Loading...",
-    "saved": "Saved successfully",
-    "error": "Error occurred",
-    "required": "Required field",
-    "optional": "Optional field"
+    "saving": "Kaydediliyor...",
+    "loading": "Yükleniyor...",
+    "saved": "Başarıyla kaydedildi",
+    "error": "Hata oluştu",
+    "required": "Zorunlu alan",
+    "optional": "İsteğe bağlı alan"
   }
 }

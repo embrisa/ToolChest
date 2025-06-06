@@ -32,6 +32,13 @@
         "title": "Отметка в PDF",
         "description": "Преобразовать разметку в PDF"
       }
+    },
+    "contact": {
+      "prompt": "Need help?",
+      "link": "Contact support"
+    },
+    "screenReader": {
+      "announcement": "Page not found. Please navigate using the links below."
     }
   },
   "serverError": {

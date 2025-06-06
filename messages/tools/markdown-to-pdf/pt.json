@@ -1,103 +1,117 @@
 {
-    "metadata": {
-        "title": "Conversor de Markdown para PDF | tool-chest",
-        "description": "Converta arquivos Markdown em PDF com opções de estilo personalizadas. Geração profissional de documentos com processamento no cliente para privacidade.",
-        "keywords": [
-            "markdown",
-            "pdf",
-            "conversor",
-            "documento",
-            "exportar",
-            "estilização",
-            "formato",
-            "download",
-            "privacidade",
-            "processamento no cliente"
-        ]
+  "metadata": {
+    "title": "Markdown to PDF Converter | tool-chest",
+    "description": "Convert Markdown to professional PDF documents with syntax highlighting, custom styling, and support for tables, code blocks, and images. Privacy-first client-side processing.",
+    "keywords": [
+      "markdown to pdf",
+      "markdown converter",
+      "pdf generator",
+      "markdown pdf",
+      "syntax highlighting",
+      "code blocks",
+      "tables",
+      "document converter",
+      "markdown export",
+      "free tool"
+    ]
+  },
+  "page": {
+    "title": "Markdown para PDF",
+    "description": "Converta arquivos Markdown para PDF com opções de estilo personalizadas.",
+    "privacyMessage": "🔒 Privacy-First • GitHub Flavored Markdown • Client-Side Processing"
+  },
+  "featureGrid": {
+    "live-preview": {
+      "title": "Live Preview",
+      "description": "Real-time markdown preview with instant rendering",
+      "icon": "👁️"
     },
-    "page": {
-        "title": "Markdown para PDF",
-        "description": "Converta arquivos Markdown para PDF com opções de estilo personalizadas."
+    "templates": {
+      "title": "Multiple Templates",
+      "description": "PDF templates and themes for different use cases",
+      "icon": "🎨"
     },
-    "tool": {
-        "input": {
-            "markdown": "Conteúdo Markdown",
-            "file": "Arquivo Markdown",
-            "placeholder": "Insira seu conteúdo Markdown aqui..."
-        },
-        "customization": {
-            "title": "Personalização do PDF",
-            "pageSize": "Tamanho da Página",
-            "margins": "Margens",
-            "theme": "Tema",
-            "fontSize": "Tamanho da Fonte",
-            "fontFamily": "Família de Fontes",
-            "lineHeight": "Altura da Linha",
-            "headerFooter": "Cabeçalho e Rodapé"
-        },
-        "themes": {
-            "default": "Padrão",
-            "github": "GitHub",
-            "minimal": "Minimalista",
-            "academic": "Acadêmico",
-            "professional": "Profissional"
-        },
-        "pageSizes": {
-            "a4": "A4",
-            "letter": "Carta",
-            "legal": "Legal",
-            "a3": "A3",
-            "tabloid": "Tabloide"
-        },
-        "margins": {
-            "none": "Nenhuma",
-            "narrow": "Estreita",
-            "normal": "Normal",
-            "wide": "Larga",
-            "custom": "Personalizada"
-        }
+    "gfm-support": {
+      "title": "GitHub Flavored Markdown",
+      "description": "Full GFM support including tables and task lists",
+      "icon": "📝"
     },
-    "validation": {
-        "markdownRequired": "Insira conteúdo Markdown ou selecione um arquivo",
-        "invalidMarkdownFile": "Selecione um arquivo Markdown válido (.md, .markdown)",
-        "fileTooLarge": "Arquivo muito grande (máx 10MB)",
-        "emptyContent": "O conteúdo Markdown não pode estar vazio"
+    "syntax-highlighting": {
+      "title": "Syntax Highlighting",
+      "description": "Code blocks with syntax highlighting for multiple languages",
+      "icon": "💻"
     },
-    "info": {
-        "title": "Sobre a Conversão de Markdown para PDF",
-        "description": "Converta seus documentos Markdown para arquivos PDF formatados profissionalmente com opções de estilo personalizáveis. Perfeito para documentação, relatórios, artigos e apresentações.",
-        "keyFeatures": {
-            "title": "Principais Recursos",
-            "items": [
-                "Suporte completo à sintaxe Markdown",
-                "Estilos e temas personalizados para PDF",
-                "Vários tamanhos e orientações de página",
-                "Realce de sintaxe para blocos de código",
-                "Suporte a tabelas e imagens",
-                "Personalização de cabeçalho e rodapé"
-            ]
-        },
-        "useCases": {
-            "title": "Casos de Uso Comuns",
-            "items": [
-                "Documentação técnica",
-                "Artigos e relatórios de pesquisa",
-                "Arquivos README para impressão",
-                "Notas e agendas de reuniões",
-                "Propostas de projetos",
-                "Postagens de blog para leitura offline"
-            ]
-        },
-        "supportedSyntax": {
-            "title": "Recursos Markdown Suportados",
-            "items": [
-                "Cabeçalhos e formatação de texto",
-                "Listas (ordenadas e não ordenadas)",
-                "Links e imagens",
-                "Tabelas e blocos de código",
-                "Citações e linhas horizontais",
-                "Expressões matemáticas LaTeX (opcional)"
-            ]
-        }
+    "custom-styling": {
+      "title": "Custom Styling",
+      "description": "Customize fonts, colors, and layout options",
+      "icon": "⚙️"
+    },
+    "file-upload": {
+      "title": "File Upload",
+      "description": "Upload .md, .markdown, or .txt files directly",
+      "icon": "📁"
+    },
+    "professional-output": {
+      "title": "Professional Output",
+      "description": "High-quality PDF generation with metadata",
+      "icon": "📄"
+    },
+    "privacy-first": {
+      "title": "Privacy-First",
+      "description": "All processing happens in your browser",
+      "icon": "🔒"
     }
+  },
+  "info": {
+    "title": "Sobre a Conversão de Markdown para PDF",
+    "description": "Converta seus documentos Markdown para arquivos PDF formatados profissionalmente com opções de estilo personalizáveis. Perfeito para documentação, relatórios, artigos e apresentações.",
+    "keyFeatures": {
+      "title": "Principais Recursos",
+      "items": [
+        "Suporte completo à sintaxe Markdown",
+        "Estilos e temas personalizados para PDF",
+        "Vários tamanhos e orientações de página",
+        "Realce de sintaxe para blocos de código",
+        "Suporte a tabelas e imagens",
+        "Personalização de cabeçalho e rodapé",
+        "File upload support (.md, .markdown, .txt)",
+        "Drag and drop file upload",
+        "Real-time word count and statistics",
+        "Professional PDF output with metadata"
+      ]
+    },
+    "supportedFeatures": {
+      "title": "Supported Markdown Features",
+      "items": [
+        "Headings (H1-H6) with automatic numbering",
+        "Bold and italic text formatting",
+        "Links and images with captions",
+        "Code blocks with syntax highlighting",
+        "Tables with proper formatting",
+        "Blockquotes and nested lists",
+        "Task lists with checkboxes",
+        "Auto-linking of URLs"
+      ]
+    },
+    "pdfTemplates": {
+      "title": "PDF Templates",
+      "items": [
+        "Default: Clean and simple design for general use",
+        "Academic: Professional format for research papers",
+        "Minimal: Clean design with lots of white space",
+        "Professional: Business-ready with headers and footers"
+      ]
+    },
+    "howToUse": {
+      "title": "How to Use",
+      "items": [
+        "Choose between typing in the editor or uploading a markdown file",
+        "Write or paste your markdown content in the editor",
+        "Use the live preview to see how your document will look",
+        "Select a template or customize styling options",
+        "Click 'Generate PDF' to create your document",
+        "Download your professional PDF file"
+      ]
+    }
+  }
 }

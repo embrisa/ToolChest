@@ -1,78 +1,86 @@
 {
   "tools": {
     "base64": {
-      "name": "Base64 Tool",
-      "description": "Encode and decode Base64 data with support for text and files"
+      "name": "Base64 Aracı",
+      "description": "Metin ve dosyalar için destekle Base64 verilerini kodlayın ve kodunu çözün"
     },
-    "hashGenerator": {
-      "name": "Hash Generator",
-      "description": "Generate MD5, SHA-1, SHA-256, and other cryptographic hashes"
+    "hash-generator": {
+      "name": "Hash Oluşturucu",
+      "description": "MD5, SHA-1, SHA-256 ve diğer kriptografik hash'leri oluşturun"
     },
-    "faviconGenerator": {
-      "name": "Favicon Generator",
-      "description": "Create favicons from images in multiple sizes and formats"
+    "favicon-generator": {
+      "name": "Favicon Oluşturucu",
+      "description": "Görüntülerden birden çok boyut ve formatta favicon'lar oluşturun"
     },
-    "markdownToPdf": {
-      "name": "Markdown to PDF",
-      "description": "Convert Markdown files to PDF with custom styling options"
+    "markdown-to-pdf": {
+      "name": "Markdown'dan PDF'e",
+      "description": "Özel stil seçenekleriyle Markdown dosyalarını PDF'ye dönüştürün"
     },
     "urlShortener": {
-      "name": "URL Shortener",
-      "description": "Create short URLs for easy sharing and tracking"
+      "name": "URL Kısaltıcı",
+      "description": "Kolay paylaşım ve izleme için kısa URL'ler oluşturun"
     },
     "qrGenerator": {
-      "name": "QR Code Generator",
-      "description": "Generate QR codes for text, URLs, and other data"
+      "name": "QR Kod Oluşturucu",
+      "description": "Metin, URL'ler ve diğer veriler için QR kodları oluşturun"
     },
     "imageCompressor": {
-      "name": "Image Compressor",
-      "description": "Compress images while maintaining quality"
+      "name": "Görüntü Sıkıştırıcı",
+      "description": "Kaliteyi korurken görüntüleri sıkıştırın"
     },
     "textDiff": {
-      "name": "Text Diff Tool",
-      "description": "Compare and highlight differences between text files"
+      "name": "Metin Fark Aracı",
+      "description": "Metin dosyaları arasındaki farkları karşılaştırın ve vurgulayın"
     }
   },
   "tags": {
     "encoding": {
-      "name": "Encoding",
-      "description": "Tools for encoding and decoding data in various formats"
-    },
-    "generation": {
-      "name": "Generation",
-      "description": "Tools for generating content, codes, and files"
-    },
-    "conversion": {
-      "name": "Conversion",
-      "description": "Tools for converting between different file formats"
+      "name": "Kodlama",
+      "description": "Verileri çeşitli formatlarda kodlamak ve kodunu çözmek için araçlar"
     },
     "security": {
-      "name": "Security",
-      "description": "Tools for cryptographic operations and security analysis"
+      "name": "Güvenlik",
+      "description": "Kriptografik işlemler ve güvenlik analizi için araçlar"
+    },
+    "design": {
+      "name": "Tasarım",
+      "description": "Tasarım ve grafik araçları"
+    },
+    "document": {
+      "name": "Belge",
+      "description": "Belge işleme araçları"
+    },
+    "generation": {
+      "name": "Oluşturma",
+      "description": "İçerik, kod ve dosya oluşturma araçları"
+    },
+    "conversion": {
+      "name": "Dönüştürme",
+      "description": "Farklı dosya formatları arasında dönüştürme araçları"
     },
     "compression": {
-      "name": "Compression",
-      "description": "Tools for reducing file sizes and optimizing content"
+      "name": "Sıkıştırma",
+      "description": "Dosya boyutlarını küçültmek ve içeriği optimize etmek için araçlar"
     },
     "analysis": {
-      "name": "Analysis",
-      "description": "Tools for analyzing and comparing data and files"
+      "name": "Analiz",
+      "description": "Veri ve dosyaları analiz etmek ve karşılaştırmak için araçlar"
     },
     "web": {
-      "name": "Web Development",
-      "description": "Tools specifically designed for web developers"
+      "name": "Web Geliştirme",
+      "description": "Web geliştiricileri için özel olarak tasarlanmış araçlar"
     },
     "image": {
-      "name": "Image Processing",
-      "description": "Tools for working with images and graphics"
+      "name": "Görüntü İşleme",
+      "description": "Görüntüler ve grafiklerle çalışmak için araçlar"
     },
     "text": {
-      "name": "Text Processing",
-      "description": "Tools for manipulating and analyzing text content"
+      "name": "Metin İşleme",
+      "description": "Metin içeriğini işlemek ve analiz etmek için araçlar"
     },
     "utility": {
-      "name": "Utility",
-      "description": "General-purpose tools for common tasks"
+      "name": "Yardımcı Program",
+      "description": "Yaygın görevler için genel amaçlı araçlar"
     }
   }
 }

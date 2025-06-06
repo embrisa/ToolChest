@@ -1,78 +1,86 @@
 {
   "tools": {
     "base64": {
-      "name": "Base64 Tool",
-      "description": "Encode and decode Base64 data with support for text and files"
+      "name": "Base64-Werkzeug",
+      "description": "Base64-Daten kodieren und dekodieren mit Unterstützung für Text und Dateien"
     },
-    "hashGenerator": {
-      "name": "Hash Generator",
-      "description": "Generate MD5, SHA-1, SHA-256, and other cryptographic hashes"
+    "hash-generator": {
+      "name": "Hash-Generator",
+      "description": "MD5, SHA-1, SHA-256 und andere kryptografische Hashes generieren"
     },
-    "faviconGenerator": {
-      "name": "Favicon Generator",
-      "description": "Create favicons from images in multiple sizes and formats"
+    "favicon-generator": {
+      "name": "Favicon-Generator",
+      "description": "Favicons aus Bildern in mehreren Größen und Formaten erstellen"
     },
-    "markdownToPdf": {
-      "name": "Markdown to PDF",
-      "description": "Convert Markdown files to PDF with custom styling options"
+    "markdown-to-pdf": {
+      "name": "Markdown zu PDF",
+      "description": "Markdown-Dateien mit benutzerdefinierten Stiloptionen in PDF konvertieren"
     },
     "urlShortener": {
-      "name": "URL Shortener",
-      "description": "Create short URLs for easy sharing and tracking"
+      "name": "URL-Kürzer",
+      "description": "Kurze URLs zum einfachen Teilen und Verfolgen erstellen"
     },
     "qrGenerator": {
-      "name": "QR Code Generator",
-      "description": "Generate QR codes for text, URLs, and other data"
+      "name": "QR-Code-Generator",
+      "description": "QR-Codes für Text, URLs und andere Daten generieren"
     },
     "imageCompressor": {
-      "name": "Image Compressor",
-      "description": "Compress images while maintaining quality"
+      "name": "Bildkompressor",
+      "description": "Bilder komprimieren und dabei die Qualität erhalten"
     },
     "textDiff": {
-      "name": "Text Diff Tool",
-      "description": "Compare and highlight differences between text files"
+      "name": "Text-Diff-Werkzeug",
+      "description": "Unterschiede zwischen Textdateien vergleichen und hervorheben"
     }
   },
   "tags": {
     "encoding": {
-      "name": "Encoding",
-      "description": "Tools for encoding and decoding data in various formats"
-    },
-    "generation": {
-      "name": "Generation",
-      "description": "Tools for generating content, codes, and files"
-    },
-    "conversion": {
-      "name": "Conversion",
-      "description": "Tools for converting between different file formats"
+      "name": "Kodierung",
+      "description": "Werkzeuge zum Kodieren und Dekodieren von Daten in verschiedenen Formaten"
     },
     "security": {
-      "name": "Security",
-      "description": "Tools for cryptographic operations and security analysis"
+      "name": "Sicherheit",
+      "description": "Werkzeuge für kryptografische Operationen und Sicherheitsanalysen"
+    },
+    "design": {
+      "name": "Design",
+      "description": "Design- und Grafikwerkzeuge"
+    },
+    "document": {
+      "name": "Dokument",
+      "description": "Werkzeuge zur Dokumentenverarbeitung"
+    },
+    "generation": {
+      "name": "Generierung",
+      "description": "Werkzeuge zum Generieren von Inhalten, Codes und Dateien"
+    },
+    "conversion": {
+      "name": "Konvertierung",
+      "description": "Werkzeuge zum Konvertieren zwischen verschiedenen Dateiformaten"
     },
     "compression": {
-      "name": "Compression",
-      "description": "Tools for reducing file sizes and optimizing content"
+      "name": "Komprimierung",
+      "description": "Werkzeuge zum Reduzieren von Dateigrößen und Optimieren von Inhalten"
     },
     "analysis": {
-      "name": "Analysis",
-      "description": "Tools for analyzing and comparing data and files"
+      "name": "Analyse",
+      "description": "Werkzeuge zum Analysieren und Vergleichen von Daten und Dateien"
     },
     "web": {
-      "name": "Web Development",
-      "description": "Tools specifically designed for web developers"
+      "name": "Web-Entwicklung",
+      "description": "Speziell für Web-Entwickler konzipierte Werkzeuge"
     },
     "image": {
-      "name": "Image Processing",
-      "description": "Tools for working with images and graphics"
+      "name": "Bildverarbeitung",
+      "description": "Werkzeuge für die Arbeit mit Bildern und Grafiken"
     },
     "text": {
-      "name": "Text Processing",
-      "description": "Tools for manipulating and analyzing text content"
+      "name": "Textverarbeitung",
+      "description": "Werkzeuge zum Bearbeiten und Analysieren von Textinhalten"
     },
     "utility": {
-      "name": "Utility",
-      "description": "General-purpose tools for common tasks"
+      "name": "Dienstprogramm",
+      "description": "Allzweckwerkzeuge für allgemeine Aufgaben"
     }
   }
 }

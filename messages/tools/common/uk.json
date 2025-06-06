@@ -1,72 +1,72 @@
 {
   "ui": {
     "modes": {
-      "encode": "Encode",
-      "decode": "Decode",
-      "generate": "Generate",
-      "convert": "Convert",
-      "process": "Process",
-      "analyze": "Analyze"
+      "encode": "Кодувати",
+      "decode": "Декодувати",
+      "generate": "Генерувати",
+      "convert": "Конвертувати",
+      "process": "Обробити",
+      "analyze": "Аналізувати"
     },
     "inputTypes": {
-      "text": "Text",
-      "file": "File",
+      "text": "Текст",
+      "file": "Файл",
       "url": "URL",
-      "upload": "Upload"
+      "upload": "Вивантажити"
     },
     "actions": {
-      "process": "Process",
-      "copy": "Copy Result",
-      "download": "Download",
-      "upload": "Upload",
-      "clear": "Clear",
-      "reset": "Reset",
-      "retry": "Retry",
-      "save": "Save",
-      "export": "Export"
+      "process": "Обробити",
+      "copy": "Копіювати результат",
+      "download": "Завантажити",
+      "upload": "Вивантажити",
+      "clear": "Очистити",
+      "reset": "Скинути",
+      "retry": "Повторити",
+      "save": "Зберегти",
+      "export": "Експортувати"
     },
     "status": {
-      "processing": "Processing...",
-      "success": "Operation completed successfully",
-      "copied": "Copied to clipboard",
-      "error": "Operation failed",
-      "ready": "Ready",
-      "waiting": "Waiting for input"
+      "processing": "Обробка...",
+      "success": "Операція успішно завершена",
+      "copied": "Скопійовано в буфер обміну",
+      "error": "Операція не вдалася",
+      "ready": "Готово",
+      "waiting": "Очікування введення"
     },
     "placeholders": {
-      "textInput": "Enter text here...",
-      "fileUpload": "Select a file or drag and drop",
-      "urlInput": "Enter URL here...",
-      "searchInput": "Search..."
+      "textInput": "Введіть текст тут...",
+      "fileUpload": "Виберіть файл або перетягніть його",
+      "urlInput": "Введіть URL тут...",
+      "searchInput": "Пошук..."
     }
   },
   "validation": {
-    "required": "This field is required",
-    "invalidInput": "Invalid input",
-    "fileTooLarge": "File too large (max {maxSize})",
-    "unsupportedFileType": "Unsupported file type",
-    "invalidFormat": "Invalid format",
-    "emptyInput": "Please enter some text or select a file",
-    "invalidUrl": "Please enter a valid URL"
+    "required": "Це поле є обов'язковим",
+    "invalidInput": "Неправильне введення",
+    "fileTooLarge": "Файл завеликий (макс. {maxSize})",
+    "unsupportedFileType": "Тип файлу не підтримується",
+    "invalidFormat": "Неправильний формат",
+    "emptyInput": "Будь ласка, введіть текст або виберіть файл",
+    "invalidUrl": "Будь ласка, введіть дійсну URL-адресу"
   },
   "privacy": {
-    "clientSideNote": "All processing happens in your browser for maximum privacy.",
-    "noDataSent": "No data sent to servers",
-    "filesStayLocal": "Files stay on your device",
-    "noLogging": "No data storage or logging"
+    "clientSideNote": "Вся обробка відбувається у вашому браузері для максимальної конфіденційності.",
+    "noDataSent": "Дані не надсилаються на сервери",
+    "filesStayLocal": "Файли залишаються на вашому пристрої",
+    "noLogging": "Немає зберігання даних або журналювання"
   },
   "features": {
-    "clientSideProcessing": "Client-side processing for privacy",
-    "copyToClipboard": "Copy to clipboard functionality",
-    "downloadResults": "Download results",
-    "realTimeProcessing": "Real-time processing",
-    "multipleFormats": "Multiple format support",
-    "batchProcessing": "Batch processing support"
+    "clientSideProcessing": "Обробка на стороні клієнта для конфіденційності",
+    "copyToClipboard": "Функціональність копіювання в буфер обміну",
+    "downloadResults": "Завантаження результатів",
+    "realTimeProcessing": "Обробка в реальному часі",
+    "multipleFormats": "Підтримка кількох форматів",
+    "batchProcessing": "Підтримка пакетної обробки"
   },
   "errors": {
-    "processingFailed": "Processing failed",
-    "fileReadError": "Error reading file",
-    "networkError": "Network error occurred",
-    "unknownError": "An unknown error occurred"
+    "processingFailed": "Не вдалося обробити",
+    "fileReadError": "Помилка читання файлу",
+    "networkError": "Сталася помилка мережі",
+    "unknownError": "Сталася невідома помилка"
   }
 }

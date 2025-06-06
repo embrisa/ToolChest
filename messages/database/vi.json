@@ -1,78 +1,86 @@
 {
   "tools": {
     "base64": {
-      "name": "Base64 Tool",
-      "description": "Encode and decode Base64 data with support for text and files"
+      "name": "Công cụ Base64",
+      "description": "Mã hóa và giải mã dữ liệu Base64 với sự hỗ trợ cho văn bản và tệp"
     },
-    "hashGenerator": {
-      "name": "Hash Generator",
-      "description": "Generate MD5, SHA-1, SHA-256, and other cryptographic hashes"
+    "hash-generator": {
+      "name": "Công cụ tạo Hash",
+      "description": "Tạo MD5, SHA-1, SHA-256 và các hàm băm mật mã khác"
     },
-    "faviconGenerator": {
-      "name": "Favicon Generator",
-      "description": "Create favicons from images in multiple sizes and formats"
+    "favicon-generator": {
+      "name": "Công cụ tạo Favicon",
+      "description": "Tạo favicon từ hình ảnh với nhiều kích cỡ và định dạng"
     },
-    "markdownToPdf": {
-      "name": "Markdown to PDF",
-      "description": "Convert Markdown files to PDF with custom styling options"
+    "markdown-to-pdf": {
+      "name": "Markdown sang PDF",
+      "description": "Chuyển đổi tệp Markdown sang PDF với các tùy chọn kiểu tùy chỉnh"
     },
     "urlShortener": {
-      "name": "URL Shortener",
-      "description": "Create short URLs for easy sharing and tracking"
+      "name": "Công cụ rút gọn URL",
+      "description": "Tạo URL ngắn để dễ dàng chia sẻ và theo dõi"
     },
     "qrGenerator": {
-      "name": "QR Code Generator",
-      "description": "Generate QR codes for text, URLs, and other data"
+      "name": "Công cụ tạo mã QR",
+      "description": "Tạo mã QR cho văn bản, URL và dữ liệu khác"
     },
     "imageCompressor": {
-      "name": "Image Compressor",
-      "description": "Compress images while maintaining quality"
+      "name": "Công cụ nén ảnh",
+      "description": "Nén ảnh trong khi vẫn giữ được chất lượng"
     },
     "textDiff": {
-      "name": "Text Diff Tool",
-      "description": "Compare and highlight differences between text files"
+      "name": "Công cụ so sánh văn bản",
+      "description": "So sánh và làm nổi bật sự khác biệt giữa các tệp văn bản"
     }
   },
   "tags": {
     "encoding": {
-      "name": "Encoding",
-      "description": "Tools for encoding and decoding data in various formats"
-    },
-    "generation": {
-      "name": "Generation",
-      "description": "Tools for generating content, codes, and files"
-    },
-    "conversion": {
-      "name": "Conversion",
-      "description": "Tools for converting between different file formats"
+      "name": "Mã hóa",
+      "description": "Các công cụ để mã hóa và giải mã dữ liệu ở nhiều định dạng khác nhau"
     },
     "security": {
-      "name": "Security",
-      "description": "Tools for cryptographic operations and security analysis"
+      "name": "Bảo mật",
+      "description": "Các công cụ cho các hoạt động mật mã và phân tích bảo mật"
+    },
+    "design": {
+      "name": "Thiết kế",
+      "description": "Công cụ thiết kế và đồ họa"
+    },
+    "document": {
+      "name": "Tài liệu",
+      "description": "Công cụ xử lý tài liệu"
+    },
+    "generation": {
+      "name": "Tạo",
+      "description": "Các công cụ để tạo nội dung, mã và tệp"
+    },
+    "conversion": {
+      "name": "Chuyển đổi",
+      "description": "Các công cụ để chuyển đổi giữa các định dạng tệp khác nhau"
     },
     "compression": {
-      "name": "Compression",
-      "description": "Tools for reducing file sizes and optimizing content"
+      "name": "Nén",
+      "description": "Các công cụ để giảm kích thước tệp và tối ưu hóa nội dung"
     },
     "analysis": {
-      "name": "Analysis",
-      "description": "Tools for analyzing and comparing data and files"
+      "name": "Phân tích",
+      "description": "Các công cụ để phân tích và so sánh dữ liệu và tệp"
     },
     "web": {
-      "name": "Web Development",
-      "description": "Tools specifically designed for web developers"
+      "name": "Phát triển Web",
+      "description": "Các công cụ được thiết kế đặc biệt cho các nhà phát triển web"
     },
     "image": {
-      "name": "Image Processing",
-      "description": "Tools for working with images and graphics"
+      "name": "Xử lý ảnh",
+      "description": "Các công cụ để làm việc với hình ảnh và đồ họa"
     },
     "text": {
-      "name": "Text Processing",
-      "description": "Tools for manipulating and analyzing text content"
+      "name": "Xử lý văn bản",
+      "description": "Các công cụ để thao tác và phân tích nội dung văn bản"
     },
     "utility": {
-      "name": "Utility",
-      "description": "General-purpose tools for common tasks"
+      "name": "Tiện ích",
+      "description": "Các công cụ đa dụng cho các tác vụ thông thường"
     }
   }
 }

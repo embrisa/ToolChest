@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import {
   AdminToolFormData,
   AdminToolValidationErrors,
@@ -27,6 +28,8 @@ export function ToolForm({
   isLoading = false,
   errors = {},
 }: ToolFormProps) {
+  const t = useTranslations("components.forms");
+  // const tCommon = useTranslations("common"); // TODO: Use for validation messages
   const [formData, setFormData] = useState<AdminToolFormData>({
     name: initialData?.name || "",
     slug: initialData?.slug || "",
@@ -108,11 +111,13 @@ export function ToolForm({
           </div>
           <div>
             <h1 className="text-title text-3xl font-bold text-primary mb-2">
-              {isEditing ? "Edit Tool" : "Create New Tool"}
+              {isEditing
+                ? t("actions.edit") + " Tool"
+                : t("actions.create") + " New Tool"}
             </h1>
             <p className="text-body text-secondary max-w-2xl mx-auto">
               {isEditing
-                ? "Update the tool&apos;s information, settings, and tags to keep it current and discoverable."
+                ? "Update the tool's information, settings, and tags to keep it current and discoverable."
                 : "Add a new tool to your collection. Fill out the basic information, configure display settings, and assign relevant tags."}
             </p>
           </div>
@@ -170,7 +175,7 @@ export function ToolForm({
                       d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
                     />
                   </svg>
-                  <span>Tool Name *</span>
+                  <span>{t("labels.name")} *</span>
                 </div>
               </label>
               <Input
@@ -178,7 +183,7 @@ export function ToolForm({
                 type="text"
                 value={formData.name}
                 onChange={(e) => handleInputChange("name", e.target.value)}
-                placeholder="e.g., Base64 Encoder/Decoder"
+                placeholder={t("placeholders.enterName")}
                 className={`w-full focus-ring text-primary ${errors.name ? "input-error border-error-500" : ""}`}
                 required
                 aria-describedby="name-help"

@@ -1,67 +1,66 @@
 {
   "metadata": {
-    "title": "पीडीएफ कनवर्टर के लिए मार्कडाउन | ",
-    "description": "कस्टम स्टाइलिंग विकल्पों के साथ PDF में मार्कडाउन फ़ाइलों को कन्वर्ट करें। ",
+    "title": "Markdown to PDF Converter | tool-chest",
+    "description": "Convert Markdown to professional PDF documents with syntax highlighting, custom styling, and support for tables, code blocks, and images. Privacy-first client-side processing.",
     "keywords": [
-      "markdown",
-      "पीडीएफ",
-      "कनवर्टर",
-      "दस्तावेज़",
-      "निर्यात",
-      "स्टाइल",
-      "प्रारूप",
-      "डाउनलोड करना",
-      "गोपनीयता",
-      "क्लाइंट-साइड"
+      "markdown to pdf",
+      "markdown converter",
+      "pdf generator",
+      "markdown pdf",
+      "syntax highlighting",
+      "code blocks",
+      "tables",
+      "document converter",
+      "markdown export",
+      "free tool"
     ]
   },
   "page": {
     "title": "पीडीएफ को मार्कडाउन",
-    "description": "कस्टम स्टाइलिंग विकल्पों के साथ PDF में मार्कडाउन फ़ाइलों को कन्वर्ट करें।"
+    "description": "कस्टम स्टाइलिंग विकल्पों के साथ PDF में मार्कडाउन फ़ाइलों को कन्वर्ट करें।",
+    "privacyMessage": "🔒 Privacy-First • GitHub Flavored Markdown • Client-Side Processing"
   },
-  "tool": {
-    "input": {
-      "markdown": "चिह्नित सामग्री",
-      "file": "मार्कडाउन संचिका",
-      "placeholder": "यहां अपनी मार्कडाउन सामग्री दर्ज करें ..."
+  "featureGrid": {
+    "live-preview": {
+      "title": "Live Preview",
+      "description": "Real-time markdown preview with instant rendering",
+      "icon": "👁️"
     },
-    "customization": {
-      "title": "पीडीएफ अनुकूलन",
-      "pageSize": "पृष्ठ आकार",
-      "margins": "मार्जिन",
-      "theme": "विषय",
-      "fontSize": "फ़ॉन्ट आकार",
-      "fontFamily": "फुहारा परिवार",
-      "lineHeight": "ऊंची लाईन",
-      "headerFooter": "शीर्षलेख पादलेख"
+    "templates": {
+      "title": "Multiple Templates",
+      "description": "PDF templates and themes for different use cases",
+      "icon": "🎨"
     },
-    "themes": {
-      "default": "गलती करना",
-      "github": "GitHub",
-      "minimal": "न्यूनतम",
-      "academic": "अकादमिक",
-      "professional": "पेशेवर"
+    "gfm-support": {
+      "title": "GitHub Flavored Markdown",
+      "description": "Full GFM support including tables and task lists",
+      "icon": "📝"
     },
-    "pageSizes": {
-      "a4": "ए 4",
-      "letter": "पत्र",
-      "legal": "कानूनी",
-      "a3": "ए 3",
-      "tabloid": "मुख़्तसर"
+    "syntax-highlighting": {
+      "title": "Syntax Highlighting",
+      "description": "Code blocks with syntax highlighting for multiple languages",
+      "icon": "💻"
     },
-    "margins": {
-      "none": "कोई नहीं",
-      "narrow": "सँकरा",
-      "normal": "सामान्य",
-      "wide": "चौड़ा",
-      "custom": "रिवाज़"
+    "custom-styling": {
+      "title": "Custom Styling",
+      "description": "Customize fonts, colors, and layout options",
+      "icon": "⚙️"
+    },
+    "file-upload": {
+      "title": "File Upload",
+      "description": "Upload .md, .markdown, or .txt files directly",
+      "icon": "📁"
+    },
+    "professional-output": {
+      "title": "Professional Output",
+      "description": "High-quality PDF generation with metadata",
+      "icon": "📄"
+    },
+    "privacy-first": {
+      "title": "Privacy-First",
+      "description": "All processing happens in your browser",
+      "icon": "🔒"
     }
-  },
-  "validation": {
-    "markdownRequired": "कृपया मार्कडाउन सामग्री दर्ज करें या एक फ़ाइल का चयन करें",
-    "invalidMarkdownFile": "कृपया एक मान्य मार्कडाउन फ़ाइल चुनें (.md, .markdown)",
-    "fileTooLarge": "फ़ाइल बहुत बड़ी (अधिकतम 10MB)",
-    "emptyContent": "मार्कडाउन सामग्री खाली नहीं हो सकती"
   },
   "info": {
     "title": "पीडीएफ रूपांतरण के लिए मार्कडाउन के बारे में",
@@ -74,29 +73,44 @@
         "एकाधिक पृष्ठ आकार और झुकाव",
         "कोड ब्लॉक के लिए सिंटैक्स हाइलाइटिंग",
         "तालिका और छवि समर्थन",
-        "हेडर और पाद अनुकूलन"
+        "हेडर और पाद अनुकूलन",
+        "File upload support (.md, .markdown, .txt)",
+        "Drag and drop file upload",
+        "Real-time word count and statistics",
+        "Professional PDF output with metadata"
       ]
     },
-    "useCases": {
-      "title": "सामान्य उपयोग के मामले",
+    "supportedFeatures": {
+      "title": "Supported Markdown Features",
       "items": [
-        "तकनीकी प्रलेखन",
-        "शोध पत्र और रिपोर्ट",
-        "प्रिंटिंग के लिए रीडमी फाइलें",
-        "नोट्स और एजेंडा को पूरा करना",
-        "परियोजना प्रस्ताव",
-        "ऑफ़लाइन पढ़ने के लिए ब्लॉग पोस्ट"
+        "Headings (H1-H6) with automatic numbering",
+        "Bold and italic text formatting",
+        "Links and images with captions",
+        "Code blocks with syntax highlighting",
+        "Tables with proper formatting",
+        "Blockquotes and nested lists",
+        "Task lists with checkboxes",
+        "Auto-linking of URLs"
       ]
     },
-    "supportedSyntax": {
-      "title": "समर्थित मार्कडाउन सुविधाएँ",
+    "pdfTemplates": {
+      "title": "PDF Templates",
       "items": [
-        "हेडर और पाठ स्वरूपण",
-        "सूचियाँ (आदेशित और अनियंत्रित)",
-        "लिंक और चित्र",
-        "टेबल्स और कोड ब्लॉक",
-        "ब्लॉकक्वोट और क्षैतिज नियम",
-        "लेटेक्स गणित के भाव (वैकल्पिक)"
+        "Default: Clean and simple design for general use",
+        "Academic: Professional format for research papers",
+        "Minimal: Clean design with lots of white space",
+        "Professional: Business-ready with headers and footers"
+      ]
+    },
+    "howToUse": {
+      "title": "How to Use",
+      "items": [
+        "Choose between typing in the editor or uploading a markdown file",
+        "Write or paste your markdown content in the editor",
+        "Use the live preview to see how your document will look",
+        "Select a template or customize styling options",
+        "Click 'Generate PDF' to create your document",
+        "Download your professional PDF file"
       ]
     }
   }

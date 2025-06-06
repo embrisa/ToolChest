@@ -10,9 +10,11 @@ datasource db {
 
 model Tool {
   id             String          @id @default(cuid())
-  name           String          @unique
+  nameKey        String          @unique
+  toolKey        String          @unique
   slug           String          @unique
-  description    String?
+  descriptionKey String?
+  isFeatured     Boolean         @default(false)
   iconClass      String?
   displayOrder   Int             @default(0)
   usageCount     Int             @default(0)
@@ -25,13 +27,16 @@ model Tool {
 }
 
 model Tag {
-  id          String    @id @default(cuid())
-  name        String    @unique
-  slug        String    @unique
-  description String?
-  color       String?   @default("#000000")
-  createdAt   DateTime  @default(now())
-  tools       ToolTag[]
+  id             String    @id @default(cuid())
+  nameKey        String    @unique
+  slug           String    @unique
+  tagKey         String    @unique
+  descriptionKey String?
+  iconClass      String?
+  displayOrder   Int       @default(0)
+  isActive       Boolean   @default(true)
+  createdAt      DateTime  @default(now())
+  tools          ToolTag[]
 }
 
 model ToolTag {

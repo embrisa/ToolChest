@@ -1,100 +1,137 @@
 {
   "dashboard": {
     "title": "Dashboard",
-    "description": "Overview of your tool-chest application performance and analytics",
+    "description": "Übersicht über die Leistung und Analytik Ihrer Tool-Chest-Anwendung",
     "stats": {
-      "totalTools": "Total Tools",
-      "totalTags": "Total Tags",
-      "totalUsage": "Total Usage",
-      "thisMonth": "This Month",
-      "applicationStats": "Application Statistics"
+      "totalTools": "Werkzeuge insgesamt",
+      "totalTags": "Tags insgesamt",
+      "totalUsage": "Nutzung insgesamt",
+      "thisMonth": "Diesen Monat",
+      "applicationStats": "Anwendungsstatistiken"
     },
     "usage": {
-      "title": "Tool Usage Overview",
+      "title": "Übersicht der Werkzeugnutzung",
       "table": {
-        "tool": "Tool",
-        "usageCount": "Usage Count",
-        "change": "Change",
-        "actions": "Actions"
+        "tool": "Werkzeug",
+        "usageCount": "Nutzungsanzahl",
+        "change": "Änderung",
+        "actions": "Aktionen"
       }
     },
     "quickActions": {
-      "title": "Quick Actions",
-      "viewAnalytics": "View Analytics",
-      "manageTools": "Manage Tools",
-      "manageTags": "Manage Tags",
-      "viewSite": "View Site",
-      "systemHealth": "System Health"
+      "title": "Schnellaktionen",
+      "viewAnalytics": "Analytik anzeigen",
+      "manageTools": "Werkzeuge verwalten",
+      "manageTags": "Tags verwalten",
+      "viewSite": "Seite anzeigen",
+      "systemHealth": "Systemzustand",
+      "addTool": "Tool hinzufügen",
+      "addTag": "Tag hinzufügen",
+      "manageRelationships": "Beziehungen verwalten",
+      "createToolDescription": "Neues Tool im System erstellen",
+      "createTagDescription": "Neuen Tag für Kategorisierung erstellen",
+      "manageRelationshipsDescription": "Tool-Tag-Zuordnungen konfigurieren",
+      "viewSiteDescription": "Öffentliche tool-chest Seite öffnen"
     }
   },
   "tools": {
-    "title": "Tool Management",
-    "description": "Manage tools, their metadata, and relationships",
+    "title": "Werkzeugverwaltung",
+    "description": "Werkzeuge, deren Metadaten und Beziehungen verwalten",
     "actions": {
-      "createTool": "Create Tool",
-      "editTool": "Edit Tool",
-      "deleteTool": "Delete Tool",
-      "bulkActions": "Bulk Actions"
+      "createTool": "Werkzeug erstellen",
+      "editTool": "Werkzeug bearbeiten",
+      "deleteTool": "Werkzeug löschen",
+      "bulkActions": "Massenaktionen"
     },
     "table": {
       "name": "Name",
       "slug": "Slug",
       "status": "Status",
       "tags": "Tags",
-      "usage": "Usage",
-      "lastModified": "Last Modified",
-      "actions": "Actions"
+      "usage": "Nutzung",
+      "lastModified": "Zuletzt geändert",
+      "actions": "Aktionen"
+    },
+    "emptyState": {
+      "description": "Beginnen Sie mit der Erstellung Ihres ersten Tools. Tools helfen Benutzern bei spezifischen Aufgaben und können mit Tags organisiert werden."
+    },
+    "bulkOperations": {
+      "title": "Massen-{operation} von Tags",
+      "selectedCount": "{count, plural, =1 {# Tool} other {# Tools}} ausgewählt",
+      "operationType": "Operation Auswählen",
+      "selectTags": "Tags Auswählen",
+      "selectedTools": "Ausgewählte Tools",
+      "previewChanges": "Änderungen Vorschau",
+      "operationSummary": "Operationszusammenfassung",
+      "totalChanges": "Gesamte Änderungen",
+      "toolsToUpdate": "Zu Aktualisierende Tools",
+      "warnings": "Warnungen",
+      "executing": "Operation Ausführen",
+      "executingMessage": "Bitte warten Sie, während wir Ihre Massenoperation bearbeiten...",
+      "completed": "Operation Abgeschlossen",
+      "failed": "Operation Fehlgeschlagen",
+      "successMessage": "Ihre Massenoperation wurde erfolgreich abgeschlossen",
+      "errorMessage": "Es gab einen Fehler beim Ausführen Ihrer Massenoperation",
+      "results": "Operationsergebnisse",
+      "toolsAffected": "Betroffene Tools",
+      "tagsAffected": "Betroffene Tags",
+      "errors": "Aufgetretene Fehler",
+      "startNew": "Neue Operation Starten"
     }
   },
   "tags": {
-    "title": "Tag Management",
-    "description": "Organize tools with tags and manage relationships",
+    "title": "Tag-Verwaltung",
+    "description": "Werkzeuge mit Tags organisieren und Beziehungen verwalten",
     "actions": {
-      "createTag": "Create Tag",
-      "editTag": "Edit Tag",
-      "deleteTag": "Delete Tag",
-      "bulkActions": "Bulk Actions"
+      "createTag": "Tag erstellen",
+      "editTag": "Tag bearbeiten",
+      "deleteTag": "Tag löschen",
+      "bulkActions": "Massenaktionen"
     },
     "table": {
       "name": "Name",
       "slug": "Slug",
-      "color": "Color",
-      "toolCount": "Tools",
-      "description": "Description",
-      "actions": "Actions"
+      "color": "Farbe",
+      "toolCount": "Werkzeuge",
+      "description": "Beschreibung",
+      "actions": "Aktionen"
+    },
+    "emptyState": {
+      "description": "Beginnen Sie mit der Erstellung Ihres ersten Tags, um Ihre Tools zu organisieren."
     }
   },
   "analytics": {
-    "title": "Analytics",
-    "description": "View detailed analytics and usage statistics",
+    "title": "Analytik",
+    "description": "Detaillierte Analysen und Nutzungsstatistiken anzeigen",
     "charts": {
-      "usageOverTime": "Usage Over Time",
-      "topTools": "Top Tools",
-      "userMetrics": "User Metrics"
+      "usageOverTime": "Nutzung im Zeitverlauf",
+      "topTools": "Top-Werkzeuge",
+      "userMetrics": "Benutzermetriken"
     }
   },
   "auth": {
-    "title": "Admin Login",
-    "description": "Access the administration panel",
+    "title": "Admin-Anmeldung",
+    "description": "Greifen Sie auf das Administrationspanel zu",
     "form": {
-      "token": "Admin Token",
-      "tokenPlaceholder": "Enter admin token",
-      "login": "Login",
-      "loginError": "Invalid admin token"
+      "token": "Admin-Token",
+      "tokenPlaceholder": "Admin-Token eingeben",
+      "login": "Anmelden",
+      "loginError": "Ungültiger Admin-Token"
     }
   },
   "loading": {
-    "panel": "Loading admin panel...",
-    "dashboard": "Loading dashboard...",
-    "analytics": "Loading analytics..."
+    "panel": "Admin-Panel wird geladen...",
+    "dashboard": "Dashboard wird geladen...",
+    "analytics": "Analytik wird geladen..."
   },
   "navigation": {
     "dashboard": "Dashboard",
-    "tools": "Tools",
+    "tools": "Werkzeuge",
     "tags": "Tags",
-    "analytics": "Analytics",
-    "monitoring": "Monitoring",
-    "logout": "Logout",
-    "viewSite": "View Site"
+    "relationships": "Beziehungen",
+    "analytics": "Analytik",
+    "monitoring": "Überwachung",
+    "logout": "Abmelden",
+    "viewSite": "Seite anzeigen"
   }
 }
