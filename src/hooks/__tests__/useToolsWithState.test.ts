@@ -5,25 +5,40 @@ import { useToolFilterState } from "../useUrlState";
 import { swrFetcher } from "@/lib/api";
 
 // Mock Response for Node.js environment
-(global as any).Response = class MockResponse {
-  private _body: any;
+interface MockResponseInit {
+  status?: number;
+  statusText?: string;
+  headers?: Record<string, string>;
+}
+
+class MockResponse {
+  private _body: string | null;
   public status: number;
   public statusText: string;
   public headers: Map<string, string>;
   public ok: boolean;
 
-  constructor(body?: any, init: { status?: number; statusText?: string; headers?: Record<string, string> } = {}) {
+  constructor(body: string | null = null, init: MockResponseInit = {}) {
     this._body = body;
     this.status = init.status || 200;
-    this.statusText = init.statusText || 'OK';
+    this.statusText = init.statusText || "OK";
     this.headers = new Map(Object.entries(init.headers || {}));
     this.ok = this.status >= 200 && this.status < 300;
   }
 
-  async json() { return JSON.parse(this._body || '{}'); }
-  async text() { return this._body?.toString() || ''; }
-  async arrayBuffer() { return new ArrayBuffer(0); }
-};
+  async json() {
+    return JSON.parse(this._body || "{}");
+  }
+  async text() {
+    return this._body?.toString() || "";
+  }
+  async arrayBuffer() {
+    return new ArrayBuffer(0);
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+(global as any).Response = MockResponse;
 
 jest.mock("swr", () => ({
   __esModule: true,

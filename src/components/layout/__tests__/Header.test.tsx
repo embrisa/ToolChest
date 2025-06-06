@@ -20,7 +20,15 @@ jest.mock("next/navigation", () => ({
 
 // Mock Next.js Link component
 jest.mock("next/link", () => {
-  return function MockLink({ children, href, ...props }: any) {
+  return function MockLink({
+    children,
+    href,
+    ...props
+  }: {
+    children: React.ReactNode;
+    href: string;
+    [key: string]: unknown;
+  }) {
     return (
       <a href={href} {...props}>
         {children}
@@ -38,7 +46,8 @@ jest.mock("@heroicons/react/24/outline", () => ({
 
 // Mock the cn utility function to avoid any potential issues
 jest.mock("@/utils", () => ({
-  cn: (...classes: any[]) => classes.filter(Boolean).join(" "),
+  cn: (...classes: (string | undefined | null | boolean)[]) =>
+    classes.filter(Boolean).join(" "),
 }));
 
 // Mock window and document APIs that Header component uses
@@ -46,30 +55,30 @@ const mockScrollTo = jest.fn();
 const mockAddEventListener = jest.fn();
 const mockRemoveEventListener = jest.fn();
 
-Object.defineProperty(window, 'scrollY', {
+Object.defineProperty(window, "scrollY", {
   value: 0,
   writable: true,
 });
 
-Object.defineProperty(window, 'scrollTo', {
+Object.defineProperty(window, "scrollTo", {
   value: mockScrollTo,
   writable: true,
 });
 
-Object.defineProperty(window, 'addEventListener', {
+Object.defineProperty(window, "addEventListener", {
   value: mockAddEventListener,
   writable: true,
 });
 
-Object.defineProperty(window, 'removeEventListener', {
+Object.defineProperty(window, "removeEventListener", {
   value: mockRemoveEventListener,
   writable: true,
 });
 
 // Mock document body style for overflow handling
-Object.defineProperty(document.body, 'style', {
+Object.defineProperty(document.body, "style", {
   value: {
-    overflow: 'unset',
+    overflow: "unset",
   },
   writable: true,
 });
@@ -94,12 +103,12 @@ describe("Header mobile menu", () => {
   beforeEach(() => {
     jest.clearAllMocks();
     // Reset body style
-    document.body.style.overflow = 'unset';
+    document.body.style.overflow = "unset";
   });
 
   afterEach(() => {
     // Clean up any side effects
-    document.body.style.overflow = 'unset';
+    document.body.style.overflow = "unset";
   });
 
   it("toggles mobile menu", async () => {
@@ -108,12 +117,12 @@ describe("Header mobile menu", () => {
     // Render the component
     render(<Header />);
 
-    // The component renders successfully without AggregateError 
+    // The component renders successfully without AggregateError
     expect(screen.getByRole("banner")).toBeInTheDocument();
 
     // There should be navigation menu controls
     const menuButton = screen.getByRole("button", {
-      name: /navigation menu/i
+      name: /navigation menu/i,
     });
     expect(menuButton).toBeInTheDocument();
 
@@ -122,16 +131,18 @@ describe("Header mobile menu", () => {
 
     // After clicking, the button should still be accessible (state changed)
     expect(
-      screen.getByRole("button", { name: /navigation menu/i })
+      screen.getByRole("button", { name: /navigation menu/i }),
     ).toBeInTheDocument();
 
     // Should also have a search input
     expect(
-      screen.getByRole("searchbox", { name: /search tools/i })
+      screen.getByRole("searchbox", { name: /search tools/i }),
     ).toBeInTheDocument();
 
     // Should have navigation links
-    expect(screen.getByRole("link", { name: /all tools/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: /all tools/i }),
+    ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /about/i })).toBeInTheDocument();
   });
 });

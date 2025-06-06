@@ -6,7 +6,7 @@ import type {
   AnalyticsExport,
   ToolUsageAnalytics,
   AnalyticsChart,
-  AnalyticsDataPoint
+  AnalyticsDataPoint,
 } from "@/types/admin/analytics";
 
 const analyticsService = AnalyticsService.getInstance();
@@ -163,7 +163,7 @@ export async function POST(request: NextRequest) {
 
       if (exportOptions.format === "csv") {
         // For CSV, cached data should be a string
-        const csvData = typeof cached.data === 'string' ? cached.data : '';
+        const csvData = typeof cached.data === "string" ? cached.data : "";
         return new NextResponse(csvData, {
           headers: {
             "Content-Type": "text/csv",

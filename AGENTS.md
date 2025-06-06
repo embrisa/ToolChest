@@ -1,44 +1,104 @@
-# ToolChest Contributor Guide
+# ToolChest AI Agent Guide
 
-## Repo orientation
+## Architecture
 
-- **Framework**: Next.js 14 with TypeScript
-- **Database**: PostgreSQL accessed via Prisma (`prisma/` folder)
-- **App code**: `src/app`, components in `src/components`, helpers in `src/{hooks,services,utils,types}`
-- **Testing**: Jest/React Testing Library (`tests`), Playwright (`e2e`)
+- **Framework**: Next.js 15 + TypeScript + App Router
+- **Database**: PostgreSQL + Prisma ORM
+- **Styling**: Tailwind CSS + Custom Design System
+- **Testing**: Jest + React Testing Library + Playwright
+- **Structure**: `src/app/` (routes), `src/components/` (UI), `src/{hooks,services,utils,types}/` (logic)
 
-## Quick setup
+## Essential Commands
 
-1. `npm run env:setup` → copies `env.example` to `.env.local`.
-2. Edit `.env.local` and provide a PostgreSQL `DATABASE_URL`.
-3. `npm run setup` to install packages, generate Prisma client and validate env.
-4. Start development with `npm run dev`.
+### Setup
 
-Run `npm run env:validate` whenever you modify `.env.local`.
+```bash
+npm run env:setup     # Copy env.example → .env.local
+npm run setup         # Install + generate + validate
+npm run dev           # Development server
+```
 
-## Development notes
+### Development
 
-- Use the `@/` alias for internal imports and keep code in TypeScript.
-- Wrap pages with `ErrorBoundary` and keep components accessible.
-- Format code with `npm run format`; lint and type-check using `npm run validate`.
+```bash
+npm run format        # Format with Prettier
+npm run lint:fix      # Auto-fix linting issues
+npm run validate      # Lint + type-check + format-check
+npm run type-check    # TypeScript validation only
+```
 
-## Testing commands
+### Testing
 
-- `npm test` – Jest unit/integration tests.
-- `npm run test:e2e` – Playwright end‑to‑end tests.
-- `npm run test:a11y` – accessibility checks.
-- `npm run test:coverage` – coverage report.
+```bash
+npm test              # Unit tests
+npm run test:coverage # Coverage report
+npm run test:e2e      # Playwright E2E
+npm run test:a11y     # Accessibility tests
+npm run test:quick    # Fast SQLite tests
+```
 
-## Database utilities
+### Database
 
-- `npm run db:migrate` – run migrations in development.
-- `npm run db:deploy` – apply migrations in production.
-- `npm run db:seed` – seed local data.
+```bash
+npm run db:generate   # Generate Prisma client
+npm run db:migrate    # Run migrations (dev)
+npm run db:deploy     # Deploy migrations (prod)
+npm run db:seed       # Seed database
+```
 
-## Pull requests
+### Validation & CI
 
-- Use clear commit messages and PR titles.
-- Ensure linting, type checks and tests succeed before opening a PR.
-- Document new environment variables or scripts in the README.
+```bash
+npm run test:all      # Full validation suite
+npm run validate:build # Build validation
+npm run validate:types # TypeScript errors
+npm run validate:lint # Lint with JSON output
+npm run validate:tests # Test coverage validation
+```
 
-Refer to `DESIGN_PHILOSOPHY.md`, `DEVELOPER_CHEAT_SHEET.md` and `TESTING.md` for more guidance.
+## Key Patterns
+
+### Imports
+
+- Use `@/` prefix: `@/components/ui`, `@/services/tools`
+- TypeScript strict mode enabled
+
+### Components
+
+- Wrap tools in `<ErrorBoundary>`
+- Use `useId()` for generated IDs (prevents hydration issues)
+- All components must be accessible (WCAG 2.1 AA)
+
+### API Routes
+
+- Admin routes: `/api/admin/*` (protected)
+- Public routes: `/api/tools/*`, `/api/health`
+- Use Zod for validation
+
+### File Processing
+
+- Client-side first (privacy)
+- 5MB+ files show progress
+- 10MB max file size
+
+## Environment
+
+Required in `.env.local`:
+
+```
+DATABASE_URL="postgresql://..."
+ADMIN_SECRET_TOKEN="secure-token"
+```
+
+## Quality Gates
+
+Before commits: `npm run validate` must pass
+
+- Linting + TypeScript + formatting
+- Use `npm run env:validate` after env changes
+
+## Reference Docs
+
+- `DESIGN_PHILOSOPHY.md` - Design system & patterns
+- `DEVELOPER_CHEAT_SHEET.md` - Detailed technical reference
+- `TESTING.md` - Testing guidelines

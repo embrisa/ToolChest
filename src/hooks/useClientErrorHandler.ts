@@ -163,47 +163,54 @@ export function useClientErrorHandler() {
       const performanceInfo =
         typeof window !== "undefined" && "performance" in window
           ? {
-            memory: (window.performance as PerformanceWithMemory).memory
-              ? (() => {
-                const perf = window.performance as PerformanceWithMemory;
-                return {
-                  usedJSHeapSize: perf.memory!.usedJSHeapSize || 0,
-                  totalJSHeapSize: perf.memory!.totalJSHeapSize || 0,
-                  jsHeapSizeLimit: perf.memory!.jsHeapSizeLimit || 0,
-                };
-              })()
-              : undefined,
-            timing: (() => {
-              try {
-                const navEntries = window.performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
-                const navTiming = navEntries[0];
-                return navTiming ? {
-                  navigationStart: navTiming.startTime || 0,
-                  unloadEventStart: navTiming.unloadEventStart || 0,
-                  unloadEventEnd: navTiming.unloadEventEnd || 0,
-                  redirectStart: navTiming.redirectStart || 0,
-                  redirectEnd: navTiming.redirectEnd || 0,
-                  fetchStart: navTiming.fetchStart || 0,
-                  domainLookupStart: navTiming.domainLookupStart || 0,
-                  domainLookupEnd: navTiming.domainLookupEnd || 0,
-                  connectStart: navTiming.connectStart || 0,
-                  connectEnd: navTiming.connectEnd || 0,
-                  secureConnectionStart: navTiming.secureConnectionStart || 0,
-                  requestStart: navTiming.requestStart || 0,
-                  responseStart: navTiming.responseStart || 0,
-                  responseEnd: navTiming.responseEnd || 0,
-                  domInteractive: navTiming.domInteractive || 0,
-                  domContentLoadedEventStart: navTiming.domContentLoadedEventStart || 0,
-                  domContentLoadedEventEnd: navTiming.domContentLoadedEventEnd || 0,
-                  domComplete: navTiming.domComplete || 0,
-                  loadEventStart: navTiming.loadEventStart || 0,
-                  loadEventEnd: navTiming.loadEventEnd || 0,
-                } : undefined;
-              } catch {
-                return undefined;
-              }
-            })(),
-          }
+              memory: (window.performance as PerformanceWithMemory).memory
+                ? (() => {
+                    const perf = window.performance as PerformanceWithMemory;
+                    return {
+                      usedJSHeapSize: perf.memory!.usedJSHeapSize || 0,
+                      totalJSHeapSize: perf.memory!.totalJSHeapSize || 0,
+                      jsHeapSizeLimit: perf.memory!.jsHeapSizeLimit || 0,
+                    };
+                  })()
+                : undefined,
+              timing: (() => {
+                try {
+                  const navEntries = window.performance.getEntriesByType(
+                    "navigation",
+                  ) as PerformanceNavigationTiming[];
+                  const navTiming = navEntries[0];
+                  return navTiming
+                    ? {
+                        navigationStart: navTiming.startTime || 0,
+                        unloadEventStart: navTiming.unloadEventStart || 0,
+                        unloadEventEnd: navTiming.unloadEventEnd || 0,
+                        redirectStart: navTiming.redirectStart || 0,
+                        redirectEnd: navTiming.redirectEnd || 0,
+                        fetchStart: navTiming.fetchStart || 0,
+                        domainLookupStart: navTiming.domainLookupStart || 0,
+                        domainLookupEnd: navTiming.domainLookupEnd || 0,
+                        connectStart: navTiming.connectStart || 0,
+                        connectEnd: navTiming.connectEnd || 0,
+                        secureConnectionStart:
+                          navTiming.secureConnectionStart || 0,
+                        requestStart: navTiming.requestStart || 0,
+                        responseStart: navTiming.responseStart || 0,
+                        responseEnd: navTiming.responseEnd || 0,
+                        domInteractive: navTiming.domInteractive || 0,
+                        domContentLoadedEventStart:
+                          navTiming.domContentLoadedEventStart || 0,
+                        domContentLoadedEventEnd:
+                          navTiming.domContentLoadedEventEnd || 0,
+                        domComplete: navTiming.domComplete || 0,
+                        loadEventStart: navTiming.loadEventStart || 0,
+                        loadEventEnd: navTiming.loadEventEnd || 0,
+                      }
+                    : undefined;
+                } catch {
+                  return undefined;
+                }
+              })(),
+            }
           : undefined;
 
       return {
@@ -214,9 +221,9 @@ export function useClientErrorHandler() {
         viewport:
           typeof window !== "undefined"
             ? {
-              width: window.innerWidth,
-              height: window.innerHeight,
-            }
+                width: window.innerWidth,
+                height: window.innerHeight,
+              }
             : undefined,
         performance: performanceInfo,
       };
@@ -346,10 +353,10 @@ export function useClientErrorHandler() {
                     );
                     const body = encodeURIComponent(
                       `Error ID: ${error.requestId || "Unknown"}\n` +
-                      `Time: ${error.timestamp}\n` +
-                      `Component: ${error.component || "Unknown"}\n` +
-                      `Message: ${error.message}\n\n` +
-                      `Please describe what you were doing when this error occurred:\n\n`,
+                        `Time: ${error.timestamp}\n` +
+                        `Component: ${error.component || "Unknown"}\n` +
+                        `Message: ${error.message}\n\n` +
+                        `Please describe what you were doing when this error occurred:\n\n`,
                     );
                     window.location.href = `mailto:support@tool-chest.com?subject=${subject}&body=${body}`;
                   },

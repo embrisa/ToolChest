@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { AnalyticsDashboard } from "../AnalyticsDashboard";
-import type { AnalyticsSummary, SystemPerformanceMetrics } from "@/types/admin/analytics";
+import type { AnalyticsSummary } from "@/types/admin/analytics";
 
 // Mock the AnalyticsDashboard component to avoid system metrics requirement for unit tests
 jest.mock("../AnalyticsDashboard", () => ({

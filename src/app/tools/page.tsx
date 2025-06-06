@@ -1,7 +1,6 @@
-'use client'
+"use client";
 
 import React, { useState, useEffect } from "react";
-import { Metadata } from "next";
 import { ToolCard } from "@/components/tools";
 import { ToolDTO } from "@/types/tools/tool";
 
@@ -96,14 +95,14 @@ export default function ToolsPage() {
     setMounted(true);
 
     // Fetch tools client-side for privacy-first approach
-    fetch('/api/tools')
-      .then(res => res.json())
+    fetch("/api/tools")
+      .then((res) => res.json())
       .then((data: ToolDTO[]) => {
         setTools(data);
         setLoading(false);
       })
-      .catch(error => {
-        console.error('Error fetching tools:', error);
+      .catch((error) => {
+        console.error("Error fetching tools:", error);
         setLoading(false);
       });
   }, []);
@@ -143,7 +142,9 @@ export default function ToolsPage() {
             >
               <div className="w-2 h-2 bg-brand-500 rounded-full animate-pulse"></div>
               <span className="text-sm font-medium text-brand-700 dark:text-brand-300">
-                {loading ? 'Loading tools...' : `${tools.length} tools available`}
+                {loading
+                  ? "Loading tools..."
+                  : `${tools.length} tools available`}
               </span>
             </div>
           </div>

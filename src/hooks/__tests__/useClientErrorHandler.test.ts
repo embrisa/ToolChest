@@ -24,10 +24,17 @@ import {
 } from "@/utils/errors";
 
 // Get the mocked functions for type safety
-const mockCreateClientError = createClientError as jest.MockedFunction<typeof createClientError>;
-const mockCategorizeError = categorizeError as jest.MockedFunction<typeof categorizeError>;
-const mockGetUserFriendlyMessage = getUserFriendlyMessage as jest.MockedFunction<typeof getUserFriendlyMessage>;
-const mockIsRecoverableError = isRecoverableError as jest.MockedFunction<typeof isRecoverableError>;
+const mockCreateClientError = createClientError as jest.MockedFunction<
+  typeof createClientError
+>;
+const mockCategorizeError = categorizeError as jest.MockedFunction<
+  typeof categorizeError
+>;
+const mockGetUserFriendlyMessage =
+  getUserFriendlyMessage as jest.MockedFunction<typeof getUserFriendlyMessage>;
+const mockIsRecoverableError = isRecoverableError as jest.MockedFunction<
+  typeof isRecoverableError
+>;
 const mockLogError = logError as jest.MockedFunction<typeof logError>;
 
 describe("useClientErrorHandler", () => {
@@ -47,7 +54,7 @@ describe("useClientErrorHandler", () => {
     mockCategorizeError.mockReturnValue("network");
     mockGetUserFriendlyMessage.mockReturnValue("Friendly");
     mockIsRecoverableError.mockReturnValue(false);
-    mockLogError.mockImplementation(() => { });
+    mockLogError.mockImplementation(() => {});
   });
 
   afterEach(() => {
@@ -65,7 +72,7 @@ describe("useClientErrorHandler", () => {
     expect(result.current.notifications.length).toBe(1);
     expect(mockCreateClientError).toHaveBeenCalledWith(
       expect.any(Error),
-      undefined
+      undefined,
     );
   });
 });

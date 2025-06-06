@@ -82,7 +82,8 @@ const parseArray = (
 };
 
 // Check if we're in build mode
-const isBuildTime = process.env.NODE_ENV === "production" && !process.env.DATABASE_URL;
+const isBuildTime =
+  process.env.NODE_ENV === "production" && !process.env.DATABASE_URL;
 
 // Validate and parse environment variables
 function validateEnvironment(): EnvironmentConfig {
@@ -99,8 +100,8 @@ function validateEnvironment(): EnvironmentConfig {
   if (missing.length > 0) {
     throw new Error(
       `Missing required environment variables: ${missing.join(", ")}\n` +
-      "Please check your .env.local file and ensure all required variables are set.\n" +
-      "See env.example for a complete list of required variables.",
+        "Please check your .env.local file and ensure all required variables are set.\n" +
+        "See env.example for a complete list of required variables.",
     );
   }
 
@@ -209,7 +210,10 @@ function createBuildTimeConfig(): EnvironmentConfig {
 }
 
 // Create runtime config with validation
-function createRuntimeConfig(nodeEnv: string, databaseUrl: string): EnvironmentConfig {
+function createRuntimeConfig(
+  nodeEnv: string,
+  databaseUrl: string,
+): EnvironmentConfig {
   return {
     // Database
     DATABASE_URL: databaseUrl,
@@ -300,7 +304,9 @@ function getEnv(): EnvironmentConfig {
       if (process.env.NODE_ENV !== "production") {
         console.error("\n📝 To fix this:");
         console.error("1. Copy env.example to .env.local");
-        console.error("2. Update the DATABASE_URL and other required variables");
+        console.error(
+          "2. Update the DATABASE_URL and other required variables",
+        );
         console.error("3. Restart the development server\n");
       }
       throw error;
@@ -314,60 +320,112 @@ export const config = new Proxy({} as EnvironmentConfig, {
   get(target, prop) {
     const env = getEnv();
     return env[prop as keyof EnvironmentConfig];
-  }
+  },
 });
 
 // Export individual sections for convenience
 export const database = {
-  get url() { return getEnv().DATABASE_URL; },
+  get url() {
+    return getEnv().DATABASE_URL;
+  },
 };
 
 export const server = {
-  get nodeEnv() { return getEnv().NODE_ENV; },
-  get port() { return getEnv().PORT; },
-  get isDevelopment() { return getEnv().NODE_ENV === "development"; },
-  get isProduction() { return getEnv().NODE_ENV === "production"; },
-  get isTest() { return getEnv().NODE_ENV === "test"; },
+  get nodeEnv() {
+    return getEnv().NODE_ENV;
+  },
+  get port() {
+    return getEnv().PORT;
+  },
+  get isDevelopment() {
+    return getEnv().NODE_ENV === "development";
+  },
+  get isProduction() {
+    return getEnv().NODE_ENV === "production";
+  },
+  get isTest() {
+    return getEnv().NODE_ENV === "test";
+  },
 };
 
 export const auth = {
-  get secretToken() { return getEnv().ADMIN_SECRET_TOKEN; },
-  get sessionSecret() { return getEnv().ADMIN_SESSION_SECRET; },
-  get sessionTimeout() { return getEnv().ADMIN_SESSION_TIMEOUT; },
-  get rememberMeTimeout() { return getEnv().ADMIN_REMEMBER_ME_TIMEOUT; },
-  get bcryptRounds() { return getEnv().ADMIN_BCRYPT_ROUNDS; },
-  get defaultPassword() { return getEnv().ADMIN_DEFAULT_PASSWORD; },
+  get secretToken() {
+    return getEnv().ADMIN_SECRET_TOKEN;
+  },
+  get sessionSecret() {
+    return getEnv().ADMIN_SESSION_SECRET;
+  },
+  get sessionTimeout() {
+    return getEnv().ADMIN_SESSION_TIMEOUT;
+  },
+  get rememberMeTimeout() {
+    return getEnv().ADMIN_REMEMBER_ME_TIMEOUT;
+  },
+  get bcryptRounds() {
+    return getEnv().ADMIN_BCRYPT_ROUNDS;
+  },
+  get defaultPassword() {
+    return getEnv().ADMIN_DEFAULT_PASSWORD;
+  },
 };
 
 export const performance = {
-  get enableCaching() { return getEnv().ENABLE_CACHING; },
-  get cacheTTL() { return getEnv().CACHE_TTL; },
+  get enableCaching() {
+    return getEnv().ENABLE_CACHING;
+  },
+  get cacheTTL() {
+    return getEnv().CACHE_TTL;
+  },
 };
 
 export const monitoring = {
-  get enableAnalytics() { return getEnv().ENABLE_ANALYTICS; },
-  get enableErrorLogging() { return getEnv().ENABLE_ERROR_LOGGING; },
-  get enableDevLogging() { return getEnv().ENABLE_DEV_LOGGING; },
+  get enableAnalytics() {
+    return getEnv().ENABLE_ANALYTICS;
+  },
+  get enableErrorLogging() {
+    return getEnv().ENABLE_ERROR_LOGGING;
+  },
+  get enableDevLogging() {
+    return getEnv().ENABLE_DEV_LOGGING;
+  },
 };
 
 export const features = {
-  get base64Tool() { return getEnv().FEATURE_BASE64_TOOL; },
-  get hashGenerator() { return getEnv().FEATURE_HASH_GENERATOR; },
-  get faviconGenerator() { return getEnv().FEATURE_FAVICON_GENERATOR; },
-  get markdownToPdf() { return getEnv().FEATURE_MARKDOWN_TO_PDF; },
-  get adminDashboard() { return getEnv().FEATURE_ADMIN_DASHBOARD; },
+  get base64Tool() {
+    return getEnv().FEATURE_BASE64_TOOL;
+  },
+  get hashGenerator() {
+    return getEnv().FEATURE_HASH_GENERATOR;
+  },
+  get faviconGenerator() {
+    return getEnv().FEATURE_FAVICON_GENERATOR;
+  },
+  get markdownToPdf() {
+    return getEnv().FEATURE_MARKDOWN_TO_PDF;
+  },
+  get adminDashboard() {
+    return getEnv().FEATURE_ADMIN_DASHBOARD;
+  },
 };
 
 export const fileProcessing = {
-  get maxFileSize() { return getEnv().MAX_FILE_SIZE; },
-  get largeFileThreshold() { return getEnv().LARGE_FILE_THRESHOLD; },
+  get maxFileSize() {
+    return getEnv().MAX_FILE_SIZE;
+  },
+  get largeFileThreshold() {
+    return getEnv().LARGE_FILE_THRESHOLD;
+  },
   isLargeFile: (size: number) => size > getEnv().LARGE_FILE_THRESHOLD,
   isValidFileSize: (size: number) => size <= getEnv().MAX_FILE_SIZE,
 };
 
 export const security = {
-  get allowedOrigins() { return getEnv().ALLOWED_ORIGINS; },
-  get enableSecurityHeaders() { return getEnv().ENABLE_SECURITY_HEADERS; },
+  get allowedOrigins() {
+    return getEnv().ALLOWED_ORIGINS;
+  },
+  get enableSecurityHeaders() {
+    return getEnv().ENABLE_SECURITY_HEADERS;
+  },
 };
 
 // Default export for the complete configuration

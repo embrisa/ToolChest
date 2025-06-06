@@ -67,9 +67,12 @@ describe("Base64Tool", () => {
     await userEvent.type(textarea, "abc");
 
     // Wait for the service to be called
-    await waitFor(() => {
-      expect(mockEncode).toHaveBeenCalled();
-    }, { timeout: 3000 });
+    await waitFor(
+      () => {
+        expect(mockEncode).toHaveBeenCalled();
+      },
+      { timeout: 3000 },
+    );
 
     // Verify the service was called (it may be called multiple times due to keystroke processing)
     expect(mockEncode).toHaveBeenCalledWith(
@@ -78,7 +81,7 @@ describe("Base64Tool", () => {
         variant: "standard",
         inputType: "text",
         // Don't check exact input since it's called on each keystroke
-      })
+      }),
     );
   });
 
@@ -92,9 +95,12 @@ describe("Base64Tool", () => {
     await userEvent.type(textarea, "abc");
 
     // Wait for the service to be called
-    await waitFor(() => {
-      expect(mockEncode).toHaveBeenCalled();
-    }, { timeout: 3000 });
+    await waitFor(
+      () => {
+        expect(mockEncode).toHaveBeenCalled();
+      },
+      { timeout: 3000 },
+    );
 
     // Look for the result in the component
     await waitFor(

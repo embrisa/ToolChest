@@ -64,9 +64,12 @@ describe("HashGeneratorTool", () => {
     await userEvent.type(textarea, "abc");
 
     // Wait for the service to be called
-    await waitFor(() => {
-      expect(mockGenerateHash).toHaveBeenCalled();
-    }, { timeout: 3000 });
+    await waitFor(
+      () => {
+        expect(mockGenerateHash).toHaveBeenCalled();
+      },
+      { timeout: 3000 },
+    );
 
     // Verify the service was called (it may be called multiple times due to keystroke processing)
     expect(mockGenerateHash).toHaveBeenCalledWith(
@@ -74,7 +77,7 @@ describe("HashGeneratorTool", () => {
         algorithm: "SHA-256",
         inputType: "text",
         // Don't check exact input since it's called on each keystroke
-      })
+      }),
     );
   });
 
@@ -88,9 +91,12 @@ describe("HashGeneratorTool", () => {
     await userEvent.type(textarea, "abc");
 
     // Wait for the service to be called
-    await waitFor(() => {
-      expect(mockGenerateHash).toHaveBeenCalled();
-    }, { timeout: 3000 });
+    await waitFor(
+      () => {
+        expect(mockGenerateHash).toHaveBeenCalled();
+      },
+      { timeout: 3000 },
+    );
 
     // Look for the hash result in the component
     await waitFor(

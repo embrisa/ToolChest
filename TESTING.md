@@ -34,11 +34,11 @@ tool-chest uses a multi-layered testing approach:
 
 ### Multi-Environment Support
 
-| Environment | Database | Schema File | Use Case |
-|-------------|----------|-------------|----------|
-| Production | PostgreSQL | `prisma/schema.prisma` | Live application |
-| Testing | SQLite | `prisma/schema.test.prisma` | Automated tests |
-| Development | PostgreSQL/SQLite | Auto-detected | Local development |
+| Environment | Database          | Schema File                 | Use Case          |
+| ----------- | ----------------- | --------------------------- | ----------------- |
+| Production  | PostgreSQL        | `prisma/schema.prisma`      | Live application  |
+| Testing     | SQLite            | `prisma/schema.test.prisma` | Automated tests   |
+| Development | PostgreSQL/SQLite | Auto-detected               | Local development |
 
 ### Testing Database Features
 
@@ -60,15 +60,16 @@ DATABASE_URL=file:./test.db
 
 **Test Results: 97/121 Passing**
 
-| Component | Status | Test Count |
-|-----------|--------|------------|
-| Homepage | Passing | 29/29 |
-| Button UI | Passing | 19/19 |
-| Utilities | Passing | 17/17 |
-| Validation | Passing | 15/15 |
-| File Processing | Passing | 10/10 |
+| Component       | Status  | Test Count |
+| --------------- | ------- | ---------- |
+| Homepage        | Passing | 29/29      |
+| Button UI       | Passing | 19/19      |
+| Utilities       | Passing | 17/17      |
+| Validation      | Passing | 15/15      |
+| File Processing | Passing | 10/10      |
 
 **Remaining Issues (24 failing tests):**
+
 - Service mocking in tool components (Base64Tool, HashGeneratorTool)
 - Prisma client browser compatibility in integration tests
 - Database connection issues in API integration tests
@@ -151,7 +152,7 @@ describe('ComponentName', () => {
 
     render(<ComponentName {...defaultProps} onClick={handleClick} />)
     await user.click(screen.getByRole('button'))
-    
+
     expect(handleClick).toHaveBeenCalledTimes(1)
   })
 
@@ -205,12 +206,12 @@ const mockTags = [
 
 ## Common Issues & Solutions
 
-| Error | Solution |
-|-------|----------|
-| `ENOENT: test.db` | Run `npm run test:setup` |
+| Error                     | Solution                                                     |
+| ------------------------- | ------------------------------------------------------------ |
+| `ENOENT: test.db`         | Run `npm run test:setup`                                     |
 | `Prisma client not found` | Run `npx prisma generate --schema=prisma/schema.test.prisma` |
-| `Multiple elements` | Use `getAllBy*` instead of `getBy*` |
-| `Component not rendering` | Check mock implementations |
+| `Multiple elements`       | Use `getAllBy*` instead of `getBy*`                          |
+| `Component not rendering` | Check mock implementations                                   |
 
 ## Debugging Commands
 
@@ -233,17 +234,17 @@ sqlite3 test.db "SELECT * FROM Tool;"
 
 ### PostgreSQL ↔ SQLite Mapping
 
-| PostgreSQL | SQLite | Notes |
-|------------|--------|-------|
-| `serial` | `INTEGER` | Auto-increment |
-| `uuid` | `TEXT` | String representation |
-| `jsonb` | `TEXT` | JSON as string |
-| `timestamp` | `TEXT` | ISO 8601 format |
+| PostgreSQL  | SQLite    | Notes                 |
+| ----------- | --------- | --------------------- |
+| `serial`    | `INTEGER` | Auto-increment        |
+| `uuid`      | `TEXT`    | String representation |
+| `jsonb`     | `TEXT`    | JSON as string        |
+| `timestamp` | `TEXT`    | ISO 8601 format       |
 
 ## Coverage Requirements
 
 - **Statements**: > 80%
-- **Branches**: > 75% 
+- **Branches**: > 75%
 - **Functions**: > 80%
 - **Lines**: > 80%
 
