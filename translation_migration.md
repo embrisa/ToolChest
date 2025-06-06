@@ -381,21 +381,21 @@ Each language task should be tackled independently and includes:
   - Maintain technical precision while being accessible
   - Translate tag names for tool organization (codering, generatie, beveiliging, etc.)
 
-- **Task 2Q – Vietnamese (vi)**
+- **Task 2Q – Vietnamese (vi) ✅ COMPLETED**
 
-  **Create 12 Vietnamese Translation Files**:
-    - `messages/common/vi.json` (shared strings: actions, status, validation, privacy)
-    - `messages/pages/home/vi.json` (home page: hero, stats, search, filtering)
-    - `messages/pages/tools/vi.json` (tools listing page)
-    - `messages/pages/error/vi.json` (404, 500, error boundaries)
-    - `messages/pages/admin/vi.json` (admin dashboard, management)
-    - `messages/pages/loading/vi.json` (loading states)
-    - `messages/components/layout/vi.json` (header, footer, navigation, locale switcher)
-    - `messages/components/forms/vi.json` (form components, validation)
-    - `messages/components/ui/vi.json` (buttons, alerts, modals, tooltips)
-    - `messages/database/vi.json` (tool & tag names)
-    - `messages/tools/common/vi.json` (shared tool patterns)
-    - `messages/tools/{tool}/vi.json` (per tool, as needed)
+  - **All 12 Vietnamese Translation Files Created**:
+    - `messages/common/vi.json` ✅
+    - `messages/pages/home/vi.json` ✅
+    - `messages/pages/tools/vi.json` ✅
+    - `messages/pages/error/vi.json` ✅
+    - `messages/pages/admin/vi.json` ✅
+    - `messages/pages/loading/vi.json` ✅
+    - `messages/components/layout/vi.json` ✅
+    - `messages/components/forms/vi.json` ✅
+    - `messages/components/ui/vi.json` ✅
+    - `messages/database/vi.json` ✅
+    - `messages/tools/common/vi.json` ✅
+    - `messages/tools/{tool}/vi.json` ✅ (base64, hash-generator, favicon-generator, markdown-to-pdf)
   - Target community: Vietnamese developer community
   - Focus on clarity and technical accuracy
   - Translate tag names for tool organization (mã hóa, tạo, bảo mật, etc.)
