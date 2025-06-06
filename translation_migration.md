@@ -210,7 +210,7 @@ Each language task should be tackled independently and includes:
   - Consider Brazilian Portuguese as primary variant
   - Translate tag names for tool organization (codificação, geração, segurança, etc.)
 
-- **Task 2H – Russian (ru)**
+- **Task 2H – Russian (ru) ✅ COMPLETED**
 
   **Create 12 Russian Translation Files**:
     - `messages/common/ru.json` (shared strings: actions, status, validation, privacy)
