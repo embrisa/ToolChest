@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui";
 import {
   MagnifyingGlassIcon,
@@ -9,6 +10,8 @@ import {
 } from "@heroicons/react/24/outline";
 
 export default function NotFound() {
+  const t = useTranslations("pages.error.notFound");
+
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-4 py-12">
       <div className="max-w-2xl mx-auto text-center">
@@ -18,7 +21,7 @@ export default function NotFound() {
             className="text-6xl sm:text-7xl md:text-8xl font-bold text-gradient-brand mb-6"
             aria-hidden="true"
           >
-            404
+            {t("errorCode")}
           </div>
           <div className="flex justify-center mb-8">
             <div className="w-24 h-24 bg-brand-50 dark:bg-brand-950/20 border border-brand-200 dark:border-brand-800/30 rounded-2xl flex items-center justify-center shadow-soft animate-float">
@@ -36,11 +39,10 @@ export default function NotFound() {
           style={{ animationDelay: "0.1s" }}
         >
           <h1 className="text-display text-3xl sm:text-4xl font-bold text-foreground mb-6">
-            Page Not Found
+            {t("title")}
           </h1>
           <p className="text-body text-lg text-foreground-secondary mb-8 max-w-lg mx-auto">
-            The page you&apos;re looking for doesn&apos;t exist. It may have
-            been moved, deleted, or you may have typed the URL incorrectly.
+            {t("description")}
           </p>
         </div>
 
@@ -50,7 +52,7 @@ export default function NotFound() {
           style={{ animationDelay: "0.2s" }}
         >
           <h2 className="text-heading text-xl font-semibold text-foreground mb-6">
-            Here&apos;s what you can do:
+            {t("suggestions.title")}
           </h2>
           <ul className="text-left space-y-4 text-foreground-secondary max-w-md mx-auto">
             <li className="flex items-start group">
@@ -59,7 +61,7 @@ export default function NotFound() {
                 aria-hidden="true"
               ></span>
               <span className="text-body group-hover:text-foreground transition-colors duration-200">
-                Check the URL for typos
+                {t("suggestions.checkUrl")}
               </span>
             </li>
             <li className="flex items-start group">
@@ -68,7 +70,7 @@ export default function NotFound() {
                 aria-hidden="true"
               ></span>
               <span className="text-body group-hover:text-foreground transition-colors duration-200">
-                Use the navigation menu to find what you&apos;re looking for
+                {t("suggestions.useNavigation")}
               </span>
             </li>
             <li className="flex items-start group">
@@ -77,7 +79,7 @@ export default function NotFound() {
                 aria-hidden="true"
               ></span>
               <span className="text-body group-hover:text-foreground transition-colors duration-200">
-                Return to the home page
+                {t("suggestions.returnHome")}
               </span>
             </li>
             <li className="flex items-start group">
@@ -86,7 +88,7 @@ export default function NotFound() {
                 aria-hidden="true"
               ></span>
               <span className="text-body group-hover:text-foreground transition-colors duration-200">
-                Search for tools using the search feature
+                {t("suggestions.searchTools")}
               </span>
             </li>
           </ul>
@@ -104,7 +106,7 @@ export default function NotFound() {
               className="w-full sm:w-auto focus-ring"
             >
               <HomeIcon className="w-5 h-5 mr-2" aria-hidden="true" />
-              Go to Home
+              {t("actions.goToHome")}
             </Button>
           </Link>
           <Button
@@ -114,7 +116,7 @@ export default function NotFound() {
             onClick={() => window.history.back()}
           >
             <ArrowLeftIcon className="w-5 h-5 mr-2" aria-hidden="true" />
-            Go Back
+            {t("actions.goBack")}
           </Button>
         </div>
 
@@ -124,7 +126,7 @@ export default function NotFound() {
           style={{ animationDelay: "0.4s" }}
         >
           <h2 className="text-heading text-lg font-semibold text-foreground mb-6">
-            Popular Tools
+            {t("popularTools.title")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
             <Link
@@ -137,10 +139,10 @@ export default function NotFound() {
                 </div>
                 <div className="flex-1 text-left">
                   <div className="font-medium text-foreground group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors duration-200">
-                    Base64 Tool
+                    {t("popularTools.base64.title")}
                   </div>
                   <div className="text-sm text-foreground-secondary mt-1">
-                    Encode and decode Base64 data
+                    {t("popularTools.base64.description")}
                   </div>
                 </div>
               </div>
@@ -155,10 +157,10 @@ export default function NotFound() {
                 </div>
                 <div className="flex-1 text-left">
                   <div className="font-medium text-foreground group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors duration-200">
-                    Hash Generator
+                    {t("popularTools.hashGenerator.title")}
                   </div>
                   <div className="text-sm text-foreground-secondary mt-1">
-                    Generate MD5, SHA hashes
+                    {t("popularTools.hashGenerator.description")}
                   </div>
                 </div>
               </div>
@@ -173,10 +175,10 @@ export default function NotFound() {
                 </div>
                 <div className="flex-1 text-left">
                   <div className="font-medium text-foreground group-hover:text-success-600 dark:group-hover:text-success-400 transition-colors duration-200">
-                    Favicon Generator
+                    {t("popularTools.faviconGenerator.title")}
                   </div>
                   <div className="text-sm text-foreground-secondary mt-1">
-                    Create favicons from images
+                    {t("popularTools.faviconGenerator.description")}
                   </div>
                 </div>
               </div>
@@ -191,10 +193,10 @@ export default function NotFound() {
                 </div>
                 <div className="flex-1 text-left">
                   <div className="font-medium text-foreground group-hover:text-warning-600 dark:group-hover:text-warning-400 transition-colors duration-200">
-                    Markdown to PDF
+                    {t("popularTools.markdownToPdf.title")}
                   </div>
                   <div className="text-sm text-foreground-secondary mt-1">
-                    Convert Markdown to PDF
+                    {t("popularTools.markdownToPdf.description")}
                   </div>
                 </div>
               </div>

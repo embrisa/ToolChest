@@ -1,0 +1,100 @@
+{
+    "dashboard": {
+        "title": "Dashboard",
+        "description": "Overview of your tool-chest application performance and analytics",
+        "stats": {
+            "totalTools": "Total Tools",
+            "totalTags": "Total Tags",
+            "totalUsage": "Total Usage",
+            "thisMonth": "This Month",
+            "applicationStats": "Application Statistics"
+        },
+        "usage": {
+            "title": "Tool Usage Overview",
+            "table": {
+                "tool": "Tool",
+                "usageCount": "Usage Count",
+                "change": "Change",
+                "actions": "Actions"
+            }
+        },
+        "quickActions": {
+            "title": "Quick Actions",
+            "viewAnalytics": "View Analytics",
+            "manageTools": "Manage Tools",
+            "manageTags": "Manage Tags",
+            "viewSite": "View Site",
+            "systemHealth": "System Health"
+        }
+    },
+    "tools": {
+        "title": "Tool Management",
+        "description": "Manage tools, their metadata, and relationships",
+        "actions": {
+            "createTool": "Create Tool",
+            "editTool": "Edit Tool",
+            "deleteTool": "Delete Tool",
+            "bulkActions": "Bulk Actions"
+        },
+        "table": {
+            "name": "Name",
+            "slug": "Slug",
+            "status": "Status",
+            "tags": "Tags",
+            "usage": "Usage",
+            "lastModified": "Last Modified",
+            "actions": "Actions"
+        }
+    },
+    "tags": {
+        "title": "Tag Management",
+        "description": "Organize tools with tags and manage relationships",
+        "actions": {
+            "createTag": "Create Tag",
+            "editTag": "Edit Tag",
+            "deleteTag": "Delete Tag",
+            "bulkActions": "Bulk Actions"
+        },
+        "table": {
+            "name": "Name",
+            "slug": "Slug",
+            "color": "Color",
+            "toolCount": "Tools",
+            "description": "Description",
+            "actions": "Actions"
+        }
+    },
+    "analytics": {
+        "title": "Analytics",
+        "description": "View detailed analytics and usage statistics",
+        "charts": {
+            "usageOverTime": "Usage Over Time",
+            "topTools": "Top Tools",
+            "userMetrics": "User Metrics"
+        }
+    },
+    "auth": {
+        "title": "Admin Login",
+        "description": "Access the administration panel",
+        "form": {
+            "token": "Admin Token",
+            "tokenPlaceholder": "Enter admin token",
+            "login": "Login",
+            "loginError": "Invalid admin token"
+        }
+    },
+    "loading": {
+        "panel": "Loading admin panel...",
+        "dashboard": "Loading dashboard...",
+        "analytics": "Loading analytics..."
+    },
+    "navigation": {
+        "dashboard": "Dashboard",
+        "tools": "Tools",
+        "tags": "Tags",
+        "analytics": "Analytics",
+        "monitoring": "Monitoring",
+        "logout": "Logout",
+        "viewSite": "View Site"
+    }
+}

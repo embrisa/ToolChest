@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { ErrorPage } from "@/components/errors";
 import { generateErrorId, logError } from "@/utils/errors";
 
@@ -10,6 +11,8 @@ interface ErrorProps {
 }
 
 export default function Error({ error, reset }: ErrorProps) {
+  const t = useTranslations("pages.error.serverError");
+
   useEffect(() => {
     // Log the error
     logError(error, {
@@ -24,47 +27,47 @@ export default function Error({ error, reset }: ErrorProps) {
     <div className="min-h-screen bg-background animate-fade-in">
       <ErrorPage
         statusCode={500}
-        title="Something went wrong"
-        message="An unexpected error occurred"
-        description="We're sorry, but something went wrong while loading this page. Our team has been notified and is working to resolve the issue."
+        title={t("title")}
+        message={t("message")}
+        description={t("description")}
         suggestions={[
-          "Try refreshing the page",
-          "Go back to the previous page",
-          "Return to the home page",
-          "Contact support if the problem persists",
+          t("suggestions.0"),
+          t("suggestions.1"),
+          t("suggestions.2"),
+          t("suggestions.3"),
         ]}
         recoveryActions={[
           {
             type: "retry",
-            label: "Try Again",
+            label: t("actions.refreshPage"),
             onClick: reset,
           },
           {
             type: "refresh",
-            label: "Refresh Page",
+            label: t("actions.refreshPage"),
             onClick: () => window.location.reload(),
           },
           {
             type: "navigate_back",
-            label: "Go Back",
+            label: t("actions.goBack"),
             onClick: () => window.history.back(),
           },
           {
             type: "navigate_home",
-            label: "Go to Home",
+            label: t("actions.goToHome"),
             onClick: () => (window.location.href = "/"),
           },
           {
             type: "contact_support",
-            label: "Contact Support",
+            label: t("actions.contactSupport"),
             onClick: () => {
               const subject = encodeURIComponent(`Error Report - ${errorId}`);
               const body = encodeURIComponent(
                 `Error ID: ${errorId}\n` +
-                  `Time: ${new Date().toISOString()}\n` +
-                  `URL: ${window.location.href}\n` +
-                  `Error: ${error.message}\n\n` +
-                  `Please describe what you were doing when this error occurred:\n\n`,
+                `Time: ${new Date().toISOString()}\n` +
+                `URL: ${window.location.href}\n` +
+                `Error: ${error.message}\n\n` +
+                `Please describe what you were doing when this error occurred:\n\n`,
               );
               window.location.href = `mailto:support@tool-chest.com?subject=${subject}&body=${body}`;
             },

@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { ToolDTO } from "@/types/tools/tool";
 import { cn } from "@/utils";
@@ -19,6 +20,7 @@ export function ToolCard({
   priority: _priority = false,
   "data-testid": testId,
 }: ToolCardProps) {
+  const t = useTranslations("common.units");
   const toolPath = `/tools/${tool.slug}`;
 
   // Get tool-specific styling based on tool type
@@ -152,10 +154,10 @@ export function ToolCard({
                   style={
                     tag.color
                       ? {
-                          backgroundColor: `${tag.color}15`,
-                          color: tag.color,
-                          borderColor: `${tag.color}30`,
-                        }
+                        backgroundColor: `${tag.color}15`,
+                        color: tag.color,
+                        borderColor: `${tag.color}30`,
+                      }
                       : undefined
                   }
                 >
@@ -200,7 +202,7 @@ export function ToolCard({
                   d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                 />
               </svg>
-              <span>Used {tool.usageCount.toLocaleString()} times</span>
+              <span>Used {tool.usageCount.toLocaleString()} {t("uses")}</span>
             </div>
           )}
         </CardContent>

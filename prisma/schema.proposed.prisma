@@ -1,0 +1,120 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tool {
+  id               String          @id @default(cuid())
+  
+  // Translation keys instead of hardcoded text
+  nameKey          String          @unique  // e.g., "tools.base64.name"
+  descriptionKey   String?                  // e.g., "tools.base64.description"
+  
+  // Technical identifiers
+  slug             String          @unique  // e.g., "base64" - used for routing and file lookup
+  toolKey          String          @unique  // e.g., "base64" - used for translation file lookup
+  
+  // UI/Display properties
+  iconClass        String?                  // e.g., "tool-icon-base64"
+  
+  // Metadata
+  displayOrder     Int             @default(0)
+  usageCount       Int             @default(0)
+  isActive         Boolean         @default(true)
+  isFeatured       Boolean         @default(false)
+  
+  // Timestamps
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  
+  // Relations
+  tags             ToolTag[]
+  usages           ToolUsage[]
+  toolUsageStats   ToolUsageStats?
+}
+
+model Tag {
+  id             String    @id @default(cuid())
+  
+  // Translation keys instead of hardcoded text
+  nameKey        String    @unique  // e.g., "tags.encoding.name"
+  descriptionKey String?            // e.g., "tags.encoding.description"
+  
+  // Technical identifiers
+  slug           String    @unique  // e.g., "encoding" - used for routing
+  tagKey         String    @unique  // e.g., "encoding" - used for translation lookup
+  
+  // UI properties
+  color          String?   @default("#000000")
+  iconClass      String?   // e.g., "tag-icon-encoding"
+  
+  // Metadata
+  displayOrder   Int       @default(0)
+  isActive       Boolean   @default(true)
+  
+  // Timestamps
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  
+  // Relations
+  tools          ToolTag[]
+}
+
+// Junction table remains the same
+model ToolTag {
+  toolId     String
+  tagId      String
+  assignedAt DateTime @default(now())
+  tag        Tag      @relation(fields: [tagId], references: [id])
+  tool       Tool     @relation(fields: [toolId], references: [id])
+
+  @@id([toolId, tagId])
+}
+
+model ToolUsageStats {
+  id         String   @id @default(cuid())
+  toolId     String   @unique
+  usageCount Int      @default(0)
+  lastUsed   DateTime @default(now())
+  tool       Tool     @relation(fields: [toolId], references: [id])
+}
+
+model ToolUsage {
+  id        String   @id @default(cuid())
+  toolId    String
+  timestamp DateTime @default(now())
+  metadata  Json?
+  tool      Tool     @relation(fields: [toolId], references: [id])
+}
+
+model AdminUser {
+  id           String          @id @default(cuid())
+  username     String          @unique
+  email        String          @unique
+  passwordHash String
+  role         String          @default("ADMIN")
+  isActive     Boolean         @default(true)
+  lastLoginAt  DateTime?
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  auditLogs    AdminAuditLog[]
+}
+
+model AdminAuditLog {
+  id          String    @id @default(cuid())
+  adminUserId String
+  action      String
+  tableName   String
+  recordId    String
+  oldValues   Json?
+  newValues   Json?
+  ipAddress   String
+  userAgent   String
+  createdAt   DateTime  @default(now())
+  adminUser   AdminUser @relation(fields: [adminUserId], references: [id])
+} 

@@ -1,11 +1,15 @@
 "use client";
 
 import React, { Suspense } from "react";
+import { useTranslations } from "next-intl";
 import { ToolCard, SearchInput, TagFilter } from "@/components/tools";
 import { useToolsWithState, useTagsWithState } from "@/hooks/useToolsWithState";
 import { Button } from "@/components/ui";
 
 function HomePageContent() {
+  const t = useTranslations("pages.home");
+  const tCommon = useTranslations("common");
+
   // Use enhanced hooks with URL synchronization
   const {
     tools: filteredTools,
@@ -57,10 +61,10 @@ function HomePageContent() {
             </svg>
           </div>
           <h2 className="text-title text-2xl font-bold text-primary mb-4">
-            Something went wrong
+            {t("errors.troubleLoading")}
           </h2>
           <p className="text-body text-secondary mb-6">
-            We&apos;re having trouble loading the tools. Please try again later.
+            {t("errors.troubleLoading")}
           </p>
           <Button
             variant="primary"
@@ -71,7 +75,7 @@ function HomePageContent() {
             className="focus-ring"
             data-testid="retry-button"
           >
-            Try Again
+            {tCommon("actions.tryAgain")}
           </Button>
         </div>
       </div>
@@ -85,13 +89,13 @@ function HomePageContent() {
         <div className="relative container-wide px-6 sm:px-8 lg:px-12 py-20 sm:py-24 lg:py-16">
           <div className="text-center animate-fade-in-up">
             <h1 className="text-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8">
-              <span className="text-gradient-brand">tool-chest</span>
+              <span className="text-gradient-brand">{t("hero.title")}</span>
             </h1>
             <p className="text-body text-lg sm:text-xl lg:text-2xl text-secondary max-w-3xl mx-auto mb-12 leading-relaxed">
-              Your collection of essential computer tools.
+              {t("hero.subtitle")}
               <br className="hidden sm:block" />
               <span className="text-gradient bg-gradient-to-r from-brand-600 to-accent-600 bg-clip-text text-transparent">
-                Encode, decode, generate, convert, and more with ease.
+                {t("hero.description")}
               </span>
             </p>
 
@@ -103,7 +107,7 @@ function HomePageContent() {
               <SearchInput
                 value={filterState.query}
                 onChange={setQuery}
-                placeholder="Search tools..."
+                placeholder={t("hero.searchPlaceholder")}
                 isLoading={Boolean(toolsLoading && filterState.query)}
                 resultCount={filteredTools.length}
                 className="w-full text-lg"
@@ -126,7 +130,7 @@ function HomePageContent() {
                   {isLoading ? "..." : filteredTools.length}
                 </div>
                 <div className="text-sm text-secondary font-medium">
-                  Tools Available
+                  {t("stats.toolsAvailable")}
                 </div>
               </div>
               <div
@@ -135,10 +139,10 @@ function HomePageContent() {
               ></div>
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-gradient bg-gradient-to-r from-success-500 to-warning-500 bg-clip-text text-transparent">
-                  100%
+                  {t("stats.clientSideValue")}
                 </div>
                 <div className="text-sm text-secondary font-medium">
-                  Client-side Processing
+                  {t("stats.clientSideProcessing")}
                 </div>
               </div>
               <div
@@ -147,10 +151,10 @@ function HomePageContent() {
               ></div>
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-gradient bg-gradient-to-r from-accent-500 to-brand-500 bg-clip-text text-transparent">
-                  Free
+                  {t("stats.freeForever")}
                 </div>
                 <div className="text-sm text-secondary font-medium">
-                  Forever
+                  {t("stats.freeValue")}
                 </div>
               </div>
             </div>
@@ -165,15 +169,15 @@ function HomePageContent() {
           <div className="flex items-center justify-between mb-6">
             <div>
               <h2 className="text-heading text-xl font-semibold text-primary">
-                {filterState.query ? "Search Results" : "All Tools"}
+                {filterState.query ? t("sections.searchResults") : t("sections.allTools")}
               </h2>
               <p
                 className="text-body text-secondary mt-2"
                 data-testid="results-summary-mobile"
               >
                 {isLoading
-                  ? "Loading..."
-                  : `${filteredTools.length} tools found`}
+                  ? t("loading.loadingTools")
+                  : `${filteredTools.length} ${t("loading.toolsFound")}`}
               </p>
             </div>
           </div>
@@ -183,10 +187,10 @@ function HomePageContent() {
             <summary className="card p-6 cursor-pointer focus-ring rounded-lg list-none">
               <div className="flex items-center justify-between">
                 <span className="text-body font-medium text-primary">
-                  Filter Tools
+                  {t("sections.filterTools")}
                   {filterState.tags.length > 0 && (
                     <span className="ml-3 inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-brand-100 text-brand-800 dark:bg-brand-900/20 dark:text-brand-200">
-                      {filterState.tags.length} active
+                      {filterState.tags.length} {t("sections.active")}
                     </span>
                   )}
                 </span>

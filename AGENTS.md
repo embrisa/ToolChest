@@ -1,5 +1,9 @@
 # ToolChest AI Agent Guide
 
+## Project Summary
+
+**tool-chest** is a privacy-focused web application providing essential computer tools (Base64 encoding, hash generation, favicon creation, Markdown to PDF conversion, etc.). All tool processing happens client-side in the browser to ensure user data privacy. The app features a modern light-mode design, supports 16 languages, and includes an admin system for managing tools and tags. Built for accessibility (WCAG 2.1 AA) and performance optimization.
+
 ## Architecture
 
 - **Framework**: Next.js 15 + TypeScript + App Router

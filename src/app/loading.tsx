@@ -1,6 +1,8 @@
 import { ToolGridFallback } from "@/components/ui";
+import { getTranslations } from "next-intl/server";
 
-export default function Loading() {
+export default async function Loading() {
+  const t = await getTranslations("pages.loading.page");
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section Skeleton */}
@@ -34,7 +36,7 @@ export default function Loading() {
 
           {/* Tools Grid */}
           <div className="mt-8 lg:mt-0 lg:col-span-3">
-            <ToolGridFallback count={6} message="Loading tools..." />
+            <ToolGridFallback count={6} message={t("message")} />
           </div>
         </div>
       </main>

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { ToolCard } from "@/components/tools";
 import { ToolDTO } from "@/types/tools/tool";
 
@@ -8,6 +9,8 @@ import { ToolDTO } from "@/types/tools/tool";
 // Consider adding metadata in a parent server component or layout
 
 function ToolGrid({ tools, loading }: { tools: ToolDTO[]; loading: boolean }) {
+  const t = useTranslations("pages.tools");
+
   if (loading) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -51,11 +54,10 @@ function ToolGrid({ tools, loading }: { tools: ToolDTO[]; loading: boolean }) {
           </svg>
         </div>
         <h3 className="text-heading text-lg font-semibold text-foreground mb-2">
-          No tools available
+          {t("states.noToolsAvailable")}
         </h3>
         <p className="text-body text-foreground-secondary max-w-md mx-auto">
-          Tools are being loaded. Please check back soon or try refreshing the
-          page.
+          {t("states.noToolsDescription")}
         </p>
       </div>
     );
@@ -87,6 +89,7 @@ function ToolGrid({ tools, loading }: { tools: ToolDTO[]; loading: boolean }) {
 }
 
 export default function ToolsPage() {
+  const t = useTranslations("pages.tools");
   const [tools, setTools] = useState<ToolDTO[]>([]);
   const [loading, setLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
@@ -123,16 +126,10 @@ export default function ToolsPage() {
         <div className="relative container-wide py-12 lg:py-16">
           <div className="text-center animate-fade-in-up">
             <h1 className="text-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-              All Tools
+              {t("page.title")}
             </h1>
             <p className="text-body text-lg lg:text-xl text-foreground-secondary max-w-3xl mx-auto leading-relaxed">
-              Explore our complete collection of utility tools designed to make
-              your
-              <span className="text-gradient bg-gradient-to-r from-brand-600 to-accent-600 bg-clip-text text-transparent font-medium">
-                {" "}
-                development workflow more efficient
-              </span>
-              .
+              {t("page.subtitle")}
             </p>
 
             {/* Tool count badge */}
@@ -143,8 +140,8 @@ export default function ToolsPage() {
               <div className="w-2 h-2 bg-brand-500 rounded-full animate-pulse"></div>
               <span className="text-sm font-medium text-brand-700 dark:text-brand-300">
                 {loading
-                  ? "Loading tools..."
-                  : `${tools.length} tools available`}
+                  ? t("page.loading")
+                  : `${tools.length} ${t("page.toolsAvailable")}`}
               </span>
             </div>
           </div>
@@ -160,10 +157,10 @@ export default function ToolsPage() {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-heading text-xl font-semibold text-foreground">
-                Available Tools
+                {t("page.availableTools")}
               </h2>
               <p className="text-body text-foreground-secondary mt-1">
-                Professional-grade utilities for web development
+                {t("page.description")}
               </p>
             </div>
 
@@ -171,11 +168,11 @@ export default function ToolsPage() {
             <div className="hidden sm:flex items-center gap-3">
               <div className="flex items-center gap-2 text-sm text-foreground-secondary">
                 <div className="w-2 h-2 bg-success-500 rounded-full"></div>
-                All tools free
+                {t("stats.allToolsFree")}
               </div>
               <div className="flex items-center gap-2 text-sm text-foreground-secondary">
                 <div className="w-2 h-2 bg-brand-500 rounded-full"></div>
-                Client-side processing
+                {t("stats.clientSideProcessing")}
               </div>
             </div>
           </div>
