@@ -399,6 +399,23 @@ Each language task should be tackled independently and includes:
   - Maintain technical precision while being accessible
   - Translate tag names for tool organization (codering, generatie, beveiliging, etc.)
 
+
+- **Task 2Q – Vietnamese (vi) ✅ COMPLETED**
+
+  - **All 12 Vietnamese Translation Files Created**:
+    - `messages/common/vi.json` ✅
+    - `messages/pages/home/vi.json` ✅
+    - `messages/pages/tools/vi.json` ✅
+    - `messages/pages/error/vi.json` ✅
+    - `messages/pages/admin/vi.json` ✅
+    - `messages/pages/loading/vi.json` ✅
+    - `messages/components/layout/vi.json` ✅
+    - `messages/components/forms/vi.json` ✅
+    - `messages/components/ui/vi.json` ✅
+    - `messages/database/vi.json` ✅
+    - `messages/tools/common/vi.json` ✅
+    - `messages/tools/{tool}/vi.json` ✅ (base64, hash-generator, favicon-generator, markdown-to-pdf)
+
 - **Task 2Q – Vietnamese (vi)**
 
   **Create 12 Vietnamese Translation Files**:
@@ -415,6 +432,7 @@ Each language task should be tackled independently and includes:
   - `messages/database/vi.json` (tool & tag names)
   - `messages/tools/common/vi.json` (shared tool patterns)
   - `messages/tools/{tool}/vi.json` (per tool, as needed)
+
   - Target community: Vietnamese developer community
   - Focus on clarity and technical accuracy
   - Translate tag names for tool organization (mã hóa, tạo, bảo mật, etc.)
