@@ -1,0 +1,72 @@
+{
+  "ui": {
+    "modes": {
+      "encode": "एन्कोड",
+      "decode": "व्याख्या करना",
+      "generate": "उत्पन्न",
+      "convert": "बदलना",
+      "process": "प्रक्रिया",
+      "analyze": "विश्लेषण करना"
+    },
+    "inputTypes": {
+      "text": "मूलपाठ",
+      "file": "फ़ाइल",
+      "url": "यूआरएल",
+      "upload": "अपलोड करना"
+    },
+    "actions": {
+      "process": "प्रक्रिया",
+      "copy": "प्रतिलिपि परिणाम",
+      "download": "डाउनलोड करना",
+      "upload": "अपलोड करना",
+      "clear": "स्पष्ट",
+      "reset": "रीसेट करना",
+      "retry": "पुन: प्रयास करें",
+      "save": "बचाना",
+      "export": "निर्यात"
+    },
+    "status": {
+      "processing": "प्रसंस्करण ...",
+      "success": "ऑपरेशन सफलतापूर्वक पूरा किया",
+      "copied": "क्लिपबोर्ड के लिए कॉपी किया गया",
+      "error": "प्रचालन विफल रहा",
+      "ready": "तैयार",
+      "waiting": "इनपुट की प्रतीक्षा में"
+    },
+    "placeholders": {
+      "textInput": "पाठ यहां लिखें...",
+      "fileUpload": "एक फ़ाइल का चयन करें या खींचें और ड्रॉप करें",
+      "urlInput": "URL यहाँ दर्ज करें ...",
+      "searchInput": "खोज..."
+    }
+  },
+  "validation": {
+    "required": "यह फ़ील्ड आवश्यक है",
+    "invalidInput": "अमान्य निवेश",
+    "fileTooLarge": "फ़ाइल बहुत बड़ी (अधिकतम {अधिकतम})",
+    "unsupportedFileType": "असमर्थित फ़ाइल प्रकार",
+    "invalidFormat": "अमान्य प्रारूप",
+    "emptyInput": "कृपया कुछ पाठ दर्ज करें या किसी फ़ाइल का चयन करें",
+    "invalidUrl": "क्रुपया मान्य यूआरएल दर्ज करें"
+  },
+  "privacy": {
+    "clientSideNote": "सभी प्रसंस्करण अधिकतम गोपनीयता के लिए आपके ब्राउज़र में होता है।",
+    "noDataSent": "सर्वर को कोई डेटा नहीं भेजा गया",
+    "filesStayLocal": "फ़ाइलें आपके डिवाइस पर रहें",
+    "noLogging": "कोई डेटा स्टोरेज या लॉगिंग नहीं"
+  },
+  "features": {
+    "clientSideProcessing": "ग्राहक-पक्षीय गोपनीयता के लिए प्रसंस्करण",
+    "copyToClipboard": "क्लिपबोर्ड कार्यक्षमता के लिए कॉपी करें",
+    "downloadResults": "डाउनलोड परिणाम",
+    "realTimeProcessing": "वास्तविक समय-प्रसंस्करण",
+    "multipleFormats": "बहु प्रारूप समर्थन",
+    "batchProcessing": "बैच संसाधन समर्थन"
+  },
+  "errors": {
+    "processingFailed": "प्रसंस्करण विफल",
+    "fileReadError": "त्रुटि पठन संचिका",
+    "networkError": "नेटवर्क त्रुटि हुई",
+    "unknownError": "एक अज्ञात त्रुटि हुई"
+  }
+}
