@@ -1,0 +1,85 @@
+{
+  "metadata": {
+    "title": "Favicon 생성기 | 도구 체력",
+    "description": "여러 크기와 형식의 이미지에서 Favicon을 만듭니다. 클라이언트 측 처리를 통해 웹 애플리케이션에 대한 완전한 Favicon 패키지를 생성합니다.",
+    "keywords": [
+      "파비콘",
+      "발전기",
+      "상",
+      "편물",
+      "영상",
+      "크기를 조정하십시오",
+      "전환하다",
+      "ICO",
+      "PNG",
+      "웹 개발"
+    ]
+  },
+  "page": {
+    "title": "Favicon 생성기",
+    "description": "여러 크기와 형식의 이미지에서 Favicon을 만듭니다."
+  },
+  "tool": {
+    "sizes": {
+      "16x16": "16x16 (브라우저 탭)",
+      "32x32": "32x32 (브라우저 탭)",
+      "48x48": "48x48 (Windows)",
+      "57x57": "57x57 (iOS)",
+      "72x72": "72x72 (iPad)",
+      "96x96": "96x96 (Android)",
+      "120x120": "120x120 (iPhone Retina)",
+      "152x152": "152x152 (iPad Retina)",
+      "180x180": "180x180 (iPhone 6 Plus)",
+      "192x192": "192x192 (Android Chrome)",
+      "512x512": "512x512 (Android Chrome)"
+    },
+    "formats": {
+      "ico": "ICO (Windows)",
+      "png": "PNG (Universal)",
+      "svg": "SVG (확장 가능)"
+    },
+    "placeholders": {
+      "fileUpload": "이미지 파일 또는 드래그 앤 드롭을 선택하십시오"
+    }
+  },
+  "validation": {
+    "imageRequired": "이미지 파일을 선택하십시오",
+    "invalidImageFormat": "유효한 이미지 형식 (PNG, JPG, SVG)을 선택하십시오.",
+    "imageTooLarge": "이미지 파일 너무 큰 (최대 10MB)",
+    "imageTooSmall": "최상의 결과를 얻으려면 이미지는 32x32 픽셀 이상이어야합니다."
+  },
+  "info": {
+    "title": "Favicon Generation에 대해",
+    "description": "Favicon은 브라우저 탭, 북마크 및 바로 가기에서 웹 사이트를 나타내는 작은 아이콘입니다. 최신 웹 애플리케이션에는 다양한 장치 및 플랫폼을 지원하기 위해 여러 Favicon 크기와 형식이 필요합니다.",
+    "keyFeatures": {
+      "title": "주요 기능",
+      "items": [
+        "다중 크기 생성 (16x16 ~ 512x512)",
+        "다양한 형식 지원 (ICO, PNG, SVG)",
+        "장치 별 최적화",
+        "zip 패키지로 배치 다운로드",
+        "다운로드하기 전에 미리보기"
+      ]
+    },
+    "useCases": {
+      "title": "일반적인 사용 사례",
+      "items": [
+        "웹 사이트 Favicon Creation",
+        "프로그레시브 웹 앱 아이콘",
+        "브라우저 북마크 아이콘",
+        "모바일 앱 바로 가기",
+        "데스크탑 응용 프로그램 아이콘"
+      ]
+    },
+    "bestPractices": {
+      "title": "모범 사례",
+      "items": [
+        "사각형 이미지 사용 (1 : 1 종횡비)",
+        "고해상도 (512x512 이상)로 시작하십시오.",
+        "간단한 디자인은 작은 크기로 더 잘 작동합니다",
+        "다른 배경에서 테스트하십시오",
+        "장치 호환성에 대한 여러 크기를 포함하십시오"
+      ]
+    }
+  }
+}

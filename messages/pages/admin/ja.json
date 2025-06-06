@@ -1,0 +1,100 @@
+{
+  "dashboard": {
+    "title": "ダッシュボード",
+    "description": "ツールチェストアプリケーションのパフォーマンスと分析の概要",
+    "stats": {
+      "totalTools": "合計ツール",
+      "totalTags": "合計タグ",
+      "totalUsage": "合計使用",
+      "thisMonth": "今月",
+      "applicationStats": "アプリケーション統計"
+    },
+    "usage": {
+      "title": "ツールの使用の概要",
+      "table": {
+        "tool": "道具",
+        "usageCount": "使用法数",
+        "change": "変化",
+        "actions": "アクション"
+      }
+    },
+    "quickActions": {
+      "title": "クイックアクション",
+      "viewAnalytics": "分析を表示します",
+      "manageTools": "ツールを管理します",
+      "manageTags": "タグを管理します",
+      "viewSite": "サイトを表示します",
+      "systemHealth": "システムの健康"
+    }
+  },
+  "tools": {
+    "title": "ツール管理",
+    "description": "ツール、メタデータ、および関係を管理します",
+    "actions": {
+      "createTool": "ツールを作成します",
+      "editTool": "ツールの編集",
+      "deleteTool": "ツールを削除します",
+      "bulkActions": "バルクアクション"
+    },
+    "table": {
+      "name": "名前",
+      "slug": "ナメクジ",
+      "status": "状態",
+      "tags": "タグ",
+      "usage": "使用法",
+      "lastModified": "最後に変更されました",
+      "actions": "アクション"
+    }
+  },
+  "tags": {
+    "title": "タグ管理",
+    "description": "タグを使用してツールを整理し、関係を管理します",
+    "actions": {
+      "createTag": "タグを作成します",
+      "editTag": "タグを編集します",
+      "deleteTag": "タグを削除します",
+      "bulkActions": "バルクアクション"
+    },
+    "table": {
+      "name": "名前",
+      "slug": "ナメクジ",
+      "color": "色",
+      "toolCount": "ツール",
+      "description": "説明",
+      "actions": "アクション"
+    }
+  },
+  "analytics": {
+    "title": "分析",
+    "description": "詳細な分析と使用統計を表示します",
+    "charts": {
+      "usageOverTime": "時間の経過とともに使用",
+      "topTools": "トップツール",
+      "userMetrics": "ユーザーメトリック"
+    }
+  },
+  "auth": {
+    "title": "管理者ログイン",
+    "description": "管理パネルにアクセスします",
+    "form": {
+      "token": "管理トークン",
+      "tokenPlaceholder": "管理トークンを入力します",
+      "login": "ログイン",
+      "loginError": "無効な管理者トークン"
+    }
+  },
+  "loading": {
+    "panel": "管理者パネルの読み込み...",
+    "dashboard": "ダッシュボードのロード...",
+    "analytics": "分析の読み込み..."
+  },
+  "navigation": {
+    "dashboard": "ダッシュボード",
+    "tools": "ツール",
+    "tags": "タグ",
+    "analytics": "分析",
+    "monitoring": "監視",
+    "logout": "ログアウト",
+    "viewSite": "サイトを表示します"
+  }
+}

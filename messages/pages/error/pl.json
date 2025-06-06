@@ -1,0 +1,67 @@
+{
+  "notFound": {
+    "errorCode": "404",
+    "title": "Nie znaleziono strony",
+    "description": "Strona, której szukasz, nie istnieje. Być może został przeniesiony, usunięty lub niewłaściwie wpisałeś adres URL.",
+    "suggestions": {
+      "title": "Oto, co możesz zrobić:",
+      "checkUrl": "Sprawdź adres URL na literówki",
+      "useNavigation": "Użyj menu nawigacyjnego, aby znaleźć to, czego szukasz",
+      "returnHome": "Wróć na stronę główną",
+      "searchTools": "Wyszukaj narzędzia za pomocą funkcji wyszukiwania"
+    },
+    "actions": {
+      "goToHome": "Idź do domu",
+      "goBack": "Wracać"
+    },
+    "popularTools": {
+      "title": "Popularne narzędzia",
+      "base64": {
+        "title": "Narzędzie Base64",
+        "description": "Koduj i dekoduj dane Base64"
+      },
+      "hashGenerator": {
+        "title": "Generator hash",
+        "description": "Wygeneruj MD5, Hashes"
+      },
+      "faviconGenerator": {
+        "title": "Generator Favicon",
+        "description": "Twórz favicons z obrazów"
+      },
+      "markdownToPdf": {
+        "title": "Markdown to PDF",
+        "description": "Konwertuj Markdown na PDF"
+      }
+    }
+  },
+  "serverError": {
+    "title": "Coś poszło nie tak",
+    "message": "Wystąpił nieoczekiwany błąd",
+    "description": "Przykro nam, ale coś poszło nie tak podczas ładowania tej strony. Nasz zespół został powiadomiony i pracuje nad rozwiązaniem problemu.",
+    "suggestions": {
+      "0": "Spróbuj odświeżyć stronę",
+      "1": "Wróć do poprzedniej strony",
+      "2": "Wróć na stronę główną",
+      "3": "Skontaktuj się z wsparciem, jeśli problem będzie się utrzymywał"
+    },
+    "actions": {
+      "refreshPage": "Strona odświeżania",
+      "goBack": "Wracać",
+      "goToHome": "Idź do domu",
+      "contactSupport": "Kontakt z obsługą"
+    },
+    "technical": {
+      "title": "Szczegóły techniczne",
+      "errorInfo": "Informacje o błędach",
+      "copyDetails": "Kopiuj szczegóły",
+      "copiedToClipboard": "Skopiowane do schowka"
+    }
+  },
+  "boundary": {
+    "title": "Coś poszło nie tak",
+    "description": "W tym komponencie wystąpił nieoczekiwany błąd.",
+    "details": "Pokaż szczegóły błędu",
+    "reload": "Załaduj komponent",
+    "reportIssue": "Zgłoś ten problem"
+  }
+}

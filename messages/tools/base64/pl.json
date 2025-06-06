@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "title": "Base64 enkoder i dekoder | Chest narzędzi",
+    "description": "Bezpłatny enkoder i dekoder Base64. Konwertuj tekst na base64 i dekoduj base64 na tekst. Obsługuje kodowanie/dekodowanie plików za pomocą opcji bezpiecznych URL. Prywatność z przetwarzaniem po stronie klienta.",
+    "keywords": [
+      "Base64",
+      "enkoder",
+      "dekoder",
+      "kodować",
+      "rozszyfrować",
+      "tekst",
+      "plik",
+      "Safe URL",
+      "narzędzie online",
+      "bezpłatny",
+      "prywatność"
+    ]
+  },
+  "page": {
+    "title": "Base64 enkoder i dekoder",
+    "description": "Koduj i dekoduj dane Base64 z obsługą tekstu i plików."
+  },
+  "tool": {
+    "variants": {
+      "standard": "Standard",
+      "urlSafe": "Safe URL"
+    },
+    "placeholders": {
+      "textInput": "Wprowadź tekst, aby zakodować/dekodować ...",
+      "fileUpload": "Wybierz plik lub przeciągnij i upuść"
+    }
+  },
+  "validation": {
+    "invalidBase64": "Nieprawidłowe wejście Base64",
+    "fileTooLarge": "Plik zbyt duży (maks. 10 MB)"
+  },
+  "info": {
+    "title": "O kodowaniu Base64",
+    "description": "Base64 to schemat kodowania binarnego do tekstu, który przekształca dane binarne w format tekstowy za pomocą zestawu 64 znaków. Jest powszechnie używany do kodowania danych w wiadomościach e-mail, stronach internetowych i adresach URL danych, zapewniając bezpieczną transmisję w stosunku do protokołów tekstowych.",
+    "keyFeatures": {
+      "title": "Kluczowe funkcje",
+      "items": [
+        "Tekst i kodowanie/dekodowanie plików",
+        "Opcja kodowania Base64 bezpieczna dla URL",
+        "Kopiuj do funkcji schowka",
+        "Pobierz zakodowane/zdekodowane wyniki",
+        "Kodowanie/dekodowanie w czasie rzeczywistym"
+      ]
+    },
+    "useCases": {
+      "title": "Powszechne przypadki użycia",
+      "items": [
+        "Załączniki e -mail kodowanie",
+        "URL danych internetowych",
+        "Transmisja danych API",
+        "Baza danych Blob Storage",
+        "Kodowanie plików konfiguracyjnych"
+      ]
+    }
+  }
+}

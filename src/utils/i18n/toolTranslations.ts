@@ -67,7 +67,7 @@ export async function getToolTranslations(
       common: commonMessages.default,
       tool: toolMessages.default,
     };
-  } catch (error) {
+  } catch {
     // Fallback to English if locale not found
     if (locale !== "en") {
       return getToolTranslations(toolSlug, "en");

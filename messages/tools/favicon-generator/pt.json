@@ -1,0 +1,85 @@
+{
+    "metadata": {
+        "title": "Gerador de Favicon | tool-chest",
+        "description": "Crie favicons a partir de imagens em vários tamanhos e formatos. Gere pacotes completos de favicon para aplicações web com processamento no cliente.",
+        "keywords": [
+            "favicon",
+            "gerador",
+            "ícone",
+            "web",
+            "imagem",
+            "redimensionar",
+            "converter",
+            "ico",
+            "png",
+            "desenvolvimento web"
+        ]
+    },
+    "page": {
+        "title": "Gerador de Favicon",
+        "description": "Crie favicons a partir de imagens em vários tamanhos e formatos."
+    },
+    "tool": {
+        "sizes": {
+            "16x16": "16x16 (Aba do Navegador)",
+            "32x32": "32x32 (Aba do Navegador)",
+            "48x48": "48x48 (Windows)",
+            "57x57": "57x57 (iOS)",
+            "72x72": "72x72 (iPad)",
+            "96x96": "96x96 (Android)",
+            "120x120": "120x120 (iPhone Retina)",
+            "152x152": "152x152 (iPad Retina)",
+            "180x180": "180x180 (iPhone 6 Plus)",
+            "192x192": "192x192 (Android Chrome)",
+            "512x512": "512x512 (Android Chrome)"
+        },
+        "formats": {
+            "ico": "ICO (Windows)",
+            "png": "PNG (Universal)",
+            "svg": "SVG (Escalável)"
+        },
+        "placeholders": {
+            "fileUpload": "Selecione uma imagem ou arraste e solte"
+        }
+    },
+    "validation": {
+        "imageRequired": "Selecione um arquivo de imagem",
+        "invalidImageFormat": "Selecione um formato de imagem válido (PNG, JPG, SVG)",
+        "imageTooLarge": "Arquivo de imagem muito grande (máx 10MB)",
+        "imageTooSmall": "A imagem deve ter pelo menos 32x32 pixels para melhores resultados"
+    },
+    "info": {
+        "title": "Sobre Geração de Favicon",
+        "description": "Um favicon é um pequeno ícone que representa seu site em abas do navegador, favoritos e atalhos. Aplicações web modernas exigem vários tamanhos e formatos para suportar diferentes dispositivos e plataformas.",
+        "keyFeatures": {
+            "title": "Principais Recursos",
+            "items": [
+                "Geração de múltiplos tamanhos (16x16 a 512x512)",
+                "Suporte a vários formatos (ICO, PNG, SVG)",
+                "Otimização específica para dispositivos",
+                "Download em lote como pacote ZIP",
+                "Pré-visualização antes de baixar"
+            ]
+        },
+        "useCases": {
+            "title": "Casos de Uso Comuns",
+            "items": [
+                "Criação de favicon para sites",
+                "Ícones para progressive web apps",
+                "Ícones de favoritos de navegador",
+                "Atalhos de aplicativos móveis",
+                "Ícones de aplicativos desktop"
+            ]
+        },
+        "bestPractices": {
+            "title": "Melhores Práticas",
+            "items": [
+                "Use imagens quadradas (proporção 1:1)",
+                "Comece com alta resolução (512x512 ou maior)",
+                "Designs simples funcionam melhor em tamanhos pequenos",
+                "Teste em diferentes fundos",
+                "Inclua vários tamanhos para compatibilidade com dispositivos"
+            ]
+        }
+    }
+}

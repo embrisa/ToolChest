@@ -1,0 +1,33 @@
+{
+  "page": {
+    "title": "Todas las herramientas",
+    "subtitle": "Explore nuestra colección completa de herramientas de servicios públicos diseñados para que su flujo de trabajo de desarrollo sea más eficiente.",
+    "loading": "Herramientas de carga ...",
+    "toolsAvailable": "Herramientas disponibles",
+    "availableTools": "Herramientas disponibles",
+    "description": "Servicios públicos de grado profesional para el desarrollo web"
+  },
+  "stats": {
+    "allToolsFree": "Todas las herramientas gratis",
+    "clientSideProcessing": "Procesamiento del lado del cliente"
+  },
+  "states": {
+    "noToolsAvailable": "No hay herramientas disponibles",
+    "noToolsDescription": "Se están cargando herramientas. Vuelve pronto o intenta actualizar la página.",
+    "loadingGrid": "Cargando herramientas disponibles ..."
+  },
+  "features": {
+    "privacy": {
+      "title": "Privacidad primero",
+      "description": "Todas las herramientas procesan datos localmente en su navegador"
+    },
+    "free": {
+      "title": "Siempre gratis",
+      "description": "Sin suscripciones, sin costos ocultos, completamente gratis"
+    },
+    "fast": {
+      "title": "Rayo rápido",
+      "description": "Resultados instantáneos con rendimiento optimizado"
+    }
+  }
+}

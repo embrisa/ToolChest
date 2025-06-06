@@ -1,0 +1,25 @@
+{
+    "page": {
+        "message": "Carregando ferramentas...",
+        "application": "Carregando tool-chest...",
+        "pleaseWait": "Carregando aplicação, aguarde..."
+    },
+    "components": {
+        "tools": "Carregando ferramentas...",
+        "tags": "Carregando tags...",
+        "search": "Pesquisando...",
+        "processing": "Processando...",
+        "saving": "Salvando...",
+        "uploading": "Enviando..."
+    },
+    "admin": {
+        "panel": "Carregando painel de administração...",
+        "dashboard": "Carregando painel...",
+        "analytics": "Carregando análises..."
+    },
+    "skeleton": {
+        "toolCard": "Carregando informações da ferramenta...",
+        "toolGrid": "Carregando ferramentas disponíveis...",
+        "tagFilters": "Carregando opções de filtro..."
+    }
+}

@@ -1,0 +1,72 @@
+{
+  "metadata": {
+    "title": "Generador hash | cajón de herramientas",
+    "description": "Genere MD5, SHA-1, SHA-256 y otros hashes en línea. Generación de hash rápida, segura, del lado del cliente para texto y archivos.",
+    "keywords": [
+      "picadillo",
+      "MD5",
+      "SHA1",
+      "SHA256",
+      "suma de verificación",
+      "generador",
+      "texto",
+      "archivo",
+      "seguridad",
+      "verificación"
+    ]
+  },
+  "page": {
+    "title": "Generador de hash",
+    "description": "Genere hashes criptográficos para texto y archivos utilizando varios algoritmos."
+  },
+  "tool": {
+    "algorithms": {
+      "md5": "MD5",
+      "sha1": "SHA-1",
+      "sha256": "SHA-256",
+      "sha512": "SHA-512",
+      "crc32": "CRC32"
+    },
+    "placeholders": {
+      "textInput": "Ingrese el texto al hash ...",
+      "fileUpload": "Seleccione un archivo para generar hash"
+    }
+  },
+  "validation": {
+    "algorithmRequired": "Seleccione un algoritmo hash",
+    "inputRequired": "Ingrese el texto o seleccione un archivo"
+  },
+  "info": {
+    "title": "Sobre funciones hash",
+    "description": "Las funciones hash convierten los datos de entrada en cadenas de caracteres de tamaño fijo, que generalmente se utilizan para la verificación de integridad de datos, el almacenamiento de contraseñas y las firmas digitales.",
+    "keyFeatures": {
+      "title": "Características clave",
+      "items": [
+        "Soporte de algoritmos de hash múltiples",
+        "Histuría de texto y archivos",
+        "Capacidad de procesamiento por lotes",
+        "Herramientas de comparación hash",
+        "Opciones de salida en mayúsculas/minúsculas"
+      ]
+    },
+    "useCases": {
+      "title": "Casos de uso comunes",
+      "items": [
+        "Verificación de integridad de archivos",
+        "Pastel de contraseña",
+        "Deduplicación de datos",
+        "Firmas digitales",
+        "Generación de suma de verificación"
+      ]
+    },
+    "security": {
+      "title": "Notas de seguridad",
+      "items": [
+        "MD5 y SHA-1 están en desuso para el uso de seguridad",
+        "Use SHA-256 o superior para fines criptográficos",
+        "Todo el hashing ocurre localmente en tu navegador",
+        "No se transmiten datos a servidores externos"
+      ]
+    }
+  }
+}

@@ -1,13 +1,17 @@
 import { getTranslations } from "next-intl/server";
 import { Tool, Tag } from "@prisma/client";
 
+type ToolWithKeys = Tool & { nameKey?: string; descriptionKey?: string | null };
+type TagWithKeys = Tag & { nameKey?: string; descriptionKey?: string | null };
+
 export interface TranslatedTool
-  extends Omit<Tool, "nameKey" | "descriptionKey"> {
+  extends Omit<ToolWithKeys, "nameKey" | "descriptionKey"> {
   name: string;
   description: string | null;
 }
 
-export interface TranslatedTag extends Omit<Tag, "nameKey" | "descriptionKey"> {
+export interface TranslatedTag
+  extends Omit<TagWithKeys, "nameKey" | "descriptionKey"> {
   name: string;
   description: string | null;
 }
@@ -20,14 +24,13 @@ export class DatabaseTranslationService {
    * Translate a single tool by resolving its translation keys
    */
   static async translateTool(
-    tool: Tool,
+    tool: ToolWithKeys,
     locale: string = "en",
   ): Promise<TranslatedTool> {
     const t = await getTranslations({ locale, namespace: "database" });
 
-    const tTool: any = tool as any;
-    const name = tTool.nameKey ? t(tTool.nameKey) : tool.slug;
-    const description = tTool.descriptionKey ? t(tTool.descriptionKey) : null;
+    const name = tool.nameKey ? t(tool.nameKey) : tool.slug;
+    const description = tool.descriptionKey ? t(tool.descriptionKey) : null;
 
     return {
       ...tool,
@@ -40,7 +43,7 @@ export class DatabaseTranslationService {
    * Translate multiple tools
    */
   static async translateTools(
-    tools: Tool[],
+    tools: ToolWithKeys[],
     locale: string = "en",
   ): Promise<TranslatedTool[]> {
     return Promise.all(tools.map((tool) => this.translateTool(tool, locale)));
@@ -50,14 +53,13 @@ export class DatabaseTranslationService {
    * Translate a single tag by resolving its translation keys
    */
   static async translateTag(
-    tag: Tag,
+    tag: TagWithKeys,
     locale: string = "en",
   ): Promise<TranslatedTag> {
     const t = await getTranslations({ locale, namespace: "database" });
 
-    const tTag: any = tag as any;
-    const name = tTag.nameKey ? t(tTag.nameKey) : tag.slug;
-    const description = tTag.descriptionKey ? t(tTag.descriptionKey) : null;
+    const name = tag.nameKey ? t(tag.nameKey) : tag.slug;
+    const description = tag.descriptionKey ? t(tag.descriptionKey) : null;
 
     return {
       ...tag,
@@ -70,7 +72,7 @@ export class DatabaseTranslationService {
    * Translate multiple tags
    */
   static async translateTags(
-    tags: Tag[],
+    tags: TagWithKeys[],
     locale: string = "en",
   ): Promise<TranslatedTag[]> {
     return Promise.all(tags.map((tag) => this.translateTag(tag, locale)));
@@ -107,7 +109,10 @@ export class DatabaseTranslationService {
   /**
    * Generate database records with proper translation keys
    */
-  static generateToolRecord(toolKey: string, additionalData?: Partial<Tool>) {
+  static generateToolRecord(
+    toolKey: string,
+    additionalData?: Partial<ToolWithKeys>,
+  ) {
     return {
       toolKey,
       slug: toolKey,
@@ -120,7 +125,10 @@ export class DatabaseTranslationService {
   /**
    * Generate database records with proper translation keys
    */
-  static generateTagRecord(tagKey: string, additionalData?: Partial<Tag>) {
+  static generateTagRecord(
+    tagKey: string,
+    additionalData?: Partial<TagWithKeys>,
+  ) {
     return {
       tagKey,
       slug: tagKey,
@@ -135,14 +143,14 @@ export class DatabaseTranslationService {
  * Hook-like function for server components to get translated database content
  */
 export async function getTranslatedTools(
-  tools: Tool[],
+  tools: ToolWithKeys[],
   locale: string = "en",
 ): Promise<TranslatedTool[]> {
   return DatabaseTranslationService.translateTools(tools, locale);
 }
 
 export async function getTranslatedTags(
-  tags: Tag[],
+  tags: TagWithKeys[],
   locale: string = "en",
 ): Promise<TranslatedTag[]> {
   return DatabaseTranslationService.translateTags(tags, locale);

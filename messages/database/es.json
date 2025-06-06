@@ -1,0 +1,78 @@
+{
+  "tools": {
+    "base64": {
+      "name": "Herramienta Base64",
+      "description": "Codificar y decodificar datos base64 con soporte para texto y archivos"
+    },
+    "hashGenerator": {
+      "name": "Generador de hash",
+      "description": "Generar MD5, SHA-1, SHA-256 y otros hashes criptográficos"
+    },
+    "faviconGenerator": {
+      "name": "Generador de favicón",
+      "description": "Crear favicones a partir de imágenes en múltiples tamaños y formatos"
+    },
+    "markdownToPdf": {
+      "name": "Markdown a PDF",
+      "description": "Convertir los archivos de Markdown a PDF con opciones de estilo personalizado"
+    },
+    "urlShortener": {
+      "name": "Acortador de URL",
+      "description": "Cree URL cortas para compartir y rastrear fácilmente"
+    },
+    "qrGenerator": {
+      "name": "Generador de código QR",
+      "description": "Generar códigos QR para texto, URL y otros datos"
+    },
+    "imageCompressor": {
+      "name": "Compresor de imágenes",
+      "description": "Comprimir imágenes mientras mantiene la calidad"
+    },
+    "textDiff": {
+      "name": "Herramienta de diff de texto",
+      "description": "Compare y resalte las diferencias entre los archivos de texto"
+    }
+  },
+  "tags": {
+    "encoding": {
+      "name": "Codificación",
+      "description": "Herramientas para codificar y decodificar datos en varios formatos"
+    },
+    "generation": {
+      "name": "Generación",
+      "description": "Herramientas para generar contenido, códigos y archivos"
+    },
+    "conversion": {
+      "name": "Conversión",
+      "description": "Herramientas para convertir entre diferentes formatos de archivo"
+    },
+    "security": {
+      "name": "Seguridad",
+      "description": "Herramientas para operaciones criptográficas y análisis de seguridad"
+    },
+    "compression": {
+      "name": "Compresión",
+      "description": "Herramientas para reducir los tamaños de archivo y optimizar el contenido"
+    },
+    "analysis": {
+      "name": "Análisis",
+      "description": "Herramientas para analizar y comparar datos y archivos"
+    },
+    "web": {
+      "name": "Desarrollo web",
+      "description": "Herramientas diseñadas específicamente para desarrolladores web"
+    },
+    "image": {
+      "name": "Procesamiento de imágenes",
+      "description": "Herramientas para trabajar con imágenes y gráficos"
+    },
+    "text": {
+      "name": "Procesamiento de texto",
+      "description": "Herramientas para manipular y analizar contenido de texto"
+    },
+    "utility": {
+      "name": "Utilidad",
+      "description": "Herramientas de propósito general para tareas comunes"
+    }
+  }
+}

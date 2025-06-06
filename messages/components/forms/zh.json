@@ -1,0 +1,64 @@
+{
+    "labels": {
+        "name": "Name",
+        "slug": "Slug",
+        "description": "Description",
+        "color": "Color",
+        "status": "Status",
+        "tags": "Tags",
+        "url": "URL",
+        "file": "File",
+        "text": "Text",
+        "options": "Options",
+        "settings": "Settings"
+    },
+    "placeholders": {
+        "enterName": "Enter name",
+        "enterDescription": "Enter description",
+        "selectColor": "Select color",
+        "selectTags": "Select tags",
+        "enterUrl": "Enter URL",
+        "chooseFile": "Choose file",
+        "enterText": "Enter text"
+    },
+    "validation": {
+        "nameRequired": "Name is required",
+        "slugRequired": "Slug is required",
+        "descriptionRequired": "Description is required",
+        "invalidSlug": "Slug can only contain letters, numbers, and hyphens",
+        "slugTooShort": "Slug must be at least 3 characters",
+        "slugTooLong": "Slug must be less than 50 characters",
+        "nameTooShort": "Name must be at least 2 characters",
+        "nameTooLong": "Name must be less than 100 characters",
+        "descriptionTooLong": "Description must be less than 500 characters",
+        "invalidColor": "Please select a valid color",
+        "invalidEmail": "Please enter a valid email address",
+        "invalidUrl": "Please enter a valid URL"
+    },
+    "help": {
+        "slug": "URL-friendly identifier (auto-generated from name)",
+        "description": "Brief description of the item",
+        "color": "Color used for visual identification",
+        "tags": "Organize items with relevant tags",
+        "status": "Current state of the item"
+    },
+    "actions": {
+        "save": "Save",
+        "cancel": "Cancel",
+        "submit": "Submit",
+        "reset": "Reset",
+        "clear": "Clear",
+        "delete": "Delete",
+        "edit": "Edit",
+        "create": "Create",
+        "update": "Update"
+    },
+    "states": {
+        "saving": "Saving...",
+        "loading": "Loading...",
+        "saved": "Saved successfully",
+        "error": "Error occurred",
+        "required": "Required field",
+        "optional": "Optional field"
+    }
+}

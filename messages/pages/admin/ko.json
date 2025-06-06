@@ -1,0 +1,100 @@
+{
+  "dashboard": {
+    "title": "계기반",
+    "description": "Tool-Chest 응용 프로그램 성능 및 분석에 대한 개요",
+    "stats": {
+      "totalTools": "총 도구",
+      "totalTags": "총 태그",
+      "totalUsage": "총 사용량",
+      "thisMonth": "이번 달",
+      "applicationStats": "응용 프로그램 통계"
+    },
+    "usage": {
+      "title": "도구 사용 개요",
+      "table": {
+        "tool": "도구",
+        "usageCount": "사용량 수",
+        "change": "변화",
+        "actions": "행위"
+      }
+    },
+    "quickActions": {
+      "title": "빠른 행동",
+      "viewAnalytics": "분석을 봅니다",
+      "manageTools": "도구 관리",
+      "manageTags": "태그 관리",
+      "viewSite": "사이트보기",
+      "systemHealth": "시스템 건강"
+    }
+  },
+  "tools": {
+    "title": "도구 관리",
+    "description": "도구, 메타 데이터 및 관계를 관리합니다",
+    "actions": {
+      "createTool": "도구를 만듭니다",
+      "editTool": "도구 편집",
+      "deleteTool": "도구 삭제",
+      "bulkActions": "대량 조치"
+    },
+    "table": {
+      "name": "이름",
+      "slug": "강타",
+      "status": "상태",
+      "tags": "태그",
+      "usage": "용법",
+      "lastModified": "마지막 수정",
+      "actions": "행위"
+    }
+  },
+  "tags": {
+    "title": "태그 관리",
+    "description": "태그로 도구를 구성하고 관계를 관리합니다",
+    "actions": {
+      "createTag": "태그를 만듭니다",
+      "editTag": "태그 편집",
+      "deleteTag": "태그 삭제",
+      "bulkActions": "대량 조치"
+    },
+    "table": {
+      "name": "이름",
+      "slug": "강타",
+      "color": "색상",
+      "toolCount": "도구",
+      "description": "설명",
+      "actions": "행위"
+    }
+  },
+  "analytics": {
+    "title": "해석학",
+    "description": "자세한 분석 및 사용 통계를보십시오",
+    "charts": {
+      "usageOverTime": "시간이 지남에 따라 사용됩니다",
+      "topTools": "최고의 도구",
+      "userMetrics": "사용자 지표"
+    }
+  },
+  "auth": {
+    "title": "관리자 로그인",
+    "description": "관리 패널에 액세스하십시오",
+    "form": {
+      "token": "관리자 토큰",
+      "tokenPlaceholder": "관리자 토큰을 입력하십시오",
+      "login": "로그인",
+      "loginError": "잘못된 관리자 토큰"
+    }
+  },
+  "loading": {
+    "panel": "관리자 패널로드 ...",
+    "dashboard": "대시 보드로드 ...",
+    "analytics": "로딩 분석 ..."
+  },
+  "navigation": {
+    "dashboard": "계기반",
+    "tools": "도구",
+    "tags": "태그",
+    "analytics": "해석학",
+    "monitoring": "모니터링",
+    "logout": "로그 아웃",
+    "viewSite": "사이트보기"
+  }
+}

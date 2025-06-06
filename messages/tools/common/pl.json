@@ -1,0 +1,72 @@
+{
+  "ui": {
+    "modes": {
+      "encode": "Kodować",
+      "decode": "Rozszyfrować",
+      "generate": "Spowodować",
+      "convert": "Konwertować",
+      "process": "Proces",
+      "analyze": "Analizować"
+    },
+    "inputTypes": {
+      "text": "Tekst",
+      "file": "Plik",
+      "url": "URL",
+      "upload": "Wgrywać"
+    },
+    "actions": {
+      "process": "Proces",
+      "copy": "Wynik kopii",
+      "download": "Pobierać",
+      "upload": "Wgrywać",
+      "clear": "Jasne",
+      "reset": "Nastawić",
+      "retry": "Spróbować ponownie",
+      "save": "Ratować",
+      "export": "Eksport"
+    },
+    "status": {
+      "processing": "Przetwarzanie...",
+      "success": "Operacja zakończona pomyślnie",
+      "copied": "Skopiowane do schowka",
+      "error": "Operacja nie powiodła się",
+      "ready": "Gotowy",
+      "waiting": "Czekam na dane wejściowe"
+    },
+    "placeholders": {
+      "textInput": "Wprowadź tekst tutaj ...",
+      "fileUpload": "Wybierz plik lub przeciągnij i upuść",
+      "urlInput": "Wprowadź adres URL tutaj ...",
+      "searchInput": "Szukaj..."
+    }
+  },
+  "validation": {
+    "required": "To pole jest wymagane",
+    "invalidInput": "Nieprawidłowe dane wejściowe",
+    "fileTooLarge": "Plik zbyt duży (Max Xyz0xyz)",
+    "unsupportedFileType": "Nieobsługiwany typ pliku",
+    "invalidFormat": "Nieprawidłowy format",
+    "emptyInput": "Wprowadź tekst lub wybierz plik",
+    "invalidUrl": "Wprowadź ważny adres URL"
+  },
+  "privacy": {
+    "clientSideNote": "Całe przetwarzanie odbywa się w przeglądarce, aby uzyskać maksymalną prywatność.",
+    "noDataSent": "Brak danych wysyłanych do serwerów",
+    "filesStayLocal": "Pliki pozostają na twoim urządzeniu",
+    "noLogging": "Brak przechowywania lub rejestrowania danych"
+  },
+  "features": {
+    "clientSideProcessing": "Przetwarzanie prywatności po stronie klienta",
+    "copyToClipboard": "Kopiuj do funkcji schowka",
+    "downloadResults": "Pobierz wyniki",
+    "realTimeProcessing": "Przetwarzanie w czasie rzeczywistym",
+    "multipleFormats": "Obsługa wielu formatów",
+    "batchProcessing": "Obsługa przetwarzania wsadowego"
+  },
+  "errors": {
+    "processingFailed": "Przetwarzanie nie powiodło się",
+    "fileReadError": "Błąd plik odczytu",
+    "networkError": "Wystąpił błąd sieciowy",
+    "unknownError": "Wystąpił nieznany błąd"
+  }
+}

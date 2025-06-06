@@ -1,0 +1,33 @@
+{
+  "page": {
+    "title": "모든 도구",
+    "subtitle": "개발 워크 플로우를보다 효율적으로 만들기 위해 설계된 유틸리티 도구의 전체 모음을 살펴보십시오.",
+    "loading": "로딩 도구 ...",
+    "toolsAvailable": "사용 가능한 도구",
+    "availableTools": "사용 가능한 도구",
+    "description": "웹 개발을위한 전문가 급 유틸리티"
+  },
+  "stats": {
+    "allToolsFree": "모든 도구가 무료입니다",
+    "clientSideProcessing": "클라이언트 측 처리"
+  },
+  "states": {
+    "noToolsAvailable": "사용 가능한 도구가 없습니다",
+    "noToolsDescription": "도구가로드되고 있습니다. 곧 다시 확인하거나 페이지를 새로 고치십시오.",
+    "loadingGrid": "사용 가능한 도구로드 ..."
+  },
+  "features": {
+    "privacy": {
+      "title": "프라이버시 먼저",
+      "description": "모든 도구는 브라우저에서 데이터를 로컬로 처리합니다"
+    },
+    "free": {
+      "title": "항상 무료",
+      "description": "구독, 숨겨진 비용 없음, 완전 무료"
+    },
+    "fast": {
+      "title": "번개 빨리",
+      "description": "최적화 된 성능으로 즉각적인 결과"
+    }
+  }
+}
