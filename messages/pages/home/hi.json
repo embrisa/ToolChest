@@ -1,0 +1,50 @@
+{
+  "hero": {
+    "title": "उपकरण-चेस्ट",
+    "subtitle": "आवश्यक कंप्यूटर टूल का आपका संग्रह।",
+    "description": "आसानी से एनकोड, डिकोड, जनरेट, कन्वर्ट, और अधिक।",
+    "searchPlaceholder": "खोज उपकरण ..."
+  },
+  "stats": {
+    "toolsAvailable": "उपलब्ध उपकरण",
+    "clientSideProcessing": "ग्राहक-पक्ष प्रक्रमण",
+    "clientSideValue": "100%",
+    "freeForever": "मुक्त",
+    "freeValue": "हमेशा के लिए"
+  },
+  "sections": {
+    "allTools": "सभी उपकरण",
+    "searchResults": "खोज के परिणाम",
+    "filterTools": "फ़िल्टर उपकरण",
+    "active": "सक्रिय"
+  },
+  "loading": {
+    "loadingTools": "लोडिंग टूल ...",
+    "toolsFound": "उपकरण मिले"
+  },
+  "noResults": {
+    "title": "कोई उपकरण नहीं मिला",
+    "description": "कोई उपकरण मेल नहीं खाता \"{क्वेरी}\"",
+    "descriptionFilters": "कोई भी उपकरण आपके चयनित फिल्टर से मेल नहीं खाता है"
+  },
+  "errors": {
+    "troubleLoading": "हमें टूल लोड करने में परेशानी हो रही है। "
+  },
+  "search": {
+    "placeholder": "खोज उपकरण ...",
+    "clearSearch": "स्पष्ट खोज",
+    "searchResults": "खोज के परिणाम"
+  },
+  "filtering": {
+    "filterByTags": "टैग द्वारा फ़िल्टर",
+    "allTags": "सभी टैग",
+    "selectedTags": "चयनित टैग",
+    "clearAll": "सभी साफ करें",
+    "noTags": "कोई टैग उपलब्ध नहीं है"
+  },
+  "toolCard": {
+    "newTool": "नया",
+    "popularTool": "लोकप्रिय",
+    "openTool": "खुला उपकरण"
+  }
+}
