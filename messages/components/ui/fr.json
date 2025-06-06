@@ -1,0 +1,89 @@
+{
+  "buttons": {
+    "save": "Sauvegarder",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "create": "Créer",
+    "update": "Mise à jour",
+    "submit": "Soumettre",
+    "close": "Fermer",
+    "copy": "Copie",
+    "download": "Télécharger",
+    "upload": "Télécharger",
+    "reset": "Réinitialiser",
+    "clear": "Clair",
+    "loading": "Chargement...",
+    "processing": "Traitement...",
+    "copied": "Copié!",
+    "selectFiles": "Sélectionner des fichiers",
+    "chooseFile": "Choisir le fichier",
+    "removeFile": "Supprimer le fichier"
+  },
+  "alerts": {
+    "success": "Succès",
+    "error": "Erreur",
+    "warning": "Avertissement",
+    "info": "Information",
+    "dismiss": "Rejeter l'alerte"
+  },
+  "modals": {
+    "close": "Fermer Modal",
+    "confirm": "Confirmer",
+    "confirmDelete": "Confirmer la suppression",
+    "deleteWarning": "Êtes-vous sûr de vouloir supprimer cet élément? Cette action ne peut pas être annulée.",
+    "unsavedChanges": "Vous avez des changements non sauvés. Êtes-vous sûr de vouloir partir?",
+    "title": "Modal"
+  },
+  "tooltips": {
+    "copy": "Copier dans le presse-papiers",
+    "download": "Télécharger le fichier",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "info": "Plus d'informations",
+    "help": "Obtenir de l'aide"
+  },
+  "progress": {
+    "uploading": "Téléchargement ... {progress}%",
+    "processing": "Traitement ... {progress}%",
+    "downloading": "Téléchargement ... {progress}%",
+    "complete": "Complet"
+  },
+  "fileUpload": {
+    "dragDrop": "Faites glisser et déposez vos fichiers ici",
+    "or": "ou",
+    "browse": "Parcourir les fichiers",
+    "selectedFiles": "Fichiers sélectionnés",
+    "maxSize": "Taille du fichier maximum: {size}",
+    "supportedFormats": "Formats pris en charge: {formats}",
+    "fileTooLarge": "Fichier trop grand. La taille maximale est {maxSize}.",
+    "invalidFileType": "Type de fichier non valide. Formats pris en charge: {formats}",
+    "uploadFailed": "Le téléchargement a échoué. Veuillez réessayer.",
+    "removeFile": "Supprimer le fichier"
+  },
+  "toast": {
+    "close": "Notification étroite",
+    "success": "Succès",
+    "error": "Erreur",
+    "warning": "Avertissement",
+    "info": "Informations"
+  },
+  "pagination": {
+    "previous": "Précédent",
+    "next": "Suivant",
+    "page": "Page Ph0",
+    "of": "de Ph0",
+    "showing": "Montrant les résultats {from} à {to} de {total}",
+    "perPage": "par page"
+  },
+  "table": {
+    "noData": "Aucune donnée disponible",
+    "loading": "Chargement de données ...",
+    "sortBy": "Trier par {column}",
+    "ascending": "Ascendant",
+    "descending": "Descendant",
+    "selectAll": "Sélectionnez tout",
+    "selectRow": "Sélectionner la ligne",
+    "actions": "Actes"
+  }
+}
