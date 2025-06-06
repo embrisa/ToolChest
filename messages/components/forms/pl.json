@@ -1,0 +1,64 @@
+{
+  "labels": {
+    "name": "Nazwa",
+    "slug": "Ślimak",
+    "description": "Opis",
+    "color": "Kolor",
+    "status": "Status",
+    "tags": "Tagi",
+    "url": "URL",
+    "file": "Plik",
+    "text": "Tekst",
+    "options": "Opcje",
+    "settings": "Ustawienia"
+  },
+  "placeholders": {
+    "enterName": "Wprowadź nazwę",
+    "enterDescription": "Wprowadź opis",
+    "selectColor": "Wybierz kolor",
+    "selectTags": "Wybierz tagi",
+    "enterUrl": "Wprowadź adres URL",
+    "chooseFile": "Wybierz plik",
+    "enterText": "Wprowadź tekst"
+  },
+  "validation": {
+    "nameRequired": "Nazwa jest wymagana",
+    "slugRequired": "Wymagany jest ślimak",
+    "descriptionRequired": "Wymagany jest opis",
+    "invalidSlug": "Ślimak może zawierać tylko litery, cyfry i łączniki",
+    "slugTooShort": "Ślimak musi mieć co najmniej 3 znaki",
+    "slugTooLong": "Ślimak musi mieć mniej niż 50 znaków",
+    "nameTooShort": "Nazwa musi mieć co najmniej 2 znaki",
+    "nameTooLong": "Nazwa musi mieć mniej niż 100 znaków",
+    "descriptionTooLong": "Opis musi mieć mniej niż 500 znaków",
+    "invalidColor": "Wybierz prawidłowy kolor",
+    "invalidEmail": "Wprowadź ważny adres e -mail",
+    "invalidUrl": "Wprowadź ważny adres URL"
+  },
+  "help": {
+    "slug": "Identyfikator przyjazny dla adresu URL (automatycznie wygenerowane z nazwy)",
+    "description": "Krótki opis przedmiotu",
+    "color": "Kolor używany do identyfikacji wizualnej",
+    "tags": "Organizuj przedmioty z odpowiednimi tagami",
+    "status": "Obecny stan elementu"
+  },
+  "actions": {
+    "save": "Ratować",
+    "cancel": "Anulować",
+    "submit": "Składać",
+    "reset": "Nastawić",
+    "clear": "Jasne",
+    "delete": "Usuwać",
+    "edit": "Redagować",
+    "create": "Tworzyć",
+    "update": "Aktualizacja"
+  },
+  "states": {
+    "saving": "Oszczędność...",
+    "loading": "Załadunek...",
+    "saved": "Zapisano pomyślnie",
+    "error": "Wystąpił błąd",
+    "required": "Wymagane pole",
+    "optional": "Opcjonalne pole"
+  }
+}
