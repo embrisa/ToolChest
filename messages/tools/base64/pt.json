@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "title": "Codificador e Decodificador Base64 | tool-chest",
+    "description": "Codificador e decodificador Base64 online gratuito. Converta texto para Base64 e decodifique Base64 para texto. Suporta codificação/decodificação de arquivos com opção URL-safe. Privacidade garantida com processamento no cliente.",
+    "keywords": [
+      "base64",
+      "codificador",
+      "decodificador",
+      "codificar",
+      "decodificar",
+      "texto",
+      "arquivo",
+      "url-safe",
+      "ferramenta online",
+      "grátis",
+      "privacidade"
+    ]
+  },
+  "page": {
+    "title": "Codificador e Decodificador Base64",
+    "description": "Codifique e decodifique dados em Base64 com suporte para textos e arquivos."
+  },
+  "tool": {
+    "variants": {
+      "standard": "Padrão",
+      "urlSafe": "URL-Safe"
+    },
+    "placeholders": {
+      "textInput": "Insira o texto para codificar/decodificar...",
+      "fileUpload": "Selecione um arquivo ou arraste e solte"
+    }
+  },
+  "validation": {
+    "invalidBase64": "Entrada Base64 inválida",
+    "fileTooLarge": "Arquivo muito grande (máx 10MB)"
+  },
+  "info": {
+    "title": "Sobre Codificação Base64",
+    "description": "Base64 é um esquema de codificação binário-para-texto que converte dados binários em texto usando um conjunto de 64 caracteres. É comumente utilizado para codificar dados em e-mails, páginas web e URLs de dados, garantindo transmissão segura em protocolos baseados em texto.",
+    "keyFeatures": {
+      "title": "Principais Recursos",
+      "items": [
+        "Codificação e decodificação de texto e arquivos",
+        "Opção de codificação Base64 URL-safe",
+        "Funcionalidade de copiar para a área de transferência",
+        "Baixar resultados codificados/decodificados",
+        "Codificação/decodificação em tempo real"
+      ]
+    },
+    "useCases": {
+      "title": "Casos de Uso Comuns",
+      "items": [
+        "Codificação de anexos de e-mail",
+        "URLs de dados na web",
+        "Transmissão de dados em APIs",
+        "Armazenamento de blobs em banco de dados",
+        "Codificação de arquivos de configuração"
+      ]
+    }
+  }
+}
