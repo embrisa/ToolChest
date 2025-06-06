@@ -1,0 +1,85 @@
+{
+  "metadata": {
+    "title": "Favicon Generator | Chest narzędzi",
+    "description": "Twórz favicons z obrazów w wielu rozmiarach i formatach. Wygeneruj kompletne pakiety Favicon dla aplikacji internetowych z przetwarzaniem po stronie klienta.",
+    "keywords": [
+      "Favicon",
+      "generator",
+      "ikona",
+      "sieć",
+      "obraz",
+      "rozmiar",
+      "konwertować",
+      "ICO",
+      "png",
+      "Opracowywanie stron internetowych"
+    ]
+  },
+  "page": {
+    "title": "Generator Favicon",
+    "description": "Twórz favicons z obrazów w wielu rozmiarach i formatach."
+  },
+  "tool": {
+    "sizes": {
+      "16x16": "16x16 (zakładka przeglądarki)",
+      "32x32": "32x32 (zakładka przeglądarki)",
+      "48x48": "48x48 (Windows)",
+      "57x57": "57x57 (iOS)",
+      "72x72": "72x72 (iPad)",
+      "96x96": "96x96 (Android)",
+      "120x120": "120x120 (siatkówka iPhone)",
+      "152x152": "152x152 (siatkówka iPad)",
+      "180x180": "180x180 (iPhone 6 Plus)",
+      "192x192": "192x192 (Android Chrome)",
+      "512x512": "512x512 (Android Chrome)"
+    },
+    "formats": {
+      "ico": "ICO (Windows)",
+      "png": "PNG (Universal)",
+      "svg": "SVG (skalowalne)"
+    },
+    "placeholders": {
+      "fileUpload": "Wybierz plik obrazu lub przeciągnij i upuść"
+    }
+  },
+  "validation": {
+    "imageRequired": "Wybierz plik obrazu",
+    "invalidImageFormat": "Wybierz prawidłowy format obrazu (PNG, JPG, SVG)",
+    "imageTooLarge": "Plik obrazu zbyt duży (maks. 10 MB)",
+    "imageTooSmall": "Obraz powinien wynosić co najmniej 32 x 32 pikseli, aby uzyskać najlepsze wyniki"
+  },
+  "info": {
+    "title": "O pokoleniu Favicon",
+    "description": "Favicon to mała ikona reprezentująca twoją stronę w zakładkach, zakładkach i skrótach. Nowoczesne aplikacje internetowe wymagają wielu fawiconów i formatów do obsługi różnych urządzeń i platform.",
+    "keyFeatures": {
+      "title": "Kluczowe funkcje",
+      "items": [
+        "Wytwarzanie wielkości (16x16 do 512x512)",
+        "Różne obsługa formatu (ICO, PNG, SVG)",
+        "Optymalizacja specyficzna dla urządzenia",
+        "Pobierz partię jako pakiet zip",
+        "Podgląd przed pobraniem"
+      ]
+    },
+    "useCases": {
+      "title": "Powszechne przypadki użycia",
+      "items": [
+        "Witryna Favicon Creation",
+        "Progresywne ikony aplikacji internetowych",
+        "Ikony zakładek do zakładek przeglądarki",
+        "Skróty aplikacji mobilnych",
+        "Ikony aplikacji komputerowych"
+      ]
+    },
+    "bestPractices": {
+      "title": "Najlepsze praktyki",
+      "items": [
+        "Użyj kwadratowych obrazów (współczynnik kształtu 1: 1)",
+        "Zacznij od wysokiej rozdzielczości (512x512 lub większy)",
+        "Proste projekty działają lepiej w małych rozmiarach",
+        "Test na różnych tłach",
+        "Uwzględnij wiele rozmiarów dla kompatybilności urządzeń"
+      ]
+    }
+  }
+}

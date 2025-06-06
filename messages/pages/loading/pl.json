@@ -1,0 +1,25 @@
+{
+  "page": {
+    "message": "Narzędzia do ładowania ...",
+    "application": "Ładowanie chestu narzędzi ...",
+    "pleaseWait": "Ładowanie aplikacji, proszę poczekaj ..."
+  },
+  "components": {
+    "tools": "Narzędzia do ładowania ...",
+    "tags": "Ładowanie tagów ...",
+    "search": "Badawczy...",
+    "processing": "Przetwarzanie...",
+    "saving": "Oszczędność...",
+    "uploading": "Przesyłanie ..."
+  },
+  "admin": {
+    "panel": "Ładowanie panelu administracyjnego ...",
+    "dashboard": "Ładowanie pulpitu nawigacyjnego ...",
+    "analytics": "Ładowanie analizy ..."
+  },
+  "skeleton": {
+    "toolCard": "Informacje o ładowaniu ...",
+    "toolGrid": "Ładowanie dostępnych narzędzi ...",
+    "tagFilters": "Opcje ładowania filtru ..."
+  }
+}

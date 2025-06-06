@@ -22,14 +22,14 @@ async function loadModularMessages(locale: string) {
 
   const messages: any = {};
 
-  for (const modulePath of modules) {
+  for (const moduleName of modules) {
     try {
       const moduleMessages = (
-        await import(`../../messages/${modulePath}/${locale}.json`)
+        await import(`../../messages/${moduleName}/${locale}.json`)
       ).default;
 
       // Convert module path to nested object structure
-      const parts = modulePath.split("/");
+      const parts = moduleName.split("/");
       let current = messages;
 
       for (let i = 0; i < parts.length - 1; i++) {
@@ -42,7 +42,7 @@ async function loadModularMessages(locale: string) {
       current[parts[parts.length - 1]] = moduleMessages;
     } catch (error) {
       console.warn(
-        `Failed to load module ${module} for locale ${locale}:`,
+        `Failed to load module ${moduleName} for locale ${locale}:`,
         error,
       );
     }

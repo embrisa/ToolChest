@@ -1,0 +1,25 @@
+{
+  "page": {
+    "message": "ロードツール...",
+    "application": "ツールチェストのロード...",
+    "pleaseWait": "アプリケーションの読み込み、待ってください..."
+  },
+  "components": {
+    "tools": "ロードツール...",
+    "tags": "タグの読み込み...",
+    "search": "検索...",
+    "processing": "処理...",
+    "saving": "節約...",
+    "uploading": "アップロード..."
+  },
+  "admin": {
+    "panel": "管理者パネルの読み込み...",
+    "dashboard": "ダッシュボードのロード...",
+    "analytics": "分析の読み込み..."
+  },
+  "skeleton": {
+    "toolCard": "ツール情報の読み込み...",
+    "toolGrid": "利用可能なツールの読み込み...",
+    "tagFilters": "フィルターオプションの読み込み..."
+  }
+}

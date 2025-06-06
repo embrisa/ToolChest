@@ -1,0 +1,78 @@
+{
+  "tools": {
+    "base64": {
+      "name": "base64ツール",
+      "description": "テキストとファイルをサポートしてbase64データをエンコードおよびデコードする"
+    },
+    "hashGenerator": {
+      "name": "ハッシュジェネレーター",
+      "description": "MD5、SHA-1、SHA-256、およびその他の暗号化ハッシュを生成します"
+    },
+    "faviconGenerator": {
+      "name": "ファビコンジェネレーター",
+      "description": "複数のサイズと形式の画像からファビコンを作成します"
+    },
+    "markdownToPdf": {
+      "name": "PDFへのマークダウン",
+      "description": "カスタムスタイリングオプションを使用して、マークダウンファイルをPDFに変換します"
+    },
+    "urlShortener": {
+      "name": "URLショートナー",
+      "description": "簡単に共有および追跡するための短いURLを作成します"
+    },
+    "qrGenerator": {
+      "name": "QRコードジェネレーター",
+      "description": "テキスト、URL、その他のデータのQRコードを生成します"
+    },
+    "imageCompressor": {
+      "name": "画像コンプレッサー",
+      "description": "品質を維持しながら画像を圧縮します"
+    },
+    "textDiff": {
+      "name": "テキストDIFFツール",
+      "description": "テキストファイル間の違いを比較して強調します"
+    }
+  },
+  "tags": {
+    "encoding": {
+      "name": "エンコーディング",
+      "description": "さまざまな形式でデータをエンコードおよびデコードするためのツール"
+    },
+    "generation": {
+      "name": "世代",
+      "description": "コンテンツ、コード、ファイルを生成するためのツール"
+    },
+    "conversion": {
+      "name": "変換",
+      "description": "異なるファイル形式間を変換するためのツール"
+    },
+    "security": {
+      "name": "安全",
+      "description": "暗号化の操作とセキュリティ分析のためのツール"
+    },
+    "compression": {
+      "name": "圧縮",
+      "description": "ファイルサイズを削減し、コンテンツを最適化するためのツール"
+    },
+    "analysis": {
+      "name": "分析",
+      "description": "データとファイルを分析および比較するためのツール"
+    },
+    "web": {
+      "name": "Web開発",
+      "description": "Web開発者向けに特別に設計されたツール"
+    },
+    "image": {
+      "name": "画像処理",
+      "description": "画像とグラフィックを操作するためのツール"
+    },
+    "text": {
+      "name": "テキスト処理",
+      "description": "テキストコンテンツを操作および分析するためのツール"
+    },
+    "utility": {
+      "name": "ユーティリティ",
+      "description": "一般的なタスク用の汎用ツール"
+    }
+  }
+}

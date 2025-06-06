@@ -1,0 +1,58 @@
+{
+  "header": {
+    "brand": "cajón de herramientas",
+    "navigation": {
+      "home": "Hogar",
+      "tools": "Herramientas",
+      "admin": "Administración"
+    },
+    "mobile": {
+      "toggleMenu": "Menú de palanca",
+      "openMenu": "Abrir menú de navegación",
+      "closeMenu": "Menú de navegación cerrado"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Tool-Chest",
+    "links": {
+      "privacy": "política de privacidad",
+      "terms": "Términos de servicio",
+      "contact": "Contacto",
+      "about": "Acerca de"
+    },
+    "description": "Herramientas de desarrollador centradas en la privacidad."
+  },
+  "breadcrumbs": {
+    "home": "Hogar",
+    "tools": "Herramientas",
+    "admin": "Administración",
+    "dashboard": "Panel",
+    "analytics": "Analítica",
+    "tags": "Etiquetas",
+    "monitoring": "Escucha",
+    "relationships": "Relaciones"
+  },
+  "localeSwitcher": {
+    "label": "Idioma",
+    "current": "Lenguaje actual",
+    "selectLanguage": "Lenguaje seleccionado",
+    "languages": {
+      "en": "Inglés",
+      "es": "Español",
+      "zh": "中文",
+      "hi": "हिन्दी",
+      "pt": "Português",
+      "ru": "Русий",
+      "ja": "日本語",
+      "de": "Deutsch",
+      "fr": "Français",
+      "ko": "한국어",
+      "it": "Italiano",
+      "tr": "Türkçe",
+      "pl": "Polski",
+      "nl": "Nederlands",
+      "vi": "Tiếng việt",
+      "uk": "Українсьа"
+    }
+  }
+}

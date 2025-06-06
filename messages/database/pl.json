@@ -1,0 +1,78 @@
+{
+  "tools": {
+    "base64": {
+      "name": "Narzędzie Base64",
+      "description": "Koduj i dekoduj dane Base64 z obsługą tekstu i plików"
+    },
+    "hashGenerator": {
+      "name": "Generator hash",
+      "description": "Wygeneruj MD5, SHA-1, SHA-256 i inne skróty kryptograficzne"
+    },
+    "faviconGenerator": {
+      "name": "Generator Favicon",
+      "description": "Utwórz favicons z obrazów w wielu rozmiarach i formatach"
+    },
+    "markdownToPdf": {
+      "name": "Markdown to PDF",
+      "description": "Konwertuj pliki Markdown na PDF z niestandardowymi opcjami stylizacji"
+    },
+    "urlShortener": {
+      "name": "Skrócenie URL",
+      "description": "Utwórz krótkie adresy URL dla łatwego udostępniania i śledzenia"
+    },
+    "qrGenerator": {
+      "name": "Generator kodu QR",
+      "description": "Generuj kody QR dla tekstu, adresów URL i innych danych"
+    },
+    "imageCompressor": {
+      "name": "Sprężarka obrazu",
+      "description": "Kompresuj obrazy, zachowując jakość"
+    },
+    "textDiff": {
+      "name": "Narzędzie do różnorodności tekstu",
+      "description": "Porównaj i wyróżnij różnice między plikami tekstowymi"
+    }
+  },
+  "tags": {
+    "encoding": {
+      "name": "Kodowanie",
+      "description": "Narzędzia do kodowania i dekodowania danych w różnych formatach"
+    },
+    "generation": {
+      "name": "Generacja",
+      "description": "Narzędzia do generowania treści, kodów i plików"
+    },
+    "conversion": {
+      "name": "Konwersja",
+      "description": "Narzędzia do konwersji między różnymi formatami plików"
+    },
+    "security": {
+      "name": "Bezpieczeństwo",
+      "description": "Narzędzia do operacji kryptograficznych i analizy bezpieczeństwa"
+    },
+    "compression": {
+      "name": "Kompresja",
+      "description": "Narzędzia do zmniejszania rozmiarów plików i optymalizacji treści"
+    },
+    "analysis": {
+      "name": "Analiza",
+      "description": "Narzędzia do analizy i porównywania danych i plików"
+    },
+    "web": {
+      "name": "Opracowywanie stron internetowych",
+      "description": "Narzędzia zaprojektowane specjalnie dla twórców stron internetowych"
+    },
+    "image": {
+      "name": "Przetwarzanie obrazu",
+      "description": "Narzędzia do pracy z obrazami i grafiką"
+    },
+    "text": {
+      "name": "Przetwarzanie tekstu",
+      "description": "Narzędzia do manipulowania i analizy treści tekstowych"
+    },
+    "utility": {
+      "name": "Pożytek",
+      "description": "Narzędzia ogólne do wspólnych zadań"
+    }
+  }
+}

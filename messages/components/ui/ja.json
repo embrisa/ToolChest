@@ -1,0 +1,89 @@
+{
+  "buttons": {
+    "save": "保存",
+    "cancel": "キャンセル",
+    "delete": "消去",
+    "edit": "編集",
+    "create": "作成する",
+    "update": "アップデート",
+    "submit": "提出する",
+    "close": "近い",
+    "copy": "コピー",
+    "download": "ダウンロード",
+    "upload": "アップロード",
+    "reset": "リセット",
+    "clear": "クリア",
+    "loading": "読み込み...",
+    "processing": "処理...",
+    "copied": "コピー！",
+    "selectFiles": "ファイルを選択します",
+    "chooseFile": "ファイルを選択します",
+    "removeFile": "ファイルを削除します"
+  },
+  "alerts": {
+    "success": "成功",
+    "error": "エラー",
+    "warning": "警告",
+    "info": "情報",
+    "dismiss": "アラートを却下します"
+  },
+  "modals": {
+    "close": "モーダルを閉じます",
+    "confirm": "確認する",
+    "confirmDelete": "削除を確認します",
+    "deleteWarning": "このアイテムを削除したいですか？このアクションを元に戻すことはできません。",
+    "unsavedChanges": "救われていない変更があります。去りたいですか？",
+    "title": "モーダル"
+  },
+  "tooltips": {
+    "copy": "クリップボードにコピーします",
+    "download": "ファイルをダウンロードします",
+    "edit": "アイテムを編集します",
+    "delete": "アイテムを削除します",
+    "info": "詳細情報",
+    "help": "助けを得る"
+  },
+  "progress": {
+    "uploading": "アップロード... {Progress}％",
+    "processing": "処理... {Progress}％",
+    "downloading": "ダウンロード... {Progress}％",
+    "complete": "完了"
+  },
+  "fileUpload": {
+    "dragDrop": "ここにファイルをドラッグしてドロップします",
+    "or": "または",
+    "browse": "ファイルを参照します",
+    "selectedFiles": "選択したファイル",
+    "maxSize": "最大ファイルサイズ：{サイズ}",
+    "supportedFormats": "サポートされているフォーマット：{フォーマット}",
+    "fileTooLarge": "ファイルが大きすぎます。最大サイズは{maxsize}です。",
+    "invalidFileType": "無効なファイルタイプ。サポートされているフォーマット：{フォーマット}",
+    "uploadFailed": "アップロードに失敗しました。もう一度やり直してください。",
+    "removeFile": "ファイルを削除します"
+  },
+  "toast": {
+    "close": "閉鎖通知",
+    "success": "成功",
+    "error": "エラー",
+    "warning": "警告",
+    "info": "情報"
+  },
+  "pagination": {
+    "previous": "前の",
+    "next": "次",
+    "page": "ページ{ページ}",
+    "of": "{合計}",
+    "showing": "{Total}の結果の{from}から{to}を表示します",
+    "perPage": "ページごと"
+  },
+  "table": {
+    "noData": "利用可能なデータはありません",
+    "loading": "データの読み込み...",
+    "sortBy": "{column}でソート",
+    "ascending": "上昇",
+    "descending": "下降",
+    "selectAll": "すべてを選択します",
+    "selectRow": "行を選択します",
+    "actions": "アクション"
+  }
+}
