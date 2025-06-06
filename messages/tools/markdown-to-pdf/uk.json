@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "title": "Markdown to PDF Converter | tool-chest",
+    "description": "Convert Markdown files to PDF with custom styling options. Professional document generation with client-side processing for privacy.",
+    "keywords": [
+      "markdown",
+      "pdf",
+      "converter",
+      "document",
+      "export",
+      "styling",
+      "format",
+      "download",
+      "privacy",
+      "client-side"
+    ]
+  },
+  "page": {
+    "title": "Markdown to PDF",
+    "description": "Convert Markdown files to PDF with custom styling options."
+  },
+  "tool": {
+    "input": {
+      "markdown": "Markdown Content",
+      "file": "Markdown File",
+      "placeholder": "Enter your Markdown content here..."
+    },
+    "customization": {
+      "title": "PDF Customization",
+      "pageSize": "Page Size",
+      "margins": "Margins",
+      "theme": "Theme",
+      "fontSize": "Font Size",
+      "fontFamily": "Font Family",
+      "lineHeight": "Line Height",
+      "headerFooter": "Header & Footer"
+    },
+    "themes": {
+      "default": "Default",
+      "github": "GitHub",
+      "minimal": "Minimal",
+      "academic": "Academic",
+      "professional": "Professional"
+    },
+    "pageSizes": {
+      "a4": "A4",
+      "letter": "Letter",
+      "legal": "Legal",
+      "a3": "A3",
+      "tabloid": "Tabloid"
+    },
+    "margins": {
+      "none": "None",
+      "narrow": "Narrow",
+      "normal": "Normal",
+      "wide": "Wide",
+      "custom": "Custom"
+    }
+  },
+  "validation": {
+    "markdownRequired": "Please enter Markdown content or select a file",
+    "invalidMarkdownFile": "Please select a valid Markdown file (.md, .markdown)",
+    "fileTooLarge": "File too large (max 10MB)",
+    "emptyContent": "Markdown content cannot be empty"
+  },
+  "info": {
+    "title": "About Markdown to PDF Conversion",
+    "description": "Convert your Markdown documents to professionally formatted PDF files with customizable styling options. Perfect for documentation, reports, articles, and presentations.",
+    "keyFeatures": {
+      "title": "Key Features",
+      "items": [
+        "Full Markdown syntax support",
+        "Custom PDF styling and themes",
+        "Multiple page sizes and orientations",
+        "Syntax highlighting for code blocks",
+        "Table and image support",
+        "Header and footer customization"
+      ]
+    },
+    "useCases": {
+      "title": "Common Use Cases",
+      "items": [
+        "Technical documentation",
+        "Research papers and reports",
+        "README files for printing",
+        "Meeting notes and agendas",
+        "Project proposals",
+        "Blog posts for offline reading"
+      ]
+    },
+    "supportedSyntax": {
+      "title": "Supported Markdown Features",
+      "items": [
+        "Headers and text formatting",
+        "Lists (ordered and unordered)",
+        "Links and images",
+        "Tables and code blocks",
+        "Blockquotes and horizontal rules",
+        "LaTeX math expressions (optional)"
+      ]
+    }
+  }
+}
