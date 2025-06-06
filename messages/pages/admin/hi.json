@@ -1,0 +1,100 @@
+{
+  "dashboard": {
+    "title": "चकरानेवाला",
+    "description": "अपने टूल-चेस्ट एप्लिकेशन प्रदर्शन और एनालिटिक्स का अवलोकन",
+    "stats": {
+      "totalTools": "कुल उपकरण",
+      "totalTags": "कुल टैग",
+      "totalUsage": "कुल उपयोग",
+      "thisMonth": "इस महीने",
+      "applicationStats": "अनुप्रयोग सांख्यिकी"
+    },
+    "usage": {
+      "title": "उपकरण उपयोग अवलोकन",
+      "table": {
+        "tool": "औजार",
+        "usageCount": "उपयोग की गणना",
+        "change": "परिवर्तन",
+        "actions": "कार्रवाई"
+      }
+    },
+    "quickActions": {
+      "title": "त्वरित क्रियाएं",
+      "viewAnalytics": "एनालिटिक्स देखें",
+      "manageTools": "उपकरण प्रबंधित करें",
+      "manageTags": "टैग प्रबंधित करें",
+      "viewSite": "साइट देखें",
+      "systemHealth": "तंत्र स्वास्थ्य"
+    }
+  },
+  "tools": {
+    "title": "उपकरण प्रबंधन",
+    "description": "उपकरण, उनके मेटाडेटा और रिश्तों का प्रबंधन करें",
+    "actions": {
+      "createTool": "उपकरण बनाएं",
+      "editTool": "संपादित करना",
+      "deleteTool": "हटाएं उपकरण",
+      "bulkActions": "थोक कार्य"
+    },
+    "table": {
+      "name": "नाम",
+      "slug": "काउंटर",
+      "status": "स्थिति",
+      "tags": "टैग",
+      "usage": "प्रयोग",
+      "lastModified": "अंतिम संशोधित",
+      "actions": "कार्रवाई"
+    }
+  },
+  "tags": {
+    "title": "टैग प्रबंधन",
+    "description": "टैग के साथ उपकरण व्यवस्थित करें और रिश्तों को प्रबंधित करें",
+    "actions": {
+      "createTag": "टैग बनाएँ",
+      "editTag": "टैग संपादित करें",
+      "deleteTag": "टैग हटाएं",
+      "bulkActions": "थोक कार्य"
+    },
+    "table": {
+      "name": "नाम",
+      "slug": "काउंटर",
+      "color": "रंग",
+      "toolCount": "औजार",
+      "description": "विवरण",
+      "actions": "कार्रवाई"
+    }
+  },
+  "analytics": {
+    "title": "एनालिटिक्स",
+    "description": "विस्तृत विश्लेषण और उपयोग के आंकड़े देखें",
+    "charts": {
+      "usageOverTime": "समय के साथ उपयोग",
+      "topTools": "शीर्ष औजार",
+      "userMetrics": "उपयोगकर्ता मेट्रिक्स"
+    }
+  },
+  "auth": {
+    "title": "व्यवस्थापक लॉगिन",
+    "description": "प्रशासन पैनल का उपयोग करें",
+    "form": {
+      "token": "व्यवस्थापक टोकन",
+      "tokenPlaceholder": "व्यवस्थापक टोकन दर्ज करें",
+      "login": "लॉग इन करें",
+      "loginError": "अमान्य व्यवस्थापक टोकन"
+    }
+  },
+  "loading": {
+    "panel": "लोडिंग एडमिन पैनल ...",
+    "dashboard": "लोडिंग डैशबोर्ड ...",
+    "analytics": "लोडिंग एनालिटिक्स ..."
+  },
+  "navigation": {
+    "dashboard": "चकरानेवाला",
+    "tools": "औजार",
+    "tags": "टैग",
+    "analytics": "एनालिटिक्स",
+    "monitoring": "निगरानी",
+    "logout": "लॉग आउट",
+    "viewSite": "साइट देखें"
+  }
+}
