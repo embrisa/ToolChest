@@ -3,31 +3,33 @@ import { getUserLocale } from "@/services/locale";
 
 async function loadModularMessages(locale: string) {
   const modules = [
-    'common',
-    'pages/home',
-    'pages/tools',
-    'pages/error',
-    'pages/admin',
-    'pages/loading',
-    'components/layout',
-    'components/forms',
-    'components/ui',
-    'database',
-    'tools/common',
-    'tools/base64',
-    'tools/hash-generator',
-    'tools/favicon-generator',
-    'tools/markdown-to-pdf',
+    "common",
+    "pages/home",
+    "pages/tools",
+    "pages/error",
+    "pages/admin",
+    "pages/loading",
+    "components/layout",
+    "components/forms",
+    "components/ui",
+    "database",
+    "tools/common",
+    "tools/base64",
+    "tools/hash-generator",
+    "tools/favicon-generator",
+    "tools/markdown-to-pdf",
   ];
 
   const messages: any = {};
 
   for (const moduleName of modules) {
     try {
-      const moduleMessages = (await import(`../../messages/${moduleName}/${locale}.json`)).default;
+      const moduleMessages = (
+        await import(`../../messages/${moduleName}/${locale}.json`)
+      ).default;
 
       // Convert module path to nested object structure
-      const parts = moduleName.split('/');
+      const parts = moduleName.split("/");
       let current = messages;
 
       for (let i = 0; i < parts.length - 1; i++) {
@@ -39,7 +41,10 @@ async function loadModularMessages(locale: string) {
 
       current[parts[parts.length - 1]] = moduleMessages;
     } catch (error) {
-      console.warn(`Failed to load module ${module} for locale ${locale}:`, error);
+      console.warn(
+        `Failed to load module ${moduleName} for locale ${locale}:`,
+        error,
+      );
     }
   }
 
