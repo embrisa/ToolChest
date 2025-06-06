@@ -298,9 +298,8 @@ Each language task should be tackled independently and includes:
   - Balance between French technical terms and accepted English terms
   - Translate tag names for tool organization (encodage, génération, sécurité, etc.)
 
-- **Task 2L – Korean (ko)**
+- **Task 2L – Korean (ko) ✅ COMPLETED**
 
-  **Create 12 Korean Translation Files**:
 
   - `messages/common/ko.json` (shared strings: actions, status, validation, privacy)
   - `messages/pages/home/ko.json` (home page: hero, stats, search, filtering)
@@ -502,6 +501,7 @@ Each language task should be tackled independently and includes:
   - `messages/components/ui/en.json` ✅
   - `messages/database/en.json` ✅
   - `messages/tools/common/en.json` ✅
+
   - `messages/tools/{tool}/en.json` ✅ (base64, hash-generator, favicon-generator, markdown-to-pdf)
 - **Task 2K - French Translation Files ✅ NEW**: All modular files created
   - `messages/common/fr.json` ✅

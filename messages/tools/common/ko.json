@@ -1,0 +1,72 @@
+{
+  "ui": {
+    "modes": {
+      "encode": "인코딩",
+      "decode": "풀다",
+      "generate": "생성하다",
+      "convert": "전환하다",
+      "process": "프로세스",
+      "analyze": "분석"
+    },
+    "inputTypes": {
+      "text": "텍스트",
+      "file": "파일",
+      "url": "URL",
+      "upload": "업로드"
+    },
+    "actions": {
+      "process": "프로세스",
+      "copy": "결과를 복사하십시오",
+      "download": "다운로드",
+      "upload": "업로드",
+      "clear": "분명한",
+      "reset": "다시 놓기",
+      "retry": "다시 해 보다",
+      "save": "구하다",
+      "export": "내보내다"
+    },
+    "status": {
+      "processing": "처리 ...",
+      "success": "작동이 성공적으로 완료되었습니다",
+      "copied": "클립 보드에 복사",
+      "error": "작동 실패",
+      "ready": "준비가 된",
+      "waiting": "입력을 기다리고 있습니다"
+    },
+    "placeholders": {
+      "textInput": "여기에 텍스트를 입력하십시오 ...",
+      "fileUpload": "파일을 선택하거나 드래그 앤 드롭",
+      "urlInput": "여기에 URL을 입력하십시오 ...",
+      "searchInput": "찾다..."
+    }
+  },
+  "validation": {
+    "required": "이 필드가 필요합니다",
+    "invalidInput": "잘못된 입력",
+    "fileTooLarge": "너무 큰 파일 (max {maxsize})",
+    "unsupportedFileType": "지원되지 않는 파일 유형",
+    "invalidFormat": "잘못된 형식",
+    "emptyInput": "텍스트를 입력하거나 파일을 선택하십시오",
+    "invalidUrl": "유효한 URL을 입력하십시오"
+  },
+  "privacy": {
+    "clientSideNote": "모든 처리는 브라우저에서 최대한의 개인 정보를 제공합니다.",
+    "noDataSent": "서버에 전송 된 데이터가 없습니다",
+    "filesStayLocal": "파일은 장치에 유지됩니다",
+    "noLogging": "데이터 저장소 또는 로깅이 없습니다"
+  },
+  "features": {
+    "clientSideProcessing": "개인 정보 보호를위한 클라이언트 측 처리",
+    "copyToClipboard": "클립 보드 기능으로 복사하십시오",
+    "downloadResults": "결과를 다운로드하십시오",
+    "realTimeProcessing": "실시간 처리",
+    "multipleFormats": "다중 형식 지원",
+    "batchProcessing": "배치 처리 지원"
+  },
+  "errors": {
+    "processingFailed": "처리가 실패했습니다",
+    "fileReadError": "오류 읽기 파일",
+    "networkError": "네트워크 오류가 발생했습니다",
+    "unknownError": "알 수없는 오류가 발생했습니다"
+  }
+}

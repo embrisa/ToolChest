@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "title": "PDF 변환기에 대한 마크 다운 | 도구 체력",
+    "description": "사용자 정의 스타일 옵션으로 Markdown 파일을 PDF로 변환하십시오. 개인 정보를위한 클라이언트 측 처리를 통해 전문 문서 생성.",
+    "keywords": [
+      "가격 인하",
+      "PDF",
+      "변환기",
+      "문서",
+      "내보내다",
+      "스타일링",
+      "체재",
+      "다운로드",
+      "은둔",
+      "클라이언트 측"
+    ]
+  },
+  "page": {
+    "title": "PDF에 마크 다운",
+    "description": "사용자 정의 스타일 옵션으로 Markdown 파일을 PDF로 변환하십시오."
+  },
+  "tool": {
+    "input": {
+      "markdown": "마크 다운 컨텐츠",
+      "file": "마크 다운 파일",
+      "placeholder": "여기에 Markdown 콘텐츠를 입력하십시오 ..."
+    },
+    "customization": {
+      "title": "PDF 사용자 정의",
+      "pageSize": "페이지 크기",
+      "margins": "여백",
+      "theme": "주제",
+      "fontSize": "글꼴 크기",
+      "fontFamily": "글꼴 가족",
+      "lineHeight": "라인 높이",
+      "headerFooter": "헤더 및 바닥 글"
+    },
+    "themes": {
+      "default": "기본",
+      "github": "github",
+      "minimal": "최소",
+      "academic": "학생",
+      "professional": "전문적인"
+    },
+    "pageSizes": {
+      "a4": "A4",
+      "letter": "편지",
+      "legal": "합법적인",
+      "a3": "A3",
+      "tabloid": "정제"
+    },
+    "margins": {
+      "none": "없음",
+      "narrow": "좁은",
+      "normal": "정상",
+      "wide": "넓은",
+      "custom": "관습"
+    }
+  },
+  "validation": {
+    "markdownRequired": "마크 다운 내용을 입력하거나 파일을 선택하십시오",
+    "invalidMarkdownFile": "유효한 마크 다운 파일 (.md, .markdown)을 선택하십시오.",
+    "fileTooLarge": "너무 큰 파일 (최대 10MB)",
+    "emptyContent": "마크 다운 컨텐츠는 비어있을 수 없습니다"
+  },
+  "info": {
+    "title": "PDF 변환에 대한 Markdown 정보",
+    "description": "마크 다운 문서를 사용자 정의 가능한 스타일 옵션으로 전문적으로 포맷 된 PDF 파일로 변환하십시오. 문서화, 보고서, 기사 및 프레젠테이션에 적합합니다.",
+    "keyFeatures": {
+      "title": "주요 기능",
+      "items": [
+        "전체 Markdown 구문 지원",
+        "맞춤형 PDF 스타일 및 테마",
+        "여러 페이지 크기 및 방향",
+        "코드 블록에 대한 구문 강조 표시",
+        "테이블 및 이미지 지원",
+        "헤더 및 바닥 글로 사용자 정의"
+      ]
+    },
+    "useCases": {
+      "title": "일반적인 사용 사례",
+      "items": [
+        "기술 문서",
+        "연구 논문 및 보고서",
+        "인쇄 용 readme 파일",
+        "회의 메모 및 의제",
+        "프로젝트 제안",
+        "오프라인 읽기를위한 블로그 게시물"
+      ]
+    },
+    "supportedSyntax": {
+      "title": "지원되는 마크 다운 기능",
+      "items": [
+        "헤더 및 텍스트 형식",
+        "목록 (주문 및 변수)",
+        "링크 및 이미지",
+        "테이블 및 코드 블록",
+        "블록 퀘스트 및 수평 규칙",
+        "라텍스 수학 표현 (선택 사항)"
+      ]
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "tools": {
+    "base64": {
+      "name": "Base64 도구",
+      "description": "텍스트 및 파일을 지원하는 Base64 데이터 인코딩 및 디코딩"
+    },
+    "hashGenerator": {
+      "name": "해시 생성기",
+      "description": "MD5, SHA-1, SHA-256 및 기타 암호화 해시를 생성하십시오"
+    },
+    "faviconGenerator": {
+      "name": "Favicon 생성기",
+      "description": "여러 크기와 형식의 이미지에서 Favicon을 만듭니다"
+    },
+    "markdownToPdf": {
+      "name": "PDF에 마크 다운",
+      "description": "사용자 정의 스타일 옵션으로 Markdown 파일을 PDF로 변환하십시오"
+    },
+    "urlShortener": {
+      "name": "URL 쇼트너",
+      "description": "쉽게 공유하고 추적 할 수 있도록 짧은 URL을 만듭니다"
+    },
+    "qrGenerator": {
+      "name": "QR 코드 생성기",
+      "description": "텍스트, URL 및 기타 데이터에 대한 QR 코드를 생성합니다"
+    },
+    "imageCompressor": {
+      "name": "이미지 압축기",
+      "description": "품질을 유지하면서 이미지를 압축합니다"
+    },
+    "textDiff": {
+      "name": "텍스트 차이 도구",
+      "description": "텍스트 파일의 차이점을 비교하고 강조하십시오"
+    }
+  },
+  "tags": {
+    "encoding": {
+      "name": "부호화",
+      "description": "다양한 형식으로 데이터를 인코딩하고 디코딩하는 도구"
+    },
+    "generation": {
+      "name": "세대",
+      "description": "컨텐츠, 코드 및 파일을 생성하기위한 도구"
+    },
+    "conversion": {
+      "name": "변환",
+      "description": "다른 파일 형식으로 변환하기위한 도구"
+    },
+    "security": {
+      "name": "보안",
+      "description": "암호화 작업 및 보안 분석 도구"
+    },
+    "compression": {
+      "name": "압축",
+      "description": "파일 크기를 줄이고 컨텐츠 최적화를위한 도구"
+    },
+    "analysis": {
+      "name": "분석",
+      "description": "데이터 및 파일 분석 및 비교 도구"
+    },
+    "web": {
+      "name": "웹 개발",
+      "description": "웹 개발자를 위해 특별히 설계된 도구"
+    },
+    "image": {
+      "name": "이미지 처리",
+      "description": "이미지 및 그래픽 작업을위한 도구"
+    },
+    "text": {
+      "name": "텍스트 처리",
+      "description": "텍스트 내용 조작 및 분석 도구"
+    },
+    "utility": {
+      "name": "공익사업",
+      "description": "일반적인 작업을위한 범용 도구"
+    }
+  }
+}

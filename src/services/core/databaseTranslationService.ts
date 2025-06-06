@@ -1,7 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Tool, Tag } from "@prisma/client";
 
-
 type ToolWithKeys = Tool & { nameKey?: string; descriptionKey?: string | null };
 type TagWithKeys = Tag & { nameKey?: string; descriptionKey?: string | null };
 
@@ -110,7 +109,6 @@ export class DatabaseTranslationService {
   /**
    * Generate database records with proper translation keys
    */
-
   static generateToolRecord(
     toolKey: string,
     additionalData?: Partial<ToolWithKeys>,
