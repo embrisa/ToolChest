@@ -24,16 +24,16 @@ export async function loadTranslationModules(
 ): Promise<Record<string, any>> {
     const translations: Record<string, any> = {};
 
-    for (const module of modules) {
+    for (const moduleName of modules) {
         try {
-            const modulePath = module.replace('.', '/');
+            const modulePath = moduleName.replace('.', '/');
             const moduleTranslations = await import(`../../../messages/${modulePath}/${locale}.json`);
 
             // Merge module translations into the main object
-            const moduleKey = module.replace('.', '_');
+            const moduleKey = moduleName.replace('.', '_');
             translations[moduleKey] = moduleTranslations.default || moduleTranslations;
         } catch (error) {
-            console.warn(`Failed to load translation module ${module} for locale ${locale}:`, error);
+            console.warn(`Failed to load translation module ${moduleName} for locale ${locale}:`, error);
             // Continue loading other modules even if one fails
         }
     }
