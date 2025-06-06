@@ -362,7 +362,7 @@ Each language task should be tackled independently and includes:
   - Ensure technical accuracy for development tools and concepts
   - Translate tag names for tool organization (kodowanie, generowanie, bezpieczeństwo, etc.)
 
-- **Task 2P – Dutch (nl)**
+- **Task 2P – Dutch (nl) ✅ COMPLETED**
 
   **Create 12 Dutch Translation Files**:
     - `messages/common/nl.json` (shared strings: actions, status, validation, privacy)
@@ -457,6 +457,19 @@ Each language task should be tackled independently and includes:
   - `messages/database/en.json` ✅ 
   - `messages/tools/common/en.json` ✅ 
   - `messages/tools/{tool}/en.json` ✅ (base64, hash-generator, favicon-generator, markdown-to-pdf)
+  - `messages/common/nl.json` ✅ **NEW**
+  - `messages/pages/home/nl.json` ✅
+  - `messages/pages/tools/nl.json` ✅
+  - `messages/pages/error/nl.json` ✅
+  - `messages/pages/admin/nl.json` ✅
+  - `messages/pages/loading/nl.json` ✅
+  - `messages/components/layout/nl.json` ✅
+  - `messages/components/forms/nl.json` ✅
+  - `messages/components/ui/nl.json` ✅
+  - `messages/database/nl.json` ✅
+  - `messages/tools/common/nl.json` ✅
+  - `messages/tools/{tool}/nl.json` ✅
+
 
 **Phase 3 - Integration ⚠️ PARTIALLY COMPLETED**
 - **Core Pages ✅**: All main pages now use translations
