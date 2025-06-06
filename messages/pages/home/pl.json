@@ -1,0 +1,50 @@
+{
+  "hero": {
+    "title": "Chest narzędzi",
+    "subtitle": "Twoja kolekcja niezbędnych narzędzi komputerowych.",
+    "description": "Koduj, dekoduj, generuj, konwertuje i więcej z łatwością.",
+    "searchPlaceholder": "Narzędzia wyszukiwania ..."
+  },
+  "stats": {
+    "toolsAvailable": "Dostępne narzędzia",
+    "clientSideProcessing": "Przetwarzanie po stronie klienta",
+    "clientSideValue": "100%",
+    "freeForever": "Bezpłatny",
+    "freeValue": "Na zawsze"
+  },
+  "sections": {
+    "allTools": "Wszystkie narzędzia",
+    "searchResults": "Wyniki wyszukiwania",
+    "filterTools": "Narzędzia filtracyjne",
+    "active": "aktywny"
+  },
+  "loading": {
+    "loadingTools": "Narzędzia do ładowania ...",
+    "toolsFound": "Znaleziono narzędzia"
+  },
+  "noResults": {
+    "title": "Nie znaleziono narzędzi",
+    "description": "Brak narzędzi dopasowanych „xyz0xyz”",
+    "descriptionFilters": "Żadne narzędzia pasują do wybranych filtrów"
+  },
+  "errors": {
+    "troubleLoading": "Mamy problem z załadowaniem narzędzi. Spróbuj ponownie później."
+  },
+  "search": {
+    "placeholder": "Narzędzia wyszukiwania ...",
+    "clearSearch": "Wyczyść wyszukiwanie",
+    "searchResults": "Wyniki wyszukiwania"
+  },
+  "filtering": {
+    "filterByTags": "Filtr według znaczników",
+    "allTags": "Wszystkie tagi",
+    "selectedTags": "Wybrane tagi",
+    "clearAll": "Wyczyść wszystko",
+    "noTags": "Brak dostępnych tagów"
+  },
+  "toolCard": {
+    "newTool": "Nowy",
+    "popularTool": "Popularny",
+    "openTool": "Otwarte narzędzie"
+  }
+}

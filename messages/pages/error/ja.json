@@ -1,0 +1,67 @@
+{
+  "notFound": {
+    "errorCode": "404",
+    "title": "ページが見つかりません",
+    "description": "探しているページは存在しません。移動、削除された場合、またはURLを誤って入力した可能性があります。",
+    "suggestions": {
+      "title": "これがあなたができることです：",
+      "checkUrl": "タイプミスのURLを確認してください",
+      "useNavigation": "ナビゲーションメニューを使用して、探しているものを見つけてください",
+      "returnHome": "ホームページに戻ります",
+      "searchTools": "検索機能を使用してツールを検索します"
+    },
+    "actions": {
+      "goToHome": "家に行く",
+      "goBack": "戻って行きます"
+    },
+    "popularTools": {
+      "title": "人気のあるツール",
+      "base64": {
+        "title": "base64ツール",
+        "description": "base64データをエンコードしてデコードします"
+      },
+      "hashGenerator": {
+        "title": "ハッシュジェネレーター",
+        "description": "MD5を生成します"
+      },
+      "faviconGenerator": {
+        "title": "ファビコンジェネレーター",
+        "description": "画像からファビコンを作成します"
+      },
+      "markdownToPdf": {
+        "title": "PDFへのマークダウン",
+        "description": "マークダウンをPDFに変換します"
+      }
+    }
+  },
+  "serverError": {
+    "title": "何かがうまくいかなかった",
+    "message": "予期しないエラーが発生しました",
+    "description": "申し訳ありませんが、このページを読み込んでいる間、何かがうまくいかなかった。私たちのチームは通知されており、問題の解決に取り組んでいます。",
+    "suggestions": {
+      "0": "ページを更新してみてください",
+      "1": "前のページに戻ります",
+      "2": "ホームページに戻ります",
+      "3": "問題が持続している場合は、サポートに連絡してください"
+    },
+    "actions": {
+      "refreshPage": "更新ページ",
+      "goBack": "戻って行きます",
+      "goToHome": "家に行く",
+      "contactSupport": "お問い合わせサポート"
+    },
+    "technical": {
+      "title": "技術的な詳細",
+      "errorInfo": "エラー情報",
+      "copyDetails": "詳細をコピーします",
+      "copiedToClipboard": "クリップボードにコピーされました"
+    }
+  },
+  "boundary": {
+    "title": "何かがうまくいかなかった",
+    "description": "このコンポーネントで予期しないエラーが発生しました。",
+    "details": "エラーの詳細を表示します",
+    "reload": "コンポーネントをリロードします",
+    "reportIssue": "この問題を報告してください"
+  }
+}

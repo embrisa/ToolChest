@@ -1,0 +1,58 @@
+{
+  "header": {
+    "brand": "Chest narzędzi",
+    "navigation": {
+      "home": "Dom",
+      "tools": "Narzędzia",
+      "admin": "Admin"
+    },
+    "mobile": {
+      "toggleMenu": "Przełącz menu",
+      "openMenu": "Otwórz menu nawigacji",
+      "closeMenu": "Zamknij menu nawigacji"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Chest narzędzi",
+    "links": {
+      "privacy": "Polityka prywatności",
+      "terms": "Warunki usług",
+      "contact": "Kontakt",
+      "about": "O"
+    },
+    "description": "Narzędzia programistyczne zorientowane na prywatność."
+  },
+  "breadcrumbs": {
+    "home": "Dom",
+    "tools": "Narzędzia",
+    "admin": "Admin",
+    "dashboard": "Panel",
+    "analytics": "Analityka",
+    "tags": "Tagi",
+    "monitoring": "Monitorowanie",
+    "relationships": "Relacje"
+  },
+  "localeSwitcher": {
+    "label": "Język",
+    "current": "Obecny język",
+    "selectLanguage": "Wybierz język",
+    "languages": {
+      "en": "angielski",
+      "es": "Español",
+      "zh": "chiński",
+      "hi": "hinduski",
+      "pt": "portugalski",
+      "ru": "rosyjski",
+      "ja": "japoński",
+      "de": "Deutsch",
+      "fr": "francuski",
+      "ko": "koreański",
+      "it": "włoski",
+      "tr": "turecki",
+      "pl": "Polski",
+      "nl": "Holenderski",
+      "vi": "wietnamski",
+      "uk": "ukraiński"
+    }
+  }
+}

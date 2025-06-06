@@ -1,0 +1,58 @@
+{
+  "header": {
+    "brand": "ツールチェスト",
+    "navigation": {
+      "home": "家",
+      "tools": "ツール",
+      "admin": "管理者"
+    },
+    "mobile": {
+      "toggleMenu": "トグルメニュー",
+      "openMenu": "ナビゲーションメニューを開きます",
+      "closeMenu": "ナビゲーションメニューを閉じます"
+    }
+  },
+  "footer": {
+    "copyright": "©2024 Tool-Chest",
+    "links": {
+      "privacy": "プライバシーポリシー",
+      "terms": "利用規約",
+      "contact": "接触",
+      "about": "について"
+    },
+    "description": "プライバシー中心の開発者ツール。"
+  },
+  "breadcrumbs": {
+    "home": "家",
+    "tools": "ツール",
+    "admin": "管理者",
+    "dashboard": "ダッシュボード",
+    "analytics": "分析",
+    "tags": "タグ",
+    "monitoring": "監視",
+    "relationships": "関係"
+  },
+  "localeSwitcher": {
+    "label": "言語",
+    "current": "現在の言語",
+    "selectLanguage": "言語を選択します",
+    "languages": {
+      "en": "英語",
+      "es": "español",
+      "zh": "中国語",
+      "hi": "ヒンディー語",
+      "pt": "ポルトガル語",
+      "ru": "ロシア",
+      "ja": "日本語",
+      "de": "ドイツ",
+      "fr": "フランス語",
+      "ko": "韓国語",
+      "it": "イタリア語",
+      "tr": "トルコ語",
+      "pl": "研磨",
+      "nl": "オランダ語",
+      "vi": "ベトナム人",
+      "uk": "ウクライナ人"
+    }
+  }
+}

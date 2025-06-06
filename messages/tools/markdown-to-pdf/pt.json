@@ -1,0 +1,103 @@
+{
+    "metadata": {
+        "title": "Conversor de Markdown para PDF | tool-chest",
+        "description": "Converta arquivos Markdown em PDF com opções de estilo personalizadas. Geração profissional de documentos com processamento no cliente para privacidade.",
+        "keywords": [
+            "markdown",
+            "pdf",
+            "conversor",
+            "documento",
+            "exportar",
+            "estilização",
+            "formato",
+            "download",
+            "privacidade",
+            "processamento no cliente"
+        ]
+    },
+    "page": {
+        "title": "Markdown para PDF",
+        "description": "Converta arquivos Markdown para PDF com opções de estilo personalizadas."
+    },
+    "tool": {
+        "input": {
+            "markdown": "Conteúdo Markdown",
+            "file": "Arquivo Markdown",
+            "placeholder": "Insira seu conteúdo Markdown aqui..."
+        },
+        "customization": {
+            "title": "Personalização do PDF",
+            "pageSize": "Tamanho da Página",
+            "margins": "Margens",
+            "theme": "Tema",
+            "fontSize": "Tamanho da Fonte",
+            "fontFamily": "Família de Fontes",
+            "lineHeight": "Altura da Linha",
+            "headerFooter": "Cabeçalho e Rodapé"
+        },
+        "themes": {
+            "default": "Padrão",
+            "github": "GitHub",
+            "minimal": "Minimalista",
+            "academic": "Acadêmico",
+            "professional": "Profissional"
+        },
+        "pageSizes": {
+            "a4": "A4",
+            "letter": "Carta",
+            "legal": "Legal",
+            "a3": "A3",
+            "tabloid": "Tabloide"
+        },
+        "margins": {
+            "none": "Nenhuma",
+            "narrow": "Estreita",
+            "normal": "Normal",
+            "wide": "Larga",
+            "custom": "Personalizada"
+        }
+    },
+    "validation": {
+        "markdownRequired": "Insira conteúdo Markdown ou selecione um arquivo",
+        "invalidMarkdownFile": "Selecione um arquivo Markdown válido (.md, .markdown)",
+        "fileTooLarge": "Arquivo muito grande (máx 10MB)",
+        "emptyContent": "O conteúdo Markdown não pode estar vazio"
+    },
+    "info": {
+        "title": "Sobre a Conversão de Markdown para PDF",
+        "description": "Converta seus documentos Markdown para arquivos PDF formatados profissionalmente com opções de estilo personalizáveis. Perfeito para documentação, relatórios, artigos e apresentações.",
+        "keyFeatures": {
+            "title": "Principais Recursos",
+            "items": [
+                "Suporte completo à sintaxe Markdown",
+                "Estilos e temas personalizados para PDF",
+                "Vários tamanhos e orientações de página",
+                "Realce de sintaxe para blocos de código",
+                "Suporte a tabelas e imagens",
+                "Personalização de cabeçalho e rodapé"
+            ]
+        },
+        "useCases": {
+            "title": "Casos de Uso Comuns",
+            "items": [
+                "Documentação técnica",
+                "Artigos e relatórios de pesquisa",
+                "Arquivos README para impressão",
+                "Notas e agendas de reuniões",
+                "Propostas de projetos",
+                "Postagens de blog para leitura offline"
+            ]
+        },
+        "supportedSyntax": {
+            "title": "Recursos Markdown Suportados",
+            "items": [
+                "Cabeçalhos e formatação de texto",
+                "Listas (ordenadas e não ordenadas)",
+                "Links e imagens",
+                "Tabelas e blocos de código",
+                "Citações e linhas horizontais",
+                "Expressões matemáticas LaTeX (opcional)"
+            ]
+        }
+    }
+}

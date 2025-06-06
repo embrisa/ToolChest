@@ -1,0 +1,33 @@
+{
+  "page": {
+    "title": "すべてのツール",
+    "subtitle": "開発ワークフローをより効率的にするために設計されたユーティリティツールの完全なコレクションを調べてください。",
+    "loading": "ロードツール...",
+    "toolsAvailable": "利用可能なツール",
+    "availableTools": "利用可能なツール",
+    "description": "Web開発のためのプロのグレードのユーティリティ"
+  },
+  "stats": {
+    "allToolsFree": "すべてのツールは無料です",
+    "clientSideProcessing": "クライアント側の処理"
+  },
+  "states": {
+    "noToolsAvailable": "利用可能なツールはありません",
+    "noToolsDescription": "ツールはロードされています。すぐに確認するか、ページを更新してみてください。",
+    "loadingGrid": "利用可能なツールの読み込み..."
+  },
+  "features": {
+    "privacy": {
+      "title": "最初にプライバシー",
+      "description": "すべてのツールは、ブラウザでデータをローカルに処理します"
+    },
+    "free": {
+      "title": "常に無料",
+      "description": "サブスクリプション、隠されたコスト、完全に無料ではありません"
+    },
+    "fast": {
+      "title": "稲妻が速い",
+      "description": "最適化されたパフォーマンスを備えたインスタント結果"
+    }
+  }
+}

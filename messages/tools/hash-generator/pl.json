@@ -1,0 +1,72 @@
+{
+  "metadata": {
+    "title": "Generator hash | Chest narzędzi",
+    "description": "Wygeneruj MD5, SHA-1, SHA-256 i inne skróty online. Szybka, bezpieczna generowanie skrótu po stronie klienta dla tekstu i plików.",
+    "keywords": [
+      "haszysz",
+      "MD5",
+      "SHA1",
+      "Malutki",
+      "Suma kontrolna",
+      "generator",
+      "tekst",
+      "plik",
+      "bezpieczeństwo",
+      "weryfikacja"
+    ]
+  },
+  "page": {
+    "title": "Generator hash",
+    "description": "Wygeneruj skróty kryptograficzne dla tekstu i plików za pomocą różnych algorytmów."
+  },
+  "tool": {
+    "algorithms": {
+      "md5": "MD5",
+      "sha1": "SHA-1",
+      "sha256": "SHA-256",
+      "sha512": "SHA-512",
+      "crc32": "CRC32"
+    },
+    "placeholders": {
+      "textInput": "Wprowadź tekst do Hash ...",
+      "fileUpload": "Wybierz plik, aby wygenerować skrót"
+    }
+  },
+  "validation": {
+    "algorithmRequired": "Wybierz algorytm skrótu",
+    "inputRequired": "Wprowadź tekst lub wybierz plik"
+  },
+  "info": {
+    "title": "O funkcjach skrótu",
+    "description": "Funkcje skrótu konwertują dane wejściowe na stałą wielkość znaków znaków, które są zwykle używane do weryfikacji integralności danych, przechowywania haseł i podpisów cyfrowych.",
+    "keyFeatures": {
+      "title": "Kluczowe funkcje",
+      "items": [
+        "Wsparcie wielu algorytmów skrótu",
+        "Tekst i haszowanie plików",
+        "Możliwość przetwarzania wsadowego",
+        "Narzędzia porównawcze skrótu",
+        "Opcje wyjściowe wieloletnich/małej litery"
+      ]
+    },
+    "useCases": {
+      "title": "Powszechne przypadki użycia",
+      "items": [
+        "Weryfikacja integralności pliku",
+        "Hasło hasła",
+        "Deduplikacja danych",
+        "Podpisy cyfrowe",
+        "Generowanie sumy kontrolnej"
+      ]
+    },
+    "security": {
+      "title": "Notatki bezpieczeństwa",
+      "items": [
+        "MD5 i SHA-1 są przestarzałe do użytku bezpieczeństwa",
+        "Użyj SHA-256 lub wyższej do celów kryptograficznych",
+        "Wszystkie mieszanie dzieje się lokalnie w Twojej przeglądarce",
+        "Żadne dane nie są przesyłane na serwery zewnętrzne"
+      ]
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "ui": {
+    "modes": {
+      "encode": "Codificar",
+      "decode": "Descodificar",
+      "generate": "Generar",
+      "convert": "Convertir",
+      "process": "Proceso",
+      "analyze": "Analizar"
+    },
+    "inputTypes": {
+      "text": "Texto",
+      "file": "Archivo",
+      "url": "Url",
+      "upload": "Subir"
+    },
+    "actions": {
+      "process": "Proceso",
+      "copy": "Copiar resultado",
+      "download": "Descargar",
+      "upload": "Subir",
+      "clear": "Claro",
+      "reset": "Reiniciar",
+      "retry": "Rever",
+      "save": "Ahorrar",
+      "export": "Exportar"
+    },
+    "status": {
+      "processing": "Tratamiento...",
+      "success": "Operación completada con éxito",
+      "copied": "Copiado al portapapeles",
+      "error": "Operación fallida",
+      "ready": "Listo",
+      "waiting": "Esperando la entrada"
+    },
+    "placeholders": {
+      "textInput": "Ingrese el texto aquí ...",
+      "fileUpload": "Seleccione un archivo o arrastre y suelte",
+      "urlInput": "Ingrese URL aquí ...",
+      "searchInput": "Buscar..."
+    }
+  },
+  "validation": {
+    "required": "Este campo es obligatorio",
+    "invalidInput": "Entrada no válida",
+    "fileTooLarge": "Archivo demasiado grande (max {maxSize})",
+    "unsupportedFileType": "Tipo de archivo no compatible",
+    "invalidFormat": "Formato no válido",
+    "emptyInput": "Ingrese algún texto o seleccione un archivo",
+    "invalidUrl": "Ingrese una URL válida"
+  },
+  "privacy": {
+    "clientSideNote": "Todo el procesamiento ocurre en su navegador para obtener la máxima privacidad.",
+    "noDataSent": "No se envían datos a los servidores",
+    "filesStayLocal": "Los archivos permanecen en su dispositivo",
+    "noLogging": "Sin almacenamiento de datos o registro"
+  },
+  "features": {
+    "clientSideProcessing": "Procesamiento del lado del cliente para la privacidad",
+    "copyToClipboard": "Copiar a la funcionalidad del portapapeles",
+    "downloadResults": "Descargar resultados",
+    "realTimeProcessing": "Procesamiento en tiempo real",
+    "multipleFormats": "Soporte de formato múltiple",
+    "batchProcessing": "Soporte de procesamiento por lotes"
+  },
+  "errors": {
+    "processingFailed": "Falló el procesamiento",
+    "fileReadError": "Error al archivo de lectura",
+    "networkError": "Se produjo un error de red",
+    "unknownError": "Ocurrió un error desconocido"
+  }
+}

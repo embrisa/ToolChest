@@ -1,0 +1,72 @@
+{
+  "ui": {
+    "modes": {
+      "encode": "エンコード",
+      "decode": "デコード",
+      "generate": "生成する",
+      "convert": "変換する",
+      "process": "プロセス",
+      "analyze": "分析します"
+    },
+    "inputTypes": {
+      "text": "文章",
+      "file": "ファイル",
+      "url": "URL",
+      "upload": "アップロード"
+    },
+    "actions": {
+      "process": "プロセス",
+      "copy": "結果をコピーします",
+      "download": "ダウンロード",
+      "upload": "アップロード",
+      "clear": "クリア",
+      "reset": "リセット",
+      "retry": "リトライ",
+      "save": "保存",
+      "export": "輸出"
+    },
+    "status": {
+      "processing": "処理...",
+      "success": "操作が正常に完了しました",
+      "copied": "クリップボードにコピーされました",
+      "error": "操作に失敗しました",
+      "ready": "準備ができて",
+      "waiting": "入力を待っています"
+    },
+    "placeholders": {
+      "textInput": "ここにテキストを入力してください...",
+      "fileUpload": "ファイルを選択するか、ドラッグアンドドロップします",
+      "urlInput": "ここにURLを入力してください...",
+      "searchInput": "検索..."
+    }
+  },
+  "validation": {
+    "required": "この項目は必須です",
+    "invalidInput": "無効な入力",
+    "fileTooLarge": "ファイルが大きすぎる（max {maxsize}）",
+    "unsupportedFileType": "サポートされていないファイルタイプ",
+    "invalidFormat": "無効な形式",
+    "emptyInput": "テキストを入力するか、ファイルを選択してください",
+    "invalidUrl": "有効なURLを入力してください"
+  },
+  "privacy": {
+    "clientSideNote": "すべての処理は、最大のプライバシーのためにブラウザで行われます。",
+    "noDataSent": "サーバーに送信されるデータはありません",
+    "filesStayLocal": "ファイルはデバイスにとどまります",
+    "noLogging": "データストレージやロギングはありません"
+  },
+  "features": {
+    "clientSideProcessing": "プライバシーのためのクライアント側の処理",
+    "copyToClipboard": "クリップボード機能にコピーします",
+    "downloadResults": "結果をダウンロードしてください",
+    "realTimeProcessing": "リアルタイム処理",
+    "multipleFormats": "複数のフォーマットサポート",
+    "batchProcessing": "バッチ処理サポート"
+  },
+  "errors": {
+    "processingFailed": "処理に失敗しました",
+    "fileReadError": "ファイルの読み取りエラー",
+    "networkError": "ネットワークエラーが発生しました",
+    "unknownError": "不明なエラーが発生しました"
+  }
+}

@@ -1,0 +1,67 @@
+{
+    "notFound": {
+        "errorCode": "404",
+        "title": "Página Não Encontrada",
+        "description": "A página que você procura não existe. Ela pode ter sido movida ou excluída, ou você pode ter digitado o endereço incorretamente.",
+        "suggestions": {
+            "title": "Veja o que você pode fazer:",
+            "checkUrl": "Verifique se o endereço está correto",
+            "useNavigation": "Use o menu de navegação para encontrar o que procura",
+            "returnHome": "Voltar para a página inicial",
+            "searchTools": "Pesquise ferramentas usando a busca"
+        },
+        "actions": {
+            "goToHome": "Ir para Início",
+            "goBack": "Voltar"
+        },
+        "popularTools": {
+            "title": "Ferramentas Populares",
+            "base64": {
+                "title": "Ferramenta Base64",
+                "description": "Codifique e decodifique dados em Base64"
+            },
+            "hashGenerator": {
+                "title": "Gerador de Hash",
+                "description": "Gere hashes MD5, SHA"
+            },
+            "faviconGenerator": {
+                "title": "Gerador de Favicon",
+                "description": "Crie favicons a partir de imagens"
+            },
+            "markdownToPdf": {
+                "title": "Markdown para PDF",
+                "description": "Converta Markdown para PDF"
+            }
+        }
+    },
+    "serverError": {
+        "title": "Algo deu errado",
+        "message": "Ocorreu um erro inesperado",
+        "description": "Desculpe, mas algo deu errado ao carregar esta página. Nossa equipe foi notificada e está trabalhando para resolver o problema.",
+        "suggestions": {
+            "0": "Tente atualizar a página",
+            "1": "Volte para a página anterior",
+            "2": "Voltar para a página inicial",
+            "3": "Entre em contato com o suporte se o problema persistir"
+        },
+        "actions": {
+            "refreshPage": "Atualizar Página",
+            "goBack": "Voltar",
+            "goToHome": "Ir para Início",
+            "contactSupport": "Contatar Suporte"
+        },
+        "technical": {
+            "title": "Detalhes Técnicos",
+            "errorInfo": "Informações do Erro",
+            "copyDetails": "Copiar Detalhes",
+            "copiedToClipboard": "Copiado para a área de transferência"
+        }
+    },
+    "boundary": {
+        "title": "Algo deu errado",
+        "description": "Ocorreu um erro inesperado neste componente.",
+        "details": "Mostrar detalhes do erro",
+        "reload": "Recarregar componente",
+        "reportIssue": "Reportar este problema"
+    }
+}
