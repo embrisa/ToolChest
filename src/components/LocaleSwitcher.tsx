@@ -5,7 +5,8 @@ import { locales } from "@/i18n/config";
 import { useTransition } from "react";
 
 export default function LocaleSwitcher() {
-  const t = useTranslations("Components.LocaleSwitcher");
+  // Use the same namespace as the existing layout translations
+  const t = useTranslations("components.layout.localeSwitcher");
   const locale = useLocale();
   const [isPending, startTransition] = useTransition();
 
