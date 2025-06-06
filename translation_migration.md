@@ -191,24 +191,23 @@ Each language task should be tackled independently and includes:
   - Balance between Hindi terms and commonly used English technical terms
   - Translate tag names for tool organization, keeping technical clarity
 
-- **Task 2G – Portuguese (pt)**
+- **Task 2G – Portuguese (pt) ✅ COMPLETED**
 
-  - **Create 12 Portuguese Translation Files**:
-    - `messages/common/pt.json` (shared strings: actions, status, validation, privacy)
-    - `messages/pages/home/pt.json` (home page: hero, stats, search, filtering)
-    - `messages/pages/tools/pt.json` (tools listing page)
-    - `messages/pages/error/pt.json` (404, 500, error boundaries)
-    - `messages/pages/admin/pt.json` (admin dashboard, management)
-    - `messages/pages/loading/pt.json` (loading states)
-    - `messages/components/layout/pt.json` (header, footer, navigation, locale switcher)
-    - `messages/components/forms/pt.json` (form components, validation)
-    - `messages/components/ui/pt.json` (buttons, alerts, modals, tooltips)
-    - `messages/database/pt.json` (tool & tag names)
-    - `messages/tools/common/pt.json` (shared tool patterns)
-    - `messages/tools/{tool}/pt.json` (per tool, as needed)
-  - Target community: Brazilian and Portuguese developers
-  - Consider Brazilian Portuguese as primary variant
-  - Translate tag names for tool organization (codificação, geração, segurança, etc.)
+  - **All 12 Portuguese Translation Files Created**:
+    - `messages/common/pt.json` ✅
+    - `messages/pages/home/pt.json` ✅
+    - `messages/pages/tools/pt.json` ✅
+    - `messages/pages/error/pt.json` ✅
+    - `messages/pages/admin/pt.json` ✅
+    - `messages/pages/loading/pt.json` ✅
+    - `messages/components/layout/pt.json` ✅
+    - `messages/components/forms/pt.json` ✅
+    - `messages/components/ui/pt.json` ✅
+    - `messages/database/pt.json` ✅
+    - `messages/tools/common/pt.json` ✅
+    - `messages/tools/{tool}/pt.json` ✅ (base64, hash-generator, favicon-generator, markdown-to-pdf)
+  - Focused on Brazilian Portuguese as the primary variant
+  - Translated tag names for tool organization (codificação, geração, segurança, etc.)
 
 - **Task 2H – Russian (ru)**
 

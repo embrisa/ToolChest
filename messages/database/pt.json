@@ -1,0 +1,78 @@
+{
+  "tools": {
+    "base64": {
+      "name": "Ferramenta Base64",
+      "description": "Codifique e decodifique dados Base64 com suporte para texto e arquivos"
+    },
+    "hashGenerator": {
+      "name": "Gerador de Hash",
+      "description": "Gere hashes MD5, SHA-1, SHA-256 e outros algoritmos criptográficos"
+    },
+    "faviconGenerator": {
+      "name": "Gerador de Favicon",
+      "description": "Crie favicons a partir de imagens em vários tamanhos e formatos"
+    },
+    "markdownToPdf": {
+      "name": "Markdown para PDF",
+      "description": "Converta arquivos Markdown para PDF com opções de estilo personalizadas"
+    },
+    "urlShortener": {
+      "name": "Encurtador de URL",
+      "description": "Crie URLs curtas para fácil compartilhamento e rastreamento"
+    },
+    "qrGenerator": {
+      "name": "Gerador de QR Code",
+      "description": "Gere códigos QR para textos, URLs e outros dados"
+    },
+    "imageCompressor": {
+      "name": "Compressor de Imagens",
+      "description": "Comprime imagens mantendo a qualidade"
+    },
+    "textDiff": {
+      "name": "Ferramenta de Diferença de Texto",
+      "description": "Compare e destaque diferenças entre arquivos de texto"
+    }
+  },
+  "tags": {
+    "encoding": {
+      "name": "Codificação",
+      "description": "Ferramentas para codificar e decodificar dados em vários formatos"
+    },
+    "generation": {
+      "name": "Geração",
+      "description": "Ferramentas para gerar conteúdo, códigos e arquivos"
+    },
+    "conversion": {
+      "name": "Conversão",
+      "description": "Ferramentas para converter entre diferentes formatos de arquivo"
+    },
+    "security": {
+      "name": "Segurança",
+      "description": "Ferramentas para operações criptográficas e análise de segurança"
+    },
+    "compression": {
+      "name": "Compressão",
+      "description": "Ferramentas para reduzir tamanhos de arquivos e otimizar conteúdo"
+    },
+    "analysis": {
+      "name": "Análise",
+      "description": "Ferramentas para analisar e comparar dados e arquivos"
+    },
+    "web": {
+      "name": "Desenvolvimento Web",
+      "description": "Ferramentas projetadas especificamente para desenvolvedores web"
+    },
+    "image": {
+      "name": "Processamento de Imagem",
+      "description": "Ferramentas para trabalhar com imagens e gráficos"
+    },
+    "text": {
+      "name": "Processamento de Texto",
+      "description": "Ferramentas para manipular e analisar conteúdo de texto"
+    },
+    "utility": {
+      "name": "Utilitário",
+      "description": "Ferramentas de uso geral para tarefas comuns"
+    }
+  }
+}
