@@ -452,6 +452,11 @@ Each language task should be tackled independently and includes:
   - `messages/components/ui/uk.json` (buttons, alerts, modals, tooltips)
   - `messages/database/uk.json` (tool & tag names)
   - `messages/tools/common/uk.json` (shared tool patterns)
+  - `messages/tools/{tool}/uk.json` (per tool, as needed)
+  - Target community: Ukrainian developer community
+  - Ensure technical terminology is appropriate and current
+  - Translate tag names for tool organization (кодування, генерація, безпека, etc.)
+
 
 - `messages/tools/{tool}/uk.json` (per tool, as needed)
 - Target community: Ukrainian developer community
@@ -495,6 +500,24 @@ Each language task should be tackled independently and includes:
   - `messages/pages/loading/en.json` ✅
   - `messages/components/layout/en.json` ✅
   - `messages/components/forms/en.json` ✅ **NEWLY COMPLETED**
+  - `messages/components/ui/en.json` ✅
+  - `messages/database/en.json` ✅
+  - `messages/tools/common/en.json` ✅
+- `messages/tools/{tool}/en.json` ✅ (base64, hash-generator, favicon-generator, markdown-to-pdf)
+
+- **Task 2J - German (de) ✅**: German translation files created
+  - `messages/common/de.json` ✅
+  - `messages/pages/home/de.json` ✅
+  - `messages/pages/tools/de.json` ✅
+  - `messages/pages/error/de.json` ✅
+  - `messages/pages/admin/de.json` ✅
+  - `messages/pages/loading/de.json` ✅
+  - `messages/components/layout/de.json` ✅
+  - `messages/components/forms/de.json` ✅
+  - `messages/components/ui/de.json` ✅
+  - `messages/database/de.json` ✅
+  - `messages/tools/common/de.json` ✅
+  - `messages/tools/{tool}/de.json` ✅ (base64, hash-generator, favicon-generator, markdown-to-pdf)
 
   - `messages/components/ui/en.json` ✅ 
   - `messages/database/en.json` ✅ 
@@ -799,7 +822,8 @@ Each language task now includes **enhanced modular translation files**:
 ### Next Priority Actions:
 
 1. **Tool Component Integration**: Focus on Base64Tool first as the template for other tools
-2. **Admin Integration**: Update admin dashboard and management pages  
-3. **Testing**: Ensure all translation integrations work correctly
+2. **Admin Integration**: Update admin dashboard and management pages
+3. **Language Expansion**: Execute tasks 2D-2R for 14 additional languages
+4. **Testing**: Ensure all translation integrations work correctly
 
 Each numbered task group can be tackled independently, minimizing merge conflicts. The foundation is solid and ready for language expansion.

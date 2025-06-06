@@ -22,7 +22,6 @@ export async function loadTranslationModules(
   locale: string,
   modules: TranslationModule[],
 ): Promise<Record<string, any>> {
-
   const translations: Record<string, any> = {};
 
   for (const moduleName of modules) {
