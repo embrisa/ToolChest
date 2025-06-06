@@ -1,5 +1,3 @@
-import { getMessages } from "next-intl/server";
-
 export interface ToolTranslations {
   metadata: {
     title: string;
