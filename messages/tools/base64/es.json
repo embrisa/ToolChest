@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "title": "Base64 codificador y decodificador | cajón de herramientas",
+    "description": "Codador y decodificador de base en línea gratuito. Convierta el texto a base64 y decodifique base64 a texto. Admite codificación/decodificación de archivos con opciones seguras a URL. Privacidad primero con procesamiento del lado del cliente.",
+    "keywords": [
+      "base64",
+      "codificador",
+      "descifrador",
+      "codificar",
+      "descodificar",
+      "texto",
+      "archivo",
+      "ausente",
+      "herramienta en línea",
+      "gratis",
+      "privacidad"
+    ]
+  },
+  "page": {
+    "title": "Base64 codificador y decodificador",
+    "description": "Codificar y decodificar datos Base64 con soporte para texto y archivos."
+  },
+  "tool": {
+    "variants": {
+      "standard": "Estándar",
+      "urlSafe": "Ausente"
+    },
+    "placeholders": {
+      "textInput": "Ingrese el texto para codificar/decodificar ...",
+      "fileUpload": "Seleccione un archivo o arrastre y suelte"
+    }
+  },
+  "validation": {
+    "invalidBase64": "Entrada no válida de base64",
+    "fileTooLarge": "Archivo demasiado grande (máximo 10MB)"
+  },
+  "info": {
+    "title": "Acerca de Base64 Codificación",
+    "description": "Base64 es un esquema de codificación binario a texto que convierte los datos binarios en un formato de texto utilizando un conjunto de 64 caracteres. Se usa comúnmente para codificar datos en correo electrónico, páginas web y URL de datos, asegurando una transmisión segura sobre protocolos basados ​​en texto.",
+    "keyFeatures": {
+      "title": "Características clave",
+      "items": [
+        "Codificación/decodificación de texto y archivo",
+        "Opción de codificación de Base64 de URL Safe",
+        "Copiar a la funcionalidad del portapapeles",
+        "Descargar resultados codificados/decodificados",
+        "Codificación/decodificación en tiempo real"
+      ]
+    },
+    "useCases": {
+      "title": "Casos de uso comunes",
+      "items": [
+        "Adjuntos de correo electrónico codificación",
+        "URL de datos web",
+        "Transmisión de datos de API",
+        "Almacenamiento de blob de bases de datos",
+        "Codificación del archivo de configuración"
+      ]
+    }
+  }
+}

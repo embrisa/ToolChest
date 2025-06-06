@@ -157,6 +157,7 @@ Each language task should be tackled independently and includes:
     - `messages/database/es.json` (tool & tag names)
     - `messages/tools/common/es.json` (shared tool patterns)
     - `messages/tools/{tool}/es.json` (per tool, as needed)
+  - **Status:** ✅ *Spanish translation files created for all modules*
   - Target community: Spanish-speaking developers worldwide
   - Focus on technical terminology appropriate for software development
   - Translate tag names for tool organization (codificación, generación, seguridad, etc.)
@@ -476,6 +477,25 @@ Each language task should be tackled independently and includes:
   - `messages/pages/loading/en.json` ✅
   - `messages/components/layout/en.json` ✅
   - `messages/components/forms/en.json` ✅ **NEWLY COMPLETED**
+
+  - `messages/components/ui/en.json` ✅ 
+  - `messages/database/en.json` ✅ 
+  - `messages/tools/common/en.json` ✅
+  - `messages/tools/{tool}/en.json` ✅ (base64, hash-generator, favicon-generator, markdown-to-pdf)
+- **Task 2D - Spanish Language ✅ NEWLY COMPLETED**: All Spanish translation files added
+  - `messages/common/es.json` ✅
+  - `messages/pages/home/es.json` ✅
+  - `messages/pages/tools/es.json` ✅
+  - `messages/pages/error/es.json` ✅
+  - `messages/pages/admin/es.json` ✅
+  - `messages/pages/loading/es.json` ✅
+  - `messages/components/layout/es.json` ✅
+  - `messages/components/forms/es.json` ✅
+  - `messages/components/ui/es.json` ✅
+  - `messages/database/es.json` ✅
+  - `messages/tools/common/es.json` ✅
+  - `messages/tools/{tool}/es.json` ✅ (base64, hash-generator, favicon-generator, markdown-to-pdf)
+
   - `messages/components/ui/en.json` ✅
   - `messages/database/en.json` ✅
   - `messages/tools/common/en.json` ✅

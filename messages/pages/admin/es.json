@@ -1,0 +1,100 @@
+{
+  "dashboard": {
+    "title": "Panel",
+    "description": "Descripción general del rendimiento y análisis de su aplicación de herramientas",
+    "stats": {
+      "totalTools": "Total de herramientas",
+      "totalTags": "Total etiquetas",
+      "totalUsage": "Uso total",
+      "thisMonth": "Este mes",
+      "applicationStats": "Estadística de aplicación"
+    },
+    "usage": {
+      "title": "Descripción general del uso de la herramienta",
+      "table": {
+        "tool": "Herramienta",
+        "usageCount": "Recuento de uso",
+        "change": "Cambiar",
+        "actions": "Comportamiento"
+      }
+    },
+    "quickActions": {
+      "title": "Acciones rápidas",
+      "viewAnalytics": "Ver análisis",
+      "manageTools": "Administrar herramientas",
+      "manageTags": "Administrar etiquetas",
+      "viewSite": "Ver sitio",
+      "systemHealth": "Salud del sistema"
+    }
+  },
+  "tools": {
+    "title": "Gestión de herramientas",
+    "description": "Administrar herramientas, sus metadatos y relaciones",
+    "actions": {
+      "createTool": "Crear herramienta",
+      "editTool": "Herramienta de edición",
+      "deleteTool": "Terrela Eliminar",
+      "bulkActions": "Acciones masivas"
+    },
+    "table": {
+      "name": "Nombre",
+      "slug": "Babosa",
+      "status": "Estado",
+      "tags": "Etiquetas",
+      "usage": "Uso",
+      "lastModified": "Última modificación",
+      "actions": "Comportamiento"
+    }
+  },
+  "tags": {
+    "title": "Gestión de etiquetas",
+    "description": "Organizar herramientas con etiquetas y administrar relaciones",
+    "actions": {
+      "createTag": "Crear etiqueta",
+      "editTag": "Etiqueta de edición",
+      "deleteTag": "Etiqueta de eliminación",
+      "bulkActions": "Acciones masivas"
+    },
+    "table": {
+      "name": "Nombre",
+      "slug": "Babosa",
+      "color": "Color",
+      "toolCount": "Herramientas",
+      "description": "Descripción",
+      "actions": "Comportamiento"
+    }
+  },
+  "analytics": {
+    "title": "Analítica",
+    "description": "Ver estadísticas detalladas de análisis y uso",
+    "charts": {
+      "usageOverTime": "Uso con el tiempo",
+      "topTools": "Herramientas superiores",
+      "userMetrics": "Métricas de usuario"
+    }
+  },
+  "auth": {
+    "title": "Inicio de sesión de administrador",
+    "description": "Acceder al panel de administración",
+    "form": {
+      "token": "Token de administrador",
+      "tokenPlaceholder": "Ingrese el token de administrador",
+      "login": "Acceso",
+      "loginError": "Token de administración no válido"
+    }
+  },
+  "loading": {
+    "panel": "Cargando el panel de administración ...",
+    "dashboard": "Cargando el tablero ...",
+    "analytics": "Carga de análisis ..."
+  },
+  "navigation": {
+    "dashboard": "Panel",
+    "tools": "Herramientas",
+    "tags": "Etiquetas",
+    "analytics": "Analítica",
+    "monitoring": "Escucha",
+    "logout": "Cierre de sesión",
+    "viewSite": "Ver sitio"
+  }
+}
