@@ -1,0 +1,58 @@
+{
+  "header": {
+    "brand": "도구 체력",
+    "navigation": {
+      "home": "집",
+      "tools": "도구",
+      "admin": "관리자"
+    },
+    "mobile": {
+      "toggleMenu": "토글 메뉴",
+      "openMenu": "탐색 메뉴 열기",
+      "closeMenu": "내비게이션 메뉴를 닫습니다"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Tool-Chest",
+    "links": {
+      "privacy": "개인 정보 보호 정책",
+      "terms": "서비스 약관",
+      "contact": "연락하다",
+      "about": "에 대한"
+    },
+    "description": "개인 정보 집중 개발자 도구."
+  },
+  "breadcrumbs": {
+    "home": "집",
+    "tools": "도구",
+    "admin": "관리자",
+    "dashboard": "계기반",
+    "analytics": "해석학",
+    "tags": "태그",
+    "monitoring": "모니터링",
+    "relationships": "관계"
+  },
+  "localeSwitcher": {
+    "label": "언어",
+    "current": "현재 언어",
+    "selectLanguage": "언어를 선택하십시오",
+    "languages": {
+      "en": "영어",
+      "es": "에스파 ñ",
+      "zh": "中文",
+      "hi": "हिन십시오",
+      "pt": "포르투갈",
+      "ru": "русскис",
+      "ja": "日本語",
+      "de": "도이치치",
+      "fr": "Français",
+      "ko": "한국어",
+      "it": "이탈리아 노",
+      "tr": "Türkçe",
+      "pl": "폴스키",
+      "nl": "네더 랜드",
+      "vi": "tiệng viết",
+      "uk": "українська"
+    }
+  }
+}

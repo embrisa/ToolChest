@@ -1,0 +1,89 @@
+{
+  "buttons": {
+    "save": "구하다",
+    "cancel": "취소",
+    "delete": "삭제",
+    "edit": "편집하다",
+    "create": "만들다",
+    "update": "업데이트",
+    "submit": "제출하다",
+    "close": "닫다",
+    "copy": "복사",
+    "download": "다운로드",
+    "upload": "업로드",
+    "reset": "다시 놓기",
+    "clear": "분명한",
+    "loading": "로딩 ...",
+    "processing": "처리 ...",
+    "copied": "복사!",
+    "selectFiles": "파일을 선택하십시오",
+    "chooseFile": "파일을 선택하십시오",
+    "removeFile": "파일을 제거하십시오"
+  },
+  "alerts": {
+    "success": "성공",
+    "error": "오류",
+    "warning": "경고",
+    "info": "정보",
+    "dismiss": "경고를 해산합니다"
+  },
+  "modals": {
+    "close": "닫기 모달",
+    "confirm": "확인하다",
+    "confirmDelete": "삭제를 확인하십시오",
+    "deleteWarning": "이 항목을 삭제 하시겠습니까? 이 조치는 취소 할 수 없습니다.",
+    "unsavedChanges": "구원받지 못한 변화가 있습니다. 떠나고 싶습니까?",
+    "title": "모달"
+  },
+  "tooltips": {
+    "copy": "클립 보드에 복사하십시오",
+    "download": "파일 다운로드",
+    "edit": "항목 편집",
+    "delete": "항목 삭제",
+    "info": "더 많은 정보",
+    "help": "도움을 받으십시오"
+  },
+  "progress": {
+    "uploading": "업로드 ... {progress}%",
+    "processing": "처리 ... {progress}%",
+    "downloading": "다운로드 ... {progress}%",
+    "complete": "완벽한"
+  },
+  "fileUpload": {
+    "dragDrop": "여기에서 파일을 끌어다 놓습니다",
+    "or": "또는",
+    "browse": "파일을 찾아보세요",
+    "selectedFiles": "선택된 파일",
+    "maxSize": "최대 파일 크기 : {size}",
+    "supportedFormats": "지원되는 형식 : {형식}",
+    "fileTooLarge": "파일이 너무 큽니다. 최대 크기는 {maxsize}입니다.",
+    "invalidFileType": "잘못된 파일 유형. 지원되는 형식 : {형식}",
+    "uploadFailed": "업로드 실패. 다시 시도하십시오.",
+    "removeFile": "파일을 제거하십시오"
+  },
+  "toast": {
+    "close": "닫기 알림",
+    "success": "성공",
+    "error": "오류",
+    "warning": "경고",
+    "info": "정보"
+  },
+  "pagination": {
+    "previous": "이전의",
+    "next": "다음",
+    "page": "페이지 {page}",
+    "of": "{총}",
+    "showing": "{total} 결과의 {에서} ~ {to}를 표시합니다",
+    "perPage": "페이지 당"
+  },
+  "table": {
+    "noData": "사용 가능한 데이터가 없습니다",
+    "loading": "데이터로드 ...",
+    "sortBy": "{column}으로 정렬",
+    "ascending": "오름차순",
+    "descending": "내림차순",
+    "selectAll": "모두를 선택하십시오",
+    "selectRow": "행을 선택하십시오",
+    "actions": "행위"
+  }
+}

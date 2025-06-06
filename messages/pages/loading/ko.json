@@ -1,0 +1,25 @@
+{
+  "page": {
+    "message": "로딩 도구 ...",
+    "application": "도구 chest로드 ...",
+    "pleaseWait": "응용 프로그램로드, 기다려주세요 ..."
+  },
+  "components": {
+    "tools": "로딩 도구 ...",
+    "tags": "태그로드 ...",
+    "search": "수색...",
+    "processing": "처리 ...",
+    "saving": "절약...",
+    "uploading": "업로드 ..."
+  },
+  "admin": {
+    "panel": "관리자 패널로드 ...",
+    "dashboard": "대시 보드로드 ...",
+    "analytics": "로딩 분석 ..."
+  },
+  "skeleton": {
+    "toolCard": "도구 정보로드 ...",
+    "toolGrid": "사용 가능한 도구로드 ...",
+    "tagFilters": "필터 옵션로드 ..."
+  }
+}

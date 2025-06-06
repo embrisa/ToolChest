@@ -1,0 +1,67 @@
+{
+  "notFound": {
+    "errorCode": "404",
+    "title": "페이지를 찾을 수 없습니다",
+    "description": "당신이 찾고있는 페이지는 존재하지 않습니다. 이동, 삭제되었거나 URL을 잘못 입력했을 수도 있습니다.",
+    "suggestions": {
+      "title": "당신이 할 수있는 일은 다음과 같습니다.",
+      "checkUrl": "오타를 확인하십시오",
+      "useNavigation": "탐색 메뉴를 사용하여 원하는 것을 찾으십시오.",
+      "returnHome": "홈페이지로 돌아갑니다",
+      "searchTools": "검색 기능을 사용하여 도구를 검색하십시오"
+    },
+    "actions": {
+      "goToHome": "집에 가십시오",
+      "goBack": "돌아 가라"
+    },
+    "popularTools": {
+      "title": "인기있는 도구",
+      "base64": {
+        "title": "Base64 도구",
+        "description": "Base64 데이터를 인코딩하고 디코딩합니다"
+      },
+      "hashGenerator": {
+        "title": "해시 생성기",
+        "description": "MD5, SHA 해시를 생성합니다"
+      },
+      "faviconGenerator": {
+        "title": "Favicon 생성기",
+        "description": "이미지에서 Favicon을 만듭니다"
+      },
+      "markdownToPdf": {
+        "title": "PDF에 마크 다운",
+        "description": "Markdown을 PDF로 변환하십시오"
+      }
+    }
+  },
+  "serverError": {
+    "title": "뭔가 잘못되었습니다",
+    "message": "예상치 못한 오류가 발생했습니다",
+    "description": "미안하지만이 페이지를로드하는 동안 뭔가 잘못되었습니다. 우리 팀은 통보를 받았으며 문제를 해결하기 위해 노력하고 있습니다.",
+    "suggestions": {
+      "0": "페이지를 새로 고치십시오",
+      "1": "이전 페이지로 돌아갑니다",
+      "2": "홈페이지로 돌아갑니다",
+      "3": "문제가 지속되면 지원합니다"
+    },
+    "actions": {
+      "refreshPage": "새로 고침 페이지",
+      "goBack": "돌아 가라",
+      "goToHome": "집에 가십시오",
+      "contactSupport": "연락처 지원"
+    },
+    "technical": {
+      "title": "기술적 인 세부 사항",
+      "errorInfo": "오류 정보",
+      "copyDetails": "세부 사항을 복사하십시오",
+      "copiedToClipboard": "클립 보드에 복사"
+    }
+  },
+  "boundary": {
+    "title": "뭔가 잘못되었습니다",
+    "description": "이 구성 요소에서 예기치 않은 오류가 발생했습니다.",
+    "details": "오류 세부 정보를 표시합니다",
+    "reload": "재 포함 구성 요소",
+    "reportIssue": "이 문제를보고하십시오"
+  }
+}
