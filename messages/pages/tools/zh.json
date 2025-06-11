@@ -1,33 +1,33 @@
 {
   "page": {
-    "title": "All Tools",
-    "subtitle": "Explore our complete collection of utility tools designed to make your development workflow more efficient.",
-    "loading": "Loading tools...",
-    "toolsAvailable": "tools available",
-    "availableTools": "Available Tools",
-    "description": "Professional-grade utilities for web development"
+    "title": "所有工具",
+    "subtitle": "探索我们完整的实用工具集合，让您的开发工作流更高效。",
+    "loading": "正在加载工具...",
+    "toolsAvailable": "个工具可用",
+    "availableTools": "可用工具",
+    "description": "面向专业的 Web 开发实用工具"
   },
   "stats": {
-    "allToolsFree": "All tools free",
-    "clientSideProcessing": "Client-side processing"
+    "allToolsFree": "所有工具免费",
+    "clientSideProcessing": "客户端处理"
   },
   "states": {
-    "noToolsAvailable": "No tools available",
-    "noToolsDescription": "Tools are being loaded. Please check back soon or try refreshing the page.",
-    "loadingGrid": "Loading available tools..."
+    "noToolsAvailable": "暂无工具",
+    "noToolsDescription": "工具正在加载中。请稍后再试或刷新页面。",
+    "loadingGrid": "正在加载可用工具..."
   },
   "features": {
     "privacy": {
-      "title": "Privacy First",
-      "description": "All tools process data locally in your browser"
+      "title": "隐私优先",
+      "description": "所有工具都在浏览器本地处理数据"
     },
     "free": {
-      "title": "Always Free",
-      "description": "No subscriptions, no hidden costs, completely free"
+      "title": "永久免费",
+      "description": "无订阅、无隐藏费用，完全免费"
     },
     "fast": {
-      "title": "Lightning Fast",
-      "description": "Instant results with optimized performance"
+      "title": "极速",
+      "description": "采用优化性能，瞬时获得结果"
     }
   }
 }

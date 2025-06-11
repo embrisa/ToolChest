@@ -1,137 +1,137 @@
 {
   "dashboard": {
-    "title": "Dashboard",
-    "description": "Overview of your tool-chest application performance and analytics",
+    "title": "仪表盘",
+    "description": "概览您的 tool-chest 应用性能和分析",
     "stats": {
-      "totalTools": "Total Tools",
-      "totalTags": "Total Tags",
-      "totalUsage": "Total Usage",
-      "thisMonth": "This Month",
-      "applicationStats": "Application Statistics"
+      "totalTools": "工具总数",
+      "totalTags": "标签总数",
+      "totalUsage": "总使用量",
+      "thisMonth": "本月",
+      "applicationStats": "应用统计"
     },
     "usage": {
-      "title": "Tool Usage Overview",
+      "title": "工具使用概览",
       "table": {
-        "tool": "Tool",
-        "usageCount": "Usage Count",
-        "change": "Change",
-        "actions": "Actions"
+        "tool": "工具",
+        "usageCount": "使用次数",
+        "change": "变化",
+        "actions": "操作"
       }
     },
     "quickActions": {
-      "title": "Quick Actions",
-      "viewAnalytics": "View Analytics",
-      "manageTools": "Manage Tools",
-      "manageTags": "Manage Tags",
-      "viewSite": "View Site",
-      "systemHealth": "System Health",
-      "addTool": "Add Tool",
-      "addTag": "Add Tag",
-      "manageRelationships": "Manage Relationships",
-      "createToolDescription": "Create new tool in the system",
-      "createTagDescription": "Create new tag for categorization",
-      "manageRelationshipsDescription": "Configure tool-tag associations",
-      "viewSiteDescription": "Open the public tool-chest site"
+      "title": "快速操作",
+      "viewAnalytics": "查看分析",
+      "manageTools": "管理工具",
+      "manageTags": "管理标签",
+      "viewSite": "查看站点",
+      "systemHealth": "系统健康",
+      "addTool": "添加工具",
+      "addTag": "添加标签",
+      "manageRelationships": "管理关系",
+      "createToolDescription": "在系统中创建新工具",
+      "createTagDescription": "创建用于分类的新标签",
+      "manageRelationshipsDescription": "配置工具与标签的关联",
+      "viewSiteDescription": "打开公共 tool-chest 网站"
     }
   },
   "tools": {
-    "title": "Tool Management",
-    "description": "Manage tools, their metadata, and relationships",
+    "title": "工具管理",
+    "description": "管理工具及其元数据和关系",
     "actions": {
-      "createTool": "Create Tool",
-      "editTool": "Edit Tool",
-      "deleteTool": "Delete Tool",
-      "bulkActions": "Bulk Actions"
+      "createTool": "创建工具",
+      "editTool": "编辑工具",
+      "deleteTool": "删除工具",
+      "bulkActions": "批量操作"
     },
     "table": {
-      "name": "Name",
+      "name": "名称",
       "slug": "Slug",
-      "status": "Status",
-      "tags": "Tags",
-      "usage": "Usage",
-      "lastModified": "Last Modified",
-      "actions": "Actions"
+      "status": "状态",
+      "tags": "标签",
+      "usage": "使用量",
+      "lastModified": "最后修改",
+      "actions": "操作"
     },
     "emptyState": {
-      "description": "Get started by creating your first tool. Tools help users accomplish specific tasks and can be organized with tags."
+      "description": "通过创建第一个工具开始。工具帮助用户完成特定任务，并可使用标签进行组织。"
     },
     "bulkOperations": {
-      "title": "Bulk {operation} Tags",
-      "selectedCount": "{count, plural, =1 {# tool} other {# tools}} selected",
-      "operationType": "Select Operation",
-      "selectTags": "Select Tags",
-      "selectedTools": "Selected Tools",
-      "previewChanges": "Preview Changes",
-      "operationSummary": "Operation Summary",
-      "totalChanges": "Total Changes",
-      "toolsToUpdate": "Tools to Update",
-      "warnings": "Warnings",
-      "executing": "Executing Operation",
-      "executingMessage": "Please wait while we process your bulk operation...",
-      "completed": "Operation Completed",
-      "failed": "Operation Failed",
-      "successMessage": "Your bulk operation has been completed successfully",
-      "errorMessage": "There was an error executing your bulk operation",
-      "results": "Operation Results",
-      "toolsAffected": "Tools Affected",
-      "tagsAffected": "Tags Affected",
-      "errors": "Errors Encountered",
-      "startNew": "Start New Operation"
+      "title": "批量 {operation} 标签",
+      "selectedCount": "已选择 {count, plural, =1 {# 个工具} other {# 个工具}}",
+      "operationType": "选择操作",
+      "selectTags": "选择标签",
+      "selectedTools": "已选择工具",
+      "previewChanges": "预览更改",
+      "operationSummary": "操作摘要",
+      "totalChanges": "总更改",
+      "toolsToUpdate": "待更新工具",
+      "warnings": "警告",
+      "executing": "正在执行操作",
+      "executingMessage": "正在处理批量操作，请稍候...",
+      "completed": "操作完成",
+      "failed": "操作失败",
+      "successMessage": "批量操作已成功完成",
+      "errorMessage": "执行批量操作时出错",
+      "results": "操作结果",
+      "toolsAffected": "受影响的工具",
+      "tagsAffected": "受影响的标签",
+      "errors": "遇到的错误",
+      "startNew": "开始新操作"
     }
   },
   "tags": {
-    "title": "Tag Management",
-    "description": "Organize tools with tags and manage relationships",
+    "title": "标签管理",
+    "description": "使用标签组织工具并管理关系",
     "actions": {
-      "createTag": "Create Tag",
-      "editTag": "Edit Tag",
-      "deleteTag": "Delete Tag",
-      "bulkActions": "Bulk Actions"
+      "createTag": "创建标签",
+      "editTag": "编辑标签",
+      "deleteTag": "删除标签",
+      "bulkActions": "批量操作"
     },
     "table": {
-      "name": "Name",
+      "name": "名称",
       "slug": "Slug",
-      "color": "Color",
-      "toolCount": "Tools",
-      "description": "Description",
-      "actions": "Actions"
+      "color": "颜色",
+      "toolCount": "工具数量",
+      "description": "描述",
+      "actions": "操作"
     },
     "emptyState": {
-      "description": "Get started by creating your first tag to organize your tools."
+      "description": "通过创建第一个标签开始以组织您的工具。"
     }
   },
   "analytics": {
-    "title": "Analytics",
-    "description": "View detailed analytics and usage statistics",
+    "title": "分析",
+    "description": "查看详细分析和使用统计",
     "charts": {
-      "usageOverTime": "Usage Over Time",
-      "topTools": "Top Tools",
-      "userMetrics": "User Metrics"
+      "usageOverTime": "使用随时间变化",
+      "topTools": "热门工具",
+      "userMetrics": "用户指标"
     }
   },
   "auth": {
-    "title": "Admin Login",
-    "description": "Access the administration panel",
+    "title": "管理员登录",
+    "description": "访问管理面板",
     "form": {
-      "token": "Admin Token",
-      "tokenPlaceholder": "Enter admin token",
-      "login": "Login",
-      "loginError": "Invalid admin token"
+      "token": "管理员令牌",
+      "tokenPlaceholder": "输入管理员令牌",
+      "login": "登录",
+      "loginError": "无效的管理员令牌"
     }
   },
   "loading": {
-    "panel": "Loading admin panel...",
-    "dashboard": "Loading dashboard...",
-    "analytics": "Loading analytics..."
+    "panel": "正在加载管理面板...",
+    "dashboard": "正在加载仪表盘...",
+    "analytics": "正在加载分析..."
   },
   "navigation": {
-    "dashboard": "Dashboard",
-    "tools": "Tools",
-    "tags": "Tags",
-    "relationships": "Relationships",
-    "analytics": "Analytics",
-    "monitoring": "Monitoring",
-    "logout": "Logout",
-    "viewSite": "View Site"
+    "dashboard": "仪表盘",
+    "tools": "工具",
+    "tags": "标签",
+    "relationships": "关系",
+    "analytics": "分析",
+    "monitoring": "监控",
+    "logout": "登出",
+    "viewSite": "查看站点"
   }
 }

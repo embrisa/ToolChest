@@ -3,12 +3,14 @@ import { ServiceFactory } from "@/services/core/serviceFactory";
 import { ToolService } from "@/services/tools";
 import { ApiResponse } from "@/types/api/common";
 import { ToolDTO } from "@/types/tools/tool";
+import { extractLocaleFromRequest } from "@/utils/locale";
 
 export async function GET(
   request: NextRequest,
 ): Promise<NextResponse<ApiResponse<ToolDTO[]>>> {
   try {
     const { searchParams } = new URL(request.url);
+    const locale = extractLocaleFromRequest(request);
     const tag = searchParams.get("tag");
     const popular = searchParams.get("popular");
     const limit = searchParams.get("limit");
@@ -79,10 +81,10 @@ export async function GET(
 
     if (popular === "true") {
       const popularLimit = limitNum || 6;
-      tools = await toolService.getPopularTools(popularLimit);
+      tools = await toolService.getPopularTools(popularLimit, locale);
       totalCount = tools.length;
     } else if (tag) {
-      tools = await toolService.getToolsByTag(tag);
+      tools = await toolService.getToolsByTag(tag, locale);
       totalCount = tools.length;
     } else {
       // Get all tools with optional pagination
@@ -96,11 +98,11 @@ export async function GET(
             | "createdAt"
             | "usageCount",
           sortOrder: sortOrder as "asc" | "desc",
-        });
+        }, locale);
         tools = result.tools;
         totalCount = result.total;
       } else {
-        tools = await toolService.getAllTools();
+        tools = await toolService.getAllTools(locale);
         totalCount = tools.length;
       }
     }

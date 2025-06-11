@@ -25,20 +25,23 @@
   "featureGrid": {
     "md5": {
       "title": "MD5",
-      "description": "128-bit hash function. Fast but not cryptographically secure. Use for checksums only."
+      "description": "Hàm băm 128-bit. Nhanh nhưng không an toàn về mật mã. Chỉ sử dụng cho checksum.",
+      "badge": ""
     },
     "sha1": {
       "title": "SHA-1",
-      "description": "160-bit hash function. Legacy algorithm, use SHA-256+ for security applications."
+      "description": "Hàm băm 160-bit. Thuật toán kế thừa, sử dụng SHA-256+ cho các ứng dụng bảo mật.",
+      "badge": ""
     },
     "sha256": {
       "title": "SHA-256",
-      "description": "256-bit hash function. Secure and widely used standard for modern applications.",
-      "badge": "Recommended"
+      "description": "Hàm băm 256-bit. Tiêu chuẩn an toàn và được sử dụng rộng rãi cho các ứng dụng hiện đại.",
+      "badge": "Khuyến nghị"
     },
     "sha512": {
       "title": "SHA-512",
-      "description": "512-bit hash function. Maximum security for sensitive data and critical applications."
+      "description": "Hàm băm 512-bit. Bảo mật tối đa cho dữ liệu nhạy cảm và ứng dụng quan trọng.",
+      "badge": ""
     }
   },
   "info": {
@@ -55,10 +58,10 @@
       ]
     },
     "securityGuidelines": {
-      "title": "Security Guidelines",
+      "title": "Hướng dẫn bảo mật",
       "items": [
-        "MD5 and SHA-1 are cryptographically broken and should not be used for security-critical applications",
-        "Use SHA-256 or SHA-512 for all security-sensitive applications and modern systems"
+        "MD5 và SHA-1 đã bị phá vỡ về mặt mật mã và không nên sử dụng cho các ứng dụng quan trọng về bảo mật",
+        "Sử dụng SHA-256 hoặc SHA-512 cho tất cả các ứng dụng nhạy cảm đến bảo mật và hệ thống hiện đại"
       ]
     }
   },

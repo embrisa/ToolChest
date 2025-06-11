@@ -68,9 +68,10 @@ export interface TagInput {
  */
 export interface PrismaToolWithRelations {
   id: string;
-  name: string;
+  nameKey: string;
+  toolKey: string;
   slug: string;
-  description: string | null;
+  descriptionKey: string | null;
   iconClass: string | null;
   displayOrder: number;
   isActive: boolean;
@@ -79,10 +80,11 @@ export interface PrismaToolWithRelations {
   tags: Array<{
     tag: {
       id: string;
-      name: string;
+      nameKey: string;
+      tagKey: string;
       slug: string;
-      description: string | null;
-      color: string | null;
+      descriptionKey: string | null;
+      iconClass: string | null;
       createdAt: Date;
     };
   }>;
@@ -97,10 +99,11 @@ export interface PrismaToolWithRelations {
  */
 export interface PrismaTagWithToolCount {
   id: string;
-  name: string;
+  nameKey: string;
+  tagKey: string;
   slug: string;
-  description: string | null;
-  color: string | null;
+  descriptionKey: string | null;
+  iconClass: string | null;
   createdAt: Date;
   _count: {
     tools: number;
@@ -112,17 +115,20 @@ export interface PrismaTagWithToolCount {
  */
 export interface PrismaTagBasic {
   id: string;
-  name: string;
+  nameKey: string;
+  tagKey: string;
   slug: string;
-  description: string | null;
-  color: string | null;
+  descriptionKey: string | null;
+  iconClass: string | null;
   createdAt: Date;
 }
 
 /**
  * Convert Prisma Tool to ToolDTO
+ * Note: This function now expects the tool to already have name and description 
+ * fields populated by the DatabaseTranslationService
  */
-export function toToolDTO(tool: PrismaToolWithRelations): ToolDTO {
+export function toToolDTO(tool: PrismaToolWithRelations & { name: string; description: string | null }): ToolDTO {
   return {
     id: tool.id,
     name: tool.name,
@@ -134,20 +140,22 @@ export function toToolDTO(tool: PrismaToolWithRelations): ToolDTO {
     createdAt: tool.createdAt,
     updatedAt: tool.updatedAt,
     usageCount: tool.toolUsageStats?.usageCount ?? 0,
-    tags: tool.tags?.map((toolTag) => toTagDTO(toolTag.tag)) ?? [],
+    tags: tool.tags?.map((toolTag) => toTagDTO(toolTag.tag as PrismaTagBasic & { name: string; description: string | null })) ?? [],
   };
 }
 
 /**
  * Convert Prisma Tag to TagDTO
+ * Note: This function now expects the tag to already have name and description 
+ * fields populated by the DatabaseTranslationService
  */
-export function toTagDTO(tag: PrismaTagBasic | PrismaTagWithToolCount): TagDTO {
+export function toTagDTO(tag: (PrismaTagBasic | PrismaTagWithToolCount) & { name: string; description: string | null }): TagDTO {
   const baseTag: TagDTO = {
     id: tag.id,
     name: tag.name,
     slug: tag.slug,
     description: tag.description,
-    color: tag.color,
+    color: tag.iconClass, // Using iconClass as color for now
     createdAt: tag.createdAt,
     updatedAt: tag.createdAt,
   };

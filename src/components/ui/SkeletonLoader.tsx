@@ -36,10 +36,11 @@ export function SkeletonLoader({
   className,
   "aria-label": ariaLabel = "Loading content",
 }: SkeletonLoaderProps) {
-  const getRandomWidth = () => {
-    const widths = ["100%", "95%", "90%", "85%", "75%"];
-    return widths[Math.floor(Math.random() * widths.length)];
-  };
+  // Use deterministic widths to avoid SSR/CSR mismatch issues
+  // Select width based on index to keep variety without randomness
+  const predefinedWidths = ["100%", "95%", "90%", "85%", "75%"];
+  const getDeterministicWidth = (idx: number) =>
+    predefinedWidths[idx % predefinedWidths.length];
 
   const renderSkeletonItem = (index: number) => {
     const itemWidth = Array.isArray(width)
@@ -47,7 +48,9 @@ export function SkeletonLoader({
       : width;
     const finalWidth =
       itemWidth ||
-      (lines > 1 && index === lines - 1 ? getRandomWidth() : "100%");
+      (lines > 1 && index === lines - 1
+        ? getDeterministicWidth(index)
+        : "100%");
 
     return (
       <div

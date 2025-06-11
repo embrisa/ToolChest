@@ -3,14 +3,16 @@ import { ServiceFactory } from "@/services/core/serviceFactory";
 import { ToolService } from "@/services/tools";
 import { ApiResponse } from "@/types/api/common";
 import { TagDTO } from "@/types/tools/tool";
+import { extractLocaleFromRequest } from "@/utils/locale";
 
 export async function GET(
-  _request: NextRequest,
+  request: NextRequest,
 ): Promise<NextResponse<ApiResponse<TagDTO[]>>> {
   try {
+    const locale = extractLocaleFromRequest(request);
     const prisma = ServiceFactory.getInstance().getPrisma();
     const toolService = new ToolService(prisma);
-    const tags = await toolService.getAllTags();
+    const tags = await toolService.getAllTags(locale);
 
     return NextResponse.json({
       success: true,

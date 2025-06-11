@@ -1,25 +1,25 @@
 {
   "page": {
-    "message": "Loading tools...",
-    "application": "Loading tool-chest...",
-    "pleaseWait": "Loading application, please wait..."
+    "message": "正在加载工具...",
+    "application": "正在加载 tool-chest...",
+    "pleaseWait": "正在加载应用程序，请稍候..."
   },
   "components": {
-    "tools": "Loading tools...",
-    "tags": "Loading tags...",
-    "search": "Searching...",
-    "processing": "Processing...",
-    "saving": "Saving...",
-    "uploading": "Uploading..."
+    "tools": "正在加载工具...",
+    "tags": "正在加载标签...",
+    "search": "正在搜索...",
+    "processing": "处理中...",
+    "saving": "保存中...",
+    "uploading": "上传中..."
   },
   "admin": {
-    "panel": "Loading admin panel...",
-    "dashboard": "Loading dashboard...",
-    "analytics": "Loading analytics..."
+    "panel": "正在加载管理面板...",
+    "dashboard": "正在加载仪表盘...",
+    "analytics": "正在加载分析..."
   },
   "skeleton": {
-    "toolCard": "Loading tool information...",
-    "toolGrid": "Loading available tools...",
-    "tagFilters": "Loading filter options..."
+    "toolCard": "正在加载工具信息...",
+    "toolGrid": "正在加载可用工具...",
+    "tagFilters": "正在加载筛选选项..."
   }
 }

@@ -7,7 +7,7 @@
 **Core Technologies:**
 
 - **Framework:** Next.js 15+ (App Router)
-- **Frontend:** React 18+ with TypeScript
+- **Frontend:** React 19+ with TypeScript
 - **Styling:** Tailwind CSS + Custom Design System
 - **Database:** PostgreSQL + Prisma ORM
 - **State Management:** React state + SWR for server state
@@ -25,7 +25,7 @@ npm run test:e2e        # E2E tests
 
 # Debugging Commands
 DEBUG=prisma:query npm run dev    # Enable database query logging
-npm run validate-env              # Check environment variables
+npm run env:validate              # Check environment variables
 npx prisma studio                # Database GUI (background service)
 npm run lint -- --format=json    # Machine-readable lint output
 ```
@@ -503,8 +503,7 @@ npm run test:e2e -- --headless
 npm run test:a11y -- --reporter=json
 
 # Performance monitoring
-npm run lighthouse -- --output=json
-npm run test:load                    # Load testing
+npm run validate:performance
 
 # Health check automation
 curl -f http://localhost:3000/api/health || exit 1
@@ -588,7 +587,7 @@ curl -s http://localhost:3000/api/tools -w "@curl-format.txt"
 
 - **Database connection failures**: Check `DATABASE_URL` and connection pooling
 - **Prisma client issues**: Verify `npx prisma generate` has been run
-- **Environment variable problems**: Use `npm run validate-env`
+- **Environment variable problems**: Use `npm run env:validate`
 - **Memory leaks**: Monitor process memory during long operations
 - **API rate limiting**: Check response headers for rate limit status
 
@@ -665,7 +664,7 @@ npm run validate                     # All quality checks
 # Automated deployment checks
 npm run build                        # Build validation
 npm run test:e2e -- --headless      # Headless E2E tests
-npm run security-scan               # Security validation
+npm audit --production              # Security validation
 
 # Health verification post-deployment
 curl -f $DEPLOY_URL/api/health

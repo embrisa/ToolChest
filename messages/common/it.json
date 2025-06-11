@@ -27,43 +27,43 @@
     "tryAgain": "Riprova",
     "clearAllFilters": "Cancella tutti i filtri",
     "clearFilters": "Cancella filtri",
-    "assign": "Assign",
-    "remove": "Remove"
+    "assign": "Assegna",
+    "remove": "Rimuovi"
   },
   "ui": {
     "status": {
-      "loading": "Loading",
-      "saving": "Saving...",
-      "success": "Success",
-      "error": "Error",
-      "warning": "Warning",
-      "info": "Information",
-      "completed": "Completed",
-      "failed": "Failed",
-      "processing": "Processing...",
-      "validating": "Validating...",
-      "uploading": "Uploading...",
-      "downloading": "Downloading...",
-      "ready": "Ready",
-      "waiting": "Waiting for input"
+      "loading": "Caricamento",
+      "saving": "Salvataggio...",
+      "success": "Successo",
+      "error": "Errore",
+      "warning": "Avviso",
+      "info": "Informazione",
+      "completed": "Completato",
+      "failed": "Fallito",
+      "processing": "Elaborazione...",
+      "validating": "Validazione...",
+      "uploading": "Caricamento...",
+      "downloading": "Scaricamento...",
+      "ready": "Pronto",
+      "waiting": "In attesa di input"
     },
     "actions": {
-      "tryAgain": "Try Again"
+      "tryAgain": "Riprova"
     },
     "confirmations": {
-      "deleteItem": "Are you sure you want to delete \"{name}\"? This action cannot be undone.",
-      "deleteItems": "Are you sure you want to delete {count} items? This action cannot be undone.",
-      "unsavedChanges": "You have unsaved changes. Are you sure you want to leave?",
-      "resetForm": "Are you sure you want to reset the form? All changes will be lost."
+      "deleteItem": "Sei sicuro di voler eliminare \"{name}\"? Questa azione non può essere annullata.",
+      "deleteItems": "Sei sicuro di voler eliminare {count} elementi? Questa azione non può essere annullata.",
+      "unsavedChanges": "Hai delle modifiche non salvate. Sei sicuro di voler uscire?",
+      "resetForm": "Sei sicuro di voler reimpostare il modulo? Tutte le modifiche andranno perse."
     },
     "labels": {
-      "order": "Order",
-      "lastUpdated": "Last Updated",
-      "active": "Published",
-      "inactive": "Draft",
-      "noItems": "No items found",
-      "noDescription": "No description provided",
-      "noTags": "No tags"
+      "order": "Ordine",
+      "lastUpdated": "Ultimo Aggiornamento",
+      "active": "Pubblicato",
+      "inactive": "Bozza",
+      "noItems": "Nessun elemento trovato",
+      "noDescription": "Nessuna descrizione fornita",
+      "noTags": "Nessun tag"
     }
   },
   "status": {
@@ -104,8 +104,8 @@
     "timeout": "Timeout della richiesta",
     "unknownError": "Errore sconosciuto",
     "somethingWentWrong": "Qualcosa è andato storto",
-    "loadingFailed": "Error Loading Data",
-    "processingFailed": "Processing failed"
+    "loadingFailed": "Errore nel caricamento dei dati",
+    "processingFailed": "Elaborazione fallita"
   },
   "navigation": {
     "home": "Home",
@@ -114,9 +114,9 @@
     "contact": "Contatti",
     "privacy": "Privacy",
     "terms": "Termini",
-    "admin": "Admin",
-    "login": "Login",
-    "logout": "Logout"
+    "admin": "Amministratore",
+    "login": "Accedi",
+    "logout": "Disconnetti"
   },
   "time": {
     "now": "Adesso",

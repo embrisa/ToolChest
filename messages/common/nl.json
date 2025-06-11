@@ -24,46 +24,46 @@
     "view": "Bekijken",
     "help": "Help",
     "settings": "Instellingen",
-    "tryAgain": "Probeer opnieuw",
+    "tryAgain": "Opnieuw proberen",
     "clearAllFilters": "Alle filters wissen",
     "clearFilters": "Filters wissen",
-    "assign": "Assign",
-    "remove": "Remove"
+    "assign": "Toewijzen",
+    "remove": "Verwijderen"
   },
   "ui": {
     "status": {
-      "loading": "Loading",
-      "saving": "Saving...",
-      "success": "Success",
-      "error": "Error",
-      "warning": "Warning",
-      "info": "Information",
-      "completed": "Completed",
-      "failed": "Failed",
-      "processing": "Processing...",
-      "validating": "Validating...",
-      "uploading": "Uploading...",
-      "downloading": "Downloading...",
-      "ready": "Ready",
-      "waiting": "Waiting for input"
+      "loading": "Laden",
+      "saving": "Opslaan...",
+      "success": "Succes",
+      "error": "Fout",
+      "warning": "Waarschuwing",
+      "info": "Informatie",
+      "completed": "Voltooid",
+      "failed": "Mislukt",
+      "processing": "Verwerken...",
+      "validating": "Valideren...",
+      "uploading": "Uploaden...",
+      "downloading": "Downloaden...",
+      "ready": "Klaar",
+      "waiting": "Wachten op invoer"
     },
     "actions": {
-      "tryAgain": "Try Again"
+      "tryAgain": "Opnieuw proberen"
     },
     "confirmations": {
-      "deleteItem": "Are you sure you want to delete \"{name}\"? This action cannot be undone.",
-      "deleteItems": "Are you sure you want to delete {count} items? This action cannot be undone.",
-      "unsavedChanges": "You have unsaved changes. Are you sure you want to leave?",
-      "resetForm": "Are you sure you want to reset the form? All changes will be lost."
+      "deleteItem": "Weet u zeker dat u \"{name}\" wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
+      "deleteItems": "Weet u zeker dat u {count} items wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
+      "unsavedChanges": "U heeft niet-opgeslagen wijzigingen. Weet u zeker dat u wilt vertrekken?",
+      "resetForm": "Weet u zeker dat u het formulier wilt resetten? Alle wijzigingen gaan verloren."
     },
     "labels": {
-      "order": "Order",
-      "lastUpdated": "Last Updated",
-      "active": "Published",
-      "inactive": "Draft",
-      "noItems": "No items found",
-      "noDescription": "No description provided",
-      "noTags": "No tags"
+      "order": "Volgorde",
+      "lastUpdated": "Laatst Bijgewerkt",
+      "active": "Gepubliceerd",
+      "inactive": "Concept",
+      "noItems": "Geen items gevonden",
+      "noDescription": "Geen beschrijving opgegeven",
+      "noTags": "Geen tags"
     }
   },
   "status": {
@@ -104,17 +104,17 @@
     "timeout": "Request time-out",
     "unknownError": "Onbekende fout",
     "somethingWentWrong": "Er is iets misgegaan",
-    "loadingFailed": "Error Loading Data",
-    "processingFailed": "Processing failed"
+    "loadingFailed": "Fout bij het laden van gegevens",
+    "processingFailed": "Verwerking mislukt"
   },
   "navigation": {
-    "home": "Home",
+    "home": "Start",
     "tools": "Tools",
     "about": "Over",
     "contact": "Contact",
     "privacy": "Privacy",
     "terms": "Voorwaarden",
-    "admin": "Admin",
+    "admin": "Beheer",
     "login": "Inloggen",
     "logout": "Uitloggen"
   },

@@ -97,7 +97,7 @@ module.exports = {
           350: "#adb5bd", // Muted elements
           400: "#9aa0a6", // Placeholder text
           450: "#868e96", // Supporting icons
-          500: "#5f6368", // Secondary text (improved contrast)
+          500: "#5a6168", // Secondary text (improved contrast) - Darkened for AA
           550: "#495057", // Emphasized secondary text
           600: "#3c4043", // Primary supporting text
           650: "#343a40", // Strong supporting text

@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import { PrismaClient } from "@prisma/client";
 import { AdminTagService } from "@/services/admin/adminTagService";
 

@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import { PrismaClient } from "@prisma/client";
 import { RelationshipService } from "@/services/admin/relationshipService";
 

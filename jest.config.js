@@ -11,12 +11,13 @@ const customJestConfig = {
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
 
   // Test environment
-  testEnvironment: "jsdom",
+  testEnvironment: "jest-environment-jsdom",
 
   // Module name mapping for path aliases
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
-    "^@prisma/client$": "<rootDir>/node_modules/@prisma/client/index.js",
+    // This line is often not needed with modern jest/next
+    // "^@prisma/client$": "<rootDir>/node_modules/.prisma/client/index-browser.js",
   },
 
   // Coverage configuration
@@ -64,17 +65,6 @@ const customJestConfig = {
     "<rootDir>/.next/",
     "<rootDir>/node_modules/",
     "<rootDir>/e2e/",
-  ],
-
-  // Transform patterns
-  transform: {
-    "^.+\\.(js|jsx|ts|tsx)$": ["babel-jest", { presets: ["next/babel"] }],
-  },
-
-  // Transform ignore patterns for node_modules
-  transformIgnorePatterns: [
-    "node_modules/(?!next-intl)",
-    "^.+\\.module\\.(css|sass|scss)$",
   ],
 
   // Module file extensions
@@ -138,7 +128,20 @@ const customJestConfig = {
 
   // Max workers for parallel testing
   maxWorkers: "50%",
+
+  // Stop ignoring next-intl for transformations
+  transformIgnorePatterns: [],
 };
 
-// Create Jest config that is merged with Next.js config
-module.exports = createJestConfig(customJestConfig);
+// Create an async function to configure Jest
+module.exports = async () => {
+  // Create the base Jest config from next/jest
+  const jestConfig = await createJestConfig(customJestConfig)();
+
+  // By default, next/jest ignores all of node_modules for transformations.
+  // We need to override this to tell Jest to transform `next-intl`.
+  // This is the official recommended approach for this problem.
+  jestConfig.transformIgnorePatterns[0] = '/node_modules/(?!(next-intl|use-intl))/';
+
+  return jestConfig;
+};

@@ -8,6 +8,7 @@ import {
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import LocaleSwitcher from "@/components/LocaleSwitcher";
 
 import { cn } from "@/utils";
 import { useTranslations } from "next-intl";
@@ -167,6 +168,9 @@ export function Header({ className }: HeaderProps) {
                   {t("navigation.about")}
                 </Link>
               </nav>
+
+              {/* Locale Switcher for desktop */}
+              <LocaleSwitcher />
             </div>
 
             {/* Mobile Controls with enhanced touch targets */}
@@ -310,6 +314,11 @@ export function Header({ className }: HeaderProps) {
                   </Link>
                 </div>
               </nav>
+
+              {/* Mobile Locale Switcher */}
+              <div className="mt-6">
+                <LocaleSwitcher />
+              </div>
 
               {/* Mobile menu footer with additional context */}
               <div className="mt-8 pt-6 border-t border-border-secondary">

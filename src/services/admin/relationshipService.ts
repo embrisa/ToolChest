@@ -54,8 +54,7 @@ export interface IRelationshipService {
 
 export class RelationshipService
   extends BaseService
-  implements IRelationshipService
-{
+  implements IRelationshipService {
   constructor(prisma: PrismaClient) {
     super(prisma);
   }
@@ -94,8 +93,8 @@ export class RelationshipService
         }
 
         where.OR = [
-          { tool: { name: nameFilter } } as unknown as Prisma.ToolTagWhereInput,
-          { tag: { name: nameFilter } } as unknown as Prisma.ToolTagWhereInput,
+          { tool: { nameKey: nameFilter } } as unknown as Prisma.ToolTagWhereInput,
+          { tag: { nameKey: nameFilter } } as unknown as Prisma.ToolTagWhereInput,
         ];
       }
 
@@ -103,16 +102,16 @@ export class RelationshipService
       let orderBy: Prisma.ToolTagOrderByWithRelationInput = {};
       switch (sortOptions.field) {
         case "toolName":
-          orderBy = { tool: { name: sortOptions.direction } };
+          orderBy = { tool: { nameKey: sortOptions.direction } };
           break;
         case "tagName":
-          orderBy = { tag: { name: sortOptions.direction } };
+          orderBy = { tag: { nameKey: sortOptions.direction } };
           break;
         case "toolDisplayOrder":
           orderBy = { tool: { displayOrder: sortOptions.direction } };
           break;
         default:
-          orderBy = { tool: { name: sortOptions.direction } };
+          orderBy = { tool: { displayOrder: sortOptions.direction } };
       }
 
       const relationships = await this.prisma.toolTag.findMany({
@@ -122,7 +121,7 @@ export class RelationshipService
           tool: {
             select: {
               id: true,
-              name: true,
+              nameKey: true,
               slug: true,
               isActive: true,
             },
@@ -130,9 +129,8 @@ export class RelationshipService
           tag: {
             select: {
               id: true,
-              name: true,
+              nameKey: true,
               slug: true,
-              color: true,
             },
           },
         },
@@ -141,12 +139,12 @@ export class RelationshipService
       return relationships.map((rel) => ({
         toolId: rel.toolId,
         tagId: rel.tagId,
-        toolName: rel.tool.name,
-        tagName: rel.tag.name,
+        toolName: rel.tool.nameKey,
+        tagName: rel.tag.nameKey,
         toolSlug: rel.tool.slug,
         tagSlug: rel.tag.slug,
         toolIsActive: rel.tool.isActive,
-        tagColor: rel.tag.color,
+        tagColor: '', // Tag no longer has color field
       }));
     });
   }
@@ -315,7 +313,7 @@ export class RelationshipService
         tags: {
           include: {
             tag: {
-              select: { id: true, name: true },
+              select: { id: true, nameKey: true },
             },
           },
         },
@@ -341,7 +339,7 @@ export class RelationshipService
 
       return {
         id: tool.id,
-        name: tool.name,
+        name: tool.nameKey,
         currentTags: currentTagIds,
         newTags: newTagIds,
         addedTags,
@@ -430,8 +428,8 @@ export class RelationshipService
                   operation.type === "assign"
                     ? {}
                     : {
-                        tagId: { in: toolUpdate.removedTags },
-                      },
+                      tagId: { in: toolUpdate.removedTags },
+                    },
                 create:
                   operation.type === "assign"
                     ? toolUpdate.addedTags.map((tagId) => ({ tagId }))

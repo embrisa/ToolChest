@@ -238,15 +238,15 @@ function HomePageContent() {
             <div className="hidden lg:flex items-center justify-between mb-10">
               <div>
                 <h2 className="text-heading text-xl font-semibold text-primary">
-                  {filterState.query ? "Search Results" : "All Tools"}
+                  {filterState.query ? t("sections.searchResults") : t("sections.allTools")}
                 </h2>
                 <p
                   className="text-body text-secondary mt-2"
                   data-testid="results-summary-desktop"
                 >
                   {isLoading
-                    ? "Loading..."
-                    : `${filteredTools.length} tools found`}
+                    ? t("loading.loadingTools")
+                    : `${filteredTools.length} ${t("loading.toolsFound")}`}
                 </p>
               </div>
 
@@ -258,7 +258,7 @@ function HomePageContent() {
                   className="focus-ring"
                   data-testid="clear-all-filters"
                 >
-                  Clear all filters
+                  {t("filtering.clearAll")}
                 </Button>
               )}
             </div>
@@ -273,7 +273,7 @@ function HomePageContent() {
                   className="focus-ring w-full sm:w-auto"
                   data-testid="clear-all-filters-mobile"
                 >
-                  Clear all filters
+                  {t("filtering.clearAll")}
                 </Button>
               </div>
             )}
@@ -353,12 +353,12 @@ function HomePageContent() {
                       </svg>
                     </div>
                     <h3 className="text-heading text-lg font-semibold text-primary mb-3">
-                      No tools found
+                      {t("noResults.title")}
                     </h3>
                     <p className="text-body text-secondary mb-10 max-w-md mx-auto">
                       {filterState.query
-                        ? `No tools match "${filterState.query}"`
-                        : "No tools match your selected filters"}
+                        ? t("noResults.description")
+                        : t("noResults.descriptionFilters")}
                     </p>
                     <Button
                       variant="primary"
@@ -366,7 +366,7 @@ function HomePageContent() {
                       className="focus-ring"
                       data-testid="clear-filters"
                     >
-                      Clear filters
+                      {tCommon("actions.clearFilters")}
                     </Button>
                   </div>
                 )}

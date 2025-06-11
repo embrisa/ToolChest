@@ -27,47 +27,47 @@
     "tryAgain": "Спробуйте ще раз",
     "clearAllFilters": "Очистити всі фільтри",
     "clearFilters": "Очистити фільтри",
-    "assign": "Assign",
-    "remove": "Remove"
+    "assign": "Призначити",
+    "remove": "Видалити"
   },
   "ui": {
     "status": {
-      "loading": "Loading",
-      "saving": "Saving...",
-      "success": "Success",
-      "error": "Error",
-      "warning": "Warning",
-      "info": "Information",
-      "completed": "Completed",
-      "failed": "Failed",
-      "processing": "Processing...",
-      "validating": "Validating...",
-      "uploading": "Uploading...",
-      "downloading": "Downloading...",
-      "ready": "Ready",
-      "waiting": "Waiting for input"
+      "loading": "Завантаження",
+      "saving": "Збереження...",
+      "success": "Успіх",
+      "error": "Помилка",
+      "warning": "Попередження",
+      "info": "Інформація",
+      "completed": "Завершено",
+      "failed": "Не вдалося",
+      "processing": "Обробка...",
+      "validating": "Перевірка...",
+      "uploading": "Вивантаження...",
+      "downloading": "Завантаження...",
+      "ready": "Готово",
+      "waiting": "Очікування введення"
     },
     "actions": {
-      "tryAgain": "Try Again"
+      "tryAgain": "Спробуйте ще раз"
     },
     "confirmations": {
-      "deleteItem": "Are you sure you want to delete \"{name}\"? This action cannot be undone.",
-      "deleteItems": "Are you sure you want to delete {count} items? This action cannot be undone.",
-      "unsavedChanges": "You have unsaved changes. Are you sure you want to leave?",
-      "resetForm": "Are you sure you want to reset the form? All changes will be lost."
+      "deleteItem": "Ви впевнені, що хочете видалити \"{name}\"? Цю дію неможливо скасувати.",
+      "deleteItems": "Ви впевнені, що хочете видалити {count} елементів? Цю дію неможливо скасувати.",
+      "unsavedChanges": "У вас є незбережені зміни. Ви впевнені, що хочете вийти?",
+      "resetForm": "Ви впевнені, що хочете скинути форму? Усі зміни будуть втрачені."
     },
     "labels": {
-      "order": "Order",
-      "lastUpdated": "Last Updated",
-      "active": "Published",
-      "inactive": "Draft",
-      "noItems": "No items found",
-      "noDescription": "No description provided",
-      "noTags": "No tags"
+      "order": "Порядок",
+      "lastUpdated": "Останнє оновлення",
+      "active": "Опубліковано",
+      "inactive": "Чернетка",
+      "noItems": "Елементів не знайдено",
+      "noDescription": "Опис не надано",
+      "noTags": "Без тегів"
     }
   },
   "status": {
-    "loading": "Завантаження...",
+    "loading": "Завантаження",
     "saving": "Збереження...",
     "success": "Успіх",
     "error": "Помилка",
@@ -104,8 +104,8 @@
     "timeout": "Час очікування запиту минув",
     "unknownError": "Невідома помилка",
     "somethingWentWrong": "Щось пішло не так",
-    "loadingFailed": "Error Loading Data",
-    "processingFailed": "Processing failed"
+    "loadingFailed": "Помилка завантаження даних",
+    "processingFailed": "Не вдалося обробити"
   },
   "navigation": {
     "home": "Головна",

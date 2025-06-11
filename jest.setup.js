@@ -21,301 +21,86 @@ jest.mock("next/navigation", () => ({
   },
 }));
 
-// Mock next-intl with comprehensive functionality for testing
+// Mock next-intl
 jest.mock("next-intl", () => {
-  // Create a comprehensive translation database that covers all known keys
-  const createTranslationDatabase = () => ({
-    // Common translations
-    common: {
-      ui: {
-        status: {
-          processing: "Processing...",
-          success: "Success",
-          error: "Error",
-          copied: "Copied!",
-          loading: "Loading...",
-        },
-        actions: {
-          copy: "Copy",
-          download: "Download",
-          tryAgain: "Try Again",
-        },
-        modes: {
-          encode: "Encode",
-          decode: "Decode",
-          generate: "Generate",
-        },
-        inputTypes: {
-          text: "Text",
-          file: "File",
-          upload: "Upload",
-        },
-      },
-      validation: {
-        emptyInput: "Input cannot be empty",
-        invalidFormat: "Invalid format",
-      },
-      errors: {
-        processingFailed: "Processing failed",
-        unexpectedError: "An unexpected error occurred",
-        troubleLoading: "Trouble loading content",
-      },
-    },
+  const mockTranslations = {
+    'pages.home.title': 'Essential Computer Tools',
+    'pages.home.description': 'Privacy-focused tools for everyday computing tasks',
+    'pages.home.search.placeholder': 'Search tools...',
+    'pages.home.search.results': 'Search Results',
+    'pages.home.search.resultsCount': '{count} tools found',
+    'pages.home.search.noResults': 'No tools found',
+    'pages.home.search.noResultsDescription': 'Try adjusting your search or filters',
+    'pages.home.filters.clearAll': 'Clear All Filters',
+    'pages.home.filters.noToolsForTags': 'No tools found for selected tags',
+    'pages.home.stats.title': 'Platform Statistics',
+    'pages.home.stats.totalTools': 'Total Tools',
+    'pages.home.stats.totalUsage': 'Total Usage',
+    'pages.home.stats.activeUsers': 'Active Users',
+    'common.loading': 'Loading...',
+    'common.error': 'Error',
+    'common.retry': 'Retry',
+    'common.actions.retry': 'Try Again',
+    'components.layout.header.navigation.tools': 'All Tools',
+    'components.layout.header.navigation.about': 'About',
+    'components.layout.header.title': 'ToolChest',
+    'components.layout.header.menu.toggle': 'Toggle menu',
+    'components.tools.toolCard.usageCount': '{count} uses',
+    'components.tools.searchInput.placeholder': 'Search tools...',
+    'components.tools.tagFilter.clearAll': 'Clear All',
+    'components.ui.button.loading': 'Loading...',
+    'tools.base64.name': 'Base64 Encoder/Decoder',
+    'tools.base64.description': 'Encode and decode Base64 strings',
+    'tools.hashGenerator.name': 'Hash Generator',
+    'tools.hashGenerator.description': 'Generate MD5, SHA-1, SHA-256 hashes',
+    'tools.faviconGenerator.name': 'Favicon Generator',
+    'tools.faviconGenerator.description': 'Create favicons from images',
+    'tools.markdownToPdf.name': 'Markdown to PDF',
+    'tools.markdownToPdf.description': 'Convert Markdown to PDF documents',
+    'database.tags.encoding': 'Encoding',
+    'database.tags.security': 'Security',
+    'database.tags.images': 'Images',
+    'database.tags.documents': 'Documents',
+  };
 
-    // Page translations
-    "pages.home": {
-      hero: {
-        title: "Essential Tools for Developers",
-        subtitle:
-          "Privacy-focused utilities that work entirely in your browser",
-      },
-      stats: {
-        title: "Powerful Tools",
-        description: "Essential utilities for daily development tasks",
-      },
-      search: {
-        placeholder: "Search tools...",
-        noResults: "No tools found",
-        resultsHeading: "Search Results",
-      },
-      errors: {
-        troubleLoading: "Trouble loading content",
-      },
-    },
-
-    "pages.tools": {
-      hero: {
-        title: "All Tools",
-        subtitle: "Comprehensive collection of developer utilities",
-      },
-    },
-
-    "pages.error.notFound": {
-      title: "Page Not Found",
-      description: "The page you're looking for doesn't exist.",
-      suggestions: {
-        0: "Check the URL for typos",
-        1: "Go back to the homepage",
-        2: "Use the search to find what you need",
-      },
-      contact: {
-        text: "If you believe this is an error, please",
-        link: "contact us",
-      },
-      screenReader: {
-        announcement: "Error 404: Page not found",
-      },
-    },
-
-    "pages.error.serverError": {
-      title: "Something went wrong",
-      description: "An unexpected error occurred. Please try again.",
-    },
-
-    "pages.loading.page": {
-      title: "Loading...",
-      description: "Please wait while we load the content",
-    },
-
-    "pages.admin.dashboard": {
-      title: "Admin Dashboard",
-      quickActions: {
-        addTool: "Add New Tool",
-        manageTags: "Manage Tags",
-        analytics: "View Analytics",
-      },
-    },
-
-    "pages.admin.tools": {
-      title: "Manage Tools",
-      description: "Add, edit, and organize tools",
-    },
-
-    "pages.admin.tags": {
-      title: "Manage Tags",
-      description: "Organize tools with tags",
-    },
-
-    "pages.admin.loading": {
-      title: "Loading admin content...",
-    },
-
-    "pages.admin.navigation": {
-      dashboard: "Dashboard",
-      tools: "Tools",
-      tags: "Tags",
-      relationships: "Relationships",
-    },
-
-    // Modern component translations
-    "components.layout.header": {
-      navigation: {
-        home: "Home",
-        tools: "Tools",
-        about: "About",
-        admin: "Admin",
-      },
-      mobile: {
-        toggleMenu: "Toggle menu",
-        openMenu: "Open navigation menu",
-        closeMenu: "Close navigation menu",
-      },
-    },
-
-    "components.layout.footer": {
-      copyright: "© 2024 tool-chest",
-      description: "Privacy-focused developer tools",
-      links: {
-        privacy: "Privacy Policy",
-        terms: "Terms of Service",
-        contact: "Contact",
-        about: "About",
-      },
-    },
-
-    "components.forms": {
-      labels: {
-        name: "Name",
-        description: "Description",
-      },
-      placeholders: {
-        enterName: "Enter name",
-        enterDescription: "Enter description",
-      },
-    },
-
-    // Tool translations
-    "tools.common": {
-      ui: {
-        status: {
-          processing: "Processing...",
-          success: "Success",
-          error: "Error",
-          copied: "Copied!",
-        },
-        actions: {
-          copy: "Copy",
-          download: "Download",
-        },
-        modes: {
-          encode: "Encode",
-          decode: "Decode",
-          generate: "Generate",
-        },
-        inputTypes: {
-          text: "Text",
-          file: "File",
-          upload: "Upload",
-        },
-      },
-      validation: {
-        emptyInput: "Input cannot be empty",
-      },
-      errors: {
-        processingFailed: "Processing failed",
-      },
-    },
-
-    "tools.base64": {
-      tool: {
-        variants: {
-          standard: "Standard",
-          urlSafe: "URL-Safe",
-        },
-        placeholders: {
-          textInput: "Enter text to encode/decode",
-        },
-      },
-    },
-
-    "tools.hash-generator": {
-      tool: {
-        placeholders: {
-          textInput: "Enter text to hash",
-        },
-      },
-    },
-
-    "tools.favicon-generator": {
-      tool: {
-        title: "Favicon Generator",
-      },
-    },
-
-    "tools.markdown-to-pdf": {
-      tool: {
-        title: "Markdown to PDF Converter",
-        themes: {
-          default: "Default",
-          github: "GitHub",
-          academic: "Academic",
-        },
-        pageSizes: {
-          a4: "A4",
-          letter: "Letter",
-          legal: "Legal",
-        },
-      },
-    },
-
-    // Database translations
-    database: {
-      tools: {
-        base64: { name: "Base64 Encoder/Decoder" },
-        "hash-generator": { name: "Hash Generator" },
-        "favicon-generator": { name: "Favicon Generator" },
-        "markdown-to-pdf": { name: "Markdown to PDF" },
-      },
-      tags: {
-        encoding: { name: "Encoding" },
-        security: { name: "Security" },
-        generation: { name: "Generation" },
-        web: { name: "Web" },
-      },
-    },
-  });
-
-  // Create a mock translation function that traverses the nested structure
-  const createTranslationFunction = (namespace) => {
-    const db = createTranslationDatabase();
-
+  const useTranslations = (namespace = '') => {
     return (key, values = {}) => {
-      // Handle nested key access like "hero.title" or "ui.status.processing"
       const fullKey = namespace ? `${namespace}.${key}` : key;
-      const keyParts = fullKey.split(".");
+      let translation = mockTranslations[fullKey] || fullKey;
 
-      let result = db;
-      for (const part of keyParts) {
-        if (result && typeof result === "object" && part in result) {
-          result = result[part];
-        } else {
-          // Return a debug-friendly fallback
-          return `[${fullKey}]`;
-        }
+      // Handle interpolation for values like {count}
+      if (values && typeof translation === 'string') {
+        Object.keys(values).forEach(valueKey => {
+          const placeholder = `{${valueKey}}`;
+          translation = translation.replace(placeholder, String(values[valueKey]));
+        });
       }
 
-      if (typeof result === "string") {
-        // Simple interpolation for values like {count}, {name}, etc.
-        return Object.keys(values).reduce((str, valueKey) => {
-          return str.replace(
-            new RegExp(`{${valueKey}}`, "g"),
-            String(values[valueKey]),
-          );
-        }, result);
-      }
-
-      // If we get an object, return debug info
-      return `[${fullKey}:object]`;
+      return translation;
     };
   };
 
   return {
-    useTranslations: jest.fn().mockImplementation(createTranslationFunction),
-    getTranslations: jest.fn().mockImplementation(async (namespace) => {
-      return createTranslationFunction(namespace);
-    }),
-    useLocale: jest.fn().mockReturnValue("en"),
+    useTranslations,
+    useLocale: () => 'en',
+    useMessages: () => mockTranslations,
     NextIntlClientProvider: ({ children }) => children,
+    getTranslations: (namespace = '') => {
+      return (key, values = {}) => {
+        const fullKey = namespace ? `${namespace}.${key}` : key;
+        let translation = mockTranslations[fullKey] || fullKey;
+
+        if (values && typeof translation === 'string') {
+          Object.keys(values).forEach(valueKey => {
+            const placeholder = `{${valueKey}}`;
+            translation = translation.replace(placeholder, String(values[valueKey]));
+          });
+        }
+
+        return translation;
+      };
+    },
+    getLocale: () => 'en',
   };
 });
 
@@ -348,25 +133,27 @@ global.IntersectionObserver = jest.fn().mockImplementation(() => ({
 }));
 
 // Mock matchMedia
-Object.defineProperty(window, "matchMedia", {
-  writable: true,
-  value: jest.fn().mockImplementation((query) => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: jest.fn(), // deprecated
-    removeListener: jest.fn(), // deprecated
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  })),
-});
+if (typeof window !== 'undefined') {
+  Object.defineProperty(window, "matchMedia", {
+    writable: true,
+    value: jest.fn().mockImplementation((query) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(), // deprecated
+      removeListener: jest.fn(), // deprecated
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    })),
+  });
 
-// Mock scrollTo
-Object.defineProperty(window, "scrollTo", {
-  value: jest.fn(),
-  writable: true,
-});
+  // Mock scrollTo
+  Object.defineProperty(window, "scrollTo", {
+    value: jest.fn(),
+    writable: true,
+  });
+}
 
 // Mock clipboard API (only if not already defined)
 if (!navigator.clipboard) {
@@ -452,18 +239,20 @@ if (typeof global.fetch === "undefined") {
 }
 
 // Mock canvas context for file processing tests
-HTMLCanvasElement.prototype.getContext = jest.fn(() => ({
-  drawImage: jest.fn(),
-  getImageData: jest.fn(() => ({ data: [] })),
-  putImageData: jest.fn(),
-  createImageData: jest.fn(() => ({ data: [] })),
-  toDataURL: jest.fn(() => "data:image/png;base64,mock-canvas-data"),
-  canvas: {
-    width: 100,
-    height: 100,
+if (typeof HTMLCanvasElement !== 'undefined') {
+  HTMLCanvasElement.prototype.getContext = jest.fn(() => ({
+    drawImage: jest.fn(),
+    getImageData: jest.fn(() => ({ data: [] })),
+    putImageData: jest.fn(),
+    createImageData: jest.fn(() => ({ data: [] })),
     toDataURL: jest.fn(() => "data:image/png;base64,mock-canvas-data"),
-  },
-}));
+    canvas: {
+      width: 100,
+      height: 100,
+      toDataURL: jest.fn(() => "data:image/png;base64,mock-canvas-data"),
+    },
+  }));
+}
 
 // Mock crypto for hash generation tests
 Object.defineProperty(global, "crypto", {

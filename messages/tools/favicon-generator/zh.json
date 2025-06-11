@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Favicon Generator - Create Favicons in All Sizes | tool-chest",
-    "description": "Free online favicon generator. Create favicons in all standard sizes (16x16, 32x32, 192x192, 512x512) from any image. Generate complete favicon packages with manifest files.",
+    "title": "Favicon 生成器 - 一键创建所有尺寸的图标 | tool-chest",
+    "description": "免费在线 Favicon 生成器。可从任意图像创建所有标准尺寸 (16x16, 32x32, 192x192, 512x512) 的图标，并生成完整的 manifest 文件。",
     "keywords": [
       "favicon generator",
       "favicon",
@@ -19,51 +19,51 @@
     ]
   },
   "page": {
-    "title": "Favicon Generator",
-    "description": "Create favicons from images in multiple sizes and formats.",
-    "privacyNotice": "All processing happens in your browser using <bold>Canvas API</bold>.",
-    "privacyMessage": "🔒 Privacy-First • Canvas API • Client-Side Processing"
+    "title": "Favicon 生成器",
+    "description": "从图像生成多尺寸、多格式的 favicon。",
+    "privacyNotice": "所有处理均在您的浏览器中通过 <bold>Canvas API</bold> 完成。",
+    "privacyMessage": "🔒 隐私优先 • Canvas API • 客户端处理"
   },
   "featureGrid": {
     "browserIcons": {
-      "title": "Browser Icons",
-      "description": "16×16, 32×32, 48×48 favicons for browser tabs, bookmarks, and desktop shortcuts."
+      "title": "浏览器图标",
+      "description": "16×16、32×32、48×48 图标，用于浏览器标签、书签和桌面快捷方式。"
     },
     "appleTouch": {
-      "title": "Apple Touch Icons",
-      "description": "180×180 icons for iOS home screen and Safari bookmark icons with rounded corners."
+      "title": "Apple Touch 图标",
+      "description": "180×180 图标，用于 iOS 主屏幕和 Safari 书签，带圆角。"
     },
     "androidIcons": {
-      "title": "Android Icons",
-      "description": "192×192, 512×512 icons for Android home screen and Progressive Web Apps."
+      "title": "Android 图标",
+      "description": "192×192、512×512 图标，用于 Android 主屏幕和 PWA 应用。"
     },
     "webManifest": {
       "title": "Web App Manifest",
-      "description": "Complete manifest.json for Progressive Web Apps with all required metadata.",
-      "badge": "PWA Ready"
+      "description": "为 PWA 生成完整的 manifest.json，包含所有必需的元数据。",
+      "badge": "PWA 就绪"
     }
   },
   "info": {
-    "title": "About Favicon Generation",
-    "description": "A favicon is a small icon that represents your website in browser tabs, bookmarks, and shortcuts. Modern web applications require multiple favicon sizes and formats to support different devices and platforms.",
+    "title": "关于 Favicon 生成",
+    "description": "Favicon 是代表您网站的小图标，显示在浏览器标签、书签和快捷方式中。现代 Web 应用需要多种尺寸和格式的图标，以支持不同的设备和平台。",
     "standardSizes": {
-      "title": "Standard Sizes",
+      "title": "标准尺寸",
       "items": [
-        "16×16, 32×32 - Browser tabs and bookmarks",
-        "48×48, 64×64 - Desktop shortcuts and apps",
-        "96×96, 128×128 - High-DPI and retina displays",
-        "180×180 - Apple touch icon for iOS",
-        "192×192, 512×512 - Android and PWA icons"
+        "16×16、32×32 - 浏览器标签和书签",
+        "48×48、64×64 - 桌面快捷方式和应用",
+        "96×96、128×128 - 高 DPI 和视网膜屏幕",
+        "180×180 - iOS 的 Apple Touch 图标",
+        "192×192、512×512 - Android 和 PWA 图标"
       ]
     },
     "bestPractices": {
-      "title": "Best Practices",
+      "title": "最佳实践",
       "items": [
-        "Use square images (1:1 aspect ratio)",
-        "Start with high resolution (512x512 or larger)",
-        "Simple designs work better at small sizes",
-        "Test on different backgrounds",
-        "Include multiple sizes for device compatibility"
+        "使用正方形图像（1:1 纵横比）",
+        "从高分辨率图像开始（512x512 或更大）",
+        "简洁的设计在小尺寸下效果更好",
+        "在不同背景上进行测试",
+        "包含多种尺寸以兼容不同设备"
       ]
     }
   }

@@ -53,37 +53,48 @@ export default async function HashGeneratorPage({
     .raw("securityGuidelines.items")
     .map((text: string) => ({ text }));
 
-  const features = ["md5", "sha1", "sha256", "sha512"].map((id) => ({
-    id,
-    title: tGrid(`${id}.title`),
-    description: tGrid(`${id}.description`),
-    icon:
-      id === "md5" ? (
-        <span className="text-sm font-bold text-white">MD5</span>
-      ) : id === "sha1" ? (
-        <span className="text-xs font-bold text-white">SHA1</span>
-      ) : id === "sha256" ? (
-        <span className="text-xs font-bold text-white">256</span>
-      ) : (
-        <span className="text-xs font-bold text-white">512</span>
-      ),
-    iconBg:
-      id === "md5"
-        ? "bg-gradient-to-br from-warning-500 to-warning-600"
-        : id === "sha1"
-          ? "bg-gradient-to-br from-error-500 to-error-600"
-          : id === "sha256"
-            ? "bg-gradient-to-br from-success-500 to-success-600"
-            : "bg-gradient-to-br from-brand-500 to-brand-600",
-    ...(tGrid.rich(`${id}.badge`) && {
-      badge: {
-        text: tGrid(`${id}.badge`),
-        className:
-          "bg-success-100 text-success-800 dark:bg-success-900/30 dark:text-success-400",
-      },
-      className: "border-success-200/50 dark:border-success-800/50",
-    }),
-  }));
+  const features = ["md5", "sha1", "sha256", "sha512"].map((id) => {
+    // Check if badge exists for this algorithm
+    let badgeText: string | null = null;
+    try {
+      badgeText = tGrid(`${id}.badge`);
+    } catch (error) {
+      // Badge doesn't exist for this algorithm, which is fine
+      badgeText = null;
+    }
+
+    return {
+      id,
+      title: tGrid(`${id}.title`),
+      description: tGrid(`${id}.description`),
+      icon:
+        id === "md5" ? (
+          <span className="text-sm font-bold text-white">MD5</span>
+        ) : id === "sha1" ? (
+          <span className="text-xs font-bold text-white">SHA1</span>
+        ) : id === "sha256" ? (
+          <span className="text-xs font-bold text-white">256</span>
+        ) : (
+          <span className="text-xs font-bold text-white">512</span>
+        ),
+      iconBg:
+        id === "md5"
+          ? "bg-gradient-to-br from-warning-500 to-warning-600"
+          : id === "sha1"
+            ? "bg-gradient-to-br from-error-500 to-error-600"
+            : id === "sha256"
+              ? "bg-gradient-to-br from-success-500 to-success-600"
+              : "bg-gradient-to-br from-brand-500 to-brand-600",
+      ...(badgeText && {
+        badge: {
+          text: badgeText,
+          className:
+            "bg-success-100 text-success-800 dark:bg-success-900/30 dark:text-success-400",
+        },
+        className: "border-success-200/50 dark:border-success-800/50",
+      }),
+    };
+  });
 
   return (
     <ToolPageTemplate

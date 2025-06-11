@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Hash Generator - Generate MD5, SHA-1, SHA-256, SHA-512 Hashes | tool-chest",
-    "description": "Free online hash generator for MD5, SHA-1, SHA-256, SHA-512, and other hash algorithms. Generate secure hashes for text and files with client-side processing.",
+    "title": "哈希生成器 - 生成 MD5、SHA-1、SHA-256、SHA-512 哈希 | tool-chest",
+    "description": "免费在线哈希生成器，支持 MD5、SHA-1、SHA-256、SHA-512 等算法。通过客户端处理为文本和文件生成安全哈希值。",
     "keywords": [
       "hash generator",
       "md5",
@@ -18,47 +18,50 @@
     ]
   },
   "page": {
-    "title": "Hash Generator",
-    "description": "Generate cryptographic hashes for text and files using various algorithms.",
-    "privacyMessage": "🔒 Privacy-First • Web Crypto API • Client-Side Processing"
+    "title": "哈希生成器",
+    "description": "使用多种算法为文本和文件生成加密哈希值。",
+    "privacyMessage": "🔒 隐私优先 • Web Crypto API • 客户端处理"
   },
   "featureGrid": {
     "md5": {
       "title": "MD5",
-      "description": "128-bit hash function. Fast but not cryptographically secure. Use for checksums only."
+      "description": "128 位哈希函数。速度快但不安全，仅用于校验和。",
+      "badge": ""
     },
     "sha1": {
       "title": "SHA-1",
-      "description": "160-bit hash function. Legacy algorithm, use SHA-256+ for security applications."
+      "description": "160 位哈希函数。属于遗留算法，安全场景请使用 SHA-256 及以上。",
+      "badge": ""
     },
     "sha256": {
       "title": "SHA-256",
-      "description": "256-bit hash function. Secure and widely used standard for modern applications.",
-      "badge": "Recommended"
+      "description": "256 位哈希函数。安全且广泛用于现代应用程序的标准。",
+      "badge": "推荐"
     },
     "sha512": {
       "title": "SHA-512",
-      "description": "512-bit hash function. Maximum security for sensitive data and critical applications."
+      "description": "512 位哈希函数。为敏感数据和关键应用提供最高安全性。",
+      "badge": ""
     }
   },
   "info": {
-    "title": "About Hash Functions",
-    "description": "Hash functions convert input data into fixed-size strings of characters, which are typically used for data integrity verification, password storage, and digital signatures.",
+    "title": "关于哈希函数",
+    "description": "哈希函数将输入数据转换为固定长度的字符串，通常用于数据完整性验证、密码存储和数字签名。",
     "useCases": {
-      "title": "Common Use Cases",
+      "title": "常见用例",
       "items": [
-        "File integrity verification",
-        "Password hashing",
-        "Data deduplication",
-        "Digital signatures",
-        "Checksum generation"
+        "文件完整性验证",
+        "密码哈希",
+        "数据去重",
+        "数字签名",
+        "校验和生成"
       ]
     },
     "securityGuidelines": {
-      "title": "Security Guidelines",
+      "title": "安全指南",
       "items": [
-        "MD5 and SHA-1 are cryptographically broken and should not be used for security-critical applications",
-        "Use SHA-256 or SHA-512 for all security-sensitive applications and modern systems"
+        "MD5 和 SHA-1 已被证明不安全，不应在安全关键应用中使用",
+        "在所有安全敏感的应用和现代系统中使用 SHA-256 或 SHA-512"
       ]
     }
   },
@@ -71,12 +74,12 @@
       "crc32": "CRC32"
     },
     "placeholders": {
-      "textInput": "Enter text to hash...",
-      "fileUpload": "Select a file to generate hash"
+      "textInput": "输入要进行哈希计算的文本...",
+      "fileUpload": "选择文件以生成哈希"
     }
   },
   "validation": {
-    "algorithmRequired": "Please select a hash algorithm",
-    "inputRequired": "Please enter text or select a file"
+    "algorithmRequired": "请选择哈希算法",
+    "inputRequired": "请输入文本或选择文件"
   }
 }

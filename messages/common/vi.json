@@ -27,60 +27,60 @@
     "tryAgain": "Thử lại",
     "clearAllFilters": "Xóa tất cả bộ lọc",
     "clearFilters": "Xóa bộ lọc",
-    "assign": "Assign",
-    "remove": "Remove"
+    "assign": "Gán",
+    "remove": "Xóa"
   },
   "ui": {
     "status": {
-      "loading": "Loading",
-      "saving": "Saving...",
-      "success": "Success",
-      "error": "Error",
-      "warning": "Warning",
-      "info": "Information",
-      "completed": "Completed",
-      "failed": "Failed",
-      "processing": "Processing...",
-      "validating": "Validating...",
-      "uploading": "Uploading...",
-      "downloading": "Downloading...",
-      "ready": "Ready",
-      "waiting": "Waiting for input"
+      "loading": "Đang tải",
+      "saving": "Đang lưu...",
+      "success": "Thành công",
+      "error": "Lỗi",
+      "warning": "Cảnh báo",
+      "info": "Thông tin",
+      "completed": "Hoàn thành",
+      "failed": "Thất bại",
+      "processing": "Đang xử lý...",
+      "validating": "Đang xác thực...",
+      "uploading": "Đang tải lên...",
+      "downloading": "Đang tải xuống...",
+      "ready": "Sẵn sàng",
+      "waiting": "Đang chờ nhập"
     },
     "actions": {
-      "tryAgain": "Try Again"
+      "tryAgain": "Thử lại"
     },
     "confirmations": {
-      "deleteItem": "Are you sure you want to delete \"{name}\"? This action cannot be undone.",
-      "deleteItems": "Are you sure you want to delete {count} items? This action cannot be undone.",
-      "unsavedChanges": "You have unsaved changes. Are you sure you want to leave?",
-      "resetForm": "Are you sure you want to reset the form? All changes will be lost."
+      "deleteItem": "Bạn có chắc chắn muốn xóa \"{name}\"? Thao tác này không thể hoàn tác.",
+      "deleteItems": "Bạn có chắc chắn muốn xóa {count} mục? Thao tác này không thể hoàn tác.",
+      "unsavedChanges": "Bạn có các thay đổi chưa lưu. Bạn có chắc chắn muốn rời đi?",
+      "resetForm": "Bạn có chắc chắn muốn đặt lại biểu mẫu? Tất cả thay đổi sẽ bị mất."
     },
     "labels": {
-      "order": "Order",
-      "lastUpdated": "Last Updated",
-      "active": "Published",
-      "inactive": "Draft",
-      "noItems": "No items found",
-      "noDescription": "No description provided",
-      "noTags": "No tags"
+      "order": "Thứ tự",
+      "lastUpdated": "Cập nhật lần cuối",
+      "active": "Đã xuất bản",
+      "inactive": "Bản nháp",
+      "noItems": "Không tìm thấy mục nào",
+      "noDescription": "Không có mô tả",
+      "noTags": "Không có thẻ"
     }
   },
   "status": {
-    "loading": "Đang tải...",
+    "loading": "Đang tải",
     "saving": "Đang lưu...",
     "success": "Thành công",
     "error": "Lỗi",
     "warning": "Cảnh báo",
     "info": "Thông tin",
-    "completed": "Đã hoàn thành",
+    "completed": "Hoàn thành",
     "failed": "Thất bại",
     "processing": "Đang xử lý...",
     "validating": "Đang xác thực...",
     "uploading": "Đang tải lên...",
     "downloading": "Đang tải xuống...",
     "ready": "Sẵn sàng",
-    "waiting": "Đang chờ nhập liệu"
+    "waiting": "Đang chờ nhập"
   },
   "validation": {
     "required": "Trường này là bắt buộc",
@@ -104,8 +104,8 @@
     "timeout": "Yêu cầu đã hết thời gian",
     "unknownError": "Lỗi không xác định",
     "somethingWentWrong": "Đã có lỗi xảy ra",
-    "loadingFailed": "Error Loading Data",
-    "processingFailed": "Processing failed"
+    "loadingFailed": "Lỗi tải dữ liệu",
+    "processingFailed": "Xử lý thất bại"
   },
   "navigation": {
     "home": "Trang chủ",

@@ -25,20 +25,23 @@
   "featureGrid": {
     "md5": {
       "title": "MD5",
-      "description": "128-bit hash function. Fast but not cryptographically secure. Use for checksums only."
+      "description": "128-bit hash function. Fast but not cryptographically secure. Use for checksums only.",
+      "badge": ""
     },
     "sha1": {
       "title": "SHA-1",
-      "description": "160-bit hash function. Legacy algorithm, use SHA-256+ for security applications."
+      "description": "160-bit hash function. Legacy algorithm, use SHA-256+ for security applications.",
+      "badge": ""
     },
     "sha256": {
       "title": "SHA-256",
-      "description": "256-bit hash function. Secure and widely used standard for modern applications.",
-      "badge": "Recommended"
+      "description": "256 bitlik karma fonksiyonu. Modern uygulamalar için güvenli ve yaygın olarak kullanılan standart.",
+      "badge": "Önerilen"
     },
     "sha512": {
       "title": "SHA-512",
-      "description": "512-bit hash function. Maximum security for sensitive data and critical applications."
+      "description": "512-bit hash function. Maximum security for sensitive data and critical applications.",
+      "badge": ""
     }
   },
   "info": {
@@ -55,10 +58,10 @@
       ]
     },
     "securityGuidelines": {
-      "title": "Security Guidelines",
+      "title": "Güvenlik Rehberi",
       "items": [
-        "MD5 and SHA-1 are cryptographically broken and should not be used for security-critical applications",
-        "Use SHA-256 or SHA-512 for all security-sensitive applications and modern systems"
+        "MD5 ve SHA-1 kriptografik olarak kırılmıştır ve güvenlik açısından kritik uygulamalarda kullanılmamalıdır",
+        "Tüm güvenlik hassas uygulamalar ve modern sistemler için SHA-256 veya SHA-512 kullanın"
       ]
     }
   },

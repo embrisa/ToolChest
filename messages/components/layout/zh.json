@@ -2,41 +2,41 @@
   "header": {
     "brand": "tool-chest",
     "navigation": {
-      "home": "Home",
-      "tools": "Tools",
-      "admin": "Admin",
+      "home": "主页",
+      "tools": "工具",
+      "admin": "管理",
       "about": "关于"
     },
     "mobile": {
-      "toggleMenu": "Toggle menu",
-      "openMenu": "Open navigation menu",
-      "closeMenu": "Close navigation menu"
+      "toggleMenu": "切换菜单",
+      "openMenu": "打开导航菜单",
+      "closeMenu": "关闭导航菜单"
     }
   },
   "footer": {
     "copyright": "© 2024 tool-chest",
     "links": {
-      "privacy": "Privacy Policy",
-      "terms": "Terms of Service",
-      "contact": "Contact",
-      "about": "About"
+      "privacy": "隐私政策",
+      "terms": "服务条款",
+      "contact": "联系",
+      "about": "关于"
     },
-    "description": "Privacy-focused developer tools."
+    "description": "注重隐私的开发者工具。"
   },
   "breadcrumbs": {
-    "home": "Home",
-    "tools": "Tools",
-    "admin": "Admin",
-    "dashboard": "Dashboard",
-    "analytics": "Analytics",
-    "tags": "Tags",
-    "monitoring": "Monitoring",
-    "relationships": "Relationships"
+    "home": "主页",
+    "tools": "工具",
+    "admin": "管理",
+    "dashboard": "仪表盘",
+    "analytics": "分析",
+    "tags": "标签",
+    "monitoring": "监控",
+    "relationships": "关系"
   },
   "localeSwitcher": {
-    "label": "Language",
-    "current": "Current language",
-    "selectLanguage": "Select language",
+    "label": "语言",
+    "current": "当前语言",
+    "selectLanguage": "选择语言",
     "languages": {
       "en": "English",
       "es": "Español",

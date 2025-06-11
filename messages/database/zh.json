@@ -1,86 +1,86 @@
 {
   "tools": {
     "base64": {
-      "name": "Base64 Tool",
-      "description": "Encode and decode Base64 data with support for text and files"
+      "name": "Base64 工具",
+      "description": "支持文本和文件的 Base64 编码与解码"
     },
     "hash-generator": {
-      "name": "Hash Generator",
-      "description": "Generate MD5, SHA-1, SHA-256, and other cryptographic hashes"
+      "name": "哈希生成器",
+      "description": "生成 MD5、SHA-1、SHA-256 等加密哈希值"
     },
     "favicon-generator": {
-      "name": "Favicon Generator",
-      "description": "Create favicons from images in multiple sizes and formats"
+      "name": "Favicon 生成器",
+      "description": "从图像生成多尺寸多格式的 favicon"
     },
     "markdown-to-pdf": {
-      "name": "Markdown to PDF",
-      "description": "Convert Markdown files to PDF with custom styling options"
+      "name": "Markdown 转 PDF",
+      "description": "将 Markdown 文件转换为 PDF，并支持自定义样式"
     },
     "urlShortener": {
-      "name": "URL Shortener",
-      "description": "Create short URLs for easy sharing and tracking"
+      "name": "URL 缩短器",
+      "description": "创建便于分享和跟踪的短链接"
     },
     "qrGenerator": {
-      "name": "QR Code Generator",
-      "description": "Generate QR codes for text, URLs, and other data"
+      "name": "二维码生成器",
+      "description": "生成文本、URL 等数据的二维码"
     },
     "imageCompressor": {
-      "name": "Image Compressor",
-      "description": "Compress images while maintaining quality"
+      "name": "图片压缩工具",
+      "description": "压缩图片同时保持质量"
     },
     "textDiff": {
-      "name": "Text Diff Tool",
-      "description": "Compare and highlight differences between text files"
+      "name": "文本差异比较工具",
+      "description": "比较并突出显示文本文件之间的差异"
     }
   },
   "tags": {
     "encoding": {
-      "name": "Encoding",
-      "description": "Tools for encoding and decoding data in various formats"
+      "name": "编码",
+      "description": "用于多种格式的数据编码与解码工具"
     },
     "security": {
-      "name": "Security",
-      "description": "Tools for cryptographic operations and security analysis"
+      "name": "安全",
+      "description": "用于加密操作和安全分析的工具"
     },
     "design": {
       "name": "设计",
-      "description": "设计和图形工具"
+      "description": "设计与图形工具"
     },
     "document": {
       "name": "文档",
       "description": "文档处理工具"
     },
     "generation": {
-      "name": "Generation",
-      "description": "Tools for generating content, codes, and files"
+      "name": "生成",
+      "description": "用于生成内容、代码和文件的工具"
     },
     "conversion": {
-      "name": "Conversion",
-      "description": "Tools for converting between different file formats"
+      "name": "转换",
+      "description": "文件格式转换工具"
     },
     "compression": {
-      "name": "Compression",
-      "description": "Tools for reducing file sizes and optimizing content"
+      "name": "压缩",
+      "description": "用于减小文件大小和优化内容的工具"
     },
     "analysis": {
-      "name": "Analysis",
-      "description": "Tools for analyzing and comparing data and files"
+      "name": "分析",
+      "description": "用于分析和比较数据与文件的工具"
     },
     "web": {
-      "name": "Web Development",
-      "description": "Tools specifically designed for web developers"
+      "name": "Web 开发",
+      "description": "专为 Web 开发者设计的工具"
     },
     "image": {
-      "name": "Image Processing",
-      "description": "Tools for working with images and graphics"
+      "name": "图像处理",
+      "description": "用于处理图像和图形的工具"
     },
     "text": {
-      "name": "Text Processing",
-      "description": "Tools for manipulating and analyzing text content"
+      "name": "文本处理",
+      "description": "用于操作和分析文本内容的工具"
     },
     "utility": {
-      "name": "Utility",
-      "description": "General-purpose tools for common tasks"
+      "name": "实用工具",
+      "description": "通用的常用任务工具"
     }
   }
 }

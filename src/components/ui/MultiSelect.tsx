@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useId } from "react";
 import {
   ChevronDownIcon,
   XMarkIcon,
@@ -37,22 +37,22 @@ export function MultiSelect({
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const listboxRef = useRef<HTMLUListElement>(null);
-  const listId = useRef(
-    `multiselect-${Math.random().toString(36).slice(2, 11)}`,
-  );
+  // Generate deterministic id using React useId to avoid SSR hydration mismatches
+  const generatedId = useId();
+  const listId = useRef(`multiselect-${generatedId}`);
 
   // Filter options based on search query
   const filteredOptions =
     searchable && state.searchQuery
       ? options.filter(
-          (option) =>
-            option.label
-              .toLowerCase()
-              .includes(state.searchQuery.toLowerCase()) ||
-            option.description
-              ?.toLowerCase()
-              .includes(state.searchQuery.toLowerCase()),
-        )
+        (option) =>
+          option.label
+            .toLowerCase()
+            .includes(state.searchQuery.toLowerCase()) ||
+          option.description
+            ?.toLowerCase()
+            .includes(state.searchQuery.toLowerCase()),
+      )
       : options;
 
   // Get selected options for display

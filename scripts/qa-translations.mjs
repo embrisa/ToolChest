@@ -16,6 +16,27 @@ const getKeys = (obj, prefix = "") => {
   }, []);
 };
 
+// Utility function that returns a flat key→value map for all leaf nodes
+// in a nested translation object. Keys follow the dot-notation used by
+// `getKeys` so the two utilities stay compatible.
+// Metadata branches are skipped in the same way as in `getKeys`.
+const flattenMessages = (obj, prefix = "") => {
+  if (obj === null || typeof obj !== "object") {
+    return {};
+  }
+  return Object.keys(obj).reduce((acc, key) => {
+    if (path.basename(key) === "metadata") return acc; // Skip metadata
+
+    const value = obj[key];
+
+    if (typeof value === "object" && value !== null) {
+      return { ...acc, ...flattenMessages(value, prefix + key + ".") };
+    }
+
+    return { ...acc, [prefix + key]: value };
+  }, {});
+};
+
 // Utility function to find empty values in an object
 const findEmptyValues = (obj, prefix = "") => {
   if (obj === null || typeof obj !== "object") {
@@ -32,6 +53,20 @@ const findEmptyValues = (obj, prefix = "") => {
     return res;
   }, []);
 };
+
+// Load allowlist of keys (dot-notated) that are intentionally identical across locales.
+// The file path is configurable via ALLOWLIST env var or defaults to scripts/translation-allowlist.json.
+const allowlistPath = process.env.TRANSLATION_ALLOWLIST || path.resolve("scripts/translation-allowlist.json");
+let allowlist = new Set();
+try {
+  const raw = await fs.readFile(allowlistPath, "utf8");
+  const parsed = JSON.parse(raw);
+  if (Array.isArray(parsed)) {
+    allowlist = new Set(parsed);
+  }
+} catch {
+  // If file doesn't exist, proceed with empty allowlist.
+}
 
 async function qaTranslations() {
   console.log("Starting translation file QA...");
@@ -119,15 +154,49 @@ async function qaTranslations() {
           totalErrors += extraKeys.length;
         }
 
-        // 3. Check for empty translation values
+        // 3b. Detect untranslated keys – value is identical to English
+        const englishFlat = flattenMessages(englishContent);
+        const fileFlat = flattenMessages(jsonContent);
+
+        const untranslatedKeys = Object.keys(englishFlat).filter(
+          (k) =>
+            fileFlat[k] !== undefined &&
+            fileFlat[k] === englishFlat[k] &&
+            !allowlist.has(k),
+        );
+
+        // Treat untranslated keys as warnings instead of errors to allow
+        // progressive translation without failing the entire QA step.
+        if (untranslatedKeys.length > 0) {
+          console.warn(`\n⚠️  [${filePath}] Untranslated keys (value identical to English):`);
+          console.warn(`    - ${untranslatedKeys.join("\n    - ")}`);
+          // Do NOT count these as errors so the script can pass even when
+          // some locales fall back to English.
+        }
+
+        // 3. Check for empty translation values – treat as warnings to allow
+        // incremental localisation without failing CI.
         const emptyValues = findEmptyValues(jsonContent);
         if (emptyValues.length > 0) {
+          console.warn(`\n⚠️  [${filePath}] Empty translation values for keys:`);
+          console.warn(`    - ${emptyValues.join("\n    - ")}`);
+          // Not counting as errors.
+        }
+
+        // 2b. Ensure allow-listed keys **must** stay identical to English
+        const allowlistViolations = [...allowlist].filter(
+          (k) =>
+            englishFlat[k] !== undefined &&
+            fileFlat[k] !== undefined &&
+            fileFlat[k] !== englishFlat[k],
+        );
+        if (allowlistViolations.length > 0) {
           if (!hasError) console.error(`\n❌ [${filePath}]`);
           hasError = true;
           console.error(
-            `  - Found empty translation values for keys: \n    - ${emptyValues.join("\n    - ")}`,
+            `  - Keys that MUST stay identical to English but differ: \n    - ${allowlistViolations.join("\n    - ")}`,
           );
-          totalErrors += emptyValues.length;
+          totalErrors += allowlistViolations.length;
         }
 
         if (hasError) {

@@ -2,6 +2,11 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe, toHaveNoViolations } from "jest-axe";
 import HomePage from "../[locale]/page";
+import {
+  mockTranslatedTools,
+  mockTranslatedTags,
+  mockDatabaseTranslationService,
+} from "../../../tests/setup/mockData";
 
 // Extend Jest matchers
 expect.extend(toHaveNoViolations);
@@ -136,30 +141,15 @@ jest.mock("@/components/ui", () => ({
   ),
 }));
 
-describe("HomePage", () => {
-  const mockTools = [
-    {
-      id: "1",
-      name: "Base64 Encoder",
-      slug: "base64",
-      description: "Encode and decode Base64 strings",
-      tags: [{ id: "1", name: "Encoding", slug: "encoding" }],
-      usageCount: 100,
-    },
-    {
-      id: "2",
-      name: "Hash Generator",
-      slug: "hash-generator",
-      description: "Generate MD5, SHA1, SHA256 hashes",
-      tags: [{ id: "2", name: "Security", slug: "security" }],
-      usageCount: 75,
-    },
-  ];
+// Mock DatabaseTranslationService
+jest.mock("@/services/core/databaseTranslationService", () => ({
+  DatabaseTranslationService: () => mockDatabaseTranslationService,
+}));
 
-  const mockTags = [
-    { id: "1", name: "Encoding", slug: "encoding", toolCount: 3 },
-    { id: "2", name: "Security", slug: "security", toolCount: 2 },
-  ];
+describe("HomePage", () => {
+  // Use updated mock data with translation keys
+  const mockTools = mockTranslatedTools.en;
+  const mockTags = mockTranslatedTags.en;
 
   const defaultToolsState = {
     tools: mockTools,
@@ -224,11 +214,9 @@ describe("HomePage", () => {
 
       render(<HomePage />);
 
-      await waitFor(() => {
-        // Should show skeleton cards
-        const skeletons = screen.getAllByTestId("tool-skeleton");
-        expect(skeletons.length).toBeGreaterThan(0);
-      });
+      // Should show loading skeleton cards
+      expect(screen.getAllByTestId("tool-skeleton")).toHaveLength(6);
+      expect(screen.getByText("Loading tools...")).toBeInTheDocument();
     });
   });
 
@@ -242,13 +230,9 @@ describe("HomePage", () => {
 
       render(<HomePage />);
 
-      expect(screen.getByText("Something went wrong")).toBeInTheDocument();
-      expect(
-        screen.getByText(/We're having trouble loading the tools/),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("button", { name: /try again/i }),
-      ).toBeInTheDocument();
+      // Should show multiple instances of the error message (mobile and desktop)
+      expect(screen.getAllByText("pages.home.errors.troubleLoading")).toHaveLength(2);
+      expect(screen.getByRole("button", { name: "common.actions.tryAgain" })).toBeInTheDocument();
     });
 
     it("should show error message when tags fail to load", () => {
@@ -260,7 +244,9 @@ describe("HomePage", () => {
 
       render(<HomePage />);
 
-      expect(screen.getByText("Something went wrong")).toBeInTheDocument();
+      // Should show multiple instances of the error message (mobile and desktop)
+      expect(screen.getAllByText("pages.home.errors.troubleLoading")).toHaveLength(2);
+      expect(screen.getByRole("button", { name: "common.actions.tryAgain" })).toBeInTheDocument();
     });
 
     it("should call retry functions when retry button is clicked", async () => {
@@ -281,7 +267,7 @@ describe("HomePage", () => {
       const user = userEvent.setup();
       render(<HomePage />);
 
-      const retryButton = screen.getByRole("button", { name: /try again/i });
+      const retryButton = screen.getByRole("button", { name: "common.actions.tryAgain" });
       await user.click(retryButton);
 
       expect(retryTools).toHaveBeenCalledTimes(1);
@@ -293,17 +279,9 @@ describe("HomePage", () => {
     it("should render main heading and description", () => {
       render(<HomePage />);
 
-      expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-        "tool-chest",
-      );
-      expect(
-        screen.getByText(/Your collection of essential computer tools/),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(
-          /Encode, decode, generate, convert, and more with ease/,
-        ),
-      ).toBeInTheDocument();
+      expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("pages.home.hero.title");
+      expect(screen.getByText("pages.home.hero.subtitle")).toBeInTheDocument();
+      expect(screen.getByText("pages.home.hero.description")).toBeInTheDocument();
     });
 
     it("should render search input", () => {
@@ -311,7 +289,7 @@ describe("HomePage", () => {
 
       const searchInput = screen.getByRole("searchbox");
       expect(searchInput).toBeInTheDocument();
-      expect(searchInput).toHaveAttribute("placeholder", "Search tools...");
+      expect(searchInput).toHaveAttribute("placeholder", "pages.home.hero.searchPlaceholder");
     });
 
     it("should render tag filters", () => {
@@ -319,32 +297,32 @@ describe("HomePage", () => {
 
       expect(screen.getAllByTestId("tag-filters")).toHaveLength(2); // Mobile and desktop
       expect(screen.getByTestId("desktop-tag-encoding")).toHaveTextContent(
-        "Encoding (3)",
+        "Encoding (2)",
       );
       expect(screen.getByTestId("desktop-tag-security")).toHaveTextContent(
-        "Security (2)",
+        "Security (1)",
       );
     });
 
     it("should render tool cards", () => {
       render(<HomePage />);
 
-      expect(screen.getByText("Base64 Encoder")).toBeInTheDocument();
+      expect(screen.getByText("Base64 Encoder/Decoder")).toBeInTheDocument();
       expect(screen.getByText("Hash Generator")).toBeInTheDocument();
       expect(
-        screen.getByText("Encode and decode Base64 strings"),
+        screen.getByText("Encode and decode Base64 strings easily"),
       ).toBeInTheDocument();
     });
 
     it("should render stats section", () => {
       render(<HomePage />);
 
-      expect(screen.getByText("2")).toBeInTheDocument(); // tools count
-      expect(screen.getByText("Tools Available")).toBeInTheDocument();
-      expect(screen.getByText("100%")).toBeInTheDocument();
-      expect(screen.getByText("Client-side Processing")).toBeInTheDocument();
-      expect(screen.getByText("Free")).toBeInTheDocument();
-      expect(screen.getByText("Forever")).toBeInTheDocument();
+      expect(screen.getByText("4")).toBeInTheDocument(); // tools count (updated to match mock data)
+      expect(screen.getByText("pages.home.stats.toolsAvailable")).toBeInTheDocument();
+      expect(screen.getByText("pages.home.stats.clientSideValue")).toBeInTheDocument();
+      expect(screen.getByText("pages.home.stats.clientSideProcessing")).toBeInTheDocument();
+      expect(screen.getByText("pages.home.stats.freeValue")).toBeInTheDocument();
+      expect(screen.getByText("pages.home.stats.freeForever")).toBeInTheDocument();
     });
   });
 
@@ -389,9 +367,8 @@ describe("HomePage", () => {
 
       render(<HomePage />);
 
-      // Use getAllByText to handle responsive duplicates
-      expect(screen.getAllByText("Search Results")).toHaveLength(2); // Mobile and desktop
-      expect(screen.getAllByText("2 tools found")).toHaveLength(2); // Mobile and desktop
+      expect(screen.getAllByText("pages.home.sections.searchResults")).toHaveLength(2); // Mobile and desktop
+      expect(screen.getAllByText(/4 pages.home.loading.toolsFound/)).toHaveLength(2); // Mobile and desktop
     });
   });
 
@@ -440,7 +417,7 @@ describe("HomePage", () => {
       render(<HomePage />);
 
       const clearButtons = screen.getAllByRole("button", {
-        name: /clear all filters/i,
+        name: "pages.home.filtering.clearAll",
       });
       expect(clearButtons).toHaveLength(2); // Mobile and desktop versions
     });
@@ -457,7 +434,7 @@ describe("HomePage", () => {
       render(<HomePage />);
 
       const clearButtons = screen.getAllByRole("button", {
-        name: /clear all filters/i,
+        name: "pages.home.filtering.clearAll",
       });
       await user.click(clearButtons[0]); // Click the first one (desktop)
 
@@ -475,13 +452,9 @@ describe("HomePage", () => {
 
       render(<HomePage />);
 
-      expect(screen.getByText("No tools found")).toBeInTheDocument();
-      expect(
-        screen.getByText('No tools match "nonexistent"'),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("button", { name: /clear filters/i }),
-      ).toBeInTheDocument();
+      expect(screen.getByText("pages.home.noResults.title")).toBeInTheDocument();
+      expect(screen.getByText("pages.home.noResults.description")).toBeInTheDocument();
+      expect(screen.getByRole("button", { name: "common.actions.clearFilters" })).toBeInTheDocument();
     });
 
     it("should show different message for tag filters", () => {
@@ -496,9 +469,7 @@ describe("HomePage", () => {
 
       render(<HomePage />);
 
-      expect(
-        screen.getByText("No tools match your selected filters"),
-      ).toBeInTheDocument();
+      expect(screen.getByText("pages.home.noResults.descriptionFilters")).toBeInTheDocument();
     });
   });
 
@@ -513,22 +484,22 @@ describe("HomePage", () => {
       render(<HomePage />);
 
       const toolsGrid = screen.getByRole("region", {
-        name: /available tools/i,
+        name: 'Available tools',
       });
       expect(toolsGrid).toBeInTheDocument();
 
       const toolCards = screen.getAllByTestId("tool-card");
-      expect(toolCards).toHaveLength(2);
+      expect(toolCards).toHaveLength(4);
     });
 
     it("should have proper heading hierarchy", () => {
       render(<HomePage />);
 
       const h1 = screen.getByRole("heading", { level: 1 });
-      expect(h1).toHaveTextContent("tool-chest");
+      expect(h1).toHaveTextContent("pages.home.hero.title");
 
       const h2Elements = screen.getAllByRole("heading", { level: 2 });
-      expect(h2Elements[0]).toHaveTextContent("All Tools");
+      expect(h2Elements[0]).toHaveTextContent("pages.home.sections.allTools");
     });
 
     it("should have proper landmark roles", () => {
@@ -651,6 +622,92 @@ describe("HomePage", () => {
 
       expect(setQuery).toHaveBeenCalled();
       expect(setTags).toHaveBeenCalled();
+    });
+  });
+
+  describe("Locale Support", () => {
+    it("should render tools with English translations by default", () => {
+      render(<HomePage />);
+
+      // Check that English tool names are displayed
+      expect(screen.getByText("Base64 Encoder/Decoder")).toBeInTheDocument();
+      expect(screen.getByText("Hash Generator")).toBeInTheDocument();
+      expect(screen.getByText("Encode and decode Base64 strings easily")).toBeInTheDocument();
+    });
+
+    it("should handle Spanish locale data when available", () => {
+      // Mock Spanish tools data
+      mockUseToolsWithState.mockReturnValue({
+        ...defaultToolsState,
+        tools: mockTranslatedTools.es,
+      });
+
+      mockUseTagsWithState.mockReturnValue({
+        ...defaultTagsState,
+        tags: mockTranslatedTags.es,
+      });
+
+      render(<HomePage />);
+
+      // Check that Spanish tool names are displayed
+      expect(screen.getByText("Herramienta Base64")).toBeInTheDocument();
+      expect(screen.getByText("Generador de Hash")).toBeInTheDocument();
+      expect(screen.getByText("Codifica y decodifica cadenas Base64 fácilmente")).toBeInTheDocument();
+    });
+
+    it("should handle French locale data when available", () => {
+      // Mock French tools data
+      mockUseToolsWithState.mockReturnValue({
+        ...defaultToolsState,
+        tools: mockTranslatedTools.fr,
+      });
+
+      mockUseTagsWithState.mockReturnValue({
+        ...defaultTagsState,
+        tags: mockTranslatedTags.fr,
+      });
+
+      render(<HomePage />);
+
+      // Check that French tool names are displayed
+      expect(screen.getByText("Outil Base64")).toBeInTheDocument();
+      expect(screen.getByText("Générateur de Hash")).toBeInTheDocument();
+      expect(screen.getByText("Encodez et décodez facilement les chaînes Base64")).toBeInTheDocument();
+    });
+
+    it("should handle empty translations gracefully", () => {
+      // Mock empty translations data
+      mockUseToolsWithState.mockReturnValue({
+        ...defaultToolsState,
+        tools: [],
+      });
+
+      mockUseTagsWithState.mockReturnValue({
+        ...defaultTagsState,
+        tags: [],
+      });
+
+      render(<HomePage />);
+
+      expect(screen.getByText("pages.home.noResults.title")).toBeInTheDocument();
+    });
+
+    it("should preserve tool metadata across locales", () => {
+      const spanishTools = mockTranslatedTools.es;
+
+      mockUseToolsWithState.mockReturnValue({
+        ...defaultToolsState,
+        tools: spanishTools,
+      });
+
+      render(<HomePage />);
+
+      // Verify that non-translated fields are preserved
+      const firstTool = spanishTools[0];
+      expect(firstTool.id).toBe("1");
+      expect(firstTool.toolKey).toBe("base64");
+      expect(firstTool.slug).toBe("base64");
+      expect(firstTool.usageCount).toBe(100);
     });
   });
 });

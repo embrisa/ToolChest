@@ -1,50 +1,50 @@
 {
   "hero": {
     "title": "tool-chest",
-    "subtitle": "Your collection of essential computer tools.",
-    "description": "Encode, decode, generate, convert, and more with ease.",
-    "searchPlaceholder": "Search tools..."
+    "subtitle": "您的必备电脑工具集合。",
+    "description": "轻松完成编码、解码、生成、转换等操作。",
+    "searchPlaceholder": "搜索工具..."
   },
   "stats": {
-    "toolsAvailable": "Tools Available",
-    "clientSideProcessing": "Client-side Processing",
+    "toolsAvailable": "可用工具",
+    "clientSideProcessing": "客户端处理",
     "clientSideValue": "100%",
-    "freeForever": "Free",
-    "freeValue": "Forever"
+    "freeForever": "免费",
+    "freeValue": "永远"
   },
   "sections": {
-    "allTools": "All Tools",
-    "searchResults": "Search Results",
-    "filterTools": "Filter Tools",
+    "allTools": "所有工具",
+    "searchResults": "搜索结果",
+    "filterTools": "筛选工具",
     "active": "active"
   },
   "loading": {
-    "loadingTools": "Loading tools...",
-    "toolsFound": "tools found"
+    "loadingTools": "正在加载工具...",
+    "toolsFound": "个工具已找到"
   },
   "noResults": {
-    "title": "No tools found",
-    "description": "No tools match \"{query}\"",
-    "descriptionFilters": "No tools match your selected filters"
+    "title": "未找到工具",
+    "description": "没有工具符合 \"{query}\"",
+    "descriptionFilters": "没有工具符合您的筛选条件"
   },
   "errors": {
-    "troubleLoading": "We're having trouble loading the tools. Please try again later."
+    "troubleLoading": "加载工具时出现问题。请稍后再试。"
   },
   "search": {
-    "placeholder": "Search tools...",
-    "clearSearch": "Clear search",
-    "searchResults": "search results"
+    "placeholder": "搜索工具...",
+    "clearSearch": "清除搜索",
+    "searchResults": "搜索结果"
   },
   "filtering": {
-    "filterByTags": "Filter by Tags",
-    "allTags": "All Tags",
-    "selectedTags": "Selected Tags",
-    "clearAll": "Clear All",
-    "noTags": "No tags available"
+    "filterByTags": "按标签筛选",
+    "allTags": "全部标签",
+    "selectedTags": "已选标签",
+    "clearAll": "清除全部",
+    "noTags": "暂无标签"
   },
   "toolCard": {
-    "newTool": "New",
-    "popularTool": "Popular",
-    "openTool": "Open tool"
+    "newTool": "新工具",
+    "popularTool": "热门",
+    "openTool": "打开工具"
   }
 }

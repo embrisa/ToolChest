@@ -24,20 +24,51 @@ export async function loadTranslationModules(
 ): Promise<Record<string, any>> {
   const translations: Record<string, any> = {};
 
+  // Helper to deep merge the loaded module into the translations object
+  const deepMerge = (
+    target: Record<string, any>,
+    keys: string[],
+    value: Record<string, any>,
+  ) => {
+    const key = keys[0]!;
+    // When we reach the last key, merge the value
+    if (keys.length === 1) {
+      if (
+        typeof target[key] === "object" &&
+        target[key] !== null &&
+        !Array.isArray(target[key])
+      ) {
+        target[key] = { ...target[key], ...value };
+      } else {
+        target[key] = value;
+      }
+      return;
+    }
+
+    // Otherwise ensure nested object exists and recurse
+    if (typeof target[key] !== "object" || target[key] === null) {
+      target[key] = {};
+    }
+    deepMerge(target[key], keys.slice(1), value);
+  };
+
   for (const moduleName of modules) {
     try {
-      const modulePath = moduleName.replace(".", "/");
+      // Convert dot notation in module name to a path for import, e.g. "components.layout" -> "components/layout"
+      const modulePath = moduleName.replace(/\./g, "/");
+
+      // Dynamically import the translation JSON (Vite/Next will tree-shake this correctly)
       const moduleTranslations = await import(
         `../../../messages/${modulePath}/${locale}.json`
       );
 
-      // Merge module translations into the main object
-      const moduleKey = moduleName.replace(".", "_");
-      translations[moduleKey] =
-        moduleTranslations.default || moduleTranslations;
+      // Insert the module translations into the nested translations object
+      const keys = moduleName.split(".");
+      deepMerge(translations, keys, moduleTranslations.default || moduleTranslations);
     } catch (error) {
+      // Don't fail hard on missing modules – just log a warning for developers
       console.warn(
-        `Failed to load translation module ${moduleName} for locale ${locale}:`,
+        `⚠️  Failed to load translation module "${moduleName}" for locale "${locale}":`,
         error,
       );
       // Continue loading other modules even if one fails
@@ -205,6 +236,7 @@ export default getRequestConfig(async ({ locale }) => {
     "components.layout",
     "components.ui",
     "database",
+    "pages.error",
   ]);
 
   return {

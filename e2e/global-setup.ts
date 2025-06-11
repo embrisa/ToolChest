@@ -77,182 +77,143 @@ async function seedE2EDatabase() {
     await prisma.tool.deleteMany();
     await prisma.tag.deleteMany();
 
-    // Create comprehensive test data for E2E testing
-    const testTags = await Promise.all([
-      prisma.tag.create({
-        data: {
-          name: "Encoding",
-          slug: "encoding",
-          description: "Text and data encoding tools",
-          color: "#3B82F6",
-        },
-      }),
-      prisma.tag.create({
-        data: {
-          name: "Security",
-          slug: "security",
-          description: "Security and cryptography tools",
-          color: "#EF4444",
-        },
-      }),
-      prisma.tag.create({
-        data: {
-          name: "Development",
-          slug: "development",
-          description: "Development and programming tools",
-          color: "#10B981",
-        },
-      }),
-      prisma.tag.create({
-        data: {
-          name: "Design",
-          slug: "design",
-          description: "Design and graphics tools",
-          color: "#8B5CF6",
-        },
-      }),
-      prisma.tag.create({
-        data: {
-          name: "Conversion",
-          slug: "conversion",
-          description: "File and format conversion tools",
-          color: "#F59E0B",
-        },
-      }),
-    ]);
+    // --- 1. Upsert Tags ---
+    const tagsData = [
+      {
+        tagKey: "encoding",
+        nameKey: "database.tags.encoding",
+        slug: "encoding",
+        descriptionKey: "database.tags.encoding.description",
+        displayOrder: 1,
+      },
+      {
+        tagKey: "security",
+        nameKey: "database.tags.security",
+        slug: "security",
+        descriptionKey: "database.tags.security.description",
+        displayOrder: 2,
+      },
+      {
+        tagKey: "generation",
+        nameKey: "database.tags.generation",
+        slug: "generation",
+        descriptionKey: "database.tags.generation.description",
+        displayOrder: 3,
+      },
+      {
+        tagKey: "conversion",
+        nameKey: "database.tags.conversion",
+        slug: "conversion",
+        descriptionKey: "database.tags.conversion.description",
+        displayOrder: 4,
+      },
+      {
+        tagKey: "design",
+        nameKey: "database.tags.design",
+        slug: "design",
+        descriptionKey: "database.tags.design.description",
+        displayOrder: 5,
+      },
+      {
+        tagKey: "document",
+        nameKey: "database.tags.document",
+        slug: "document",
+        descriptionKey: "database.tags.document.description",
+        displayOrder: 6,
+      },
+    ];
 
-    // Create test tools with realistic data
-    const testTools = await Promise.all([
-      prisma.tool.create({
-        data: {
-          name: "Base64 Encoder/Decoder",
-          slug: "base64",
-          description:
-            "Encode and decode Base64 text and files with support for URL-safe encoding",
-          iconClass: "hero-document-text",
-          displayOrder: 1,
-          usageCount: 1250,
-          isActive: true,
-        },
-      }),
-      prisma.tool.create({
-        data: {
-          name: "Hash Generator",
-          slug: "hash-generator",
-          description:
-            "Generate MD5, SHA-1, SHA-256, SHA-512 hashes for text and files",
-          iconClass: "hero-key",
-          displayOrder: 2,
-          usageCount: 890,
-          isActive: true,
-        },
-      }),
-      prisma.tool.create({
-        data: {
-          name: "Favicon Generator",
-          slug: "favicon-generator",
-          description:
-            "Generate favicons in multiple sizes and formats from any image",
-          iconClass: "hero-photo",
-          displayOrder: 3,
-          usageCount: 670,
-          isActive: true,
-        },
-      }),
-      prisma.tool.create({
-        data: {
-          name: "Markdown to PDF",
-          slug: "markdown-to-pdf",
-          description:
-            "Convert Markdown documents to styled PDF files with custom themes",
-          iconClass: "hero-document-duplicate",
-          displayOrder: 4,
-          usageCount: 450,
-          isActive: true,
-        },
-      }),
-    ]);
+    for (const tag of tagsData) {
+      await prisma.tag.upsert({
+        where: { slug: tag.slug },
+        update: {},
+        create: tag,
+      });
+    }
 
-    // Create comprehensive tool-tag relationships
-    await Promise.all([
-      // Base64 - Encoding, Development
-      prisma.toolTag.create({
-        data: { toolId: testTools[0].id, tagId: testTags[0].id },
-      }),
-      prisma.toolTag.create({
-        data: { toolId: testTools[0].id, tagId: testTags[2].id },
-      }),
+    // --- 2. Upsert Tools ---
+    const toolsData = [
+      {
+        toolKey: "base64",
+        nameKey: "tools.base64.name",
+        slug: "base64",
+        descriptionKey: "tools.base64.description",
+        displayOrder: 1,
+        iconClass: "🔗",
+      },
+      {
+        toolKey: "hash-generator",
+        nameKey: "tools.hash-generator.name",
+        slug: "hash-generator",
+        descriptionKey: "tools.hash-generator.description",
+        displayOrder: 2,
+        iconClass: "🔐",
+      },
+      {
+        toolKey: "favicon-generator",
+        nameKey: "tools.favicon-generator.name",
+        slug: "favicon-generator",
+        descriptionKey: "tools.favicon-generator.description",
+        displayOrder: 3,
+        iconClass: "🎨",
+      },
+      {
+        toolKey: "markdown-to-pdf",
+        nameKey: "tools.markdown-to-pdf.name",
+        slug: "markdown-to-pdf",
+        descriptionKey: "tools.markdown-to-pdf.description",
+        displayOrder: 4,
+        iconClass: "📄",
+      },
+    ];
 
-      // Hash Generator - Security, Development
-      prisma.toolTag.create({
-        data: { toolId: testTools[1].id, tagId: testTags[1].id },
-      }),
-      prisma.toolTag.create({
-        data: { toolId: testTools[1].id, tagId: testTags[2].id },
-      }),
+    for (const tool of toolsData) {
+      await prisma.tool.upsert({
+        where: { slug: tool.slug },
+        update: {},
+        create: tool,
+      });
+    }
 
-      // Favicon Generator - Design, Development, Conversion
-      prisma.toolTag.create({
-        data: { toolId: testTools[2].id, tagId: testTags[3].id },
-      }),
-      prisma.toolTag.create({
-        data: { toolId: testTools[2].id, tagId: testTags[2].id },
-      }),
-      prisma.toolTag.create({
-        data: { toolId: testTools[2].id, tagId: testTags[4].id },
-      }),
+    const createdTools = await prisma.tool.findMany();
+    const createdTags = await prisma.tag.findMany();
 
-      // Markdown to PDF - Development, Conversion
-      prisma.toolTag.create({
-        data: { toolId: testTools[3].id, tagId: testTags[2].id },
-      }),
-      prisma.toolTag.create({
-        data: { toolId: testTools[3].id, tagId: testTags[4].id },
-      }),
-    ]);
+    // --- 3. Create Tool-Tag Relationships ---
+    const toolTagRelations = [
+      { toolSlug: "base64", tagSlugs: ["encoding", "conversion"] },
+      { toolSlug: "hash-generator", tagSlugs: ["security", "generation"] },
+      { toolSlug: "favicon-generator", tagSlugs: ["generation", "design"] },
+      { toolSlug: "markdown-to-pdf", tagSlugs: ["conversion", "document"] },
+    ];
 
-    // Create usage statistics
-    await Promise.all(
-      testTools.map((tool) =>
-        prisma.toolUsageStats.create({
-          data: {
-            toolId: tool.id,
-            usageCount: tool.usageCount,
-            lastUsed: new Date(),
-          },
-        }),
-      ),
-    );
-
-    // Create some sample usage records for analytics testing
-    const now = new Date();
-    const usageRecords = [];
-
-    for (const tool of testTools) {
-      for (let i = 0; i < 10; i++) {
-        const timestamp = new Date(now.getTime() - i * 24 * 60 * 60 * 1000); // Last 10 days
-        usageRecords.push(
-          prisma.toolUsage.create({
-            data: {
-              toolId: tool.id,
-              timestamp,
-              metadata: {
-                success: true,
-                processingTime: Math.floor(Math.random() * 1000) + 100,
-                inputSize: Math.floor(Math.random() * 10000) + 1000,
-              },
-            },
-          }),
-        );
+    for (const relation of toolTagRelations) {
+      const tool = createdTools.find((t) => t.slug === relation.toolSlug);
+      if (!tool) continue;
+      for (const tagSlug of relation.tagSlugs) {
+        const tag = createdTags.find((t) => t.slug === tagSlug);
+        if (!tag) continue;
+        await prisma.toolTag.upsert({
+          where: { toolId_tagId: { toolId: tool.id, tagId: tag.id } },
+          update: {},
+          create: { toolId: tool.id, tagId: tag.id },
+        });
       }
     }
 
-    await Promise.all(usageRecords);
+    // --- 4. Create Initial Usage Stats ---
+    for (const tool of createdTools) {
+      await prisma.toolUsageStats.upsert({
+        where: { toolId: tool.id },
+        update: {},
+        create: {
+          toolId: tool.id,
+          usageCount: Math.floor(Math.random() * 2500) + 50,
+          lastUsed: new Date(Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000),
+        },
+      });
+    }
 
     console.log("✅ E2E test database seeded successfully");
-    console.log(`   - Created ${testTags.length} tags`);
-    console.log(`   - Created ${testTools.length} tools`);
-    console.log(`   - Created ${usageRecords.length} usage records`);
   } catch (error) {
     console.error("❌ E2E test database seeding failed:", error);
     throw error;
