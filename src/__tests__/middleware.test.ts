@@ -4,11 +4,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 describe('Middleware', () => {
-    let middleware: any;
+    let middleware: (request: NextRequest) => NextResponse;
     let mockIntlMiddleware: jest.Mock;
     let mockCreateIntlMiddleware: jest.Mock;
 
-    beforeEach(() => {
+    beforeEach(async () => {
         // Reset module registry to ensure fresh imports
         jest.resetModules();
 
@@ -25,8 +25,8 @@ describe('Middleware', () => {
             defaultLocale: 'en',
         }));
 
-        // Require the middleware after setting up mocks
-        middleware = require('../../middleware.js');
+        // Dynamically import the middleware after setting up mocks
+        middleware = (await import('../../middleware.js')).default;
     });
 
     afterEach(() => {

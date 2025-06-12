@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function RootNotFound() {
     return (
         <div
@@ -15,7 +17,7 @@ export default function RootNotFound() {
             <p style={{ fontSize: "1.25rem", marginBottom: "2rem" }}>
                 Page not found
             </p>
-            <a
+            <Link
                 href="/"
                 style={{
                     padding: "0.75rem 1.5rem",
@@ -26,7 +28,7 @@ export default function RootNotFound() {
                 }}
             >
                 Go to Home
-            </a>
+            </Link>
         </div>
     );
-} 
+}
