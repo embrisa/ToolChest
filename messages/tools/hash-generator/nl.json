@@ -63,6 +63,15 @@
         "MD5 en SHA-1 zijn cryptografisch gebroken en mogen niet worden gebruikt voor beveiligingskritische toepassingen",
         "Gebruik SHA-256 of SHA-512 voor alle beveiligingsgevoelige toepassingen en moderne systemen"
       ]
+    },
+    "supportedAlgorithms": {
+      "title": "Supported Algorithms",
+      "items": [
+        "MD5",
+        "SHA-1",
+        "SHA-256",
+        "SHA-512"
+      ]
     }
   },
   "tool": {

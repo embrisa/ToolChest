@@ -63,6 +63,15 @@
         "MD5 e SHA-1 são criptograficamente inseguros e não devem ser usados em aplicações críticas de segurança",
         "Use SHA-256 ou SHA-512 em todas as aplicações sensíveis à segurança e sistemas modernos"
       ]
+    },
+    "supportedAlgorithms": {
+      "title": "Supported Algorithms",
+      "items": [
+        "MD5",
+        "SHA-1",
+        "SHA-256",
+        "SHA-512"
+      ]
     }
   },
   "tool": {

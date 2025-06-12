@@ -673,3 +673,28 @@ curl -s $DEPLOY_URL/debug | jq '.environment'
 # Database migration verification
 npx prisma migrate status
 ```
+
+---
+
+## 🌐 Internationalization & Translation Stability
+
+### Translation Workflow Overview
+
+- **Reference locale:** `en` is the single source of truth for every namespace.
+- All other locale JSON files must mirror the exact structure of their English twin.
+- CI calls `npm run qa:translations` (see `scripts/validateTranslations.ts`) which fails the build on:
+  - Missing or extra keys
+  - Type mismatches vs. the canonical schema
+  - Invalid JSON
+
+### Canonical Schemas
+
+- Every namespace must have a Zod schema in `src/types/i18n/*` (e.g. `PagesAdminAnalyticsSchema`).
+- Update or create the schema whenever you introduce a new key in code.
+
+### Validator Script
+
+```bash
+# Run manually
+npm run qa:translations
+```

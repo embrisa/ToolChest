@@ -63,6 +63,15 @@
         "MD5 と SHA-1 は暗号的に脆弱であり、セキュリティが重要な用途には使用すべきではありません",
         "すべてのセキュリティ重視のアプリケーションおよび最新システムでは SHA-256 または SHA-512 を使用してください"
       ]
+    },
+    "supportedAlgorithms": {
+      "title": "Supported Algorithms",
+      "items": [
+        "MD5",
+        "SHA-1",
+        "SHA-256",
+        "SHA-512"
+      ]
     }
   },
   "tool": {

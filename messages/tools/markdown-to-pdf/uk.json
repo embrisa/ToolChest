@@ -112,6 +112,18 @@
         "Натисніть 'Генерувати PDF' щоб створити документ",
         "Завантажте ваш професійний PDF файл"
       ]
+    },
+    "features": {
+      "items": [
+        "Live preview",
+        "Multiple templates",
+        "GFM support",
+        "Syntax highlighting",
+        "Custom styling",
+        "File upload",
+        "Professional output",
+        "Privacy-first"
+      ]
     }
   }
 }

@@ -1,7 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
+import type {
+  PagesAdminAnalyticsMessages,
+  PagesAdminLoadingMessages,
+  CommonMessages,
+} from "@/types/i18n";
 import { AnalyticsChart } from "./AnalyticsChart";
 import { Loading } from "@/components/ui/Loading";
 import { Button } from "@/components/ui/Button";
@@ -20,8 +25,13 @@ type ExtendedSystemMetrics = SystemPerformanceMetrics & {
 };
 
 export function AnalyticsDashboard({ initialData }: AnalyticsDashboardProps) {
-  const t = useTranslations("pages.admin.analytics");
-  const tCommon = useTranslations("common");
+  const t = useTypedTranslations<PagesAdminAnalyticsMessages>(
+    "pages.admin.analytics",
+  );
+  const tLoading = useTypedTranslations<PagesAdminLoadingMessages>(
+    "pages.admin.loading",
+  );
+  const tCommon = useTypedTranslations<CommonMessages>("common");
 
   const [summary, setSummary] = useState<AnalyticsSummary | null>(
     initialData || null,
@@ -113,7 +123,7 @@ export function AnalyticsDashboard({ initialData }: AnalyticsDashboardProps) {
         <div className="text-center space-y-4">
           <Loading size="lg" />
           <p className="text-neutral-600 dark:text-neutral-400 text-body">
-            {t("loading")}...
+            {tLoading("analytics")}
           </p>
         </div>
       </div>
@@ -286,11 +296,10 @@ export function AnalyticsDashboard({ initialData }: AnalyticsDashboardProps) {
                   {formatNumber(summary.totalUsage)}
                 </p>
                 <p
-                  className={`text-sm font-medium ${
-                    summary.periodComparison.growthRates.usage >= 0
-                      ? "text-success-600 dark:text-success-400"
-                      : "text-error-600 dark:text-error-400"
-                  }`}
+                  className={`text-sm font-medium ${summary.periodComparison.growthRates.usage >= 0
+                    ? "text-success-600 dark:text-success-400"
+                    : "text-error-600 dark:text-error-400"
+                    }`}
                 >
                   {formatPercentage(summary.periodComparison.growthRates.usage)}{" "}
                   vs last period
@@ -329,11 +338,10 @@ export function AnalyticsDashboard({ initialData }: AnalyticsDashboardProps) {
                   {formatNumber(summary.activeUsers)}
                 </p>
                 <p
-                  className={`text-sm font-medium ${
-                    summary.periodComparison.growthRates.newUsers >= 0
-                      ? "text-success-600 dark:text-success-400"
-                      : "text-error-600 dark:text-error-400"
-                  }`}
+                  className={`text-sm font-medium ${summary.periodComparison.growthRates.newUsers >= 0
+                    ? "text-success-600 dark:text-success-400"
+                    : "text-error-600 dark:text-error-400"
+                    }`}
                 >
                   {formatPercentage(
                     summary.periodComparison.growthRates.newUsers,
@@ -388,19 +396,18 @@ export function AnalyticsDashboard({ initialData }: AnalyticsDashboardProps) {
               </div>
               <div className="w-full bg-neutral-200 dark:bg-neutral-700 rounded-full h-2">
                 <div
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    (systemMetrics.memoryUsage.heapUsed /
+                  className={`h-2 rounded-full transition-all duration-300 ${(systemMetrics.memoryUsage.heapUsed /
+                    systemMetrics.memoryUsage.heapTotal) *
+                    100 >
+                    80
+                    ? "bg-error-500"
+                    : (systemMetrics.memoryUsage.heapUsed /
                       systemMetrics.memoryUsage.heapTotal) *
                       100 >
-                    80
-                      ? "bg-error-500"
-                      : (systemMetrics.memoryUsage.heapUsed /
-                            systemMetrics.memoryUsage.heapTotal) *
-                            100 >
-                          60
-                        ? "bg-warning-500"
-                        : "bg-brand-500"
-                  }`}
+                      60
+                      ? "bg-warning-500"
+                      : "bg-brand-500"
+                    }`}
                   style={{
                     width: `${(systemMetrics.memoryUsage.heapUsed / systemMetrics.memoryUsage.heapTotal) * 100}%`,
                   }}
@@ -419,13 +426,12 @@ export function AnalyticsDashboard({ initialData }: AnalyticsDashboardProps) {
               </div>
               <div className="w-full bg-neutral-200 dark:bg-neutral-700 rounded-full h-2">
                 <div
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    cpuUsage > 80
-                      ? "bg-error-500"
-                      : cpuUsage > 60
-                        ? "bg-warning-500"
-                        : "bg-brand-500"
-                  }`}
+                  className={`h-2 rounded-full transition-all duration-300 ${cpuUsage > 80
+                    ? "bg-error-500"
+                    : cpuUsage > 60
+                      ? "bg-warning-500"
+                      : "bg-brand-500"
+                    }`}
                   style={{ width: `${cpuUsage}%` }}
                 />
               </div>
@@ -442,13 +448,12 @@ export function AnalyticsDashboard({ initialData }: AnalyticsDashboardProps) {
               </div>
               <div className="w-full bg-neutral-200 dark:bg-neutral-700 rounded-full h-2">
                 <div
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    systemMetrics.apiResponseTimes.average > 1000
-                      ? "bg-error-500"
-                      : systemMetrics.apiResponseTimes.average > 500
-                        ? "bg-warning-500"
-                        : "bg-success-500"
-                  }`}
+                  className={`h-2 rounded-full transition-all duration-300 ${systemMetrics.apiResponseTimes.average > 1000
+                    ? "bg-error-500"
+                    : systemMetrics.apiResponseTimes.average > 500
+                      ? "bg-warning-500"
+                      : "bg-success-500"
+                    }`}
                   style={{
                     width: `${Math.min((systemMetrics.apiResponseTimes.average / 2000) * 100, 100)}%`,
                   }}

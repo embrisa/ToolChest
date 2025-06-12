@@ -65,6 +65,25 @@
         "Testen Sie auf verschiedenen Hintergründen",
         "Fügen Sie mehrere Größen für die Gerätekompatibilität hinzu"
       ]
+    },
+    "supportedSizes": {
+      "title": "Supported Sizes",
+      "items": [
+        "16×16, 32×32 - Browser tabs and bookmarks",
+        "48×48, 64×64 - Desktop shortcuts and apps",
+        "96×96, 128×128 - High-DPI and retina displays",
+        "180×180 - Apple touch icon for iOS",
+        "192×192, 512×512 - Android and PWA icons"
+      ]
+    },
+    "outputFormats": {
+      "title": "Output Formats",
+      "items": [
+        "PNG favicons for modern browsers",
+        "ICO files for legacy compatibility",
+        "Web manifest with icon paths",
+        "HTML <link> tags for easy embedding"
+      ]
     }
   }
 }

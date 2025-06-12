@@ -63,6 +63,15 @@
         "MD5 và SHA-1 đã bị phá vỡ về mặt mật mã và không nên sử dụng cho các ứng dụng quan trọng về bảo mật",
         "Sử dụng SHA-256 hoặc SHA-512 cho tất cả các ứng dụng nhạy cảm đến bảo mật và hệ thống hiện đại"
       ]
+    },
+    "supportedAlgorithms": {
+      "title": "Supported Algorithms",
+      "items": [
+        "MD5",
+        "SHA-1",
+        "SHA-256",
+        "SHA-512"
+      ]
     }
   },
   "tool": {

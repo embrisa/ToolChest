@@ -63,6 +63,15 @@
         "MD5 和 SHA-1 已被证明不安全，不应在安全关键应用中使用",
         "在所有安全敏感的应用和现代系统中使用 SHA-256 或 SHA-512"
       ]
+    },
+    "supportedAlgorithms": {
+      "title": "Supported Algorithms",
+      "items": [
+        "MD5",
+        "SHA-1",
+        "SHA-256",
+        "SHA-512"
+      ]
     }
   },
   "tool": {

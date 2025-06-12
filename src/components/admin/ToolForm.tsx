@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
+import { useTypedTranslations } from "@/i18n/useTypedTranslations";
+import type { ComponentsFormsMessages } from "@/types/i18n";
 import {
   AdminToolFormData,
   AdminToolValidationErrors,
@@ -28,7 +29,7 @@ export function ToolForm({
   isLoading = false,
   errors = {},
 }: ToolFormProps) {
-  const t = useTranslations("components.forms");
+  const t = useTypedTranslations<ComponentsFormsMessages>("components.forms");
   // const tCommon = useTranslations("common"); // TODO: Use for validation messages
   const [formData, setFormData] = useState<AdminToolFormData>({
     name: initialData?.name || "",
@@ -229,11 +230,10 @@ export function ToolForm({
                 <button
                   type="button"
                   onClick={() => setAutoGenerateSlug(!autoGenerateSlug)}
-                  className={`touch-target-min px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 focus-ring border-2 ${
-                    autoGenerateSlug
+                  className={`touch-target-min px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 focus-ring border-2 ${autoGenerateSlug
                       ? "bg-brand-500 text-white border-brand-600 shadow-soft"
                       : "bg-neutral-50 text-tertiary border-neutral-200 hover:bg-neutral-25 hover:border-neutral-300 hover:text-primary"
-                  }`}
+                    }`}
                   aria-pressed={autoGenerateSlug}
                   aria-label={
                     autoGenerateSlug
@@ -253,9 +253,8 @@ export function ToolForm({
                   handleInputChange("slug", e.target.value);
                 }}
                 placeholder="e.g., base64-encoder-decoder"
-                className={`w-full text-code focus-ring text-primary ${
-                  autoGenerateSlug ? "bg-neutral-25 text-secondary" : ""
-                } ${errors.slug ? "input-error border-error-500" : ""}`}
+                className={`w-full text-code focus-ring text-primary ${autoGenerateSlug ? "bg-neutral-25 text-secondary" : ""
+                  } ${errors.slug ? "input-error border-error-500" : ""}`}
                 disabled={autoGenerateSlug}
                 required
                 aria-describedby="slug-help"
@@ -599,18 +598,17 @@ export function ToolForm({
                       key={tag.id}
                       type="button"
                       onClick={() => handleTagToggle(tag.id)}
-                      className={`touch-target-comfortable inline-flex items-center px-5 py-3 rounded-xl text-sm font-medium transition-all duration-200 focus-ring border-2 ${
-                        isSelected
+                      className={`touch-target-comfortable inline-flex items-center px-5 py-3 rounded-xl text-sm font-medium transition-all duration-200 focus-ring border-2 ${isSelected
                           ? "bg-brand-500 text-white shadow-colored border-brand-600 transform hover:scale-105"
                           : "bg-neutral-50 text-tertiary border-neutral-200 hover:bg-neutral-25 hover:border-neutral-300 hover:text-primary"
-                      }`}
+                        }`}
                       style={
                         isSelected && tag.color
                           ? {
-                              backgroundColor: tag.color,
-                              borderColor: tag.color,
-                              color: "#ffffff",
-                            }
+                            backgroundColor: tag.color,
+                            borderColor: tag.color,
+                            color: "#ffffff",
+                          }
                           : {}
                       }
                       aria-pressed={isSelected}

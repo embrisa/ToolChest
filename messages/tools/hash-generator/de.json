@@ -63,6 +63,15 @@
         "MD5 und SHA-1 sind kryptografisch gebrochen und sollten nicht für sicherheitskritische Anwendungen verwendet werden",
         "Verwenden Sie SHA-256 oder SHA-512 für alle sicherheitssensitiven Anwendungen und modernen Systeme"
       ]
+    },
+    "supportedAlgorithms": {
+      "title": "Supported Algorithms",
+      "items": [
+        "MD5",
+        "SHA-1",
+        "SHA-256",
+        "SHA-512"
+      ]
     }
   },
   "tool": {

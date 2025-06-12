@@ -63,6 +63,15 @@
         "MD5 ve SHA-1 kriptografik olarak kırılmıştır ve güvenlik açısından kritik uygulamalarda kullanılmamalıdır",
         "Tüm güvenlik hassas uygulamalar ve modern sistemler için SHA-256 veya SHA-512 kullanın"
       ]
+    },
+    "supportedAlgorithms": {
+      "title": "Supported Algorithms",
+      "items": [
+        "MD5",
+        "SHA-1",
+        "SHA-256",
+        "SHA-512"
+      ]
     }
   },
   "tool": {

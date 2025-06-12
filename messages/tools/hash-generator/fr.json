@@ -63,6 +63,15 @@
         "MD5 et SHA-1 sont cassés cryptographiquement et ne doivent pas être utilisés pour des applications critiques en matière de sécurité",
         "Utilisez SHA-256 ou SHA-512 pour toutes les applications sensibles à la sécurité et les systèmes modernes"
       ]
+    },
+    "supportedAlgorithms": {
+      "title": "Supported Algorithms",
+      "items": [
+        "MD5",
+        "SHA-1",
+        "SHA-256",
+        "SHA-512"
+      ]
     }
   },
   "tool": {
