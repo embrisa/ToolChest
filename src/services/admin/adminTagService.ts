@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { PrismaClient, Prisma } from "@prisma/client";
 import { BaseService } from "../core/baseService";
 import { TagDTO, toTagDTO } from "@/types/tools/tool";

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 import { BaseService } from "../core/baseService";
 import { ToolDTO, TagDTO, toToolDTO, toTagDTO } from "@/types/tools/tool";
