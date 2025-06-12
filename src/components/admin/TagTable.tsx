@@ -20,7 +20,6 @@ export function TagTable({
   onDelete,
 }: TagTableProps) {
   const tAdmin = useTranslations("pages.admin.tags");
-  const tForms = useTranslations("components.forms");
   const tCommon = useTranslations("common");
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState<string | null>(
@@ -257,10 +256,11 @@ export function TagTable({
                           {tag.tools.slice(0, 3).map((tool) => (
                             <div
                               key={tool.id}
-                              className={`inline-flex items-center justify-center w-8 h-8 rounded-xl text-xs font-medium border-2 border-white dark:border-neutral-900 shadow-soft ${tool.isActive
-                                ? "bg-success-100 text-success-700 dark:bg-success-950/30 dark:text-success-400"
-                                : "bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300"
-                                }`}
+                              className={`inline-flex items-center justify-center w-8 h-8 rounded-xl text-xs font-medium border-2 border-white dark:border-neutral-900 shadow-soft ${
+                                tool.isActive
+                                  ? "bg-success-100 text-success-700 dark:bg-success-950/30 dark:text-success-400"
+                                  : "bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300"
+                              }`}
                               title={`${tool.name} (${tool.isActive ? "Active" : "Inactive"})`}
                             >
                               {tool.name.charAt(0).toUpperCase()}

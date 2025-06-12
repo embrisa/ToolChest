@@ -96,9 +96,17 @@ export default async function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className={`${inter.variable} ${jetbrainsMono.variable} flex flex-col min-h-screen bg-background text-foreground font-sans antialiased transition-colors duration-300`}>
-        <div className="fixed inset-0 -z-10 bg-gradient-shift" aria-hidden="true" />
-        <div className="fixed inset-0 -z-10 bg-noise opacity-20" aria-hidden="true" />
+      <body
+        className={`${inter.variable} ${jetbrainsMono.variable} flex flex-col min-h-screen bg-background text-foreground font-sans antialiased transition-colors duration-300`}
+      >
+        <div
+          className="fixed inset-0 -z-10 bg-gradient-shift"
+          aria-hidden="true"
+        />
+        <div
+          className="fixed inset-0 -z-10 bg-noise opacity-20"
+          aria-hidden="true"
+        />
         {children}
       </body>
     </html>

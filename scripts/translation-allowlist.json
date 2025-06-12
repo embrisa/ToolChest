@@ -1,7 +1,1 @@
-[
-    "units.bytes",
-    "units.kb",
-    "units.mb",
-    "units.gb",
-    "units.characters"
-]
+["units.bytes", "units.kb", "units.mb", "units.gb", "units.characters"]

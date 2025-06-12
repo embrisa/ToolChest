@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
 import React from "react";
 import Link from "next/link";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { ToolDTO } from "@/types/tools/tool";
 import { cn } from "@/utils";
@@ -37,7 +37,7 @@ class TranslationErrorBoundary extends React.Component<
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('Translation error in ToolCard:', error, errorInfo);
+    console.error("Translation error in ToolCard:", error, errorInfo);
   }
 
   render() {
@@ -56,7 +56,6 @@ export function ToolCard({
   priority: _priority = false,
   "data-testid": testId,
 }: ToolCardProps) {
-  const t = useTranslations("common.units");
   const locale = useLocale();
   const toolPath = `/${locale}/tools/${tool.slug}`;
 
@@ -122,10 +121,7 @@ export function ToolCard({
       aria-label="Translation error for tool"
     >
       <CardHeader className="pb-6">
-        <CardTitle
-          as="h3"
-          className="text-xl font-semibold text-error-600"
-        >
+        <CardTitle as="h3" className="text-xl font-semibold text-error-600">
           <div className="flex items-center gap-4">
             <div
               className="w-14 h-14 rounded-xl flex items-center justify-center bg-error-100 text-error-600 font-semibold text-xl flex-shrink-0"
@@ -141,7 +137,8 @@ export function ToolCard({
       </CardHeader>
       <CardContent>
         <p className="text-error-600 text-sm">
-          Tool content is temporarily unavailable. Please try refreshing the page.
+          Tool content is temporarily unavailable. Please try refreshing the
+          page.
         </p>
       </CardContent>
     </Card>
@@ -173,8 +170,10 @@ export function ToolCard({
         <Link
           href={toolPath}
           className="block h-full focus:outline-none"
-          aria-describedby={tool.description ? `tool-description-${tool.id}` : undefined}
-          aria-label={`${tool.name} - Open tool${tool.description ? '. ' + tool.description : ''}`}
+          aria-describedby={
+            tool.description ? `tool-description-${tool.id}` : undefined
+          }
+          aria-label={`${tool.name} - Open tool${tool.description ? ". " + tool.description : ""}`}
         >
           <CardHeader className="pb-6">
             <CardTitle
@@ -209,9 +208,7 @@ export function ToolCard({
                     {tool.name.charAt(0).toUpperCase()}
                   </div>
                 )}
-                <span className="text-balance leading-tight">
-                  {tool.name}
-                </span>
+                <span className="text-balance leading-tight">{tool.name}</span>
               </div>
             </CardTitle>
           </CardHeader>
@@ -230,7 +227,11 @@ export function ToolCard({
               <div
                 className="flex flex-wrap gap-3"
                 role="list"
-                aria-label={`Tags for ${tool.name}: ${tool.tags.slice(0, 3).map(tag => tag.name).filter(Boolean).join(', ')}`}
+                aria-label={`Tags for ${tool.name}: ${tool.tags
+                  .slice(0, 3)
+                  .map((tag) => tag.name)
+                  .filter(Boolean)
+                  .join(", ")}`}
               >
                 {tool.tags.slice(0, 3).map((tag) => {
                   // Only render tags with valid translations
@@ -251,10 +252,10 @@ export function ToolCard({
                       style={
                         tag.color
                           ? {
-                            backgroundColor: `${tag.color}15`,
-                            color: tag.color,
-                            borderColor: `${tag.color}30`,
-                          }
+                              backgroundColor: `${tag.color}15`,
+                              color: tag.color,
+                              borderColor: `${tag.color}30`,
+                            }
                           : undefined
                       }
                       aria-label={`Tag: ${tag.name}`}
@@ -263,16 +264,22 @@ export function ToolCard({
                     </span>
                   );
                 })}
-                {tool.tags.filter(tag => tag.name && tag.name.trim().length > 0).length > 3 && (
+                {tool.tags.filter(
+                  (tag) => tag.name && tag.name.trim().length > 0,
+                ).length > 3 && (
                   <span
                     className={cn(
                       "inline-flex items-center px-3 py-1.5 rounded-lg",
                       "text-sm font-medium",
                       "bg-neutral-100 text-muted",
                     )}
-                    aria-label={`${tool.tags.filter(tag => tag.name && tag.name.trim().length > 0).length - 3} additional tags`}
+                    aria-label={`${tool.tags.filter((tag) => tag.name && tag.name.trim().length > 0).length - 3} additional tags`}
                   >
-                    +{tool.tags.filter(tag => tag.name && tag.name.trim().length > 0).length - 3} more
+                    +
+                    {tool.tags.filter(
+                      (tag) => tag.name && tag.name.trim().length > 0,
+                    ).length - 3}{" "}
+                    more
                   </span>
                 )}
               </div>
@@ -303,9 +310,7 @@ export function ToolCard({
                     d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                   />
                 </svg>
-                <span>
-                  {tool.usageCount} uses
-                </span>
+                <span>{tool.usageCount} uses</span>
               </div>
             )}
           </CardContent>

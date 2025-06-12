@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe, toHaveNoViolations } from "jest-axe";
 import HomePage from "../[locale]/page";
@@ -231,8 +231,12 @@ describe("HomePage", () => {
       render(<HomePage />);
 
       // Should show multiple instances of the error message (mobile and desktop)
-      expect(screen.getAllByText("pages.home.errors.troubleLoading")).toHaveLength(2);
-      expect(screen.getByRole("button", { name: "common.actions.tryAgain" })).toBeInTheDocument();
+      expect(
+        screen.getAllByText("pages.home.errors.troubleLoading"),
+      ).toHaveLength(2);
+      expect(
+        screen.getByRole("button", { name: "common.actions.tryAgain" }),
+      ).toBeInTheDocument();
     });
 
     it("should show error message when tags fail to load", () => {
@@ -245,8 +249,12 @@ describe("HomePage", () => {
       render(<HomePage />);
 
       // Should show multiple instances of the error message (mobile and desktop)
-      expect(screen.getAllByText("pages.home.errors.troubleLoading")).toHaveLength(2);
-      expect(screen.getByRole("button", { name: "common.actions.tryAgain" })).toBeInTheDocument();
+      expect(
+        screen.getAllByText("pages.home.errors.troubleLoading"),
+      ).toHaveLength(2);
+      expect(
+        screen.getByRole("button", { name: "common.actions.tryAgain" }),
+      ).toBeInTheDocument();
     });
 
     it("should call retry functions when retry button is clicked", async () => {
@@ -267,7 +275,9 @@ describe("HomePage", () => {
       const user = userEvent.setup();
       render(<HomePage />);
 
-      const retryButton = screen.getByRole("button", { name: "common.actions.tryAgain" });
+      const retryButton = screen.getByRole("button", {
+        name: "common.actions.tryAgain",
+      });
       await user.click(retryButton);
 
       expect(retryTools).toHaveBeenCalledTimes(1);
@@ -279,9 +289,13 @@ describe("HomePage", () => {
     it("should render main heading and description", () => {
       render(<HomePage />);
 
-      expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("pages.home.hero.title");
+      expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
+        "pages.home.hero.title",
+      );
       expect(screen.getByText("pages.home.hero.subtitle")).toBeInTheDocument();
-      expect(screen.getByText("pages.home.hero.description")).toBeInTheDocument();
+      expect(
+        screen.getByText("pages.home.hero.description"),
+      ).toBeInTheDocument();
     });
 
     it("should render search input", () => {
@@ -289,7 +303,10 @@ describe("HomePage", () => {
 
       const searchInput = screen.getByRole("searchbox");
       expect(searchInput).toBeInTheDocument();
-      expect(searchInput).toHaveAttribute("placeholder", "pages.home.hero.searchPlaceholder");
+      expect(searchInput).toHaveAttribute(
+        "placeholder",
+        "pages.home.hero.searchPlaceholder",
+      );
     });
 
     it("should render tag filters", () => {
@@ -318,11 +335,21 @@ describe("HomePage", () => {
       render(<HomePage />);
 
       expect(screen.getByText("4")).toBeInTheDocument(); // tools count (updated to match mock data)
-      expect(screen.getByText("pages.home.stats.toolsAvailable")).toBeInTheDocument();
-      expect(screen.getByText("pages.home.stats.clientSideValue")).toBeInTheDocument();
-      expect(screen.getByText("pages.home.stats.clientSideProcessing")).toBeInTheDocument();
-      expect(screen.getByText("pages.home.stats.freeValue")).toBeInTheDocument();
-      expect(screen.getByText("pages.home.stats.freeForever")).toBeInTheDocument();
+      expect(
+        screen.getByText("pages.home.stats.toolsAvailable"),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText("pages.home.stats.clientSideValue"),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText("pages.home.stats.clientSideProcessing"),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText("pages.home.stats.freeValue"),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText("pages.home.stats.freeForever"),
+      ).toBeInTheDocument();
     });
   });
 
@@ -367,8 +394,12 @@ describe("HomePage", () => {
 
       render(<HomePage />);
 
-      expect(screen.getAllByText("pages.home.sections.searchResults")).toHaveLength(2); // Mobile and desktop
-      expect(screen.getAllByText(/4 pages.home.loading.toolsFound/)).toHaveLength(2); // Mobile and desktop
+      expect(
+        screen.getAllByText("pages.home.sections.searchResults"),
+      ).toHaveLength(2); // Mobile and desktop
+      expect(
+        screen.getAllByText(/4 pages.home.loading.toolsFound/),
+      ).toHaveLength(2); // Mobile and desktop
     });
   });
 
@@ -452,9 +483,15 @@ describe("HomePage", () => {
 
       render(<HomePage />);
 
-      expect(screen.getByText("pages.home.noResults.title")).toBeInTheDocument();
-      expect(screen.getByText("pages.home.noResults.description")).toBeInTheDocument();
-      expect(screen.getByRole("button", { name: "common.actions.clearFilters" })).toBeInTheDocument();
+      expect(
+        screen.getByText("pages.home.noResults.title"),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText("pages.home.noResults.description"),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "common.actions.clearFilters" }),
+      ).toBeInTheDocument();
     });
 
     it("should show different message for tag filters", () => {
@@ -469,7 +506,9 @@ describe("HomePage", () => {
 
       render(<HomePage />);
 
-      expect(screen.getByText("pages.home.noResults.descriptionFilters")).toBeInTheDocument();
+      expect(
+        screen.getByText("pages.home.noResults.descriptionFilters"),
+      ).toBeInTheDocument();
     });
   });
 
@@ -484,7 +523,7 @@ describe("HomePage", () => {
       render(<HomePage />);
 
       const toolsGrid = screen.getByRole("region", {
-        name: 'Available tools',
+        name: "Available tools",
       });
       expect(toolsGrid).toBeInTheDocument();
 
@@ -632,7 +671,9 @@ describe("HomePage", () => {
       // Check that English tool names are displayed
       expect(screen.getByText("Base64 Encoder/Decoder")).toBeInTheDocument();
       expect(screen.getByText("Hash Generator")).toBeInTheDocument();
-      expect(screen.getByText("Encode and decode Base64 strings easily")).toBeInTheDocument();
+      expect(
+        screen.getByText("Encode and decode Base64 strings easily"),
+      ).toBeInTheDocument();
     });
 
     it("should handle Spanish locale data when available", () => {
@@ -652,7 +693,9 @@ describe("HomePage", () => {
       // Check that Spanish tool names are displayed
       expect(screen.getByText("Herramienta Base64")).toBeInTheDocument();
       expect(screen.getByText("Generador de Hash")).toBeInTheDocument();
-      expect(screen.getByText("Codifica y decodifica cadenas Base64 fácilmente")).toBeInTheDocument();
+      expect(
+        screen.getByText("Codifica y decodifica cadenas Base64 fácilmente"),
+      ).toBeInTheDocument();
     });
 
     it("should handle French locale data when available", () => {
@@ -672,7 +715,9 @@ describe("HomePage", () => {
       // Check that French tool names are displayed
       expect(screen.getByText("Outil Base64")).toBeInTheDocument();
       expect(screen.getByText("Générateur de Hash")).toBeInTheDocument();
-      expect(screen.getByText("Encodez et décodez facilement les chaînes Base64")).toBeInTheDocument();
+      expect(
+        screen.getByText("Encodez et décodez facilement les chaînes Base64"),
+      ).toBeInTheDocument();
     });
 
     it("should handle empty translations gracefully", () => {
@@ -689,7 +734,9 @@ describe("HomePage", () => {
 
       render(<HomePage />);
 
-      expect(screen.getByText("pages.home.noResults.title")).toBeInTheDocument();
+      expect(
+        screen.getByText("pages.home.noResults.title"),
+      ).toBeInTheDocument();
     });
 
     it("should preserve tool metadata across locales", () => {

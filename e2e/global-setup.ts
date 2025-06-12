@@ -208,7 +208,9 @@ async function seedE2EDatabase() {
         create: {
           toolId: tool.id,
           usageCount: Math.floor(Math.random() * 2500) + 50,
-          lastUsed: new Date(Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000),
+          lastUsed: new Date(
+            Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000,
+          ),
         },
       });
     }

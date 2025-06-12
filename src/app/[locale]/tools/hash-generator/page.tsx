@@ -58,7 +58,7 @@ export default async function HashGeneratorPage({
     let badgeText: string | null = null;
     try {
       badgeText = tGrid(`${id}.badge`);
-    } catch (error) {
+    } catch {
       // Badge doesn't exist for this algorithm, which is fine
       badgeText = null;
     }

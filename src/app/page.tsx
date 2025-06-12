@@ -2,12 +2,12 @@ import { Header, Footer } from "@/components/layout";
 import { WebVitals } from "@/components/ui";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getLocale } from "next-intl/server";
-import { locales, defaultLocale } from "@/i18n/config";
+import { locales, defaultLocale, type Locale } from "@/i18n/config";
 import HomePage from "./[locale]/page";
 
 export default async function IndexPage() {
-  let locale = await getLocale();
-  if (!locales.includes(locale as any)) {
+  let locale = (await getLocale()) as Locale;
+  if (!locales.includes(locale)) {
     locale = defaultLocale;
   }
   const messages = await getMessages({ locale });

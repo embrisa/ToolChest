@@ -89,16 +89,19 @@ export async function GET(
     } else {
       // Get all tools with optional pagination
       if (limitNum || offsetNum) {
-        const result = await toolService.getAllToolsPaginated({
-          limit: limitNum,
-          offset: offsetNum,
-          sortBy: sortBy as
-            | "displayOrder"
-            | "name"
-            | "createdAt"
-            | "usageCount",
-          sortOrder: sortOrder as "asc" | "desc",
-        }, locale);
+        const result = await toolService.getAllToolsPaginated(
+          {
+            limit: limitNum,
+            offset: offsetNum,
+            sortBy: sortBy as
+              | "displayOrder"
+              | "name"
+              | "createdAt"
+              | "usageCount",
+            sortOrder: sortOrder as "asc" | "desc",
+          },
+          locale,
+        );
         tools = result.tools;
         totalCount = result.total;
       } else {

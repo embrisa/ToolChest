@@ -28,42 +28,42 @@ import enToolsFaviconGenerator from "../../messages/tools/favicon-generator/en.j
 import enToolsHashGenerator from "../../messages/tools/hash-generator/en.json";
 import enToolsMarkdownToPdf from "../../messages/tools/markdown-to-pdf/en.json";
 
-const messages: AbstractIntlMessages = {
-    common: enCommon,
-    components: {
-        forms: enComponentsForms,
-        layout: enComponentsLayout,
-        ui: enComponentsUi,
-    },
-    database: enDatabase,
-    pages: {
-        admin: enPagesAdmin,
-        error: enPagesError,
-        home: enPagesHome,
-        loading: enPagesLoading,
-        tools: enPagesTools,
-    },
-    tools: {
-        base64: enToolsBase64,
-        common: enToolsCommon,
-        "favicon-generator": enToolsFaviconGenerator,
-        "hash-generator": enToolsHashGenerator,
-        "markdown-to-pdf": enToolsMarkdownToPdf,
-    },
-} as any;
+const messages = {
+  common: enCommon,
+  components: {
+    forms: enComponentsForms,
+    layout: enComponentsLayout,
+    ui: enComponentsUi,
+  },
+  database: enDatabase,
+  pages: {
+    admin: enPagesAdmin,
+    error: enPagesError,
+    home: enPagesHome,
+    loading: enPagesLoading,
+    tools: enPagesTools,
+  },
+  tools: {
+    base64: enToolsBase64,
+    common: enToolsCommon,
+    "favicon-generator": enToolsFaviconGenerator,
+    "hash-generator": enToolsHashGenerator,
+    "markdown-to-pdf": enToolsMarkdownToPdf,
+  },
+} as unknown as AbstractIntlMessages;
 
 const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
-    return (
-        <NextIntlClientProvider locale="en" messages={messages}>
-            {children}
-        </NextIntlClientProvider>
-    );
+  return (
+    <NextIntlClientProvider locale="en" messages={messages}>
+      {children}
+    </NextIntlClientProvider>
+  );
 };
 
 const customRender = (
-    ui: ReactElement,
-    options?: Omit<RenderOptions, "wrapper">
+  ui: ReactElement,
+  options?: Omit<RenderOptions, "wrapper">,
 ) => render(ui, { wrapper: AllTheProviders, ...options });
 
 export * from "@testing-library/react";
-export { customRender as render }; 
+export { customRender as render };

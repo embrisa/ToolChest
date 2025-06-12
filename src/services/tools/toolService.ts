@@ -30,16 +30,20 @@ export interface IToolService {
   recordToolUsage(toolSlug: string): Promise<void>;
   getPopularTools(limit: number, locale?: string): Promise<ToolDTO[]>;
   searchTools(query: string, locale?: string): Promise<ToolDTO[]>;
-  getToolsPaginated(offset: number, limit: number, locale?: string): Promise<ToolDTO[]>;
+  getToolsPaginated(
+    offset: number,
+    limit: number,
+    locale?: string,
+  ): Promise<ToolDTO[]>;
   getToolsByTagPaginated(
     tagSlug: string,
     offset: number,
     limit: number,
-    locale?: string
+    locale?: string,
   ): Promise<ToolDTO[]>;
   getAllToolsPaginated(
     options: PaginationOptions,
-    locale?: string
+    locale?: string,
   ): Promise<PaginatedResult<ToolDTO>>;
 }
 
@@ -56,14 +60,16 @@ export class ToolService extends BaseService implements IToolService {
         },
       });
 
-      const translatedTools =
-        await DatabaseTranslationService.translateTools(rawTools, locale);
+      const translatedTools = await DatabaseTranslationService.translateTools(
+        rawTools,
+        locale,
+      );
 
       const toolsWithTranslatedTags = await Promise.all(
         translatedTools.map(async (tool) => {
           const translatedTags = await DatabaseTranslationService.translateTags(
             tool.tags.map((tt) => tt.tag),
-            locale
+            locale,
           );
           return {
             ...tool,
@@ -72,14 +78,19 @@ export class ToolService extends BaseService implements IToolService {
               tag: translatedTags[index],
             })),
           };
-        })
+        }),
       );
 
-      return toolsWithTranslatedTags.map((tool: any) => toToolDTO(tool));
+      return toolsWithTranslatedTags.map((tool) =>
+        toToolDTO(tool as PrismaToolWithRelations),
+      );
     });
   }
 
-  async getToolBySlug(slug: string, locale: string = "en"): Promise<ToolDTO | null> {
+  async getToolBySlug(
+    slug: string,
+    locale: string = "en",
+  ): Promise<ToolDTO | null> {
     this.validateRequired({ slug });
 
     const cacheKey = `toolBySlug:${slug}:${locale}`;
@@ -96,12 +107,14 @@ export class ToolService extends BaseService implements IToolService {
         return null;
       }
 
-      const translatedTool =
-        await DatabaseTranslationService.translateTool(rawTool, locale);
+      const translatedTool = await DatabaseTranslationService.translateTool(
+        rawTool,
+        locale,
+      );
 
       const translatedTags = await DatabaseTranslationService.translateTags(
         rawTool.tags.map((tt) => tt.tag),
-        locale
+        locale,
       );
 
       const toolWithTranslatedTags = {
@@ -116,7 +129,10 @@ export class ToolService extends BaseService implements IToolService {
     });
   }
 
-  async getToolsByTag(tagSlug: string, locale: string = "en"): Promise<ToolDTO[]> {
+  async getToolsByTag(
+    tagSlug: string,
+    locale: string = "en",
+  ): Promise<ToolDTO[]> {
     this.validateRequired({ tagSlug });
 
     const cacheKey = `toolsByTag:${tagSlug}:${locale}`;
@@ -137,14 +153,16 @@ export class ToolService extends BaseService implements IToolService {
         },
       });
 
-      const translatedTools =
-        await DatabaseTranslationService.translateTools(rawTools, locale);
+      const translatedTools = await DatabaseTranslationService.translateTools(
+        rawTools,
+        locale,
+      );
 
       const toolsWithTranslatedTags = await Promise.all(
         translatedTools.map(async (tool) => {
           const translatedTags = await DatabaseTranslationService.translateTags(
             tool.tags.map((tt) => tt.tag),
-            locale
+            locale,
           );
           return {
             ...tool,
@@ -153,11 +171,11 @@ export class ToolService extends BaseService implements IToolService {
               tag: translatedTags[index],
             })),
           };
-        })
+        }),
       );
 
       return toolsWithTranslatedTags.map((tool: PrismaToolWithRelations) =>
-        toToolDTO(tool)
+        toToolDTO(tool),
       );
     });
   }
@@ -178,14 +196,21 @@ export class ToolService extends BaseService implements IToolService {
         },
       });
 
-      const translatedTags =
-        await DatabaseTranslationService.translateTags(rawTags, locale);
+      const translatedTags = await DatabaseTranslationService.translateTags(
+        rawTags,
+        locale,
+      );
 
-      return translatedTags.map((tag: any) => toTagDTO(tag));
+      return translatedTags.map((tag) =>
+        toTagDTO(tag as PrismaTagWithToolCount),
+      );
     });
   }
 
-  async getTagBySlug(slug: string, locale: string = "en"): Promise<TagDTO | null> {
+  async getTagBySlug(
+    slug: string,
+    locale: string = "en",
+  ): Promise<TagDTO | null> {
     this.validateRequired({ slug });
 
     const cacheKey = `tagBySlug:${slug}:${locale}`;
@@ -205,8 +230,10 @@ export class ToolService extends BaseService implements IToolService {
         return null;
       }
 
-      const translatedTag =
-        await DatabaseTranslationService.translateTag(rawTag, locale);
+      const translatedTag = await DatabaseTranslationService.translateTag(
+        rawTag,
+        locale,
+      );
 
       return toTagDTO(translatedTag as PrismaTagWithToolCount);
     });
@@ -247,7 +274,10 @@ export class ToolService extends BaseService implements IToolService {
     this.invalidateCache("popularTools");
   }
 
-  async getPopularTools(limit: number, locale: string = "en"): Promise<ToolDTO[]> {
+  async getPopularTools(
+    limit: number,
+    locale: string = "en",
+  ): Promise<ToolDTO[]> {
     this.validateRequired({ limit });
 
     const cacheKey = `popularTools:${limit}:${locale}`;
@@ -275,8 +305,10 @@ export class ToolService extends BaseService implements IToolService {
           },
         });
 
-        const translatedTools =
-          await DatabaseTranslationService.translateTools(fallbackTools, locale);
+        const translatedTools = await DatabaseTranslationService.translateTools(
+          fallbackTools,
+          locale,
+        );
 
         return translatedTools.map((tool: PrismaToolWithRelations) =>
           toToolDTO(tool),
@@ -307,14 +339,16 @@ export class ToolService extends BaseService implements IToolService {
         .map((id) => toolsMap.get(id))
         .filter(Boolean) as PrismaToolWithRelations[];
 
-      const translatedTools =
-        await DatabaseTranslationService.translateTools(sortedPopularTools, locale);
+      const translatedTools = await DatabaseTranslationService.translateTools(
+        sortedPopularTools,
+        locale,
+      );
 
       const toolsWithTranslatedTags = await Promise.all(
         translatedTools.map(async (tool) => {
           const translatedTags = await DatabaseTranslationService.translateTags(
             tool.tags.map((tt) => tt.tag),
-            locale
+            locale,
           );
           return {
             ...tool,
@@ -323,7 +357,7 @@ export class ToolService extends BaseService implements IToolService {
               tag: translatedTags[index],
             })),
           };
-        })
+        }),
       );
 
       return toolsWithTranslatedTags.map((tool: PrismaToolWithRelations) =>
@@ -365,14 +399,16 @@ export class ToolService extends BaseService implements IToolService {
         },
       });
 
-      const translatedTools =
-        await DatabaseTranslationService.translateTools(rawTools, locale);
+      const translatedTools = await DatabaseTranslationService.translateTools(
+        rawTools,
+        locale,
+      );
 
       const toolsWithTranslatedTags = await Promise.all(
         translatedTools.map(async (tool) => {
           const translatedTags = await DatabaseTranslationService.translateTags(
             tool.tags.map((tt) => tt.tag),
-            locale
+            locale,
           );
           return {
             ...tool,
@@ -381,7 +417,7 @@ export class ToolService extends BaseService implements IToolService {
               tag: translatedTags[index],
             })),
           };
-        })
+        }),
       );
 
       return toolsWithTranslatedTags.map((tool: PrismaToolWithRelations) =>
@@ -390,7 +426,11 @@ export class ToolService extends BaseService implements IToolService {
     });
   }
 
-  async getToolsPaginated(offset: number, limit: number, locale: string = "en"): Promise<ToolDTO[]> {
+  async getToolsPaginated(
+    offset: number,
+    limit: number,
+    locale: string = "en",
+  ): Promise<ToolDTO[]> {
     this.validateRequired({ offset, limit });
 
     const cacheKey = `toolsPaginated:${offset}:${limit}:${locale}`;
@@ -406,14 +446,16 @@ export class ToolService extends BaseService implements IToolService {
         },
       });
 
-      const translatedTools =
-        await DatabaseTranslationService.translateTools(tools, locale);
+      const translatedTools = await DatabaseTranslationService.translateTools(
+        tools,
+        locale,
+      );
 
       const toolsWithTranslatedTags = await Promise.all(
         translatedTools.map(async (tool) => {
           const translatedTags = await DatabaseTranslationService.translateTags(
             tool.tags.map((tt) => tt.tag),
-            locale
+            locale,
           );
           return {
             ...tool,
@@ -422,11 +464,11 @@ export class ToolService extends BaseService implements IToolService {
               tag: translatedTags[index],
             })),
           };
-        })
+        }),
       );
 
       return toolsWithTranslatedTags.map((tool: PrismaToolWithRelations) =>
-        toToolDTO(tool)
+        toToolDTO(tool),
       );
     });
   }
@@ -435,7 +477,7 @@ export class ToolService extends BaseService implements IToolService {
     tagSlug: string,
     offset: number,
     limit: number,
-    locale: string = "en"
+    locale: string = "en",
   ): Promise<ToolDTO[]> {
     this.validateRequired({ tagSlug, offset, limit });
 
@@ -459,14 +501,16 @@ export class ToolService extends BaseService implements IToolService {
         },
       });
 
-      const translatedTools =
-        await DatabaseTranslationService.translateTools(tools, locale);
+      const translatedTools = await DatabaseTranslationService.translateTools(
+        tools,
+        locale,
+      );
 
       const toolsWithTranslatedTags = await Promise.all(
         translatedTools.map(async (tool) => {
           const translatedTags = await DatabaseTranslationService.translateTags(
             tool.tags.map((tt) => tt.tag),
-            locale
+            locale,
           );
           return {
             ...tool,
@@ -475,18 +519,18 @@ export class ToolService extends BaseService implements IToolService {
               tag: translatedTags[index],
             })),
           };
-        })
+        }),
       );
 
       return toolsWithTranslatedTags.map((tool: PrismaToolWithRelations) =>
-        toToolDTO(tool)
+        toToolDTO(tool),
       );
     });
   }
 
   async getAllToolsPaginated(
     options: PaginationOptions,
-    locale: string = "en"
+    locale: string = "en",
   ): Promise<PaginatedResult<ToolDTO>> {
     const {
       limit,
@@ -540,15 +584,18 @@ export class ToolService extends BaseService implements IToolService {
           .map((id) => toolsMap.get(id))
           .filter(Boolean) as PrismaToolWithRelations[];
 
-        const translatedTools =
-          await DatabaseTranslationService.translateTools(sortedTools, locale);
+        const translatedTools = await DatabaseTranslationService.translateTools(
+          sortedTools,
+          locale,
+        );
 
         const toolsWithTranslatedTags = await Promise.all(
           translatedTools.map(async (tool) => {
-            const translatedTags = await DatabaseTranslationService.translateTags(
-              tool.tags.map((tt) => tt.tag),
-              locale
-            );
+            const translatedTags =
+              await DatabaseTranslationService.translateTags(
+                tool.tags.map((tt) => tt.tag),
+                locale,
+              );
             return {
               ...tool,
               tags: tool.tags.map((tt, index) => ({
@@ -556,7 +603,7 @@ export class ToolService extends BaseService implements IToolService {
                 tag: translatedTags[index],
               })),
             };
-          })
+          }),
         );
 
         return {
@@ -590,14 +637,16 @@ export class ToolService extends BaseService implements IToolService {
 
       const tools = await this.prisma.tool.findMany(queryOptions);
 
-      const translatedTools =
-        await DatabaseTranslationService.translateTools(tools, locale);
+      const translatedTools = await DatabaseTranslationService.translateTools(
+        tools,
+        locale,
+      );
 
       const toolsWithTranslatedTags = await Promise.all(
         translatedTools.map(async (tool) => {
           const translatedTags = await DatabaseTranslationService.translateTags(
             tool.tags.map((tt) => tt.tag),
-            locale
+            locale,
           );
           return {
             ...tool,
@@ -606,7 +655,7 @@ export class ToolService extends BaseService implements IToolService {
               tag: translatedTags[index],
             })),
           };
-        })
+        }),
       );
 
       return {

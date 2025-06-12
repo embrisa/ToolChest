@@ -246,24 +246,28 @@ describe("useToolsWithState", () => {
     mockUseToolFilterState.mockReturnValue({
       filterState: {
         query: "search-query", // query is present
-        tags: ["encoding"],      // tags are present
+        tags: ["encoding"], // tags are present
         page: 1,
         limit: 10,
       },
       mounted: true,
     });
-    mockUseSWR.mockReturnValue({ data: mockTools, error: null, isLoading: false });
+    mockUseSWR.mockReturnValue({
+      data: mockTools,
+      error: null,
+      isLoading: false,
+    });
 
     const { result } = renderHook(() => useToolsWithState());
 
-    expect(result.current.tools.map(t => t.slug)).toEqual(["tool1", "tool3"]);
+    expect(result.current.tools.map((t) => t.slug)).toEqual(["tool1", "tool3"]);
     expect(result.current.totalCount).toBe(2);
   });
 
   it("handles recordUsage failure and reverts optimistic update", async () => {
     const originalData = [{ slug: "t1", usageCount: 10 }];
     const mutateMock = jest.fn();
-    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+    const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
 
     mockUseToolFilterState.mockReturnValue({
       filterState: {
@@ -298,7 +302,10 @@ describe("useToolsWithState", () => {
     expect(mutateMock).toHaveBeenCalledTimes(2);
     // The second call should be with the original data to revert
     expect(mutateMock).toHaveBeenLastCalledWith();
-    expect(consoleErrorSpy).toHaveBeenCalledWith("Failed to record tool usage:", expect.any(Error));
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      "Failed to record tool usage:",
+      expect.any(Error),
+    );
 
     consoleErrorSpy.mockRestore();
   });
@@ -343,12 +350,15 @@ describe("useToolsWithState", () => {
       },
       mounted: true,
     });
-    const { result, rerender } = renderHook(({ data, isLoading }) => {
-      mockUseSWR.mockReturnValue({ data, isLoading, error: null });
-      return useToolsWithState();
-    }, {
-      initialProps: { data: [] as { slug: string }[], isLoading: false }
-    });
+    const { result, rerender } = renderHook(
+      ({ data, isLoading }) => {
+        mockUseSWR.mockReturnValue({ data, isLoading, error: null });
+        return useToolsWithState();
+      },
+      {
+        initialProps: { data: [] as { slug: string }[], isLoading: false },
+      },
+    );
 
     expect(result.current.isEmpty).toBe(true);
 
@@ -369,7 +379,7 @@ describe("useToolsWithState", () => {
         page: 1,
         limit: 24,
       },
-      mounted: true
+      mounted: true,
     });
     mockUseSWR.mockReturnValue({ data: [], error: null, isLoading: false });
     const fetchMock: jest.MockedFunction<typeof fetch> = jest

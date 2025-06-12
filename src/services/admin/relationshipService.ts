@@ -56,7 +56,8 @@ export interface IRelationshipService {
 
 export class RelationshipService
   extends BaseService
-  implements IRelationshipService {
+  implements IRelationshipService
+{
   constructor(prisma: PrismaClient) {
     super(prisma);
   }
@@ -95,8 +96,12 @@ export class RelationshipService
         }
 
         where.OR = [
-          { tool: { nameKey: nameFilter } } as unknown as Prisma.ToolTagWhereInput,
-          { tag: { nameKey: nameFilter } } as unknown as Prisma.ToolTagWhereInput,
+          {
+            tool: { nameKey: nameFilter },
+          } as unknown as Prisma.ToolTagWhereInput,
+          {
+            tag: { nameKey: nameFilter },
+          } as unknown as Prisma.ToolTagWhereInput,
         ];
       }
 
@@ -146,7 +151,7 @@ export class RelationshipService
         toolSlug: rel.tool.slug,
         tagSlug: rel.tag.slug,
         toolIsActive: rel.tool.isActive,
-        tagColor: '', // Tag no longer has color field
+        tagColor: "", // Tag no longer has color field
       }));
     });
   }
@@ -430,8 +435,8 @@ export class RelationshipService
                   operation.type === "assign"
                     ? {}
                     : {
-                      tagId: { in: toolUpdate.removedTags },
-                    },
+                        tagId: { in: toolUpdate.removedTags },
+                      },
                 create:
                   operation.type === "assign"
                     ? toolUpdate.addedTags.map((tagId) => ({ tagId }))

@@ -141,7 +141,8 @@ module.exports = async () => {
   // By default, next/jest ignores all of node_modules for transformations.
   // We need to override this to tell Jest to transform `next-intl`.
   // This is the official recommended approach for this problem.
-  jestConfig.transformIgnorePatterns[0] = '/node_modules/(?!(next-intl|use-intl))/';
+  jestConfig.transformIgnorePatterns[0] =
+    "/node_modules/(?!(next-intl|use-intl))/";
 
   return jestConfig;
 };

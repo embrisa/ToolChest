@@ -144,7 +144,10 @@ describe("Header Translation Integration", () => {
       (useTranslations as jest.Mock).mockImplementation((namespace: string) => {
         return jest.fn((key: string) => {
           // Only provide partial translations to test fallbacks
-          if (namespace === "components.layout.header" && key === "navigation.tools") {
+          if (
+            namespace === "components.layout.header" &&
+            key === "navigation.tools"
+          ) {
             return "Tools";
           }
           return `[${namespace}.${key}]`;
@@ -156,7 +159,9 @@ describe("Header Translation Integration", () => {
       // Should show the translated key for "tools"
       expect(screen.getByText("Tools")).toBeInTheDocument();
       // Should show fallback for "about"
-      expect(screen.getByText("[components.layout.header.navigation.about]")).toBeInTheDocument();
+      expect(
+        screen.getByText("[components.layout.header.navigation.about]"),
+      ).toBeInTheDocument();
     });
   });
 });

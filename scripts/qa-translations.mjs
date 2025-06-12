@@ -56,7 +56,9 @@ const findEmptyValues = (obj, prefix = "") => {
 
 // Load allowlist of keys (dot-notated) that are intentionally identical across locales.
 // The file path is configurable via ALLOWLIST env var or defaults to scripts/translation-allowlist.json.
-const allowlistPath = process.env.TRANSLATION_ALLOWLIST || path.resolve("scripts/translation-allowlist.json");
+const allowlistPath =
+  process.env.TRANSLATION_ALLOWLIST ||
+  path.resolve("scripts/translation-allowlist.json");
 let allowlist = new Set();
 try {
   const raw = await fs.readFile(allowlistPath, "utf8");
@@ -168,7 +170,9 @@ async function qaTranslations() {
         // Treat untranslated keys as warnings instead of errors to allow
         // progressive translation without failing the entire QA step.
         if (untranslatedKeys.length > 0) {
-          console.warn(`\n⚠️  [${filePath}] Untranslated keys (value identical to English):`);
+          console.warn(
+            `\n⚠️  [${filePath}] Untranslated keys (value identical to English):`,
+          );
           console.warn(`    - ${untranslatedKeys.join("\n    - ")}`);
           // Do NOT count these as errors so the script can pass even when
           // some locales fall back to English.
@@ -178,7 +182,9 @@ async function qaTranslations() {
         // incremental localisation without failing CI.
         const emptyValues = findEmptyValues(jsonContent);
         if (emptyValues.length > 0) {
-          console.warn(`\n⚠️  [${filePath}] Empty translation values for keys:`);
+          console.warn(
+            `\n⚠️  [${filePath}] Empty translation values for keys:`,
+          );
           console.warn(`    - ${emptyValues.join("\n    - ")}`);
           // Not counting as errors.
         }

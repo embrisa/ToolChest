@@ -21,14 +21,14 @@ export type TranslationModule =
 export async function loadTranslationModules(
   locale: string,
   modules: TranslationModule[],
-): Promise<Record<string, any>> {
-  const translations: Record<string, any> = {};
+): Promise<Record<string, unknown>> {
+  const translations: Record<string, unknown> = {};
 
   // Helper to deep merge the loaded module into the translations object
   const deepMerge = (
-    target: Record<string, any>,
+    target: Record<string, unknown>,
     keys: string[],
-    value: Record<string, any>,
+    value: Record<string, unknown>,
   ) => {
     const key = keys[0]!;
     // When we reach the last key, merge the value
@@ -49,7 +49,7 @@ export async function loadTranslationModules(
     if (typeof target[key] !== "object" || target[key] === null) {
       target[key] = {};
     }
-    deepMerge(target[key], keys.slice(1), value);
+    deepMerge(target[key] as Record<string, unknown>, keys.slice(1), value);
   };
 
   for (const moduleName of modules) {
@@ -64,7 +64,11 @@ export async function loadTranslationModules(
 
       // Insert the module translations into the nested translations object
       const keys = moduleName.split(".");
-      deepMerge(translations, keys, moduleTranslations.default || moduleTranslations);
+      deepMerge(
+        translations,
+        keys,
+        moduleTranslations.default || moduleTranslations,
+      );
     } catch (error) {
       // Don't fail hard on missing modules – just log a warning for developers
       console.warn(
@@ -147,7 +151,7 @@ export async function getAdminTranslations(locale: string) {
  * Flatten nested translation object for easier access
  */
 export function flattenTranslations(
-  translations: Record<string, any>,
+  translations: Record<string, unknown>,
   prefix = "",
 ): Record<string, string> {
   const flattened: Record<string, string> = {};
@@ -156,7 +160,10 @@ export function flattenTranslations(
     const newKey = prefix ? `${prefix}.${key}` : key;
 
     if (typeof value === "object" && value !== null) {
-      Object.assign(flattened, flattenTranslations(value, newKey));
+      Object.assign(
+        flattened,
+        flattenTranslations(value as Record<string, unknown>, newKey),
+      );
     } else {
       flattened[newKey] = String(value);
     }
@@ -169,9 +176,9 @@ export function flattenTranslations(
  * Merge multiple translation objects with conflict resolution
  */
 export function mergeTranslations(
-  ...translationObjects: Record<string, any>[]
-): Record<string, any> {
-  const merged: Record<string, any> = {};
+  ...translationObjects: Record<string, unknown>[]
+): Record<string, unknown> {
+  const merged: Record<string, unknown> = {};
 
   for (const obj of translationObjects) {
     for (const [key, value] of Object.entries(obj)) {
@@ -181,7 +188,10 @@ export function mergeTranslations(
         !Array.isArray(value)
       ) {
         merged[key] = merged[key]
-          ? mergeTranslations(merged[key], value)
+          ? mergeTranslations(
+              merged[key] as Record<string, unknown>,
+              value as Record<string, unknown>,
+            )
           : { ...value };
       } else {
         merged[key] = value;

@@ -124,7 +124,9 @@ export default async function FaviconGeneratorPage({
     },
   ].map(({ id, ...rest }) => {
     // Convert kebab-case ID to camelCase for translation keys
-    const translationKey = id.replace(/-([a-z])/g, (match, letter) => letter.toUpperCase());
+    const translationKey = id.replace(/-([a-z])/g, (match, letter) =>
+      letter.toUpperCase(),
+    );
 
     return {
       id,

@@ -121,14 +121,18 @@ async function main() {
   for (const relation of toolTagRelations) {
     const tool = createdTools.find((t) => t.slug === relation.toolSlug);
     if (!tool) {
-      console.warn(`Tool with slug "${relation.toolSlug}" not found. Skipping relation.`);
+      console.warn(
+        `Tool with slug "${relation.toolSlug}" not found. Skipping relation.`,
+      );
       continue;
     }
 
     for (const tagSlug of relation.tagSlugs) {
       const tag = createdTags.find((t) => t.slug === tagSlug);
       if (!tag) {
-        console.warn(`Tag with slug "${tagSlug}" not found. Skipping relation.`);
+        console.warn(
+          `Tag with slug "${tagSlug}" not found. Skipping relation.`,
+        );
         continue;
       }
 
@@ -157,7 +161,9 @@ async function main() {
       create: {
         toolId: tool.id,
         usageCount: Math.floor(Math.random() * 2500) + 50, // Add random usage
-        lastUsed: new Date(Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000), // Random date in last 30 days
+        lastUsed: new Date(
+          Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000,
+        ), // Random date in last 30 days
       },
     });
   }

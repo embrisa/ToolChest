@@ -21,16 +21,26 @@ export class DatabaseTranslationService {
    */
   private static async loadDatabaseTranslations(locale: string = "en") {
     try {
-      const translations = await import(`../../../messages/database/${locale}.json`);
+      const translations = await import(
+        `../../../messages/database/${locale}.json`
+      );
       return translations.default;
     } catch (error) {
-      console.warn(`Failed to load database translations for locale ${locale}, falling back to English`);
+      console.warn(
+        `Failed to load database translations for locale ${locale}, falling back to English`,
+        error,
+      );
       if (locale !== "en") {
         try {
-          const fallbackTranslations = await import(`../../../messages/database/en.json`);
+          const fallbackTranslations = await import(
+            `../../../messages/database/en.json`
+          );
           return fallbackTranslations.default;
         } catch (fallbackError) {
-          console.error("Failed to load fallback English database translations", fallbackError);
+          console.error(
+            "Failed to load fallback English database translations",
+            fallbackError,
+          );
           return { tools: {}, tags: {} };
         }
       }
@@ -47,7 +57,8 @@ export class DatabaseTranslationService {
   ): Promise<TranslatedTool> {
     const translations = await this.loadDatabaseTranslations(locale);
 
-    const translatedName = translations.tools?.[tool.toolKey]?.name || tool.nameKey;
+    const translatedName =
+      translations.tools?.[tool.toolKey]?.name || tool.nameKey;
     const translatedDescription = tool.descriptionKey
       ? translations.tools?.[tool.toolKey]?.description || tool.descriptionKey
       : null;
@@ -68,8 +79,9 @@ export class DatabaseTranslationService {
   ): Promise<TranslatedTool[]> {
     const translations = await this.loadDatabaseTranslations(locale);
 
-    return tools.map(tool => {
-      const translatedName = translations.tools?.[tool.toolKey]?.name || tool.nameKey;
+    return tools.map((tool) => {
+      const translatedName =
+        translations.tools?.[tool.toolKey]?.name || tool.nameKey;
       const translatedDescription = tool.descriptionKey
         ? translations.tools?.[tool.toolKey]?.description || tool.descriptionKey
         : null;
@@ -112,8 +124,9 @@ export class DatabaseTranslationService {
   ): Promise<TranslatedTag[]> {
     const translations = await this.loadDatabaseTranslations(locale);
 
-    return tags.map(tag => {
-      const translatedName = translations.tags?.[tag.tagKey]?.name || tag.nameKey;
+    return tags.map((tag) => {
+      const translatedName =
+        translations.tags?.[tag.tagKey]?.name || tag.nameKey;
       const translatedDescription = tag.descriptionKey
         ? translations.tags?.[tag.tagKey]?.description || tag.descriptionKey
         : null;

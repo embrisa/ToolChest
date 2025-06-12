@@ -22,12 +22,12 @@ This document proposes a **multi-phase strategy** for systematically detecting, 
 
 Goal: find **compile-time** issues before the code even runs.
 
-| Check | Description | Suggested Implementation |
-|-------|-------------|---------------------------|
-| **Missing `t()` calls** | Components containing plain text instead of `useTranslations()` keys | AST based scan using `ts-morph` or ESLint rule |
-| **Dynamic keys** | `t(dynamicVar)` hides missing keys from static analysis | ESLint rule to ban non-literal keys, or require explicit whitelist |
-| **Unused messages** | Keys that exist in locale files but are never imported | Diff extraction list ↔ messages directory |
-| **Pluralisation gaps** | ICU plural/ordinal patterns missing variants | `@formatjs/cli verify` |
+| Check                   | Description                                                          | Suggested Implementation                                           |
+| ----------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| **Missing `t()` calls** | Components containing plain text instead of `useTranslations()` keys | AST based scan using `ts-morph` or ESLint rule                     |
+| **Dynamic keys**        | `t(dynamicVar)` hides missing keys from static analysis              | ESLint rule to ban non-literal keys, or require explicit whitelist |
+| **Unused messages**     | Keys that exist in locale files but are never imported               | Diff extraction list ↔ messages directory                         |
+| **Pluralisation gaps**  | ICU plural/ordinal patterns missing variants                         | `@formatjs/cli verify`                                             |
 
 Deliverable: `reports/static-analysis-YYYY-MM-DD.json` with counts & offending file locations.
 
@@ -61,8 +61,8 @@ Deliverable: `reports/e2e-missing-keys-<commit>.html` dashboard with page/locale
 
 Add to `npm run validate` and the GitHub workflow:
 
-- `i18n:static` – runs Phase 1 checks; threshold **0 missing, 0 dynamic**.  
-- `i18n:e2e` – runs crawler on PR head SHA; must report **0 missing**.  
+- `i18n:static` – runs Phase 1 checks; threshold **0 missing, 0 dynamic**.
+- `i18n:e2e` – runs crawler on PR head SHA; must report **0 missing**.
 - Pull-request bot posts a summarised comment (✅ pass / ❌ fail with diff).
 
 Merges are blocked until both gates are green.
@@ -71,8 +71,8 @@ Merges are blocked until both gates are green.
 
 ## Phase 5 – Continuous Monitoring
 
-1. **Sentry alert** if production missing-key events >  5 per hour.  
-2. **Grafana dashboard** (or Vercel analytics) tracking per-locale coverage over time.  
+1. **Sentry alert** if production missing-key events > 5 per hour.
+2. **Grafana dashboard** (or Vercel analytics) tracking per-locale coverage over time.
 3. Quarterly audit task in the engineering Jira board.
 
 ---
@@ -81,22 +81,22 @@ Merges are blocked until both gates are green.
 
 While automation catches 95 %, human review ensures contextual accuracy:
 
-- **Accessibility review**: screen-reader output for translated ARIA labels.  
-- **RTL locales** (ar, he, fa) layout sanity.  
+- **Accessibility review**: screen-reader output for translated ARIA labels.
+- **RTL locales** (ar, he, fa) layout sanity.
 - **Copy-writing review** by native speakers.
 
 ---
 
 ## Milestones & Timeline
 
-| Week | Milestone |
-|------|-----------|
-| 1 | Complete Phase 0 & Phase 1 tooling; commit baseline report |
-| 2 | Integrate runtime instrumentation (Phase 2) |
-| 3 | Implement Playwright crawler; run on staging (Phase 3) |
-| 4 | Enforce CI gates (Phase 4); fix all blocking issues |
-| 5 | Activate Sentry alerts & dashboards (Phase 5) |
-| 6 | First manual review round (Phase 6) |
+| Week | Milestone                                                  |
+| ---- | ---------------------------------------------------------- |
+| 1    | Complete Phase 0 & Phase 1 tooling; commit baseline report |
+| 2    | Integrate runtime instrumentation (Phase 2)                |
+| 3    | Implement Playwright crawler; run on staging (Phase 3)     |
+| 4    | Enforce CI gates (Phase 4); fix all blocking issues        |
+| 5    | Activate Sentry alerts & dashboards (Phase 5)              |
+| 6    | First manual review round (Phase 6)                        |
 
 ---
 
@@ -109,4 +109,4 @@ While automation catches 95 %, human review ensures contextual accuracy:
 
 ---
 
-_End of plan_ 
+_End of plan_

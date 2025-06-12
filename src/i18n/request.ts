@@ -20,7 +20,7 @@ async function loadModularMessages(locale: string) {
     "tools/markdown-to-pdf",
   ];
 
-  const messages: any = {};
+  const messages: Record<string, unknown> = {};
 
   for (const moduleName of modules) {
     try {
@@ -36,11 +36,11 @@ async function loadModularMessages(locale: string) {
         if (!current[parts[i]]) {
           current[parts[i]] = {};
         }
-        current = current[parts[i]];
+        current = current[parts[i]] as Record<string, unknown>;
       }
 
       current[parts[parts.length - 1]] = moduleMessages;
-    } catch (error) {
+    } catch {
       // It's okay if a message file for a specific module doesn't exist.
       // console.warn(
       //   `Could not load messages for module ${moduleName} for locale ${locale}:`,

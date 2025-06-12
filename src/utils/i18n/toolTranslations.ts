@@ -8,7 +8,7 @@ export interface ToolTranslations {
     title: string;
     description: string;
   };
-  tool: Record<string, any>;
+  tool: Record<string, unknown>;
   validation: Record<string, string>;
   info: {
     title: string;

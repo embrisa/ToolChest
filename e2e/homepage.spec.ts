@@ -15,8 +15,13 @@ test.describe("Homepage E2E Tests", () => {
   });
 
   test.describe("Page Loading and Navigation", () => {
-    test("should load homepage successfully and display header", async ({ page }) => {
-      const heading = page.getByRole("heading", { name: /tool-chest/i, level: 1 });
+    test("should load homepage successfully and display header", async ({
+      page,
+    }) => {
+      const heading = page.getByRole("heading", {
+        name: /tool-chest/i,
+        level: 1,
+      });
       await expect(heading).toBeVisible();
       const header = page.getByRole("banner");
       await expect(header).toBeVisible();
@@ -51,7 +56,9 @@ test.describe("Homepage E2E Tests", () => {
       await expect(homePage.toolCard).toHaveCount(1);
     });
 
-    test("should show no results for a valid search with no matches", async ({ page }) => {
+    test("should show no results for a valid search with no matches", async ({
+      page,
+    }) => {
       await homePage.search("nonexistenttool12345");
       const noResultsMessage = page.getByTestId("no-results");
       await expect(noResultsMessage).toBeVisible();
@@ -65,23 +72,29 @@ test.describe("Homepage E2E Tests", () => {
   });
 
   test.describe("Responsive Design", () => {
-    test("should display a single column of tools on mobile", async ({ page }) => {
+    test("should display a single column of tools on mobile", async ({
+      page,
+    }) => {
       // Set mobile viewport
       await page.setViewportSize({ width: 375, height: 667 });
 
       // Check that the tools grid is in a single-column layout
-      const toolsGrid = homePage.toolCard.first().locator('..');
+      const toolsGrid = homePage.toolCard.first().locator("..");
       const gridStyles = await toolsGrid.evaluate((element) => {
         return window.getComputedStyle(element);
       });
 
       // On mobile, the grid should be a single column
-      expect(gridStyles.getPropertyValue('grid-template-columns')).not.toContain(' ');
+      expect(
+        gridStyles.getPropertyValue("grid-template-columns"),
+      ).not.toContain(" ");
     });
   });
 
   test.describe("Accessibility", () => {
-    test("should have no accessibility violations on load", async ({ page }) => {
+    test("should have no accessibility violations on load", async ({
+      page,
+    }) => {
       const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
       expect(accessibilityScanResults.violations).toEqual([]);
     });
