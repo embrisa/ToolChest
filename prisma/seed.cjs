@@ -9,6 +9,20 @@ const prisma = new PrismaClient();
 async function main() {
     console.log("🌱 Starting database seed (JS)…");
 
+    // Optional: wipe all data first for a completely fresh start.
+    if (process.env.RESET_DB_DATA === "true") {
+        console.warn("⚠️  RESET_DB_DATA=true – wiping existing data before seeding…");
+        // Wrap in a transaction so either the whole truncate + seed succeeds or nothing changes
+        await prisma.$transaction(async (tx) => {
+            // Order of tables matters; TRUNCATE … CASCADE handles FK dependencies for Postgres
+            // Adjust list if you add new models.
+            await tx.$executeRawUnsafe(
+                `TRUNCATE TABLE "AdminAuditLog", "ToolUsage", "ToolUsageStats", "ToolTag", "AdminUser", "Tool", "Tag" RESTART IDENTITY CASCADE;`,
+            );
+        });
+        console.log("🗑️  Existing data removed. Proceeding with fresh seed…");
+    }
+
     // 1. Tags
     const tagsData = [
         { tagKey: "encoding", nameKey: "tags.encoding.name", slug: "encoding", descriptionKey: "tags.encoding.description", displayOrder: 1 },
