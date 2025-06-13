@@ -12,25 +12,6 @@
   - Made the column `toolKey` on table `Tool` required. This step will fail if there are existing NULL values in that column.
 
 */
--- DropIndex
-DROP INDEX "Tag_name_key";
-
--- DropIndex
-DROP INDEX "Tool_name_key";
-
--- AlterTable
-ALTER TABLE "Tag" DROP COLUMN "color",
-DROP COLUMN "description",
-DROP COLUMN "name",
-ALTER COLUMN "nameKey" SET NOT NULL,
-ALTER COLUMN "tagKey" SET NOT NULL;
-
--- AlterTable
-ALTER TABLE "Tool" DROP COLUMN "description",
-DROP COLUMN "name",
-ALTER COLUMN "nameKey" SET NOT NULL,
-ALTER COLUMN "toolKey" SET NOT NULL;
-
 -- Back-fill keys so NOT NULL constraint succeeds
 UPDATE "Tag" SET "nameKey" = COALESCE("nameKey", "slug"),
                  "tagKey"  = COALESCE("tagKey",  "slug")
@@ -41,3 +22,21 @@ UPDATE "Tool" SET "nameKey" = COALESCE("nameKey", "slug"),
                   "toolKey" = COALESCE("toolKey", "slug")
 WHERE "nameKey" IS NULL
    OR "toolKey" IS NULL;
+
+-- AlterTable
+-- ensure NOT NULL after data backfill
+ALTER TABLE "Tag"
+    ALTER COLUMN "nameKey" SET NOT NULL,
+    ALTER COLUMN "tagKey" SET NOT NULL;
+
+ALTER TABLE "Tool" 
+    ALTER COLUMN "nameKey" SET NOT NULL,
+    ALTER COLUMN "toolKey" SET NOT NULL;
+
+-- Now remove legacy columns & indexes
+DROP INDEX "Tag_name_key";
+DROP INDEX "Tool_name_key";
+
+ALTER TABLE "Tag" DROP COLUMN "color", DROP COLUMN "description", DROP COLUMN "name";
+
+ALTER TABLE "Tool" DROP COLUMN "description", DROP COLUMN "name";
