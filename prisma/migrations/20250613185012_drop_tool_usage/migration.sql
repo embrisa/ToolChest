@@ -5,7 +5,7 @@
 
 */
 -- DropForeignKey
-ALTER TABLE "ToolUsage" DROP CONSTRAINT "ToolUsage_toolId_fkey";
+ALTER TABLE IF EXISTS "ToolUsage" DROP CONSTRAINT IF EXISTS "ToolUsage_toolId_fkey";
 
 -- DropTable
-DROP TABLE "ToolUsage";
+DROP TABLE IF EXISTS "ToolUsage";
