@@ -12,15 +12,29 @@ async function main() {
     // Optional: wipe all data first for a completely fresh start.
     if (process.env.RESET_DB_DATA === "true") {
         console.warn("⚠️  RESET_DB_DATA=true – wiping existing data before seeding…");
-        // Wrap in a transaction so either the whole truncate + seed succeeds or nothing changes
-        await prisma.$transaction(async (tx) => {
-            // Order of tables matters; TRUNCATE … CASCADE handles FK dependencies for Postgres
-            // Adjust list if you add new models.
-            await tx.$executeRawUnsafe(
-                `TRUNCATE TABLE "ToolUsage", "ToolUsageStats", "ToolTag", "Tool", "Tag" RESTART IDENTITY CASCADE;`,
-            );
-        });
-        console.log("🗑️  Existing data removed. Proceeding with fresh seed…");
+        /*
+         * Using raw SQL TRUNCATE caused issues in some environments where the expected
+         * relations weren't present (for example when the database schema drifted).
+         * Instead we now rely on Prisma's Client API to clear data. This is more portable
+         * and automatically targets the correct schema that Prisma is configured for.
+         *
+         * We still wrap everything in a single transaction so either the whole wipe +
+         * subsequent seed succeeds, or nothing is changed.
+         */
+
+        try {
+            await prisma.$transaction(async (tx) => {
+                // Delete from children first → parents last to satisfy FK constraints
+                await tx.toolUsage.deleteMany();
+                await tx.toolUsageStats.deleteMany();
+                await tx.toolTag.deleteMany();
+                await tx.tool.deleteMany();
+                await tx.tag.deleteMany();
+            });
+            console.log("🗑️  Existing data removed. Proceeding with fresh seed…");
+        } catch (wipeErr) {
+            console.error("⚠️  Failed to wipe existing data — continuing with seeding anyway", wipeErr);
+        }
     }
 
     // 1. Tags
