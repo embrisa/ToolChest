@@ -30,3 +30,14 @@ ALTER TABLE "Tool" DROP COLUMN "description",
 DROP COLUMN "name",
 ALTER COLUMN "nameKey" SET NOT NULL,
 ALTER COLUMN "toolKey" SET NOT NULL;
+
+-- Back-fill keys so NOT NULL constraint succeeds
+UPDATE "Tag" SET "nameKey" = COALESCE("nameKey", "slug"),
+                 "tagKey"  = COALESCE("tagKey",  "slug")
+WHERE "nameKey" IS NULL
+   OR "tagKey"  IS NULL;
+
+UPDATE "Tool" SET "nameKey" = COALESCE("nameKey", "slug"),
+                  "toolKey" = COALESCE("toolKey", "slug")
+WHERE "nameKey" IS NULL
+   OR "toolKey" IS NULL;
