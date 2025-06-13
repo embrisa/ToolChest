@@ -140,6 +140,6 @@
     "webpack-bundle-analyzer": "^4.10.2"
   },
   "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "seed": "node prisma/seed.cjs"
   }
 }
