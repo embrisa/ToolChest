@@ -14,7 +14,6 @@ RUN npm ci --ignore-scripts
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
-RUN npm i -g npm@11
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
