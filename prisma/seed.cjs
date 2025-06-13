@@ -17,7 +17,7 @@ async function main() {
             // Order of tables matters; TRUNCATE … CASCADE handles FK dependencies for Postgres
             // Adjust list if you add new models.
             await tx.$executeRawUnsafe(
-                `TRUNCATE TABLE "AdminAuditLog", "ToolUsage", "ToolUsageStats", "ToolTag", "AdminUser", "Tool", "Tag" RESTART IDENTITY CASCADE;`,
+                `TRUNCATE TABLE "ToolUsage", "ToolUsageStats", "ToolTag", "Tool", "Tag" RESTART IDENTITY CASCADE;`,
             );
         });
         console.log("🗑️  Existing data removed. Proceeding with fresh seed…");

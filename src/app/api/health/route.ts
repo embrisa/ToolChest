@@ -18,10 +18,7 @@ export async function GET() {
     const dbResponseTime = Date.now() - startTime;
 
     // Get basic database info
-    const [userCount, toolCount] = await Promise.all([
-      prisma.adminUser.count(),
-      prisma.tool.count(),
-    ]);
+    const toolCount = await prisma.tool.count();
 
     return NextResponse.json({
       status: "healthy",
@@ -30,7 +27,6 @@ export async function GET() {
       database: {
         status: "connected",
         responseTime: `${dbResponseTime}ms`,
-        users: userCount,
         tools: toolCount,
       },
       features: {
