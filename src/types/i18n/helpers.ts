@@ -1,9 +1,9 @@
 // Utility type to concatenate keys in a dotted path
 type Join<K, P> = K extends string | number
-    ? P extends string | number
+  ? P extends string | number
     ? `${K}.${P}`
     : never
-    : never;
+  : never;
 
 // Recursive helper to collect paths up to depth D (to avoid infinite recursion)
 // Increase the tuple length if you need deeper objects.
@@ -38,12 +38,12 @@ type Prev = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 // full dotted-path keys.
 
 export type MessageKeys<T> = T extends object
-    ? {
-        // Remove optional modifier on K to get cleaner unions
-        [K in keyof T]-?: K extends string
+  ? {
+      // Remove optional modifier on K to get cleaner unions
+      [K in keyof T]-?: K extends string
         ? NonNullable<T[K]> extends object
-        ? | K | `${K}.${MessageKeys<NonNullable<T[K]>>}`
-        : K
+          ? K | `${K}.${MessageKeys<NonNullable<T[K]>>}`
+          : K
         : never;
     }[keyof T]
-    : never; 
+  : never;

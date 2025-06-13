@@ -17,4 +17,4 @@ export * from "./pagesError";
 export * from "./componentsUi";
 export * from "./componentsForms";
 export * from "./componentsLayout";
-export * from "./toolsCommon"; 
+export * from "./toolsCommon";

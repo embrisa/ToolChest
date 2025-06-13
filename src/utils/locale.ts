@@ -1,8 +1,5 @@
 import { NextRequest } from "next/server";
-import {
-  type Locale,
-  isValidLocale,
-} from "@/utils/i18n/modularTranslations";
+import { type Locale, isValidLocale } from "@/utils/i18n/modularTranslations";
 import { defaultLocale } from "@/i18n/config";
 
 /**

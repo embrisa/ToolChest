@@ -100,6 +100,7 @@ ADMIN_SECRET_TOKEN="secure-token"
 Before commits: `npm run validate` must pass
 
 - Linting + TypeScript + formatting
+- Please run `npm run format` to auto format all code in the project, very encouraged to use!
 - Use `npm run env:validate` after env changes
 
 ## Reference Docs

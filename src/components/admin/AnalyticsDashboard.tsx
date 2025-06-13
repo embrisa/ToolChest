@@ -296,10 +296,11 @@ export function AnalyticsDashboard({ initialData }: AnalyticsDashboardProps) {
                   {formatNumber(summary.totalUsage)}
                 </p>
                 <p
-                  className={`text-sm font-medium ${summary.periodComparison.growthRates.usage >= 0
-                    ? "text-success-600 dark:text-success-400"
-                    : "text-error-600 dark:text-error-400"
-                    }`}
+                  className={`text-sm font-medium ${
+                    summary.periodComparison.growthRates.usage >= 0
+                      ? "text-success-600 dark:text-success-400"
+                      : "text-error-600 dark:text-error-400"
+                  }`}
                 >
                   {formatPercentage(summary.periodComparison.growthRates.usage)}{" "}
                   vs last period
@@ -338,10 +339,11 @@ export function AnalyticsDashboard({ initialData }: AnalyticsDashboardProps) {
                   {formatNumber(summary.activeUsers)}
                 </p>
                 <p
-                  className={`text-sm font-medium ${summary.periodComparison.growthRates.newUsers >= 0
-                    ? "text-success-600 dark:text-success-400"
-                    : "text-error-600 dark:text-error-400"
-                    }`}
+                  className={`text-sm font-medium ${
+                    summary.periodComparison.growthRates.newUsers >= 0
+                      ? "text-success-600 dark:text-success-400"
+                      : "text-error-600 dark:text-error-400"
+                  }`}
                 >
                   {formatPercentage(
                     summary.periodComparison.growthRates.newUsers,
@@ -396,18 +398,19 @@ export function AnalyticsDashboard({ initialData }: AnalyticsDashboardProps) {
               </div>
               <div className="w-full bg-neutral-200 dark:bg-neutral-700 rounded-full h-2">
                 <div
-                  className={`h-2 rounded-full transition-all duration-300 ${(systemMetrics.memoryUsage.heapUsed /
-                    systemMetrics.memoryUsage.heapTotal) *
-                    100 >
-                    80
-                    ? "bg-error-500"
-                    : (systemMetrics.memoryUsage.heapUsed /
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    (systemMetrics.memoryUsage.heapUsed /
                       systemMetrics.memoryUsage.heapTotal) *
                       100 >
-                      60
-                      ? "bg-warning-500"
-                      : "bg-brand-500"
-                    }`}
+                    80
+                      ? "bg-error-500"
+                      : (systemMetrics.memoryUsage.heapUsed /
+                            systemMetrics.memoryUsage.heapTotal) *
+                            100 >
+                          60
+                        ? "bg-warning-500"
+                        : "bg-brand-500"
+                  }`}
                   style={{
                     width: `${(systemMetrics.memoryUsage.heapUsed / systemMetrics.memoryUsage.heapTotal) * 100}%`,
                   }}
@@ -426,12 +429,13 @@ export function AnalyticsDashboard({ initialData }: AnalyticsDashboardProps) {
               </div>
               <div className="w-full bg-neutral-200 dark:bg-neutral-700 rounded-full h-2">
                 <div
-                  className={`h-2 rounded-full transition-all duration-300 ${cpuUsage > 80
-                    ? "bg-error-500"
-                    : cpuUsage > 60
-                      ? "bg-warning-500"
-                      : "bg-brand-500"
-                    }`}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    cpuUsage > 80
+                      ? "bg-error-500"
+                      : cpuUsage > 60
+                        ? "bg-warning-500"
+                        : "bg-brand-500"
+                  }`}
                   style={{ width: `${cpuUsage}%` }}
                 />
               </div>
@@ -448,12 +452,13 @@ export function AnalyticsDashboard({ initialData }: AnalyticsDashboardProps) {
               </div>
               <div className="w-full bg-neutral-200 dark:bg-neutral-700 rounded-full h-2">
                 <div
-                  className={`h-2 rounded-full transition-all duration-300 ${systemMetrics.apiResponseTimes.average > 1000
-                    ? "bg-error-500"
-                    : systemMetrics.apiResponseTimes.average > 500
-                      ? "bg-warning-500"
-                      : "bg-success-500"
-                    }`}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    systemMetrics.apiResponseTimes.average > 1000
+                      ? "bg-error-500"
+                      : systemMetrics.apiResponseTimes.average > 500
+                        ? "bg-warning-500"
+                        : "bg-success-500"
+                  }`}
                   style={{
                     width: `${Math.min((systemMetrics.apiResponseTimes.average / 2000) * 100, 100)}%`,
                   }}
