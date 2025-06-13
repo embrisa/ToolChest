@@ -63,18 +63,19 @@ async function main() {
     }
     console.log("Upserted tool-tag relationships.");
 
-    // 4. Initial usage stats
+    // 4. Initial (zeroed) usage stats – deterministic & idempotent
     for (const tool of createdTools) {
         await prisma.toolUsageStats.upsert({
             where: { toolId: tool.id },
             update: {},
             create: {
                 toolId: tool.id,
-                usageCount: Math.floor(Math.random() * 2500) + 50,
-                lastUsed: new Date(Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000),
+                usageCount: 0,
+                lastUsed: new Date(),
             },
         });
     }
+
     console.log("✅ Database seeded successfully!");
 }
 
