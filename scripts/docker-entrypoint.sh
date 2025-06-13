@@ -11,9 +11,6 @@ if [ -z "$DATABASE_URL" ]; then
     exit 1
 fi
 
-echo "🔄 Resolving database migrations..."
-npx prisma migrate resolve --rolled-back 20250606164703_remove_old_text_fields
-
 echo "🗄️ Running database migrations..."
 npx prisma migrate deploy
 
