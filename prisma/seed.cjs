@@ -23,17 +23,32 @@ async function main() {
          */
 
         try {
-            await prisma.$transaction(async (tx) => {
-                // Delete from children first → parents last to satisfy FK constraints
-                await tx.toolUsage.deleteMany();
-                await tx.toolUsageStats.deleteMany();
-                await tx.toolTag.deleteMany();
-                await tx.tool.deleteMany();
-                await tx.tag.deleteMany();
-            });
-            console.log("🗑️  Existing data removed. Proceeding with fresh seed…");
+            // Delete in dependency order; wrap each table operation in its own try/catch so
+            // the absence of a table doesn't abort the whole wipe. This keeps the script
+            // flexible when the DB schema differs between environments.
+
+            const maybeDelete = async (fn, label) => {
+                try {
+                    await fn();
+                } catch (err) {
+                    if (err?.code === "P2021") {
+                        // Table or model does not exist in this DB – skip silently
+                        console.warn(`⚠️  Skipping wipe for missing table/model: ${label}`);
+                    } else {
+                        throw err;
+                    }
+                }
+            };
+
+            // Children first –> parents last
+            await maybeDelete(() => prisma.toolUsageStats.deleteMany(), "ToolUsageStats");
+            await maybeDelete(() => prisma.toolTag.deleteMany(), "ToolTag");
+            await maybeDelete(() => prisma.tool.deleteMany(), "Tool");
+            await maybeDelete(() => prisma.tag.deleteMany(), "Tag");
+
+            console.log("🗑️  Existing (known) data removed. Proceeding with fresh seed…");
         } catch (wipeErr) {
-            console.error("⚠️  Failed to wipe existing data — continuing with seeding anyway", wipeErr);
+            console.error("⚠️  Unexpected error while wiping data — continuing with seeding anyway", wipeErr);
         }
     }
 

@@ -160,22 +160,8 @@ export function useToolsWithState(): ToolsWithStateResult {
           await mutateTools(optimisticData, false);
         }
 
-        // Make the actual API call
-        const response = await fetch(`/api/tools/${toolSlug}/usage`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        // Revalidate to ensure consistency
+        // Raw usage endpoint removed – skip server call
         await mutateTools();
-
-        // Also invalidate related caches
         await mutate("/api/tools?popular=true");
       } catch (error) {
         console.error("Failed to record tool usage:", error);
@@ -278,19 +264,7 @@ export function useToolWithUsage(slug: string) {
         await mutateTool(optimisticData, false);
       }
 
-      // Make API call
-      const response = await fetch(`/api/tools/${slug}/usage`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      // Revalidate
+      // Raw usage endpoint removed – skip server call
       await mutateTool();
       await mutate("/api/tools?popular=true");
     } catch (error) {

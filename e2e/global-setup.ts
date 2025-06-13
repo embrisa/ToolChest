@@ -71,7 +71,6 @@ async function seedE2EDatabase() {
 
   try {
     // Clean existing data
-    await prisma.toolUsage.deleteMany();
     await prisma.toolUsageStats.deleteMany();
     await prisma.toolTag.deleteMany();
     await prisma.tool.deleteMany();

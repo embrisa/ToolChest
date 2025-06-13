@@ -498,7 +498,7 @@ export class AnalyticsService extends BaseService {
     const cleanup = () => {
       const cutoffDate = new Date(
         Date.now() -
-          this.monitoringConfig.retentionPeriod * 24 * 60 * 60 * 1000,
+        this.monitoringConfig.retentionPeriod * 24 * 60 * 60 * 1000,
       );
 
       // Clean up old error logs
@@ -598,22 +598,14 @@ export class AnalyticsService extends BaseService {
               isActive: !filter?.includeInactive ? true : undefined,
             },
             include: {
-              usages: {
-                where: {
-                  timestamp: {
-                    gte: timeRange.start,
-                    lte: timeRange.end,
-                  },
-                },
-              },
               toolUsageStats: true,
             },
           });
 
           const analytics: ToolUsageAnalytics[] = await Promise.all(
             tools.map(async (tool) => {
-              const usageCount = tool.usages.length;
-              const trend = await this.getUsageTrend(tool.id, timeRange);
+              const usageCount = tool.toolUsageStats?.usageCount || 0;
+              const trend = { daily: [], weekly: [], monthly: [] };
               const growth = this.calculateGrowthRates(trend);
 
               return {
@@ -621,11 +613,8 @@ export class AnalyticsService extends BaseService {
                 toolName: tool.name,
                 toolSlug: tool.slug,
                 usageCount,
-                uniqueUsers: await this.getUniqueUsersCount(tool.id, timeRange),
-                averageSessionTime: await this.getAverageSessionTime(
-                  tool.id,
-                  timeRange,
-                ),
+                uniqueUsers: 0,
+                averageSessionTime: 0,
                 lastUsed: tool.toolUsageStats?.lastUsed || new Date(0),
                 trend,
                 growth,
@@ -770,34 +759,39 @@ export class AnalyticsService extends BaseService {
   private async getTotalUsageCount(
     timeRange: AnalyticsTimeRange,
   ): Promise<number> {
-    return this.prisma.toolUsage.count({
+    const result = await this.prisma.toolUsageStats.aggregate({
+      _sum: {
+        usageCount: true,
+      },
       where: {
-        timestamp: {
+        lastUsed: {
           gte: timeRange.start,
           lte: timeRange.end,
         },
       },
     });
+
+    return result._sum?.usageCount ?? 0;
   }
 
   private async getActiveUsersCount(
     timeRange: AnalyticsTimeRange,
   ): Promise<number> {
-    // Since we don't track individual users for privacy, return estimated count
     const totalUsage = await this.getTotalUsageCount(timeRange);
-    // Estimate based on average sessions per user (rough approximation)
+    // Rough estimate: assume 3 runs per user
     return Math.ceil(totalUsage / 3);
   }
 
   private async getTopTools(timeRange: AnalyticsTimeRange, limit: number) {
     const tools = await this.prisma.tool.findMany({
       include: {
-        usages: {
-          where: {
-            timestamp: {
-              gte: timeRange.start,
-              lte: timeRange.end,
-            },
+        toolUsageStats: true,
+      },
+      where: {
+        toolUsageStats: {
+          lastUsed: {
+            gte: timeRange.start,
+            lte: timeRange.end,
           },
         },
       },
@@ -806,9 +800,9 @@ export class AnalyticsService extends BaseService {
     return tools
       .map((tool) => ({
         toolId: tool.id,
-        name: tool.name,
-        usageCount: tool.usages.length,
-        growthRate: 0, // Calculate based on previous period
+        name: (tool as any).name ?? tool.nameKey ?? "Unknown", // fallback keys
+        usageCount: tool.toolUsageStats?.usageCount || 0,
+        growthRate: 0, // not tracked without raw events
       }))
       .sort((a, b) => b.usageCount - a.usageCount)
       .slice(0, limit);
@@ -818,28 +812,8 @@ export class AnalyticsService extends BaseService {
     timeRange: AnalyticsTimeRange,
     limit: number,
   ) {
-    const recentUsages = await this.prisma.toolUsage.findMany({
-      where: {
-        timestamp: {
-          gte: timeRange.start,
-          lte: timeRange.end,
-        },
-      },
-      include: {
-        tool: true,
-      },
-      orderBy: {
-        timestamp: "desc",
-      },
-      take: limit,
-    });
-
-    return recentUsages.map((usage) => ({
-      timestamp: usage.timestamp,
-      action: "tool_used",
-      toolName: usage.tool.name,
-      metadata: (usage.metadata as Record<string, unknown>) || {},
-    }));
+    // Raw recent activity feed removed with ToolUsage.
+    return [];
   }
 
   private async getPeriodComparison(timeRange: AnalyticsTimeRange) {
@@ -885,75 +859,11 @@ export class AnalyticsService extends BaseService {
   }
 
   private async getUsageTrend(toolId: string, timeRange: AnalyticsTimeRange) {
-    // Generate trend data (daily, weekly, monthly)
-    const usages = await this.prisma.toolUsage.findMany({
-      where: {
-        toolId,
-        timestamp: {
-          gte: timeRange.start,
-          lte: timeRange.end,
-        },
-      },
-      orderBy: {
-        timestamp: "asc",
-      },
-    });
-
-    // Group by day for daily trend
-    const dailyData = this.groupUsagesByPeriod(usages, "day");
-    const weeklyData = this.groupUsagesByPeriod(usages, "week");
-    const monthlyData = this.groupUsagesByPeriod(usages, "month");
-
+    // Detailed trends require raw events which are no longer stored.
     return {
-      daily: dailyData,
-      weekly: weeklyData,
-      monthly: monthlyData,
-    };
-  }
-
-  private groupUsagesByPeriod(
-    usages: Array<{ timestamp: Date }>,
-    period: "day" | "week" | "month",
-  ): number[] {
-    // Simple implementation - group usages by period and count
-    const groups: Record<string, number> = {};
-
-    usages.forEach((usage) => {
-      const date = new Date(usage.timestamp);
-      let key: string;
-
-      if (period === "day") {
-        key = date.toISOString().split("T")[0];
-      } else if (period === "week") {
-        const weekStart = new Date(date);
-        weekStart.setDate(date.getDate() - date.getDay());
-        key = weekStart.toISOString().split("T")[0];
-      } else {
-        key = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, "0")}`;
-      }
-
-      groups[key] = (groups[key] || 0) + 1;
-    });
-
-    return Object.values(groups);
-  }
-
-  private calculateGrowthRates(trend: {
-    daily: number[];
-    weekly: number[];
-    monthly: number[];
-  }) {
-    const calculateRate = (data: number[]) => {
-      if (data.length < 2) return 0;
-      const current = data[data.length - 1];
-      const previous = data[data.length - 2];
-      return previous > 0 ? ((current - previous) / previous) * 100 : 0;
-    };
-
-    return {
-      dailyGrowth: calculateRate(trend.daily),
-      weeklyGrowth: calculateRate(trend.weekly),
-      monthlyGrowth: calculateRate(trend.monthly),
+      daily: [],
+      weekly: [],
+      monthly: [],
     };
   }
 
@@ -961,18 +871,8 @@ export class AnalyticsService extends BaseService {
     toolId: string,
     timeRange: AnalyticsTimeRange,
   ): Promise<number> {
-    // Since we don't track individual users, estimate based on usage patterns
-    const totalUsage = await this.prisma.toolUsage.count({
-      where: {
-        toolId,
-        timestamp: {
-          gte: timeRange.start,
-          lte: timeRange.end,
-        },
-      },
-    });
-
-    return Math.ceil(totalUsage / 2); // Estimate 2 uses per unique user
+    // No longer track per-user events. Return 0 or estimate based on stats.
+    return 0;
   }
 
   private async getAverageSessionTime(
@@ -986,25 +886,11 @@ export class AnalyticsService extends BaseService {
   private async generateUsageChart(
     timeRange: AnalyticsTimeRange,
   ): Promise<AnalyticsChart> {
-    const usages = await this.prisma.toolUsage.findMany({
-      where: {
-        timestamp: {
-          gte: timeRange.start,
-          lte: timeRange.end,
-        },
-      },
-    });
-
-    const dailyUsage = this.groupUsagesByPeriod(usages, "day");
-    const labels = this.generateDateLabels(timeRange, "day");
-
+    // Raw usage per day no longer available; return empty chart.
     return {
       type: "line",
-      title: "Daily Usage Trend",
-      data: labels.map((label, index) => ({
-        label,
-        value: dailyUsage[index] || 0,
-      })),
+      title: "Daily Usage Trend (not available)",
+      data: [],
       options: {
         colors: ["#3B82F6"],
         showLegend: false,
@@ -1037,29 +923,21 @@ export class AnalyticsService extends BaseService {
   private async generateTrendsChart(
     timeRange: AnalyticsTimeRange,
   ): Promise<AnalyticsChart> {
-    // Generate a pie chart showing usage distribution by tool tag
+    // Generate a pie chart showing distribution by tag using aggregate stats
     const tools = await this.prisma.tool.findMany({
       include: {
         tags: {
-          include: {
-            tag: true,
-          },
+          include: { tag: true },
         },
-        usages: {
-          where: {
-            timestamp: {
-              gte: timeRange.start,
-              lte: timeRange.end,
-            },
-          },
-        },
+        toolUsageStats: true,
       },
     });
 
     const tagUsage: Record<string, number> = {};
     tools.forEach((tool) => {
       const tag = tool.tags[0]?.tag.name || "Untagged";
-      tagUsage[tag] = (tagUsage[tag] || 0) + tool.usages.length;
+      tagUsage[tag] =
+        (tagUsage[tag] || 0) + (tool.toolUsageStats?.usageCount || 0);
     });
 
     return {
@@ -1100,5 +978,60 @@ export class AnalyticsService extends BaseService {
     }
 
     return labels;
+  }
+
+  /**
+   * Utility: group an array of timestamped usage-like objects by period and return counts.
+   * Retained for unit-test coverage even though raw events are gone.
+   */
+  private groupUsagesByPeriod(
+    usages: Array<{ timestamp: Date }>,
+    period: "day" | "week" | "month",
+  ): number[] {
+    const groups: Record<string, number> = {};
+
+    usages.forEach((usage) => {
+      const date = new Date(usage.timestamp);
+      let key: string;
+
+      if (period === "day") {
+        key = date.toISOString().split("T")[0];
+      } else if (period === "week") {
+        const weekStart = new Date(date);
+        weekStart.setDate(date.getDate() - date.getDay());
+        key = weekStart.toISOString().split("T")[0];
+      } else {
+        key = `${date.getFullYear()}-${(date.getMonth() + 1)
+          .toString()
+          .padStart(2, "0")}`;
+      }
+
+      groups[key] = (groups[key] || 0) + 1;
+    });
+
+    return Object.values(groups);
+  }
+
+  /**
+   * Utility: calculate growth percentages given grouped counts.
+   * Still used in tests even after removal of raw event data.
+   */
+  private calculateGrowthRates(trend: {
+    daily: number[];
+    weekly: number[];
+    monthly: number[];
+  }) {
+    const calculateRate = (data: number[]) => {
+      if (data.length < 2) return 0;
+      const current = data[data.length - 1];
+      const previous = data[data.length - 2];
+      return previous > 0 ? ((current - previous) / previous) * 100 : 0;
+    };
+
+    return {
+      dailyGrowth: calculateRate(trend.daily),
+      weeklyGrowth: calculateRate(trend.weekly),
+      monthlyGrowth: calculateRate(trend.monthly),
+    };
   }
 }

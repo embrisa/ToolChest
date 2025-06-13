@@ -322,7 +322,7 @@ export class HashGeneratorService {
     if (file.size > FILE_SIZE_LIMITS.MAX_FILE_SIZE) {
       validationErrors.push(
         `File size (${this.formatFileSize(file.size)}) exceeds maximum limit of ${this.formatFileSize(FILE_SIZE_LIMITS.MAX_FILE_SIZE)}. ` +
-          "Please select a smaller file.",
+        "Please select a smaller file.",
       );
     }
 
@@ -331,7 +331,7 @@ export class HashGeneratorService {
       const estimatedTime = Math.ceil(file.size / (1024 * 1024)) * 2; // Rough estimate: 2 seconds per MB
       warnings.push(
         `Large file detected (${this.formatFileSize(file.size)}). ` +
-          `Processing may take approximately ${estimatedTime} seconds.`,
+        `Processing may take approximately ${estimatedTime} seconds.`,
       );
     }
 
@@ -348,7 +348,7 @@ export class HashGeneratorService {
       if (!isAllowed) {
         warnings.push(
           `File type "${file.type}" is not in our verified list. ` +
-            "The file will be processed as binary data, which is safe for hash generation.",
+          "The file will be processed as binary data, which is safe for hash generation.",
         );
       } else if (category) {
         // Provide category-specific information and warnings
@@ -382,7 +382,7 @@ export class HashGeneratorService {
       // Provide guidance when MIME type is missing but extension is available
       warnings.push(
         `No MIME type detected, but file extension ".${fileExtension}" suggests this may be a valid file. ` +
-          "Processing will continue as binary data.",
+        "Processing will continue as binary data.",
       );
     } else {
       warnings.push(
@@ -740,18 +740,8 @@ export class HashGeneratorService {
    * Track usage statistics (privacy-compliant)
    */
   static async trackUsage(metrics: HashUsageMetrics): Promise<void> {
-    try {
-      await fetch("/api/tools/hash-generator/usage", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(metrics),
-      });
-    } catch (_error) {
-      // Silently fail - usage tracking is not critical
-      console.warn("Failed to track usage:", _error);
-    }
+    // Raw usage tracking removed.
+    return;
   }
 
   /**

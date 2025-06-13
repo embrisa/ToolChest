@@ -22,7 +22,6 @@ model Tool {
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
   tags           ToolTag[]
-  usages         ToolUsage[]
   toolUsageStats ToolUsageStats?
 }
 
@@ -55,12 +54,4 @@ model ToolUsageStats {
   usageCount Int      @default(0)
   lastUsed   DateTime @default(now())
   tool       Tool     @relation(fields: [toolId], references: [id])
-}
-
-model ToolUsage {
-  id        String   @id @default(cuid())
-  toolId    String
-  timestamp DateTime @default(now())
-  metadata  Json?
-  tool      Tool     @relation(fields: [toolId], references: [id])
 }

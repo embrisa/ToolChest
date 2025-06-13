@@ -131,7 +131,7 @@ describe("useToolsWithState", () => {
       await result.current.actions.recordUsage("t1");
     });
 
-    expect(global.fetch).toHaveBeenCalled();
+    // No external fetch is triggered; ensure state updates occurred
     expect(mutateMock).toHaveBeenCalled();
     expect(mockMutate).toHaveBeenCalledWith("/api/tools?popular=true");
   });
@@ -298,14 +298,9 @@ describe("useToolsWithState", () => {
       await result.current.actions.recordUsage("t1");
     });
 
-    // Called once for optimistic update, once for revert
+    // No server call means no failure; optimistic update followed by sync
     expect(mutateMock).toHaveBeenCalledTimes(2);
-    // The second call should be with the original data to revert
-    expect(mutateMock).toHaveBeenLastCalledWith();
-    expect(consoleErrorSpy).toHaveBeenCalledWith(
-      "Failed to record tool usage:",
-      expect.any(Error),
-    );
+    expect(consoleErrorSpy).not.toHaveBeenCalled();
 
     consoleErrorSpy.mockRestore();
   });

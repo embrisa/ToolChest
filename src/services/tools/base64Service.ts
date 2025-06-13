@@ -876,20 +876,7 @@ export class Base64Service {
     clientSide?: boolean;
     error?: string;
   }): Promise<void> {
-    try {
-      await fetch("/api/tools/base64/usage", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...usageData,
-          clientSide: usageData.clientSide ?? true,
-        }),
-      });
-    } catch (error) {
-      // Silently fail usage tracking - don't interrupt user experience
-      console.warn("Usage tracking failed:", error);
-    }
+    // Raw usage logging removed – no-op
+    return;
   }
 }
