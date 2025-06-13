@@ -12,6 +12,6 @@ export function useTypedTranslations<Schema>(namespace: string) {
   // Cast the runtime translator to our dot-key constrained type.
   return useNextIntlTranslations(namespace) as unknown as (
     key: MessageKeys<Schema>,
-    params?: Record<string, any>,
+    params?: Record<string, unknown>,
   ) => string;
 }
