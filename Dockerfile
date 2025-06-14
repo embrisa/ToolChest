@@ -51,6 +51,9 @@ RUN chown nextjs:nodejs .next
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
+# Copy translation messages so next-intl can load them at runtime
+COPY --from=builder --chown=nextjs:nodejs /app/messages ./.next/standalone/server/messages
+
 # Copy Prisma files and generate client
 COPY --from=builder /app/prisma ./prisma
 # Copy Prisma dependencies required at runtime
