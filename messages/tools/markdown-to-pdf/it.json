@@ -1,128 +1,138 @@
 {
   "metadata": {
-    "title": "Markdown to PDF Converter | tool-chest",
-    "description": "Convert Markdown to professional PDF documents with syntax highlighting, custom styling, and support for tables, code blocks, and images. Privacy-first client-side processing.",
+    "title": "Convertitore da Markdown a PDF | tool-chest",
+    "description": "Converti Markdown in documenti PDF professionali con evidenziazione della sintassi, stile personalizzato e supporto per tabelle, blocchi di codice e immagini. Elaborazione lato client che dà priorità alla privacy.",
     "keywords": [
       "markdown to pdf",
+      "markdown a pdf",
       "markdown converter",
+      "convertitore markdown",
       "pdf generator",
+      "generatore pdf",
       "markdown pdf",
+      "markdown a pdf",
       "syntax highlighting",
+      "evidenziazione sintassi",
       "code blocks",
+      "blocchi di codice",
       "tables",
+      "tabelle",
       "document converter",
+      "convertitore documenti",
       "markdown export",
-      "free tool"
+      "esportazione markdown",
+      "free tool",
+      "strumento gratuito"
     ]
   },
   "page": {
-    "title": "Markdown to PDF",
-    "description": "Convert Markdown files to PDF with custom styling options.",
-    "privacyMessage": "🔒 Privacy-First • GitHub Flavored Markdown • Client-Side Processing"
+    "title": "Markdown in PDF",
+    "description": "Converti file Markdown in PDF con opzioni di stile personalizzate.",
+    "privacyMessage": "🔒 Privacy Prima di Tutto • GitHub Flavored Markdown • Elaborazione lato client"
   },
   "featureGrid": {
     "live-preview": {
-      "title": "Live Preview",
-      "description": "Real-time markdown preview with instant rendering",
+      "title": "Anteprima live",
+      "description": "Anteprima Markdown in tempo reale con rendering istantaneo",
       "icon": "👁️"
     },
     "templates": {
-      "title": "Multiple Templates",
-      "description": "PDF templates and themes for different use cases",
+      "title": "Più template",
+      "description": "Template e temi PDF per diversi casi d'uso",
       "icon": "🎨"
     },
     "gfm-support": {
-      "title": "GitHub Flavored Markdown",
-      "description": "Full GFM support including tables and task lists",
+      "title": "Markdown stile GitHub",
+      "description": "Supporto completo GFM inclusi tabelle e liste di attività",
       "icon": "📝"
     },
     "syntax-highlighting": {
-      "title": "Syntax Highlighting",
-      "description": "Code blocks with syntax highlighting for multiple languages",
+      "title": "Evidenziazione della sintassi",
+      "description": "Blocchi di codice con evidenziazione della sintassi per più linguaggi",
       "icon": "💻"
     },
     "custom-styling": {
-      "title": "Custom Styling",
-      "description": "Customize fonts, colors, and layout options",
+      "title": "Stile personalizzato",
+      "description": "Personalizza font, colori e opzioni di layout",
       "icon": "⚙️"
     },
     "file-upload": {
-      "title": "File Upload",
-      "description": "Upload .md, .markdown, or .txt files directly",
+      "title": "Caricamento file",
+      "description": "Carica direttamente file .md, .markdown o .txt",
       "icon": "📁"
     },
     "professional-output": {
-      "title": "Professional Output",
-      "description": "High-quality PDF generation with metadata",
+      "title": "Output professionale",
+      "description": "Generazione PDF di alta qualità con metadati",
       "icon": "📄"
     },
     "privacy-first": {
-      "title": "Privacy-First",
-      "description": "All processing happens in your browser",
+      "title": "Privacy prima di tutto",
+      "description": "Tutto il processo avviene nel tuo browser",
       "icon": "🔒"
     }
   },
   "info": {
-    "title": "About Markdown to PDF Conversion",
-    "description": "Convert your Markdown documents to professionally formatted PDF files with customizable styling options. Perfect for documentation, reports, articles, and presentations.",
+    "title": "Informazioni sulla conversione da Markdown a PDF",
+    "description": "Trasforma i tuoi documenti Markdown in file PDF professionali con facilità. Il nostro convertitore supporta GitHub Flavored Markdown (GFM), incluse tabelle, blocchi di codice e liste di attività, offrendoti la flessibilità di creare documenti che mantengono la loro formattazione e stile.",
     "keyFeatures": {
-      "title": "Key Features",
+      "title": "Funzionalità chiave",
       "items": [
-        "Full Markdown syntax support",
-        "Custom PDF styling and themes",
-        "Multiple page sizes and orientations",
-        "Syntax highlighting for code blocks",
-        "Table and image support",
-        "Header and footer customization",
-        "File upload support (.md, .markdown, .txt)",
-        "Drag and drop file upload",
-        "Real-time word count and statistics",
-        "Professional PDF output with metadata"
+        "Anteprima Markdown live con rendering in tempo reale",
+        "Più modelli e temi PDF",
+        "Supporto GitHub Flavored Markdown",
+        "Tabelle, blocchi di codice e liste di attività",
+        "Opzioni di stile e formattazione personalizzate",
+        "Diversi formati PDF (A4, Lettera, ecc.)",
+        "Supporto per il caricamento di file (.md, .markdown, .txt)",
+        "Caricamento file tramite trascinamento",
+        "Conteggio parole e statistiche in tempo reale",
+        "Output PDF professionale con metadati"
       ]
     },
     "supportedFeatures": {
-      "title": "Supported Markdown Features",
+      "title": "Funzionalità Markdown supportate",
       "items": [
-        "Headings (H1-H6) with automatic numbering",
-        "Bold and italic text formatting",
-        "Links and images with captions",
-        "Code blocks with syntax highlighting",
-        "Tables with proper formatting",
-        "Blockquotes and nested lists",
-        "Task lists with checkboxes",
-        "Auto-linking of URLs"
+        "Intestazioni (H1-H6) con numerazione automatica",
+        "Formattazione del testo in grassetto e corsivo",
+        "Link e immagini con didascalie",
+        "Blocchi di codice con evidenziazione della sintassi",
+        "Tabelle con formattazione corretta",
+        "Citazioni a blocco e liste nidificate",
+        "Liste di attività con caselle di controllo",
+        "Collegamento automatico degli URL"
       ]
     },
     "pdfTemplates": {
-      "title": "PDF Templates",
+      "title": "Modelli PDF",
       "items": [
-        "Default: Clean and simple design for general use",
-        "Academic: Professional format for research papers",
-        "Minimal: Clean design with lots of white space",
-        "Professional: Business-ready with headers and footers"
+        "Predefinito: Design pulito e semplice per uso generale",
+        "Accademico: Formato professionale per documenti di ricerca",
+        "Minimale: Design pulito con molto spazio bianco",
+        "Professionale: Pronto per il business con intestazioni e piè di pagina"
       ]
     },
     "howToUse": {
-      "title": "How to Use",
+      "title": "Come usare",
       "items": [
-        "Choose between typing in the editor or uploading a markdown file",
-        "Write or paste your markdown content in the editor",
-        "Use the live preview to see how your document will look",
-        "Select a template or customize styling options",
-        "Click 'Generate PDF' to create your document",
-        "Download your professional PDF file"
+        "Scegli tra la digitazione nell'editor o il caricamento di un file Markdown",
+        "Scrivi o incolla il tuo contenuto Markdown nell'editor",
+        "Usa l'anteprima live per vedere come apparirà il tuo documento",
+        "Seleziona un modello o personalizza le opzioni di stile",
+        "Clicca su 'Genera PDF' per creare il tuo documento",
+        "Scarica il tuo file PDF professionale"
       ]
     },
     "features": {
       "items": [
-        "Live preview",
-        "Multiple templates",
-        "GFM support",
-        "Syntax highlighting",
-        "Custom styling",
-        "File upload",
-        "Professional output",
-        "Privacy-first"
+        "Anteprima live",
+        "Più modelli",
+        "Supporto GFM",
+        "Evidenziazione della sintassi",
+        "Stile personalizzato",
+        "Caricamento file",
+        "Output professionale",
+        "Privacy prima di tutto"
       ]
     }
   }

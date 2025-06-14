@@ -1,6 +1,6 @@
 {
   "header": {
-    "brand": "Coffre à Outils",
+    "brand": "tool-chest",
     "navigation": {
       "home": "Accueil",
       "tools": "Outils",
@@ -14,7 +14,7 @@
     }
   },
   "footer": {
-    "copyright": "© 2024 Tool-Chest",
+    "copyright": "© 2024 tool-chest",
     "links": {
       "privacy": "Politique de confidentialité",
       "terms": "Conditions d'utilisation",
@@ -29,7 +29,7 @@
     "admin": "Admin",
     "dashboard": "Tableau de bord",
     "analytics": "Analyses",
-    "tags": "Étiquettes",
+    "tags": "Balises",
     "monitoring": "Surveillance",
     "relationships": "Relations"
   },
@@ -38,22 +38,22 @@
     "current": "Langue actuelle",
     "selectLanguage": "Sélectionner la langue",
     "languages": {
-      "en": "Anglais",
-      "es": "Espagnol",
-      "zh": "Chinois",
-      "hi": "Hindi",
-      "pt": "Portugais",
-      "ru": "Russe",
-      "ja": "Japonais",
-      "de": "Allemand",
+      "en": "English",
+      "es": "Español",
+      "zh": "中文",
+      "hi": "हिन्दी",
+      "pt": "Português",
+      "ru": "Русский",
+      "ja": "日本語",
+      "de": "Deutsch",
       "fr": "Français",
-      "ko": "Coréen",
-      "it": "Italien",
-      "tr": "Turc",
-      "pl": "Polonais",
-      "nl": "Néerlandais",
-      "vi": "Vietnamien",
-      "uk": "Ukrainien"
+      "ko": "한국어",
+      "it": "Italiano",
+      "tr": "Türkçe",
+      "pl": "Polski",
+      "nl": "Nederlands",
+      "vi": "Tiếng Việt",
+      "uk": "Українська"
     }
   }
 }

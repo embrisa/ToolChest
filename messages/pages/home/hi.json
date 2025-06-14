@@ -3,7 +3,7 @@
     "title": "उपकरण-चेस्ट",
     "subtitle": "आवश्यक कंप्यूटर टूल का आपका संग्रह।",
     "description": "आसानी से एनकोड, डिकोड, जनरेट, कन्वर्ट, और अधिक।",
-    "searchPlaceholder": "खोज उपकरण ..."
+    "searchPlaceholder": "खोज उपकरण"
   },
   "stats": {
     "toolsAvailable": "उपलब्ध उपकरण",
@@ -19,19 +19,19 @@
     "active": "सक्रिय"
   },
   "loading": {
-    "loadingTools": "लोडिंग टूल ...",
+    "loadingTools": "लोडिंग टूल",
     "toolsFound": "उपकरण मिले"
   },
   "noResults": {
     "title": "कोई उपकरण नहीं मिला",
-    "description": "कोई उपकरण मेल नहीं खाता \"{क्वेरी}\"",
+    "description": "कोई उपकरण मेल नहीं खाता \"{query}\"",
     "descriptionFilters": "कोई भी उपकरण आपके चयनित फिल्टर से मेल नहीं खाता है"
   },
   "errors": {
-    "troubleLoading": "हमें टूल लोड करने में परेशानी हो रही है। "
+    "troubleLoading": "हमें टूल लोड करने में परेशानी हो रही है। कृपया बाद में पुनः प्रयास करें।"
   },
   "search": {
-    "placeholder": "खोज उपकरण ...",
+    "placeholder": "खोज उपकरण",
     "clearSearch": "स्पष्ट खोज",
     "searchResults": "खोज के परिणाम"
   },

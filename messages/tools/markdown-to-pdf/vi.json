@@ -1,128 +1,138 @@
 {
   "metadata": {
-    "title": "Markdown to PDF Converter | tool-chest",
-    "description": "Convert Markdown to professional PDF documents with syntax highlighting, custom styling, and support for tables, code blocks, and images. Privacy-first client-side processing.",
+    "title": "Công cụ Chuyển đổi Markdown sang PDF | tool-chest",
+    "description": "Chuyển đổi Markdown thành tài liệu PDF chuyên nghiệp với tô sáng cú pháp, kiểu dáng tùy chỉnh và hỗ trợ bảng, khối mã và hình ảnh. Xử lý phía máy khách ưu tiên quyền riêng tư.",
     "keywords": [
       "markdown to pdf",
+      "markdown sang pdf",
       "markdown converter",
+      "công cụ chuyển đổi markdown",
       "pdf generator",
+      "công cụ tạo pdf",
       "markdown pdf",
+      "markdown sang pdf",
       "syntax highlighting",
+      "tô sáng cú pháp",
       "code blocks",
+      "khối mã",
       "tables",
+      "bảng",
       "document converter",
+      "công cụ chuyển đổi tài liệu",
       "markdown export",
-      "free tool"
+      "xuất markdown",
+      "free tool",
+      "công cụ miễn phí"
     ]
   },
   "page": {
-    "title": "Markdown to PDF",
-    "description": "Convert Markdown files to PDF with custom styling options.",
-    "privacyMessage": "🔒 Privacy-First • GitHub Flavored Markdown • Client-Side Processing"
+    "title": "Markdown sang PDF",
+    "description": "Chuyển đổi tệp Markdown sang PDF với các tuỳ chọn kiểu dáng tùy chỉnh.",
+    "privacyMessage": "🔒 Ưu tiên quyền riêng tư • Markdown dạng GitHub • Xử lý phía máy khách"
   },
   "featureGrid": {
     "live-preview": {
-      "title": "Live Preview",
-      "description": "Real-time markdown preview with instant rendering",
+      "title": "Xem trước trực tiếp",
+      "description": "Xem trước Markdown thời gian thực với kết xuất tức thì",
       "icon": "👁️"
     },
     "templates": {
-      "title": "Multiple Templates",
-      "description": "PDF templates and themes for different use cases",
+      "title": "Nhiều mẫu",
+      "description": "Các mẫu và chủ đề PDF cho nhiều trường hợp sử dụng",
       "icon": "🎨"
     },
     "gfm-support": {
-      "title": "GitHub Flavored Markdown",
-      "description": "Full GFM support including tables and task lists",
+      "title": "Markdown dạng GitHub",
+      "description": "Hỗ trợ GFM đầy đủ bao gồm bảng và danh sách công việc",
       "icon": "📝"
     },
     "syntax-highlighting": {
-      "title": "Syntax Highlighting",
-      "description": "Code blocks with syntax highlighting for multiple languages",
+      "title": "Tô sáng cú pháp",
+      "description": "Khối mã với tô sáng cú pháp cho nhiều ngôn ngữ",
       "icon": "💻"
     },
     "custom-styling": {
-      "title": "Custom Styling",
-      "description": "Customize fonts, colors, and layout options",
+      "title": "Tùy chỉnh kiểu dáng",
+      "description": "Tùy chỉnh phông chữ, màu sắc và tùy chọn bố cục",
       "icon": "⚙️"
     },
     "file-upload": {
-      "title": "File Upload",
-      "description": "Upload .md, .markdown, or .txt files directly",
+      "title": "Tải lên tệp",
+      "description": "Tải trực tiếp các tệp .md, .markdown hoặc .txt",
       "icon": "📁"
     },
     "professional-output": {
-      "title": "Professional Output",
-      "description": "High-quality PDF generation with metadata",
+      "title": "Đầu ra chuyên nghiệp",
+      "description": "Tạo PDF chất lượng cao với metadata",
       "icon": "📄"
     },
     "privacy-first": {
-      "title": "Privacy-First",
-      "description": "All processing happens in your browser",
+      "title": "Ưu tiên quyền riêng tư",
+      "description": "Mọi xử lý đều diễn ra trong trình duyệt của bạn",
       "icon": "🔒"
     }
   },
   "info": {
-    "title": "About Markdown to PDF Conversion",
-    "description": "Convert your Markdown documents to professionally formatted PDF files with customizable styling options. Perfect for documentation, reports, articles, and presentations.",
+    "title": "Giới thiệu về Chuyển đổi Markdown sang PDF",
+    "description": "Dễ dàng chuyển đổi tài liệu Markdown của bạn sang các tệp PDF chuyên nghiệp. Công cụ chuyển đổi của chúng tôi hỗ trợ GitHub Flavored Markdown (GFM) bao gồm bảng, khối mã và danh sách tác vụ, mang lại cho bạn sự linh hoạt để tạo các tài liệu giữ nguyên định dạng và kiểu dáng của chúng.",
     "keyFeatures": {
-      "title": "Key Features",
+      "title": "Các tính năng chính",
       "items": [
-        "Full Markdown syntax support",
-        "Custom PDF styling and themes",
-        "Multiple page sizes and orientations",
-        "Syntax highlighting for code blocks",
-        "Table and image support",
-        "Header and footer customization",
-        "File upload support (.md, .markdown, .txt)",
-        "Drag and drop file upload",
-        "Real-time word count and statistics",
-        "Professional PDF output with metadata"
+        "Xem trước Markdown trực tiếp với kết xuất thời gian thực",
+        "Nhiều mẫu và chủ đề PDF",
+        "Hỗ trợ GitHub Flavored Markdown",
+        "Bảng, khối mã và danh sách tác vụ",
+        "Tùy chọn kiểu dáng và định dạng tùy chỉnh",
+        "Nhiều định dạng PDF (A4, Letter, v.v.)",
+        "Hỗ trợ tải lên tệp (.md, .markdown, .txt)",
+        "Kéo và thả để tải lên tệp",
+        "Đếm từ và thống kê thời gian thực",
+        "Đầu ra PDF chuyên nghiệp với siêu dữ liệu"
       ]
     },
     "supportedFeatures": {
-      "title": "Supported Markdown Features",
+      "title": "Các tính năng Markdown được hỗ trợ",
       "items": [
-        "Headings (H1-H6) with automatic numbering",
-        "Bold and italic text formatting",
-        "Links and images with captions",
-        "Code blocks with syntax highlighting",
-        "Tables with proper formatting",
-        "Blockquotes and nested lists",
-        "Task lists with checkboxes",
-        "Auto-linking of URLs"
+        "Tiêu đề (H1-H6) với đánh số tự động",
+        "Định dạng văn bản in đậm và in nghiêng",
+        "Liên kết và hình ảnh có chú thích",
+        "Khối mã với tô sáng cú pháp",
+        "Bảng với định dạng phù hợp",
+        "Trích dẫn khối và danh sách lồng nhau",
+        "Danh sách tác vụ có hộp kiểm",
+        "Tự động liên kết URL"
       ]
     },
     "pdfTemplates": {
-      "title": "PDF Templates",
+      "title": "Mẫu PDF",
       "items": [
-        "Default: Clean and simple design for general use",
-        "Academic: Professional format for research papers",
-        "Minimal: Clean design with lots of white space",
-        "Professional: Business-ready with headers and footers"
+        "Mặc định: Thiết kế sạch sẽ và đơn giản để sử dụng chung",
+        "Học thuật: Định dạng chuyên nghiệp cho các bài nghiên cứu",
+        "Tối giản: Thiết kế sạch sẽ với nhiều không gian trắng",
+        "Chuyên nghiệp: Sẵn sàng cho doanh nghiệp với tiêu đề và chân trang"
       ]
     },
     "howToUse": {
-      "title": "How to Use",
+      "title": "Cách sử dụng",
       "items": [
-        "Choose between typing in the editor or uploading a markdown file",
-        "Write or paste your markdown content in the editor",
-        "Use the live preview to see how your document will look",
-        "Select a template or customize styling options",
-        "Click 'Generate PDF' to create your document",
-        "Download your professional PDF file"
+        "Chọn giữa nhập trong trình chỉnh sửa hoặc tải lên tệp Markdown",
+        "Viết hoặc dán nội dung Markdown của bạn vào trình chỉnh sửa",
+        "Sử dụng xem trước trực tiếp để xem tài liệu của bạn sẽ trông như thế nào",
+        "Chọn một mẫu hoặc tùy chỉnh các tùy chọn kiểu dáng",
+        "Nhấp vào 'Tạo PDF' để tạo tài liệu của bạn",
+        "Tải xuống tệp PDF chuyên nghiệp của bạn"
       ]
     },
     "features": {
       "items": [
-        "Live preview",
-        "Multiple templates",
-        "GFM support",
-        "Syntax highlighting",
-        "Custom styling",
-        "File upload",
-        "Professional output",
-        "Privacy-first"
+        "Xem trước trực tiếp",
+        "Nhiều mẫu",
+        "Hỗ trợ GFM",
+        "Tô sáng cú pháp",
+        "Tùy chỉnh kiểu dáng",
+        "Tải lên tệp",
+        "Đầu ra chuyên nghiệp",
+        "Ưu tiên quyền riêng tư"
       ]
     }
   }

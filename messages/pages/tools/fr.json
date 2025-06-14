@@ -3,7 +3,7 @@
     "title": "Tous les outils",
     "subtitle": "Explorez notre collection complète d'outils utilitaires conçus pour rendre votre flux de travail de développement plus efficace.",
     "loading": "Chargement des outils...",
-    "toolsAvailable": "outils disponibles",
+    "toolsAvailable": "Outils disponibles",
     "availableTools": "Outils disponibles",
     "description": "Utilitaires de qualité professionnelle pour le développement web"
   },
@@ -18,7 +18,7 @@
   },
   "features": {
     "privacy": {
-      "title": "La confidentialité d'abord",
+      "title": "Confidentialité d'abord",
       "description": "Tous les outils traitent les données localement dans votre navigateur"
     },
     "free": {

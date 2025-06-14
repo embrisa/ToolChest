@@ -13,55 +13,65 @@
       "url-safe",
       "online tool",
       "free",
-      "privacy"
+      "privacy",
+      "codificador",
+      "decodificador",
+      "codificar",
+      "decodificar",
+      "texto",
+      "archivo",
+      "url-segura",
+      "herramienta en línea",
+      "gratis",
+      "privacidad"
     ]
   },
   "page": {
     "title": "Base64 codificador y decodificador",
     "description": "Codificar y decodificar datos Base64 con soporte para texto y archivos.",
-    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
+    "privacyNotice": "Todo el procesamiento ocurre en su navegador para <bold>máxima privacidad</bold>."
   },
   "tool": {
     "variants": {
       "standard": "Estándar",
-      "urlSafe": "Ausente"
+      "urlSafe": "URL segura"
     },
     "placeholders": {
-      "textInput": "Ingrese el texto para codificar/decodificar ...",
+      "textInput": "Ingrese el texto para codificar/decodificar...",
       "fileUpload": "Seleccione un archivo o arrastre y suelte"
     }
   },
   "validation": {
-    "invalidBase64": "Entrada no válida de base64",
+    "invalidBase64": "Entrada no válida de Base64",
     "fileTooLarge": "Archivo demasiado grande (máximo 10MB)"
   },
   "info": {
-    "title": "Acerca de Base64 Codificación",
-    "description": "Base64 es un esquema de codificación binario a texto que convierte los datos binarios en un formato de texto utilizando un conjunto de 64 caracteres. Se usa comúnmente para codificar datos en correo electrónico, páginas web y URL de datos, asegurando una transmisión segura sobre protocolos basados ​​en texto.",
+    "title": "Acerca de la Codificación Base64",
+    "description": "Base64 es un esquema de codificación binario a texto que convierte los datos binarios en un formato de texto utilizando un conjunto de 64 caracteres. Se usa comúnmente para codificar datos en correo electrónico, páginas web y URL de datos, asegurando una transmisión segura sobre protocolos basados en texto.",
     "keyFeatures": {
       "title": "Características clave",
       "items": [
         "Codificación/decodificación de texto y archivo",
-        "Opción de codificación de Base64 de URL Safe",
+        "Opción de codificación de Base64 de URL segura",
         "Copiar a la funcionalidad del portapapeles",
         "Descargar resultados codificados/decodificados",
         "Codificación/decodificación en tiempo real",
-        "Real-time encoding/decoding"
+        "Procesamiento del lado del cliente para la privacidad"
       ]
     },
     "securityAndPrivacy": {
-      "title": "Security & Privacy",
+      "title": "Seguridad y Privacidad",
       "items": [
-        "No data sent to servers",
-        "Processing happens in your browser",
-        "Files stay on your device",
-        "No data storage or logging"
+        "No se envían datos a los servidores",
+        "El procesamiento ocurre en su navegador",
+        "Los archivos permanecen en su dispositivo",
+        "No hay almacenamiento ni registro de datos"
       ]
     },
     "useCases": {
       "title": "Casos de uso comunes",
       "items": [
-        "Adjuntos de correo electrónico codificación",
+        "Codificación de adjuntos de correo electrónico",
         "URL de datos web",
         "Transmisión de datos de API",
         "Almacenamiento de blob de bases de datos",

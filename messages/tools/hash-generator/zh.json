@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "title": "哈希生成器 - 生成 MD5、SHA-1、SHA-256、SHA-512 哈希 | tool-chest",
+    "title": "哈希生成器 - 生成 MD5、SHA-1、SHA-256、SHA-512 哈希 | Tool-Chest",
     "description": "免费在线哈希生成器，支持 MD5、SHA-1、SHA-256、SHA-512 等算法。通过客户端处理为文本和文件生成安全哈希值。",
     "keywords": [
       "hash generator",
@@ -14,7 +14,15 @@
       "file hash",
       "text hash",
       "online tool",
-      "free"
+      "free",
+      "哈希生成器",
+      "校验和",
+      "加密",
+      "安全",
+      "文件哈希",
+      "文本哈希",
+      "在线工具",
+      "免费"
     ]
   },
   "page": {
@@ -65,8 +73,13 @@
       ]
     },
     "supportedAlgorithms": {
-      "title": "Supported Algorithms",
-      "items": ["MD5", "SHA-1", "SHA-256", "SHA-512"]
+      "title": "支持的算法",
+      "items": [
+        "MD5",
+        "SHA-1",
+        "SHA-256",
+        "SHA-512"
+      ]
     }
   },
   "tool": {

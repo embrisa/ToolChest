@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Hash Generator - Generate MD5, SHA-1, SHA-256, SHA-512 Hashes | tool-chest",
-    "description": "Free online hash generator for MD5, SHA-1, SHA-256, SHA-512, and other hash algorithms. Generate secure hashes for text and files with client-side processing.",
+    "title": "Hash Generator - Generuj Hashe MD5, SHA-1, SHA-256, SHA-512 | Tool-Chest",
+    "description": "Darmowy generator hash online dla MD5, SHA-1, SHA-256, SHA-512 i innych algorytmów hashujących. Generuje bezpieczne hashe dla tekstu i plików z przetwarzaniem po stronie klienta.",
     "keywords": [
       "hash generator",
       "md5",
@@ -14,7 +14,15 @@
       "file hash",
       "text hash",
       "online tool",
-      "free"
+      "free",
+      "generator hash",
+      "suma kontrolna",
+      "krypto",
+      "bezpieczeństwo",
+      "hash pliku",
+      "hash tekstu",
+      "narzędzie online",
+      "darmowe"
     ]
   },
   "page": {
@@ -46,12 +54,12 @@
   },
   "info": {
     "title": "O funkcjach skrótu",
-    "description": "Funkcje skrótu konwertują dane wejściowe na stałą wielkość znaków znaków, które są zwykle używane do weryfikacji integralności danych, przechowywania haseł i podpisów cyfrowych.",
+    "description": "Funkcje skrótu konwertują dane wejściowe na stałą wielkość znaków, które są zwykle używane do weryfikacji integralności danych, przechowywania haseł i podpisów cyfrowych.",
     "useCases": {
       "title": "Powszechne przypadki użycia",
       "items": [
         "Weryfikacja integralności pliku",
-        "Hasło hasła",
+        "Haszowanie haseł",
         "Deduplikacja danych",
         "Podpisy cyfrowe",
         "Generowanie sumy kontrolnej"
@@ -65,8 +73,13 @@
       ]
     },
     "supportedAlgorithms": {
-      "title": "Supported Algorithms",
-      "items": ["MD5", "SHA-1", "SHA-256", "SHA-512"]
+      "title": "Obsługiwane Algorytmy",
+      "items": [
+        "MD5",
+        "SHA-1",
+        "SHA-256",
+        "SHA-512"
+      ]
     }
   },
   "tool": {
@@ -78,8 +91,8 @@
       "crc32": "CRC32"
     },
     "placeholders": {
-      "textInput": "Wprowadź tekst do Hash ...",
-      "fileUpload": "Wybierz plik, aby wygenerować skrót"
+      "textInput": "Wprowadź tekst do haszowania...",
+      "fileUpload": "Wybierz plik, aby wygenerować hash"
     }
   },
   "validation": {

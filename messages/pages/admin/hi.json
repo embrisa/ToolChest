@@ -25,13 +25,13 @@
       "manageTags": "टैग प्रबंधित करें",
       "viewSite": "साइट देखें",
       "systemHealth": "तंत्र स्वास्थ्य",
-      "addTool": "Add Tool",
-      "addTag": "Add Tag",
-      "manageRelationships": "Manage Relationships",
-      "createToolDescription": "Create new tool in the system",
-      "createTagDescription": "Create new tag for categorization",
-      "manageRelationshipsDescription": "Configure tool-tag associations",
-      "viewSiteDescription": "Open the public tool-chest site"
+      "addTool": "उपकरण जोड़ें",
+      "addTag": "टैग जोड़ें",
+      "manageRelationships": "संबंध प्रबंधित करें",
+      "createToolDescription": "सिस्टम में नया उपकरण बनाएं",
+      "createTagDescription": "वर्गीकरण के लिए नया टैग बनाएं",
+      "manageRelationshipsDescription": "उपकरण-टैग संघों को कॉन्फ़िगर करें",
+      "viewSiteDescription": "सार्वजनिक टूल-चेस्ट साइट खोलें"
     }
   },
   "tools": {
@@ -53,30 +53,30 @@
       "actions": "कार्रवाई"
     },
     "emptyState": {
-      "description": "Get started by creating your first tool. Tools help users accomplish specific tasks and can be organized with tags."
+      "description": "अपना पहला उपकरण बनाकर प्रारंभ करें। उपकरण उपयोगकर्ताओं को विशिष्ट कार्यों को पूरा करने में मदद करते हैं और टैग के साथ व्यवस्थित किए जा सकते हैं।"
     },
     "bulkOperations": {
-      "title": "Bulk {operation} Tags",
-      "selectedCount": "{count, plural, =1 {# tool} other {# tools}} selected",
-      "operationType": "Select Operation",
-      "selectTags": "Select Tags",
-      "selectedTools": "Selected Tools",
-      "previewChanges": "Preview Changes",
-      "operationSummary": "Operation Summary",
-      "totalChanges": "Total Changes",
-      "toolsToUpdate": "Tools to Update",
-      "warnings": "Warnings",
-      "executing": "Executing Operation",
-      "executingMessage": "Please wait while we process your bulk operation...",
-      "completed": "Operation Completed",
-      "failed": "Operation Failed",
-      "successMessage": "Your bulk operation has been completed successfully",
-      "errorMessage": "There was an error executing your bulk operation",
-      "results": "Operation Results",
-      "toolsAffected": "Tools Affected",
-      "tagsAffected": "Tags Affected",
-      "errors": "Errors Encountered",
-      "startNew": "Start New Operation"
+      "title": "थोक {operation} टैग",
+      "selectedCount": "{count, plural, =1 {# उपकरण} अन्य {# उपकरण}} चयनित",
+      "operationType": "ऑपरेशन का चयन करें",
+      "selectTags": "टैग चुनें",
+      "selectedTools": "चयनित उपकरण",
+      "previewChanges": "परिवर्तन पूर्वावलोकन",
+      "operationSummary": "ऑपरेशन सारांश",
+      "totalChanges": "कुल परिवर्तन",
+      "toolsToUpdate": "अद्यतन करने के लिए उपकरण",
+      "warnings": "चेतावनी",
+      "executing": "ऑपरेशन निष्पादित करना",
+      "executingMessage": "कृपया प्रतीक्षा करें जबकि हम आपके थोक ऑपरेशन को संसाधित करते हैं...",
+      "completed": "ऑपरेशन पूरा हुआ",
+      "failed": "ऑपरेशन विफल",
+      "successMessage": "आपका थोक ऑपरेशन सफलतापूर्वक पूरा हो गया है",
+      "errorMessage": "आपके थोक ऑपरेशन को निष्पादित करने में एक त्रुटि थी",
+      "results": "ऑपरेशन के परिणाम",
+      "toolsAffected": "प्रभावित उपकरण",
+      "tagsAffected": "प्रभावित टैग",
+      "errors": "त्रुटियां मिलीं",
+      "startNew": "नया ऑपरेशन शुरू करें"
     }
   },
   "tags": {
@@ -97,7 +97,7 @@
       "actions": "कार्रवाई"
     },
     "emptyState": {
-      "description": "Get started by creating your first tag to organize your tools."
+      "description": "अपने उपकरणों को व्यवस्थित करने के लिए अपना पहला टैग बनाकर प्रारंभ करें।"
     }
   },
   "analytics": {
@@ -128,7 +128,7 @@
     "dashboard": "चकरानेवाला",
     "tools": "औजार",
     "tags": "टैग",
-    "relationships": "Relationships",
+    "relationships": "रिश्ते",
     "analytics": "एनालिटिक्स",
     "monitoring": "निगरानी",
     "logout": "लॉग आउट",

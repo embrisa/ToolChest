@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Hash Generator - Generate MD5, SHA-1, SHA-256, SHA-512 Hashes | tool-chest",
-    "description": "Free online hash generator for MD5, SHA-1, SHA-256, SHA-512, and other hash algorithms. Generate secure hashes for text and files with client-side processing.",
+    "title": "Hash Generator - Genera Hash MD5, SHA-1, SHA-256, SHA-512 | Tool-Chest",
+    "description": "Generatore di hash gratuito online per MD5, SHA-1, SHA-256, SHA-512 e altri algoritmi di hash. Genera hash sicuri per testo e file con elaborazione lato client.",
     "keywords": [
       "hash generator",
       "md5",
@@ -14,18 +14,26 @@
       "file hash",
       "text hash",
       "online tool",
-      "free"
+      "free",
+      "generatore di hash",
+      "somma di controllo",
+      "crittografia",
+      "sicurezza",
+      "hash file",
+      "hash testo",
+      "strumento online",
+      "gratuito"
     ]
   },
   "page": {
-    "title": "Hash Generator",
-    "description": "Generate cryptographic hashes for text and files using various algorithms.",
+    "title": "Generatore di Hash",
+    "description": "Genera hash crittografici per testo e file utilizzando vari algoritmi.",
     "privacyMessage": "🔒 Privacy-First • Web Crypto API • Client-Side Processing"
   },
   "featureGrid": {
     "md5": {
       "title": "MD5",
-      "description": "Funzione hash a 128 bit. Veloce ma non sicura criptograficamente. Usare solo per checksum.",
+      "description": "Funzione hash a 128 bit. Veloce ma non sicura crittograficamente. Usare solo per checksum.",
       "badge": ""
     },
     "sha1": {
@@ -35,7 +43,7 @@
     },
     "sha256": {
       "title": "SHA-256",
-      "description": "256-bit hash function. Standard sicuro e ampiamente utilizzato per le applicazioni moderne.",
+      "description": "Funzione hash a 256 bit. Standard sicuro e ampiamente utilizzato per le applicazioni moderne.",
       "badge": "Consigliato"
     },
     "sha512": {
@@ -46,15 +54,15 @@
   },
   "info": {
     "title": "Informazioni sulle funzioni hash",
-    "description": "Hash functions convert input data into fixed-size strings of characters, which are typically used for data integrity verification, password storage, and digital signatures.",
+    "description": "Le funzioni hash convertono i dati di input in stringhe di caratteri di dimensione fissa, che vengono tipicamente utilizzate per la verifica dell'integrità dei dati, l'archiviazione delle password e le firme digitali.",
     "useCases": {
       "title": "Casi d'uso comuni",
       "items": [
-        "File integrity verification",
-        "Password hashing",
-        "Data deduplication",
-        "Digital signatures",
-        "Checksum generation"
+        "Verifica dell'integrità dei file",
+        "Hashing delle password",
+        "Deduplicazione dei dati",
+        "Firme digitali",
+        "Generazione di checksum"
       ]
     },
     "securityGuidelines": {
@@ -65,8 +73,13 @@
       ]
     },
     "supportedAlgorithms": {
-      "title": "Supported Algorithms",
-      "items": ["MD5", "SHA-1", "SHA-256", "SHA-512"]
+      "title": "Algoritmi Supportati",
+      "items": [
+        "MD5",
+        "SHA-1",
+        "SHA-256",
+        "SHA-512"
+      ]
     }
   },
   "tool": {
@@ -78,12 +91,12 @@
       "crc32": "CRC32"
     },
     "placeholders": {
-      "textInput": "Enter text to hash...",
-      "fileUpload": "Select a file to generate hash"
+      "textInput": "Inserisci il testo da hashare...",
+      "fileUpload": "Seleziona un file per generare l'hash"
     }
   },
   "validation": {
-    "algorithmRequired": "Please select a hash algorithm",
-    "inputRequired": "Please enter text or select a file"
+    "algorithmRequired": "Seleziona un algoritmo di hash",
+    "inputRequired": "Inserisci il testo o seleziona un file"
   }
 }

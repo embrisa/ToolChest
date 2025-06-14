@@ -1,6 +1,6 @@
 {
   "hero": {
-    "title": "ツールチェスト",
+    "title": "tool-chest",
     "subtitle": "重要なコンピューターツールのコレクション。",
     "description": "エンコード、デコード、生成、変換、その他。",
     "searchPlaceholder": "検索ツール..."
@@ -24,7 +24,7 @@
   },
   "noResults": {
     "title": "ツールは見つかりません",
-    "description": "「{Query}」と一致するツールなし",
+    "description": "「{query}」と一致するツールなし",
     "descriptionFilters": "選択したフィルターに一致するツールはありません"
   },
   "errors": {
@@ -39,12 +39,12 @@
     "filterByTags": "タグでフィルター",
     "allTags": "すべてのタグ",
     "selectedTags": "選択したタグ",
-    "clearAll": "すべてをクリアします",
+    "clearAll": "すべてクリア",
     "noTags": "タグはありません"
   },
   "toolCard": {
-    "newTool": "新しい",
-    "popularTool": "人気のある",
-    "openTool": "オープンツール"
+    "newTool": "新規",
+    "popularTool": "人気",
+    "openTool": "ツールを開く"
   }
 }

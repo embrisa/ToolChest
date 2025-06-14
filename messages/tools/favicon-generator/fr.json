@@ -4,85 +4,90 @@
     "description": "Générateur de favicon gratuit en ligne. Créez des favicons dans toutes les tailles standard (16x16, 32x32, 192x192, 512x512) à partir de n'importe quelle image. Générez des packages complets de favicon avec des fichiers de manifeste.",
     "keywords": [
       "favicon generator",
-      "favicon",
+      "générateur de favicon",
       "icon generator",
+      "générateur d'icônes",
       "website icon",
+      "icône de site web",
       "app icon",
+      "icône d'application",
       "16x16",
       "32x32",
       "192x192",
       "512x512",
-      "ico file",
-      "png icon",
-      "web app manifest",
-      "free tool"
+      "fichier ico",
+      "icône png",
+      "manifeste d'application web",
+      "outil gratuit",
+      "favicon",
+      "favicons"
     ]
   },
   "page": {
     "title": "Générateur de Favicon",
-    "description": "Créez des favicons à partir d'images en plusieurs tailles et formats.",
-    "privacyNotice": "All processing happens in your browser using <bold>Canvas API</bold>.",
-    "privacyMessage": "🔒 Privacy-First • Canvas API • Client-Side Processing"
+    "description": "Générez des favicons dans toutes les tailles standard à partir de n'importe quelle image. Créez des packages complets de favicon avec les formats PNG, ICO et le manifeste d'application web.",
+    "privacyNotice": "Tout le traitement se passe dans votre navigateur en utilisant <bold>l'API Canvas</bold>.",
+    "privacyMessage": "🔒 Priorité à la Confidentialité • API Canvas • Traitement Côté Client"
   },
   "featureGrid": {
     "browserIcons": {
-      "title": "Browser Icons",
-      "description": "16×16, 32×32, 48×48 favicons for browser tabs, bookmarks, and desktop shortcuts."
+      "title": "Icônes de Navigateur",
+      "description": "Favicons 16×16, 32×32, 48×48 pour les onglets de navigateur, les favoris et les raccourcis de bureau."
     },
     "appleTouch": {
-      "title": "Apple Touch Icons",
-      "description": "180×180 icons for iOS home screen and Safari bookmark icons with rounded corners."
+      "title": "Icônes Apple Touch",
+      "description": "Icônes 180×180 pour l'écran d'accueil iOS et les icônes de favoris Safari avec coins arrondis."
     },
     "androidIcons": {
-      "title": "Android Icons",
-      "description": "192×192, 512×512 icons for Android home screen and Progressive Web Apps."
+      "title": "Icônes Android",
+      "description": "Icônes 192×192, 512×512 pour l'écran d'accueil Android et les Applications Web Progressives."
     },
     "webManifest": {
-      "title": "Web App Manifest",
-      "description": "Complete manifest.json for Progressive Web Apps with all required metadata.",
-      "badge": "PWA Ready"
+      "title": "Manifeste d'Application Web",
+      "description": "Manifeste.json complet pour les Applications Web Progressives avec toutes les métadonnées requises.",
+      "badge": "Prêt pour PWA"
     }
   },
   "info": {
-    "title": "À propos de la génération de Favicon",
-    "description": "Un favicon est une petite icône qui représente votre site web dans les onglets de navigateur, les favoris et les raccourcis. Les applications web modernes nécessitent plusieurs tailles et formats de favicon pour prendre en charge différents appareils et plates-formes.",
+    "title": "À Propos des Favicons",
+    "description": "Les favicons (icônes de favoris) sont de petites icônes affichées dans les onglets du navigateur, les favoris et les barres d'adresse. Ils aident les utilisateurs à identifier rapidement votre site web et à améliorer la reconnaissance de la marque. Les sites web modernes nécessitent plusieurs tailles de favicon pour différents appareils et cas d'utilisation.",
     "standardSizes": {
-      "title": "Standard Sizes",
+      "title": "Tailles Standard",
       "items": [
-        "16×16, 32×32 - Browser tabs and bookmarks",
-        "48×48, 64×64 - Desktop shortcuts and apps",
-        "96×96, 128×128 - High-DPI and retina displays",
-        "180×180 - Apple touch icon for iOS",
-        "192×192, 512×512 - Android and PWA icons"
+        "16×16, 32×32 - Onglets et favoris du navigateur",
+        "48×48, 64×64 - Raccourcis et applications de bureau",
+        "96×96, 128×128 - Écrans haute résolution et retina",
+        "180×180 - Icône tactile Apple pour iOS",
+        "192×192, 512×512 - Icônes Android et PWA"
       ]
     },
     "bestPractices": {
-      "title": "Meilleures pratiques",
+      "title": "Meilleures Pratiques",
       "items": [
-        "Utilisez des images carrées (rapport d'aspect 1:1)",
-        "Commencez avec une haute résolution (512x512 ou plus)",
-        "Les designs simples fonctionnent mieux à petites tailles",
+        "Utilisez des images carrées (ratio d'aspect 1:1)",
+        "Commencez avec une source de 512×512 pour une meilleure qualité",
+        "Gardez un design simple et reconnaissable",
         "Testez sur différents arrière-plans",
-        "Inclure plusieurs tailles pour la compatibilité des appareils"
+        "Utilisez le format PNG pour la prise en charge de la transparence"
       ]
     },
     "supportedSizes": {
-      "title": "Supported Sizes",
+      "title": "Tailles Supportées",
       "items": [
-        "16×16, 32×32 - Browser tabs and bookmarks",
-        "48×48, 64×64 - Desktop shortcuts and apps",
-        "96×96, 128×128 - High-DPI and retina displays",
-        "180×180 - Apple touch icon for iOS",
-        "192×192, 512×512 - Android and PWA icons"
+        "16×16, 32×32 - Onglets et favoris du navigateur",
+        "48×48, 64×64 - Raccourcis et applications de bureau",
+        "96×96, 128×128 - Écrans haute résolution et retina",
+        "180×180 - Icône tactile Apple pour iOS",
+        "192×192, 512×512 - Icônes Android et PWA"
       ]
     },
     "outputFormats": {
-      "title": "Output Formats",
+      "title": "Formats de Sortie",
       "items": [
-        "PNG favicons for modern browsers",
-        "ICO files for legacy compatibility",
-        "Web manifest with icon paths",
-        "HTML <link> tags for easy embedding"
+        "Favicons PNG pour les navigateurs modernes",
+        "Fichiers ICO pour la compatibilité héritée",
+        "Manifeste web avec les chemins des icônes",
+        "Balises HTML <link> pour une intégration facile"
       ]
     }
   }

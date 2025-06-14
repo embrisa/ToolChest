@@ -1,8 +1,8 @@
 {
   "header": {
-    "brand": "ツールチェスト",
+    "brand": "tool-chest",
     "navigation": {
-      "home": "家",
+      "home": "ホーム",
       "tools": "ツール",
       "admin": "管理者",
       "about": "について"
@@ -14,17 +14,17 @@
     }
   },
   "footer": {
-    "copyright": "©2024 Tool-Chest",
+    "copyright": "© 2024 tool-chest",
     "links": {
       "privacy": "プライバシーポリシー",
       "terms": "利用規約",
-      "contact": "接触",
+      "contact": "お問い合わせ",
       "about": "について"
     },
     "description": "プライバシー中心の開発者ツール。"
   },
   "breadcrumbs": {
-    "home": "家",
+    "home": "ホーム",
     "tools": "ツール",
     "admin": "管理者",
     "dashboard": "ダッシュボード",
@@ -39,21 +39,21 @@
     "selectLanguage": "言語を選択します",
     "languages": {
       "en": "英語",
-      "es": "español",
+      "es": "スペイン語",
       "zh": "中国語",
       "hi": "ヒンディー語",
       "pt": "ポルトガル語",
-      "ru": "ロシア",
+      "ru": "ロシア語",
       "ja": "日本語",
-      "de": "ドイツ",
+      "de": "ドイツ語",
       "fr": "フランス語",
       "ko": "韓国語",
       "it": "イタリア語",
       "tr": "トルコ語",
-      "pl": "研磨",
+      "pl": "ポーランド語",
       "nl": "オランダ語",
-      "vi": "ベトナム人",
-      "uk": "ウクライナ人"
+      "vi": "ベトナム語",
+      "uk": "ウクライナ語"
     }
   }
 }

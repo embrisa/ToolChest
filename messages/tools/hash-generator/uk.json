@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Hash Generator - Generate MD5, SHA-1, SHA-256, SHA-512 Hashes | tool-chest",
-    "description": "Free online hash generator for MD5, SHA-1, SHA-256, SHA-512, and other hash algorithms. Generate secure hashes for text and files with client-side processing.",
+    "title": "Генератор хешів - Згенерувати хеші MD5, SHA-1, SHA-256, SHA-512 | Tool-Chest",
+    "description": "Безкоштовний онлайн-генератор хешів для MD5, SHA-1, SHA-256, SHA-512 та інших алгоритмів хешування. Генерує безпечні хеші для тексту та файлів з обробкою на стороні клієнта.",
     "keywords": [
       "hash generator",
       "md5",
@@ -14,7 +14,15 @@
       "file hash",
       "text hash",
       "online tool",
-      "free"
+      "free",
+      "хеш генератор",
+      "контрольна сума",
+      "крипто",
+      "безпека",
+      "хеш файлу",
+      "хеш тексту",
+      "онлайн інструмент",
+      "безкоштовно"
     ]
   },
   "page": {
@@ -65,8 +73,13 @@
       ]
     },
     "supportedAlgorithms": {
-      "title": "Supported Algorithms",
-      "items": ["MD5", "SHA-1", "SHA-256", "SHA-512"]
+      "title": "Підтримувані алгоритми",
+      "items": [
+        "MD5",
+        "SHA-1",
+        "SHA-256",
+        "SHA-512"
+      ]
     }
   },
   "tool": {

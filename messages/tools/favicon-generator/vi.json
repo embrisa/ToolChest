@@ -1,59 +1,68 @@
 {
   "metadata": {
-    "title": "Favicon Generator - Create Favicons in All Sizes | tool-chest",
-    "description": "Free online favicon generator. Create favicons in all standard sizes (16x16, 32x32, 192x192, 512x512) from any image. Generate complete favicon packages with manifest files.",
+    "title": "Trình tạo Favicon - Tạo Favicon mọi kích thước | tool-chest",
+    "description": "Trình tạo favicon trực tuyến miễn phí. Tạo favicon với tất cả các kích thước tiêu chuẩn (16x16, 32x32, 192x192, 512x512) từ bất kỳ hình ảnh nào. Tạo các gói favicon hoàn chỉnh với các tệp kê khai.",
     "keywords": [
       "favicon generator",
+      "trình tạo favicon",
+      "favicon",
       "favicon",
       "icon generator",
+      "trình tạo biểu tượng",
       "website icon",
+      "biểu tượng trang web",
       "app icon",
+      "biểu tượng ứng dụng",
       "16x16",
       "32x32",
       "192x192",
       "512x512",
       "ico file",
+      "tệp ico",
       "png icon",
+      "biểu tượng png",
       "web app manifest",
-      "free tool"
+      "tệp kê khai ứng dụng web",
+      "free tool",
+      "công cụ miễn phí"
     ]
   },
   "page": {
     "title": "Trình tạo Favicon",
     "description": "Tạo favicon từ hình ảnh với nhiều kích thước và định dạng.",
-    "privacyNotice": "All processing happens in your browser using <bold>Canvas API</bold>.",
-    "privacyMessage": "🔒 Privacy-First • Canvas API • Client-Side Processing"
+    "privacyNotice": "Tất cả quá trình xử lý diễn ra trong trình duyệt của bạn bằng cách sử dụng <bold>API Canvas</bold>.",
+    "privacyMessage": "🔒 Ưu tiên quyền riêng tư • API Canvas • Xử lý phía máy khách"
   },
   "featureGrid": {
     "browserIcons": {
-      "title": "Browser Icons",
-      "description": "16×16, 32×32, 48×48 favicons for browser tabs, bookmarks, and desktop shortcuts."
+      "title": "Biểu tượng trình duyệt",
+      "description": "Favicon 16×16, 32×32, 48×48 cho các tab trình duyệt, dấu trang và lối tắt trên màn hình."
     },
     "appleTouch": {
-      "title": "Apple Touch Icons",
-      "description": "180×180 icons for iOS home screen and Safari bookmark icons with rounded corners."
+      "title": "Biểu tượng Apple Touch",
+      "description": "Biểu tượng 180×180 cho màn hình chính iOS và biểu tượng dấu trang Safari với các góc tròn."
     },
     "androidIcons": {
-      "title": "Android Icons",
-      "description": "192×192, 512×512 icons for Android home screen and Progressive Web Apps."
+      "title": "Biểu tượng Android",
+      "description": "Biểu tượng 192×192, 512×512 cho màn hình chính Android và ứng dụng web Progressive."
     },
     "webManifest": {
-      "title": "Web App Manifest",
-      "description": "Complete manifest.json for Progressive Web Apps with all required metadata.",
-      "badge": "PWA Ready"
+      "title": "Tệp kê khai ứng dụng web",
+      "description": "Hoàn chỉnh manifest.json cho các ứng dụng web Progressive với tất cả siêu dữ liệu cần thiết.",
+      "badge": "Sẵn sàng PWA"
     }
   },
   "info": {
     "title": "Giới thiệu về tạo Favicon",
     "description": "Favicon là một biểu tượng nhỏ đại diện cho trang web của bạn trong các thẻ trình duyệt, dấu trang và lối tắt. Các ứng dụng web hiện đại yêu cầu nhiều kích thước và định dạng favicon để hỗ trợ các thiết bị và nền tảng khác nhau.",
     "standardSizes": {
-      "title": "Standard Sizes",
+      "title": "Kích thước tiêu chuẩn",
       "items": [
-        "16×16, 32×32 - Browser tabs and bookmarks",
-        "48×48, 64×64 - Desktop shortcuts and apps",
-        "96×96, 128×128 - High-DPI and retina displays",
-        "180×180 - Apple touch icon for iOS",
-        "192×192, 512×512 - Android and PWA icons"
+        "16×16, 32×32 - Tab trình duyệt và dấu trang",
+        "48×48, 64×64 - Lối tắt máy tính để bàn và ứng dụng",
+        "96×96, 128×128 - Màn hình DPI cao và retina",
+        "180×180 - Biểu tượng cảm ứng Apple cho iOS",
+        "192×192, 512×512 - Biểu tượng Android và PWA"
       ]
     },
     "bestPractices": {
@@ -67,22 +76,22 @@
       ]
     },
     "supportedSizes": {
-      "title": "Supported Sizes",
+      "title": "Kích thước được hỗ trợ",
       "items": [
-        "16×16, 32×32 - Browser tabs and bookmarks",
-        "48×48, 64×64 - Desktop shortcuts and apps",
-        "96×96, 128×128 - High-DPI and retina displays",
-        "180×180 - Apple touch icon for iOS",
-        "192×192, 512×512 - Android and PWA icons"
+        "16×16, 32×32 - Tab trình duyệt và dấu trang",
+        "48×48, 64×64 - Lối tắt máy tính để bàn và ứng dụng",
+        "96×96, 128×128 - Màn hình DPI cao và retina",
+        "180×180 - Biểu tượng cảm ứng Apple cho iOS",
+        "192×192, 512×512 - Biểu tượng Android và PWA"
       ]
     },
     "outputFormats": {
-      "title": "Output Formats",
+      "title": "Định dạng đầu ra",
       "items": [
-        "PNG favicons for modern browsers",
-        "ICO files for legacy compatibility",
-        "Web manifest with icon paths",
-        "HTML <link> tags for easy embedding"
+        "Favicon PNG cho trình duyệt hiện đại",
+        "Tệp ICO cho khả năng tương thích cũ",
+        "Tệp kê khai web với đường dẫn biểu tượng",
+        "Thẻ HTML <link> để dễ dàng nhúng"
       ]
     }
   }

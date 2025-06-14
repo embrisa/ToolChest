@@ -1,7 +1,7 @@
 {
   "labels": {
     "name": "이름",
-    "slug": "강타",
+    "slug": "슬러그",
     "description": "설명",
     "color": "색상",
     "status": "상태",
@@ -25,40 +25,40 @@
     "nameRequired": "이름이 필요합니다",
     "slugRequired": "슬러그가 필요합니다",
     "descriptionRequired": "설명이 필요합니다",
-    "invalidSlug": "슬러그에는 글자, 숫자 및 하이픈 만 포함 할 수 있습니다",
-    "slugTooShort": "슬러그는 3 자 이상이어야합니다",
-    "slugTooLong": "슬러그는 50 자 미만이어야합니다",
-    "nameTooShort": "이름은 2 자 이상이어야합니다",
-    "nameTooLong": "이름은 100 자 미만이어야합니다",
-    "descriptionTooLong": "설명은 500 자 미만이어야합니다",
+    "invalidSlug": "슬러그에는 글자, 숫자 및 하이픈만 포함할 수 있습니다",
+    "slugTooShort": "슬러그는 3자 이상이어야 합니다",
+    "slugTooLong": "슬러그는 50자 미만이어야 합니다",
+    "nameTooShort": "이름은 2자 이상이어야 합니다",
+    "nameTooLong": "이름은 100자 미만이어야 합니다",
+    "descriptionTooLong": "설명은 500자 미만이어야 합니다",
     "invalidColor": "유효한 색상을 선택하십시오",
     "invalidEmail": "유효한 이메일 주소를 입력하십시오",
     "invalidUrl": "유효한 URL을 입력하십시오"
   },
   "help": {
-    "slug": "URL 친화적 인 식별자 (이름에서 자동 생성)",
+    "slug": "URL 친화적인 식별자 (이름에서 자동 생성)",
     "description": "항목에 대한 간단한 설명",
     "color": "시각적 식별에 사용되는 색상",
     "tags": "관련 태그로 항목을 구성하십시오",
     "status": "항목의 현재 상태"
   },
   "actions": {
-    "save": "구하다",
+    "save": "저장",
     "cancel": "취소",
-    "submit": "제출하다",
-    "reset": "다시 놓기",
-    "clear": "분명한",
+    "submit": "제출",
+    "reset": "초기화",
+    "clear": "지우기",
     "delete": "삭제",
-    "edit": "편집하다",
-    "create": "만들다",
+    "edit": "편집",
+    "create": "생성",
     "update": "업데이트"
   },
   "states": {
-    "saving": "절약...",
-    "loading": "로딩 ...",
+    "saving": "저장 중...",
+    "loading": "로드 중...",
     "saved": "성공적으로 저장되었습니다",
     "error": "오류가 발생했습니다",
     "required": "필수 필드",
-    "optional": "선택적 필드"
+    "optional": "선택 필드"
   }
 }

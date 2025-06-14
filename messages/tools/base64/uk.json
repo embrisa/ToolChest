@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Base64 Encoder & Decoder | tool-chest",
-    "description": "Free online Base64 encoder and decoder. Convert text to Base64 and decode Base64 to text. Supports file encoding/decoding with URL-safe options. Privacy-first with client-side processing.",
+    "title": "Кодувальник та Декодувальник Base64 | tool-chest",
+    "description": "Безкоштовний онлайн-кодувальник та декодувальник Base64. Перетворює текст у Base64 та декодує Base64 у текст. Підтримує кодування/декодування файлів з URL-безпечними опціями. Приватність насамперед, з обробкою на стороні клієнта.",
     "keywords": [
       "base64",
       "encoder",
@@ -13,18 +13,28 @@
       "url-safe",
       "online tool",
       "free",
-      "privacy"
+      "privacy",
+      "кодувальник",
+      "декодувальник",
+      "кодувати",
+      "декодувати",
+      "текст",
+      "файл",
+      "url-безпечний",
+      "онлайн-інструмент",
+      "безкоштовно",
+      "приватність"
     ]
   },
   "page": {
-    "title": "Кодувальник та декодувальник Base64",
+    "title": "Кодувальник та Декодувальник Base64",
     "description": "Кодуйте та декодуйте дані Base64 з підтримкою тексту та файлів.",
-    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
+    "privacyNotice": "Вся обробка відбувається у вашому браузері для <bold>максимальної конфіденційності</bold>."
   },
   "tool": {
     "variants": {
       "standard": "Стандартний",
-      "urlSafe": "URL-Safe"
+      "urlSafe": "URL-безпечний"
     },
     "placeholders": {
       "textInput": "Введіть текст для кодування/декодування...",
@@ -42,20 +52,20 @@
       "title": "Ключові особливості",
       "items": [
         "Кодування/декодування тексту та файлів",
-        "Опція кодування URL-safe Base64",
+        "Опція кодування URL-безпечного Base64",
         "Функціональність копіювання в буфер обміну",
         "Завантаження закодованих/декодованих результатів",
         "Кодування/декодування в реальному часі",
-        "Real-time encoding/decoding"
+        "Обробка на стороні клієнта для конфіденційності"
       ]
     },
     "securityAndPrivacy": {
-      "title": "Security & Privacy",
+      "title": "Безпека та конфіденційність",
       "items": [
-        "No data sent to servers",
-        "Processing happens in your browser",
-        "Files stay on your device",
-        "No data storage or logging"
+        "Дані не надсилаються на сервери",
+        "Обробка відбувається у вашому браузері",
+        "Файли залишаються на вашому пристрої",
+        "Без зберігання даних або журналювання"
       ]
     },
     "useCases": {

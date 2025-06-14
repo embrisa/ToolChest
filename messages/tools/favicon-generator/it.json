@@ -1,88 +1,93 @@
 {
   "metadata": {
-    "title": "Favicon Generator - Create Favicons in All Sizes | tool-chest",
-    "description": "Free online favicon generator. Create favicons in all standard sizes (16x16, 32x32, 192x192, 512x512) from any image. Generate complete favicon packages with manifest files.",
+    "title": "Generatore di Favicon - Crea Favicon di Tutte le Dimensioni | tool-chest",
+    "description": "Generatore di favicon online gratuito. Crea favicon in tutte le dimensioni standard (16x16, 32x32, 192x192, 512x512) da qualsiasi immagine. Genera pacchetti favicon completi con file manifest.",
     "keywords": [
       "favicon generator",
-      "favicon",
+      "generatore di favicon",
       "icon generator",
+      "generatore di icone",
       "website icon",
+      "icona sito web",
       "app icon",
+      "icona app",
       "16x16",
       "32x32",
       "192x192",
       "512x512",
-      "ico file",
-      "png icon",
-      "web app manifest",
-      "free tool"
+      "file ico",
+      "icona png",
+      "manifest dell'app web",
+      "strumento gratuito",
+      "favicon",
+      "icone preferite"
     ]
   },
   "page": {
-    "title": "Favicon Generator",
-    "description": "Create favicons from images in multiple sizes and formats.",
-    "privacyNotice": "All processing happens in your browser using <bold>Canvas API</bold>.",
-    "privacyMessage": "🔒 Privacy-First • Canvas API • Client-Side Processing"
+    "title": "Generatore di Favicon",
+    "description": "Genera favicon in tutte le dimensioni standard da qualsiasi immagine. Crea pacchetti favicon completi con formati PNG, ICO e manifest dell'app web.",
+    "privacyNotice": "Tutta l'elaborazione avviene nel tuo browser utilizzando l'<bold>API Canvas</bold>.",
+    "privacyMessage": "🔒 Privacy Prima di Tutto • API Canvas • Elaborazione Lato Client"
   },
   "featureGrid": {
     "browserIcons": {
-      "title": "Browser Icons",
-      "description": "16×16, 32×32, 48×48 favicons for browser tabs, bookmarks, and desktop shortcuts."
+      "title": "Icone del Browser",
+      "description": "Favicon 16×16, 32×32, 48×48 per schede del browser, segnalibri e scorciatoie desktop."
     },
     "appleTouch": {
-      "title": "Apple Touch Icons",
-      "description": "180×180 icons for iOS home screen and Safari bookmark icons with rounded corners."
+      "title": "Icone Apple Touch",
+      "description": "Icone 180×180 per la schermata principale di iOS e icone dei segnalibri di Safari con angoli arrotondati."
     },
     "androidIcons": {
-      "title": "Android Icons",
-      "description": "192×192, 512×512 icons for Android home screen and Progressive Web Apps."
+      "title": "Icone Android",
+      "description": "Icone 192×192, 512×512 per la schermata principale di Android e Progressive Web App."
     },
     "webManifest": {
-      "title": "Web App Manifest",
-      "description": "Complete manifest.json for Progressive Web Apps with all required metadata.",
-      "badge": "PWA Ready"
+      "title": "Manifest dell'App Web",
+      "description": "Manifest.json completo per Progressive Web App con tutti i metadati richiesti.",
+      "badge": "Pronto per PWA"
     }
   },
   "info": {
-    "title": "About Favicon Generation",
-    "description": "A favicon is a small icon that represents your website in browser tabs, bookmarks, and shortcuts. Modern web applications require multiple favicon sizes and formats to support different devices and platforms.",
+    "title": "Informazioni sui Favicon",
+    "description": "I favicon (icone dei preferiti) sono piccole icone visualizzate nelle schede del browser, nei segnalibri e nelle barre degli indirizzi. Aiutano gli utenti a identificare rapidamente il tuo sito web e a migliorare il riconoscimento del marchio. I siti web moderni richiedono più dimensioni di favicon per diversi dispositivi e casi d'uso.",
     "standardSizes": {
-      "title": "Standard Sizes",
+      "title": "Dimensioni Standard",
       "items": [
-        "16×16, 32×32 - Browser tabs and bookmarks",
-        "48×48, 64×64 - Desktop shortcuts and apps",
-        "96×96, 128×128 - High-DPI and retina displays",
-        "180×180 - Apple touch icon for iOS",
-        "192×192, 512×512 - Android and PWA icons"
+        "16×16, 32×32 - Schede e segnalibri del browser",
+        "48×48, 64×64 - Scorciatoie e app desktop",
+        "96×96, 128×128 - Display ad alta DPI e retina",
+        "180×180 - Icona touch Apple per iOS",
+        "192×192, 512×512 - Icone Android e PWA"
       ]
     },
     "bestPractices": {
-      "title": "Best Practices",
+      "title": "Migliori Pratiche",
       "items": [
-        "Use square images (1:1 aspect ratio)",
-        "Start with high resolution (512x512 or larger)",
-        "Simple designs work better at small sizes",
-        "Test on different backgrounds",
-        "Include multiple sizes for device compatibility"
+        "Usa immagini quadrate (rapporto d'aspetto 1:1)",
+        "Inizia con una sorgente 512×512 per la migliore qualità",
+        "Mantieni un design semplice e riconoscibile",
+        "Testa su sfondi diversi",
+        "Usa il formato PNG per il supporto della trasparenza"
       ]
     },
     "supportedSizes": {
-      "title": "Supported Sizes",
+      "title": "Dimensioni Supportate",
       "items": [
-        "16×16, 32×32 - Browser tabs and bookmarks",
-        "48×48, 64×64 - Desktop shortcuts and apps",
-        "96×96, 128×128 - High-DPI and retina displays",
-        "180×180 - Apple touch icon for iOS",
-        "192×192, 512×512 - Android and PWA icons"
+        "16×16, 32×32 - Schede e segnalibri del browser",
+        "48×48, 64×64 - Scorciatoie e app desktop",
+        "96×96, 128×128 - Display ad alta DPI e retina",
+        "180×180 - Icona touch Apple per iOS",
+        "192×192, 512×512 - Icone Android e PWA"
       ]
     },
     "outputFormats": {
-      "title": "Output Formats",
+      "title": "Formati di Output",
       "items": [
-        "PNG favicons for modern browsers",
-        "ICO files for legacy compatibility",
-        "Web manifest with icon paths",
-        "HTML <link> tags for easy embedding"
+        "Favicon PNG per browser moderni",
+        "File ICO per compatibilità legacy",
+        "Manifest web con percorsi delle icone",
+        "Tag HTML <link> per un facile incorporamento"
       ]
     }
   }

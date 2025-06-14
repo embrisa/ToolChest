@@ -23,8 +23,8 @@
       "viewAnalytics": "查看分析",
       "manageTools": "管理工具",
       "manageTags": "管理标签",
-      "viewSite": "查看站点",
-      "systemHealth": "系统健康",
+      "viewSite": "查看公共网站",
+      "systemHealth": "系统健康状况",
       "addTool": "添加工具",
       "addTag": "添加标签",
       "manageRelationships": "管理关系",
@@ -132,6 +132,6 @@
     "analytics": "分析",
     "monitoring": "监控",
     "logout": "登出",
-    "viewSite": "查看站点"
+    "viewSite": "查看公共网站"
   }
 }

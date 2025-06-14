@@ -23,7 +23,7 @@
       "viewAnalytics": "Voir les analyses",
       "manageTools": "Gérer les outils",
       "manageTags": "Gérer les étiquettes",
-      "viewSite": "Voir le site",
+      "viewSite": "Voir le site public",
       "systemHealth": "Santé du système",
       "addTool": "Ajouter un outil",
       "addTag": "Ajouter une étiquette",
@@ -56,27 +56,27 @@
       "description": "Commencez par créer votre premier outil. Les outils aident les utilisateurs à accomplir des tâches spécifiques et peuvent être organisés avec des tags."
     },
     "bulkOperations": {
-      "title": "{operation} de Tags en Lot",
+      "title": "Tags en Lot {operation}",
       "selectedCount": "{count, plural, =1 {# outil} other {# outils}} sélectionnés",
-      "operationType": "Sélectionner Opération",
-      "selectTags": "Sélectionner Tags",
-      "selectedTools": "Outils Sélectionnés",
-      "previewChanges": "Aperçu des Modifications",
-      "operationSummary": "Résumé de l'Opération",
-      "totalChanges": "Modifications Totales",
-      "toolsToUpdate": "Outils à Mettre à Jour",
+      "operationType": "Sélectionner l'opération",
+      "selectTags": "Sélectionner les tags",
+      "selectedTools": "Outils sélectionnés",
+      "previewChanges": "Aperçu des modifications",
+      "operationSummary": "Résumé de l'opération",
+      "totalChanges": "Modifications totales",
+      "toolsToUpdate": "Outils à mettre à jour",
       "warnings": "Avertissements",
-      "executing": "Exécution de l'Opération",
+      "executing": "Exécution de l'opération",
       "executingMessage": "Veuillez patienter pendant que nous traitons votre opération en lot...",
-      "completed": "Opération Terminée",
-      "failed": "Opération Échouée",
+      "completed": "Opération terminée",
+      "failed": "Opération échouée",
       "successMessage": "Votre opération en lot a été terminée avec succès",
       "errorMessage": "Il y a eu une erreur lors de l'exécution de votre opération en lot",
-      "results": "Résultats de l'Opération",
-      "toolsAffected": "Outils Affectés",
-      "tagsAffected": "Tags Affectés",
-      "errors": "Erreurs Rencontrées",
-      "startNew": "Démarrer Nouvelle Opération"
+      "results": "Résultats de l'opération",
+      "toolsAffected": "Outils affectés",
+      "tagsAffected": "Tags affectés",
+      "errors": "Erreurs rencontrées",
+      "startNew": "Démarrer une nouvelle opération"
     }
   },
   "tags": {
@@ -132,6 +132,6 @@
     "analytics": "Analyses",
     "monitoring": "Surveillance",
     "logout": "Déconnexion",
-    "viewSite": "Voir le site"
+    "viewSite": "Voir le site public"
   }
 }

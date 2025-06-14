@@ -14,8 +14,8 @@
       "table": {
         "tool": "Herramienta",
         "usageCount": "Recuento de uso",
-        "change": "Cambiar",
-        "actions": "Comportamiento"
+        "change": "Cambio",
+        "actions": "Acciones"
       }
     },
     "quickActions": {
@@ -23,15 +23,15 @@
       "viewAnalytics": "Ver análisis",
       "manageTools": "Administrar herramientas",
       "manageTags": "Administrar etiquetas",
-      "viewSite": "Ver sitio",
+      "viewSite": "Ver sitio público",
       "systemHealth": "Salud del sistema",
       "addTool": "Agregar herramienta",
       "addTag": "Agregar etiqueta",
-      "manageRelationships": "Gestionar relaciones",
+      "manageRelationships": "Administrar relaciones",
       "createToolDescription": "Crear nueva herramienta en el sistema",
       "createTagDescription": "Crear nueva etiqueta para categorización",
       "manageRelationshipsDescription": "Configurar asociaciones herramienta-etiqueta",
-      "viewSiteDescription": "Abrir sitio público tool-chest"
+      "viewSiteDescription": "Abrir el sitio público tool-chest"
     }
   },
   "tools": {
@@ -39,44 +39,44 @@
     "description": "Administrar herramientas, sus metadatos y relaciones",
     "actions": {
       "createTool": "Crear herramienta",
-      "editTool": "Herramienta de edición",
-      "deleteTool": "Terrela Eliminar",
+      "editTool": "Editar herramienta",
+      "deleteTool": "Eliminar herramienta",
       "bulkActions": "Acciones masivas"
     },
     "table": {
       "name": "Nombre",
-      "slug": "Babosa",
+      "slug": "Slug",
       "status": "Estado",
       "tags": "Etiquetas",
       "usage": "Uso",
       "lastModified": "Última modificación",
-      "actions": "Comportamiento"
+      "actions": "Acciones"
     },
     "emptyState": {
       "description": "Comienza creando tu primera herramienta. Las herramientas ayudan a los usuarios a realizar tareas específicas y pueden organizarse con etiquetas."
     },
     "bulkOperations": {
-      "title": "{operation} Etiquetas en Lote",
+      "title": "Etiquetas en Lote {operation}",
       "selectedCount": "{count, plural, =1 {# herramienta} other {# herramientas}} seleccionadas",
-      "operationType": "Seleccionar Operación",
-      "selectTags": "Seleccionar Etiquetas",
-      "selectedTools": "Herramientas Seleccionadas",
-      "previewChanges": "Vista Previa de Cambios",
-      "operationSummary": "Resumen de Operación",
-      "totalChanges": "Cambios Totales",
-      "toolsToUpdate": "Herramientas a Actualizar",
+      "operationType": "Seleccionar operación",
+      "selectTags": "Seleccionar etiquetas",
+      "selectedTools": "Herramientas seleccionadas",
+      "previewChanges": "Vista previa de cambios",
+      "operationSummary": "Resumen de operación",
+      "totalChanges": "Cambios totales",
+      "toolsToUpdate": "Herramientas a actualizar",
       "warnings": "Advertencias",
-      "executing": "Ejecutando Operación",
+      "executing": "Ejecutando operación",
       "executingMessage": "Por favor espera mientras procesamos tu operación en lote...",
-      "completed": "Operación Completada",
-      "failed": "Operación Fallida",
+      "completed": "Operación completada",
+      "failed": "Operación fallida",
       "successMessage": "Tu operación en lote se ha completado exitosamente",
       "errorMessage": "Hubo un error ejecutando tu operación en lote",
-      "results": "Resultados de Operación",
-      "toolsAffected": "Herramientas Afectadas",
-      "tagsAffected": "Etiquetas Afectadas",
-      "errors": "Errores Encontrados",
-      "startNew": "Iniciar Nueva Operación"
+      "results": "Resultados de operación",
+      "toolsAffected": "Herramientas afectadas",
+      "tagsAffected": "Etiquetas afectadas",
+      "errors": "Errores encontrados",
+      "startNew": "Iniciar nueva operación"
     }
   },
   "tags": {
@@ -84,17 +84,17 @@
     "description": "Organizar herramientas con etiquetas y administrar relaciones",
     "actions": {
       "createTag": "Crear etiqueta",
-      "editTag": "Etiqueta de edición",
-      "deleteTag": "Etiqueta de eliminación",
+      "editTag": "Editar etiqueta",
+      "deleteTag": "Eliminar etiqueta",
       "bulkActions": "Acciones masivas"
     },
     "table": {
       "name": "Nombre",
-      "slug": "Babosa",
+      "slug": "Slug",
       "color": "Color",
       "toolCount": "Herramientas",
       "description": "Descripción",
-      "actions": "Comportamiento"
+      "actions": "Acciones"
     },
     "emptyState": {
       "description": "Comienza creando tu primera etiqueta para organizar tus herramientas."

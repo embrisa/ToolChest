@@ -34,11 +34,11 @@
       }
     },
     "contact": {
-      "prompt": "Need help?",
-      "link": "Contact support"
+      "prompt": "お困りですか？",
+      "link": "サポートに連絡"
     },
     "screenReader": {
-      "announcement": "Page not found. Please navigate using the links below."
+      "announcement": "ページが見つかりません。以下のリンクを使用して移動してください。"
     }
   },
   "serverError": {

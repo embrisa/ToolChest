@@ -23,7 +23,7 @@
     "toolsFound": "strumenti trovati"
   },
   "noResults": {
-    "title": "Nessun strumento trovato",
+    "title": "Nessuno strumento trovato",
     "description": "Nessuno strumento corrisponde a \"{query}\"",
     "descriptionFilters": "Nessuno strumento corrisponde ai filtri selezionati"
   },
@@ -33,7 +33,7 @@
   "search": {
     "placeholder": "Cerca strumenti...",
     "clearSearch": "Cancella ricerca",
-    "searchResults": "risultati della ricerca"
+    "searchResults": "Risultati della ricerca"
   },
   "filtering": {
     "filterByTags": "Filtra per Tag",

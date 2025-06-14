@@ -1,6 +1,6 @@
 {
   "header": {
-    "brand": "उपकरण-चेस्ट",
+    "brand": "tool-chest",
     "navigation": {
       "home": "घर",
       "tools": "औजार",
@@ -14,7 +14,7 @@
     }
   },
   "footer": {
-    "copyright": "© 2024 टूल-चेस्ट",
+    "copyright": "© 2024 tool-chest",
     "links": {
       "privacy": "गोपनीयता नीति",
       "terms": "सेवा की शर्तें",
@@ -38,22 +38,22 @@
     "current": "वर्तमान भाषा",
     "selectLanguage": "भाषा चुने",
     "languages": {
-      "en": "अंग्रेज़ी",
-      "es": "एस्पानोल",
+      "en": "English",
+      "es": "Español",
       "zh": "中文",
       "hi": "हिन्दी",
-      "pt": "पुर्तगू",
+      "pt": "Português",
       "ru": "Русский",
       "ja": "日本語",
-      "de": "deutsch",
-      "fr": "फ्रांकाइस",
+      "de": "Deutsch",
+      "fr": "Français",
       "ko": "한국어",
       "it": "Italiano",
-      "tr": "तुर्के",
-      "pl": "पोल्स्की",
-      "nl": "नेडरलैंड",
-      "vi": "Tiếng việt",
-      "uk": "आप"
+      "tr": "Türkçe",
+      "pl": "Polski",
+      "nl": "Nederlands",
+      "vi": "Tiếng Việt",
+      "uk": "Українська"
     }
   }
 }

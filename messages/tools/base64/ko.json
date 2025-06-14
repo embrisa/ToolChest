@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Base64 Encoder & Decoder | tool-chest",
-    "description": "Free online Base64 encoder and decoder. Convert text to Base64 and decode Base64 to text. Supports file encoding/decoding with URL-safe options. Privacy-first with client-side processing.",
+    "title": "Base64 인코더 및 디코더 | tool-chest",
+    "description": "무료 온라인 Base64 인코더 및 디코더. 텍스트를 Base64로 변환하고 Base64를 텍스트로 디코딩합니다. URL-SAFE 옵션으로 파일 인코딩/디코딩을 지원합니다. 클라이언트 측 처리로 개인 정보 보호를 최우선으로 합니다.",
     "keywords": [
       "base64",
       "encoder",
@@ -13,22 +13,33 @@
       "url-safe",
       "online tool",
       "free",
-      "privacy"
+      "privacy",
+      "베이스64",
+      "인코더",
+      "디코더",
+      "인코딩",
+      "디코딩",
+      "텍스트",
+      "파일",
+      "URL-SAFE",
+      "온라인 도구",
+      "무료",
+      "개인정보"
     ]
   },
   "page": {
     "title": "Base64 인코더 및 디코더",
     "description": "텍스트 및 파일을 지원하여 Base64 데이터를 인코딩 및 디코딩합니다.",
-    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
+    "privacyNotice": "모든 처리는 <bold>최대 개인 정보 보호</bold>를 위해 브라우저에서 발생합니다."
   },
   "tool": {
     "variants": {
-      "standard": "기준",
+      "standard": "표준",
       "urlSafe": "URL-SAFE"
     },
     "placeholders": {
-      "textInput": "인코딩/디코딩하려면 텍스트를 입력하십시오 ...",
-      "fileUpload": "파일을 선택하거나 드래그 앤 드롭"
+      "textInput": "인코딩/디코딩하려면 텍스트를 입력하십시오...",
+      "fileUpload": "파일을 선택하거나 끌어서 놓기"
     }
   },
   "validation": {
@@ -46,16 +57,16 @@
         "클립 보드 기능으로 복사하십시오",
         "인코딩/디코딩 결과를 다운로드하십시오",
         "실시간 인코딩/디코딩",
-        "Real-time encoding/decoding"
+        "개인 정보 보호를 위한 클라이언트 측 처리"
       ]
     },
     "securityAndPrivacy": {
-      "title": "Security & Privacy",
+      "title": "보안 및 개인 정보 보호",
       "items": [
-        "No data sent to servers",
-        "Processing happens in your browser",
-        "Files stay on your device",
-        "No data storage or logging"
+        "서버로 전송되는 데이터 없음",
+        "브라우저에서 처리 발생",
+        "파일은 장치에 유지",
+        "데이터 저장 또는 로깅 없음"
       ]
     },
     "useCases": {
@@ -64,7 +75,7 @@
         "이메일 첨부 파일 인코딩",
         "웹 데이터 URL",
         "API 데이터 전송",
-        "데이터베이스 블로브 스토리지",
+        "데이터베이스 BLOB 스토리지",
         "구성 파일 인코딩"
       ]
     }

@@ -1,7 +1,7 @@
 {
   "labels": {
     "name": "Name",
-    "slug": "Slug",
+    "slug": "Kurzbezeichnung",
     "description": "Beschreibung",
     "color": "Farbe",
     "status": "Status",
@@ -13,7 +13,7 @@
     "settings": "Einstellungen"
   },
   "placeholders": {
-    "enterName": "Name eingeben",
+    "enterName": "Namen eingeben",
     "enterDescription": "Beschreibung eingeben",
     "selectColor": "Farbe auswählen",
     "selectTags": "Tags auswählen",
@@ -23,11 +23,11 @@
   },
   "validation": {
     "nameRequired": "Name ist erforderlich",
-    "slugRequired": "Slug ist erforderlich",
+    "slugRequired": "Kurzbezeichnung ist erforderlich",
     "descriptionRequired": "Beschreibung ist erforderlich",
-    "invalidSlug": "Slug darf nur Buchstaben, Zahlen und Bindestriche enthalten",
-    "slugTooShort": "Slug muss mindestens 3 Zeichen lang sein",
-    "slugTooLong": "Slug muss weniger als 50 Zeichen lang sein",
+    "invalidSlug": "Kurzbezeichnung darf nur Buchstaben, Zahlen und Bindestriche enthalten",
+    "slugTooShort": "Kurzbezeichnung muss mindestens 3 Zeichen lang sein",
+    "slugTooLong": "Kurzbezeichnung muss weniger als 50 Zeichen lang sein",
     "nameTooShort": "Name muss mindestens 2 Zeichen lang sein",
     "nameTooLong": "Name muss weniger als 100 Zeichen lang sein",
     "descriptionTooLong": "Beschreibung muss weniger als 500 Zeichen lang sein",

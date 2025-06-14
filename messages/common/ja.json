@@ -2,17 +2,17 @@
   "actions": {
     "save": "保存",
     "cancel": "キャンセル",
-    "delete": "消去",
+    "delete": "削除",
     "edit": "編集",
-    "create": "作成する",
-    "update": "アップデート",
-    "submit": "提出する",
-    "close": "近い",
+    "create": "作成",
+    "update": "更新",
+    "submit": "送信",
+    "close": "閉じる",
     "back": "戻る",
-    "next": "次",
-    "previous": "前の",
-    "retry": "リトライ",
-    "refresh": "リフレッシュします",
+    "next": "次へ",
+    "previous": "前へ",
+    "retry": "再試行",
+    "refresh": "更新",
     "copy": "コピー",
     "download": "ダウンロード",
     "upload": "アップロード",
@@ -20,70 +20,70 @@
     "reset": "リセット",
     "search": "検索",
     "filter": "フィルター",
-    "sort": "選別",
-    "view": "ビュー",
+    "sort": "ソート",
+    "view": "表示",
     "help": "ヘルプ",
     "settings": "設定",
-    "tryAgain": "もう一度やり直してください",
-    "clearAllFilters": "すべてのフィルターをクリアします",
-    "clearFilters": "フィルターをクリアします",
-    "assign": "Assign",
-    "remove": "Remove"
+    "tryAgain": "再試行",
+    "clearAllFilters": "すべてのフィルターをクリア",
+    "clearFilters": "フィルターをクリア",
+    "assign": "割り当て",
+    "remove": "削除"
   },
   "ui": {
     "status": {
-      "loading": "Loading",
-      "saving": "Saving...",
-      "success": "Success",
-      "error": "Error",
-      "warning": "Warning",
-      "info": "Information",
-      "completed": "Completed",
-      "failed": "Failed",
-      "processing": "Processing...",
-      "validating": "Validating...",
-      "uploading": "Uploading...",
-      "downloading": "Downloading...",
-      "ready": "Ready",
-      "waiting": "Waiting for input"
+      "loading": "読み込み中",
+      "saving": "保存中...",
+      "success": "成功",
+      "error": "エラー",
+      "warning": "警告",
+      "info": "情報",
+      "completed": "完了",
+      "failed": "失敗",
+      "processing": "処理中...",
+      "validating": "検証中...",
+      "uploading": "アップロード中...",
+      "downloading": "ダウンロード中...",
+      "ready": "準備完了",
+      "waiting": "入力待ち"
     },
     "actions": {
-      "tryAgain": "Try Again"
+      "tryAgain": "再試行"
     },
     "confirmations": {
-      "deleteItem": "Are you sure you want to delete \"{name}\"? This action cannot be undone.",
-      "deleteItems": "Are you sure you want to delete {count} items? This action cannot be undone.",
-      "unsavedChanges": "You have unsaved changes. Are you sure you want to leave?",
-      "resetForm": "Are you sure you want to reset the form? All changes will be lost."
+      "deleteItem": "\"{name}\"を削除してもよろしいですか？この操作は元に戻せません。",
+      "deleteItems": "{count}個のアイテムを削除してもよろしいですか？この操作は元に戻せません。",
+      "unsavedChanges": "保存されていない変更があります。本当に終了しますか？",
+      "resetForm": "フォームをリセットしてもよろしいですか？すべての変更が失われます。"
     },
     "labels": {
-      "order": "Order",
-      "lastUpdated": "Last Updated",
-      "active": "Published",
-      "inactive": "Draft",
-      "noItems": "No items found",
-      "noDescription": "No description provided",
-      "noTags": "No tags"
+      "order": "順序",
+      "lastUpdated": "最終更新",
+      "active": "公開済み",
+      "inactive": "下書き",
+      "noItems": "アイテムが見つかりません",
+      "noDescription": "説明がありません",
+      "noTags": "タグなし"
     }
   },
   "status": {
-    "loading": "読み込み...",
-    "saving": "節約...",
+    "loading": "読み込み中...",
+    "saving": "保存中...",
     "success": "成功",
     "error": "エラー",
     "warning": "警告",
     "info": "情報",
-    "completed": "完了しました",
-    "failed": "失敗した",
-    "processing": "処理...",
-    "validating": "検証...",
-    "uploading": "アップロード...",
-    "downloading": "ダウンロード...",
-    "ready": "準備ができて",
-    "waiting": "入力を待っています"
+    "completed": "完了",
+    "failed": "失敗",
+    "processing": "処理中...",
+    "validating": "検証中...",
+    "uploading": "アップロード中...",
+    "downloading": "ダウンロード中...",
+    "ready": "準備完了",
+    "waiting": "入力待ち"
   },
   "validation": {
-    "required": "この項目は必須です",
+    "required": "このフィールドは必須です",
     "invalid": "無効な入力",
     "tooShort": "入力が短すぎます",
     "tooLong": "入力が長すぎます",
@@ -99,21 +99,21 @@
     "networkError": "ネットワークエラー",
     "serverError": "サーバーエラー",
     "notFound": "見つかりません",
-    "unauthorized": "不正",
+    "unauthorized": "不正なアクセス",
     "forbidden": "アクセスが拒否されました",
     "timeout": "リクエストタイムアウト",
     "unknownError": "不明なエラー",
-    "somethingWentWrong": "何かがうまくいかなかった",
-    "loadingFailed": "Error Loading Data",
-    "processingFailed": "Processing failed"
+    "somethingWentWrong": "問題が発生しました",
+    "loadingFailed": "データの読み込みに失敗しました",
+    "processingFailed": "処理に失敗しました"
   },
   "navigation": {
-    "home": "家",
+    "home": "ホーム",
     "tools": "ツール",
     "about": "について",
-    "contact": "接触",
+    "contact": "お問い合わせ",
     "privacy": "プライバシー",
-    "terms": "条項",
+    "terms": "利用規約",
     "admin": "管理者",
     "login": "ログイン",
     "logout": "ログアウト"
@@ -126,7 +126,7 @@
     "lastWeek": "先週",
     "thisMonth": "今月",
     "lastMonth": "先月",
-    "never": "一度もない"
+    "never": "なし"
   },
   "units": {
     "bytes": "バイト",
@@ -136,14 +136,14 @@
     "items": "アイテム",
     "files": "ファイル",
     "characters": "文字",
-    "uses": "用途"
+    "uses": "使用回数"
   },
   "privacy": {
-    "clientSideProcessing": "クライアント側の処理",
-    "noDataSent": "サーバーに送信されるデータはありません",
-    "privacyFirst": "プライバシーファースト",
+    "clientSideProcessing": "クライアントサイド処理",
+    "noDataSent": "サーバーにデータは送信されません",
+    "privacyFirst": "プライバシー優先",
     "secureProcessing": "安全な処理",
-    "filesStayLocal": "ファイルはデバイスにとどまります",
-    "noLogging": "データストレージやロギングはありません"
+    "filesStayLocal": "ファイルはデバイスに留まります",
+    "noLogging": "データストレージやログ記録なし"
   }
 }

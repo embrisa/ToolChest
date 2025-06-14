@@ -1,25 +1,25 @@
 {
   "page": {
-    "message": "Herramientas de carga ...",
-    "application": "Carga de herramientas de la herramienta ...",
-    "pleaseWait": "Aplicación de carga, espere ..."
+    "message": "Cargando herramientas...",
+    "application": "Cargando tool-chest...",
+    "pleaseWait": "Cargando aplicación, por favor espere..."
   },
   "components": {
-    "tools": "Herramientas de carga ...",
-    "tags": "Cargando etiquetas ...",
-    "search": "Búsqueda...",
-    "processing": "Tratamiento...",
-    "saving": "Ahorro...",
-    "uploading": "Subiendo ..."
+    "tools": "Cargando herramientas...",
+    "tags": "Cargando etiquetas...",
+    "search": "Buscando...",
+    "processing": "Procesando...",
+    "saving": "Guardando...",
+    "uploading": "Subiendo..."
   },
   "admin": {
-    "panel": "Cargando el panel de administración ...",
-    "dashboard": "Cargando el tablero ...",
-    "analytics": "Carga de análisis ..."
+    "panel": "Cargando panel de administración...",
+    "dashboard": "Cargando panel...",
+    "analytics": "Cargando análisis..."
   },
   "skeleton": {
-    "toolCard": "Información de la herramienta de carga ...",
-    "toolGrid": "Cargando herramientas disponibles ...",
-    "tagFilters": "Carga de opciones de filtro ..."
+    "toolCard": "Cargando información de la herramienta...",
+    "toolGrid": "Cargando herramientas disponibles...",
+    "tagFilters": "Cargando opciones de filtro..."
   }
 }

@@ -34,11 +34,11 @@
       }
     },
     "contact": {
-      "prompt": "Need help?",
-      "link": "Contact support"
+      "prompt": "Cần giúp đỡ?",
+      "link": "Liên hệ hỗ trợ"
     },
     "screenReader": {
-      "announcement": "Page not found. Please navigate using the links below."
+      "announcement": "Không tìm thấy trang. Vui lòng điều hướng bằng các liên kết bên dưới."
     }
   },
   "serverError": {

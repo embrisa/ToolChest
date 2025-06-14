@@ -33,7 +33,7 @@
   "search": {
     "placeholder": "Пошук інструментів...",
     "clearSearch": "Очистити пошук",
-    "searchResults": "результати пошуку"
+    "searchResults": "Результати пошуку"
   },
   "filtering": {
     "filterByTags": "Фільтрувати за тегами",

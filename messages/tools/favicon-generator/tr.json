@@ -1,59 +1,68 @@
 {
   "metadata": {
-    "title": "Favicon Generator - Create Favicons in All Sizes | tool-chest",
-    "description": "Free online favicon generator. Create favicons in all standard sizes (16x16, 32x32, 192x192, 512x512) from any image. Generate complete favicon packages with manifest files.",
+    "title": "Favicon Oluşturucu - Tüm Boyutlarda Favicon Oluşturun | tool-chest",
+    "description": "Ücretsiz çevrimiçi favicon oluşturucu. Herhangi bir görselden tüm standart boyutlarda (16x16, 32x32, 192x192, 512x512) favicon oluşturun. Manifest dosyalarıyla birlikte eksiksiz favicon paketleri oluşturur.",
     "keywords": [
       "favicon generator",
+      "favicon oluşturucu",
+      "favicon",
       "favicon",
       "icon generator",
+      "simge oluşturucu",
       "website icon",
+      "web sitesi simgesi",
       "app icon",
+      "uygulama simgesi",
       "16x16",
       "32x32",
       "192x192",
       "512x512",
       "ico file",
+      "ico dosyası",
       "png icon",
+      "png simgesi",
       "web app manifest",
-      "free tool"
+      "web uygulaması manifesti",
+      "free tool",
+      "ücretsiz araç"
     ]
   },
   "page": {
     "title": "Favicon Oluşturucu",
     "description": "Görüntülerden birden çok boyut ve formatta favicon'lar oluşturun.",
-    "privacyNotice": "All processing happens in your browser using <bold>Canvas API</bold>.",
-    "privacyMessage": "🔒 Privacy-First • Canvas API • Client-Side Processing"
+    "privacyNotice": "Tüm işlemler tarayıcınızda <bold>Canvas API</bold> kullanılarak gerçekleşir.",
+    "privacyMessage": "🔒 Gizlilik Önceliği • Canvas API • İstemci Tarafı İşleme"
   },
   "featureGrid": {
     "browserIcons": {
-      "title": "Browser Icons",
-      "description": "16×16, 32×32, 48×48 favicons for browser tabs, bookmarks, and desktop shortcuts."
+      "title": "Tarayıcı Simgeleri",
+      "description": "Tarayıcı sekmeleri, yer imleri ve masaüstü kısayolları için 16×16, 32×32, 48×48 favicon'lar."
     },
     "appleTouch": {
-      "title": "Apple Touch Icons",
-      "description": "180×180 icons for iOS home screen and Safari bookmark icons with rounded corners."
+      "title": "Apple Dokunmatik Simgeler",
+      "description": "iOS ana ekranı ve yuvarlatılmış köşeli Safari yer imi simgeleri için 180×180 simgeler."
     },
     "androidIcons": {
-      "title": "Android Icons",
-      "description": "192×192, 512×512 icons for Android home screen and Progressive Web Apps."
+      "title": "Android Simgeleri",
+      "description": "Android ana ekranı ve Aşamalı Web Uygulamaları için 192×192, 512×512 simgeler."
     },
     "webManifest": {
-      "title": "Web App Manifest",
-      "description": "Complete manifest.json for Progressive Web Apps with all required metadata.",
-      "badge": "PWA Ready"
+      "title": "Web Uygulaması Manifesti",
+      "description": "Tüm gerekli meta verilerle birlikte Aşamalı Web Uygulamaları için eksiksiz manifest.json.",
+      "badge": "PWA Hazır"
     }
   },
   "info": {
     "title": "Favicon Oluşturma Hakkında",
     "description": "Favicon, web sitenizi tarayıcı sekmelerinde, yer imlerinde ve kısayollarda temsil eden küçük bir simgedir. Modern web uygulamaları, farklı cihazları ve platformları desteklemek için birden çok favicon boyutu ve formatı gerektirir.",
     "standardSizes": {
-      "title": "Standard Sizes",
+      "title": "Standart Boyutlar",
       "items": [
-        "16×16, 32×32 - Browser tabs and bookmarks",
-        "48×48, 64×64 - Desktop shortcuts and apps",
-        "96×96, 128×128 - High-DPI and retina displays",
-        "180×180 - Apple touch icon for iOS",
-        "192×192, 512×512 - Android and PWA icons"
+        "16×16, 32×32 - Tarayıcı sekmeleri ve yer imleri",
+        "48×48, 64×64 - Masaüstü kısayolları ve uygulamalar",
+        "96×96, 128×128 - Yüksek DPI ve retina ekranlar",
+        "180×180 - iOS için Apple dokunmatik simgesi",
+        "192×192, 512×512 - Android ve PWA simgeleri"
       ]
     },
     "bestPractices": {
@@ -67,22 +76,22 @@
       ]
     },
     "supportedSizes": {
-      "title": "Supported Sizes",
+      "title": "Desteklenen Boyutlar",
       "items": [
-        "16×16, 32×32 - Browser tabs and bookmarks",
-        "48×48, 64×64 - Desktop shortcuts and apps",
-        "96×96, 128×128 - High-DPI and retina displays",
-        "180×180 - Apple touch icon for iOS",
-        "192×192, 512×512 - Android and PWA icons"
+        "16×16, 32×32 - Tarayıcı sekmeleri ve yer imleri",
+        "48×48, 64×64 - Masaüstü kısayolları ve uygulamalar",
+        "96×96, 128×128 - Yüksek DPI ve retina ekranlar",
+        "180×180 - iOS için Apple dokunmatik simgesi",
+        "192×192, 512×512 - Android ve PWA simgeleri"
       ]
     },
     "outputFormats": {
-      "title": "Output Formats",
+      "title": "Çıktı Formatları",
       "items": [
-        "PNG favicons for modern browsers",
-        "ICO files for legacy compatibility",
-        "Web manifest with icon paths",
-        "HTML <link> tags for easy embedding"
+        "Modern tarayıcılar için PNG favicon'lar",
+        "Eski uyumluluk için ICO dosyaları",
+        "Simge yolları ile web manifest",
+        "Kolay yerleştirme için HTML <link> etiketleri"
       ]
     }
   }

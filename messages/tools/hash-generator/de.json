@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "title": "Hash-Generator - MD5, SHA-1, SHA-256, SHA-512 Hashes Generieren | tool-chest",
+    "title": "Hash-Generator - MD5, SHA-1, SHA-256, SHA-512 Hashes Generieren | Tool-Chest",
     "description": "Kostenloser Online-Hash-Generator für MD5, SHA-1, SHA-256, SHA-512 und andere Hash-Algorithmen. Generiert sichere Hashes für Text und Dateien mit clientseitiger Verarbeitung.",
     "keywords": [
       "hash generator",
@@ -14,7 +14,15 @@
       "file hash",
       "text hash",
       "online tool",
-      "free"
+      "free",
+      "hash-generator",
+      "prüfsumme",
+      "krypto",
+      "sicherheit",
+      "datei-hash",
+      "text-hash",
+      "online-tool",
+      "kostenlos"
     ]
   },
   "page": {
@@ -65,8 +73,13 @@
       ]
     },
     "supportedAlgorithms": {
-      "title": "Supported Algorithms",
-      "items": ["MD5", "SHA-1", "SHA-256", "SHA-512"]
+      "title": "Unterstützte Algorithmen",
+      "items": [
+        "MD5",
+        "SHA-1",
+        "SHA-256",
+        "SHA-512"
+      ]
     }
   },
   "tool": {

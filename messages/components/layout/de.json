@@ -5,7 +5,7 @@
       "home": "Startseite",
       "tools": "Werkzeuge",
       "admin": "Admin",
-      "about": "Über"
+      "about": "Über uns"
     },
     "mobile": {
       "toggleMenu": "Menü umschalten",
@@ -16,10 +16,10 @@
   "footer": {
     "copyright": "© 2024 tool-chest",
     "links": {
-      "privacy": "Datenschutz-Bestimmungen",
+      "privacy": "Datenschutzrichtlinie",
       "terms": "Nutzungsbedingungen",
       "contact": "Kontakt",
-      "about": "Über"
+      "about": "Über uns"
     },
     "description": "Datenschutzorientierte Entwicklerwerkzeuge."
   },

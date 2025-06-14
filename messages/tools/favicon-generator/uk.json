@@ -1,59 +1,68 @@
 {
   "metadata": {
-    "title": "Favicon Generator - Create Favicons in All Sizes | tool-chest",
-    "description": "Free online favicon generator. Create favicons in all standard sizes (16x16, 32x32, 192x192, 512x512) from any image. Generate complete favicon packages with manifest files.",
+    "title": "Генератор Favicon - Створюйте Favicon у всіх розмірах | tool-chest",
+    "description": "Безкоштовний онлайн-генератор Favicon. Створює Favicon у всіх стандартних розмірах (16x16, 32x32, 192x192, 512x512) з будь-якого зображення. Генерує повні пакети Favicon з файлами маніфесту.",
     "keywords": [
       "favicon generator",
+      "генератор favicon",
+      "favicon",
       "favicon",
       "icon generator",
+      "генератор іконок",
       "website icon",
+      "іконка веб-сайту",
       "app icon",
+      "іконка програми",
       "16x16",
       "32x32",
       "192x192",
       "512x512",
       "ico file",
+      "ico файл",
       "png icon",
+      "png іконка",
       "web app manifest",
-      "free tool"
+      "маніфест веб-додатків",
+      "free tool",
+      "безкоштовний інструмент"
     ]
   },
   "page": {
     "title": "Генератор Favicon",
     "description": "Створюйте favicon з зображень у різних розмірах та форматах.",
-    "privacyNotice": "All processing happens in your browser using <bold>Canvas API</bold>.",
-    "privacyMessage": "🔒 Privacy-First • Canvas API • Client-Side Processing"
+    "privacyNotice": "Вся обробка відбувається у вашому браузері за допомогою <bold>Canvas API</bold>.",
+    "privacyMessage": "🔒 Конфіденційність насамперед • Canvas API • Обробка на стороні клієнта"
   },
   "featureGrid": {
     "browserIcons": {
-      "title": "Browser Icons",
-      "description": "16×16, 32×32, 48×48 favicons for browser tabs, bookmarks, and desktop shortcuts."
+      "title": "Іконки браузера",
+      "description": "16×16, 32×32, 48×48 Favicon для вкладок браузера, закладок та ярликів робочого столу."
     },
     "appleTouch": {
-      "title": "Apple Touch Icons",
-      "description": "180×180 icons for iOS home screen and Safari bookmark icons with rounded corners."
+      "title": "Іконки Apple Touch",
+      "description": "180×180 іконки для домашнього екрану iOS та іконки закладок Safari зі скругленими кутами."
     },
     "androidIcons": {
-      "title": "Android Icons",
-      "description": "192×192, 512×512 icons for Android home screen and Progressive Web Apps."
+      "title": "Іконки Android",
+      "description": "192×192, 512×512 іконки для домашнього екрану Android та Progressive Web Apps."
     },
     "webManifest": {
-      "title": "Web App Manifest",
-      "description": "Complete manifest.json for Progressive Web Apps with all required metadata.",
-      "badge": "PWA Ready"
+      "title": "Маніфест веб-додатків",
+      "description": "Повний manifest.json для Progressive Web Apps з усіма необхідними метаданими.",
+      "badge": "PWA готовий"
     }
   },
   "info": {
     "title": "Про генерацію Favicon",
     "description": "Favicon - це маленька іконка, яка представляє ваш веб-сайт у вкладках браузера, закладках та ярликах. Сучасним веб-додаткам потрібні favicon різних розмірів та форматів для підтримки різних пристроїв та платформ.",
     "standardSizes": {
-      "title": "Standard Sizes",
+      "title": "Стандартні розміри",
       "items": [
-        "16×16, 32×32 - Browser tabs and bookmarks",
-        "48×48, 64×64 - Desktop shortcuts and apps",
-        "96×96, 128×128 - High-DPI and retina displays",
-        "180×180 - Apple touch icon for iOS",
-        "192×192, 512×512 - Android and PWA icons"
+        "16×16, 32×32 - Вкладки браузера та закладки",
+        "48×48, 64×64 - Ярлики робочого столу та програми",
+        "96×96, 128×128 - Дисплеї високої роздільної здатності та Retina",
+        "180×180 - Іконка Apple Touch для iOS",
+        "192×192, 512×512 - Іконки Android та PWA"
       ]
     },
     "bestPractices": {
@@ -67,22 +76,22 @@
       ]
     },
     "supportedSizes": {
-      "title": "Supported Sizes",
+      "title": "Підтримувані розміри",
       "items": [
-        "16×16, 32×32 - Browser tabs and bookmarks",
-        "48×48, 64×64 - Desktop shortcuts and apps",
-        "96×96, 128×128 - High-DPI and retina displays",
-        "180×180 - Apple touch icon for iOS",
-        "192×192, 512×512 - Android and PWA icons"
+        "16×16, 32×32 - Вкладки браузера та закладки",
+        "48×48, 64×64 - Ярлики робочого столу та програми",
+        "96×96, 128×128 - Дисплеї високої роздільної здатності та Retina",
+        "180×180 - Іконка Apple Touch для iOS",
+        "192×192, 512×512 - Іконки Android та PWA"
       ]
     },
     "outputFormats": {
-      "title": "Output Formats",
+      "title": "Формати виводу",
       "items": [
-        "PNG favicons for modern browsers",
-        "ICO files for legacy compatibility",
-        "Web manifest with icon paths",
-        "HTML <link> tags for easy embedding"
+        "PNG Favicon для сучасних браузерів",
+        "ICO файли для застарілої сумісності",
+        "Веб-маніфест з шляхами до іконок",
+        "HTML <link> теги для простого вбудовування"
       ]
     }
   }

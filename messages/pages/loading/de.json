@@ -1,11 +1,11 @@
 {
   "page": {
-    "message": "Werkzeuge werden geladen...",
+    "message": "Tools werden geladen...",
     "application": "tool-chest wird geladen...",
     "pleaseWait": "Anwendung wird geladen, bitte warten..."
   },
   "components": {
-    "tools": "Werkzeuge werden geladen...",
+    "tools": "Tools werden geladen...",
     "tags": "Tags werden geladen...",
     "search": "Suchen...",
     "processing": "Verarbeiten...",
@@ -18,8 +18,8 @@
     "analytics": "Analysen werden geladen..."
   },
   "skeleton": {
-    "toolCard": "Werkzeuginformationen werden geladen...",
-    "toolGrid": "Verfügbare Werkzeuge werden geladen...",
+    "toolCard": "Tool-Informationen werden geladen...",
+    "toolGrid": "Verfügbare Tools werden geladen...",
     "tagFilters": "Filteroptionen werden geladen..."
   }
 }

@@ -4,125 +4,135 @@
     "description": "Convert Markdown to professional PDF documents with syntax highlighting, custom styling, and support for tables, code blocks, and images. Privacy-first client-side processing.",
     "keywords": [
       "markdown to pdf",
+      "마크다운을 PDF로",
       "markdown converter",
+      "마크다운 변환기",
       "pdf generator",
+      "PDF 생성기",
       "markdown pdf",
+      "마크다운 PDF",
       "syntax highlighting",
+      "구문 강조",
       "code blocks",
+      "코드 블록",
       "tables",
+      "테이블",
       "document converter",
+      "문서 변환기",
       "markdown export",
-      "free tool"
+      "마크다운 내보내기",
+      "free tool",
+      "무료 도구"
     ]
   },
   "page": {
     "title": "PDF에 마크 다운",
     "description": "사용자 정의 스타일 옵션으로 Markdown 파일을 PDF로 변환하십시오.",
-    "privacyMessage": "🔒 Privacy-First • GitHub Flavored Markdown • Client-Side Processing"
+    "privacyMessage": "🔒 프라이버시 우선 • GitHub 스타일 Markdown • 클라이언트 측 처리"
   },
   "featureGrid": {
     "live-preview": {
-      "title": "Live Preview",
-      "description": "Real-time markdown preview with instant rendering",
+      "title": "라이브 미리보기",
+      "description": "즉시 렌더링되는 실시간 Markdown 미리보기",
       "icon": "👁️"
     },
     "templates": {
-      "title": "Multiple Templates",
-      "description": "PDF templates and themes for different use cases",
+      "title": "다양한 템플릿",
+      "description": "다양한 용도에 맞는 PDF 템플릿과 테마",
       "icon": "🎨"
     },
     "gfm-support": {
-      "title": "GitHub Flavored Markdown",
-      "description": "Full GFM support including tables and task lists",
+      "title": "GitHub 스타일 Markdown",
+      "description": "표와 작업 목록을 포함한 완전한 GFM 지원",
       "icon": "📝"
     },
     "syntax-highlighting": {
-      "title": "Syntax Highlighting",
-      "description": "Code blocks with syntax highlighting for multiple languages",
+      "title": "문법 하이라이트",
+      "description": "여러 언어를 위한 코드 블록 문법 하이라이트",
       "icon": "💻"
     },
     "custom-styling": {
-      "title": "Custom Styling",
-      "description": "Customize fonts, colors, and layout options",
+      "title": "사용자 지정 스타일",
+      "description": "글꼴, 색상, 레이아웃 옵션을 사용자 지정",
       "icon": "⚙️"
     },
     "file-upload": {
-      "title": "File Upload",
-      "description": "Upload .md, .markdown, or .txt files directly",
+      "title": "파일 업로드",
+      "description": ".md, .markdown, .txt 파일을 직접 업로드",
       "icon": "📁"
     },
     "professional-output": {
-      "title": "Professional Output",
-      "description": "High-quality PDF generation with metadata",
+      "title": "전문적인 출력",
+      "description": "메타데이터가 포함된 고품질 PDF 생성",
       "icon": "📄"
     },
     "privacy-first": {
-      "title": "Privacy-First",
-      "description": "All processing happens in your browser",
+      "title": "프라이버시 우선",
+      "description": "모든 처리가 브라우저에서 이루어집니다",
       "icon": "🔒"
     }
   },
   "info": {
     "title": "PDF 변환에 대한 Markdown 정보",
-    "description": "마크 다운 문서를 사용자 정의 가능한 스타일 옵션으로 전문적으로 포맷 된 PDF 파일로 변환하십시오. 문서화, 보고서, 기사 및 프레젠테이션에 적합합니다.",
+    "description": "Markdown 문서를 손쉽게 전문적인 PDF 파일로 변환하세요. 저희 변환기는 테이블, 코드 블록 및 작업 목록을 포함한 GitHub Flavored Markdown (GFM)을 지원하여 서식과 스타일을 유지하는 문서를 유연하게 만들 수 있습니다.",
     "keyFeatures": {
       "title": "주요 기능",
       "items": [
-        "전체 Markdown 구문 지원",
-        "맞춤형 PDF 스타일 및 테마",
-        "여러 페이지 크기 및 방향",
-        "코드 블록에 대한 구문 강조 표시",
-        "테이블 및 이미지 지원",
-        "헤더 및 바닥 글로 사용자 정의",
-        "File upload support (.md, .markdown, .txt)",
-        "Drag and drop file upload",
-        "Real-time word count and statistics",
-        "Professional PDF output with metadata"
+        "실시간 렌더링이 가능한 라이브 Markdown 미리보기",
+        "다양한 PDF 템플릿 및 테마",
+        "GitHub Flavored Markdown 지원",
+        "테이블, 코드 블록 및 작업 목록",
+        "사용자 정의 스타일 및 서식 옵션",
+        "다양한 PDF 형식 (A4, 레터 등)",
+        "파일 업로드 지원 (.md, .markdown, .txt)",
+        "드래그 앤 드롭 파일 업로드",
+        "실시간 단어 수 및 통계",
+        "메타데이터가 포함된 전문 PDF 출력"
       ]
     },
     "supportedFeatures": {
-      "title": "Supported Markdown Features",
+      "title": "지원되는 Markdown 기능",
       "items": [
-        "Headings (H1-H6) with automatic numbering",
-        "Bold and italic text formatting",
-        "Links and images with captions",
-        "Code blocks with syntax highlighting",
-        "Tables with proper formatting",
-        "Blockquotes and nested lists",
-        "Task lists with checkboxes",
-        "Auto-linking of URLs"
+        "자동 번호 매기기가 있는 제목 (H1-H6)",
+        "굵게 및 기울임꼴 텍스트 서식",
+        "캡션이 있는 링크 및 이미지",
+        "구문 강조가 있는 코드 블록",
+        "올바른 서식의 테이블",
+        "블록 인용 및 중첩 목록",
+        "체크박스가 있는 작업 목록",
+        "URL 자동 연결"
       ]
     },
     "pdfTemplates": {
-      "title": "PDF Templates",
+      "title": "PDF 템플릿",
       "items": [
-        "Default: Clean and simple design for general use",
-        "Academic: Professional format for research papers",
-        "Minimal: Clean design with lots of white space",
-        "Professional: Business-ready with headers and footers"
+        "기본: 일반적인 사용을 위한 깨끗하고 간단한 디자인",
+        "학술: 연구 논문을 위한 전문 형식",
+        "최소: 많은 여백이 있는 깨끗한 디자인",
+        "전문: 헤더 및 바닥글이 있는 비즈니스 준비"
       ]
     },
     "howToUse": {
-      "title": "How to Use",
+      "title": "사용 방법",
       "items": [
-        "Choose between typing in the editor or uploading a markdown file",
-        "Write or paste your markdown content in the editor",
-        "Use the live preview to see how your document will look",
-        "Select a template or customize styling options",
-        "Click 'Generate PDF' to create your document",
-        "Download your professional PDF file"
+        "편집기에서 입력하거나 Markdown 파일을 업로드하는 것 중에서 선택하세요",
+        "편집기에 Markdown 내용을 작성하거나 붙여넣으세요",
+        "라이브 미리보기를 사용하여 문서가 어떻게 보일지 확인하세요",
+        "템플릿을 선택하거나 스타일 옵션을 사용자 정의하세요",
+        "문서를 만들려면 'PDF 생성'을 클릭하세요",
+        "전문 PDF 파일을 다운로드하세요"
       ]
     },
     "features": {
       "items": [
-        "Live preview",
-        "Multiple templates",
-        "GFM support",
-        "Syntax highlighting",
-        "Custom styling",
-        "File upload",
-        "Professional output",
-        "Privacy-first"
+        "라이브 미리보기",
+        "다양한 템플릿",
+        "GFM 지원",
+        "문법 하이라이트",
+        "사용자 지정 스타일",
+        "파일 업로드",
+        "전문적인 출력",
+        "프라이버시 우선"
       ]
     }
   }

@@ -24,14 +24,14 @@
       "manageTools": "ツールを管理します",
       "manageTags": "タグを管理します",
       "viewSite": "サイトを表示します",
-      "systemHealth": "システムの健康",
-      "addTool": "Add Tool",
-      "addTag": "Add Tag",
-      "manageRelationships": "Manage Relationships",
-      "createToolDescription": "Create new tool in the system",
-      "createTagDescription": "Create new tag for categorization",
-      "manageRelationshipsDescription": "Configure tool-tag associations",
-      "viewSiteDescription": "Open the public tool-chest site"
+      "systemHealth": "システムの健康状態",
+      "addTool": "ツールを追加",
+      "addTag": "タグを追加",
+      "manageRelationships": "関係を管理",
+      "createToolDescription": "システムに新しいツールを作成",
+      "createTagDescription": "分類用の新しいタグを作成",
+      "manageRelationshipsDescription": "ツールとタグの関連付けを設定",
+      "viewSiteDescription": "公開tool-chestサイトを開く"
     }
   },
   "tools": {
@@ -45,7 +45,7 @@
     },
     "table": {
       "name": "名前",
-      "slug": "ナメクジ",
+      "slug": "スラッグ",
       "status": "状態",
       "tags": "タグ",
       "usage": "使用法",
@@ -53,30 +53,30 @@
       "actions": "アクション"
     },
     "emptyState": {
-      "description": "Get started by creating your first tool. Tools help users accomplish specific tasks and can be organized with tags."
+      "description": "最初のツールを作成することから始めましょう。ツールはユーザーが特定のタスクを達成するのに役立ち、タグで整理できます。"
     },
     "bulkOperations": {
-      "title": "Bulk {operation} Tags",
-      "selectedCount": "{count, plural, =1 {# tool} other {# tools}} selected",
-      "operationType": "Select Operation",
-      "selectTags": "Select Tags",
-      "selectedTools": "Selected Tools",
-      "previewChanges": "Preview Changes",
-      "operationSummary": "Operation Summary",
-      "totalChanges": "Total Changes",
-      "toolsToUpdate": "Tools to Update",
-      "warnings": "Warnings",
-      "executing": "Executing Operation",
-      "executingMessage": "Please wait while we process your bulk operation...",
-      "completed": "Operation Completed",
-      "failed": "Operation Failed",
-      "successMessage": "Your bulk operation has been completed successfully",
-      "errorMessage": "There was an error executing your bulk operation",
-      "results": "Operation Results",
-      "toolsAffected": "Tools Affected",
-      "tagsAffected": "Tags Affected",
-      "errors": "Errors Encountered",
-      "startNew": "Start New Operation"
+      "title": "一括{operation}タグ",
+      "selectedCount": "{count, plural, =1 {# ツール} other {# ツール}}選択済み",
+      "operationType": "操作を選択",
+      "selectTags": "タグを選択",
+      "selectedTools": "選択されたツール",
+      "previewChanges": "変更をプレビュー",
+      "operationSummary": "操作概要",
+      "totalChanges": "総変更数",
+      "toolsToUpdate": "更新するツール",
+      "warnings": "警告",
+      "executing": "操作を実行中",
+      "executingMessage": "一括操作を処理しています。しばらくお待ちください...",
+      "completed": "操作完了",
+      "failed": "操作失敗",
+      "successMessage": "一括操作が正常に完了しました",
+      "errorMessage": "一括操作の実行中にエラーが発生しました",
+      "results": "操作結果",
+      "toolsAffected": "影響を受けるツール",
+      "tagsAffected": "影響を受けるタグ",
+      "errors": "検出されたエラー",
+      "startNew": "新しい操作を開始"
     }
   },
   "tags": {
@@ -90,14 +90,14 @@
     },
     "table": {
       "name": "名前",
-      "slug": "ナメクジ",
+      "slug": "スラッグ",
       "color": "色",
       "toolCount": "ツール",
       "description": "説明",
       "actions": "アクション"
     },
     "emptyState": {
-      "description": "Get started by creating your first tag to organize your tools."
+      "description": "ツールを整理するために、最初のタグを作成することから始めましょう。"
     }
   },
   "analytics": {
@@ -128,10 +128,10 @@
     "dashboard": "ダッシュボード",
     "tools": "ツール",
     "tags": "タグ",
-    "relationships": "Relationships",
+    "relationships": "関係",
     "analytics": "分析",
     "monitoring": "監視",
     "logout": "ログアウト",
-    "viewSite": "サイトを表示します"
+    "viewSite": "公開サイトを表示"
   }
 }

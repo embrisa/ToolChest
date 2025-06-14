@@ -1,64 +1,64 @@
 {
   "labels": {
     "name": "名前",
-    "slug": "ナメクジ",
+    "slug": "スラッグ",
     "description": "説明",
     "color": "色",
-    "status": "状態",
+    "status": "ステータス",
     "tags": "タグ",
     "url": "URL",
     "file": "ファイル",
-    "text": "文章",
+    "text": "テキスト",
     "options": "オプション",
     "settings": "設定"
   },
   "placeholders": {
-    "enterName": "名前を入力します",
-    "enterDescription": "説明を入力します",
-    "selectColor": "色を選択します",
-    "selectTags": "タグを選択します",
-    "enterUrl": "URLを入力します",
-    "chooseFile": "ファイルを選択します",
-    "enterText": "テキストを入力します"
+    "enterName": "名前を入力",
+    "enterDescription": "説明を入力",
+    "selectColor": "色を選択",
+    "selectTags": "タグを選択",
+    "enterUrl": "URLを入力",
+    "chooseFile": "ファイルを選択",
+    "enterText": "テキストを入力"
   },
   "validation": {
-    "nameRequired": "名前が必要です",
-    "slugRequired": "ナメクジが必要です",
-    "descriptionRequired": "説明が必要です",
-    "invalidSlug": "ナメクジは、文字、数字、およびハイフンのみを含めることができます",
-    "slugTooShort": "スラッグは少なくとも3文字でなければなりません",
-    "slugTooLong": "ナメクジは50文字未満でなければなりません",
-    "nameTooShort": "名前は少なくとも2文字でなければなりません",
-    "nameTooLong": "名前は100文字未満でなければなりません",
-    "descriptionTooLong": "説明は500文字未満でなければなりません",
+    "nameRequired": "名前は必須です",
+    "slugRequired": "スラッグは必須です",
+    "descriptionRequired": "説明は必須です",
+    "invalidSlug": "スラッグには、文字、数字、ハイフンのみを含めることができます",
+    "slugTooShort": "スラッグは3文字以上である必要があります",
+    "slugTooLong": "スラッグは50文字未満である必要があります",
+    "nameTooShort": "名前は2文字以上である必要があります",
+    "nameTooLong": "名前は100文字未満である必要があります",
+    "descriptionTooLong": "説明は500文字未満である必要があります",
     "invalidColor": "有効な色を選択してください",
     "invalidEmail": "有効なメールアドレスを入力してください",
     "invalidUrl": "有効なURLを入力してください"
   },
   "help": {
-    "slug": "URLに優しい識別子（名前から自動生成）",
+    "slug": "URLフレンドリーな識別子（名前から自動生成）",
     "description": "アイテムの簡単な説明",
-    "color": "視覚識別に使用される色",
-    "tags": "関連するタグでアイテムを整理します",
+    "color": "視覚的識別に使用される色",
+    "tags": "関連するタグでアイテムを整理する",
     "status": "アイテムの現在の状態"
   },
   "actions": {
     "save": "保存",
     "cancel": "キャンセル",
-    "submit": "提出する",
+    "submit": "送信",
     "reset": "リセット",
     "clear": "クリア",
-    "delete": "消去",
+    "delete": "削除",
     "edit": "編集",
-    "create": "作成する",
-    "update": "アップデート"
+    "create": "作成",
+    "update": "更新"
   },
   "states": {
-    "saving": "節約...",
-    "loading": "読み込み...",
+    "saving": "保存中...",
+    "loading": "読み込み中...",
     "saved": "正常に保存されました",
     "error": "エラーが発生しました",
-    "required": "必要なフィールド",
-    "optional": "オプションのフィールド"
+    "required": "必須フィールド",
+    "optional": "オプションフィールド"
   }
 }

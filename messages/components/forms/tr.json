@@ -1,6 +1,6 @@
 {
   "labels": {
-    "name": "İsim",
+    "name": "Ad",
     "slug": "Kısa Ad",
     "description": "Açıklama",
     "color": "Renk",
@@ -13,7 +13,7 @@
     "settings": "Ayarlar"
   },
   "placeholders": {
-    "enterName": "İsim girin",
+    "enterName": "Adı girin",
     "enterDescription": "Açıklama girin",
     "selectColor": "Renk seçin",
     "selectTags": "Etiketleri seçin",
@@ -22,21 +22,21 @@
     "enterText": "Metin girin"
   },
   "validation": {
-    "nameRequired": "İsim gereklidir",
+    "nameRequired": "Ad gereklidir",
     "slugRequired": "Kısa ad gereklidir",
     "descriptionRequired": "Açıklama gereklidir",
     "invalidSlug": "Kısa ad yalnızca harf, rakam ve tire içerebilir",
     "slugTooShort": "Kısa ad en az 3 karakter olmalıdır",
     "slugTooLong": "Kısa ad 50 karakterden az olmalıdır",
-    "nameTooShort": "İsim en az 2 karakter olmalıdır",
-    "nameTooLong": "İsim 100 karakterden az olmalıdır",
+    "nameTooShort": "Ad en az 2 karakter olmalıdır",
+    "nameTooLong": "Ad 100 karakterden az olmalıdır",
     "descriptionTooLong": "Açıklama 500 karakterden az olmalıdır",
     "invalidColor": "Lütfen geçerli bir renk seçin",
     "invalidEmail": "Lütfen geçerli bir e-posta adresi girin",
     "invalidUrl": "Lütfen geçerli bir URL girin"
   },
   "help": {
-    "slug": "URL dostu tanımlayıcı (isimden otomatik olarak oluşturulur)",
+    "slug": "URL dostu tanımlayıcı (addan otomatik olarak oluşturulur)",
     "description": "Öğenin kısa açıklaması",
     "color": "Görsel tanımlama için kullanılan renk",
     "tags": "Öğeleri ilgili etiketlerle düzenleyin",

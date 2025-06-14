@@ -34,11 +34,11 @@
       }
     },
     "contact": {
-      "prompt": "Need help?",
-      "link": "Contact support"
+      "prompt": "도움이 필요하세요?",
+      "link": "지원팀에 문의"
     },
     "screenReader": {
-      "announcement": "Page not found. Please navigate using the links below."
+      "announcement": "페이지를 찾을 수 없습니다. 아래 링크를 사용하여 탐색하십시오."
     }
   },
   "serverError": {

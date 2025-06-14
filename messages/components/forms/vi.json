@@ -1,7 +1,7 @@
 {
   "labels": {
     "name": "Tên",
-    "slug": "Slug",
+    "slug": "Định danh",
     "description": "Mô tả",
     "color": "Màu sắc",
     "status": "Trạng thái",
@@ -23,11 +23,11 @@
   },
   "validation": {
     "nameRequired": "Tên là bắt buộc",
-    "slugRequired": "Slug là bắt buộc",
+    "slugRequired": "Định danh là bắt buộc",
     "descriptionRequired": "Mô tả là bắt buộc",
-    "invalidSlug": "Slug chỉ có thể chứa chữ cái, số và dấu gạch ngang",
-    "slugTooShort": "Slug phải có ít nhất 3 ký tự",
-    "slugTooLong": "Slug phải ít hơn 50 ký tự",
+    "invalidSlug": "Định danh chỉ có thể chứa chữ cái, số và dấu gạch ngang",
+    "slugTooShort": "Định danh phải có ít nhất 3 ký tự",
+    "slugTooLong": "Định danh phải ít hơn 50 ký tự",
     "nameTooShort": "Tên phải có ít nhất 2 ký tự",
     "nameTooLong": "Tên phải ít hơn 100 ký tự",
     "descriptionTooLong": "Mô tả phải ít hơn 500 ký tự",

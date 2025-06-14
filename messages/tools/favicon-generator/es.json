@@ -1,88 +1,96 @@
 {
   "metadata": {
-    "title": "Generador de Favicon - Crea Favicons en Todos los Tamaños | tool-chest",
-    "description": "Generador de favicon gratuito en línea. Crea favicons en todos los tamaños estándar (16x16, 32x32, 192x192, 512x512) desde cualquier imagen. Genera paquetes completos de favicon con archivos de manifiesto.",
+    "title": "Generador de Favicon - Crear Favicons en Todos los Tamaños | tool-chest",
+    "description": "Generador de favicon gratuito en línea. Cree favicons en todos los tamaños estándar (16x16, 32x32, 192x192, 512x512) a partir de cualquier imagen. Genere paquetes completos de favicon con archivos de manifiesto.",
     "keywords": [
       "favicon generator",
-      "favicon",
+      "generador de favicon",
       "icon generator",
+      "generador de iconos",
       "website icon",
+      "icono de sitio web",
       "app icon",
+      "icono de aplicacion",
       "16x16",
       "32x32",
       "192x192",
       "512x512",
-      "ico file",
-      "png icon",
-      "web app manifest",
-      "free tool"
+      "archivo ico",
+      "icono png",
+      "manifiesto de aplicacion web",
+      "herramienta gratuita",
+      "favicon",
+      "favicons",
+      "generador de iconos",
+      "icono web",
+      "icono de app"
     ]
   },
   "page": {
-    "title": "Generador de favicón",
-    "description": "Cree favicones a partir de imágenes en múltiples tamaños y formatos.",
-    "privacyNotice": "All processing happens in your browser using <bold>Canvas API</bold>.",
-    "privacyMessage": "🔒 Privacy-First • Canvas API • Client-Side Processing"
+    "title": "Generador de Favicon",
+    "description": "Genere favicons en todos los tamaños estándar a partir de cualquier imagen. Cree paquetes completos de favicon con formatos PNG, ICO y manifiesto de aplicación web.",
+    "privacyNotice": "Todo el procesamiento ocurre en su navegador usando la <bold>API Canvas</bold>.",
+    "privacyMessage": "🔒 Privacidad Primero • API Canvas • Procesamiento del Lado del Cliente"
   },
   "featureGrid": {
     "browserIcons": {
-      "title": "Browser Icons",
-      "description": "16×16, 32×32, 48×48 favicons for browser tabs, bookmarks, and desktop shortcuts."
+      "title": "Iconos del Navegador",
+      "description": "Favicons de 16×16, 32×32, 48×48 para pestañas de navegador, marcadores y accesos directos de escritorio."
     },
     "appleTouch": {
-      "title": "Apple Touch Icons",
-      "description": "180×180 icons for iOS home screen and Safari bookmark icons with rounded corners."
+      "title": "Iconos Táctiles de Apple",
+      "description": "Iconos de 180×180 para la pantalla de inicio de iOS e iconos de marcadores de Safari con esquinas redondeadas."
     },
     "androidIcons": {
-      "title": "Android Icons",
-      "description": "192×192, 512×512 icons for Android home screen and Progressive Web Apps."
+      "title": "Iconos de Android",
+      "description": "Iconos de 192×192, 512×512 para la pantalla de inicio de Android y Aplicaciones Web Progresivas."
     },
     "webManifest": {
-      "title": "Web App Manifest",
-      "description": "Complete manifest.json for Progressive Web Apps with all required metadata.",
-      "badge": "PWA Ready"
+      "title": "Manifiesto de Aplicación Web",
+      "description": "Manifiesto.json completo para Aplicaciones Web Progresivas con todos los metadatos requeridos.",
+      "badge": "Lista para PWA"
     }
   },
   "info": {
-    "title": "Sobre la generación de favicon",
-    "description": "Un favicon es un pequeño icono que representa su sitio web en las pestañas, marcadores y atajos. Las aplicaciones web modernas requieren múltiples tamaños y formatos de Favicon para admitir diferentes dispositivos y plataformas.",
+    "title": "Acerca de los Favicons",
+    "description": "Los favicons (iconos de favoritos) son pequeños iconos que se muestran en las pestañas del navegador, marcadores y barras de direcciones. Ayudan a los usuarios a identificar su sitio web rápidamente y mejoran el reconocimiento de la marca. Los sitios web modernos requieren múltiples tamaños de favicon para diferentes dispositivos y casos de uso.",
     "standardSizes": {
-      "title": "Standard Sizes",
+      "title": "Tamaños Estándar",
       "items": [
-        "16×16, 32×32 - Browser tabs and bookmarks",
-        "48×48, 64×64 - Desktop shortcuts and apps",
-        "96×96, 128×128 - High-DPI and retina displays",
-        "180×180 - Apple touch icon for iOS",
-        "192×192, 512×512 - Android and PWA icons"
+        "16×16, 32×32 - Pestañas y marcadores del navegador",
+        "48×48, 64×64 - Accesos directos y aplicaciones de escritorio",
+        "96×96, 128×128 - Pantallas de alta densidad de píxeles y retina",
+        "180×180 - Icono táctil de Apple para iOS",
+        "192×192, 512×512 - Iconos de Android y PWA"
       ]
     },
     "bestPractices": {
-      "title": "Mejores prácticas",
+      "title": "Mejores Prácticas",
       "items": [
-        "Use imágenes cuadradas (relación de aspecto 1: 1)",
-        "Comience con alta resolución (512x512 o más)",
-        "Los diseños simples funcionan mejor en tamaños pequeños",
-        "Prueba en diferentes orígenes",
-        "Incluir múltiples tamaños para la compatibilidad del dispositivo"
+        "Use imágenes cuadradas (relación de aspecto 1:1)",
+        "Comience con una fuente de 512×512 para obtener la mejor calidad",
+        "Mantenga el diseño simple y reconocible",
+        "Pruebe en diferentes fondos",
+        "Use el formato PNG para admitir transparencia"
       ]
     },
     "supportedSizes": {
-      "title": "Supported Sizes",
+      "title": "Tamaños Soportados",
       "items": [
-        "16×16, 32×32 - Browser tabs and bookmarks",
-        "48×48, 64×64 - Desktop shortcuts and apps",
-        "96×96, 128×128 - High-DPI and retina displays",
-        "180×180 - Apple touch icon for iOS",
-        "192×192, 512×512 - Android and PWA icons"
+        "16×16, 32×32 - Pestañas y marcadores del navegador",
+        "48×48, 64×64 - Accesos directos y aplicaciones de escritorio",
+        "96×96, 128×128 - Pantallas de alta densidad de píxeles y retina",
+        "180×180 - Icono táctil de Apple para iOS",
+        "192×192, 512×512 - Iconos de Android y PWA"
       ]
     },
     "outputFormats": {
-      "title": "Output Formats",
+      "title": "Formatos de Salida",
       "items": [
-        "PNG favicons for modern browsers",
-        "ICO files for legacy compatibility",
-        "Web manifest with icon paths",
-        "HTML <link> tags for easy embedding"
+        "Favicons PNG para navegadores modernos",
+        "Archivos ICO para compatibilidad heredada",
+        "Manifiesto web con rutas de iconos",
+        "Etiquetas HTML <link> para una fácil inserción"
       ]
     }
   }

@@ -4,125 +4,135 @@
     "description": "Convierte Markdown a documentos PDF profesionales con resaltado de sintaxis, estilo personalizado y soporte para tablas, bloques de código e imágenes. Procesamiento del lado del cliente que prioriza la privacidad.",
     "keywords": [
       "markdown to pdf",
+      "markdown a pdf",
       "markdown converter",
+      "convertidor de markdown",
       "pdf generator",
+      "generador de pdf",
       "markdown pdf",
+      "markdown a pdf",
       "syntax highlighting",
+      "resaltado de sintaxis",
       "code blocks",
+      "bloques de código",
       "tables",
+      "tablas",
       "document converter",
+      "convertidor de documentos",
       "markdown export",
-      "free tool"
+      "exportación de markdown",
+      "free tool",
+      "herramienta gratuita"
     ]
   },
   "page": {
-    "title": "Markdown to PDF",
-    "description": "Convert Markdown files to PDF with custom styling options.",
-    "privacyMessage": "🔒 Privacy-First • GitHub Flavored Markdown • Client-Side Processing"
+    "title": "Markdown a PDF",
+    "description": "Convierte archivos Markdown a PDF con opciones de estilo personalizadas.",
+    "privacyMessage": "🔒 Privacidad Primero • GitHub Flavored Markdown • Procesamiento del lado del cliente"
   },
   "featureGrid": {
     "live-preview": {
-      "title": "Live Preview",
-      "description": "Real-time markdown preview with instant rendering",
+      "title": "Vista previa en vivo",
+      "description": "Vista previa de Markdown en tiempo real con renderizado instantáneo",
       "icon": "👁️"
     },
     "templates": {
-      "title": "Multiple Templates",
-      "description": "PDF templates and themes for different use cases",
+      "title": "Múltiples plantillas",
+      "description": "Plantillas y temas PDF para diferentes casos de uso",
       "icon": "🎨"
     },
     "gfm-support": {
-      "title": "GitHub Flavored Markdown",
-      "description": "Full GFM support including tables and task lists",
+      "title": "Markdown con sabor a GitHub",
+      "description": "Soporte completo de GFM incluyendo tablas y listas de tareas",
       "icon": "📝"
     },
     "syntax-highlighting": {
-      "title": "Syntax Highlighting",
-      "description": "Code blocks with syntax highlighting for multiple languages",
+      "title": "Resaltado de sintaxis",
+      "description": "Bloques de código con resaltado de sintaxis para múltiples lenguajes",
       "icon": "💻"
     },
     "custom-styling": {
-      "title": "Custom Styling",
-      "description": "Customize fonts, colors, and layout options",
+      "title": "Estilo personalizado",
+      "description": "Personaliza fuentes, colores y opciones de diseño",
       "icon": "⚙️"
     },
     "file-upload": {
-      "title": "File Upload",
-      "description": "Upload .md, .markdown, or .txt files directly",
+      "title": "Carga de archivos",
+      "description": "Carga archivos .md, .markdown o .txt directamente",
       "icon": "📁"
     },
     "professional-output": {
-      "title": "Professional Output",
-      "description": "High-quality PDF generation with metadata",
+      "title": "Salida profesional",
+      "description": "Generación de PDF de alta calidad con metadatos",
       "icon": "📄"
     },
     "privacy-first": {
-      "title": "Privacy-First",
-      "description": "All processing happens in your browser",
+      "title": "Privacidad ante todo",
+      "description": "Todo el procesamiento ocurre en tu navegador",
       "icon": "🔒"
     }
   },
   "info": {
-    "title": "About Markdown to PDF Conversion",
-    "description": "Convert your Markdown documents to professionally formatted PDF files with customizable styling options. Perfect for documentation, reports, articles, and presentations.",
+    "title": "Sobre la conversión de Markdown a PDF",
+    "description": "Transforme sus documentos Markdown en archivos PDF profesionales con facilidad. Nuestro convertidor es compatible con GitHub Flavored Markdown (GFM), incluidas tablas, bloques de código y listas de tareas, lo que le brinda la flexibilidad de crear documentos que mantienen su formato y estilo.",
     "keyFeatures": {
-      "title": "Key Features",
+      "title": "Características clave",
       "items": [
-        "Full Markdown syntax support",
-        "Custom PDF styling and themes",
-        "Multiple page sizes and orientations",
-        "Syntax highlighting for code blocks",
-        "Table and image support",
-        "Header and footer customization",
-        "File upload support (.md, .markdown, .txt)",
-        "Drag and drop file upload",
-        "Real-time word count and statistics",
-        "Professional PDF output with metadata"
+        "Vista previa de Markdown en vivo con renderizado en tiempo real",
+        "Múltiples plantillas y temas de PDF",
+        "Compatibilidad con GitHub Flavored Markdown",
+        "Tablas, bloques de código y listas de tareas",
+        "Opciones de estilo y formato personalizadas",
+        "Múltiples formatos de PDF (A4, Carta, etc.)",
+        "Soporte de carga de archivos (.md, .markdown, .txt)",
+        "Carga de archivos de arrastrar y soltar",
+        "Recuento de palabras y estadísticas en tiempo real",
+        "Salida de PDF profesional con metadatos"
       ]
     },
     "supportedFeatures": {
-      "title": "Supported Markdown Features",
+      "title": "Características de Markdown compatibles",
       "items": [
-        "Headings (H1-H6) with automatic numbering",
-        "Bold and italic text formatting",
-        "Links and images with captions",
-        "Code blocks with syntax highlighting",
-        "Tables with proper formatting",
-        "Blockquotes and nested lists",
-        "Task lists with checkboxes",
-        "Auto-linking of URLs"
+        "Encabezados (H1-H6) con numeración automática",
+        "Formato de texto en negrita y cursiva",
+        "Enlaces e imágenes con subtítulos",
+        "Bloques de código con resaltado de sintaxis",
+        "Tablas con formato adecuado",
+        "Citas en bloque y listas anidadas",
+        "Listas de tareas con casillas de verificación",
+        "Vinculación automática de URL"
       ]
     },
     "pdfTemplates": {
-      "title": "PDF Templates",
+      "title": "Plantillas de PDF",
       "items": [
-        "Default: Clean and simple design for general use",
-        "Academic: Professional format for research papers",
-        "Minimal: Clean design with lots of white space",
-        "Professional: Business-ready with headers and footers"
+        "Predeterminado: Diseño limpio y sencillo para uso general",
+        "Académico: Formato profesional para trabajos de investigación",
+        "Minimalista: Diseño limpio con mucho espacio en blanco",
+        "Profesional: Listo para negocios con encabezados y pies de página"
       ]
     },
     "howToUse": {
-      "title": "How to Use",
+      "title": "Cómo utilizar",
       "items": [
-        "Choose between typing in the editor or uploading a markdown file",
-        "Write or paste your markdown content in the editor",
-        "Use the live preview to see how your document will look",
-        "Select a template or customize styling options",
-        "Click 'Generate PDF' to create your document",
-        "Download your professional PDF file"
+        "Elija entre escribir en el editor o cargar un archivo Markdown",
+        "Escriba o pegue su contenido Markdown en el editor",
+        "Use la vista previa en vivo para ver cómo se verá su documento",
+        "Seleccione una plantilla o personalice las opciones de estilo",
+        "Haga clic en 'Generar PDF' para crear su documento",
+        "Descargue su archivo PDF profesional"
       ]
     },
     "features": {
       "items": [
-        "Live preview",
-        "Multiple templates",
-        "GFM support",
-        "Syntax highlighting",
-        "Custom styling",
-        "File upload",
-        "Professional output",
-        "Privacy-first"
+        "Vista previa en vivo",
+        "Múltiples plantillas",
+        "Soporte GFM",
+        "Resaltado de sintaxis",
+        "Estilo personalizado",
+        "Carga de archivos",
+        "Salida profesional",
+        "Privacidad ante todo"
       ]
     }
   }

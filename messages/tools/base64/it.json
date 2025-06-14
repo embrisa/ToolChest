@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Base64 Encoder & Decoder | tool-chest",
-    "description": "Free online Base64 encoder and decoder. Convert text to Base64 and decode Base64 to text. Supports file encoding/decoding with URL-safe options. Privacy-first with client-side processing.",
+    "title": "Codificatore e Decodificatore Base64 | tool-chest",
+    "description": "Codificatore e decodificatore Base64 online gratuito. Converte testo in Base64 e decodifica Base64 in testo. Supporta codifica/decodifica di file con opzioni URL-safe. Orientato alla privacy con elaborazione lato client.",
     "keywords": [
       "base64",
       "encoder",
@@ -13,13 +13,23 @@
       "url-safe",
       "online tool",
       "free",
+      "privacy",
+      "codificatore",
+      "decodificatore",
+      "codificare",
+      "decodificare",
+      "testo",
+      "file",
+      "url-safe",
+      "strumento online",
+      "gratuito",
       "privacy"
     ]
   },
   "page": {
     "title": "Codificatore e Decodificatore Base64",
     "description": "Codifica e decodifica dati Base64 con supporto per testo e file.",
-    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
+    "privacyNotice": "Tutta l'elaborazione avviene nel tuo browser per la <bold>massima privacy</bold>."
   },
   "tool": {
     "variants": {
@@ -46,16 +56,16 @@
         "Funzionalità di copia negli appunti",
         "Download dei risultati codificati/decodificati",
         "Codifica/decodifica in tempo reale",
-        "Real-time encoding/decoding"
+        "Elaborazione lato client per la privacy"
       ]
     },
     "securityAndPrivacy": {
-      "title": "Security & Privacy",
+      "title": "Sicurezza e Privacy",
       "items": [
-        "No data sent to servers",
-        "Processing happens in your browser",
-        "Files stay on your device",
-        "No data storage or logging"
+        "Nessun dato inviato ai server",
+        "L'elaborazione avviene nel tuo browser",
+        "I file rimangono sul tuo dispositivo",
+        "Nessuna memorizzazione o registrazione dei dati"
       ]
     },
     "useCases": {

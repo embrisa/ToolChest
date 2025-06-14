@@ -38,22 +38,22 @@
     "current": "Idioma atual",
     "selectLanguage": "Selecionar idioma",
     "languages": {
-      "en": "English",
-      "es": "Español",
-      "zh": "中文",
-      "hi": "हिन्दी",
+      "en": "Inglês",
+      "es": "Espanhol",
+      "zh": "Chinês",
+      "hi": "Hindi",
       "pt": "Português",
-      "ru": "Русский",
-      "ja": "日本語",
-      "de": "Deutsch",
-      "fr": "Français",
-      "ko": "한국어",
+      "ru": "Russo",
+      "ja": "Japonês",
+      "de": "Alemão",
+      "fr": "Francês",
+      "ko": "Coreano",
       "it": "Italiano",
-      "tr": "Türkçe",
-      "pl": "Polski",
-      "nl": "Nederlands",
-      "vi": "Tiếng Việt",
-      "uk": "Українська"
+      "tr": "Turco",
+      "pl": "Polonês",
+      "nl": "Holandês",
+      "vi": "Vietnamita",
+      "uk": "Ucraniano"
     }
   }
 }

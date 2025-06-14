@@ -23,15 +23,15 @@
       "viewAnalytics": "Просмотреть аналитику",
       "manageTools": "Управление инструментами",
       "manageTags": "Управление тегами",
-      "viewSite": "Просмотреть сайт",
-      "systemHealth": "Система здоровья",
-      "addTool": "Add Tool",
-      "addTag": "Add Tag",
-      "manageRelationships": "Manage Relationships",
-      "createToolDescription": "Create new tool in the system",
-      "createTagDescription": "Create new tag for categorization",
-      "manageRelationshipsDescription": "Configure tool-tag associations",
-      "viewSiteDescription": "Open the public tool-chest site"
+      "viewSite": "Просмотреть публичный сайт",
+      "systemHealth": "Состояние системы",
+      "addTool": "Добавить инструмент",
+      "addTag": "Добавить тег",
+      "manageRelationships": "Управление отношениями",
+      "createToolDescription": "Создать новый инструмент в системе",
+      "createTagDescription": "Создать новый тег для категоризации",
+      "manageRelationshipsDescription": "Настроить связи инструмент-тег",
+      "viewSiteDescription": "Открыть публичный сайт tool-chest"
     }
   },
   "tools": {
@@ -45,38 +45,38 @@
     },
     "table": {
       "name": "Имя",
-      "slug": "Пульт",
+      "slug": "Слаг",
       "status": "Статус",
       "tags": "Теги",
       "usage": "Использование",
-      "lastModified": "Последнее изменено",
+      "lastModified": "Последнее изменение",
       "actions": "Действия"
     },
     "emptyState": {
-      "description": "Get started by creating your first tool. Tools help users accomplish specific tasks and can be organized with tags."
+      "description": "Начните с создания своего первого инструмента. Инструменты помогают пользователям выполнять определенные задачи и могут быть организованы с помощью тегов."
     },
     "bulkOperations": {
-      "title": "Bulk {operation} Tags",
-      "selectedCount": "{count, plural, =1 {# tool} other {# tools}} selected",
-      "operationType": "Select Operation",
-      "selectTags": "Select Tags",
-      "selectedTools": "Selected Tools",
-      "previewChanges": "Preview Changes",
-      "operationSummary": "Operation Summary",
-      "totalChanges": "Total Changes",
-      "toolsToUpdate": "Tools to Update",
-      "warnings": "Warnings",
-      "executing": "Executing Operation",
-      "executingMessage": "Please wait while we process your bulk operation...",
-      "completed": "Operation Completed",
-      "failed": "Operation Failed",
-      "successMessage": "Your bulk operation has been completed successfully",
-      "errorMessage": "There was an error executing your bulk operation",
-      "results": "Operation Results",
-      "toolsAffected": "Tools Affected",
-      "tagsAffected": "Tags Affected",
-      "errors": "Errors Encountered",
-      "startNew": "Start New Operation"
+      "title": "Массовые {operation} теги",
+      "selectedCount": "{count, plural, =1 {# инструмент} other {# инструментов}} выбрано",
+      "operationType": "Выбрать операцию",
+      "selectTags": "Выбрать теги",
+      "selectedTools": "Выбранные инструменты",
+      "previewChanges": "Предварительный просмотр изменений",
+      "operationSummary": "Сводка операций",
+      "totalChanges": "Всего изменений",
+      "toolsToUpdate": "Инструменты для обновления",
+      "warnings": "Предупреждения",
+      "executing": "Выполнение операции",
+      "executingMessage": "Пожалуйста, подождите, пока мы обрабатываем вашу массовую операцию...",
+      "completed": "Операция завершена",
+      "failed": "Операция не удалась",
+      "successMessage": "Ваша массовая операция успешно завершена",
+      "errorMessage": "Произошла ошибка при выполнении массовой операции",
+      "results": "Результаты операции",
+      "toolsAffected": "Затронутые инструменты",
+      "tagsAffected": "Затронутые теги",
+      "errors": "Обнаруженные ошибки",
+      "startNew": "Начать новую операцию"
     }
   },
   "tags": {
@@ -90,14 +90,14 @@
     },
     "table": {
       "name": "Имя",
-      "slug": "Пульт",
+      "slug": "Слаг",
       "color": "Цвет",
       "toolCount": "Инструменты",
       "description": "Описание",
       "actions": "Действия"
     },
     "emptyState": {
-      "description": "Get started by creating your first tag to organize your tools."
+      "description": "Начните с создания своего первого тега, чтобы организовать свои инструменты."
     }
   },
   "analytics": {
@@ -128,10 +128,10 @@
     "dashboard": "Приборная панель",
     "tools": "Инструменты",
     "tags": "Теги",
-    "relationships": "Relationships",
+    "relationships": "Отношения",
     "analytics": "Аналитика",
     "monitoring": "Мониторинг",
-    "logout": "Выход",
-    "viewSite": "Просмотреть сайт"
+    "logout": "Выйти",
+    "viewSite": "Просмотреть публичный сайт"
   }
 }

@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Base64 Encoder & Decoder | tool-chest",
-    "description": "Free online Base64 encoder and decoder. Convert text to Base64 and decode Base64 to text. Supports file encoding/decoding with URL-safe options. Privacy-first with client-side processing.",
+    "description": "Gratis online Base64-encoder en -decoder. Converteert tekst naar Base64 en decodeert Base64 naar tekst. Ondersteunt bestandscodering/decodering met URL-veilige opties. Privacy-eerst met client-side verwerking.",
     "keywords": [
       "base64",
       "encoder",
@@ -13,13 +13,21 @@
       "url-safe",
       "online tool",
       "free",
+      "privacy",
+      "coderen",
+      "decoderen",
+      "tekst",
+      "bestand",
+      "url-veilig",
+      "online tool",
+      "gratis",
       "privacy"
     ]
   },
   "page": {
     "title": "Base64 Encoder & Decoder",
     "description": "Codeer en decodeer Base64-gegevens met ondersteuning voor tekst en bestanden.",
-    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
+    "privacyNotice": "Alle verwerking gebeurt in uw browser voor <bold>maximale privacy</bold>."
   },
   "tool": {
     "variants": {
@@ -45,17 +53,17 @@
         "URL-veilige Base64-coderingsoptie",
         "Kopieer naar klembord functionaliteit",
         "Download gecodeerde/gedecodeerde resultaten",
-        "Real-time codering/decodering",
-        "Real-time encoding/decoding"
+        "Codering/decodering in realtime",
+        "Client-side verwerking voor privacy"
       ]
     },
     "securityAndPrivacy": {
-      "title": "Security & Privacy",
+      "title": "Beveiliging & Privacy",
       "items": [
-        "No data sent to servers",
-        "Processing happens in your browser",
-        "Files stay on your device",
-        "No data storage or logging"
+        "Geen gegevens naar servers verzonden",
+        "Verwerking gebeurt in uw browser",
+        "Bestanden blijven op uw apparaat",
+        "Geen gegevensopslag of logboekregistratie"
       ]
     },
     "useCases": {

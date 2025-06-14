@@ -23,15 +23,15 @@
       "viewAnalytics": "Xem phân tích",
       "manageTools": "Quản lý công cụ",
       "manageTags": "Quản lý thẻ",
-      "viewSite": "Xem trang",
+      "viewSite": "Xem trang công khai",
       "systemHealth": "Tình trạng hệ thống",
-      "addTool": "Add Tool",
-      "addTag": "Add Tag",
-      "manageRelationships": "Manage Relationships",
-      "createToolDescription": "Create new tool in the system",
-      "createTagDescription": "Create new tag for categorization",
-      "manageRelationshipsDescription": "Configure tool-tag associations",
-      "viewSiteDescription": "Open the public tool-chest site"
+      "addTool": "Thêm công cụ",
+      "addTag": "Thêm thẻ",
+      "manageRelationships": "Quản lý mối quan hệ",
+      "createToolDescription": "Tạo công cụ mới trong hệ thống",
+      "createTagDescription": "Tạo thẻ mới để phân loại",
+      "manageRelationshipsDescription": "Cấu hình liên kết công cụ-thẻ",
+      "viewSiteDescription": "Mở trang công khai tool-chest"
     }
   },
   "tools": {
@@ -53,30 +53,30 @@
       "actions": "Hành động"
     },
     "emptyState": {
-      "description": "Get started by creating your first tool. Tools help users accomplish specific tasks and can be organized with tags."
+      "description": "Bắt đầu bằng cách tạo công cụ đầu tiên của bạn. Các công cụ giúp người dùng hoàn thành các tác vụ cụ thể và có thể được tổ chức bằng thẻ."
     },
     "bulkOperations": {
-      "title": "Bulk {operation} Tags",
-      "selectedCount": "{count, plural, =1 {# tool} other {# tools}} selected",
-      "operationType": "Select Operation",
-      "selectTags": "Select Tags",
-      "selectedTools": "Selected Tools",
-      "previewChanges": "Preview Changes",
-      "operationSummary": "Operation Summary",
-      "totalChanges": "Total Changes",
-      "toolsToUpdate": "Tools to Update",
-      "warnings": "Warnings",
-      "executing": "Executing Operation",
-      "executingMessage": "Please wait while we process your bulk operation...",
-      "completed": "Operation Completed",
-      "failed": "Operation Failed",
-      "successMessage": "Your bulk operation has been completed successfully",
-      "errorMessage": "There was an error executing your bulk operation",
-      "results": "Operation Results",
-      "toolsAffected": "Tools Affected",
-      "tagsAffected": "Tags Affected",
-      "errors": "Errors Encountered",
-      "startNew": "Start New Operation"
+      "title": "Thẻ thao tác hàng loạt {operation}",
+      "selectedCount": "{count, plural, =1 {# công cụ} other {# công cụ}} được chọn",
+      "operationType": "Chọn thao tác",
+      "selectTags": "Chọn thẻ",
+      "selectedTools": "Các công cụ đã chọn",
+      "previewChanges": "Xem trước thay đổi",
+      "operationSummary": "Tóm tắt thao tác",
+      "totalChanges": "Tổng số thay đổi",
+      "toolsToUpdate": "Công cụ cần cập nhật",
+      "warnings": "Cảnh báo",
+      "executing": "Đang thực hiện thao tác",
+      "executingMessage": "Vui lòng chờ trong khi chúng tôi xử lý thao tác hàng loạt của bạn...",
+      "completed": "Thao tác hoàn tất",
+      "failed": "Thao tác thất bại",
+      "successMessage": "Thao tác hàng loạt của bạn đã hoàn tất thành công",
+      "errorMessage": "Đã xảy ra lỗi khi thực hiện thao tác hàng loạt của bạn",
+      "results": "Kết quả thao tác",
+      "toolsAffected": "Các công cụ bị ảnh hưởng",
+      "tagsAffected": "Các thẻ bị ảnh hưởng",
+      "errors": "Lỗi gặp phải",
+      "startNew": "Bắt đầu thao tác mới"
     }
   },
   "tags": {
@@ -97,7 +97,7 @@
       "actions": "Hành động"
     },
     "emptyState": {
-      "description": "Get started by creating your first tag to organize your tools."
+      "description": "Bắt đầu bằng cách tạo thẻ đầu tiên của bạn để sắp xếp các công cụ của bạn."
     }
   },
   "analytics": {
@@ -128,10 +128,10 @@
     "dashboard": "Bảng điều khiển",
     "tools": "Công cụ",
     "tags": "Thẻ",
-    "relationships": "Relationships",
+    "relationships": "Mối quan hệ",
     "analytics": "Phân tích",
     "monitoring": "Giám sát",
     "logout": "Đăng xuất",
-    "viewSite": "Xem trang"
+    "viewSite": "Xem trang công khai"
   }
 }

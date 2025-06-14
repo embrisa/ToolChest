@@ -1,128 +1,138 @@
 {
   "metadata": {
-    "title": "Markdown to PDF Converter | tool-chest",
-    "description": "Convert Markdown to professional PDF documents with syntax highlighting, custom styling, and support for tables, code blocks, and images. Privacy-first client-side processing.",
+    "title": "Markdown'dan PDF'e Dönüştürücü | tool-chest",
+    "description": "Markdown'ı sözdizimi vurgulama, özel stil ve tablolar, kod blokları ve görseller için destek ile profesyonel PDF belgelerine dönüştürür. Gizlilik odaklı istemci tarafı işleme.",
     "keywords": [
       "markdown to pdf",
+      "markdown'dan pdf'e",
       "markdown converter",
+      "markdown dönüştürücü",
       "pdf generator",
+      "pdf oluşturucu",
       "markdown pdf",
+      "markdown'dan pdf'e",
       "syntax highlighting",
+      "sözdizimi vurgulama",
       "code blocks",
+      "kod blokları",
       "tables",
+      "tablolar",
       "document converter",
+      "belge dönüştürücü",
       "markdown export",
-      "free tool"
+      "markdown dışa aktarma",
+      "free tool",
+      "ücretsiz araç"
     ]
   },
   "page": {
     "title": "Markdown'dan PDF'e",
     "description": "Markdown dosyalarını özel stil seçenekleriyle PDF'ye dönüştürün.",
-    "privacyMessage": "🔒 Privacy-First • GitHub Flavored Markdown • Client-Side Processing"
+    "privacyMessage": "🔒 Önce Gizlilik • GitHub Uyumlu Markdown • İstemci Tarafı İşleme"
   },
   "featureGrid": {
     "live-preview": {
-      "title": "Live Preview",
-      "description": "Real-time markdown preview with instant rendering",
+      "title": "Canlı Önizleme",
+      "description": "Anında işleme ile gerçek zamanlı Markdown önizlemesi",
       "icon": "👁️"
     },
     "templates": {
-      "title": "Multiple Templates",
-      "description": "PDF templates and themes for different use cases",
+      "title": "Birden Fazla Şablon",
+      "description": "Farklı kullanım senaryoları için PDF şablonları ve temaları",
       "icon": "🎨"
     },
     "gfm-support": {
-      "title": "GitHub Flavored Markdown",
-      "description": "Full GFM support including tables and task lists",
+      "title": "GitHub Uyumlu Markdown",
+      "description": "Tablo ve görev listeleri dahil tam GFM desteği",
       "icon": "📝"
     },
     "syntax-highlighting": {
-      "title": "Syntax Highlighting",
-      "description": "Code blocks with syntax highlighting for multiple languages",
+      "title": "Sözdizimi Vurgulama",
+      "description": "Birden fazla dil için sözdizimi vurgulamalı kod blokları",
       "icon": "💻"
     },
     "custom-styling": {
-      "title": "Custom Styling",
-      "description": "Customize fonts, colors, and layout options",
+      "title": "Özel Stil",
+      "description": "Yazı tiplerini, renkleri ve düzen seçeneklerini özelleştirin",
       "icon": "⚙️"
     },
     "file-upload": {
-      "title": "File Upload",
-      "description": "Upload .md, .markdown, or .txt files directly",
+      "title": "Dosya Yükleme",
+      "description": "Doğrudan .md, .markdown veya .txt dosyalarını yükleyin",
       "icon": "📁"
     },
     "professional-output": {
-      "title": "Professional Output",
-      "description": "High-quality PDF generation with metadata",
+      "title": "Profesyonel Çıktı",
+      "description": "Meta verilerle yüksek kaliteli PDF oluşturma",
       "icon": "📄"
     },
     "privacy-first": {
-      "title": "Privacy-First",
-      "description": "All processing happens in your browser",
+      "title": "Önce Gizlilik",
+      "description": "Tüm işlemler tarayıcınızda gerçekleşir",
       "icon": "🔒"
     }
   },
   "info": {
     "title": "Markdown'dan PDF'e Dönüştürme Hakkında",
-    "description": "Markdown belgelerinizi özelleştirilebilir stil seçenekleriyle profesyonel olarak biçimlendirilmiş PDF dosyalarına dönüştürün. Dokümantasyon, raporlar, makaleler ve sunumlar için mükemmeldir.",
+    "description": "Markdown belgelerinizi kolayca profesyonel PDF dosyalarına dönüştürün. Dönüştürücümüz, tablolar, kod blokları ve görev listeleri dahil olmak üzere GitHub Flavored Markdown (GFM) desteği sunarak, biçimlendirme ve stilini koruyan belgeler oluşturma esnekliği sağlar.",
     "keyFeatures": {
       "title": "Ana Özellikler",
       "items": [
-        "Tam Markdown sözdizimi desteği",
-        "Özel PDF stillemesi ve temaları",
-        "Çoklu sayfa boyutları ve yönelimleri",
-        "Kod blokları için sözdizimi vurgulama",
-        "Tablo ve resim desteği",
-        "Üstbilgi ve altbilgi özelleştirmesi",
-        "File upload support (.md, .markdown, .txt)",
-        "Drag and drop file upload",
-        "Real-time word count and statistics",
-        "Professional PDF output with metadata"
+        "Gerçek zamanlı render ile canlı Markdown önizlemesi",
+        "Birden fazla PDF şablonu ve teması",
+        "GitHub Flavored Markdown desteği",
+        "Tablolar, kod blokları ve görev listeleri",
+        "Özel stil ve biçimlendirme seçenekleri",
+        "Birden fazla PDF formatı (A4, Letter, vb.)",
+        "Dosya yükleme desteği (.md, .markdown, .txt)",
+        "Sürükle ve bırak dosya yükleme",
+        "Gerçek zamanlı kelime sayısı ve istatistikler",
+        "Meta verilerle profesyonel PDF çıktısı"
       ]
     },
     "supportedFeatures": {
-      "title": "Supported Markdown Features",
+      "title": "Desteklenen Markdown Özellikleri",
       "items": [
-        "Headings (H1-H6) with automatic numbering",
-        "Bold and italic text formatting",
-        "Links and images with captions",
-        "Code blocks with syntax highlighting",
-        "Tables with proper formatting",
-        "Blockquotes and nested lists",
-        "Task lists with checkboxes",
-        "Auto-linking of URLs"
+        "Otomatik numaralandırmalı başlıklar (H1-H6)",
+        "Kalın ve italik metin biçimlendirme",
+        "Resim yazılarıyla bağlantılar ve resimler",
+        "Sözdizimi vurgulamalı kod blokları",
+        "Uygun biçimlendirmeli tablolar",
+        "Blok alıntılar ve iç içe listeler",
+        "Onay kutulu görev listeleri",
+        "URL'lerin otomatik bağlanması"
       ]
     },
     "pdfTemplates": {
-      "title": "PDF Templates",
+      "title": "PDF Şablonları",
       "items": [
-        "Default: Clean and simple design for general use",
-        "Academic: Professional format for research papers",
-        "Minimal: Clean design with lots of white space",
-        "Professional: Business-ready with headers and footers"
+        "Varsayılan: Genel kullanım için temiz ve basit tasarım",
+        "Akademik: Araştırma makaleleri için profesyonel format",
+        "Minimal: Çok fazla beyaz alan içeren temiz tasarım",
+        "Profesyonel: Başlıklar ve altbilgilerle işe hazır"
       ]
     },
     "howToUse": {
-      "title": "How to Use",
+      "title": "Nasıl Kullanılır",
       "items": [
-        "Choose between typing in the editor or uploading a markdown file",
-        "Write or paste your markdown content in the editor",
-        "Use the live preview to see how your document will look",
-        "Select a template or customize styling options",
-        "Click 'Generate PDF' to create your document",
-        "Download your professional PDF file"
+        "Editöre yazma veya bir Markdown dosyası yükleme arasında seçim yapın",
+        "Markdown içeriğinizi editöre yazın veya yapıştırın",
+        "Belgenizin nasıl görüneceğini görmek için canlı önizlemeyi kullanın",
+        "Bir şablon seçin veya stil seçeneklerini özelleştirin",
+        "Belgenizi oluşturmak için 'PDF Oluştur'a tıklayın",
+        "Profesyonel PDF dosyanızı indirin"
       ]
     },
     "features": {
       "items": [
-        "Live preview",
-        "Multiple templates",
-        "GFM support",
-        "Syntax highlighting",
-        "Custom styling",
-        "File upload",
-        "Professional output",
-        "Privacy-first"
+        "Canlı Önizleme",
+        "Birden Fazla Şablon",
+        "GFM Desteği",
+        "Sözdizimi Vurgulama",
+        "Özel Stil",
+        "Dosya Yükleme",
+        "Profesyonel Çıktı",
+        "Önce Gizlilik"
       ]
     }
   }

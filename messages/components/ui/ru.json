@@ -41,28 +41,28 @@
     "edit": "Редактировать пункт",
     "delete": "Удалить элемент",
     "info": "Больше информации",
-    "help": "Получите помощь"
+    "help": "Получить помощь"
   },
   "progress": {
-    "uploading": "Загрузка ... ph0%",
-    "processing": "Обработка ... ph0%",
-    "downloading": "Загрузка ... ph0%",
-    "complete": "Полный"
+    "uploading": "Загрузка... {progress}%",
+    "processing": "Обработка... {progress}%",
+    "downloading": "Загрузка... {progress}%",
+    "complete": "Завершено"
   },
   "fileUpload": {
-    "dragDrop": "Перетащите здесь свои файлы",
+    "dragDrop": "Перетащите сюда свои файлы",
     "or": "или",
     "browse": "Просмотреть файлы",
     "selectedFiles": "Выбранные файлы",
-    "maxSize": "Максимальный размер файла: ph0",
-    "supportedFormats": "Поддерживаемые форматы: ph0",
-    "fileTooLarge": "Подавать слишком большой. Максимальный размер - ph0.",
-    "invalidFileType": "Неверный тип файла. Поддерживаемые форматы: ph0",
+    "maxSize": "Максимальный размер файла: {size}",
+    "supportedFormats": "Поддерживаемые форматы: {formats}",
+    "fileTooLarge": "Файл слишком большой. Максимальный размер - {maxSize}.",
+    "invalidFileType": "Неверный тип файла. Поддерживаемые форматы: {formats}",
     "uploadFailed": "Загрузка не удалась. Пожалуйста, попробуйте еще раз.",
     "removeFile": "Удалить файл"
   },
   "toast": {
-    "close": "Близкое уведомление",
+    "close": "Закрыть уведомление",
     "success": "Успех",
     "error": "Ошибка",
     "warning": "Предупреждение",
@@ -71,9 +71,9 @@
   "pagination": {
     "previous": "Предыдущий",
     "next": "Следующий",
-    "page": "Page {page}",
-    "of": "{total}",
-    "showing": "Показывание ph0 до ph1 результатов ph2",
+    "page": "Страница {page}",
+    "of": "из {total}",
+    "showing": "Показано с {from} по {to} из {total} результатов",
     "perPage": "за страницу"
   },
   "table": {

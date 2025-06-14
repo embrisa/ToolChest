@@ -23,15 +23,15 @@
       "viewAnalytics": "Переглянути аналітику",
       "manageTools": "Керувати інструментами",
       "manageTags": "Керувати тегами",
-      "viewSite": "Переглянути сайт",
+      "viewSite": "Переглянути публічний сайт",
       "systemHealth": "Справність системи",
-      "addTool": "Add Tool",
-      "addTag": "Add Tag",
-      "manageRelationships": "Manage Relationships",
-      "createToolDescription": "Create new tool in the system",
-      "createTagDescription": "Create new tag for categorization",
-      "manageRelationshipsDescription": "Configure tool-tag associations",
-      "viewSiteDescription": "Open the public tool-chest site"
+      "addTool": "Додати інструмент",
+      "addTag": "Додати тег",
+      "manageRelationships": "Керувати зв'язками",
+      "createToolDescription": "Створити новий інструмент у системі",
+      "createTagDescription": "Створити новий тег для категоризації",
+      "manageRelationshipsDescription": "Налаштувати асоціації інструмент-тег",
+      "viewSiteDescription": "Відкрити публічний сайт tool-chest"
     }
   },
   "tools": {
@@ -53,30 +53,30 @@
       "actions": "Дії"
     },
     "emptyState": {
-      "description": "Get started by creating your first tool. Tools help users accomplish specific tasks and can be organized with tags."
+      "description": "Почніть зі створення свого першого інструменту. Інструменти допомагають користувачам виконувати конкретні завдання та можуть бути організовані за допомогою тегів."
     },
     "bulkOperations": {
-      "title": "Bulk {operation} Tags",
-      "selectedCount": "{count, plural, =1 {# tool} other {# tools}} selected",
-      "operationType": "Select Operation",
-      "selectTags": "Select Tags",
-      "selectedTools": "Selected Tools",
-      "previewChanges": "Preview Changes",
-      "operationSummary": "Operation Summary",
-      "totalChanges": "Total Changes",
-      "toolsToUpdate": "Tools to Update",
-      "warnings": "Warnings",
-      "executing": "Executing Operation",
-      "executingMessage": "Please wait while we process your bulk operation...",
-      "completed": "Operation Completed",
-      "failed": "Operation Failed",
-      "successMessage": "Your bulk operation has been completed successfully",
-      "errorMessage": "There was an error executing your bulk operation",
-      "results": "Operation Results",
-      "toolsAffected": "Tools Affected",
-      "tagsAffected": "Tags Affected",
-      "errors": "Errors Encountered",
-      "startNew": "Start New Operation"
+      "title": "Масові {operation} теги",
+      "selectedCount": "{count, plural, =1 {# інструмент} other {# інструменти}} вибрано",
+      "operationType": "Вибрати операцію",
+      "selectTags": "Вибрати теги",
+      "selectedTools": "Вибрані інструменти",
+      "previewChanges": "Попередній перегляд змін",
+      "operationSummary": "Підсумок операції",
+      "totalChanges": "Всього змін",
+      "toolsToUpdate": "Інструменти для оновлення",
+      "warnings": "Попередження",
+      "executing": "Виконання операції",
+      "executingMessage": "Будь ласка, зачекайте, поки ми обробляємо вашу масову операцію...",
+      "completed": "Операція завершена",
+      "failed": "Операція не вдалася",
+      "successMessage": "Ваша масова операція успішно завершена",
+      "errorMessage": "Під час виконання масової операції сталася помилка",
+      "results": "Результати операції",
+      "toolsAffected": "Зачеплені інструменти",
+      "tagsAffected": "Зачеплені теги",
+      "errors": "Виявлені помилки",
+      "startNew": "Розпочати нову операцію"
     }
   },
   "tags": {
@@ -97,7 +97,7 @@
       "actions": "Дії"
     },
     "emptyState": {
-      "description": "Get started by creating your first tag to organize your tools."
+      "description": "Почніть зі створення свого першого тега, щоб організувати свої інструменти."
     }
   },
   "analytics": {
@@ -128,10 +128,10 @@
     "dashboard": "Панель приладів",
     "tools": "Інструменти",
     "tags": "Теги",
-    "relationships": "Relationships",
+    "relationships": "Зв'язки",
     "analytics": "Аналітика",
     "monitoring": "Моніторинг",
     "logout": "Вийти",
-    "viewSite": "Переглянути сайт"
+    "viewSite": "Переглянути публічний сайт"
   }
 }

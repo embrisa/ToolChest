@@ -44,21 +44,21 @@
     "help": "Uzyskaj pomoc"
   },
   "progress": {
-    "uploading": "Przesyłanie ... xyz0xyz%",
-    "processing": "Przetwarzanie ... {progress}%",
-    "downloading": "Pobieranie ... {progress}%",
-    "complete": "Kompletny"
+    "uploading": "Przesyłanie... {progress}%",
+    "processing": "Przetwarzanie... {progress}%",
+    "downloading": "Pobieranie... {progress}%",
+    "complete": "Ukończono"
   },
   "fileUpload": {
     "dragDrop": "Przeciągnij i upuść swoje pliki tutaj",
-    "or": "Lub",
+    "or": "lub",
     "browse": "Przeglądaj pliki",
     "selectedFiles": "Wybrane pliki",
-    "maxSize": "Max rozmiar pliku: xyz0xyz",
+    "maxSize": "Maksymalny rozmiar pliku: {size}",
     "supportedFormats": "Obsługiwane formaty: {formats}",
     "fileTooLarge": "Plik za duży. Maksymalny rozmiar to {maxSize}.",
     "invalidFileType": "Nieprawidłowy typ pliku. Obsługiwane formaty: {formats}",
-    "uploadFailed": "Prześlij nie powiodło się. Spróbuj ponownie.",
+    "uploadFailed": "Przesyłanie nie powiodło się. Spróbuj ponownie.",
     "removeFile": "Usuń plik"
   },
   "toast": {
@@ -72,8 +72,8 @@
     "previous": "Poprzedni",
     "next": "Następny",
     "page": "Strona {page}",
-    "of": "{total}",
-    "showing": "Pokazanie {from} do {to} z wyników {total}",
+    "of": "z {total}",
+    "showing": "Pokazano od {from} do {to} z {total} wyników",
     "perPage": "na stronę"
   },
   "table": {

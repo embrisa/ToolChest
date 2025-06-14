@@ -23,60 +23,60 @@
       "viewAnalytics": "Zobacz analitykę",
       "manageTools": "Zarządzaj narzędziami",
       "manageTags": "Zarządzaj tagami",
-      "viewSite": "Zobacz stronę",
-      "systemHealth": "Zdrowie systemu",
-      "addTool": "Add Tool",
-      "addTag": "Add Tag",
-      "manageRelationships": "Manage Relationships",
-      "createToolDescription": "Create new tool in the system",
-      "createTagDescription": "Create new tag for categorization",
-      "manageRelationshipsDescription": "Configure tool-tag associations",
-      "viewSiteDescription": "Open the public tool-chest site"
+      "viewSite": "Zobacz stronę publiczną",
+      "systemHealth": "Stan systemu",
+      "addTool": "Dodaj narzędzie",
+      "addTag": "Dodaj tag",
+      "manageRelationships": "Zarządzaj relacjami",
+      "createToolDescription": "Utwórz nowe narzędzie w systemie",
+      "createTagDescription": "Utwórz nowy tag do kategoryzacji",
+      "manageRelationshipsDescription": "Skonfiguruj skojarzenia narzędzie-tag",
+      "viewSiteDescription": "Otwórz publiczną stronę tool-chest"
     }
   },
   "tools": {
     "title": "Zarządzanie narzędziami",
-    "description": "Zarządzaj narzędziami, ich metadanami i relacjami",
+    "description": "Zarządzaj narzędziami, ich metadanymi i relacjami",
     "actions": {
       "createTool": "Utwórz narzędzie",
-      "editTool": "Narzędzie do edycji",
+      "editTool": "Edytuj narzędzie",
       "deleteTool": "Usuń narzędzie",
       "bulkActions": "Działania masowe"
     },
     "table": {
       "name": "Nazwa",
-      "slug": "Ślimak",
+      "slug": "Slug",
       "status": "Status",
       "tags": "Tagi",
-      "usage": "Stosowanie",
-      "lastModified": "Ostatni zmodyfikowany",
+      "usage": "Użycie",
+      "lastModified": "Ostatnia modyfikacja",
       "actions": "Działania"
     },
     "emptyState": {
-      "description": "Get started by creating your first tool. Tools help users accomplish specific tasks and can be organized with tags."
+      "description": "Zacznij od utworzenia swojego pierwszego narzędzia. Narzędzia pomagają użytkownikom wykonywać określone zadania i mogą być organizowane za pomocą tagów."
     },
     "bulkOperations": {
-      "title": "Bulk {operation} Tags",
-      "selectedCount": "{count, plural, =1 {# tool} other {# tools}} selected",
-      "operationType": "Select Operation",
-      "selectTags": "Select Tags",
-      "selectedTools": "Selected Tools",
-      "previewChanges": "Preview Changes",
-      "operationSummary": "Operation Summary",
-      "totalChanges": "Total Changes",
-      "toolsToUpdate": "Tools to Update",
-      "warnings": "Warnings",
-      "executing": "Executing Operation",
-      "executingMessage": "Please wait while we process your bulk operation...",
-      "completed": "Operation Completed",
-      "failed": "Operation Failed",
-      "successMessage": "Your bulk operation has been completed successfully",
-      "errorMessage": "There was an error executing your bulk operation",
-      "results": "Operation Results",
-      "toolsAffected": "Tools Affected",
-      "tagsAffected": "Tags Affected",
-      "errors": "Errors Encountered",
-      "startNew": "Start New Operation"
+      "title": "Operacje masowe {operation} tagów",
+      "selectedCount": "{count, plural, =1 {# narzędzie} other {# narzędzia}} wybrane",
+      "operationType": "Wybierz operację",
+      "selectTags": "Wybierz tagi",
+      "selectedTools": "Wybrane narzędzia",
+      "previewChanges": "Podgląd zmian",
+      "operationSummary": "Podsumowanie operacji",
+      "totalChanges": "Całkowite zmiany",
+      "toolsToUpdate": "Narzędzia do aktualizacji",
+      "warnings": "Ostrzeżenia",
+      "executing": "Wykonywanie operacji",
+      "executingMessage": "Proszę czekać, podczas gdy przetwarzamy Twoją operację masową...",
+      "completed": "Operacja zakończona",
+      "failed": "Operacja nie powiodła się",
+      "successMessage": "Twoja operacja masowa została pomyślnie zakończona",
+      "errorMessage": "Wystąpił błąd podczas wykonywania operacji masowej",
+      "results": "Wyniki operacji",
+      "toolsAffected": "Narzędzia, których dotyczy problem",
+      "tagsAffected": "Tagi, których dotyczy problem",
+      "errors": "Wykryte błędy",
+      "startNew": "Rozpocznij nową operację"
     }
   },
   "tags": {
@@ -90,14 +90,14 @@
     },
     "table": {
       "name": "Nazwa",
-      "slug": "Ślimak",
+      "slug": "Slug",
       "color": "Kolor",
       "toolCount": "Narzędzia",
       "description": "Opis",
       "actions": "Działania"
     },
     "emptyState": {
-      "description": "Get started by creating your first tag to organize your tools."
+      "description": "Zacznij od utworzenia swojego pierwszego tagu, aby zorganizować swoje narzędzia."
     }
   },
   "analytics": {
@@ -128,10 +128,10 @@
     "dashboard": "Panel",
     "tools": "Narzędzia",
     "tags": "Tagi",
-    "relationships": "Relationships",
+    "relationships": "Relacje",
     "analytics": "Analityka",
     "monitoring": "Monitorowanie",
-    "logout": "Logout",
-    "viewSite": "Zobacz stronę"
+    "logout": "Wyloguj się",
+    "viewSite": "Zobacz stronę publiczną"
   }
 }

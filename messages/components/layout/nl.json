@@ -2,10 +2,10 @@
   "header": {
     "brand": "tool-chest",
     "navigation": {
-      "home": "Home",
-      "tools": "Tools",
-      "admin": "Admin",
-      "about": "Over"
+      "home": "Startpagina",
+      "tools": "Gereedschap",
+      "admin": "Beheerder",
+      "about": "Over ons"
     },
     "mobile": {
       "toggleMenu": "Menu wisselen",
@@ -19,16 +19,16 @@
       "privacy": "Privacybeleid",
       "terms": "Servicevoorwaarden",
       "contact": "Contact",
-      "about": "Over"
+      "about": "Over ons"
     },
     "description": "Privacygerichte ontwikkelaarstools."
   },
   "breadcrumbs": {
-    "home": "Home",
-    "tools": "Tools",
-    "admin": "Admin",
+    "home": "Startpagina",
+    "tools": "Gereedschap",
+    "admin": "Beheerder",
     "dashboard": "Dashboard",
-    "analytics": "Analyses",
+    "analytics": "Analyse",
     "tags": "Tags",
     "monitoring": "Monitoring",
     "relationships": "Relaties"
@@ -36,24 +36,24 @@
   "localeSwitcher": {
     "label": "Taal",
     "current": "Huidige taal",
-    "selectLanguage": "Selecteer taal",
+    "selectLanguage": "Taal selecteren",
     "languages": {
-      "en": "English",
-      "es": "Español",
-      "zh": "中文",
-      "hi": "हिन्दी",
-      "pt": "Português",
-      "ru": "Русский",
-      "ja": "日本語",
-      "de": "Deutsch",
-      "fr": "Français",
-      "ko": "한국어",
-      "it": "Italiano",
-      "tr": "Türkçe",
-      "pl": "Polski",
+      "en": "Engels",
+      "es": "Spaans",
+      "zh": "Chinees",
+      "hi": "Hindi",
+      "pt": "Portugees",
+      "ru": "Russisch",
+      "ja": "Japans",
+      "de": "Duits",
+      "fr": "Frans",
+      "ko": "Koreaans",
+      "it": "Italiaans",
+      "tr": "Turks",
+      "pl": "Pools",
       "nl": "Nederlands",
-      "vi": "Tiếng Việt",
-      "uk": "Українська"
+      "vi": "Vietnamees",
+      "uk": "Oekraïens"
     }
   }
 }

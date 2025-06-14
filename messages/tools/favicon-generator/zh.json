@@ -4,18 +4,27 @@
     "description": "免费在线 Favicon 生成器。可从任意图像创建所有标准尺寸 (16x16, 32x32, 192x192, 512x512) 的图标，并生成完整的 manifest 文件。",
     "keywords": [
       "favicon generator",
+      "favicon 生成器",
       "favicon",
+      "图标",
       "icon generator",
+      "图标生成器",
       "website icon",
+      "网站图标",
       "app icon",
+      "应用图标",
       "16x16",
       "32x32",
       "192x192",
       "512x512",
       "ico file",
+      "ico 文件",
       "png icon",
+      "png 图标",
       "web app manifest",
-      "free tool"
+      "web 应用清单",
+      "free tool",
+      "免费工具"
     ]
   },
   "page": {
@@ -67,22 +76,22 @@
       ]
     },
     "supportedSizes": {
-      "title": "Supported Sizes",
+      "title": "支持的尺寸",
       "items": [
-        "16×16, 32×32 - Browser tabs and bookmarks",
-        "48×48, 64×64 - Desktop shortcuts and apps",
-        "96×96, 128×128 - High-DPI and retina displays",
-        "180×180 - Apple touch icon for iOS",
-        "192×192, 512×512 - Android and PWA icons"
+        "16×16、32×32 - 浏览器标签和书签",
+        "48×48、64×64 - 桌面快捷方式和应用",
+        "96×96、128×128 - 高 DPI 和视网膜屏幕",
+        "180×180 - iOS 的 Apple Touch 图标",
+        "192×192、512×512 - Android 和 PWA 图标"
       ]
     },
     "outputFormats": {
-      "title": "Output Formats",
+      "title": "输出格式",
       "items": [
-        "PNG favicons for modern browsers",
-        "ICO files for legacy compatibility",
-        "Web manifest with icon paths",
-        "HTML <link> tags for easy embedding"
+        "适用于现代浏览器的 PNG Favicon",
+        "用于旧版兼容性的 ICO 文件",
+        "带有图标路径的 Web 清单",
+        "便于嵌入的 HTML <link> 标签"
       ]
     }
   }

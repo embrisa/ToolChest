@@ -1,11 +1,11 @@
 {
   "labels": {
     "name": "Nom",
-    "slug": "Slug",
+    "slug": "Identifiant",
     "description": "Description",
     "color": "Couleur",
     "status": "Statut",
-    "tags": "Étiquettes",
+    "tags": "Mots-clés",
     "url": "URL",
     "file": "Fichier",
     "text": "Texte",
@@ -16,18 +16,18 @@
     "enterName": "Saisir le nom",
     "enterDescription": "Saisir la description",
     "selectColor": "Sélectionner la couleur",
-    "selectTags": "Sélectionner les étiquettes",
+    "selectTags": "Sélectionner les mots-clés",
     "enterUrl": "Saisir l'URL",
     "chooseFile": "Choisir le fichier",
     "enterText": "Saisir le texte"
   },
   "validation": {
     "nameRequired": "Le nom est requis",
-    "slugRequired": "Le slug est requis",
+    "slugRequired": "L'identifiant est requis",
     "descriptionRequired": "La description est requise",
-    "invalidSlug": "Le slug ne peut contenir que des lettres, des chiffres et des tirets",
-    "slugTooShort": "Le slug doit comporter au moins 3 caractères",
-    "slugTooLong": "Le slug doit comporter moins de 50 caractères",
+    "invalidSlug": "L'identifiant ne peut contenir que des lettres, des chiffres et des tirets",
+    "slugTooShort": "L'identifiant doit comporter au moins 3 caractères",
+    "slugTooLong": "L'identifiant doit comporter moins de 50 caractères",
     "nameTooShort": "Le nom doit comporter au moins 2 caractères",
     "nameTooLong": "Le nom doit comporter moins de 100 caractères",
     "descriptionTooLong": "La description doit comporter moins de 500 caractères",
@@ -39,7 +39,7 @@
     "slug": "Identifiant convivial pour l'URL (généré automatiquement à partir du nom)",
     "description": "Brève description de l'élément",
     "color": "Couleur utilisée pour l'identification visuelle",
-    "tags": "Organiser les éléments avec des étiquettes pertinentes",
+    "tags": "Organiser les éléments avec des mots-clés pertinents",
     "status": "État actuel de l'élément"
   },
   "actions": {
@@ -59,6 +59,6 @@
     "saved": "Enregistré avec succès",
     "error": "Une erreur est survenue",
     "required": "Champ requis",
-    "optional": "Champ optionnel"
+    "optional": "Champ facultatif"
   }
 }

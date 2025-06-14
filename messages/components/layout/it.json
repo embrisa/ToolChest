@@ -16,8 +16,8 @@
   "footer": {
     "copyright": "© 2024 tool-chest",
     "links": {
-      "privacy": "Informativa sulla Privacy",
-      "terms": "Termini di Servizio",
+      "privacy": "Informativa sulla privacy",
+      "terms": "Termini di servizio",
       "contact": "Contatti",
       "about": "Chi siamo"
     },
@@ -27,7 +27,7 @@
     "home": "Home",
     "tools": "Strumenti",
     "admin": "Admin",
-    "dashboard": "Pannello di Controllo",
+    "dashboard": "Pannello di controllo",
     "analytics": "Analisi",
     "tags": "Tag",
     "monitoring": "Monitoraggio",

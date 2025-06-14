@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Base64 Encoder & Decoder | tool-chest",
-    "description": "Free online Base64 encoder and decoder. Convert text to Base64 and decode Base64 to text. Supports file encoding/decoding with URL-safe options. Privacy-first with client-side processing.",
+    "title": "Base64 Encoder i Decoder | tool-chest",
+    "description": "Darmowy internetowy koder i dekoder Base64. Konwertuje tekst na Base64 i dekoduje Base64 na tekst. Obsługuje kodowanie/dekodowanie plików z opcjami bezpiecznymi dla URL. Prywatność przede wszystkim, z przetwarzaniem po stronie klienta.",
     "keywords": [
       "base64",
       "encoder",
@@ -13,21 +13,31 @@
       "url-safe",
       "online tool",
       "free",
-      "privacy"
+      "privacy",
+      "koder",
+      "dekoder",
+      "koduj",
+      "dekoduj",
+      "tekst",
+      "plik",
+      "url-safe",
+      "narzędzie online",
+      "darmowe",
+      "prywatność"
     ]
   },
   "page": {
     "title": "Base64 enkoder i dekoder",
     "description": "Koduj i dekoduj dane Base64 z obsługą tekstu i plików.",
-    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
+    "privacyNotice": "Całe przetwarzanie odbywa się w Twojej przeglądarce, zapewniając <bold>maksymalną prywatność</bold>."
   },
   "tool": {
     "variants": {
       "standard": "Standard",
-      "urlSafe": "Safe URL"
+      "urlSafe": "URL bezpieczny"
     },
     "placeholders": {
-      "textInput": "Wprowadź tekst, aby zakodować/dekodować ...",
+      "textInput": "Wprowadź tekst, aby zakodować/dekodować...",
       "fileUpload": "Wybierz plik lub przeciągnij i upuść"
     }
   },
@@ -46,25 +56,25 @@
         "Kopiuj do funkcji schowka",
         "Pobierz zakodowane/zdekodowane wyniki",
         "Kodowanie/dekodowanie w czasie rzeczywistym",
-        "Real-time encoding/decoding"
+        "Przetwarzanie po stronie klienta dla prywatności"
       ]
     },
     "securityAndPrivacy": {
-      "title": "Security & Privacy",
+      "title": "Bezpieczeństwo i Prywatność",
       "items": [
-        "No data sent to servers",
-        "Processing happens in your browser",
-        "Files stay on your device",
-        "No data storage or logging"
+        "Brak danych wysyłanych na serwery",
+        "Przetwarzanie odbywa się w Twojej przeglądarce",
+        "Pliki pozostają na Twoim urządzeniu",
+        "Brak przechowywania danych lub logowania"
       ]
     },
     "useCases": {
       "title": "Powszechne przypadki użycia",
       "items": [
-        "Załączniki e -mail kodowanie",
+        "Kodowanie załączników e-mail",
         "URL danych internetowych",
         "Transmisja danych API",
-        "Baza danych Blob Storage",
+        "Przechowywanie blobów w bazie danych",
         "Kodowanie plików konfiguracyjnych"
       ]
     }

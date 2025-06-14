@@ -1,128 +1,138 @@
 {
   "metadata": {
-    "title": "Markdown to PDF Converter | tool-chest",
-    "description": "Convert Markdown to professional PDF documents with syntax highlighting, custom styling, and support for tables, code blocks, and images. Privacy-first client-side processing.",
+    "title": "Markdown 转 PDF 转换器 | tool-chest",
+    "description": "将 Markdown 转换为专业的 PDF 文档，支持语法高亮、自定义样式以及表格、代码块和图片。隐私优先的客户端处理。",
     "keywords": [
       "markdown to pdf",
+      "markdown 转 pdf",
       "markdown converter",
+      "markdown 转换器",
       "pdf generator",
+      "pdf 生成器",
       "markdown pdf",
+      "markdown 转 pdf",
       "syntax highlighting",
+      "语法高亮",
       "code blocks",
+      "代码块",
       "tables",
+      "表格",
       "document converter",
+      "文档转换器",
       "markdown export",
-      "free tool"
+      "markdown 导出",
+      "free tool",
+      "免费工具"
     ]
   },
   "page": {
-    "title": "Markdown to PDF",
-    "description": "Convert Markdown files to PDF with custom styling options.",
-    "privacyMessage": "🔒 Privacy-First • GitHub Flavored Markdown • Client-Side Processing"
+    "title": "Markdown 转 PDF",
+    "description": "使用自定义样式选项将 Markdown 文件转换为 PDF。",
+    "privacyMessage": "🔒 隐私优先 • GitHub 风格 Markdown • 客户端处理"
   },
   "featureGrid": {
     "live-preview": {
-      "title": "Live Preview",
-      "description": "Real-time markdown preview with instant rendering",
+      "title": "实时预览",
+      "description": "即时渲染的实时 Markdown 预览",
       "icon": "👁️"
     },
     "templates": {
-      "title": "Multiple Templates",
-      "description": "PDF templates and themes for different use cases",
+      "title": "多种模板",
+      "description": "适用于不同场景的 PDF 模板和主题",
       "icon": "🎨"
     },
     "gfm-support": {
-      "title": "GitHub Flavored Markdown",
-      "description": "Full GFM support including tables and task lists",
+      "title": "GitHub 风格 Markdown",
+      "description": "完整的 GFM 支持，包括表格和任务列表",
       "icon": "📝"
     },
     "syntax-highlighting": {
-      "title": "Syntax Highlighting",
-      "description": "Code blocks with syntax highlighting for multiple languages",
+      "title": "语法高亮",
+      "description": "支持多语言的代码块语法高亮",
       "icon": "💻"
     },
     "custom-styling": {
-      "title": "Custom Styling",
-      "description": "Customize fonts, colors, and layout options",
+      "title": "自定义样式",
+      "description": "自定义字体、颜色和布局选项",
       "icon": "⚙️"
     },
     "file-upload": {
-      "title": "File Upload",
-      "description": "Upload .md, .markdown, or .txt files directly",
+      "title": "文件上传",
+      "description": "直接上传 .md、.markdown 或 .txt 文件",
       "icon": "📁"
     },
     "professional-output": {
-      "title": "Professional Output",
-      "description": "High-quality PDF generation with metadata",
+      "title": "专业输出",
+      "description": "带有元数据的高质量 PDF 生成",
       "icon": "📄"
     },
     "privacy-first": {
-      "title": "Privacy-First",
-      "description": "All processing happens in your browser",
+      "title": "隐私优先",
+      "description": "所有处理在您的浏览器中完成",
       "icon": "🔒"
     }
   },
   "info": {
-    "title": "About Markdown to PDF Conversion",
-    "description": "Convert your Markdown documents to professionally formatted PDF files with customizable styling options. Perfect for documentation, reports, articles, and presentations.",
+    "title": "关于 Markdown 到 PDF 的转换",
+    "description": "轻松将您的 Markdown 文档转换为专业的 PDF 文件。我们的转换器支持 GitHub Flavored Markdown (GFM)，包括表格、代码块和任务列表，让您能够灵活地创建保持其格式和样式的文档。",
     "keyFeatures": {
-      "title": "Key Features",
+      "title": "主要功能",
       "items": [
-        "Full Markdown syntax support",
-        "Custom PDF styling and themes",
-        "Multiple page sizes and orientations",
-        "Syntax highlighting for code blocks",
-        "Table and image support",
-        "Header and footer customization",
-        "File upload support (.md, .markdown, .txt)",
-        "Drag and drop file upload",
-        "Real-time word count and statistics",
-        "Professional PDF output with metadata"
+        "实时渲染的实时 Markdown 预览",
+        "多种 PDF 模板和主题",
+        "支持 GitHub Flavored Markdown",
+        "表格、代码块和任务列表",
+        "自定义样式和格式选项",
+        "多种 PDF 格式（A4、信纸等）",
+        "文件上传支持（.md、.markdown、.txt）",
+        "拖放文件上传",
+        "实时字数统计和统计数据",
+        "带有元数据的专业 PDF 输出"
       ]
     },
     "supportedFeatures": {
-      "title": "Supported Markdown Features",
+      "title": "支持的 Markdown 功能",
       "items": [
-        "Headings (H1-H6) with automatic numbering",
-        "Bold and italic text formatting",
-        "Links and images with captions",
-        "Code blocks with syntax highlighting",
-        "Tables with proper formatting",
-        "Blockquotes and nested lists",
-        "Task lists with checkboxes",
-        "Auto-linking of URLs"
+        "带有自动编号的标题（H1-H6）",
+        "粗体和斜体文本格式",
+        "带有标题的链接和图像",
+        "带有语法高亮的代码块",
+        "格式正确的表格",
+        "块引用和嵌套列表",
+        "带有复选框的任务列表",
+        "URL 的自动链接"
       ]
     },
     "pdfTemplates": {
-      "title": "PDF Templates",
+      "title": "PDF 模板",
       "items": [
-        "Default: Clean and simple design for general use",
-        "Academic: Professional format for research papers",
-        "Minimal: Clean design with lots of white space",
-        "Professional: Business-ready with headers and footers"
+        "默认：简洁明了的设计，适用于一般用途",
+        "学术：研究论文的专业格式",
+        "极简：简洁的设计，留有大量空白",
+        "专业：带有页眉和页脚的商务就绪"
       ]
     },
     "howToUse": {
-      "title": "How to Use",
+      "title": "如何使用",
       "items": [
-        "Choose between typing in the editor or uploading a markdown file",
-        "Write or paste your markdown content in the editor",
-        "Use the live preview to see how your document will look",
-        "Select a template or customize styling options",
-        "Click 'Generate PDF' to create your document",
-        "Download your professional PDF file"
+        "选择在编辑器中输入或上传 Markdown 文件",
+        "在编辑器中编写或粘贴您的 Markdown 内容",
+        "使用实时预览查看您的文档将如何显示",
+        "选择模板或自定义样式选项",
+        "单击 \"生成 PDF\" 以创建您的文档",
+        "下载您的专业 PDF 文件"
       ]
     },
     "features": {
       "items": [
-        "Live preview",
-        "Multiple templates",
-        "GFM support",
-        "Syntax highlighting",
-        "Custom styling",
-        "File upload",
-        "Professional output",
-        "Privacy-first"
+        "实时预览",
+        "多种模板",
+        "GFM 支持",
+        "语法高亮",
+        "自定义样式",
+        "文件上传",
+        "专业输出",
+        "隐私优先"
       ]
     }
   }

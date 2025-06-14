@@ -16,11 +16,11 @@
     "allTools": "所有工具",
     "searchResults": "搜索结果",
     "filterTools": "筛选工具",
-    "active": "active"
+    "active": "活跃"
   },
   "loading": {
     "loadingTools": "正在加载工具...",
-    "toolsFound": "个工具已找到"
+    "toolsFound": "工具已找到"
   },
   "noResults": {
     "title": "未找到工具",

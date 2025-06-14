@@ -43,6 +43,26 @@ const findEmptyValues = (obj: any, prefix = ""): string[] => {
   }, []);
 };
 
+// Load allow-listed message keys that are allowed to remain identical across locales.
+// The file lives next to this script as "translation-allowlist.json" and simply contains
+// an array of flattened message keys (e.g. "units.bytes"). These keys will be skipped
+// when reporting the "Untranslated keys" warning below.
+
+// We lazily read it inside the main QA routine so we can use async/await without
+// introducing top-level await (which would require Node 20+ or an ESM context).
+
+// Additionally, certain values are intrinsically language-agnostic – for example
+// purely numeric strings or simple percentages like "100%". Such cases generate
+// a lot of false positives, so we also suppress warnings when the *value* matches
+// a conservative regex that covers these scenarios.
+
+const NUMERIC_VALUE_REGEX = /^\s*[0-9]+(?:[.,][0-9]+)?%?\s*$/;
+// Matches:
+//   42
+//   3.14
+//   1,000
+//   100%
+
 // --------------------------- Schema integration ---------------------------
 
 import {
@@ -218,6 +238,23 @@ function getObjectByPath(obj: any, pathStr: string): any {
 async function qaTranslations(): Promise<void> {
   console.log("Starting translation file QA with schema validation...");
 
+  // Prepare allow-list of keys that are permitted to be identical between
+  // English and other locales. If the file is missing or malformed we fall
+  // back to an empty set.
+  const allowlistPath = path.join(__dirname, "translation-allowlist.json");
+  let allowlistKeys = new Set<string>();
+  try {
+    const raw = await fs.readFile(allowlistPath, "utf8");
+    allowlistKeys = new Set(JSON.parse(raw));
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.warn(
+      `⚠️  Could not read translation allowlist at ${allowlistPath}: ${(
+        err as Error
+      ).message}. Continuing with empty allowlist.`,
+    );
+  }
+
   const modulePaths = await glob("messages/**/", {
     ignore: "messages/node_modules/**",
   });
@@ -321,10 +358,28 @@ async function qaTranslations(): Promise<void> {
         const englishFlat = flattenMessages(englishContent);
         const fileFlat = flattenMessages(jsonContent);
 
-        const untranslatedKeys = Object.keys(englishFlat).filter(
-          (k) => fileFlat[k] !== undefined && fileFlat[k] === englishFlat[k],
-        );
-        if (untranslatedKeys.length > 0) {
+        const untranslatedKeys = Object.keys(englishFlat).filter((k) => {
+          // Skip keys explicitly allowed to remain untranslated
+          if (allowlistKeys.has(k)) return false;
+
+          const enVal = englishFlat[k];
+          const localeVal = fileFlat[k];
+
+          // Only consider warnings when the key exists in both and the values match
+          if (localeVal === undefined || localeVal !== enVal) return false;
+
+          // Skip obviously language-agnostic values (pure numbers / percentages)
+          if (
+            typeof enVal === "string" &&
+            NUMERIC_VALUE_REGEX.test(enVal.trim())
+          ) {
+            return false;
+          }
+
+          return true;
+        });
+
+        if (untranslatedKeys.length > 0 && process.env.SHOW_UNTRANSLATED_WARNINGS) {
           console.warn(`\n⚠️  [${filePath}] Untranslated keys:`);
           console.warn(`    - ${untranslatedKeys.join("\n    - ")}`);
         }

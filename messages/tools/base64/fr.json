@@ -13,13 +13,23 @@
       "url-safe",
       "online tool",
       "free",
-      "privacy"
+      "privacy",
+      "encodeur",
+      "décodeur",
+      "encoder",
+      "décoder",
+      "texte",
+      "fichier",
+      "url-safe",
+      "outil en ligne",
+      "gratuit",
+      "confidentialité"
     ]
   },
   "page": {
     "title": "Encodeur & Décodeur Base64",
     "description": "Encodez et décodez des données Base64 avec prise en charge du texte et des fichiers.",
-    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
+    "privacyNotice": "Tout le traitement se fait dans votre navigateur pour une <bold>confidentialité maximale</bold>."
   },
   "tool": {
     "variants": {
@@ -46,16 +56,16 @@
         "Fonctionnalité de copie dans le presse-papiers",
         "Téléchargement des résultats encodés/décodés",
         "Encodage/décodage en temps réel",
-        "Real-time encoding/decoding"
+        "Traitement côté client pour la confidentialité"
       ]
     },
     "securityAndPrivacy": {
-      "title": "Security & Privacy",
+      "title": "Sécurité & Confidentialité",
       "items": [
-        "No data sent to servers",
-        "Processing happens in your browser",
-        "Files stay on your device",
-        "No data storage or logging"
+        "Aucune donnée envoyée aux serveurs",
+        "Le traitement se fait dans votre navigateur",
+        "Les fichiers restent sur votre appareil",
+        "Pas de stockage ou d'enregistrement de données"
       ]
     },
     "useCases": {

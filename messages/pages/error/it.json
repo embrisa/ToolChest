@@ -34,11 +34,11 @@
       }
     },
     "contact": {
-      "prompt": "Need help?",
-      "link": "Contact support"
+      "prompt": "Hai bisogno di aiuto?",
+      "link": "Contatta il supporto"
     },
     "screenReader": {
-      "announcement": "Page not found. Please navigate using the links below."
+      "announcement": "Pagina non trovata. Si prega di navigare utilizzando i collegamenti sottostanti."
     }
   },
   "serverError": {

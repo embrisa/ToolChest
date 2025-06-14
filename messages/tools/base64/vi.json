@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Base64 Encoder & Decoder | tool-chest",
-    "description": "Free online Base64 encoder and decoder. Convert text to Base64 and decode Base64 to text. Supports file encoding/decoding with URL-safe options. Privacy-first with client-side processing.",
+    "title": "Bộ mã hóa & giải mã Base64 | tool-chest",
+    "description": "Miễn phí trực tuyến Bộ mã hóa và giải mã Base64. Chuyển đổi văn bản sang Base64 và giải mã Base64 sang văn bản. Hỗ trợ mã hóa/giải mã tệp với các tùy chọn an toàn URL. Ưu tiên quyền riêng tư với xử lý phía máy khách.",
     "keywords": [
       "base64",
       "encoder",
@@ -13,13 +13,23 @@
       "url-safe",
       "online tool",
       "free",
-      "privacy"
+      "privacy",
+      "bộ mã hóa",
+      "bộ giải mã",
+      "mã hóa",
+      "giải mã",
+      "văn bản",
+      "tệp",
+      "an toàn URL",
+      "công cụ trực tuyến",
+      "miễn phí",
+      "quyền riêng tư"
     ]
   },
   "page": {
     "title": "Bộ mã hóa & giải mã Base64",
     "description": "Mã hóa và giải mã dữ liệu Base64 với sự hỗ trợ cho văn bản và tệp.",
-    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
+    "privacyNotice": "Tất cả quá trình xử lý diễn ra trong trình duyệt của bạn để <bold>bảo mật tối đa</bold>."
   },
   "tool": {
     "variants": {
@@ -46,16 +56,16 @@
         "Chức năng sao chép vào clipboard",
         "Tải xuống kết quả đã mã hóa/giải mã",
         "Mã hóa/giải mã thời gian thực",
-        "Real-time encoding/decoding"
+        "Xử lý phía máy khách để bảo mật quyền riêng tư"
       ]
     },
     "securityAndPrivacy": {
-      "title": "Security & Privacy",
+      "title": "Bảo mật & Quyền riêng tư",
       "items": [
-        "No data sent to servers",
-        "Processing happens in your browser",
-        "Files stay on your device",
-        "No data storage or logging"
+        "Không có dữ liệu nào được gửi đến máy chủ",
+        "Quá trình xử lý diễn ra trong trình duyệt của bạn",
+        "Các tệp vẫn còn trên thiết bị của bạn",
+        "Không lưu trữ hoặc ghi nhật ký dữ liệu"
       ]
     },
     "useCases": {

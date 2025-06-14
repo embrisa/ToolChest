@@ -1,9 +1,9 @@
 {
   "hero": {
-    "title": "Chest narzędzi",
+    "title": "tool-chest",
     "subtitle": "Twoja kolekcja niezbędnych narzędzi komputerowych.",
     "description": "Koduj, dekoduj, generuj, konwertuje i więcej z łatwością.",
-    "searchPlaceholder": "Narzędzia wyszukiwania ..."
+    "searchPlaceholder": "Wyszukaj narzędzia"
   },
   "stats": {
     "toolsAvailable": "Dostępne narzędzia",
@@ -19,19 +19,19 @@
     "active": "aktywny"
   },
   "loading": {
-    "loadingTools": "Narzędzia do ładowania ...",
+    "loadingTools": "Ładowanie narzędzi",
     "toolsFound": "Znaleziono narzędzia"
   },
   "noResults": {
     "title": "Nie znaleziono narzędzi",
-    "description": "Brak narzędzi dopasowanych „xyz0xyz”",
+    "description": "Brak narzędzi dopasowanych \"{query}\"",
     "descriptionFilters": "Żadne narzędzia pasują do wybranych filtrów"
   },
   "errors": {
     "troubleLoading": "Mamy problem z załadowaniem narzędzi. Spróbuj ponownie później."
   },
   "search": {
-    "placeholder": "Narzędzia wyszukiwania ...",
+    "placeholder": "Wyszukaj narzędzia",
     "clearSearch": "Wyczyść wyszukiwanie",
     "searchResults": "Wyniki wyszukiwania"
   },
@@ -43,8 +43,8 @@
     "noTags": "Brak dostępnych tagów"
   },
   "toolCard": {
-    "newTool": "Nowy",
-    "popularTool": "Popularny",
-    "openTool": "Otwarte narzędzie"
+    "newTool": "Nowe",
+    "popularTool": "Popularne",
+    "openTool": "Otwórz narzędzie"
   }
 }

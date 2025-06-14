@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Hash Generator - Generate MD5, SHA-1, SHA-256, SHA-512 Hashes | tool-chest",
-    "description": "Free online hash generator for MD5, SHA-1, SHA-256, SHA-512, and other hash algorithms. Generate secure hashes for text and files with client-side processing.",
+    "title": "Trình tạo Hash - Tạo Hash MD5, SHA-1, SHA-256, SHA-512 | Tool-Chest",
+    "description": "Trình tạo hash trực tuyến miễn phí cho MD5, SHA-1, SHA-256, SHA-512 và các thuật toán hash khác. Tạo hash an toàn cho văn bản và tệp với xử lý phía máy khách.",
     "keywords": [
       "hash generator",
       "md5",
@@ -14,7 +14,15 @@
       "file hash",
       "text hash",
       "online tool",
-      "free"
+      "free",
+      "trình tạo hash",
+      "checksum",
+      "mật mã",
+      "bảo mật",
+      "hash tệp",
+      "hash văn bản",
+      "công cụ trực tuyến",
+      "miễn phí"
     ]
   },
   "page": {
@@ -65,8 +73,13 @@
       ]
     },
     "supportedAlgorithms": {
-      "title": "Supported Algorithms",
-      "items": ["MD5", "SHA-1", "SHA-256", "SHA-512"]
+      "title": "Thuật toán được hỗ trợ",
+      "items": [
+        "MD5",
+        "SHA-1",
+        "SHA-256",
+        "SHA-512"
+      ]
     }
   },
   "tool": {

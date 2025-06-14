@@ -34,11 +34,11 @@
       }
     },
     "contact": {
-      "prompt": "Need help?",
-      "link": "Contact support"
+      "prompt": "Hulp nodig?",
+      "link": "Neem contact op met ondersteuning"
     },
     "screenReader": {
-      "announcement": "Page not found. Please navigate using the links below."
+      "announcement": "Pagina niet gevonden. Navigeer alstublieft via de onderstaande links."
     }
   },
   "serverError": {

@@ -38,22 +38,22 @@
     "current": "Ngôn ngữ hiện tại",
     "selectLanguage": "Chọn ngôn ngữ",
     "languages": {
-      "en": "English",
-      "es": "Español",
-      "zh": "中文",
-      "hi": "हिन्दी",
-      "pt": "Português",
-      "ru": "Русский",
-      "ja": "日本語",
-      "de": "Deutsch",
-      "fr": "Français",
-      "ko": "한국어",
-      "it": "Italiano",
-      "tr": "Türkçe",
-      "pl": "Polski",
-      "nl": "Nederlands",
+      "en": "Tiếng Anh",
+      "es": "Tiếng Tây Ban Nha",
+      "zh": "Tiếng Trung",
+      "hi": "Tiếng Hindi",
+      "pt": "Tiếng Bồ Đào Nha",
+      "ru": "Tiếng Nga",
+      "ja": "Tiếng Nhật",
+      "de": "Tiếng Đức",
+      "fr": "Tiếng Pháp",
+      "ko": "Tiếng Hàn",
+      "it": "Tiếng Ý",
+      "tr": "Tiếng Thổ Nhĩ Kỳ",
+      "pl": "Tiếng Ba Lan",
+      "nl": "Tiếng Hà Lan",
       "vi": "Tiếng Việt",
-      "uk": "Українська"
+      "uk": "Tiếng Ukraina"
     }
   }
 }

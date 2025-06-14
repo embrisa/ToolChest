@@ -23,15 +23,15 @@
       "viewAnalytics": "Analitiği Görüntüle",
       "manageTools": "Araçları Yönet",
       "manageTags": "Etiketleri Yönet",
-      "viewSite": "Siteyi Görüntüle",
+      "viewSite": "Halka açık siteyi görüntüle",
       "systemHealth": "Sistem Sağlığı",
-      "addTool": "Add Tool",
-      "addTag": "Add Tag",
-      "manageRelationships": "Manage Relationships",
-      "createToolDescription": "Create new tool in the system",
-      "createTagDescription": "Create new tag for categorization",
-      "manageRelationshipsDescription": "Configure tool-tag associations",
-      "viewSiteDescription": "Open the public tool-chest site"
+      "addTool": "Araç Ekle",
+      "addTag": "Etiket Ekle",
+      "manageRelationships": "İlişkileri Yönet",
+      "createToolDescription": "Sisteme yeni araç oluştur",
+      "createTagDescription": "Kategorizasyon için yeni etiket oluştur",
+      "manageRelationshipsDescription": "Araç-etiket ilişkilerini yapılandır",
+      "viewSiteDescription": "Halka açık tool-chest sitesini aç"
     }
   },
   "tools": {
@@ -53,30 +53,30 @@
       "actions": "Eylemler"
     },
     "emptyState": {
-      "description": "Get started by creating your first tool. Tools help users accomplish specific tasks and can be organized with tags."
+      "description": "İlk aracınızı oluşturarak başlayın. Araçlar, kullanıcıların belirli görevleri tamamlamasına yardımcı olur ve etiketlerle organize edilebilir."
     },
     "bulkOperations": {
-      "title": "Bulk {operation} Tags",
-      "selectedCount": "{count, plural, =1 {# tool} other {# tools}} selected",
-      "operationType": "Select Operation",
-      "selectTags": "Select Tags",
-      "selectedTools": "Selected Tools",
-      "previewChanges": "Preview Changes",
-      "operationSummary": "Operation Summary",
-      "totalChanges": "Total Changes",
-      "toolsToUpdate": "Tools to Update",
-      "warnings": "Warnings",
-      "executing": "Executing Operation",
-      "executingMessage": "Please wait while we process your bulk operation...",
-      "completed": "Operation Completed",
-      "failed": "Operation Failed",
-      "successMessage": "Your bulk operation has been completed successfully",
-      "errorMessage": "There was an error executing your bulk operation",
-      "results": "Operation Results",
-      "toolsAffected": "Tools Affected",
-      "tagsAffected": "Tags Affected",
-      "errors": "Errors Encountered",
-      "startNew": "Start New Operation"
+      "title": "Toplu {operation} Etiketler",
+      "selectedCount": "{count, plural, =1 {# araç} other {# araç}} seçili",
+      "operationType": "Operasyon Seç",
+      "selectTags": "Etiket Seç",
+      "selectedTools": "Seçilen Araçlar",
+      "previewChanges": "Değişiklikleri Önizle",
+      "operationSummary": "Operasyon Özeti",
+      "totalChanges": "Toplam Değişiklikler",
+      "toolsToUpdate": "Güncellenecek Araçlar",
+      "warnings": "Uyarılar",
+      "executing": "Operasyon Yürütülüyor",
+      "executingMessage": "Toplu işleminiz işlenirken lütfen bekleyin...",
+      "completed": "Operasyon Tamamlandı",
+      "failed": "Operasyon Başarısız",
+      "successMessage": "Toplu işleminiz başarıyla tamamlandı",
+      "errorMessage": "Toplu işleminizi yürütürken bir hata oluştu",
+      "results": "Operasyon Sonuçları",
+      "toolsAffected": "Etkilenen Araçlar",
+      "tagsAffected": "Etkilenen Etiketler",
+      "errors": "Karşılaşılan Hatalar",
+      "startNew": "Yeni Operasyon Başlat"
     }
   },
   "tags": {
@@ -97,7 +97,7 @@
       "actions": "Eylemler"
     },
     "emptyState": {
-      "description": "Get started by creating your first tag to organize your tools."
+      "description": "Araçlarınızı düzenlemek için ilk etiketinizi oluşturarak başlayın."
     }
   },
   "analytics": {
@@ -128,10 +128,10 @@
     "dashboard": "Kontrol Paneli",
     "tools": "Araçlar",
     "tags": "Etiketler",
-    "relationships": "Relationships",
+    "relationships": "İlişkiler",
     "analytics": "Analitik",
     "monitoring": "İzleme",
-    "logout": "Çıkış",
-    "viewSite": "Siteyi Görüntüle"
+    "logout": "Çıkış Yap",
+    "viewSite": "Halka açık siteyi görüntüle"
   }
 }

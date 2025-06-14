@@ -34,11 +34,11 @@
       }
     },
     "contact": {
-      "prompt": "Need help?",
-      "link": "Contact support"
+      "prompt": "Потрібна допомога?",
+      "link": "Зв'язатися з підтримкою"
     },
     "screenReader": {
-      "announcement": "Page not found. Please navigate using the links below."
+      "announcement": "Сторінку не знайдено. Будь ласка, перейдіть за посиланнями нижче."
     }
   },
   "serverError": {

@@ -34,11 +34,11 @@
       }
     },
     "contact": {
-      "prompt": "Need help?",
-      "link": "Contact support"
+      "prompt": "मदद चाहिए?",
+      "link": "समर्थन से संपर्क करें"
     },
     "screenReader": {
-      "announcement": "Page not found. Please navigate using the links below."
+      "announcement": "पृष्ठ नहीं मिला। कृपया नीचे दिए गए लिंक का उपयोग करके नेविगेट करें।"
     }
   },
   "serverError": {

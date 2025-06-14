@@ -23,15 +23,15 @@
       "viewAnalytics": "Visualizza Analisi",
       "manageTools": "Gestisci Strumenti",
       "manageTags": "Gestisci Tag",
-      "viewSite": "Visualizza Sito",
-      "systemHealth": "Stato del Sistema",
-      "addTool": "Add Tool",
-      "addTag": "Add Tag",
-      "manageRelationships": "Manage Relationships",
-      "createToolDescription": "Create new tool in the system",
-      "createTagDescription": "Create new tag for categorization",
-      "manageRelationshipsDescription": "Configure tool-tag associations",
-      "viewSiteDescription": "Open the public tool-chest site"
+      "viewSite": "Visualizza sito pubblico",
+      "systemHealth": "Stato del sistema",
+      "addTool": "Aggiungi strumento",
+      "addTag": "Aggiungi tag",
+      "manageRelationships": "Gestisci relazioni",
+      "createToolDescription": "Crea nuovo strumento nel sistema",
+      "createTagDescription": "Crea nuovo tag per la categorizzazione",
+      "manageRelationshipsDescription": "Configura associazioni strumento-tag",
+      "viewSiteDescription": "Apri il sito pubblico tool-chest"
     }
   },
   "tools": {
@@ -53,30 +53,30 @@
       "actions": "Azioni"
     },
     "emptyState": {
-      "description": "Get started by creating your first tool. Tools help users accomplish specific tasks and can be organized with tags."
+      "description": "Inizia creando il tuo primo strumento. Gli strumenti aiutano gli utenti a svolgere compiti specifici e possono essere organizzati con i tag."
     },
     "bulkOperations": {
-      "title": "Bulk {operation} Tags",
-      "selectedCount": "{count, plural, =1 {# tool} other {# tools}} selected",
-      "operationType": "Select Operation",
-      "selectTags": "Select Tags",
-      "selectedTools": "Selected Tools",
-      "previewChanges": "Preview Changes",
-      "operationSummary": "Operation Summary",
-      "totalChanges": "Total Changes",
-      "toolsToUpdate": "Tools to Update",
-      "warnings": "Warnings",
-      "executing": "Executing Operation",
-      "executingMessage": "Please wait while we process your bulk operation...",
-      "completed": "Operation Completed",
-      "failed": "Operation Failed",
-      "successMessage": "Your bulk operation has been completed successfully",
-      "errorMessage": "There was an error executing your bulk operation",
-      "results": "Operation Results",
-      "toolsAffected": "Tools Affected",
-      "tagsAffected": "Tags Affected",
-      "errors": "Errors Encountered",
-      "startNew": "Start New Operation"
+      "title": "Operazione di Massa {operation} Tag",
+      "selectedCount": "{count, plural, =1 {# strumento} other {# strumenti}} selezionati",
+      "operationType": "Seleziona operazione",
+      "selectTags": "Seleziona tag",
+      "selectedTools": "Strumenti selezionati",
+      "previewChanges": "Anteprima modifiche",
+      "operationSummary": "Riepilogo operazione",
+      "totalChanges": "Modifiche totali",
+      "toolsToUpdate": "Strumenti da aggiornare",
+      "warnings": "Avvisi",
+      "executing": "Esecuzione operazione",
+      "executingMessage": "Attendi mentre elaboriamo la tua operazione di massa...",
+      "completed": "Operazione completata",
+      "failed": "Operazione fallita",
+      "successMessage": "La tua operazione di massa è stata completata con successo",
+      "errorMessage": "Si è verificato un errore durante l'esecuzione dell'operazione di massa",
+      "results": "Risultati operazione",
+      "toolsAffected": "Strumenti interessati",
+      "tagsAffected": "Tag interessati",
+      "errors": "Errori riscontrati",
+      "startNew": "Inizia nuova operazione"
     }
   },
   "tags": {
@@ -97,7 +97,7 @@
       "actions": "Azioni"
     },
     "emptyState": {
-      "description": "Get started by creating your first tag to organize your tools."
+      "description": "Inizia creando il tuo primo tag per organizzare i tuoi strumenti."
     }
   },
   "analytics": {
@@ -128,10 +128,10 @@
     "dashboard": "Pannello di Controllo",
     "tools": "Strumenti",
     "tags": "Tag",
-    "relationships": "Relationships",
+    "relationships": "Relazioni",
     "analytics": "Analisi",
     "monitoring": "Monitoraggio",
     "logout": "Logout",
-    "viewSite": "Visualizza Sito"
+    "viewSite": "Visualizza Sito Pubblico"
   }
 }

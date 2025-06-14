@@ -1,8 +1,8 @@
 {
   "header": {
-    "brand": "Chest narzędzi",
+    "brand": "tool-chest",
     "navigation": {
-      "home": "Dom",
+      "home": "Strona główna",
       "tools": "Narzędzia",
       "admin": "Admin",
       "about": "O nas"
@@ -14,17 +14,17 @@
     }
   },
   "footer": {
-    "copyright": "© 2024 Chest narzędzi",
+    "copyright": "© 2024 tool-chest",
     "links": {
       "privacy": "Polityka prywatności",
-      "terms": "Warunki usług",
+      "terms": "Warunki usługi",
       "contact": "Kontakt",
-      "about": "O"
+      "about": "O nas"
     },
-    "description": "Narzędzia programistyczne zorientowane na prywatność."
+    "description": "Narzędzia dla programistów skoncentrowane na prywatności."
   },
   "breadcrumbs": {
-    "home": "Dom",
+    "home": "Strona główna",
     "tools": "Narzędzia",
     "admin": "Admin",
     "dashboard": "Panel",
@@ -38,22 +38,22 @@
     "current": "Obecny język",
     "selectLanguage": "Wybierz język",
     "languages": {
-      "en": "angielski",
-      "es": "Español",
-      "zh": "chiński",
-      "hi": "hinduski",
-      "pt": "portugalski",
-      "ru": "rosyjski",
-      "ja": "japoński",
-      "de": "Deutsch",
-      "fr": "francuski",
-      "ko": "koreański",
-      "it": "włoski",
-      "tr": "turecki",
+      "en": "Angielski",
+      "es": "Hiszpański",
+      "zh": "Chiński",
+      "hi": "Hindi",
+      "pt": "Portugalski",
+      "ru": "Rosyjski",
+      "ja": "Japoński",
+      "de": "Niemiecki",
+      "fr": "Francuski",
+      "ko": "Koreański",
+      "it": "Włoski",
+      "tr": "Turecki",
       "pl": "Polski",
       "nl": "Holenderski",
-      "vi": "wietnamski",
-      "uk": "ukraiński"
+      "vi": "Wietnamski",
+      "uk": "Ukraiński"
     }
   }
 }

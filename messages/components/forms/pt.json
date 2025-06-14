@@ -1,7 +1,7 @@
 {
   "labels": {
     "name": "Nome",
-    "slug": "Slug",
+    "slug": "Identificador",
     "description": "Descrição",
     "color": "Cor",
     "status": "Status",
@@ -13,21 +13,21 @@
     "settings": "Configurações"
   },
   "placeholders": {
-    "enterName": "Insira o nome",
-    "enterDescription": "Insira a descrição",
-    "selectColor": "Selecione a cor",
-    "selectTags": "Selecione as tags",
-    "enterUrl": "Insira a URL",
+    "enterName": "Inserir nome",
+    "enterDescription": "Inserir descrição",
+    "selectColor": "Selecionar cor",
+    "selectTags": "Selecionar tags",
+    "enterUrl": "Inserir URL",
     "chooseFile": "Escolher arquivo",
-    "enterText": "Insira o texto"
+    "enterText": "Inserir texto"
   },
   "validation": {
     "nameRequired": "Nome é obrigatório",
-    "slugRequired": "Slug é obrigatório",
+    "slugRequired": "Identificador é obrigatório",
     "descriptionRequired": "Descrição é obrigatória",
-    "invalidSlug": "Slug só pode conter letras, números e hífens",
-    "slugTooShort": "Slug deve ter ao menos 3 caracteres",
-    "slugTooLong": "Slug deve ter menos de 50 caracteres",
+    "invalidSlug": "Identificador pode conter apenas letras, números e hífens",
+    "slugTooShort": "Identificador deve ter ao menos 3 caracteres",
+    "slugTooLong": "Identificador deve ter menos de 50 caracteres",
     "nameTooShort": "Nome deve ter ao menos 2 caracteres",
     "nameTooLong": "Nome deve ter menos de 100 caracteres",
     "descriptionTooLong": "Descrição deve ter menos de 500 caracteres",

@@ -72,7 +72,7 @@
     "previous": "Précédent",
     "next": "Suivant",
     "page": "Page {page}",
-    "of": "sur {count}",
+    "of": "sur {total}",
     "showing": "Affiche {from}-{to} sur {total} résultats",
     "perPage": "par page"
   },

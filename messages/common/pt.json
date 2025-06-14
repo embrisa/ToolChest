@@ -15,7 +15,7 @@
     "refresh": "Atualizar",
     "copy": "Copiar",
     "download": "Baixar",
-    "upload": "Enviar",
+    "upload": "Carregar",
     "clear": "Limpar",
     "reset": "Redefinir",
     "search": "Pesquisar",
@@ -27,43 +27,43 @@
     "tryAgain": "Tentar novamente",
     "clearAllFilters": "Limpar todos os filtros",
     "clearFilters": "Limpar filtros",
-    "assign": "Assign",
-    "remove": "Remove"
+    "assign": "Atribuir",
+    "remove": "Remover"
   },
   "ui": {
     "status": {
-      "loading": "Loading",
-      "saving": "Saving...",
-      "success": "Success",
-      "error": "Error",
-      "warning": "Warning",
-      "info": "Information",
-      "completed": "Completed",
-      "failed": "Failed",
-      "processing": "Processing...",
-      "validating": "Validating...",
-      "uploading": "Uploading...",
-      "downloading": "Downloading...",
-      "ready": "Ready",
-      "waiting": "Waiting for input"
+      "loading": "Carregando",
+      "saving": "Salvando...",
+      "success": "Sucesso",
+      "error": "Erro",
+      "warning": "Aviso",
+      "info": "Informação",
+      "completed": "Concluído",
+      "failed": "Falha",
+      "processing": "Processando...",
+      "validating": "Validando...",
+      "uploading": "Carregando...",
+      "downloading": "Baixando...",
+      "ready": "Pronto",
+      "waiting": "Aguardando entrada"
     },
     "actions": {
-      "tryAgain": "Try Again"
+      "tryAgain": "Tentar novamente"
     },
     "confirmations": {
-      "deleteItem": "Are you sure you want to delete \"{name}\"? This action cannot be undone.",
-      "deleteItems": "Are you sure you want to delete {count} items? This action cannot be undone.",
-      "unsavedChanges": "You have unsaved changes. Are you sure you want to leave?",
-      "resetForm": "Are you sure you want to reset the form? All changes will be lost."
+      "deleteItem": "Tem certeza de que deseja excluir \"{name}\"? Esta ação não pode ser desfeita.",
+      "deleteItems": "Tem certeza de que deseja excluir {count} itens? Esta ação não pode ser desfeita.",
+      "unsavedChanges": "Você tem alterações não salvas. Tem certeza de que deseja sair?",
+      "resetForm": "Tem certeza de que deseja redefinir o formulário? Todas as alterações serão perdidas."
     },
     "labels": {
-      "order": "Order",
-      "lastUpdated": "Last Updated",
-      "active": "Published",
-      "inactive": "Draft",
-      "noItems": "No items found",
-      "noDescription": "No description provided",
-      "noTags": "No tags"
+      "order": "Ordem",
+      "lastUpdated": "Última atualização",
+      "active": "Publicado",
+      "inactive": "Rascunho",
+      "noItems": "Nenhum item encontrado",
+      "noDescription": "Nenhuma descrição fornecida",
+      "noTags": "Sem tags"
     }
   },
   "status": {
@@ -74,10 +74,10 @@
     "warning": "Aviso",
     "info": "Informação",
     "completed": "Concluído",
-    "failed": "Falhou",
+    "failed": "Falha",
     "processing": "Processando...",
     "validating": "Validando...",
-    "uploading": "Enviando...",
+    "uploading": "Carregando...",
     "downloading": "Baixando...",
     "ready": "Pronto",
     "waiting": "Aguardando entrada"
@@ -101,11 +101,11 @@
     "notFound": "Não encontrado",
     "unauthorized": "Não autorizado",
     "forbidden": "Acesso negado",
-    "timeout": "Tempo de requisição esgotado",
+    "timeout": "Tempo limite da requisição",
     "unknownError": "Erro desconhecido",
     "somethingWentWrong": "Algo deu errado",
-    "loadingFailed": "Error Loading Data",
-    "processingFailed": "Processing failed"
+    "loadingFailed": "Falha ao carregar dados",
+    "processingFailed": "Falha no processamento"
   },
   "navigation": {
     "home": "Início",
@@ -139,7 +139,7 @@
     "uses": "usos"
   },
   "privacy": {
-    "clientSideProcessing": "Processamento no cliente",
+    "clientSideProcessing": "Processamento do lado do cliente",
     "noDataSent": "Nenhum dado enviado aos servidores",
     "privacyFirst": "Privacidade em primeiro lugar",
     "secureProcessing": "Processamento seguro",

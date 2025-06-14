@@ -1,59 +1,68 @@
 {
   "metadata": {
-    "title": "Favicon Generator - Create Favicons in All Sizes | tool-chest",
-    "description": "Free online favicon generator. Create favicons in all standard sizes (16x16, 32x32, 192x192, 512x512) from any image. Generate complete favicon packages with manifest files.",
+    "title": "Gerador de Favicon - Crie Favicons em Todos os Tamanhos | tool-chest",
+    "description": "Gerador de favicon online gratuito. Crie favicons em todos os tamanhos padrão (16x16, 32x32, 192x192, 512x512) a partir de qualquer imagem. Gere pacotes completos de favicon com arquivos de manifesto.",
     "keywords": [
       "favicon generator",
+      "gerador de favicon",
+      "favicon",
       "favicon",
       "icon generator",
+      "gerador de ícones",
       "website icon",
+      "ícone de site",
       "app icon",
+      "ícone de aplicativo",
       "16x16",
       "32x32",
       "192x192",
       "512x512",
       "ico file",
+      "arquivo ico",
       "png icon",
+      "ícone png",
       "web app manifest",
-      "free tool"
+      "manifesto de aplicativo web",
+      "free tool",
+      "ferramenta gratuita"
     ]
   },
   "page": {
     "title": "Gerador de Favicon",
     "description": "Crie favicons a partir de imagens em vários tamanhos e formatos.",
-    "privacyNotice": "All processing happens in your browser using <bold>Canvas API</bold>.",
-    "privacyMessage": "🔒 Privacy-First • Canvas API • Client-Side Processing"
+    "privacyNotice": "Todo o processamento acontece no seu navegador usando a <bold>API Canvas</bold>.",
+    "privacyMessage": "🔒 Privacidade em Primeiro Lugar • API Canvas • Processamento do Lado do Cliente"
   },
   "featureGrid": {
     "browserIcons": {
-      "title": "Browser Icons",
-      "description": "16×16, 32×32, 48×48 favicons for browser tabs, bookmarks, and desktop shortcuts."
+      "title": "Ícones do Navegador",
+      "description": "Favicons 16×16, 32×32, 48×48 para abas do navegador, favoritos e atalhos da área de trabalho."
     },
     "appleTouch": {
-      "title": "Apple Touch Icons",
-      "description": "180×180 icons for iOS home screen and Safari bookmark icons with rounded corners."
+      "title": "Ícones Apple Touch",
+      "description": "Ícones 180×180 para a tela inicial do iOS e ícones de favoritos do Safari com cantos arredondados."
     },
     "androidIcons": {
-      "title": "Android Icons",
-      "description": "192×192, 512×512 icons for Android home screen and Progressive Web Apps."
+      "title": "Ícones Android",
+      "description": "Ícones 192×192, 512×512 para a tela inicial do Android e Progressive Web Apps."
     },
     "webManifest": {
-      "title": "Web App Manifest",
-      "description": "Complete manifest.json for Progressive Web Apps with all required metadata.",
-      "badge": "PWA Ready"
+      "title": "Manifesto do Aplicativo Web",
+      "description": "Manifest.json completo para Progressive Web Apps com todos os metadados necessários.",
+      "badge": "Pronto para PWA"
     }
   },
   "info": {
-    "title": "Sobre Geração de Favicon",
+    "title": "Sobre a Geração de Favicon",
     "description": "Um favicon é um pequeno ícone que representa seu site em abas do navegador, favoritos e atalhos. Aplicações web modernas exigem vários tamanhos e formatos para suportar diferentes dispositivos e plataformas.",
     "standardSizes": {
-      "title": "Standard Sizes",
+      "title": "Tamanhos Padrão",
       "items": [
-        "16×16, 32×32 - Browser tabs and bookmarks",
-        "48×48, 64×64 - Desktop shortcuts and apps",
-        "96×96, 128×128 - High-DPI and retina displays",
-        "180×180 - Apple touch icon for iOS",
-        "192×192, 512×512 - Android and PWA icons"
+        "16×16, 32×32 - Abas e favoritos do navegador",
+        "48×48, 64×64 - Atalhos de desktop e aplicativos",
+        "96×96, 128×128 - Telas de alta DPI e retina",
+        "180×180 - Ícone touch da Apple para iOS",
+        "192×192, 512×512 - Ícones Android e PWA"
       ]
     },
     "bestPractices": {
@@ -67,22 +76,22 @@
       ]
     },
     "supportedSizes": {
-      "title": "Supported Sizes",
+      "title": "Tamanhos Suportados",
       "items": [
-        "16×16, 32×32 - Browser tabs and bookmarks",
-        "48×48, 64×64 - Desktop shortcuts and apps",
-        "96×96, 128×128 - High-DPI and retina displays",
-        "180×180 - Apple touch icon for iOS",
-        "192×192, 512×512 - Android and PWA icons"
+        "16×16, 32×32 - Abas e favoritos do navegador",
+        "48×48, 64×64 - Atalhos de desktop e aplicativos",
+        "96×96, 128×128 - Telas de alta DPI e retina",
+        "180×180 - Ícone touch da Apple para iOS",
+        "192×192, 512×512 - Ícones Android e PWA"
       ]
     },
     "outputFormats": {
-      "title": "Output Formats",
+      "title": "Formatos de Saída",
       "items": [
-        "PNG favicons for modern browsers",
-        "ICO files for legacy compatibility",
-        "Web manifest with icon paths",
-        "HTML <link> tags for easy embedding"
+        "Favicons PNG para navegadores modernos",
+        "Arquivos ICO para compatibilidade legada",
+        "Manifesto web com caminhos de ícones",
+        "Tags HTML <link> para fácil incorporação"
       ]
     }
   }

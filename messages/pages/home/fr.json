@@ -1,6 +1,6 @@
 {
   "hero": {
-    "title": "Coffre à Outils",
+    "title": "tool-chest",
     "subtitle": "Votre collection d'outils informatiques essentiels.",
     "description": "Encodez, décodez, générez, convertissez, et plus encore, avec facilité.",
     "searchPlaceholder": "Rechercher des outils..."
@@ -33,7 +33,7 @@
   "search": {
     "placeholder": "Rechercher des outils...",
     "clearSearch": "Effacer la recherche",
-    "searchResults": "résultats de recherche"
+    "searchResults": "Résultats de recherche"
   },
   "filtering": {
     "filterByTags": "Filtrer par étiquettes",

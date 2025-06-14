@@ -13,13 +13,13 @@
     "settings": "Instellingen"
   },
   "placeholders": {
-    "enterName": "Voer naam in",
-    "enterDescription": "Voer beschrijving in",
-    "selectColor": "Selecteer kleur",
-    "selectTags": "Selecteer tags",
-    "enterUrl": "Voer URL in",
-    "chooseFile": "Kies bestand",
-    "enterText": "Voer tekst in"
+    "enterName": "Naam invoeren",
+    "enterDescription": "Beschrijving invoeren",
+    "selectColor": "Kleur selecteren",
+    "selectTags": "Tags selecteren",
+    "enterUrl": "URL invoeren",
+    "chooseFile": "Bestand kiezen",
+    "enterText": "Tekst invoeren"
   },
   "validation": {
     "nameRequired": "Naam is verplicht",

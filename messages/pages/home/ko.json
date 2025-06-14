@@ -1,9 +1,9 @@
 {
   "hero": {
-    "title": "도구 체력",
+    "title": "tool-chest",
     "subtitle": "필수 컴퓨터 도구 모음.",
     "description": "인코딩, 디코딩, 생성, 변환 및 더 쉽게 쉽게.",
-    "searchPlaceholder": "검색 도구 ..."
+    "searchPlaceholder": "검색 도구"
   },
   "stats": {
     "toolsAvailable": "사용 가능한 도구",
@@ -19,32 +19,32 @@
     "active": "활동적인"
   },
   "loading": {
-    "loadingTools": "로딩 도구 ...",
-    "toolsFound": "발견 된 도구"
+    "loadingTools": "도구 로드 중",
+    "toolsFound": "도구 발견"
   },
   "noResults": {
     "title": "도구가 없습니다",
-    "description": "\"{query}\"일치하는 도구 없음",
+    "description": "일치하는 도구가 없습니다 \"{query}\"",
     "descriptionFilters": "선택한 필터와 일치하는 도구가 없습니다"
   },
   "errors": {
     "troubleLoading": "우리는 도구를로드하는 데 어려움을 겪고 있습니다. 나중에 다시 시도하십시오."
   },
   "search": {
-    "placeholder": "검색 도구 ...",
-    "clearSearch": "명확한 검색",
+    "placeholder": "검색 도구",
+    "clearSearch": "검색 지우기",
     "searchResults": "검색 결과"
   },
   "filtering": {
     "filterByTags": "태그로 필터",
     "allTags": "모든 태그",
     "selectedTags": "선택된 태그",
-    "clearAll": "모든 것을 지우십시오",
+    "clearAll": "모두 지우기",
     "noTags": "사용 가능한 태그가 없습니다"
   },
   "toolCard": {
-    "newTool": "새로운",
-    "popularTool": "인기 있는",
-    "openTool": "오픈 도구"
+    "newTool": "신규",
+    "popularTool": "인기",
+    "openTool": "도구 열기"
   }
 }

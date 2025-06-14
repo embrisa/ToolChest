@@ -1,25 +1,25 @@
 {
   "page": {
-    "message": "Narzędzia do ładowania ...",
-    "application": "Ładowanie chestu narzędzi ...",
-    "pleaseWait": "Ładowanie aplikacji, proszę poczekaj ..."
+    "message": "Ładowanie narzędzi...",
+    "application": "Ładowanie tool-chest...",
+    "pleaseWait": "Ładowanie aplikacji, proszę czekać..."
   },
   "components": {
-    "tools": "Narzędzia do ładowania ...",
-    "tags": "Ładowanie tagów ...",
-    "search": "Badawczy...",
+    "tools": "Ładowanie narzędzi...",
+    "tags": "Ładowanie tagów...",
+    "search": "Wyszukiwanie...",
     "processing": "Przetwarzanie...",
-    "saving": "Oszczędność...",
-    "uploading": "Przesyłanie ..."
+    "saving": "Zapisywanie...",
+    "uploading": "Przesyłanie..."
   },
   "admin": {
-    "panel": "Ładowanie panelu administracyjnego ...",
-    "dashboard": "Ładowanie pulpitu nawigacyjnego ...",
-    "analytics": "Ładowanie analizy ..."
+    "panel": "Ładowanie panelu administracyjnego...",
+    "dashboard": "Ładowanie pulpitu nawigacyjnego...",
+    "analytics": "Ładowanie analityki..."
   },
   "skeleton": {
-    "toolCard": "Informacje o ładowaniu ...",
-    "toolGrid": "Ładowanie dostępnych narzędzi ...",
-    "tagFilters": "Opcje ładowania filtru ..."
+    "toolCard": "Ładowanie informacji o narzędziu...",
+    "toolGrid": "Ładowanie dostępnych narzędzi...",
+    "tagFilters": "Ładowanie opcji filtra..."
   }
 }

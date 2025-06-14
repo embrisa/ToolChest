@@ -4,85 +4,95 @@
     "description": "Kostenloser Online-Favicon-Generator. Erstellt Favicons in allen Standardgrößen (16x16, 32x32, 192x192, 512x512) aus beliebigen Bildern. Generiert komplette Favicon-Pakete mit Manifest-Dateien.",
     "keywords": [
       "favicon generator",
-      "favicon",
+      "favicon erstellen",
       "icon generator",
+      "icon erstellen",
       "website icon",
       "app icon",
       "16x16",
       "32x32",
       "192x192",
       "512x512",
-      "ico file",
+      "ico datei",
       "png icon",
       "web app manifest",
-      "free tool"
+      "kostenloses werkzeug",
+      "favicon",
+      "favicons",
+      "symbol generator",
+      "webseite symbol",
+      "app symbol",
+      "ico datei",
+      "png symbol",
+      "web app manifest",
+      "gratis tool"
     ]
   },
   "page": {
     "title": "Favicon-Generator",
-    "description": "Erstellen Sie Favicons aus Bildern in mehreren Größen und Formaten.",
-    "privacyNotice": "All processing happens in your browser using <bold>Canvas API</bold>.",
-    "privacyMessage": "🔒 Privacy-First • Canvas API • Client-Side Processing"
+    "description": "Generieren Sie Favicons in allen Standardgrößen aus jedem Bild. Erstellen Sie vollständige Favicon-Pakete mit PNG-, ICO-Formaten und Web-App-Manifest.",
+    "privacyNotice": "Die gesamte Verarbeitung erfolgt in Ihrem Browser mithilfe der <bold>Canvas API</bold>.",
+    "privacyMessage": "🔒 Datenschutz Zuerst • Canvas API • Client-seitige Verarbeitung"
   },
   "featureGrid": {
     "browserIcons": {
-      "title": "Browser Icons",
-      "description": "16×16, 32×32, 48×48 favicons for browser tabs, bookmarks, and desktop shortcuts."
+      "title": "Browser-Symbole",
+      "description": "16×16, 32×32, 48×48 Favicons für Browser-Tabs, Lesezeichen und Desktop-Verknüpfungen."
     },
     "appleTouch": {
-      "title": "Apple Touch Icons",
-      "description": "180×180 icons for iOS home screen and Safari bookmark icons with rounded corners."
+      "title": "Apple Touch-Symbole",
+      "description": "180×180 Symbole für den iOS-Startbildschirm und Safari-Lesezeichensymbole mit abgerundeten Ecken."
     },
     "androidIcons": {
-      "title": "Android Icons",
-      "description": "192×192, 512×512 icons for Android home screen and Progressive Web Apps."
+      "title": "Android-Symbole",
+      "description": "192×192, 512×512 Symbole für den Android-Startbildschirm und Progressive Web Apps."
     },
     "webManifest": {
       "title": "Web App Manifest",
-      "description": "Complete manifest.json for Progressive Web Apps with all required metadata.",
-      "badge": "PWA Ready"
+      "description": "Vollständige manifest.json für Progressive Web Apps mit allen erforderlichen Metadaten.",
+      "badge": "PWA-fähig"
     }
   },
   "info": {
-    "title": "Über die Favicon-Generierung",
-    "description": "Ein Favicon ist ein kleines Symbol, das Ihre Website in Browser-Tabs, Lesezeichen und Verknüpfungen darstellt. Moderne Webanwendungen erfordern mehrere Favicon-Größen und -Formate, um verschiedene Geräte und Plattformen zu unterstützen.",
+    "title": "Über Favicons",
+    "description": "Favicons (Favoriten-Symbole) sind kleine Symbole, die in Browser-Tabs, Lesezeichen und Adressleisten angezeigt werden. Sie helfen Benutzern, Ihre Website schnell zu identifizieren und die Markenbekanntheit zu verbessern. Moderne Websites erfordern mehrere Favicon-Größen für verschiedene Geräte und Anwendungsfälle.",
     "standardSizes": {
-      "title": "Standard Sizes",
+      "title": "Standardgrößen",
       "items": [
-        "16×16, 32×32 - Browser tabs and bookmarks",
-        "48×48, 64×64 - Desktop shortcuts and apps",
-        "96×96, 128×128 - High-DPI and retina displays",
-        "180×180 - Apple touch icon for iOS",
-        "192×192, 512×512 - Android and PWA icons"
+        "16×16, 32×32 - Browser-Tabs und Lesezeichen",
+        "48×48, 64×64 - Desktop-Verknüpfungen und Apps",
+        "96×96, 128×128 - Hochauflösende und Retina-Displays",
+        "180×180 - Apple Touch-Symbol für iOS",
+        "192×192, 512×512 - Android- und PWA-Symbole"
       ]
     },
     "bestPractices": {
       "title": "Beste Vorgehensweisen",
       "items": [
         "Verwenden Sie quadratische Bilder (Seitenverhältnis 1:1)",
-        "Beginnen Sie mit einer hohen Auflösung (512x512 oder größer)",
-        "Einfache Designs funktionieren bei kleinen Größen besser",
+        "Beginnen Sie mit einer 512×512-Quelle für beste Qualität",
+        "Halten Sie das Design einfach und wiedererkennbar",
         "Testen Sie auf verschiedenen Hintergründen",
-        "Fügen Sie mehrere Größen für die Gerätekompatibilität hinzu"
+        "Verwenden Sie das PNG-Format für Transparenzunterstützung"
       ]
     },
     "supportedSizes": {
-      "title": "Supported Sizes",
+      "title": "Unterstützte Größen",
       "items": [
-        "16×16, 32×32 - Browser tabs and bookmarks",
-        "48×48, 64×64 - Desktop shortcuts and apps",
-        "96×96, 128×128 - High-DPI and retina displays",
-        "180×180 - Apple touch icon for iOS",
-        "192×192, 512×512 - Android and PWA icons"
+        "16×16, 32×32 - Browser-Tabs und Lesezeichen",
+        "48×48, 64×64 - Desktop-Verknüpfungen und Apps",
+        "96×96, 128×128 - Hochauflösende und Retina-Displays",
+        "180×180 - Apple Touch-Symbol für iOS",
+        "192×192, 512×512 - Android- und PWA-Symbole"
       ]
     },
     "outputFormats": {
-      "title": "Output Formats",
+      "title": "Ausgabeformate",
       "items": [
-        "PNG favicons for modern browsers",
-        "ICO files for legacy compatibility",
-        "Web manifest with icon paths",
-        "HTML <link> tags for easy embedding"
+        "PNG-Favicons für moderne Browser",
+        "ICO-Dateien für Legacy-Kompatibilität",
+        "Web-Manifest mit Symbolpfaden",
+        "HTML <link>-Tags für einfaches Einbetten"
       ]
     }
   }

@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Hash Generator - Generate MD5, SHA-1, SHA-256, SHA-512 Hashes | tool-chest",
-    "description": "Free online hash generator for MD5, SHA-1, SHA-256, SHA-512, and other hash algorithms. Generate secure hashes for text and files with client-side processing.",
+    "title": "Hash Oluşturucu - MD5, SHA-1, SHA-256, SHA-512 Hashları Oluştur | Tool-Chest",
+    "description": "MD5, SHA-1, SHA-256, SHA-512 ve diğer hash algoritmaları için ücretsiz çevrimiçi hash oluşturucu. Metin ve dosyalar için istemci tarafı işlemle güvenli hash'ler oluşturun.",
     "keywords": [
       "hash generator",
       "md5",
@@ -14,7 +14,15 @@
       "file hash",
       "text hash",
       "online tool",
-      "free"
+      "free",
+      "hash oluşturucu",
+      "sağlama toplamı",
+      "kripto",
+      "güvenlik",
+      "dosya hash'i",
+      "metin hash'i",
+      "çevrimiçi araç",
+      "ücretsiz"
     ]
   },
   "page": {
@@ -65,8 +73,13 @@
       ]
     },
     "supportedAlgorithms": {
-      "title": "Supported Algorithms",
-      "items": ["MD5", "SHA-1", "SHA-256", "SHA-512"]
+      "title": "Desteklenen Algoritmalar",
+      "items": [
+        "MD5",
+        "SHA-1",
+        "SHA-256",
+        "SHA-512"
+      ]
     }
   },
   "tool": {

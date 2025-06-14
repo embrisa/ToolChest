@@ -4,125 +4,135 @@
     "description": "Convert Markdown to professional PDF documents with syntax highlighting, custom styling, and support for tables, code blocks, and images. Privacy-first client-side processing.",
     "keywords": [
       "markdown to pdf",
+      "マークダウンからPDFへ",
       "markdown converter",
+      "マークダウン変換",
       "pdf generator",
+      "PDF生成",
       "markdown pdf",
+      "マークダウンPDF",
       "syntax highlighting",
+      "シンタックスハイライト",
       "code blocks",
+      "コードブロック",
       "tables",
+      "テーブル",
       "document converter",
+      "ドキュメント変換",
       "markdown export",
-      "free tool"
+      "マークダウンエクスポート",
+      "free tool",
+      "無料ツール"
     ]
   },
   "page": {
     "title": "PDFへのマークダウン",
     "description": "カスタムスタイリングオプションを使用して、マークダウンファイルをPDFに変換します。",
-    "privacyMessage": "🔒 Privacy-First • GitHub Flavored Markdown • Client-Side Processing"
+    "privacyMessage": "🔒 プライバシー第一 • GitHub風Markdown • クライアントサイド処理"
   },
   "featureGrid": {
     "live-preview": {
-      "title": "Live Preview",
-      "description": "Real-time markdown preview with instant rendering",
+      "title": "ライブプレビュー",
+      "description": "リアルタイムでMarkdownを即時レンダリングしながらプレビュー",
       "icon": "👁️"
     },
     "templates": {
-      "title": "Multiple Templates",
-      "description": "PDF templates and themes for different use cases",
+      "title": "複数のテンプレート",
+      "description": "用途に応じたPDFテンプレートとテーマ",
       "icon": "🎨"
     },
     "gfm-support": {
-      "title": "GitHub Flavored Markdown",
-      "description": "Full GFM support including tables and task lists",
+      "title": "GitHub風Markdown",
+      "description": "テーブルやタスクリストを含む完全なGFMサポート",
       "icon": "📝"
     },
     "syntax-highlighting": {
-      "title": "Syntax Highlighting",
-      "description": "Code blocks with syntax highlighting for multiple languages",
+      "title": "シンタックスハイライト",
+      "description": "複数言語に対応したコードブロックのシンタックスハイライト",
       "icon": "💻"
     },
     "custom-styling": {
-      "title": "Custom Styling",
-      "description": "Customize fonts, colors, and layout options",
+      "title": "カスタムスタイリング",
+      "description": "フォント、色、レイアウトオプションをカスタマイズ",
       "icon": "⚙️"
     },
     "file-upload": {
-      "title": "File Upload",
-      "description": "Upload .md, .markdown, or .txt files directly",
+      "title": "ファイルアップロード",
+      "description": ".md、.markdown、.txtファイルを直接アップロード",
       "icon": "📁"
     },
     "professional-output": {
-      "title": "Professional Output",
-      "description": "High-quality PDF generation with metadata",
+      "title": "プロフェッショナル出力",
+      "description": "メタデータ付きの高品質なPDF生成",
       "icon": "📄"
     },
     "privacy-first": {
-      "title": "Privacy-First",
-      "description": "All processing happens in your browser",
+      "title": "プライバシー重視",
+      "description": "すべての処理がブラウザ内で実行",
       "icon": "🔒"
     }
   },
   "info": {
-    "title": "PDF変換へのマークダウンについて",
-    "description": "マークダウンドキュメントを、カスタマイズ可能なスタイリングオプションを使用して、専門的にフォーマットされたPDFファイルに変換します。ドキュメント、レポート、記事、プレゼンテーションに最適です。",
+    "title": "MarkdownからPDFへの変換について",
+    "description": "Markdownドキュメントを簡単にプロフェッショナルなPDFファイルに変換します。当社のコンバータは、テーブル、コードブロック、タスクリストを含むGitHub Flavored Markdown (GFM)をサポートしており、フォーマットとスタイルを維持したドキュメントを作成する柔軟性を提供します。",
     "keyFeatures": {
-      "title": "重要な機能",
+      "title": "主な機能",
       "items": [
-        "フルマークダウン構文サポート",
-        "カスタムPDFスタイリングとテーマ",
-        "複数のページサイズとオリエンテーション",
-        "コードブロックの構文強調表示",
-        "テーブルと画像のサポート",
-        "ヘッダーとフッターのカスタマイズ",
-        "File upload support (.md, .markdown, .txt)",
-        "Drag and drop file upload",
-        "Real-time word count and statistics",
-        "Professional PDF output with metadata"
+        "リアルタイムレンダリングによるライブMarkdownプレビュー",
+        "複数のPDFテンプレートとテーマ",
+        "GitHub Flavored Markdownのサポート",
+        "テーブル、コードブロック、タスクリスト",
+        "カスタムスタイリングとフォーマットオプション",
+        "複数のPDF形式（A4、レターなど）",
+        "ファイルアップロードのサポート（.md、.markdown、.txt）",
+        "ドラッグ＆ドロップファイルアップロード",
+        "リアルタイムの単語数と統計",
+        "メタデータ付きのプロフェッショナルなPDF出力"
       ]
     },
     "supportedFeatures": {
-      "title": "Supported Markdown Features",
+      "title": "サポートされているMarkdown機能",
       "items": [
-        "Headings (H1-H6) with automatic numbering",
-        "Bold and italic text formatting",
-        "Links and images with captions",
-        "Code blocks with syntax highlighting",
-        "Tables with proper formatting",
-        "Blockquotes and nested lists",
-        "Task lists with checkboxes",
-        "Auto-linking of URLs"
+        "自動番号付け付きの見出し（H1-H6）",
+        "太字と斜体のテキストフォーマット",
+        "キャプション付きのリンクと画像",
+        "シンタックスハイライト付きのコードブロック",
+        "適切なフォーマットのテーブル",
+        "ブロッククォートとネストされたリスト",
+        "チェックボックス付きのタスクリスト",
+        "URLの自動リンク"
       ]
     },
     "pdfTemplates": {
-      "title": "PDF Templates",
+      "title": "PDFテンプレート",
       "items": [
-        "Default: Clean and simple design for general use",
-        "Academic: Professional format for research papers",
-        "Minimal: Clean design with lots of white space",
-        "Professional: Business-ready with headers and footers"
+        "デフォルト：一般的な用途向けのクリーンでシンプルなデザイン",
+        "アカデミック：研究論文向けのプロフェッショナルなフォーマット",
+        "ミニマル：余白の多いクリーンなデザイン",
+        "プロフェッショナル：ヘッダーとフッターを備えたビジネス対応"
       ]
     },
     "howToUse": {
-      "title": "How to Use",
+      "title": "使用方法",
       "items": [
-        "Choose between typing in the editor or uploading a markdown file",
-        "Write or paste your markdown content in the editor",
-        "Use the live preview to see how your document will look",
-        "Select a template or customize styling options",
-        "Click 'Generate PDF' to create your document",
-        "Download your professional PDF file"
+        "エディタで入力するか、Markdownファイルをアップロードするかを選択します",
+        "エディタにMarkdownコンテンツを記述または貼り付けます",
+        "ライブプレビューを使用して、ドキュメントがどのように表示されるかを確認します",
+        "テンプレートを選択するか、スタイリングオプションをカスタマイズします",
+        "'PDFを生成'をクリックしてドキュメントを作成します",
+        "プロフェッショナルなPDFファイルをダウンロードします"
       ]
     },
     "features": {
       "items": [
-        "Live preview",
-        "Multiple templates",
-        "GFM support",
-        "Syntax highlighting",
-        "Custom styling",
-        "File upload",
-        "Professional output",
-        "Privacy-first"
+        "ライブプレビュー",
+        "複数のテンプレート",
+        "GFMサポート",
+        "シンタックスハイライト",
+        "カスタムスタイリング",
+        "ファイルアップロード",
+        "プロフェッショナル出力",
+        "プライバシー重視"
       ]
     }
   }

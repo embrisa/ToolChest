@@ -2,10 +2,10 @@
   "page": {
     "title": "Wszystkie narzędzia",
     "subtitle": "Przeglądaj naszą kompletną kolekcję narzędzi użytkowych zaprojektowanych w celu zwiększenia wydajności przepływu pracy.",
-    "loading": "Narzędzia do ładowania ...",
+    "loading": "Narzędzia się ładują...",
     "toolsAvailable": "Dostępne narzędzia",
     "availableTools": "Dostępne narzędzia",
-    "description": "Narzędzia profesjonalne do tworzenia stron internetowych"
+    "description": "Profesjonalne narzędzia do tworzenia stron internetowych"
   },
   "stats": {
     "allToolsFree": "Wszystkie narzędzia za darmo",
@@ -14,7 +14,7 @@
   "states": {
     "noToolsAvailable": "Brak dostępnych narzędzi",
     "noToolsDescription": "Narzędzia są ładowane. Sprawdź wkrótce lub spróbuj odświeżyć stronę.",
-    "loadingGrid": "Ładowanie dostępnych narzędzi ..."
+    "loadingGrid": "Ładowanie dostępnych narzędzi..."
   },
   "features": {
     "privacy": {
@@ -22,11 +22,11 @@
       "description": "Wszystkie narzędzia przetwarzają dane lokalnie w przeglądarce"
     },
     "free": {
-      "title": "Zawsze wolne",
+      "title": "Zawsze darmowe",
       "description": "Bez subskrypcji, bez ukrytych kosztów, całkowicie bezpłatne"
     },
     "fast": {
-      "title": "Błyskawica szybko",
+      "title": "Błyskawicznie szybkie",
       "description": "Natychmiastowe wyniki z zoptymalizowaną wydajnością"
     }
   }

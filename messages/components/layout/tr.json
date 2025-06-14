@@ -38,22 +38,22 @@
     "current": "Mevcut dil",
     "selectLanguage": "Dil seçin",
     "languages": {
-      "en": "English",
-      "es": "Español",
-      "zh": "中文",
-      "hi": "हिन्दी",
-      "pt": "Português",
-      "ru": "Русский",
-      "ja": "日本語",
-      "de": "Deutsch",
-      "fr": "Français",
-      "ko": "한국어",
-      "it": "Italiano",
+      "en": "İngilizce",
+      "es": "İspanyolca",
+      "zh": "Çince",
+      "hi": "Hintçe",
+      "pt": "Portekizce",
+      "ru": "Rusça",
+      "ja": "Japonca",
+      "de": "Almanca",
+      "fr": "Fransızca",
+      "ko": "Korece",
+      "it": "İtalyanca",
       "tr": "Türkçe",
-      "pl": "Polski",
-      "nl": "Nederlands",
-      "vi": "Tiếng Việt",
-      "uk": "Українська"
+      "pl": "Lehçe",
+      "nl": "Hollandaca",
+      "vi": "Vietnamca",
+      "uk": "Ukraynaca"
     }
   }
 }

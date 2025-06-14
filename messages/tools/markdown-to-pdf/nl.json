@@ -1,128 +1,138 @@
 {
   "metadata": {
-    "title": "Markdown to PDF Converter | tool-chest",
-    "description": "Convert Markdown to professional PDF documents with syntax highlighting, custom styling, and support for tables, code blocks, and images. Privacy-first client-side processing.",
+    "title": "Markdown naar PDF-converter | tool-chest",
+    "description": "Converteert Markdown naar professionele PDF-documenten met syntaxismarkering, aangepaste stijl en ondersteuning voor tabellen, codeblokken en afbeeldingen. Privacy-eerst cliënt-side verwerking.",
     "keywords": [
       "markdown to pdf",
+      "markdown naar pdf",
       "markdown converter",
+      "markdown-converter",
       "pdf generator",
+      "pdf-generator",
       "markdown pdf",
+      "markdown naar pdf",
       "syntax highlighting",
+      "syntaxismarkering",
       "code blocks",
+      "codeblokken",
       "tables",
+      "tabellen",
       "document converter",
+      "document-converter",
       "markdown export",
-      "free tool"
+      "markdown-export",
+      "free tool",
+      "gratis tool"
     ]
   },
   "page": {
     "title": "Markdown naar PDF",
     "description": "Converteer Markdown-bestanden naar PDF met aangepaste stijlopties.",
-    "privacyMessage": "🔒 Privacy-First • GitHub Flavored Markdown • Client-Side Processing"
+    "privacyMessage": "🔒 Privacy Eerst • GitHub Flavored Markdown • Client-Side Verwerking"
   },
   "featureGrid": {
     "live-preview": {
-      "title": "Live Preview",
-      "description": "Real-time markdown preview with instant rendering",
+      "title": "Live voorbeeld",
+      "description": "Realtime Markdown-voorbeeld met directe rendering",
       "icon": "👁️"
     },
     "templates": {
-      "title": "Multiple Templates",
-      "description": "PDF templates and themes for different use cases",
+      "title": "Meerdere sjablonen",
+      "description": "PDF-sjablonen en thema's voor verschillende toepassingen",
       "icon": "🎨"
     },
     "gfm-support": {
-      "title": "GitHub Flavored Markdown",
-      "description": "Full GFM support including tables and task lists",
+      "title": "GitHub-flavored Markdown",
+      "description": "Volledige GFM-ondersteuning inclusief tabellen en takenlijsten",
       "icon": "📝"
     },
     "syntax-highlighting": {
-      "title": "Syntax Highlighting",
-      "description": "Code blocks with syntax highlighting for multiple languages",
+      "title": "Syntaxmarkering",
+      "description": "Codeblokken met syntaxmarkering voor meerdere talen",
       "icon": "💻"
     },
     "custom-styling": {
-      "title": "Custom Styling",
-      "description": "Customize fonts, colors, and layout options",
+      "title": "Aangepaste stijl",
+      "description": "Pas lettertypen, kleuren en lay-outopties aan",
       "icon": "⚙️"
     },
     "file-upload": {
-      "title": "File Upload",
-      "description": "Upload .md, .markdown, or .txt files directly",
+      "title": "Bestand uploaden",
+      "description": "Upload direct .md-, .markdown- of .txt-bestanden",
       "icon": "📁"
     },
     "professional-output": {
-      "title": "Professional Output",
-      "description": "High-quality PDF generation with metadata",
+      "title": "Professionele output",
+      "description": "Hoogwaardige PDF-generatie met metadata",
       "icon": "📄"
     },
     "privacy-first": {
-      "title": "Privacy-First",
-      "description": "All processing happens in your browser",
+      "title": "Privacy eerst",
+      "description": "Alle verwerking gebeurt in je browser",
       "icon": "🔒"
     }
   },
   "info": {
     "title": "Over Markdown naar PDF-conversie",
-    "description": "Converteer uw Markdown-documenten naar professioneel opgemaakte PDF-bestanden met aanpasbare stijlopties. Perfect voor documentatie, rapporten, artikelen en presentaties.",
+    "description": "Transformeer uw Markdown-documenten eenvoudig in professionele PDF-bestanden. Onze converter ondersteunt GitHub Flavored Markdown (GFM), inclusief tabellen, codeblokken en takenlijsten, waardoor u de flexibiliteit hebt om documenten te maken die hun opmaak en stijl behouden.",
     "keyFeatures": {
       "title": "Belangrijkste kenmerken",
       "items": [
-        "Volledige Markdown-syntaxondersteuning",
-        "Aangepaste PDF-styling en thema's",
-        "Meerdere paginagroottes en -oriëntaties",
-        "Syntax highlighting voor codeblokken",
-        "Tabel- en afbeeldingsondersteuning",
-        "Aanpassing van kop- en voettekst",
-        "File upload support (.md, .markdown, .txt)",
-        "Drag and drop file upload",
-        "Real-time word count and statistics",
-        "Professional PDF output with metadata"
+        "Live Markdown-voorbeeld met real-time weergave",
+        "Meerdere PDF-sjablonen en thema's",
+        "Ondersteuning voor GitHub Flavored Markdown",
+        "Tabellen, codeblokken en takenlijsten",
+        "Aangepaste stijl- en opmaakopties",
+        "Meerdere PDF-formaten (A4, Letter, etc.)",
+        "Bestandsupload ondersteuning (.md, .markdown, .txt)",
+        "Bestandsupload via slepen en neerzetten",
+        "Real-time woordtelling en statistieken",
+        "Professionele PDF-uitvoer met metadata"
       ]
     },
     "supportedFeatures": {
-      "title": "Supported Markdown Features",
+      "title": "Ondersteunde Markdown-functies",
       "items": [
-        "Headings (H1-H6) with automatic numbering",
-        "Bold and italic text formatting",
-        "Links and images with captions",
-        "Code blocks with syntax highlighting",
-        "Tables with proper formatting",
-        "Blockquotes and nested lists",
-        "Task lists with checkboxes",
-        "Auto-linking of URLs"
+        "Koppen (H1-H6) met automatische nummering",
+        "Vetgedrukte en cursieve tekstformattering",
+        "Links en afbeeldingen met bijschriften",
+        "Codeblokken met syntaxismarkering",
+        "Tabellen met de juiste opmaak",
+        "Blockquotes en geneste lijsten",
+        "Takenlijsten met selectievakjes",
+        "Automatisch koppelen van URL's"
       ]
     },
     "pdfTemplates": {
-      "title": "PDF Templates",
+      "title": "PDF-sjablonen",
       "items": [
-        "Default: Clean and simple design for general use",
-        "Academic: Professional format for research papers",
-        "Minimal: Clean design with lots of white space",
-        "Professional: Business-ready with headers and footers"
+        "Standaard: Schoon en eenvoudig ontwerp voor algemeen gebruik",
+        "Academisch: Professioneel formaat voor onderzoeksdocumenten",
+        "Minimaal: Schoon ontwerp met veel witruimte",
+        "Professioneel: Zakelijk klaar met kop- en voetteksten"
       ]
     },
     "howToUse": {
-      "title": "How to Use",
+      "title": "Hoe te gebruiken",
       "items": [
-        "Choose between typing in the editor or uploading a markdown file",
-        "Write or paste your markdown content in the editor",
-        "Use the live preview to see how your document will look",
-        "Select a template or customize styling options",
-        "Click 'Generate PDF' to create your document",
-        "Download your professional PDF file"
+        "Kies tussen typen in de editor of het uploaden van een Markdown-bestand",
+        "Schrijf of plak uw Markdown-inhoud in de editor",
+        "Gebruik de live preview om te zien hoe uw document eruit zal zien",
+        "Selecteer een sjabloon of pas stijlopties aan",
+        "Klik op 'PDF genereren' om uw document te maken",
+        "Download uw professionele PDF-bestand"
       ]
     },
     "features": {
       "items": [
-        "Live preview",
-        "Multiple templates",
-        "GFM support",
-        "Syntax highlighting",
-        "Custom styling",
-        "File upload",
-        "Professional output",
-        "Privacy-first"
+        "Live voorbeeld",
+        "Meerdere sjablonen",
+        "GFM-ondersteuning",
+        "Syntaxmarkering",
+        "Aangepaste stijl",
+        "Bestand uploaden",
+        "Professionele output",
+        "Privacy eerst"
       ]
     }
   }

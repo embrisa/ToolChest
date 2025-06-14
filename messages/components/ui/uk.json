@@ -44,7 +44,7 @@
     "help": "Отримати допомогу"
   },
   "progress": {
-    "uploading": "Вивантаження... {progress}%",
+    "uploading": "Завантаження... {progress}%",
     "processing": "Обробка... {progress}%",
     "downloading": "Завантаження... {progress}%",
     "complete": "Завершено"

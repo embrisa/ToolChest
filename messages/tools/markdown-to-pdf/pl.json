@@ -4,125 +4,135 @@
     "description": "Convert Markdown to professional PDF documents with syntax highlighting, custom styling, and support for tables, code blocks, and images. Privacy-first client-side processing.",
     "keywords": [
       "markdown to pdf",
+      "markdown do pdf",
       "markdown converter",
+      "konwerter markdown",
       "pdf generator",
+      "generator pdf",
+      "markdown pdf",
       "markdown pdf",
       "syntax highlighting",
+      "podświetlanie składni",
       "code blocks",
+      "bloki kodu",
       "tables",
+      "tabele",
       "document converter",
+      "konwerter dokumentów",
       "markdown export",
-      "free tool"
+      "eksport markdown",
+      "free tool",
+      "darmowe narzędzie"
     ]
   },
   "page": {
-    "title": "Markdown to PDF",
+    "title": "Markdown do PDF",
     "description": "Konwertuj pliki Markdown na PDF z niestandardowymi opcjami stylizacji.",
-    "privacyMessage": "🔒 Privacy-First • GitHub Flavored Markdown • Client-Side Processing"
+    "privacyMessage": "🔒 Prywatność Przede Wszystkim • Markdown w stylu GitHub • Przetwarzanie po stronie klienta"
   },
   "featureGrid": {
     "live-preview": {
-      "title": "Live Preview",
-      "description": "Real-time markdown preview with instant rendering",
+      "title": "Podgląd na żywo",
+      "description": "Podgląd Markdown w czasie rzeczywistym z natychmiastowym renderowaniem",
       "icon": "👁️"
     },
     "templates": {
-      "title": "Multiple Templates",
-      "description": "PDF templates and themes for different use cases",
+      "title": "Wiele szablonów",
+      "description": "Szablony i motywy PDF dla różnych zastosowań",
       "icon": "🎨"
     },
     "gfm-support": {
-      "title": "GitHub Flavored Markdown",
-      "description": "Full GFM support including tables and task lists",
+      "title": "Markdown w stylu GitHub",
+      "description": "Pełne wsparcie GFM, w tym tabele i listy zadań",
       "icon": "📝"
     },
     "syntax-highlighting": {
-      "title": "Syntax Highlighting",
-      "description": "Code blocks with syntax highlighting for multiple languages",
+      "title": "Podświetlanie składni",
+      "description": "Bloki kodu z podświetlaniem składni dla wielu języków",
       "icon": "💻"
     },
     "custom-styling": {
-      "title": "Custom Styling",
-      "description": "Customize fonts, colors, and layout options",
+      "title": "Niestandardowe stylowanie",
+      "description": "Dostosuj czcionki, kolory i opcje układu",
       "icon": "⚙️"
     },
     "file-upload": {
-      "title": "File Upload",
-      "description": "Upload .md, .markdown, or .txt files directly",
+      "title": "Przesyłanie plików",
+      "description": "Prześlij bezpośrednio pliki .md, .markdown lub .txt",
       "icon": "📁"
     },
     "professional-output": {
-      "title": "Professional Output",
-      "description": "High-quality PDF generation with metadata",
+      "title": "Profesjonalny wynik",
+      "description": "Generowanie wysokiej jakości PDF z metadanymi",
       "icon": "📄"
     },
     "privacy-first": {
-      "title": "Privacy-First",
-      "description": "All processing happens in your browser",
+      "title": "Prywatność przede wszystkim",
+      "description": "Całe przetwarzanie odbywa się w Twojej przeglądarce",
       "icon": "🔒"
     }
   },
   "info": {
     "title": "O konwersji Markdown do PDF",
-    "description": "Konwertuj dokumenty Markdown na profesjonalnie sformatowane pliki PDF z opcjami stylizacji konfigurowalnych. Idealny do dokumentacji, raportów, artykułów i prezentacji.",
+    "description": "Z łatwością przekształcaj dokumenty Markdown w profesjonalne pliki PDF. Nasz konwerter obsługuje GitHub Flavored Markdown (GFM), w tym tabele, bloki kodu i listy zadań, co daje elastyczność w tworzeniu dokumentów, które zachowują swoje formatowanie i styl.",
     "keyFeatures": {
       "title": "Kluczowe funkcje",
       "items": [
-        "Pełna obsługa składni Markdown",
-        "Niestandardowy styl pdf i motywy",
-        "Wiele stron i orientacje",
-        "Podświetlanie składni dla bloków kodu",
-        "Obsługa tabeli i obrazu",
-        "Dostosowanie nagłówka i stopki",
-        "File upload support (.md, .markdown, .txt)",
-        "Drag and drop file upload",
-        "Real-time word count and statistics",
-        "Professional PDF output with metadata"
+        "Podgląd Markdown na żywo z renderowaniem w czasie rzeczywistym",
+        "Wiele szablonów i motywów PDF",
+        "Obsługa GitHub Flavored Markdown",
+        "Tabele, bloki kodu i listy zadań",
+        "Niestandardowe opcje stylu i formatowania",
+        "Wiele formatów PDF (A4, Letter itp.)",
+        "Obsługa przesyłania plików (.md, .markdown, .txt)",
+        "Przeciągnij i upuść przesyłanie plików",
+        "Licznik słów i statystyki w czasie rzeczywistym",
+        "Profesjonalne wyjście PDF z metadanymi"
       ]
     },
     "supportedFeatures": {
-      "title": "Supported Markdown Features",
+      "title": "Obsługiwane funkcje Markdown",
       "items": [
-        "Headings (H1-H6) with automatic numbering",
-        "Bold and italic text formatting",
-        "Links and images with captions",
-        "Code blocks with syntax highlighting",
-        "Tables with proper formatting",
-        "Blockquotes and nested lists",
-        "Task lists with checkboxes",
-        "Auto-linking of URLs"
+        "Nagłówki (H1-H6) z automatyczną numeracją",
+        "Formatowanie tekstu pogrubionego i kursywy",
+        "Linki i obrazy z podpisami",
+        "Bloki kodu z podświetlaniem składni",
+        "Tabele z prawidłowym formatowaniem",
+        "Cytaty blokowe i zagnieżdżone listy",
+        "Listy zadań z polami wyboru",
+        "Automatyczne łączenie adresów URL"
       ]
     },
     "pdfTemplates": {
-      "title": "PDF Templates",
+      "title": "Szablony PDF",
       "items": [
-        "Default: Clean and simple design for general use",
-        "Academic: Professional format for research papers",
-        "Minimal: Clean design with lots of white space",
-        "Professional: Business-ready with headers and footers"
+        "Domyślny: Czysty i prosty projekt do ogólnego użytku",
+        "Akademicki: Profesjonalny format dla prac badawczych",
+        "Minimalny: Czysty projekt z dużą ilością białego miejsca",
+        "Profesjonalny: Gotowy do użytku biznesowego z nagłówkami i stopkami"
       ]
     },
     "howToUse": {
-      "title": "How to Use",
+      "title": "Jak używać",
       "items": [
-        "Choose between typing in the editor or uploading a markdown file",
-        "Write or paste your markdown content in the editor",
-        "Use the live preview to see how your document will look",
-        "Select a template or customize styling options",
-        "Click 'Generate PDF' to create your document",
-        "Download your professional PDF file"
+        "Wybierz między wpisywaniem w edytorze a przesyłaniem pliku Markdown",
+        "Napisz lub wklej zawartość Markdown do edytora",
+        "Użyj podglądu na żywo, aby zobaczyć, jak będzie wyglądał Twój dokument",
+        "Wybierz szablon lub dostosuj opcje stylu",
+        "Kliknij 'Generuj PDF', aby utworzyć dokument",
+        "Pobierz swój profesjonalny plik PDF"
       ]
     },
     "features": {
       "items": [
-        "Live preview",
-        "Multiple templates",
-        "GFM support",
-        "Syntax highlighting",
-        "Custom styling",
-        "File upload",
-        "Professional output",
-        "Privacy-first"
+        "Podgląd na żywo",
+        "Wiele szablonów",
+        "Obsługa GFM",
+        "Podświetlanie składni",
+        "Niestandardowe stylowanie",
+        "Przesyłanie plików",
+        "Profesjonalny wynik",
+        "Prywatność przede wszystkim"
       ]
     }
   }

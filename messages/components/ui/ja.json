@@ -44,9 +44,9 @@
     "help": "助けを得る"
   },
   "progress": {
-    "uploading": "アップロード... {Progress}％",
-    "processing": "処理... {Progress}％",
-    "downloading": "ダウンロード... {Progress}％",
+    "uploading": "アップロード中... {progress}%",
+    "processing": "処理中... {progress}%",
+    "downloading": "ダウンロード中... {progress}%",
     "complete": "完了"
   },
   "fileUpload": {

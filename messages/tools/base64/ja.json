@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Base64 Encoder & Decoder | tool-chest",
-    "description": "Free online Base64 encoder and decoder. Convert text to Base64 and decode Base64 to text. Supports file encoding/decoding with URL-safe options. Privacy-first with client-side processing.",
+    "title": "Base64 エンコーダとデコーダ | tool-chest",
+    "description": "無料のオンラインBase64エンコーダとデコーダ。テキストをBase64に変換し、Base64をテキストにデコードします。URLセーフオプション付きのファイルエンコード/デコードをサポート。クライアントサイド処理でプライバシーを最優先。",
     "keywords": [
       "base64",
       "encoder",
@@ -13,18 +13,29 @@
       "url-safe",
       "online tool",
       "free",
-      "privacy"
+      "privacy",
+      "ベース64",
+      "エンコーダ",
+      "デコーダ",
+      "エンコード",
+      "デコード",
+      "テキスト",
+      "ファイル",
+      "URLセーフ",
+      "オンラインツール",
+      "無料",
+      "プライバシー"
     ]
   },
   "page": {
-    "title": "base64エンコーダーとデコーダー",
+    "title": "Base64 エンコーダーとデコーダー",
     "description": "テキストとファイルのサポートを備えたBase64データをエンコードおよびデコードします。",
-    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
+    "privacyNotice": "すべての処理は、<bold>最大限のプライバシー</bold>のためにブラウザで行われます。"
   },
   "tool": {
     "variants": {
       "standard": "標準",
-      "urlSafe": "url-safe"
+      "urlSafe": "URLセーフ"
     },
     "placeholders": {
       "textInput": "エンコード/デコードするにはテキストを入力してください...",
@@ -32,7 +43,7 @@
     }
   },
   "validation": {
-    "invalidBase64": "無効なbase64入力",
+    "invalidBase64": "無効なBase64入力",
     "fileTooLarge": "ファイルが大きすぎる（最大10MB）"
   },
   "info": {
@@ -46,16 +57,16 @@
         "クリップボード機能にコピーします",
         "エンコード/デコードされた結果をダウンロードします",
         "リアルタイムエンコード/デコード",
-        "Real-time encoding/decoding"
+        "プライバシーのためのクライアントサイド処理"
       ]
     },
     "securityAndPrivacy": {
-      "title": "Security & Privacy",
+      "title": "セキュリティとプライバシー",
       "items": [
-        "No data sent to servers",
-        "Processing happens in your browser",
-        "Files stay on your device",
-        "No data storage or logging"
+        "サーバーにデータは送信されません",
+        "処理はブラウザで行われます",
+        "ファイルはデバイスに残ります",
+        "データの保存やログ記録はありません"
       ]
     },
     "useCases": {

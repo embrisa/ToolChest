@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Base64 Encoder & Decoder | tool-chest",
-    "description": "Kostenloser Online-Base64-Encoder und -Decoder. Konvertiert Text zu Base64 und dekodiert Base64 zu Text. Unterstützt Datei-Encoding/Dekodierung mit URL-sicheren Optionen. Datenschutzorientierte clientseitige Verarbeitung.",
+    "title": "Base64 Kodierer & Dekodierer | tool-chest",
+    "description": "Kostenloser Online-Base64-Kodierer und -Dekodierer. Konvertiert Text zu Base64 und dekodiert Base64 zu Text. Unterstützt Datei-Kodierung/Dekodierung mit URL-sicheren Optionen. Datenschutzorientierte clientseitige Verarbeitung.",
     "keywords": [
       "base64",
       "encoder",
@@ -13,7 +13,17 @@
       "url-safe",
       "online tool",
       "free",
-      "privacy"
+      "privacy",
+      "kodierer",
+      "dekodierer",
+      "kodieren",
+      "dekodieren",
+      "text",
+      "datei",
+      "url-sicher",
+      "online-tool",
+      "kostenlos",
+      "datenschutz"
     ]
   },
   "page": {
@@ -46,16 +56,16 @@
         "In die Zwischenablage kopieren",
         "Kodierte/dekodierte Ergebnisse herunterladen",
         "Echtzeit-Kodierung/Dekodierung",
-        "Real-time encoding/decoding"
+        "Clientseitige Verarbeitung für Datenschutz"
       ]
     },
     "securityAndPrivacy": {
-      "title": "Security & Privacy",
+      "title": "Sicherheit & Datenschutz",
       "items": [
-        "No data sent to servers",
-        "Processing happens in your browser",
-        "Files stay on your device",
-        "No data storage or logging"
+        "Keine Daten an Server gesendet",
+        "Verarbeitung erfolgt in Ihrem Browser",
+        "Dateien bleiben auf Ihrem Gerät",
+        "Keine Datenspeicherung oder -protokollierung"
       ]
     },
     "useCases": {

@@ -1,49 +1,49 @@
 {
   "header": {
-    "brand": "cajón de herramientas",
+    "brand": "Tool-Chest",
     "navigation": {
-      "home": "Hogar",
+      "home": "Inicio",
       "tools": "Herramientas",
       "admin": "Administración",
-      "about": "Acerca de"
+      "about": "Acerca de nosotros"
     },
     "mobile": {
-      "toggleMenu": "Menú de palanca",
+      "toggleMenu": "Alternar menú",
       "openMenu": "Abrir menú de navegación",
-      "closeMenu": "Menú de navegación cerrado"
+      "closeMenu": "Cerrar menú de navegación"
     }
   },
   "footer": {
-    "copyright": "© 2024 Tool-Chest",
+    "copyright": "© 2024 tool-chest",
     "links": {
-      "privacy": "política de privacidad",
-      "terms": "Términos de servicio",
+      "privacy": "Política de Privacidad",
+      "terms": "Términos de Servicio",
       "contact": "Contacto",
       "about": "Acerca de"
     },
     "description": "Herramientas de desarrollador centradas en la privacidad."
   },
   "breadcrumbs": {
-    "home": "Hogar",
+    "home": "Inicio",
     "tools": "Herramientas",
     "admin": "Administración",
-    "dashboard": "Panel",
+    "dashboard": "Panel de control",
     "analytics": "Analítica",
     "tags": "Etiquetas",
-    "monitoring": "Escucha",
+    "monitoring": "Monitorización",
     "relationships": "Relaciones"
   },
   "localeSwitcher": {
     "label": "Idioma",
-    "current": "Lenguaje actual",
-    "selectLanguage": "Lenguaje seleccionado",
+    "current": "Idioma actual",
+    "selectLanguage": "Seleccionar idioma",
     "languages": {
-      "en": "Inglés",
+      "en": "English",
       "es": "Español",
       "zh": "中文",
       "hi": "हिन्दी",
       "pt": "Português",
-      "ru": "Русий",
+      "ru": "Русский",
       "ja": "日本語",
       "de": "Deutsch",
       "fr": "Français",
@@ -52,8 +52,8 @@
       "tr": "Türkçe",
       "pl": "Polski",
       "nl": "Nederlands",
-      "vi": "Tiếng việt",
-      "uk": "Українсьа"
+      "vi": "Tiếng Việt",
+      "uk": "Українська"
     }
   }
 }

@@ -34,11 +34,11 @@
       }
     },
     "contact": {
-      "prompt": "Need help?",
-      "link": "Contact support"
+      "prompt": "Yardıma mı ihtiyacınız var?",
+      "link": "Destekle iletişime geçin"
     },
     "screenReader": {
-      "announcement": "Page not found. Please navigate using the links below."
+      "announcement": "Sayfa bulunamadı. Lütfen aşağıdaki bağlantıları kullanarak gezinin."
     }
   },
   "serverError": {

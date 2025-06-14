@@ -72,7 +72,7 @@
     "previous": "Önceki",
     "next": "Sonraki",
     "page": "Sayfa {page}",
-    "of": " / {total}",
+    "of": "{total}",
     "showing": "{total} sonuçtan {from} ile {to} arası gösteriliyor",
     "perPage": "sayfa başına"
   },

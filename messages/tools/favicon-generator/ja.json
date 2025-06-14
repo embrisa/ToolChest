@@ -1,59 +1,68 @@
 {
   "metadata": {
-    "title": "Favicon Generator - Create Favicons in All Sizes | tool-chest",
-    "description": "Free online favicon generator. Create favicons in all standard sizes (16x16, 32x32, 192x192, 512x512) from any image. Generate complete favicon packages with manifest files.",
+    "title": "ファビコンジェネレーター - 全てのサイズのファビコンを作成 | tool-chest",
+    "description": "無料オンラインファビコンジェネレーター。任意の画像から全ての標準サイズ（16x16、32x32、192x192、512x512）のファビコンを作成します。マニフェストファイルを含む完全なファビコンパッケージを生成します。",
     "keywords": [
       "favicon generator",
+      "ファビコンジェネレーター",
       "favicon",
+      "ファビコン",
       "icon generator",
+      "アイコンジェネレーター",
       "website icon",
+      "ウェブサイトアイコン",
       "app icon",
+      "アプリアイコン",
       "16x16",
       "32x32",
       "192x192",
       "512x512",
       "ico file",
+      "ICOファイル",
       "png icon",
+      "PNGアイコン",
       "web app manifest",
-      "free tool"
+      "ウェブアプリマニフェスト",
+      "free tool",
+      "無料ツール"
     ]
   },
   "page": {
     "title": "ファビコンジェネレーター",
     "description": "複数のサイズと形式の画像からファビコンを作成します。",
-    "privacyNotice": "All processing happens in your browser using <bold>Canvas API</bold>.",
-    "privacyMessage": "🔒 Privacy-First • Canvas API • Client-Side Processing"
+    "privacyNotice": "すべての処理はブラウザ内で<bold>Canvas API</bold>を使用して行われます。",
+    "privacyMessage": "🔒 プライバシー第一 • Canvas API • クライアントサイド処理"
   },
   "featureGrid": {
     "browserIcons": {
-      "title": "Browser Icons",
-      "description": "16×16, 32×32, 48×48 favicons for browser tabs, bookmarks, and desktop shortcuts."
+      "title": "ブラウザアイコン",
+      "description": "ブラウザタブ、ブックマーク、デスクトップショートカット用の16×16、32×32、48×48ファビコン。"
     },
     "appleTouch": {
-      "title": "Apple Touch Icons",
-      "description": "180×180 icons for iOS home screen and Safari bookmark icons with rounded corners."
+      "title": "Apple Touchアイコン",
+      "description": "iOSホーム画面および角が丸いSafariブックマークアイコン用の180×180アイコン。"
     },
     "androidIcons": {
-      "title": "Android Icons",
-      "description": "192×192, 512×512 icons for Android home screen and Progressive Web Apps."
+      "title": "Androidアイコン",
+      "description": "Androidホーム画面およびプログレッシブウェブアプリ用の192×192、512×512アイコン。"
     },
     "webManifest": {
-      "title": "Web App Manifest",
-      "description": "Complete manifest.json for Progressive Web Apps with all required metadata.",
-      "badge": "PWA Ready"
+      "title": "ウェブアプリマニフェスト",
+      "description": "すべての必須メタデータを含むプログレッシブウェブアプリ用の完全なmanifest.json。",
+      "badge": "PWA対応"
     }
   },
   "info": {
-    "title": "ファビコン世代について",
+    "title": "ファビコンについて",
     "description": "Faviconは、ブラウザタブ、ブックマーク、ショートカットでWebサイトを表す小さなアイコンです。最新のWebアプリケーションでは、さまざまなデバイスやプラットフォームをサポートするために、複数のFaviconサイズとフォーマットが必要です。",
     "standardSizes": {
-      "title": "Standard Sizes",
+      "title": "標準サイズ",
       "items": [
-        "16×16, 32×32 - Browser tabs and bookmarks",
-        "48×48, 64×64 - Desktop shortcuts and apps",
-        "96×96, 128×128 - High-DPI and retina displays",
-        "180×180 - Apple touch icon for iOS",
-        "192×192, 512×512 - Android and PWA icons"
+        "16×16, 32×32 - ブラウザタブとブックマーク",
+        "48×48, 64×64 - デスクトップショートカットとアプリ",
+        "96×96, 128×128 - 高DPIおよびRetinaディスプレイ",
+        "180×180 - iOS用Apple Touchアイコン",
+        "192×192, 512×512 - AndroidおよびPWAアイコン"
       ]
     },
     "bestPractices": {
@@ -67,22 +76,22 @@
       ]
     },
     "supportedSizes": {
-      "title": "Supported Sizes",
+      "title": "対応サイズ",
       "items": [
-        "16×16, 32×32 - Browser tabs and bookmarks",
-        "48×48, 64×64 - Desktop shortcuts and apps",
-        "96×96, 128×128 - High-DPI and retina displays",
-        "180×180 - Apple touch icon for iOS",
-        "192×192, 512×512 - Android and PWA icons"
+        "16×16, 32×32 - ブラウザタブとブックマーク",
+        "48×48, 64×64 - デスクトップショートカットとアプリ",
+        "96×96, 128×128 - 高DPIおよびRetinaディスプレイ",
+        "180×180 - iOS用Apple Touchアイコン",
+        "192×192, 512×512 - AndroidおよびPWAアイコン"
       ]
     },
     "outputFormats": {
-      "title": "Output Formats",
+      "title": "出力形式",
       "items": [
-        "PNG favicons for modern browsers",
-        "ICO files for legacy compatibility",
-        "Web manifest with icon paths",
-        "HTML <link> tags for easy embedding"
+        "現代のブラウザ用のPNGファビコン",
+        "レガシー互換性のあるICOファイル",
+        "アイコンパスを含むウェブマニフェスト",
+        "簡単な埋め込みのためのHTML <link>タグ"
       ]
     }
   }

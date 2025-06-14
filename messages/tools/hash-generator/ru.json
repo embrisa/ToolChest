@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Hash Generator - Generate MD5, SHA-1, SHA-256, SHA-512 Hashes | tool-chest",
-    "description": "Free online hash generator for MD5, SHA-1, SHA-256, SHA-512, and other hash algorithms. Generate secure hashes for text and files with client-side processing.",
+    "title": "Генератор хешей - Создание хешей MD5, SHA-1, SHA-256, SHA-512 | Tool-Chest",
+    "description": "Бесплатный онлайн-генератор хешей для MD5, SHA-1, SHA-256, SHA-512 и других алгоритмов хеширования. Генерирует безопасные хеши для текста и файлов с обработкой на стороне клиента.",
     "keywords": [
       "hash generator",
       "md5",
@@ -14,7 +14,15 @@
       "file hash",
       "text hash",
       "online tool",
-      "free"
+      "free",
+      "хеш генератор",
+      "контрольная сумма",
+      "крипто",
+      "безопасность",
+      "хеш файла",
+      "хеш текста",
+      "онлайн инструмент",
+      "бесплатно"
     ]
   },
   "page": {
@@ -51,10 +59,10 @@
       "title": "Общие варианты использования",
       "items": [
         "Проверка целостности файла",
-        "Пароль хешинг",
-        "Данные данные",
+        "Хеширование паролей",
+        "Дедупликация данных",
         "Цифровые подписи",
-        "Контрольная сумма"
+        "Генерация контрольной суммы"
       ]
     },
     "securityGuidelines": {
@@ -65,8 +73,13 @@
       ]
     },
     "supportedAlgorithms": {
-      "title": "Supported Algorithms",
-      "items": ["MD5", "SHA-1", "SHA-256", "SHA-512"]
+      "title": "Поддерживаемые алгоритмы",
+      "items": [
+        "MD5",
+        "SHA-1",
+        "SHA-256",
+        "SHA-512"
+      ]
     }
   },
   "tool": {
@@ -78,12 +91,12 @@
       "crc32": "CRC32"
     },
     "placeholders": {
-      "textInput": "Введите текст в хэш ...",
-      "fileUpload": "Выберите файл для генерации хэша"
+      "textInput": "Введите текст для хеширования...",
+      "fileUpload": "Выберите файл для генерации хеша"
     }
   },
   "validation": {
-    "algorithmRequired": "Пожалуйста, выберите алгоритм хэш",
+    "algorithmRequired": "Пожалуйста, выберите алгоритм хеширования",
     "inputRequired": "Пожалуйста, введите текст или выберите файл"
   }
 }

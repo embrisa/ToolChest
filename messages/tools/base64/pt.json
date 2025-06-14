@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Base64 Encoder & Decoder | tool-chest",
-    "description": "Free online Base64 encoder and decoder. Convert text to Base64 and decode Base64 to text. Supports file encoding/decoding with URL-safe options. Privacy-first with client-side processing.",
+    "title": "Codificador e Decodificador Base64 | tool-chest",
+    "description": "Codificador e decodificador Base64 online gratuito. Converte texto em Base64 e decodifica Base64 em texto. Suporta codificação/decodificação de arquivos com opções URL-safe. Prioriza a privacidade com processamento do lado do cliente.",
     "keywords": [
       "base64",
       "encoder",
@@ -13,13 +13,23 @@
       "url-safe",
       "online tool",
       "free",
-      "privacy"
+      "privacy",
+      "codificador",
+      "decodificador",
+      "codificar",
+      "decodificar",
+      "texto",
+      "arquivo",
+      "url-safe",
+      "ferramenta online",
+      "grátis",
+      "privacidade"
     ]
   },
   "page": {
     "title": "Codificador e Decodificador Base64",
     "description": "Codifique e decodifique dados em Base64 com suporte para textos e arquivos.",
-    "privacyNotice": "All processing happens in your browser for <bold>maximum privacy</bold>."
+    "privacyNotice": "Todo o processamento ocorre no seu navegador para <bold>máxima privacidade</bold>."
   },
   "tool": {
     "variants": {
@@ -46,16 +56,16 @@
         "Funcionalidade de copiar para a área de transferência",
         "Baixar resultados codificados/decodificados",
         "Codificação/decodificação em tempo real",
-        "Real-time encoding/decoding"
+        "Processamento no lado do cliente para privacidade"
       ]
     },
     "securityAndPrivacy": {
-      "title": "Security & Privacy",
+      "title": "Segurança e Privacidade",
       "items": [
-        "No data sent to servers",
-        "Processing happens in your browser",
-        "Files stay on your device",
-        "No data storage or logging"
+        "Nenhum dado enviado aos servidores",
+        "O processamento ocorre no seu navegador",
+        "Os arquivos permanecem no seu dispositivo",
+        "Nenhum armazenamento ou registro de dados"
       ]
     },
     "useCases": {
