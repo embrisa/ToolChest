@@ -7,6 +7,7 @@ import {
   SparklesIcon,
 } from "@heroicons/react/24/outline";
 import { cn } from "@/utils";
+import LocaleSwitcher from "@/components/LocaleSwitcher";
 
 export interface FooterProps {
   className?: string;
@@ -181,6 +182,10 @@ export function Footer({ className }: FooterProps) {
         >
           <div className="flex items-center gap-2 text-base text-foreground-secondary">
             <span>&copy; {currentYear} tool-chest. All rights reserved.</span>
+          </div>
+
+          <div className="mt-2 sm:mt-0">
+            <LocaleSwitcher />
           </div>
 
           <div className="flex items-center gap-2 text-base text-foreground-secondary">
