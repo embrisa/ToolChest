@@ -1,9 +1,8 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { locales, localeNames } from "@/i18n/config";
-import { useTransition } from "react";
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import { locales, localeNames, Locale } from "@/i18n/config";
+import { useTransition, useState } from "react";
 import { cn } from "@/utils";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -11,12 +10,33 @@ export default function LocaleSwitcher() {
   // Use the same namespace as the existing layout translations
   const t = useTranslations("components.layout.localeSwitcher");
   const locale = useLocale();
+  const [selectedLocale, setSelectedLocale] = useState(locale);
   const pathname = usePathname();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
+  const localeFlags: Record<Locale, string> = {
+    en: "🇺🇸",
+    es: "🇪🇸",
+    zh: "🇨🇳",
+    hi: "🇮🇳",
+    pt: "🇧🇷",
+    ru: "🇷🇺",
+    ja: "🇯🇵",
+    de: "🇩🇪",
+    fr: "🇫🇷",
+    ko: "🇰🇷",
+    it: "🇮🇹",
+    tr: "🇹🇷",
+    pl: "🇵🇱",
+    nl: "🇳🇱",
+    vi: "🇻🇳",
+    uk: "🇺🇦",
+  };
+
   const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
+    const value = e.target.value as Locale;
+    setSelectedLocale(value);
     startTransition(async () => {
       // Persist locale preference in a cookie for future visits
       await fetch("/api/locale", {
@@ -49,7 +69,7 @@ export default function LocaleSwitcher() {
       <select
         id="locale-switcher"
         onChange={onChange}
-        defaultValue={locale}
+        value={selectedLocale}
         disabled={isPending}
         className={cn(
           "input-field pr-10 cursor-pointer min-h-[44px] font-medium w-auto", // design token utilities
@@ -69,11 +89,13 @@ export default function LocaleSwitcher() {
         {t("current", { locale })}
       </span>
 
-      {/* Custom dropdown icon */}
-      <ChevronDownIcon
-        className="absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-foreground-secondary pointer-events-none"
+      {/* Custom dropdown icon showing the current locale flag */}
+      <span
+        className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none"
         aria-hidden="true"
-      />
+      >
+        {localeFlags[selectedLocale as Locale]}
+      </span>
     </div>
   );
 }
