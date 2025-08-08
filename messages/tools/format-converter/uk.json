@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "title": "Format Converter | tool-chest",
+    "description": "Convert data between JSON, XML, CSV, and YAML formats directly in your browser.",
+    "keywords": ["json", "xml", "csv", "yaml", "convert", "data", "format"]
+  },
+  "page": {
+    "title": "Format Converter",
+    "description": "Convert data between JSON, XML, CSV, and YAML formats."
+  },
+  "tool": {
+    "actions": { "convert": "Convert" },
+    "placeholders": { "input": "Enter or paste data here..." },
+    "fromLabel": "From",
+    "toLabel": "To"
+  },
+  "validation": {
+    "invalidInput": "Invalid input data"
+  },
+  "info": {
+    "title": "About Format Converter",
+    "description": "This tool converts data between JSON, XML, CSV, and YAML formats without sending it to the server.",
+    "keyFeatures": {
+      "title": "Key Features",
+      "items": [
+        "Convert between JSON, XML, CSV, and YAML",
+        "Client-side processing for privacy"
+      ]
+    }
+  }
+}

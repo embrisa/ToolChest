@@ -84,7 +84,13 @@ export async function getToolTranslations(
 export async function getAvailableTools(): Promise<string[]> {
   // This would be dynamically populated in a real implementation
   // For now, return the tools we know exist
-  return ["base64", "hash-generator"];
+  return [
+    "base64",
+    "hash-generator",
+    "format-converter",
+    "favicon-generator",
+    "markdown-to-pdf",
+  ];
 }
 
 /**
