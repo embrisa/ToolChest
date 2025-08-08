@@ -421,6 +421,10 @@ export function MarkdownToPdfTool() {
           syntaxHighlighting: {
             ...DEFAULT_PDF_STYLING.syntaxHighlighting,
             ...template.stylingOptions.syntaxHighlighting,
+            theme:
+              template.stylingOptions.syntaxHighlighting?.theme ??
+              DEFAULT_PDF_STYLING.syntaxHighlighting?.theme ??
+              "github",
             enabled:
               template.stylingOptions.syntaxHighlighting?.enabled ??
               DEFAULT_PDF_STYLING.syntaxHighlighting?.enabled ??
@@ -429,6 +433,18 @@ export function MarkdownToPdfTool() {
           pageNumbers: {
             ...DEFAULT_PDF_STYLING.pageNumbers,
             ...template.stylingOptions.pageNumbers,
+            position:
+              template.stylingOptions.pageNumbers?.position ??
+              DEFAULT_PDF_STYLING.pageNumbers?.position ??
+              "footer",
+            alignment:
+              template.stylingOptions.pageNumbers?.alignment ??
+              DEFAULT_PDF_STYLING.pageNumbers?.alignment ??
+              "center",
+            format:
+              template.stylingOptions.pageNumbers?.format ??
+              DEFAULT_PDF_STYLING.pageNumbers?.format ??
+              "page-of-total",
             enabled:
               template.stylingOptions.pageNumbers?.enabled ??
               DEFAULT_PDF_STYLING.pageNumbers?.enabled ??
