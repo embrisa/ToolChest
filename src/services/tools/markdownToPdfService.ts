@@ -234,7 +234,29 @@ export class MarkdownToPdfService {
     stylingOptions: PdfStylingOptions,
     onProgress?: (progress: MarkdownToPdfProgress) => void,
   ): Promise<jsPDF> {
-    const chunkHeight = 2000; // Process 2000px at a time
+    // Calculate a chunk height that equals one PDF page of content (in pixels)
+    const dims = PDF_FORMAT_DIMENSIONS[stylingOptions.format];
+    const pdfWidthMm =
+      stylingOptions.orientation === "landscape" ? dims.height : dims.width;
+    const pdfHeightMm =
+      stylingOptions.orientation === "landscape" ? dims.width : dims.height;
+
+    const headerHeightMm = stylingOptions.header?.enabled
+      ? stylingOptions.header.height || 0
+      : 0;
+    const footerHeightMm = stylingOptions.footer?.enabled
+      ? stylingOptions.footer.height || 0
+      : 0;
+    const contentHeightMm =
+      pdfHeightMm -
+      stylingOptions.margin.top -
+      stylingOptions.margin.bottom -
+      headerHeightMm -
+      footerHeightMm;
+
+    const mmToPx = (mm: number) => (mm * 96) / 25.4;
+    const chunkHeight = Math.max(400, Math.floor(mmToPx(contentHeightMm))); // at least 400px
+
     const totalHeight = container.scrollHeight;
     const totalChunks = Math.ceil(totalHeight / chunkHeight);
 
@@ -265,7 +287,7 @@ export class MarkdownToPdfService {
         const canvas = await html2canvas(chunkContainer, {
           allowTaint: true,
           useCORS: true,
-          scale: 1.5, // Slightly lower scale for memory efficiency
+          scale: 2, // Higher quality for crisp text
           backgroundColor: stylingOptions.backgroundColor || "#ffffff",
           logging: false,
           width: container.scrollWidth,
@@ -337,44 +359,12 @@ export class MarkdownToPdfService {
       document.body.appendChild(container);
 
       try {
-        // Check if document is large and needs chunked rendering
-        const isLargeDocument = container.scrollHeight > 5000; // 5000px threshold
-        let pdf: jsPDF;
-
-        if (isLargeDocument) {
-          // Use chunked rendering for large documents to prevent memory issues
-          pdf = await this.generatePdfInChunks(
-            container,
-            stylingOptions,
-            onProgress,
-          );
-        } else {
-          // Convert HTML to canvas with enhanced options for smaller documents
-          const canvas = await html2canvas(container, {
-            allowTaint: true,
-            useCORS: true,
-            scale: 2, // Higher quality for crisp text
-            backgroundColor: stylingOptions.backgroundColor || "#ffffff",
-            logging: false, // Disable logging for cleaner output
-            width: container.scrollWidth,
-            height: container.scrollHeight,
-            windowWidth: 1200, // Standard width for consistent rendering
-            windowHeight: 800,
-            removeContainer: false, // We'll handle cleanup
-          });
-
-          // Report generating stage
-          onProgress?.({
-            stage: "generating",
-            progress: 70,
-            currentStep: "Creating optimized PDF document...",
-          });
-
-          // Create PDF and place canvas respecting margins and header/footer space
-          pdf = this.initPdf(stylingOptions);
-          this.placeCanvasOnPdf(pdf, canvas, stylingOptions);
-          this.drawHeaderFooterAndPageNumbers(pdf, stylingOptions, 1, 1);
-        }
+        // Always paginate using chunked rendering to maintain 1:1 page scale and spacing
+        const pdf = await this.generatePdfInChunks(
+          container,
+          stylingOptions,
+          onProgress,
+        );
 
         // Generate comprehensive metadata
         const metadata = this.generatePdfMetadata(stylingOptions, html);
@@ -973,6 +963,7 @@ export class MarkdownToPdfService {
                 margin-top: 0;
                 margin-bottom: 16px;
                 text-align: left;
+                max-width: 680px;
             }
             
             .pdf-blockquote {
@@ -989,7 +980,7 @@ export class MarkdownToPdfService {
                 margin: 16px 0;
                 display: table;
                 width: max-content;
-                max-width: 100%;
+                max-width: 680px;
                 overflow: auto;
                 page-break-inside: avoid;
             }
@@ -1129,13 +1120,14 @@ export class MarkdownToPdfService {
             
             /* Enhanced image styling */
             .pdf-image {
-                max-width: 100%;
+                max-width: 680px;
+                width: 100%;
                 height: auto;
                 box-sizing: content-box;
                 background-color: #ffffff;
                 border-style: none;
                 page-break-inside: avoid;
-            }
+              }
             
             /* Horizontal rules */
             hr {
@@ -1310,6 +1302,15 @@ export class MarkdownToPdfService {
     container.style.padding = "0"; // margins are handled by PDF placement
     container.style.boxSizing = "content-box";
 
+    // Improve print-like layout by constraining images and avoiding collapsed margins
+    const contentEl = container.querySelector(
+      ".pdf-content",
+    ) as HTMLElement | null;
+    if (contentEl) {
+      contentEl.style.margin = "0";
+      contentEl.style.padding = "0";
+    }
+
     return container;
   }
 
@@ -1392,10 +1393,19 @@ export class MarkdownToPdfService {
       width: number,
       align: "left" | "center" | "right" = "center",
     ) => {
+      if (!text) return;
+      const prevSize = (pdf as any).getFontSize?.() ?? 12;
+      const size =
+        options.pageNumbers?.fontSize ||
+        options.header?.fontSize ||
+        options.footer?.fontSize ||
+        10;
+      pdf.setFontSize(size);
       let x = xLeft;
       if (align === "center") x = xLeft + width / 2;
       if (align === "right") x = xLeft + width;
       pdf.text(text, x, y, { align });
+      pdf.setFontSize(prevSize);
     };
 
     // Header
@@ -1409,6 +1419,16 @@ export class MarkdownToPdfService {
         totalPages: String(totalPages),
         date: new Date().toLocaleDateString(),
       });
+      if (options.header?.backgroundColor) {
+        pdf.setFillColor(options.header.backgroundColor);
+        pdf.rect(
+          options.margin.left,
+          options.margin.top - headerHeight,
+          contentWidth,
+          headerHeight,
+          "F",
+        );
+      }
       drawAlignedText(headerText, options.margin.left, y, contentWidth, headerAlign);
 
       if (options.header?.borderBottom) {
@@ -1447,6 +1467,16 @@ export class MarkdownToPdfService {
         totalPages: String(totalPages),
         date: new Date().toLocaleDateString(),
       });
+      if (options.footer?.backgroundColor) {
+        pdf.setFillColor(options.footer.backgroundColor);
+        pdf.rect(
+          options.margin.left,
+          pageHeight - options.margin.bottom - footerHeight,
+          contentWidth,
+          footerHeight,
+          "F",
+        );
+      }
       drawAlignedText(footerText, options.margin.left, y, contentWidth, footerAlign);
 
       if (options.footer?.borderTop) {
