@@ -9,6 +9,7 @@ import {
   PdfFontFamily,
   SyntaxTheme,
   PdfTheme,
+  DEFAULT_PDF_STYLING,
 } from "@/types/tools/markdownToPdf";
 import { Button } from "@/components/ui/Button";
 import { Card, CardHeader, CardContent } from "@/components/ui/Card";
@@ -109,10 +110,39 @@ export function PdfCustomizationPanel({
   };
 
   const applyTemplate = (template: PdfTemplate) => {
-    onStylingChange({
-      ...stylingOptions,
+    const mergedOptions: PdfStylingOptions = {
+      ...DEFAULT_PDF_STYLING,
       ...template.stylingOptions,
-    });
+      margin: {
+        ...DEFAULT_PDF_STYLING.margin,
+        ...template.stylingOptions.margin,
+      },
+      header: {
+        ...DEFAULT_PDF_STYLING.header,
+        ...template.stylingOptions.header,
+      },
+      footer: {
+        ...DEFAULT_PDF_STYLING.footer,
+        ...template.stylingOptions.footer,
+      },
+      tableOfContents: {
+        ...DEFAULT_PDF_STYLING.tableOfContents,
+        ...template.stylingOptions.tableOfContents,
+      },
+      syntaxHighlighting: {
+        ...DEFAULT_PDF_STYLING.syntaxHighlighting,
+        ...template.stylingOptions.syntaxHighlighting,
+      },
+      pageNumbers: {
+        ...DEFAULT_PDF_STYLING.pageNumbers,
+        ...template.stylingOptions.pageNumbers,
+      },
+      accessibility: {
+        ...DEFAULT_PDF_STYLING.accessibility,
+        ...template.stylingOptions.accessibility,
+      },
+    };
+    onStylingChange(mergedOptions);
   };
 
   return (
