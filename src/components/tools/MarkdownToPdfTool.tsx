@@ -397,22 +397,42 @@ export function MarkdownToPdfTool() {
           header: {
             ...DEFAULT_PDF_STYLING.header,
             ...template.stylingOptions.header,
+            enabled:
+              template.stylingOptions.header?.enabled ??
+              DEFAULT_PDF_STYLING.header?.enabled ??
+              false,
           },
           footer: {
             ...DEFAULT_PDF_STYLING.footer,
             ...template.stylingOptions.footer,
+            enabled:
+              template.stylingOptions.footer?.enabled ??
+              DEFAULT_PDF_STYLING.footer?.enabled ??
+              false,
           },
           tableOfContents: {
             ...DEFAULT_PDF_STYLING.tableOfContents,
             ...template.stylingOptions.tableOfContents,
+            enabled:
+              template.stylingOptions.tableOfContents?.enabled ??
+              DEFAULT_PDF_STYLING.tableOfContents?.enabled ??
+              false,
           },
           syntaxHighlighting: {
             ...DEFAULT_PDF_STYLING.syntaxHighlighting,
             ...template.stylingOptions.syntaxHighlighting,
+            enabled:
+              template.stylingOptions.syntaxHighlighting?.enabled ??
+              DEFAULT_PDF_STYLING.syntaxHighlighting?.enabled ??
+              false,
           },
           pageNumbers: {
             ...DEFAULT_PDF_STYLING.pageNumbers,
             ...template.stylingOptions.pageNumbers,
+            enabled:
+              template.stylingOptions.pageNumbers?.enabled ??
+              DEFAULT_PDF_STYLING.pageNumbers?.enabled ??
+              false,
           },
           accessibility: {
             ...DEFAULT_PDF_STYLING.accessibility,
