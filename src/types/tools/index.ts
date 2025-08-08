@@ -58,3 +58,4 @@ export type {
   PDF_FORMAT_DIMENSIONS,
   PDF_TEMPLATES,
 } from "./markdownToPdf";
+export type { DataFormat, FormatConverterResult } from "./formatConverter";

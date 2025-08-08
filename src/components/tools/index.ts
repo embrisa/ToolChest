@@ -8,3 +8,4 @@ export * from "./FaviconGeneratorTool";
 export * from "./FaviconPreview";
 export * from "./MarkdownToPdfTool";
 export * from "./PdfCustomizationPanel";
+export * from "./FormatConverterTool";

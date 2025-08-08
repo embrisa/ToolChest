@@ -114,7 +114,10 @@
     "tailwindcss": "^3.4.17",
     "web-vitals": "^5.0.2",
     "zod": "^3.25.42",
-    "zustand": "^5.0.5"
+    "zustand": "^5.0.5",
+    "js-yaml": "^4.1.0",
+    "xml-js": "^1.6.11",
+    "papaparse": "^5.4.1"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.1",

@@ -8,3 +8,4 @@ export {
   MarkdownToPdfService,
   markdownToPdfService,
 } from "./markdownToPdfService";
+export { FormatConverterService } from "./formatConverterService";

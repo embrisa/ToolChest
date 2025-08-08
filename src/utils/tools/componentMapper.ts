@@ -21,6 +21,11 @@ const MarkdownToPdfTool = lazy(() =>
     default: module.MarkdownToPdfTool,
   })),
 );
+const FormatConverterTool = lazy(() =>
+  import("@/components/tools/FormatConverterTool").then((module) => ({
+    default: module.FormatConverterTool,
+  })),
+);
 
 // Tool component mapping
 export const TOOL_COMPONENTS = {
@@ -28,6 +33,7 @@ export const TOOL_COMPONENTS = {
   "hash-generator": HashGeneratorTool,
   "favicon-generator": FaviconGeneratorTool,
   "markdown-to-pdf": MarkdownToPdfTool,
+  "format-converter": FormatConverterTool,
 } as const;
 
 export type ToolSlug = keyof typeof TOOL_COMPONENTS;
