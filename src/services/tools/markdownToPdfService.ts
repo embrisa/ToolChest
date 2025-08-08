@@ -238,8 +238,8 @@ export class MarkdownToPdfService {
     const totalHeight = container.scrollHeight;
     const totalChunks = Math.ceil(totalHeight / chunkHeight);
 
-    // Initialize PDF with first chunk
-    let pdf: jsPDF | null = null;
+    // Initialize PDF
+    const pdf = this.initPdf(stylingOptions);
 
     for (let i = 0; i < totalChunks; i++) {
       const startY = i * chunkHeight;
@@ -275,17 +275,17 @@ export class MarkdownToPdfService {
           y: 0, // Start from top of chunk
         });
 
-        if (i === 0) {
-          // Create PDF with first chunk
-          pdf = this.createPdfFromCanvas(canvas, stylingOptions);
-        } else if (pdf) {
-          // Add new page and append chunk
+        if (i > 0) {
           pdf.addPage();
-          const imgData = canvas.toDataURL("image/png");
-          const pdfWidth = pdf.internal.pageSize.getWidth();
-          const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-          pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
         }
+
+        this.placeCanvasOnPdf(pdf, canvas, stylingOptions);
+        this.drawHeaderFooterAndPageNumbers(
+          pdf,
+          stylingOptions,
+          i + 1,
+          totalChunks,
+        );
 
         // Clean up canvas to free memory
         canvas.width = 0;
@@ -299,10 +299,6 @@ export class MarkdownToPdfService {
       if (typeof window !== "undefined" && "gc" in window) {
         (window as Window & { gc: () => void }).gc();
       }
-    }
-
-    if (!pdf) {
-      throw new Error("Failed to generate PDF from chunks");
     }
 
     return pdf;
@@ -337,7 +333,7 @@ export class MarkdownToPdfService {
       });
 
       // Create temporary container for rendering
-      const container = this.createRenderContainer(styledHtml);
+      const container = this.createRenderContainer(styledHtml, stylingOptions);
       document.body.appendChild(container);
 
       try {
@@ -374,8 +370,10 @@ export class MarkdownToPdfService {
             currentStep: "Creating optimized PDF document...",
           });
 
-          // Create PDF from canvas with enhanced options
-          pdf = this.createPdfFromCanvas(canvas, stylingOptions);
+          // Create PDF and place canvas respecting margins and header/footer space
+          pdf = this.initPdf(stylingOptions);
+          this.placeCanvasOnPdf(pdf, canvas, stylingOptions);
+          this.drawHeaderFooterAndPageNumbers(pdf, stylingOptions, 1, 1);
         }
 
         // Generate comprehensive metadata
@@ -1056,9 +1054,8 @@ export class MarkdownToPdfService {
                 color: ${colors.text};
             }
             
-            ${
-              syntaxHighlighting?.lineNumbers
-                ? `
+            ${syntaxHighlighting?.lineNumbers
+        ? `
             .pdf-code-block .hljs {
                 counter-reset: line-numbering;
             }
@@ -1080,8 +1077,8 @@ export class MarkdownToPdfService {
                 user-select: none;
             }
             `
-                : ""
-            }
+        : ""
+      }
             
             /* Enhanced strikethrough support (GFM) */
             .pdf-strikethrough {
@@ -1289,17 +1286,29 @@ export class MarkdownToPdfService {
   /**
    * Create temporary container for rendering
    */
-  private createRenderContainer(html: string): HTMLElement {
+  private createRenderContainer(
+    html: string,
+    options: PdfStylingOptions,
+  ): HTMLElement {
     const container = document.createElement("div");
     container.innerHTML = html;
     container.style.position = "absolute";
     container.style.top = "-9999px";
     container.style.left = "-9999px";
-    container.style.width = "210mm"; // A4 width
+
+    // Compute content width in mm: page width minus margins
+    const dims = PDF_FORMAT_DIMENSIONS[options.format];
+    const pageWidthMm =
+      options.orientation === "landscape" ? dims.height : dims.width;
+    const contentWidthMm =
+      pageWidthMm - options.margin.left - options.margin.right;
+    container.style.width = `${contentWidthMm}mm`;
+
     container.style.background = "white";
-    container.style.fontSize = "12px";
-    container.style.lineHeight = "1.5";
-    container.style.padding = "20mm";
+    container.style.fontSize = `${options.fontSize}px`;
+    container.style.lineHeight = `${options.lineHeight}`;
+    container.style.padding = "0"; // margins are handled by PDF placement
+    container.style.boxSizing = "content-box";
 
     return container;
   }
@@ -1307,54 +1316,167 @@ export class MarkdownToPdfService {
   /**
    * Create PDF from canvas
    */
-  private createPdfFromCanvas(
-    canvas: HTMLCanvasElement,
-    options: PdfStylingOptions,
-  ): jsPDF {
+  private initPdf(options: PdfStylingOptions): jsPDF {
     const { format, orientation } = options;
     const dimensions = PDF_FORMAT_DIMENSIONS[format];
-
     const pdfWidth =
       orientation === "landscape" ? dimensions.height : dimensions.width;
     const pdfHeight =
       orientation === "landscape" ? dimensions.width : dimensions.height;
 
-    const pdf = new jsPDF({
+    return new jsPDF({
       orientation: orientation === "landscape" ? "l" : "p",
       unit: "mm",
       format: [pdfWidth, pdfHeight],
     });
+  }
 
-    // Calculate scaling to fit content
+  private placeCanvasOnPdf(
+    pdf: jsPDF,
+    canvas: HTMLCanvasElement,
+    options: PdfStylingOptions,
+  ): void {
+    const { format, orientation } = options;
+    const dims = PDF_FORMAT_DIMENSIONS[format];
+    const pdfWidth =
+      orientation === "landscape" ? dims.height : dims.width;
+    const pdfHeight =
+      orientation === "landscape" ? dims.width : dims.height;
+
+    const headerHeight = options.header?.enabled ? options.header.height || 0 : 0;
+    const footerHeight = options.footer?.enabled ? options.footer.height || 0 : 0;
+
+    const contentX = options.margin.left;
+    const contentY = options.margin.top + headerHeight;
+    const contentWidth = pdfWidth - options.margin.left - options.margin.right;
+    const contentHeight =
+      pdfHeight - options.margin.top - options.margin.bottom - headerHeight - footerHeight;
+
     const canvasWidth = canvas.width;
     const canvasHeight = canvas.height;
     const ratio = canvasWidth / canvasHeight;
 
-    const availableWidth =
-      pdfWidth - options.margin.left - options.margin.right;
-    const availableHeight =
-      pdfHeight - options.margin.top - options.margin.bottom;
-
-    let imgWidth = availableWidth;
+    let imgWidth = contentWidth;
     let imgHeight = imgWidth / ratio;
-
-    if (imgHeight > availableHeight) {
-      imgHeight = availableHeight;
+    if (imgHeight > contentHeight) {
+      imgHeight = contentHeight;
       imgWidth = imgHeight * ratio;
     }
 
-    // Add image to PDF
     const imgData = canvas.toDataURL("image/png");
-    pdf.addImage(
-      imgData,
-      "PNG",
-      options.margin.left,
-      options.margin.top,
-      imgWidth,
-      imgHeight,
-    );
+    pdf.addImage(imgData, "PNG", contentX, contentY, imgWidth, imgHeight);
+  }
 
-    return pdf;
+  private drawHeaderFooterAndPageNumbers(
+    pdf: jsPDF,
+    options: PdfStylingOptions,
+    pageNumber: number,
+    totalPages: number,
+  ): void {
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+
+    const headerEnabled = options.header?.enabled;
+    const footerEnabled = options.footer?.enabled;
+
+    const headerHeight = headerEnabled ? options.header?.height || 0 : 0;
+    const footerHeight = footerEnabled ? options.footer?.height || 0 : 0;
+
+    const contentWidth = pageWidth - options.margin.left - options.margin.right;
+
+    // Helper to align text
+    const drawAlignedText = (
+      text: string,
+      xLeft: number,
+      y: number,
+      width: number,
+      align: "left" | "center" | "right" = "center",
+    ) => {
+      let x = xLeft;
+      if (align === "center") x = xLeft + width / 2;
+      if (align === "right") x = xLeft + width;
+      pdf.text(text, x, y, { align });
+    };
+
+    // Header
+    if (headerEnabled && headerHeight > 0) {
+      const y = options.margin.top - 1 + headerHeight / 2; // visually centered
+      const headerAlign = options.header?.alignment || "center";
+      const headerTextRaw = options.header?.content || "";
+      const headerText = this.applyTemplate(headerTextRaw, {
+        ...options.header?.variables,
+        pageNumber: String(pageNumber),
+        totalPages: String(totalPages),
+        date: new Date().toLocaleDateString(),
+      });
+      drawAlignedText(headerText, options.margin.left, y, contentWidth, headerAlign);
+
+      if (options.header?.borderBottom) {
+        const lineY = options.margin.top + headerHeight - 0.5;
+        pdf.setLineWidth(0.2);
+        pdf.line(options.margin.left, lineY, pageWidth - options.margin.right, lineY);
+      }
+    }
+
+    // Page numbers (can be configured via pageNumbers or footer)
+    const pageNumbersEnabled =
+      options.pageNumbers?.enabled || options.footer?.includePageNumbers;
+    if (pageNumbersEnabled) {
+      const fmt = options.pageNumbers?.format || options.footer?.pageNumberFormat || "page-of-total";
+      const text = this.formatPageNumber(fmt, pageNumber, totalPages);
+      const position = options.pageNumbers?.position || "footer";
+      const align = options.pageNumbers?.alignment || "center";
+
+      if (position === "header" && headerEnabled) {
+        const y = options.margin.top - 1 + (headerHeight > 0 ? headerHeight / 2 : 6);
+        drawAlignedText(text, options.margin.left, y, contentWidth, align);
+      } else if (footerEnabled) {
+        const y = pageHeight - options.margin.bottom - (footerHeight > 0 ? footerHeight / 2 : 6);
+        drawAlignedText(text, options.margin.left, y, contentWidth, align);
+      }
+    }
+
+    // Footer
+    if (footerEnabled && footerHeight > 0) {
+      const y = pageHeight - options.margin.bottom - footerHeight / 2;
+      const footerAlign = options.footer?.alignment || "center";
+      const footerTextRaw = options.footer?.content || "";
+      const footerText = this.applyTemplate(footerTextRaw, {
+        ...options.footer?.variables,
+        pageNumber: String(pageNumber),
+        totalPages: String(totalPages),
+        date: new Date().toLocaleDateString(),
+      });
+      drawAlignedText(footerText, options.margin.left, y, contentWidth, footerAlign);
+
+      if (options.footer?.borderTop) {
+        const lineY = pageHeight - options.margin.bottom - footerHeight + 0.5;
+        pdf.setLineWidth(0.2);
+        pdf.line(options.margin.left, lineY, pageWidth - options.margin.right, lineY);
+      }
+    }
+  }
+
+  private formatPageNumber(
+    format: "page-of-total" | "page-only" | "total-only",
+    current: number,
+    total: number,
+  ): string {
+    switch (format) {
+      case "page-only":
+        return `${current}`;
+      case "total-only":
+        return `${total}`;
+      default:
+        return `${current} / ${total}`;
+    }
+  }
+
+  private applyTemplate(template: string, vars: Record<string, string | number | undefined>): string {
+    return template.replace(/{{\s*(\w+)\s*}}/g, (_m, key) => {
+      const val = vars[key];
+      return val !== undefined ? String(val) : "";
+    });
   }
 
   /**
