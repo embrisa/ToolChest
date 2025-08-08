@@ -12,12 +12,22 @@ import {
   isValidToolSlug,
 } from "@/utils/tools/componentMapper";
 
+// Slugs that have dedicated file-based routes under /tools/<slug>/page.tsx.
+// We must not claim these with the dynamic [slug] route to avoid 404s/collisions.
+const STATIC_TOOL_SLUGS = new Set([
+  "hash-generator",
+  "favicon-generator",
+  "markdown-to-pdf",
+]);
+
 // Build-time: generate all locale + slug combinations
 export const generateStaticParams = async () => {
   const slugs = await StaticDataService.getAllToolSlugs();
 
   // Return an array of { locale, slug }
-  return locales.flatMap((locale) => slugs.map((slug) => ({ locale, slug })));
+  // Exclude slugs that have dedicated static pages to prevent route conflicts
+  const dynamicOnly = slugs.filter((slug) => !STATIC_TOOL_SLUGS.has(slug));
+  return locales.flatMap((locale) => dynamicOnly.map((slug) => ({ locale, slug })));
 };
 
 // Build-time: metadata per page
@@ -27,6 +37,11 @@ export async function generateMetadata({
   params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
   const { slug, locale } = await params;
+
+  // If a dedicated static page exists for this slug, defer to that route
+  if (STATIC_TOOL_SLUGS.has(slug)) {
+    return { title: "Tool" };
+  }
 
   // Validate the tool exists
   if (!isValidToolSlug(slug)) {
@@ -64,16 +79,18 @@ export default async function ToolPage({
 }) {
   const { slug, locale } = await params;
 
+  // If a dedicated static page exists, let Next route to that instead
+  if (STATIC_TOOL_SLUGS.has(slug)) {
+    notFound();
+  }
+
   // Validate the tool slug exists
   if (!isValidToolSlug(slug)) {
     notFound();
   }
 
-  // Fetch tool data
+  // Fetch tool data (optional). If DB isn't available or data missing, we continue with translations only.
   const toolData = await StaticDataService.getToolData(slug, locale);
-  if (!toolData) {
-    notFound();
-  }
 
   // Get translations
   const tPage = await getTranslations({
@@ -260,12 +277,7 @@ export default async function ToolPage({
   return (
     <ToolPageTemplate title={tPage("title")} {...toolProps}>
       <Suspense
-        fallback={
-          <SuspenseFallback
-            variant="card"
-            message={`Loading ${toolData.name}...`}
-          />
-        }
+        fallback={<SuspenseFallback variant="card" message={`Loading ${tPage("title")}...`} />}
       >
         <ToolComponent />
       </Suspense>
