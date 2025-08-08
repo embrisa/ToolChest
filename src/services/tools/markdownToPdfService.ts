@@ -117,7 +117,9 @@ export class MarkdownToPdfService {
   /**
    * Return CSS used for rendering preview so the live preview matches the PDF output
    */
-  public getPreviewCss(options: PdfStylingOptions = DEFAULT_PDF_STYLING): string {
+  public getPreviewCss(
+    options: PdfStylingOptions = DEFAULT_PDF_STYLING,
+  ): string {
     return this.generatePdfCss(options);
   }
 
@@ -284,9 +286,15 @@ export class MarkdownToPdfService {
       // Create a temporary container for this chunk
       const chunkContainer = container.cloneNode(true) as HTMLElement;
       chunkContainer.style.position = "absolute";
-      chunkContainer.style.top = `-${startY}px`;
       chunkContainer.style.height = `${chunkHeight}px`;
       chunkContainer.style.overflow = "hidden";
+
+      // Offset the content using scroll rather than CSS positioning.
+      // Using a negative top value caused html2canvas to capture the first
+      // page repeatedly. Scrolling ensures each chunk renders its unique
+      // portion of the document.
+      chunkContainer.scrollTop = startY;
+
       document.body.appendChild(chunkContainer);
 
       try {
@@ -1052,8 +1060,9 @@ export class MarkdownToPdfService {
                 color: ${colors.text};
             }
             
-            ${syntaxHighlighting?.lineNumbers
-        ? `
+            ${
+              syntaxHighlighting?.lineNumbers
+                ? `
             .pdf-code-block .hljs {
                 counter-reset: line-numbering;
             }
@@ -1075,8 +1084,8 @@ export class MarkdownToPdfService {
                 user-select: none;
             }
             `
-        : ""
-      }
+                : ""
+            }
             
             /* Enhanced strikethrough support (GFM) */
             .pdf-strikethrough {
@@ -1346,19 +1355,25 @@ export class MarkdownToPdfService {
   ): void {
     const { format, orientation } = options;
     const dims = PDF_FORMAT_DIMENSIONS[format];
-    const pdfWidth =
-      orientation === "landscape" ? dims.height : dims.width;
-    const pdfHeight =
-      orientation === "landscape" ? dims.width : dims.height;
+    const pdfWidth = orientation === "landscape" ? dims.height : dims.width;
+    const pdfHeight = orientation === "landscape" ? dims.width : dims.height;
 
-    const headerHeight = options.header?.enabled ? options.header.height || 0 : 0;
-    const footerHeight = options.footer?.enabled ? options.footer.height || 0 : 0;
+    const headerHeight = options.header?.enabled
+      ? options.header.height || 0
+      : 0;
+    const footerHeight = options.footer?.enabled
+      ? options.footer.height || 0
+      : 0;
 
     const contentX = options.margin.left;
     const contentY = options.margin.top + headerHeight;
     const contentWidth = pdfWidth - options.margin.left - options.margin.right;
     const contentHeight =
-      pdfHeight - options.margin.top - options.margin.bottom - headerHeight - footerHeight;
+      pdfHeight -
+      options.margin.top -
+      options.margin.bottom -
+      headerHeight -
+      footerHeight;
 
     const canvasWidth = canvas.width;
     const canvasHeight = canvas.height;
@@ -1436,12 +1451,23 @@ export class MarkdownToPdfService {
           "F",
         );
       }
-      drawAlignedText(headerText, options.margin.left, y, contentWidth, headerAlign);
+      drawAlignedText(
+        headerText,
+        options.margin.left,
+        y,
+        contentWidth,
+        headerAlign,
+      );
 
       if (options.header?.borderBottom) {
         const lineY = options.margin.top + headerHeight - 0.5;
         pdf.setLineWidth(0.2);
-        pdf.line(options.margin.left, lineY, pageWidth - options.margin.right, lineY);
+        pdf.line(
+          options.margin.left,
+          lineY,
+          pageWidth - options.margin.right,
+          lineY,
+        );
       }
     }
 
@@ -1449,16 +1475,23 @@ export class MarkdownToPdfService {
     const pageNumbersEnabled =
       options.pageNumbers?.enabled || options.footer?.includePageNumbers;
     if (pageNumbersEnabled) {
-      const fmt = options.pageNumbers?.format || options.footer?.pageNumberFormat || "page-of-total";
+      const fmt =
+        options.pageNumbers?.format ||
+        options.footer?.pageNumberFormat ||
+        "page-of-total";
       const text = this.formatPageNumber(fmt, pageNumber, totalPages);
       const position = options.pageNumbers?.position || "footer";
       const align = options.pageNumbers?.alignment || "center";
 
       if (position === "header" && headerEnabled) {
-        const y = options.margin.top - 1 + (headerHeight > 0 ? headerHeight / 2 : 6);
+        const y =
+          options.margin.top - 1 + (headerHeight > 0 ? headerHeight / 2 : 6);
         drawAlignedText(text, options.margin.left, y, contentWidth, align);
       } else if (footerEnabled) {
-        const y = pageHeight - options.margin.bottom - (footerHeight > 0 ? footerHeight / 2 : 6);
+        const y =
+          pageHeight -
+          options.margin.bottom -
+          (footerHeight > 0 ? footerHeight / 2 : 6);
         drawAlignedText(text, options.margin.left, y, contentWidth, align);
       }
     }
@@ -1484,12 +1517,23 @@ export class MarkdownToPdfService {
           "F",
         );
       }
-      drawAlignedText(footerText, options.margin.left, y, contentWidth, footerAlign);
+      drawAlignedText(
+        footerText,
+        options.margin.left,
+        y,
+        contentWidth,
+        footerAlign,
+      );
 
       if (options.footer?.borderTop) {
         const lineY = pageHeight - options.margin.bottom - footerHeight + 0.5;
         pdf.setLineWidth(0.2);
-        pdf.line(options.margin.left, lineY, pageWidth - options.margin.right, lineY);
+        pdf.line(
+          options.margin.left,
+          lineY,
+          pageWidth - options.margin.right,
+          lineY,
+        );
       }
     }
   }
@@ -1509,7 +1553,10 @@ export class MarkdownToPdfService {
     }
   }
 
-  private applyTemplate(template: string, vars: Record<string, string | number | undefined>): string {
+  private applyTemplate(
+    template: string,
+    vars: Record<string, string | number | undefined>,
+  ): string {
     return template.replace(/{{\s*(\w+)\s*}}/g, (_m, key) => {
       const val = vars[key];
       return val !== undefined ? String(val) : "";
