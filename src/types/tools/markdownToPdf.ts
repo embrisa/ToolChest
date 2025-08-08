@@ -232,6 +232,8 @@ export interface MarkdownToPdfState {
   markdownOptions: MarkdownOptions;
   showPreview: boolean;
   splitPaneSize: number; // 10-90, percentage for editor vs preview
+  editorHeight: number; // editor height in pixels
+  previewHeight: number; // preview height in pixels
 }
 
 /**

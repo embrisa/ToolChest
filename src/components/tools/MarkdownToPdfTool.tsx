@@ -135,6 +135,8 @@ export function MarkdownToPdfTool() {
     markdownOptions: DEFAULT_MARKDOWN_OPTIONS,
     showPreview: true,
     splitPaneSize: 50,
+    editorHeight: 480,
+    previewHeight: 480,
   });
 
   const [currentAnnouncement, setCurrentAnnouncement] = useState<{
@@ -528,10 +530,38 @@ export function MarkdownToPdfTool() {
           </Alert>
         )}
 
+        {/* Height Controls */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+          <Input
+            type="number"
+            label="Editor Height (px)"
+            min={200}
+            value={state.editorHeight}
+            onChange={(e) =>
+              setState((prev) => ({
+                ...prev,
+                editorHeight: Number(e.target.value),
+              }))
+            }
+          />
+          <Input
+            type="number"
+            label="Preview Height (px)"
+            min={200}
+            value={state.previewHeight}
+            onChange={(e) =>
+              setState((prev) => ({
+                ...prev,
+                previewHeight: Number(e.target.value),
+              }))
+            }
+          />
+        </div>
+
         {/* Main Editor/Preview Area */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="flex flex-col gap-8">
           {/* Editor Area */}
-          <Card>
+          <Card className="w-full">
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
                 <div className="w-8 h-8 bg-warning-100 rounded-lg flex items-center justify-center">
@@ -566,7 +596,8 @@ export function MarkdownToPdfTool() {
                 value={state.markdownContent}
                 onChange={(e) => handleContentChange(e.target.value)}
                 placeholder="Type your markdown here..."
-                className="w-full h-96 p-4 border border-neutral-300 rounded-xl text-code text-sm resize-none focus:ring-2 focus:ring-warning-500/50 focus:border-warning-400 bg-white text-neutral-900 transition-all duration-200"
+                style={{ height: `${state.editorHeight}px` }}
+                className="w-full p-4 border border-neutral-300 rounded-xl text-code text-sm resize-none focus:ring-2 focus:ring-warning-500/50 focus:border-warning-400 bg-white text-neutral-900 transition-all duration-200"
                 aria-label="Markdown content editor"
               />
               <div className="mt-4 flex justify-between items-center text-sm text-neutral-600">
@@ -578,7 +609,7 @@ export function MarkdownToPdfTool() {
 
           {/* Preview Area */}
           {state.showPreview && (
-            <Card>
+            <Card className="w-full">
               <CardHeader>
                 <CardTitle className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-brand-100 rounded-lg flex items-center justify-center">
@@ -593,7 +624,8 @@ export function MarkdownToPdfTool() {
               <CardContent>
                 <div
                   ref={previewRef}
-                  className="max-w-none h-96 overflow-auto surface rounded-xl p-0 shadow-soft border border-neutral-200"
+                  style={{ height: `${state.previewHeight}px` }}
+                  className="max-w-none overflow-auto surface rounded-xl p-0 shadow-soft border border-neutral-200"
                   dangerouslySetInnerHTML={{
                     __html: `<!DOCTYPE html><html><head><style>${previewCss}</style></head><body><div class=\"pdf-content\">${state.previewHtml}</div></body></html>`,
                   }}
