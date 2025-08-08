@@ -387,11 +387,44 @@ export function MarkdownToPdfTool() {
     (templateId: string) => {
       const template = PDF_TEMPLATES.find((t) => t.id === templateId);
       if (template) {
-        handleStylingChange(template.stylingOptions);
+        const mergedOptions: PdfStylingOptions = {
+          ...DEFAULT_PDF_STYLING,
+          ...template.stylingOptions,
+          margin: {
+            ...DEFAULT_PDF_STYLING.margin,
+            ...template.stylingOptions.margin,
+          },
+          header: {
+            ...DEFAULT_PDF_STYLING.header,
+            ...template.stylingOptions.header,
+          },
+          footer: {
+            ...DEFAULT_PDF_STYLING.footer,
+            ...template.stylingOptions.footer,
+          },
+          tableOfContents: {
+            ...DEFAULT_PDF_STYLING.tableOfContents,
+            ...template.stylingOptions.tableOfContents,
+          },
+          syntaxHighlighting: {
+            ...DEFAULT_PDF_STYLING.syntaxHighlighting,
+            ...template.stylingOptions.syntaxHighlighting,
+          },
+          pageNumbers: {
+            ...DEFAULT_PDF_STYLING.pageNumbers,
+            ...template.stylingOptions.pageNumbers,
+          },
+          accessibility: {
+            ...DEFAULT_PDF_STYLING.accessibility,
+            ...template.stylingOptions.accessibility,
+          },
+        };
+
+        setState((prev) => ({ ...prev, stylingOptions: mergedOptions }));
         addAnnouncement(`Applied ${template.name} template`);
       }
     },
-    [handleStylingChange, addAnnouncement],
+    [addAnnouncement],
   );
 
   return (
@@ -525,7 +558,9 @@ export function MarkdownToPdfTool() {
                 <div
                   ref={previewRef}
                   className="max-w-none h-96 overflow-auto surface rounded-xl p-0 shadow-soft border border-neutral-200"
-                  dangerouslySetInnerHTML={{ __html: `<!DOCTYPE html><html><head><style>${previewCss}</style></head><body><div class=\"pdf-content\">${state.previewHtml}</div></body></html>` }}
+                  dangerouslySetInnerHTML={{
+                    __html: `<!DOCTYPE html><html><head><style>${previewCss}</style></head><body><div class=\"pdf-content\">${state.previewHtml}</div></body></html>`,
+                  }}
                   aria-label="Markdown preview"
                 />
               </CardContent>
@@ -660,7 +695,9 @@ export function MarkdownToPdfTool() {
                 min={8}
                 max={24}
                 value={state.stylingOptions.fontSize}
-                onChange={(e) => handleStylingChange({ fontSize: Number(e.target.value) })}
+                onChange={(e) =>
+                  handleStylingChange({ fontSize: Number(e.target.value) })
+                }
                 label="Font Size (px)"
               />
               <Input
@@ -669,7 +706,9 @@ export function MarkdownToPdfTool() {
                 min={1}
                 max={2}
                 value={state.stylingOptions.lineHeight}
-                onChange={(e) => handleStylingChange({ lineHeight: Number(e.target.value) })}
+                onChange={(e) =>
+                  handleStylingChange({ lineHeight: Number(e.target.value) })
+                }
                 label="Line Height"
               />
               <Input
@@ -677,7 +716,14 @@ export function MarkdownToPdfTool() {
                 min={5}
                 max={40}
                 value={state.stylingOptions.margin.top}
-                onChange={(e) => handleStylingChange({ margin: { ...state.stylingOptions.margin, top: Number(e.target.value) } })}
+                onChange={(e) =>
+                  handleStylingChange({
+                    margin: {
+                      ...state.stylingOptions.margin,
+                      top: Number(e.target.value),
+                    },
+                  })
+                }
                 label="Margin Top (mm)"
               />
               <Input
@@ -685,7 +731,14 @@ export function MarkdownToPdfTool() {
                 min={5}
                 max={40}
                 value={state.stylingOptions.margin.right}
-                onChange={(e) => handleStylingChange({ margin: { ...state.stylingOptions.margin, right: Number(e.target.value) } })}
+                onChange={(e) =>
+                  handleStylingChange({
+                    margin: {
+                      ...state.stylingOptions.margin,
+                      right: Number(e.target.value),
+                    },
+                  })
+                }
                 label="Margin Right (mm)"
               />
               <Input
@@ -693,7 +746,14 @@ export function MarkdownToPdfTool() {
                 min={5}
                 max={40}
                 value={state.stylingOptions.margin.bottom}
-                onChange={(e) => handleStylingChange({ margin: { ...state.stylingOptions.margin, bottom: Number(e.target.value) } })}
+                onChange={(e) =>
+                  handleStylingChange({
+                    margin: {
+                      ...state.stylingOptions.margin,
+                      bottom: Number(e.target.value),
+                    },
+                  })
+                }
                 label="Margin Bottom (mm)"
               />
               <Input
@@ -701,13 +761,31 @@ export function MarkdownToPdfTool() {
                 min={5}
                 max={40}
                 value={state.stylingOptions.margin.left}
-                onChange={(e) => handleStylingChange({ margin: { ...state.stylingOptions.margin, left: Number(e.target.value) } })}
+                onChange={(e) =>
+                  handleStylingChange({
+                    margin: {
+                      ...state.stylingOptions.margin,
+                      left: Number(e.target.value),
+                    },
+                  })
+                }
                 label="Margin Left (mm)"
               />
               <Input
                 type="text"
                 value={state.stylingOptions.header?.content || ""}
-                onChange={(e) => handleStylingChange({ header: { ...(state.stylingOptions.header || { enabled: true, height: 12 }), content: e.target.value, enabled: true } })}
+                onChange={(e) =>
+                  handleStylingChange({
+                    header: {
+                      ...(state.stylingOptions.header || {
+                        enabled: true,
+                        height: 12,
+                      }),
+                      content: e.target.value,
+                      enabled: true,
+                    },
+                  })
+                }
                 label="Header Text (supports {{title}} {{date}} {{pageNumber}} {{totalPages}})"
               />
               <Input
@@ -715,7 +793,15 @@ export function MarkdownToPdfTool() {
                 min={8}
                 max={20}
                 value={state.stylingOptions.header?.fontSize || 11}
-                onChange={(e) => handleStylingChange({ header: { ...(state.stylingOptions.header || { enabled: true }), fontSize: Number(e.target.value), enabled: true } })}
+                onChange={(e) =>
+                  handleStylingChange({
+                    header: {
+                      ...(state.stylingOptions.header || { enabled: true }),
+                      fontSize: Number(e.target.value),
+                      enabled: true,
+                    },
+                  })
+                }
                 label="Header Font Size"
               />
               <Input
@@ -723,13 +809,32 @@ export function MarkdownToPdfTool() {
                 min={8}
                 max={20}
                 value={state.stylingOptions.footer?.fontSize || 11}
-                onChange={(e) => handleStylingChange({ footer: { ...(state.stylingOptions.footer || { enabled: true }), fontSize: Number(e.target.value), enabled: true } })}
+                onChange={(e) =>
+                  handleStylingChange({
+                    footer: {
+                      ...(state.stylingOptions.footer || { enabled: true }),
+                      fontSize: Number(e.target.value),
+                      enabled: true,
+                    },
+                  })
+                }
                 label="Footer Font Size"
               />
               <Input
                 type="text"
                 value={state.stylingOptions.footer?.content || ""}
-                onChange={(e) => handleStylingChange({ footer: { ...(state.stylingOptions.footer || { enabled: true, height: 12 }), content: e.target.value, enabled: true } })}
+                onChange={(e) =>
+                  handleStylingChange({
+                    footer: {
+                      ...(state.stylingOptions.footer || {
+                        enabled: true,
+                        height: 12,
+                      }),
+                      content: e.target.value,
+                      enabled: true,
+                    },
+                  })
+                }
                 label="Footer Text"
               />
             </div>
@@ -737,8 +842,18 @@ export function MarkdownToPdfTool() {
               <label className="inline-flex items-center gap-2">
                 <input
                   type="checkbox"
-                  checked={state.stylingOptions.footer?.includePageNumbers ?? true}
-                  onChange={(e) => handleStylingChange({ footer: { ...(state.stylingOptions.footer || { enabled: true }), includePageNumbers: e.target.checked, enabled: true } })}
+                  checked={
+                    state.stylingOptions.footer?.includePageNumbers ?? true
+                  }
+                  onChange={(e) =>
+                    handleStylingChange({
+                      footer: {
+                        ...(state.stylingOptions.footer || { enabled: true }),
+                        includePageNumbers: e.target.checked,
+                        enabled: true,
+                      },
+                    })
+                  }
                 />
                 <span>Include Page Numbers</span>
               </label>
@@ -746,7 +861,14 @@ export function MarkdownToPdfTool() {
                 <input
                   type="checkbox"
                   checked={state.stylingOptions.header?.enabled ?? false}
-                  onChange={(e) => handleStylingChange({ header: { ...(state.stylingOptions.header || {}), enabled: e.target.checked } })}
+                  onChange={(e) =>
+                    handleStylingChange({
+                      header: {
+                        ...(state.stylingOptions.header || {}),
+                        enabled: e.target.checked,
+                      },
+                    })
+                  }
                 />
                 <span>Show Header</span>
               </label>
@@ -754,7 +876,14 @@ export function MarkdownToPdfTool() {
                 <input
                   type="checkbox"
                   checked={state.stylingOptions.footer?.enabled ?? true}
-                  onChange={(e) => handleStylingChange({ footer: { ...(state.stylingOptions.footer || {}), enabled: e.target.checked } })}
+                  onChange={(e) =>
+                    handleStylingChange({
+                      footer: {
+                        ...(state.stylingOptions.footer || {}),
+                        enabled: e.target.checked,
+                      },
+                    })
+                  }
                 />
                 <span>Show Footer</span>
               </label>
