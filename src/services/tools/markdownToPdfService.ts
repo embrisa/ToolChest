@@ -115,6 +115,13 @@ export class MarkdownToPdfService {
   }
 
   /**
+   * Return CSS used for rendering preview so the live preview matches the PDF output
+   */
+  public getPreviewCss(options: PdfStylingOptions = DEFAULT_PDF_STYLING): string {
+    return this.generatePdfCss(options);
+  }
+
+  /**
    * Parse markdown content to HTML with analysis and syntax highlighting
    * Optimized for large documents with chunking support
    */

@@ -10,6 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { Button } from "@/components/ui/Button";
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/Card";
+import { Input } from "@/components/ui";
 import { Alert } from "@/components/ui/Alert";
 import { AriaLiveRegion } from "@/components/ui/AriaLiveRegion";
 import { ToolHeader } from "@/components/ui/ToolHeader";
@@ -172,6 +173,9 @@ export function MarkdownToPdfTool() {
       return () => clearTimeout(timeoutId);
     }
   }, [state.markdownContent, state.markdownOptions, updatePreview]);
+
+  // Update preview CSS to match current styling options so preview == PDF
+  const previewCss = markdownToPdfService.getPreviewCss(state.stylingOptions);
 
   // Helper function to add accessibility announcements
   const addAnnouncement = useCallback(
@@ -520,8 +524,8 @@ export function MarkdownToPdfTool() {
               <CardContent>
                 <div
                   ref={previewRef}
-                  className="prose prose-sm max-w-none h-96 overflow-auto surface rounded-xl p-6 shadow-soft border border-neutral-200"
-                  dangerouslySetInnerHTML={{ __html: state.previewHtml }}
+                  className="max-w-none h-96 overflow-auto surface rounded-xl p-0 shadow-soft border border-neutral-200"
+                  dangerouslySetInnerHTML={{ __html: `<!DOCTYPE html><html><head><style>${previewCss}</style></head><body><div class=\"pdf-content\">${state.previewHtml}</div></body></html>` }}
                   aria-label="Markdown preview"
                 />
               </CardContent>
@@ -635,6 +639,125 @@ export function MarkdownToPdfTool() {
                   </div>
                 </button>
               ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Styling Controls */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-brand-100 rounded-lg flex items-center justify-center">
+                <Cog6ToothIcon className="h-5 w-5 text-brand-600" />
+              </div>
+              Styling Options
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <Input
+                type="number"
+                min={8}
+                max={24}
+                value={state.stylingOptions.fontSize}
+                onChange={(e) => handleStylingChange({ fontSize: Number(e.target.value) })}
+                label="Font Size (px)"
+              />
+              <Input
+                type="number"
+                step="0.05"
+                min={1}
+                max={2}
+                value={state.stylingOptions.lineHeight}
+                onChange={(e) => handleStylingChange({ lineHeight: Number(e.target.value) })}
+                label="Line Height"
+              />
+              <Input
+                type="number"
+                min={5}
+                max={40}
+                value={state.stylingOptions.margin.top}
+                onChange={(e) => handleStylingChange({ margin: { ...state.stylingOptions.margin, top: Number(e.target.value) } })}
+                label="Margin Top (mm)"
+              />
+              <Input
+                type="number"
+                min={5}
+                max={40}
+                value={state.stylingOptions.margin.right}
+                onChange={(e) => handleStylingChange({ margin: { ...state.stylingOptions.margin, right: Number(e.target.value) } })}
+                label="Margin Right (mm)"
+              />
+              <Input
+                type="number"
+                min={5}
+                max={40}
+                value={state.stylingOptions.margin.bottom}
+                onChange={(e) => handleStylingChange({ margin: { ...state.stylingOptions.margin, bottom: Number(e.target.value) } })}
+                label="Margin Bottom (mm)"
+              />
+              <Input
+                type="number"
+                min={5}
+                max={40}
+                value={state.stylingOptions.margin.left}
+                onChange={(e) => handleStylingChange({ margin: { ...state.stylingOptions.margin, left: Number(e.target.value) } })}
+                label="Margin Left (mm)"
+              />
+              <Input
+                type="text"
+                value={state.stylingOptions.header?.content || ""}
+                onChange={(e) => handleStylingChange({ header: { ...(state.stylingOptions.header || { enabled: true, height: 12 }), content: e.target.value, enabled: true } })}
+                label="Header Text (supports {{title}} {{date}} {{pageNumber}} {{totalPages}})"
+              />
+              <Input
+                type="number"
+                min={8}
+                max={20}
+                value={state.stylingOptions.header?.fontSize || 11}
+                onChange={(e) => handleStylingChange({ header: { ...(state.stylingOptions.header || { enabled: true }), fontSize: Number(e.target.value), enabled: true } })}
+                label="Header Font Size"
+              />
+              <Input
+                type="number"
+                min={8}
+                max={20}
+                value={state.stylingOptions.footer?.fontSize || 11}
+                onChange={(e) => handleStylingChange({ footer: { ...(state.stylingOptions.footer || { enabled: true }), fontSize: Number(e.target.value), enabled: true } })}
+                label="Footer Font Size"
+              />
+              <Input
+                type="text"
+                value={state.stylingOptions.footer?.content || ""}
+                onChange={(e) => handleStylingChange({ footer: { ...(state.stylingOptions.footer || { enabled: true, height: 12 }), content: e.target.value, enabled: true } })}
+                label="Footer Text"
+              />
+            </div>
+            <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <label className="inline-flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={state.stylingOptions.footer?.includePageNumbers ?? true}
+                  onChange={(e) => handleStylingChange({ footer: { ...(state.stylingOptions.footer || { enabled: true }), includePageNumbers: e.target.checked, enabled: true } })}
+                />
+                <span>Include Page Numbers</span>
+              </label>
+              <label className="inline-flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={state.stylingOptions.header?.enabled ?? false}
+                  onChange={(e) => handleStylingChange({ header: { ...(state.stylingOptions.header || {}), enabled: e.target.checked } })}
+                />
+                <span>Show Header</span>
+              </label>
+              <label className="inline-flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={state.stylingOptions.footer?.enabled ?? true}
+                  onChange={(e) => handleStylingChange({ footer: { ...(state.stylingOptions.footer || {}), enabled: e.target.checked } })}
+                />
+                <span>Show Footer</span>
+              </label>
             </div>
           </CardContent>
         </Card>
