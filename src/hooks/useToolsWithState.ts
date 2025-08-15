@@ -159,8 +159,12 @@ export function useToolsWithState(): ToolsWithStateResult {
           // Update local cache optimistically
           await mutateTools(optimisticData, false);
         }
-
-        // Raw usage endpoint removed – skip server call
+        const response = await fetch(`/api/tools/${toolSlug}/usage`, {
+          method: "POST",
+        });
+        if (!response.ok) {
+          throw new Error("Failed to record usage");
+        }
         await mutateTools();
         await mutate("/api/tools?popular=true");
       } catch (error) {
@@ -263,8 +267,12 @@ export function useToolWithUsage(slug: string) {
         };
         await mutateTool(optimisticData, false);
       }
-
-      // Raw usage endpoint removed – skip server call
+      const response = await fetch(`/api/tools/${slug}/usage`, {
+        method: "POST",
+      });
+      if (!response.ok) {
+        throw new Error("Failed to record usage");
+      }
       await mutateTool();
       await mutate("/api/tools?popular=true");
     } catch (error) {
