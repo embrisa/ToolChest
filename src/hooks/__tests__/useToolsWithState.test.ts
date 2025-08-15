@@ -131,8 +131,10 @@ describe("useToolsWithState", () => {
       await result.current.actions.recordUsage("t1");
     });
 
-    // No external fetch is triggered; ensure state updates occurred
-    expect(mutateMock).toHaveBeenCalled();
+    expect(fetchMock).toHaveBeenCalledWith("/api/tools/t1/usage", {
+      method: "POST",
+    });
+    expect(mutateMock).toHaveBeenCalledTimes(2);
     expect(mockMutate).toHaveBeenCalledWith("/api/tools?popular=true");
   });
 
@@ -298,9 +300,11 @@ describe("useToolsWithState", () => {
       await result.current.actions.recordUsage("t1");
     });
 
-    // No server call means no failure; optimistic update followed by sync
+    expect(fetchMock).toHaveBeenCalledWith("/api/tools/t1/usage", {
+      method: "POST",
+    });
     expect(mutateMock).toHaveBeenCalledTimes(2);
-    expect(consoleErrorSpy).not.toHaveBeenCalled();
+    expect(consoleErrorSpy).toHaveBeenCalled();
 
     consoleErrorSpy.mockRestore();
   });
