@@ -23,6 +23,7 @@ model Tool {
   updatedAt      DateTime        @updatedAt
   tags           ToolTag[]
   toolUsageStats ToolUsageStats?
+  dailyVisits    ToolDailyVisit[]
 }
 
 model Tag {
@@ -54,4 +55,18 @@ model ToolUsageStats {
   usageCount Int      @default(0)
   lastUsed   DateTime @default(now())
   tool       Tool     @relation(fields: [toolId], references: [id])
+}
+
+/// Tracks unique daily visits per tool using a salted hash of the IP for privacy
+model ToolDailyVisit {
+  id        String   @id @default(cuid())
+  toolId    String
+  visitDate DateTime
+  ipHash    String
+  createdAt DateTime @default(now())
+
+  tool Tool @relation(fields: [toolId], references: [id])
+
+  @@unique([toolId, visitDate, ipHash], name: "unique_tool_visit_per_ip_per_day")
+  @@index([visitDate])
 }

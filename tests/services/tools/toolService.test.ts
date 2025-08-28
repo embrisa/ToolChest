@@ -272,6 +272,52 @@ describe("ToolService integration", () => {
     });
   });
 
+  describe("recordUniqueDailyUsage", () => {
+    test("should increment once per IP per day", async () => {
+      const toolSlug = "base64";
+
+      const before = await prisma.tool.findUnique({
+        where: { slug: toolSlug },
+        include: { toolUsageStats: true },
+      });
+      const startUsage = before?.toolUsageStats?.usageCount ?? 0;
+
+      const res1 = await service.recordUniqueDailyUsage(toolSlug, "1.2.3.4");
+      const res2 = await service.recordUniqueDailyUsage(toolSlug, "1.2.3.4");
+
+      expect(res1.counted).toBe(true);
+      expect(res2.counted).toBe(false);
+
+      const after = await prisma.tool.findUnique({
+        where: { slug: toolSlug },
+        include: { toolUsageStats: true },
+      });
+      expect(after?.toolUsageStats?.usageCount).toBe(startUsage + 1);
+    });
+
+    test("should count different IPs separately on same day", async () => {
+      const toolSlug = "hash-generator";
+
+      const before = await prisma.tool.findUnique({
+        where: { slug: toolSlug },
+        include: { toolUsageStats: true },
+      });
+      const startUsage = before?.toolUsageStats?.usageCount ?? 0;
+
+      const a = await service.recordUniqueDailyUsage(toolSlug, "5.6.7.8");
+      const b = await service.recordUniqueDailyUsage(toolSlug, "9.10.11.12");
+
+      expect(a.counted).toBe(true);
+      expect(b.counted).toBe(true);
+
+      const after = await prisma.tool.findUnique({
+        where: { slug: toolSlug },
+        include: { toolUsageStats: true },
+      });
+      expect(after?.toolUsageStats?.usageCount).toBe(startUsage + 2);
+    });
+  });
+
   describe("getPopularTools", () => {
     beforeAll(async () => {
       // Seed popular tools

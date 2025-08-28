@@ -28,6 +28,10 @@ export interface IToolService {
   getAllTags(locale?: string): Promise<TagDTO[]>;
   getTagBySlug(slug: string, locale?: string): Promise<TagDTO | null>;
   recordToolUsage(toolSlug: string): Promise<void>;
+  recordUniqueDailyUsage(
+    toolSlug: string,
+    ipAddress: string,
+  ): Promise<{ counted: boolean }>;
   getPopularTools(limit: number, locale?: string): Promise<ToolDTO[]>;
   searchTools(query: string, locale?: string): Promise<ToolDTO[]>;
   getToolsPaginated(
@@ -272,6 +276,91 @@ export class ToolService extends BaseService implements IToolService {
     this.invalidateCache("allTools");
     this.invalidateCache(`toolBySlug:${toolSlug}`);
     this.invalidateCache("popularTools");
+  }
+
+  /**
+   * Increment usage only once per unique IP per UTC day.
+   * Uses a salted SHA-256 hash of the IP for privacy and stores a small dedup record.
+   */
+  async recordUniqueDailyUsage(
+    toolSlug: string,
+    ipAddress: string,
+  ): Promise<{ counted: boolean }> {
+    this.validateRequired({ toolSlug, ipAddress });
+
+    const tool = await this.prisma.tool.findUnique({
+      where: { slug: toolSlug, isActive: true },
+      select: { id: true },
+    });
+
+    if (!tool) {
+      console.warn(
+        `Attempted to record usage for non-existent or inactive tool: ${toolSlug}`,
+      );
+      return { counted: false };
+    }
+
+    // Compute start of current UTC day
+    const now = new Date();
+    const visitDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+
+    // Salted hash of IP for privacy (fallback to ADMIN_SECRET_TOKEN to avoid adding a hard requirement)
+    const salt =
+      process.env.USAGE_IP_HASH_SALT || process.env.ADMIN_SECRET_TOKEN || "default-salt";
+
+    // Lazy import crypto to avoid type issues; file has ts-nocheck
+    const crypto = await import("crypto");
+    const ipHash = crypto
+      .createHmac("sha256", salt)
+      .update(ipAddress)
+      .digest("hex");
+
+    // Try to create a unique visit; if it already exists, skip increment
+    try {
+      await this.prisma.toolDailyVisit.create({
+        data: {
+          toolId: tool.id,
+          visitDate,
+          ipHash,
+        },
+      });
+    } catch (e: any) {
+      // Prisma unique constraint violation -> already counted today for this IP
+      if (e?.code === "P2002") {
+        return { counted: false };
+      }
+      throw e;
+    }
+
+    // Count this unique visit
+    await this.prisma.toolUsageStats.upsert({
+      where: { toolId: tool.id },
+      create: {
+        toolId: tool.id,
+        usageCount: 1,
+        lastUsed: now,
+      },
+      update: {
+        usageCount: { increment: 1 },
+        lastUsed: now,
+      },
+    });
+
+    // Clear related caches
+    this.invalidateCache("allTools");
+    this.invalidateCache(`toolBySlug:${toolSlug}`);
+    this.invalidateCache("popularTools");
+
+    // Opportunistic cleanup: delete dedup rows older than 7 days (non-blocking)
+    this.prisma.toolDailyVisit
+      .deleteMany({
+        where: {
+          visitDate: { lt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) },
+        },
+      })
+      .catch(() => undefined);
+
+    return { counted: true };
   }
 
   async getPopularTools(
