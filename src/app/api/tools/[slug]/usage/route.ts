@@ -15,10 +15,10 @@ function getClientIP(request: NextRequest): string | null {
 
 export async function POST(
   _request: NextRequest,
-  { params }: { params: { slug: string } },
+  { params }: { params: Promise<{ slug: string }> },
 ) {
   try {
-    const { slug } = params;
+    const { slug } = await params;
     const toolService = serviceFactory.getToolService();
 
     // Count once per unique IP per day. If IP is unavailable, fall back to simple increment.
