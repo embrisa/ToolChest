@@ -126,10 +126,9 @@ export async function GET(
     });
 
     // Cache for 5 minutes for public data
-    response.headers.set(
-      "Cache-Control",
-      "public, max-age=300, stale-while-revalidate=600",
-    );
+    response.headers.set("Cache-Control", "no-store");
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
 
     return response;
   } catch (error) {

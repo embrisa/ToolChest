@@ -1,8 +1,19 @@
+import { mutate } from "swr";
+
 /**
  * Lightweight client-side helper for recording tool usage.
  * Falls back gracefully when the browser doesn't support newer APIs.
  */
 const USAGE_ENDPOINT = (slug: string) => `/api/tools/${slug}/usage`;
+
+const revalidateToolCaches = () => {
+  // Only attempt to revalidate on the client.
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  void mutate((key) => typeof key === "string" && key.startsWith("/api/tools"));
+};
 
 interface RecordUsageOptions {
   /**
@@ -44,6 +55,7 @@ export async function recordToolUsage(
         : undefined;
 
     if (navigator.sendBeacon(url, payload)) {
+      revalidateToolCaches();
       return;
     }
   }
@@ -63,6 +75,7 @@ export async function recordToolUsage(
             }
           : undefined,
       body: metadata !== undefined ? JSON.stringify(metadata) : undefined,
+      cache: "no-store",
     });
 
     if (!response.ok && process.env.NODE_ENV !== "production") {
@@ -77,5 +90,7 @@ export async function recordToolUsage(
         error,
       );
     }
+  } finally {
+    revalidateToolCaches();
   }
 }
