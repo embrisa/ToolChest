@@ -1,5 +1,7 @@
 import Papa from "papaparse";
+import type { UnparseObject } from "papaparse";
 import { js2xml, xml2js } from "xml-js";
+import type { ElementCompact } from "xml-js";
 import YAML from "js-yaml";
 import {
   DataFormat,
@@ -46,10 +48,12 @@ export class FormatConverterService {
           output = YAML.dump(data);
           break;
         case "xml":
-          output = js2xml(data as any, { compact: true, spaces: 2 });
+          output = js2xml(data as ElementCompact, { compact: true, spaces: 2 });
           break;
         case "csv":
-          output = Papa.unparse(data as any);
+          output = Papa.unparse(
+            data as UnparseObject<unknown> | UnparseObject<unknown>["data"],
+          );
           break;
         default:
           throw new Error(`Unsupported output format: ${to}`);

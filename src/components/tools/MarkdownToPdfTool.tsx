@@ -352,30 +352,6 @@ export function MarkdownToPdfTool() {
     tCommon,
   ]);
 
-  // Download PDF
-  const handleDownloadPdf = useCallback(() => {
-    if (!state.pdfResult?.pdfBlob) {
-      addAnnouncement("No PDF available to download");
-      return;
-    }
-
-    try {
-      const downloadOptions = markdownToPdfService.createDownloadOptions(
-        state.pdfResult.pdfBlob,
-        undefined,
-        state.pdfResult.metadata,
-      );
-
-      markdownToPdfService.downloadPdf(downloadOptions);
-      addAnnouncement(`PDF downloaded: ${downloadOptions.filename}`);
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : "Download failed";
-      setState((prev) => ({ ...prev, error: errorMessage }));
-      addAnnouncement(`Download failed: ${errorMessage}`);
-    }
-  }, [state.pdfResult, addAnnouncement]);
-
   // Handle styling option changes
   const handleStylingChange = useCallback(
     (updates: Partial<PdfStylingOptions>) => {
@@ -467,6 +443,14 @@ export function MarkdownToPdfTool() {
     },
     [addAnnouncement],
   );
+
+  const pdfDownloadOptions = state.pdfResult?.pdfBlob
+    ? markdownToPdfService.createDownloadOptions(
+        state.pdfResult.pdfBlob,
+        undefined,
+        state.pdfResult.metadata,
+      )
+    : null;
 
   return (
     <ErrorBoundary>
@@ -726,12 +710,12 @@ export function MarkdownToPdfTool() {
             <CopyExportBar
               value={null}
               rawValue={null}
-              filename={markdownToPdfService.createDownloadOptions(
-                state.pdfResult.pdfBlob,
-              ).filename}
+              filename={
+                pdfDownloadOptions?.filename || "tool-chest_markdown.pdf"
+              }
               mimeType="application/pdf"
-              onDownloadData={() => state.pdfResult?.pdfBlob || null}
-              disabled={!state.pdfResult?.pdfBlob}
+              onDownloadData={() => pdfDownloadOptions?.blob || null}
+              disabled={!pdfDownloadOptions}
               labels={{
                 copy: tCommon("ui.actions.copy"),
                 copyRaw: tCommon("ui.actions.copyRaw"),

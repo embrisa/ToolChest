@@ -1286,7 +1286,7 @@ export class FaviconGeneratorService {
   /**
    * Track usage analytics (privacy-compliant)
    */
-  static async trackUsage(data: FaviconUsageData): Promise<void> {
+  static async trackUsage(_data: FaviconUsageData): Promise<void> {
     // Usage tracking removed.
     return;
   }
@@ -1395,7 +1395,7 @@ export class FaviconGeneratorService {
   /**
    * Enhanced usage tracking with performance metrics
    */
-  static async trackUsageEnhanced(data: {
+  static async trackUsageEnhanced(_data: {
     fileSize: number;
     fileSizes?: number[];
     generatedSizes: number[];

@@ -135,5 +135,19 @@
         "Datenschutzorientiert"
       ]
     }
+  },
+  "tool": {
+    "themes": {
+      "default": "Standard",
+      "github": "GitHub",
+      "academic": "Akademisch",
+      "minimal": "Minimal",
+      "professional": "Professionell"
+    },
+    "pageSizes": {
+      "a4": "A4 (210 × 297 mm)",
+      "letter": "Letter (8,5 × 11 Zoll)",
+      "legal": "Legal (8,5 × 14 Zoll)"
+    }
   }
 }

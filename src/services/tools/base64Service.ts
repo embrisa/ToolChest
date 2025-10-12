@@ -816,7 +816,7 @@ export class Base64Service {
   /**
    * Track usage analytics (privacy-compliant)
    */
-  public static async trackUsage(usageData: {
+  public static async trackUsage(_usageData: {
     operation: "encode" | "decode";
     inputType: "text" | "file";
     variant?: "standard" | "url-safe";

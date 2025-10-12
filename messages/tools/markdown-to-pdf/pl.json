@@ -135,5 +135,19 @@
         "Prywatność przede wszystkim"
       ]
     }
+  },
+  "tool": {
+    "themes": {
+      "default": "Domyślny",
+      "github": "GitHub",
+      "academic": "Akademicki",
+      "minimal": "Minimalny",
+      "professional": "Profesjonalny"
+    },
+    "pageSizes": {
+      "a4": "A4 (210 × 297 mm)",
+      "letter": "Letter (8,5 × 11 cali)",
+      "legal": "Legal (8,5 × 14 cali)"
+    }
   }
 }

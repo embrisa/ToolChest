@@ -781,12 +781,15 @@ export function FaviconGeneratorTool() {
               }}
               filename={`tool-chest_favicons_${Date.now()}.zip`}
               mimeType="application/zip"
-              onDownloadData={() =>
-                FaviconGeneratorService.createZipPackage(
-                  state.result!.favicons,
-                  state.result!.manifestJson || undefined,
-                )
-              }
+              onDownloadData={() => {
+                if (!state.result?.favicons) {
+                  return undefined;
+                }
+                return FaviconGeneratorService.createZipPackage(
+                  state.result.favicons,
+                  state.result.manifestJson || undefined,
+                );
+              }}
               labels={{
                 copy: tCommon("ui.actions.copy"),
                 copyRaw: tCommon("ui.actions.copyRaw"),

@@ -135,5 +135,19 @@
         "Privacidade em primeiro lugar"
       ]
     }
+  },
+  "tool": {
+    "themes": {
+      "default": "Padrão",
+      "github": "GitHub",
+      "academic": "Acadêmico",
+      "minimal": "Minimalista",
+      "professional": "Profissional"
+    },
+    "pageSizes": {
+      "a4": "A4 (210 × 297 mm)",
+      "letter": "Carta (8,5 × 11 polegadas)",
+      "legal": "Ofício (8,5 × 14 polegadas)"
+    }
   }
 }

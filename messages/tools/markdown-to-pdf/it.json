@@ -135,5 +135,19 @@
         "Privacy prima di tutto"
       ]
     }
+  },
+  "tool": {
+    "themes": {
+      "default": "Predefinito",
+      "github": "GitHub",
+      "academic": "Accademico",
+      "minimal": "Minimale",
+      "professional": "Professionale"
+    },
+    "pageSizes": {
+      "a4": "A4 (210 × 297 mm)",
+      "letter": "Lettera (8,5 × 11 pollici)",
+      "legal": "Legale (8,5 × 14 pollici)"
+    }
   }
 }

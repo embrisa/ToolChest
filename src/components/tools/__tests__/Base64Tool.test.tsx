@@ -10,6 +10,7 @@ jest.mock("@/services/tools/base64Service", () => ({
     validateFile: jest.fn(),
     trackUsage: jest.fn(),
     generateDownload: jest.fn(),
+    generateFilename: jest.fn(),
   },
 }));
 
@@ -20,6 +21,7 @@ import { Base64Service } from "@/services/tools/base64Service";
 const mockEncode = Base64Service.encode as jest.Mock;
 const mockValidateFile = Base64Service.validateFile as jest.Mock;
 const mockTrackUsage = Base64Service.trackUsage as jest.Mock;
+const mockGenerateFilename = Base64Service.generateFilename as jest.Mock;
 
 describe("Base64Tool", () => {
   beforeEach(() => {
@@ -42,6 +44,7 @@ describe("Base64Tool", () => {
     });
 
     mockTrackUsage.mockResolvedValue(undefined);
+    mockGenerateFilename.mockReturnValue("base64-result.txt");
   });
 
   it("renders without crashing", () => {

@@ -134,9 +134,8 @@ async function seedTestDatabase() {
       }),
     ]);
 
-    // Create test tools
-    const testTools = await Promise.all([
-      prisma.tool.create({
+    const toolDefinitions = [
+      {
         data: {
           nameKey: "tools.base64.name",
           toolKey: "base64",
@@ -144,12 +143,12 @@ async function seedTestDatabase() {
           descriptionKey: "tools.base64.description",
           iconClass: "hero-document-text",
           displayOrder: 1,
-          usageCount: 150,
           isActive: true,
           isFeatured: true,
         },
-      }),
-      prisma.tool.create({
+        usageCount: 150,
+      },
+      {
         data: {
           nameKey: "tools.hash-generator.name",
           toolKey: "hash-generator",
@@ -157,12 +156,12 @@ async function seedTestDatabase() {
           descriptionKey: "tools.hash-generator.description",
           iconClass: "hero-key",
           displayOrder: 2,
-          usageCount: 89,
           isActive: true,
           isFeatured: false,
         },
-      }),
-      prisma.tool.create({
+        usageCount: 89,
+      },
+      {
         data: {
           nameKey: "tools.favicon-generator.name",
           toolKey: "favicon-generator",
@@ -170,12 +169,12 @@ async function seedTestDatabase() {
           descriptionKey: "tools.favicon-generator.description",
           iconClass: "hero-photo",
           displayOrder: 3,
-          usageCount: 67,
           isActive: true,
           isFeatured: false,
         },
-      }),
-      prisma.tool.create({
+        usageCount: 67,
+      },
+      {
         data: {
           nameKey: "tools.markdown-to-pdf.name",
           toolKey: "markdown-to-pdf",
@@ -183,12 +182,17 @@ async function seedTestDatabase() {
           descriptionKey: "tools.markdown-to-pdf.description",
           iconClass: "hero-document-duplicate",
           displayOrder: 4,
-          usageCount: 45,
           isActive: true,
           isFeatured: false,
         },
-      }),
-    ]);
+        usageCount: 45,
+      },
+    ];
+
+    // Create test tools
+    const testTools = await Promise.all(
+      toolDefinitions.map((tool) => prisma.tool.create({ data: tool.data })),
+    );
 
     // Create tool-tag relationships
     await Promise.all([
@@ -224,11 +228,11 @@ async function seedTestDatabase() {
 
     // Create test usage statistics
     await Promise.all(
-      testTools.map((tool) =>
+      testTools.map((tool, index) =>
         prisma.toolUsageStats.create({
           data: {
             toolId: tool.id,
-            usageCount: tool.usageCount,
+            usageCount: toolDefinitions[index].usageCount,
             lastUsed: new Date(),
           },
         }),

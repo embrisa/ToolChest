@@ -135,5 +135,19 @@
         "Confidentialité prioritaire"
       ]
     }
+  },
+  "tool": {
+    "themes": {
+      "default": "Par défaut",
+      "github": "GitHub",
+      "academic": "Académique",
+      "minimal": "Minimal",
+      "professional": "Professionnel"
+    },
+    "pageSizes": {
+      "a4": "A4 (210 × 297 mm)",
+      "letter": "Lettre (8,5 × 11 pouces)",
+      "legal": "Légal (8,5 × 14 pouces)"
+    }
   }
 }

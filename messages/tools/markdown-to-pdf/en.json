@@ -125,5 +125,19 @@
         "Privacy-first"
       ]
     }
+  },
+  "tool": {
+    "themes": {
+      "default": "Default",
+      "github": "GitHub",
+      "academic": "Academic",
+      "minimal": "Minimal",
+      "professional": "Professional"
+    },
+    "pageSizes": {
+      "a4": "A4 (210 × 297 mm)",
+      "letter": "Letter (8.5 × 11 in)",
+      "legal": "Legal (8.5 × 14 in)"
+    }
   }
 }

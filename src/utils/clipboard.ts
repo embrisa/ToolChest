@@ -12,7 +12,7 @@ export async function copyText(text: string): Promise<CopyResult> {
       await navigator.clipboard.writeText(text);
       return { success: true, message: "Copied to clipboard", method: "modern" };
     }
-  } catch (e) {
+  } catch {
     // fall through to fallback
   }
 
@@ -45,4 +45,3 @@ export async function copyJSON(value: unknown, pretty = true): Promise<CopyResul
     return { success: false, message: `Failed to copy JSON: ${msg}`, method: "unknown" };
   }
 }
-

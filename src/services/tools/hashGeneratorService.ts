@@ -739,7 +739,7 @@ export class HashGeneratorService {
   /**
    * Track usage statistics (privacy-compliant)
    */
-  static async trackUsage(metrics: HashUsageMetrics): Promise<void> {
+  static async trackUsage(_metrics: HashUsageMetrics): Promise<void> {
     // Raw usage tracking removed.
     return;
   }

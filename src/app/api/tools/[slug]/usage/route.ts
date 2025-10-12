@@ -1,12 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import { serviceFactory } from "@/services/core/serviceFactory";
 
-export async function POST(
-  _request: NextRequest,
-  { params }: { params: { slug: string } },
-) {
+export async function POST(request: NextRequest) {
   try {
-    const { slug } = params;
+    const segments = request.nextUrl.pathname.split("/").filter(Boolean);
+    const slug = segments.at(-2);
+
+    if (!slug) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Missing tool slug",
+          timestamp: new Date().toISOString(),
+        },
+        { status: 400 },
+      );
+    }
+
     const toolService = serviceFactory.getToolService();
     await toolService.recordToolUsage(slug);
 

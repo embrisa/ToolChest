@@ -135,5 +135,19 @@
         "Önce Gizlilik"
       ]
     }
+  },
+  "tool": {
+    "themes": {
+      "default": "Varsayılan",
+      "github": "GitHub",
+      "academic": "Akademik",
+      "minimal": "Minimal",
+      "professional": "Profesyonel"
+    },
+    "pageSizes": {
+      "a4": "A4 (210 × 297 mm)",
+      "letter": "Letter (8,5 × 11 inç)",
+      "legal": "Legal (8,5 × 14 inç)"
+    }
   }
 }

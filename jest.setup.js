@@ -156,6 +156,12 @@ if (typeof window !== "undefined") {
     })),
   });
 
+  // Ensure tests run in a secure context so clipboard API is available
+  Object.defineProperty(window, "isSecureContext", {
+    value: true,
+    configurable: true,
+  });
+
   // Mock scrollTo
   Object.defineProperty(window, "scrollTo", {
     value: jest.fn(),
@@ -163,8 +169,8 @@ if (typeof window !== "undefined") {
   });
 }
 
-// Mock clipboard API (only if not already defined)
-if (!navigator.clipboard) {
+// Mock clipboard API (only if a navigator environment exists and clipboard is missing)
+if (typeof navigator !== "undefined" && !navigator.clipboard) {
   Object.defineProperty(navigator, "clipboard", {
     value: {
       writeText: jest.fn(() => Promise.resolve()),

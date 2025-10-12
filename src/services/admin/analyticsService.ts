@@ -588,6 +588,7 @@ export class AnalyticsService extends BaseService {
         cacheKey,
         async () => {
           const timeRange = filter?.timeRange || this.getDefaultTimeRange();
+          const includeInactive = Boolean(filter?.includeInactive);
           const toolFilter = filter?.toolIds
             ? { id: { in: filter.toolIds } }
             : {};
@@ -602,25 +603,30 @@ export class AnalyticsService extends BaseService {
             },
           });
 
-          const analytics: ToolUsageAnalytics[] = await Promise.all(
-            tools.map(async (tool) => {
-              const usageCount = tool.toolUsageStats?.usageCount || 0;
+          const analytics: ToolUsageAnalytics[] = tools
+            .map((tool) => {
+              const lastUsed = tool.toolUsageStats?.lastUsed ?? null;
+              const usageCount = this.isWithinRange(lastUsed, timeRange)
+                ? tool.toolUsageStats?.usageCount || 0
+                : 0;
               const trend = { daily: [], weekly: [], monthly: [] };
               const growth = this.calculateGrowthRates(trend);
 
               return {
                 toolId: tool.id,
-                toolName: tool.name,
+                toolName: this.getToolDisplayName(
+                  tool as typeof tool & { name?: string | null },
+                ),
                 toolSlug: tool.slug,
                 usageCount,
                 uniqueUsers: 0,
                 averageSessionTime: 0,
-                lastUsed: tool.toolUsageStats?.lastUsed || new Date(0),
+                lastUsed: lastUsed || new Date(0),
                 trend,
                 growth,
               };
-            }),
-          );
+            })
+            .filter((entry) => includeInactive || entry.usageCount > 0);
 
           return analytics;
         },
@@ -800,7 +806,10 @@ export class AnalyticsService extends BaseService {
     return tools
       .map((tool) => ({
         toolId: tool.id,
-        name: (tool as any).name ?? tool.nameKey ?? "Unknown", // fallback keys
+        name:
+          this.getToolDisplayName(
+            tool as typeof tool & { name?: string | null },
+          ) ?? "Unknown",
         usageCount: tool.toolUsageStats?.usageCount || 0,
         growthRate: 0, // not tracked without raw events
       }))
@@ -809,8 +818,8 @@ export class AnalyticsService extends BaseService {
   }
 
   private async getRecentActivity(
-    timeRange: AnalyticsTimeRange,
-    limit: number,
+    _timeRange: AnalyticsTimeRange,
+    _limit: number,
   ) {
     // Raw recent activity feed removed with ToolUsage.
     return [];
@@ -858,7 +867,10 @@ export class AnalyticsService extends BaseService {
     };
   }
 
-  private async getUsageTrend(toolId: string, timeRange: AnalyticsTimeRange) {
+  private async getUsageTrend(
+    _toolId: string,
+    _timeRange: AnalyticsTimeRange,
+  ) {
     // Detailed trends require raw events which are no longer stored.
     return {
       daily: [],
@@ -868,8 +880,8 @@ export class AnalyticsService extends BaseService {
   }
 
   private async getUniqueUsersCount(
-    toolId: string,
-    timeRange: AnalyticsTimeRange,
+    _toolId: string,
+    _timeRange: AnalyticsTimeRange,
   ): Promise<number> {
     // No longer track per-user events. Return 0 or estimate based on stats.
     return 0;
@@ -887,9 +899,15 @@ export class AnalyticsService extends BaseService {
     timeRange: AnalyticsTimeRange,
   ): Promise<AnalyticsChart> {
     // Raw usage per day no longer available; return empty chart.
+    const periodLabel =
+      timeRange.period === "week"
+        ? "Weekly"
+        : timeRange.period === "month"
+          ? "Monthly"
+          : "Daily";
     return {
       type: "line",
-      title: "Daily Usage Trend (not available)",
+      title: `${periodLabel} Usage Trend (data unavailable)`,
       data: [],
       options: {
         colors: ["#3B82F6"],
@@ -935,6 +953,9 @@ export class AnalyticsService extends BaseService {
 
     const tagUsage: Record<string, number> = {};
     tools.forEach((tool) => {
+      if (!this.isWithinRange(tool.toolUsageStats?.lastUsed ?? null, timeRange)) {
+        return;
+      }
       const tag = tool.tags[0]?.tag.name || "Untagged";
       tagUsage[tag] =
         (tagUsage[tag] || 0) + (tool.toolUsageStats?.usageCount || 0);
@@ -978,6 +999,39 @@ export class AnalyticsService extends BaseService {
     }
 
     return labels;
+  }
+
+  private isWithinRange(
+    date: Date | null,
+    range: AnalyticsTimeRange,
+  ): boolean {
+    if (!date) {
+      return false;
+    }
+    const timestamp = date.getTime();
+    return (
+      timestamp >= range.start.getTime() && timestamp <= range.end.getTime()
+    );
+  }
+
+  private getToolDisplayName(
+    tool: {
+      nameKey: string;
+      toolKey: string;
+      slug: string;
+    } & { name?: string | null },
+  ): string {
+    const name = typeof tool.name === "string" ? tool.name.trim() : "";
+    if (name) {
+      return name;
+    }
+    if (tool.nameKey) {
+      return tool.nameKey;
+    }
+    if (tool.toolKey) {
+      return tool.toolKey;
+    }
+    return tool.slug;
   }
 
   /**

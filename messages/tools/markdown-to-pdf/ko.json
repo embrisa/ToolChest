@@ -135,5 +135,19 @@
         "프라이버시 우선"
       ]
     }
+  },
+  "tool": {
+    "themes": {
+      "default": "기본",
+      "github": "GitHub",
+      "academic": "학술",
+      "minimal": "미니멀",
+      "professional": "전문"
+    },
+    "pageSizes": {
+      "a4": "A4 (210 × 297 mm)",
+      "letter": "레터 (8.5 × 11 인치)",
+      "legal": "리갈 (8.5 × 14 인치)"
+    }
   }
 }

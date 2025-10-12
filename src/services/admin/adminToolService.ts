@@ -66,8 +66,12 @@ export class AdminToolService extends BaseService implements IAdminToolService {
       }
 
       // Build order by clause
-      const orderBy: Prisma.ToolOrderByWithRelationInput = {};
-      orderBy[sortOptions.field] = sortOptions.direction;
+      const orderBy: Prisma.ToolOrderByWithRelationInput =
+        sortOptions.field === "usageCount"
+          ? { toolUsageStats: { usageCount: sortOptions.direction } }
+          : ({
+              [sortOptions.field]: sortOptions.direction,
+            } as Prisma.ToolOrderByWithRelationInput);
 
       const tools = await this.prisma.tool.findMany({
         where,

@@ -3,12 +3,12 @@
 // objects exposing a `variable` class name used by our layout.
 
 type FontReturn = { className?: string; variable?: string };
+type FontOptions = Record<string, unknown>;
 
-export function Inter(_opts?: any): FontReturn {
+export function Inter(_opts?: FontOptions): FontReturn {
   return { className: "", variable: "" };
 }
 
-export function JetBrains_Mono(_opts?: any): FontReturn {
+export function JetBrains_Mono(_opts?: FontOptions): FontReturn {
   return { className: "", variable: "" };
 }
-

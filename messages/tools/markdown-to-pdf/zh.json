@@ -135,5 +135,19 @@
         "隐私优先"
       ]
     }
+  },
+  "tool": {
+    "themes": {
+      "default": "默认",
+      "github": "GitHub",
+      "academic": "学术",
+      "minimal": "极简",
+      "professional": "专业"
+    },
+    "pageSizes": {
+      "a4": "A4 (210 × 297 毫米)",
+      "letter": "信纸 (8.5 × 11 英寸)",
+      "legal": "法律纸 (8.5 × 14 英寸)"
+    }
   }
 }

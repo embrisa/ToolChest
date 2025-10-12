@@ -90,7 +90,7 @@ export default async function ToolPage({
   }
 
   // Fetch tool data (optional). If DB isn't available or data missing, we continue with translations only.
-  const toolData = await StaticDataService.getToolData(slug, locale);
+  await StaticDataService.getToolData(slug, locale);
 
   // Get translations
   const tPage = await getTranslations({

@@ -1,5 +1,6 @@
 import { renderHook, act } from "@testing-library/react";
 import { useClipboard } from "../useClipboard";
+import * as clipboardModule from "@/utils/clipboard";
 
 jest.mock("@/utils/clipboard", () => ({
   copyText: jest.fn(),
@@ -7,15 +8,16 @@ jest.mock("@/utils/clipboard", () => ({
 }));
 
 describe("useClipboard hook", () => {
+  const mockedClipboard = jest.mocked(clipboardModule);
+
   beforeEach(() => {
     jest.clearAllMocks();
-    const ClipboardModule = require("@/utils/clipboard");
-    (ClipboardModule.copyText as jest.Mock).mockResolvedValue({
+    mockedClipboard.copyText.mockResolvedValue({
       success: true,
       message: "Copied to clipboard",
       method: "modern",
     });
-    (ClipboardModule.copyJSON as jest.Mock).mockResolvedValue({
+    mockedClipboard.copyJSON.mockResolvedValue({
       success: true,
       message: "Copied to clipboard",
       method: "modern",
@@ -41,13 +43,12 @@ describe("useClipboard hook", () => {
   });
 
   it("maps fallback/error results from util", async () => {
-    const ClipboardModule = require("@/utils/clipboard");
-    (ClipboardModule.copyText as jest.Mock).mockResolvedValueOnce({
+    mockedClipboard.copyText.mockResolvedValueOnce({
       success: true,
       message: "Copied to clipboard",
       method: "fallback",
     });
-    (ClipboardModule.copyJSON as jest.Mock).mockResolvedValueOnce({
+    mockedClipboard.copyJSON.mockResolvedValueOnce({
       success: false,
       message: "Failed to copy JSON: Invalid JSON",
       method: "unknown",

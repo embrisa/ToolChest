@@ -245,8 +245,6 @@ export class MarkdownToPdfService {
   ): Promise<jsPDF> {
     // Calculate a chunk height that equals one PDF page of content (in pixels)
     const dims = PDF_FORMAT_DIMENSIONS[stylingOptions.format];
-    const pdfWidthMm =
-      stylingOptions.orientation === "landscape" ? dims.height : dims.width;
     const pdfHeightMm =
       stylingOptions.orientation === "landscape" ? dims.width : dims.height;
 
@@ -1416,7 +1414,8 @@ export class MarkdownToPdfService {
       align: "left" | "center" | "right" = "center",
     ) => {
       if (!text) return;
-      const prevSize = (pdf as any).getFontSize?.() ?? 12;
+      const prevSize =
+        typeof pdf.getFontSize === "function" ? pdf.getFontSize() : 12;
       const size =
         options.pageNumbers?.fontSize ||
         options.header?.fontSize ||
