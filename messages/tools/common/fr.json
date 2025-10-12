@@ -17,6 +17,9 @@
     "actions": {
       "process": "Traiter",
       "copy": "Copier le résultat",
+      "copyRaw": "Copier brut",
+      "copyJSON": "Copier JSON",
+      "pasteFromClipboard": "Coller depuis le presse-papiers",
       "download": "Télécharger",
       "upload": "Téléverser",
       "clear": "Effacer",

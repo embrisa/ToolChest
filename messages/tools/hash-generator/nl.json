@@ -34,12 +34,12 @@
     "md5": {
       "title": "MD5",
       "description": "128-bits hashfunctie. Snel maar niet cryptografisch veilig. Alleen voor checksums gebruiken.",
-      "badge": ""
+      "badge": "Verouderd"
     },
     "sha1": {
       "title": "SHA-1",
       "description": "160-bits hashfunctie. Verouderd algoritme, gebruik SHA-256+ voor beveiligingstoepassingen.",
-      "badge": ""
+      "badge": "Verouderd"
     },
     "sha256": {
       "title": "SHA-256",
@@ -49,7 +49,7 @@
     "sha512": {
       "title": "SHA-512",
       "description": "512-bits hashfunctie. Maximale beveiliging voor gevoelige data en kritieke toepassingen.",
-      "badge": ""
+      "badge": "Sterk"
     }
   },
   "info": {

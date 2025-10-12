@@ -744,42 +744,6 @@ export class HashGeneratorService {
     return;
   }
 
-  /**
-   * Enhanced copy to clipboard with better error handling and accessibility
-   */
-  static async copyToClipboard(
-    text: string,
-  ): Promise<{ success: boolean; message: string }> {
-    try {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(text);
-        return { success: true, message: "Hash copied to clipboard" };
-      } else {
-        // Enhanced fallback for older browsers or non-secure contexts
-        const textArea = document.createElement("textarea");
-        textArea.value = text;
-        textArea.style.position = "fixed";
-        textArea.style.left = "-999999px";
-        textArea.style.top = "-999999px";
-        textArea.setAttribute("readonly", "");
-        textArea.setAttribute("aria-hidden", "true");
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-
-        const successful = document.execCommand("copy");
-        document.body.removeChild(textArea);
-
-        if (successful) {
-          return { success: true, message: "Hash copied to clipboard" };
-        } else {
-          throw new Error("Copy command failed");
-        }
-      }
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : "Copy failed";
-      return { success: false, message: `Failed to copy: ${errorMessage}` };
-    }
-  }
+  // Note: Service-level clipboard helpers removed.
+  // Use `useClipboard` or `@/utils/clipboard` directly in UI components.
 }

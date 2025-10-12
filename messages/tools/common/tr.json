@@ -17,6 +17,9 @@
     "actions": {
       "process": "İşle",
       "copy": "Sonucu Kopyala",
+      "copyRaw": "Ham veriyi kopyala",
+      "copyJSON": "JSON'u kopyala",
+      "pasteFromClipboard": "Panodan yapıştır",
       "download": "İndir",
       "upload": "Yükle",
       "clear": "Temizle",

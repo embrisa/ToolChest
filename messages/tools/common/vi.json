@@ -17,6 +17,9 @@
     "actions": {
       "process": "Xử lý",
       "copy": "Sao chép kết quả",
+      "copyRaw": "Sao chép văn bản thô",
+      "copyJSON": "Sao chép JSON",
+      "pasteFromClipboard": "Dán từ clipboard",
       "download": "Tải xuống",
       "upload": "Tải lên",
       "clear": "Xóa",

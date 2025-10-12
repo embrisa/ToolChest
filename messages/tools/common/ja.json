@@ -17,6 +17,9 @@
     "actions": {
       "process": "プロセス",
       "copy": "結果をコピーします",
+      "copyRaw": "生テキストをコピー",
+      "copyJSON": "JSONをコピー",
+      "pasteFromClipboard": "クリップボードから貼り付け",
       "download": "ダウンロード",
       "upload": "アップロード",
       "clear": "クリア",

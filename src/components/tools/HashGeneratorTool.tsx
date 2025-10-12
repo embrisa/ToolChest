@@ -14,13 +14,13 @@ import {
   AlertList,
   ResultsPanel,
   ResultBadge,
+  CopyExportBar,
 } from "@/components/ui";
 import { HashGeneratorService } from "@/services/tools/hashGeneratorService";
 import {
   HashState,
   HashResult,
   HashAlgorithm,
-  ClipboardResult,
   HASH_ALGORITHMS,
   ALGORITHM_INFO,
 } from "@/types/tools/hashGenerator";
@@ -50,7 +50,7 @@ export function HashGeneratorTool() {
   });
 
   const [dragActive, setDragActive] = useState(false);
-  const [copySuccess, setCopySuccess] = useState<ClipboardResult | null>(null);
+  // Copy handled via CopyExportBar; legacy copy state removed
   const [announcement, setAnnouncement] = useState<A11yAnnouncement | null>(
     null,
   );
@@ -398,39 +398,7 @@ export function HashGeneratorTool() {
     [handleFileSelect, announceToScreenReader],
   );
 
-  // Enhanced copy to clipboard with accessibility feedback
-  const handleCopy = useCallback(async () => {
-    // Get all successful hash results
-    const allHashes = HASH_ALGORITHMS.filter(
-      (algorithm) =>
-        state.results[algorithm]?.success && state.results[algorithm]?.hash,
-    )
-      .map((algorithm) => {
-        const result = state.results[algorithm];
-        return `${algorithm}: ${result?.hash}`;
-      })
-      .join("\n\n");
-
-    if (!allHashes) return;
-
-    const result = await HashGeneratorService.copyToClipboard(allHashes);
-    setCopySuccess({
-      success: result.success,
-      message: result.message,
-      timestamp: Date.now(),
-    });
-
-    setAnnouncement(
-      announceToScreenReader(
-        result.message,
-        result.success ? "polite" : "assertive",
-      ),
-    );
-
-    if (result.success) {
-      setTimeout(() => setCopySuccess(null), 3000);
-    }
-  }, [state.results, announceToScreenReader]);
+  // Copy is provided by CopyExportBar
 
   // Clear file input
   const handleClearFile = useCallback(() => {
@@ -896,11 +864,6 @@ export function HashGeneratorTool() {
             .join("\n\n") || ""
         }
         isProcessing={state.isProcessing}
-        onCopy={handleCopy}
-        copySuccess={
-          copySuccess?.success && copySuccess.message.includes("copied")
-        }
-        copyLabel="Copy All Hashes"
         placeholder={
           state.isProcessing
             ? "Generating hash values..."
@@ -964,15 +927,52 @@ export function HashGeneratorTool() {
         rows={6}
         className="animate-fade-in-up"
       >
-        {/* Copy Success Feedback */}
-        {copySuccess && (
-          <Alert
-            variant={copySuccess.success ? "success" : "error"}
-            className="animate-fade-in"
-          >
-            {copySuccess.message}
-          </Alert>
-        )}
+        {/* Copy actions are handled by CopyExportBar */}
+        <div className="mt-4">
+          <CopyExportBar
+            value={
+              HASH_ALGORITHMS.filter(
+                (algorithm) =>
+                  state.results[algorithm]?.success &&
+                  state.results[algorithm]?.hash,
+              )
+                .map((algorithm) => {
+                  const result = state.results[algorithm];
+                  return `${algorithm}: ${result?.hash}`;
+                })
+                .join("\n\n") || ""
+            }
+            rawValue={
+              HASH_ALGORITHMS.filter(
+                (algorithm) =>
+                  state.results[algorithm]?.success &&
+                  state.results[algorithm]?.hash,
+              )
+                .map((algorithm) => state.results[algorithm]?.hash || "")
+                .join("\n") || ""
+            }
+            jsonValue={(() => {
+              const obj: Record<string, string> = {};
+              for (const algo of HASH_ALGORITHMS) {
+                const r = state.results[algo];
+                if (r?.success && r.hash) obj[algo] = r.hash;
+              }
+              return Object.keys(obj).length ? obj : undefined;
+            })()}
+            filename="hashes.txt"
+            mimeType="text/plain;charset=utf-8"
+            labels={{
+              copy: tCommon("ui.actions.copy"),
+              copyRaw: tCommon("ui.actions.copyRaw"),
+              copyJSON: tCommon("ui.actions.copyJSON"),
+              download: tCommon("ui.actions.download"),
+              copied: tCommon("ui.status.copied"),
+            }}
+            onAnnounce={(msg, kind) =>
+              setAnnouncement(announceToScreenReader(msg, kind))
+            }
+          />
+        </div>
       </ResultsPanel>
     </div>
   );

@@ -115,12 +115,7 @@ export interface Base64DownloadOptions {
 /**
  * Clipboard operation result with accessibility
  */
-export interface ClipboardResult {
-  success: boolean;
-  method: "modern" | "fallback" | "failed";
-  message: string;
-  announceToScreenReader?: string;
-}
+// Deprecated clipboard types removed; use `@/utils/clipboard` results instead.
 
 /**
  * Base64 usage statistics

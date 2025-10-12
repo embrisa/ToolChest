@@ -34,12 +34,12 @@
     "md5": {
       "title": "MD5",
       "description": "Hàm băm 128-bit. Nhanh nhưng không an toàn về mật mã. Chỉ sử dụng cho checksum.",
-      "badge": ""
+      "badge": "Lỗi thời"
     },
     "sha1": {
       "title": "SHA-1",
       "description": "Hàm băm 160-bit. Thuật toán kế thừa, sử dụng SHA-256+ cho các ứng dụng bảo mật.",
-      "badge": ""
+      "badge": "Lỗi thời"
     },
     "sha256": {
       "title": "SHA-256",
@@ -49,7 +49,7 @@
     "sha512": {
       "title": "SHA-512",
       "description": "Hàm băm 512-bit. Bảo mật tối đa cho dữ liệu nhạy cảm và ứng dụng quan trọng.",
-      "badge": ""
+      "badge": "Mạnh"
     }
   },
   "info": {

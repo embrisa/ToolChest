@@ -34,12 +34,12 @@
     "md5": {
       "title": "MD5",
       "description": "128 位哈希函数。速度快但不安全，仅用于校验和。",
-      "badge": ""
+      "badge": "已弃用"
     },
     "sha1": {
       "title": "SHA-1",
       "description": "160 位哈希函数。属于遗留算法，安全场景请使用 SHA-256 及以上。",
-      "badge": ""
+      "badge": "已弃用"
     },
     "sha256": {
       "title": "SHA-256",
@@ -49,7 +49,7 @@
     "sha512": {
       "title": "SHA-512",
       "description": "512 位哈希函数。为敏感数据和关键应用提供最高安全性。",
-      "badge": ""
+      "badge": "高强度"
     }
   },
   "info": {

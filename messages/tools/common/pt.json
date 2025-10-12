@@ -17,6 +17,9 @@
     "actions": {
       "process": "Processar",
       "copy": "Copiar Resultado",
+      "copyRaw": "Copiar bruto",
+      "copyJSON": "Copiar JSON",
+      "pasteFromClipboard": "Colar da área de transferência",
       "download": "Baixar",
       "upload": "Enviar",
       "clear": "Limpar",

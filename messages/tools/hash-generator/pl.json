@@ -34,12 +34,12 @@
     "md5": {
       "title": "MD5",
       "description": "128-bitowa funkcja skrótu. Szybka, ale kryptograficznie niebezpieczna. Używaj tylko do sum kontrolnych.",
-      "badge": ""
+      "badge": "Przestarzały"
     },
     "sha1": {
       "title": "SHA-1",
       "description": "160-bitowa funkcja skrótu. Przestarzały algorytm, użyj SHA-256+ do zastosowań bezpieczeństwa.",
-      "badge": ""
+      "badge": "Przestarzały"
     },
     "sha256": {
       "title": "SHA-256",
@@ -49,7 +49,7 @@
     "sha512": {
       "title": "SHA-512",
       "description": "512-bitowa funkcja skrótu. Maksymalne bezpieczeństwo dla wrażliwych danych i krytycznych aplikacji.",
-      "badge": ""
+      "badge": "Silny"
     }
   },
   "info": {

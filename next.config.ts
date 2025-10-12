@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
+import path from "path";
 
 const nextConfig: NextConfig = {
   /* Performance Optimizations */
@@ -41,6 +42,16 @@ const nextConfig: NextConfig = {
 
   // Compression and output optimization
   compress: true,
+
+  // Conditionally skip lint/type errors during builds for E2E runs
+  eslint: {
+    ignoreDuringBuilds:
+      process.env.NODE_ENV === "test" || process.env.DISABLE_LINT_BUILD === "1",
+  },
+  typescript: {
+    ignoreBuildErrors:
+      process.env.NODE_ENV === "test" || process.env.DISABLE_TYPES_BUILD === "1",
+  },
 
   // Headers for better caching and security
   async headers() {
@@ -89,22 +100,40 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  // Enable bundle analyzer in development
-  ...(process.env.ANALYZE === "true" && {
-    webpack: (config: any) => {
-      if (process.env.ANALYZE === "true") {
-        const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-        config.plugins.push(
-          new BundleAnalyzerPlugin({
-            analyzerMode: "server",
-            analyzerPort: 8888,
-            openAnalyzer: true,
-          }),
-        );
-      }
-      return config;
-    },
-  }),
+  // Webpack customizations
+  webpack: (config: any) => {
+    // Offline Google Fonts during test/CI runs to avoid network fetches
+    if (process.env.OFFLINE_FONTS === "1") {
+      config.resolve = config.resolve || {};
+      config.resolve.alias = config.resolve.alias || {};
+      // Stub both the next/font/google JS entry and its generated CSS target
+      config.resolve.alias["next/font/google"] = path.resolve(
+        __dirname,
+        "src/test/stubs/next-font-google.ts",
+      );
+      config.resolve.alias["next/font/google/target.css"] = path.resolve(
+        __dirname,
+        "src/test/stubs/next-font-google.css",
+      );
+      // Also stub our module indirection if referenced
+      config.resolve.alias["@/app/fonts"] = path.resolve(
+        __dirname,
+        "src/test/stubs/fonts.ts",
+      );
+    }
+    // Enable bundle analyzer in development when ANALYZE=true
+    if (process.env.ANALYZE === "true") {
+      const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+      config.plugins.push(
+        new BundleAnalyzerPlugin({
+          analyzerMode: "server",
+          analyzerPort: 8888,
+          openAnalyzer: true,
+        }),
+      );
+    }
+    return config;
+  },
 
   // Output configuration for better performance
   output: "standalone",

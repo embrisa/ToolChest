@@ -14,18 +14,17 @@ import {
   AlertList,
   Loading,
   TextareaLoadingWrapper,
+  ImportPanel,
+  CopyExportBar,
+  FileInfo,
 } from "@/components/ui";
 import { Base64Service } from "@/services/tools/base64Service";
-import {
-  Base64State,
-  Base64Result,
-  A11yAnnouncement,
-  ClipboardResult,
-} from "@/types/tools/base64";
+import { Base64State, Base64Result, A11yAnnouncement } from "@/types/tools/base64";
 import { cn } from "@/utils";
 
 export function Base64Tool() {
   const tCommon = useTranslations("tools.common");
+  const tUnits = useTranslations("common");
   const tBase64 = useTranslations("tools.base64");
 
   const [state, setState] = useState<Base64State>({
@@ -42,14 +41,11 @@ export function Base64Tool() {
     validationErrors: [],
   });
 
-  const [dragActive, setDragActive] = useState(false);
-  const [copySuccess, setCopySuccess] = useState<ClipboardResult | null>(null);
   const [announcement, setAnnouncement] = useState<A11yAnnouncement | null>(
     null,
   );
 
   const { announceToScreenReader } = useAccessibilityAnnouncements();
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const stateRef = useRef(state);
   const lastProcessedInputRef = useRef<{
     inputType: string;
@@ -305,84 +301,7 @@ export function Base64Tool() {
     [announceToScreenReader, tCommon],
   );
 
-  // Enhanced drag and drop handlers with accessibility
-  const handleDrag = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.type === "dragenter" || e.type === "dragover") {
-      setDragActive(true);
-    } else if (e.type === "dragleave") {
-      setDragActive(false);
-    }
-  }, []);
-
-  const handleDrop = useCallback(
-    (e: React.DragEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-      setDragActive(false);
-
-      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-        handleFileSelect(e.dataTransfer.files[0]);
-      } else {
-        setAnnouncement(
-          announceToScreenReader(
-            "No valid file found in drop operation",
-            "assertive",
-          ),
-        );
-      }
-    },
-    [handleFileSelect, announceToScreenReader],
-  );
-
-  // Enhanced copy to clipboard with accessibility feedback
-  const handleCopy = useCallback(async () => {
-    if (!state.result?.data) return;
-
-    const result = await Base64Service.copyToClipboard(state.result.data);
-    setCopySuccess(result);
-
-    setAnnouncement(
-      announceToScreenReader(
-        result.announceToScreenReader || result.message,
-        result.success ? "polite" : "assertive",
-      ),
-    );
-
-    if (result.success) {
-      setTimeout(() => setCopySuccess(null), 3000);
-    }
-  }, [state.result, announceToScreenReader]);
-
-  // Download result with accessibility feedback
-  const handleDownload = useCallback(() => {
-    if (!state.result?.data) return;
-
-    try {
-      const filename = Base64Service.generateFilename(
-        state.mode,
-        state.result.filename || state.fileInput?.name,
-      );
-
-      Base64Service.generateDownload({
-        content: state.result.data,
-        filename,
-        contentType: "text/plain",
-      });
-
-      setAnnouncement(
-        announceToScreenReader(`Download started for ${filename}`, "polite"),
-      );
-    } catch {
-      setAnnouncement(
-        announceToScreenReader(
-          "Download failed. Please try again.",
-          "assertive",
-        ),
-      );
-    }
-  }, [state.result, state.mode, state.fileInput, announceToScreenReader]);
+  // Copy and Download handled via CopyExportBar
 
   // Clear file input
   const handleClearFile = useCallback(() => {
@@ -394,10 +313,6 @@ export function Base64Tool() {
       warnings: [],
       validationErrors: [],
     }));
-
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
 
     setAnnouncement(announceToScreenReader("File cleared", "polite"));
   }, [announceToScreenReader]);
@@ -570,164 +485,53 @@ export function Base64Tool() {
               : `Upload a file to ${tCommon(`ui.modes.${state.mode}`)}`}
           </p>
         </CardHeader>
-        <CardContent className="pt-0">
-          {state.inputType === "text" ? (
-            <div className="space-y-6">
-              <textarea
-                value={state.textInput}
-                onChange={(e) =>
-                  setState((prev) => ({
-                    ...prev,
-                    textInput: e.target.value,
-                    result: null,
-                  }))
-                }
-                placeholder={
-                  state.mode === "encode"
-                    ? tBase64("tool.placeholders.textInput")
-                    : tBase64("tool.placeholders.textInput")
-                }
-                className={cn(
-                  "input-field h-40 resize-vertical text-code",
-                  "placeholder:text-neutral-400 dark:placeholder:text-neutral-500",
-                  state.isProcessing && "opacity-50 cursor-not-allowed",
-                )}
-                aria-label={
-                  state.mode === "encode"
-                    ? `Text input for ${tCommon("ui.modes.encode").toLowerCase()}`
-                    : `Base64 input for ${tCommon("ui.modes.decode").toLowerCase()}`
-                }
-                disabled={state.isProcessing}
-              />
-              {state.textInput && (
-                <div className="text-sm text-foreground-secondary">
-                  Input length: {state.textInput.length.toLocaleString()}{" "}
-                  characters
-                </div>
-              )}
-            </div>
-          ) : (
-            <div className="space-y-8">
-              {/* File Upload Area */}
-              <div
-                className={cn(
-                  "relative border-2 border-dashed rounded-2xl p-12 text-center",
-                  "transition-all duration-300 group",
-                  dragActive
-                    ? "border-brand-400 bg-brand-50 dark:border-brand-500 dark:bg-brand-950/20"
-                    : "border-neutral-300 dark:border-neutral-600 hover:border-brand-300 dark:hover:border-brand-600",
-                  state.isProcessing && "opacity-50 pointer-events-none",
-                )}
-                onDragEnter={handleDrag}
-                onDragLeave={handleDrag}
-                onDragOver={handleDrag}
-                onDrop={handleDrop}
-              >
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  onChange={(e) =>
-                    e.target.files?.[0] && handleFileSelect(e.target.files[0])
-                  }
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                  aria-label="File upload input"
-                  disabled={state.isProcessing}
-                />
-
-                <div className="space-y-6">
-                  <div
-                    className={cn(
-                      "mx-auto h-20 w-20 rounded-full flex items-center justify-center",
-                      "bg-gradient-to-br from-brand-100 to-brand-200",
-                      "dark:from-brand-900/30 dark:to-brand-800/30",
-                      "transition-transform duration-200 group-hover:scale-110",
-                    )}
-                  >
-                    <svg
-                      className="h-10 w-10 text-brand-600 dark:text-brand-400"
-                      stroke="currentColor"
-                      fill="none"
-                      viewBox="0 0 48 48"
-                    >
-                      <path
-                        d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-body text-foreground-secondary mb-2">
-                      <span className="font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 cursor-pointer">
-                        Click to upload
-                      </span>{" "}
-                      or drag and drop
-                    </p>
-                    <p className="text-sm text-foreground-tertiary">
-                      Maximum file size: 10MB
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Selected File Info */}
-              {state.fileInput && (
-                <div
-                  className={cn(
-                    "bg-background-tertiary rounded-2xl p-6 animate-fade-in-up border border-border-secondary",
-                  )}
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-6">
-                      <div className="flex-shrink-0">
-                        <div
-                          className={cn(
-                            "h-16 w-16 rounded-2xl flex items-center justify-center",
-                            "bg-gradient-to-br from-neutral-100 to-neutral-200",
-                            "dark:from-neutral-800 dark:to-neutral-700",
-                          )}
-                        >
-                          <svg
-                            className="h-8 w-8 text-neutral-600 dark:text-neutral-400"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-body font-medium text-foreground truncate mb-1">
-                          {state.fileInput.name}
-                        </p>
-                        <p className="text-sm text-foreground-secondary">
-                          {(state.fileInput.size / 1024).toFixed(1)} KB
-                          {state.fileInput.type && ` • ${state.fileInput.type}`}
-                        </p>
-                      </div>
-                    </div>
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      onClick={handleClearFile}
-                      aria-label="Remove selected file"
-                      disabled={state.isProcessing}
-                      className="h-10"
-                    >
-                      Remove
-                    </Button>
-                  </div>
-                </div>
-              )}
-            </div>
+        <CardContent className="pt-0 space-y-6">
+          <ImportPanel
+            mode={state.inputType}
+            onModeChange={(m) =>
+              setState((prev) => ({
+                ...prev,
+                inputType: m,
+                result: null,
+                ...(m === "text" ? { fileInput: null } : { textInput: "" }),
+              }))
+            }
+            textValue={state.textInput}
+            onTextChange={(v) =>
+              setState((prev) => ({ ...prev, textInput: v, result: null }))
+            }
+            onFileSelect={handleFileSelect}
+            accept={"*/*"}
+            maxSizeMB={10}
+            title={
+              state.inputType === "text"
+                ? tBase64("tool.placeholders.textInput")
+                : "Upload a file"
+            }
+            description={
+              state.inputType === "text"
+                ? "Paste or type your data"
+                : "Drag and drop or paste a file (max 10MB)"
+            }
+            placeholder={tCommon("ui.placeholders.textInput")}
+            labels={{
+              textMode: tCommon("ui.inputTypes.text"),
+              fileMode: tCommon("ui.inputTypes.file"),
+              pasteFromClipboard: tCommon("ui.actions.pasteFromClipboard"),
+              clearText: tCommon("ui.actions.clear"),
+              characters: tUnits("units.characters"),
+              validationErrors: tCommon("validation.invalidInput"),
+              filePasteTip: tCommon("ui.placeholders.fileUpload"),
+            }}
+            fileSubtitle={tCommon("ui.placeholders.fileUpload")}
+            onAnnounce={(msg, kind) =>
+              setAnnouncement(announceToScreenReader(msg, kind))
+            }
+          />
+          {state.inputType === "file" && state.fileInput && (
+            <FileInfo file={state.fileInput} onRemove={handleClearFile} />
           )}
+          {/* legacy input UI removed; ImportPanel covers text/file inputs */}
 
           {/* Validation Errors */}
           {state.validationErrors.length > 0 && (
@@ -846,45 +650,7 @@ export function Base64Tool() {
                 </p>
               )}
             </div>
-            <div className="flex gap-3">
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={handleCopy}
-                disabled={
-                  state.isProcessing ||
-                  !state.result?.success ||
-                  !state.result.data
-                }
-                aria-label="Copy result to clipboard"
-                className={cn(
-                  "h-10",
-                  copySuccess?.success
-                    ? "bg-success-100 text-success-800 dark:bg-success-950/40 dark:text-success-200"
-                    : "",
-                )}
-                isLoading={state.isProcessing}
-              >
-                {copySuccess?.success
-                  ? tCommon("ui.status.copied")
-                  : tCommon("ui.actions.copy")}
-              </Button>
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={handleDownload}
-                disabled={
-                  state.isProcessing ||
-                  !state.result?.success ||
-                  !state.result.data
-                }
-                aria-label="Download result as file"
-                className="h-10"
-                isLoading={state.isProcessing}
-              >
-                {tCommon("ui.actions.download")}
-              </Button>
-            </div>
+            <div className="hidden" />
           </div>
         </CardHeader>
         <CardContent className="pt-0">
@@ -920,15 +686,33 @@ export function Base64Tool() {
               />
             </TextareaLoadingWrapper>
 
-            {/* Copy Success Feedback */}
-            {copySuccess && (
-              <Alert
-                variant={copySuccess.success ? "success" : "error"}
-                className="animate-fade-in"
-              >
-                {copySuccess.message}
-              </Alert>
-            )}
+            <CopyExportBar
+              value={state.result?.success ? state.result.data || "" : ""}
+              rawValue={state.result?.success ? state.result.data || "" : ""}
+              filename={Base64Service.generateFilename(
+                state.mode,
+                state.result?.filename || state.fileInput?.name,
+              )}
+              mimeType="text/plain;charset=utf-8"
+              onDownloadData={() =>
+                state.result?.success && state.result.data
+                  ? new Blob([state.result.data], {
+                      type: "text/plain;charset=utf-8",
+                    })
+                  : null
+              }
+              disabled={state.isProcessing || !state.result?.success}
+              labels={{
+                copy: tCommon("ui.actions.copy"),
+                copyRaw: tCommon("ui.actions.copyRaw"),
+                copyJSON: tCommon("ui.actions.copyJSON"),
+                download: tCommon("ui.actions.download"),
+                copied: tCommon("ui.status.copied"),
+              }}
+              onAnnounce={(msg, kind) =>
+                setAnnouncement(announceToScreenReader(msg, kind))
+              }
+            />
 
             {/* Result Warnings */}
             {state.result?.success &&

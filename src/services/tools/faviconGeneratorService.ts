@@ -1263,18 +1263,8 @@ export class FaviconGeneratorService {
     URL.revokeObjectURL(link.href);
   }
 
-  /**
-   * Copy favicon data URL to clipboard
-   */
-  static async copyToClipboard(favicon: GeneratedFavicon): Promise<boolean> {
-    try {
-      await navigator.clipboard.writeText(favicon.dataUrl);
-      return true;
-    } catch (error) {
-      console.warn("Failed to copy to clipboard:", error);
-      return false;
-    }
-  }
+  // Note: Service-level clipboard helpers removed.
+  // Use `useClipboard` or `@/utils/clipboard` directly in UI components.
 
   /**
    * Estimate remaining processing time

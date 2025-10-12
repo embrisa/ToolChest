@@ -14,10 +14,11 @@ import {
   ProgressIndicator,
   ResultsPanel,
   ResultBadge,
-  FileUpload,
   FileInfo,
   SizeSelector,
   ColorPicker,
+  ImportPanel,
+  CopyExportBar,
 } from "@/components/ui";
 import { FaviconPreview } from "./FaviconPreview";
 import { FaviconGeneratorService } from "@/services/tools/faviconGeneratorService";
@@ -33,6 +34,7 @@ import {
 
 export function FaviconGeneratorTool() {
   const tCommon = useTranslations("tools.common");
+  const tUnits = useTranslations("common");
 
   const [state, setState] = useState<FaviconGeneratorState>({
     sourceImage: null,
@@ -52,10 +54,7 @@ export function FaviconGeneratorTool() {
   });
 
   const [announcement] = useState<FaviconA11yAnnouncement | null>(null);
-  const [copySuccess, setCopySuccess] = useState<{
-    success: boolean;
-    message: string;
-  } | null>(null);
+  // Copy feedback handled via CopyExportBar
 
   const { announceToScreenReader } = useAccessibilityAnnouncements();
   const stateRef = useRef(state);
@@ -288,56 +287,7 @@ export function FaviconGeneratorTool() {
     }
   }, [state.sourceImage, state.options, announceToScreenReader, tCommon]);
 
-  // Copy all favicons to clipboard
-  const handleCopyAll = useCallback(async () => {
-    if (!state.result?.favicons) return;
-
-    try {
-      const faviconData = state.result.favicons
-        .map((favicon) => `${favicon.size.name}: ${favicon.dataUrl}`)
-        .join("\n\n");
-
-      await navigator.clipboard.writeText(faviconData);
-      setCopySuccess({
-        success: true,
-        message: tCommon("ui.status.copied"),
-      });
-      announceToScreenReader(tCommon("ui.status.copied"), "polite");
-
-      setTimeout(() => setCopySuccess(null), 3000);
-    } catch {
-      setCopySuccess({
-        success: false,
-        message: tCommon("ui.status.error"),
-      });
-      announceToScreenReader(tCommon("ui.status.error"), "assertive");
-    }
-  }, [state.result?.favicons, announceToScreenReader, tCommon]);
-
-  // Download all favicons
-  const downloadAllFavicons = useCallback(async () => {
-    if (!state.result?.favicons) return;
-
-    try {
-      announceToScreenReader(
-        `${tCommon("ui.status.processing")} downloads...`,
-        "polite",
-      );
-
-      state.result.favicons.forEach((favicon) => {
-        const link = document.createElement("a");
-        link.href = favicon.dataUrl;
-        link.download = favicon.filename;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      });
-
-      announceToScreenReader("All favicons downloaded", "polite");
-    } catch {
-      announceToScreenReader("Failed to download files", "assertive");
-    }
-  }, [state.result?.favicons, announceToScreenReader, tCommon]);
+  // Download all favicons handled via CopyExportBar onDownloadData
 
   // Clear file input
   const handleClearFile = useCallback(() => {
@@ -544,29 +494,31 @@ export function FaviconGeneratorTool() {
         </CardHeader>
         <CardContent className="pt-0">
           <div className="space-y-8">
-            {/* File Upload Area */}
-            <FileUpload
+            <ImportPanel
+              mode="file"
+              onModeChange={() => {}}
+              textValue=""
+              onTextChange={() => {}}
               onFileSelect={handleFileSelect}
               accept="image/*"
-              maxSize={10}
-              disabled={state.isProcessing}
-              icon={
-                <svg
-                  className="h-10 w-10 text-purple-600 dark:text-purple-400"
-                  stroke="currentColor"
-                  fill="none"
-                  viewBox="0 0 48 48"
-                >
-                  <path
-                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+              maxSizeMB={10}
+              title="Upload image"
+              description={tCommon("ui.placeholders.fileUpload")}
+              placeholder={tCommon("ui.placeholders.textInput")}
+              labels={{
+                textMode: tCommon("ui.inputTypes.text"),
+                fileMode: tCommon("ui.inputTypes.file"),
+                pasteFromClipboard: tCommon("ui.actions.pasteFromClipboard"),
+                clearText: tCommon("ui.actions.clear"),
+                characters: tUnits("units.characters"),
+                validationErrors: tCommon("validation.invalidInput"),
+                filePasteTip: tCommon("ui.placeholders.fileUpload"),
+              }}
+              fileSubtitle={tCommon("ui.placeholders.fileUpload")}
+              modes={["file"]}
+              onAnnounce={(msg, kind) =>
+                announceToScreenReader(msg, kind || "polite")
               }
-              title="Click to upload"
-              subtitle="PNG, JPG, SVG supported • Maximum file size: 10MB"
             />
 
             {/* Selected File Info */}
@@ -766,9 +718,6 @@ export function FaviconGeneratorTool() {
             : ""
         }
         isProcessing={state.isProcessing}
-        onCopy={handleCopyAll}
-        copySuccess={copySuccess?.success}
-        copyLabel="Copy All URLs"
         placeholder={
           state.isProcessing
             ? "Generating favicon files..."
@@ -813,16 +762,42 @@ export function FaviconGeneratorTool() {
         {/* Additional Actions */}
         {state.result?.success && state.result.favicons && (
           <div className="mt-6 space-y-4">
-            <div className="flex gap-3">
-              <Button
-                onClick={downloadAllFavicons}
-                variant="primary"
-                size="sm"
-                className="flex-1"
-              >
-                Download All Files
-              </Button>
-            </div>
+            <CopyExportBar
+              value={state.result.favicons
+                .map((f) => `${f.size.name}: ${f.dataUrl}`)
+                .join("\n\n")}
+              rawValue={state.result.favicons
+                .map((f) => f.dataUrl)
+                .join("\n")}
+              jsonValue={{
+                favicons: state.result.favicons.map((f) => ({
+                  name: f.size.name,
+                  width: f.size.width,
+                  height: f.size.height,
+                  filename: f.filename,
+                  dataUrl: f.dataUrl,
+                })),
+                manifest: state.result.manifestJson || undefined,
+              }}
+              filename={`tool-chest_favicons_${Date.now()}.zip`}
+              mimeType="application/zip"
+              onDownloadData={() =>
+                FaviconGeneratorService.createZipPackage(
+                  state.result!.favicons,
+                  state.result!.manifestJson || undefined,
+                )
+              }
+              labels={{
+                copy: tCommon("ui.actions.copy"),
+                copyRaw: tCommon("ui.actions.copyRaw"),
+                copyJSON: tCommon("ui.actions.copyJSON"),
+                download: tCommon("ui.actions.download"),
+                copied: tCommon("ui.status.copied"),
+              }}
+              onAnnounce={(msg, kind) =>
+                announceToScreenReader(msg, kind || "polite")
+              }
+            />
 
             {/* Individual Favicon Display */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-96 overflow-y-auto">
@@ -874,15 +849,7 @@ export function FaviconGeneratorTool() {
           </div>
         )}
 
-        {/* Copy Success Feedback */}
-        {copySuccess && (
-          <Alert
-            variant={copySuccess.success ? "success" : "error"}
-            className="animate-fade-in"
-          >
-            {copySuccess.message}
-          </Alert>
-        )}
+        {/* Copy feedback handled by CopyExportBar */}
 
         {/* Manifest JSON Display */}
         {state.result?.manifestJson && (

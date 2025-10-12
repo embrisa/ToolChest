@@ -8,7 +8,6 @@ jest.mock("@/services/tools/base64Service", () => ({
     encode: jest.fn(),
     decode: jest.fn(),
     validateFile: jest.fn(),
-    copyToClipboard: jest.fn(),
     trackUsage: jest.fn(),
     generateDownload: jest.fn(),
   },
@@ -20,7 +19,6 @@ import { Base64Service } from "@/services/tools/base64Service";
 // Type cast to get access to the mock functions
 const mockEncode = Base64Service.encode as jest.Mock;
 const mockValidateFile = Base64Service.validateFile as jest.Mock;
-const mockCopyToClipboard = Base64Service.copyToClipboard as jest.Mock;
 const mockTrackUsage = Base64Service.trackUsage as jest.Mock;
 
 describe("Base64Tool", () => {
@@ -41,12 +39,6 @@ describe("Base64Tool", () => {
       isValid: true,
       warnings: [],
       validationErrors: [],
-    });
-
-    mockCopyToClipboard.mockResolvedValue({
-      success: true,
-      method: "modern",
-      message: "Copied to clipboard",
     });
 
     mockTrackUsage.mockResolvedValue(undefined);
@@ -109,5 +101,28 @@ describe("Base64Tool", () => {
       },
       { timeout: 3000 },
     );
+  });
+
+  it("copies result using CopyExportBar", async () => {
+    // Mock clipboard API
+    Object.assign(navigator, {
+      clipboard: {
+        writeText: jest.fn().mockResolvedValue(undefined),
+      },
+    });
+
+    render(<Base64Tool />);
+
+    const textarea = screen.getByLabelText(/text input/i);
+    await userEvent.type(textarea, "abc");
+
+    await waitFor(() => {
+      expect(mockEncode).toHaveBeenCalled();
+    });
+
+    const copyBtn = await screen.findByRole("button", { name: /copy result/i });
+    await userEvent.click(copyBtn);
+
+    expect(navigator.clipboard.writeText).toHaveBeenCalled();
   });
 });

@@ -17,6 +17,9 @@
     "actions": {
       "process": "处理",
       "copy": "复制结果",
+      "copyRaw": "复制原始内容",
+      "copyJSON": "复制JSON",
+      "pasteFromClipboard": "从剪贴板粘贴",
       "download": "下载",
       "upload": "上传",
       "clear": "清除",

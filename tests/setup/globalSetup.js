@@ -4,6 +4,16 @@ const path = require("path");
 module.exports = async () => {
   console.log("🧪 Setting up global test environment...");
 
+  // Allow skipping DB setup in sandboxed/unit-only runs
+  if (process.env.JEST_SKIP_DB_SETUP === "1" || process.env.JEST_SKIP_DB_SETUP === "true") {
+    process.env.NODE_ENV = "test";
+    process.env.DATABASE_PROVIDER = "sqlite";
+    process.env.DATABASE_URL = "file:./test.db";
+    process.env.ADMIN_SECRET_TOKEN = "test-admin-token";
+    console.log("⏭️  Skipping DB setup/seed (JEST_SKIP_DB_SETUP)");
+    return;
+  }
+
   // Set test environment variables for SQLite
   process.env.NODE_ENV = "test";
   process.env.DATABASE_PROVIDER = "sqlite";

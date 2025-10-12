@@ -65,11 +65,7 @@ export interface A11yAnnouncement {
   timestamp: number;
 }
 
-export interface ClipboardResult {
-  success: boolean;
-  message: string;
-  timestamp: number;
-}
+// Deprecated clipboard types removed; use `@/utils/clipboard` results instead.
 
 // Constants
 export const HASH_ALGORITHMS: HashAlgorithm[] = [

@@ -180,7 +180,7 @@ export default defineConfig({
 
   // Web server configuration for local development
   webServer: {
-    command: "npm run build && npm run start",
+    command: "npm run build:test-e2e && npm run start:test-e2e",
     url: "http://localhost:3000",
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000, // 2 minutes for build and start
@@ -190,6 +190,9 @@ export default defineConfig({
       NODE_ENV: "test",
       DATABASE_URL: "file:./test-e2e.db",
       ADMIN_SECRET_TOKEN: "test-admin-token-e2e",
+      OFFLINE_FONTS: "1",
+      DISABLE_LINT_BUILD: "1",
+      DISABLE_TYPES_BUILD: "1",
     },
   },
 

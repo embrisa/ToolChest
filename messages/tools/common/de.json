@@ -17,6 +17,9 @@
     "actions": {
       "process": "Verarbeiten",
       "copy": "Ergebnis kopieren",
+      "copyRaw": "Rohdaten kopieren",
+      "copyJSON": "JSON kopieren",
+      "pasteFromClipboard": "Aus Zwischenablage einfügen",
       "download": "Herunterladen",
       "upload": "Hochladen",
       "clear": "Löschen",

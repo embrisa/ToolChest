@@ -17,6 +17,9 @@
     "actions": {
       "process": "Verwerken",
       "copy": "Resultaat kopiëren",
+      "copyRaw": "Ruwe tekst kopiëren",
+      "copyJSON": "JSON kopiëren",
+      "pasteFromClipboard": "Plakken vanuit klembord",
       "download": "Downloaden",
       "upload": "Uploaden",
       "clear": "Wissen",

@@ -17,6 +17,9 @@
     "actions": {
       "process": "प्रक्रिया",
       "copy": "प्रतिलिपि परिणाम",
+      "copyRaw": "कच्चा पाठ कॉपी करें",
+      "copyJSON": "JSON कॉपी करें",
+      "pasteFromClipboard": "क्लिपबोर्ड से पेस्ट करें",
       "download": "डाउनलोड करना",
       "upload": "अपलोड करना",
       "clear": "स्पष्ट",

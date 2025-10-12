@@ -17,6 +17,9 @@
     "actions": {
       "process": "Proces",
       "copy": "Wynik kopii",
+      "copyRaw": "Kopiuj bez formatowania",
+      "copyJSON": "Kopiuj JSON",
+      "pasteFromClipboard": "Wklej ze schowka",
       "download": "Pobierać",
       "upload": "Wgrywać",
       "clear": "Jasne",

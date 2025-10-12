@@ -7,7 +7,6 @@ jest.mock("@/services/tools/hashGeneratorService", () => ({
   HashGeneratorService: {
     generateHash: jest.fn(),
     validateFile: jest.fn(),
-    copyToClipboard: jest.fn(),
     trackUsage: jest.fn(),
   },
 }));
@@ -18,7 +17,6 @@ import { HashGeneratorService } from "@/services/tools/hashGeneratorService";
 // Type cast to get access to the mock functions
 const mockGenerateHash = HashGeneratorService.generateHash as jest.Mock;
 const mockValidateFile = HashGeneratorService.validateFile as jest.Mock;
-const mockCopyToClipboard = HashGeneratorService.copyToClipboard as jest.Mock;
 const mockTrackUsage = HashGeneratorService.trackUsage as jest.Mock;
 
 describe("HashGeneratorTool", () => {
@@ -39,11 +37,6 @@ describe("HashGeneratorTool", () => {
       isValid: true,
       warnings: [],
       validationErrors: [],
-    });
-
-    mockCopyToClipboard.mockResolvedValue({
-      success: true,
-      message: "Copied to clipboard",
     });
 
     mockTrackUsage.mockResolvedValue(undefined);
@@ -105,5 +98,28 @@ describe("HashGeneratorTool", () => {
       },
       { timeout: 3000 },
     );
+  });
+
+  it("copies results using CopyExportBar", async () => {
+    // Mock clipboard API
+    Object.assign(navigator, {
+      clipboard: {
+        writeText: jest.fn().mockResolvedValue(undefined),
+      },
+    });
+
+    render(<HashGeneratorTool />);
+
+    const textarea = screen.getByLabelText(/text input/i);
+    await userEvent.type(textarea, "abc");
+
+    await waitFor(() => {
+      expect(mockGenerateHash).toHaveBeenCalled();
+    });
+
+    const copyBtn = await screen.findByRole("button", { name: /copy result/i });
+    await userEvent.click(copyBtn);
+
+    expect(navigator.clipboard.writeText).toHaveBeenCalled();
   });
 });

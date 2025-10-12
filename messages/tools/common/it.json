@@ -17,6 +17,9 @@
     "actions": {
       "process": "Elabora",
       "copy": "Copia Risultato",
+      "copyRaw": "Copia grezzo",
+      "copyJSON": "Copia JSON",
+      "pasteFromClipboard": "Incolla dagli appunti",
       "download": "Scarica",
       "upload": "Carica",
       "clear": "Pulisci",

@@ -34,12 +34,12 @@
     "md5": {
       "title": "MD5",
       "description": "Función hash de 128 bits. Rápido pero no seguro criptográficamente. Solo usar para checksums.",
-      "badge": ""
+      "badge": "Obsoleto"
     },
     "sha1": {
       "title": "SHA-1",
       "description": "Función hash de 160 bits. Algoritmo heredado, use SHA-256+ para aplicaciones de seguridad.",
-      "badge": ""
+      "badge": "Obsoleto"
     },
     "sha256": {
       "title": "SHA-256",
@@ -49,7 +49,7 @@
     "sha512": {
       "title": "SHA-512",
       "description": "Función hash de 512 bits. Máxima seguridad para datos sensibles y aplicaciones críticas.",
-      "badge": ""
+      "badge": "Fuerte"
     }
   },
   "info": {

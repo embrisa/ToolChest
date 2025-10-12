@@ -56,9 +56,7 @@ NODE_ENV=test
 DATABASE_URL=file:./test.db
 ```
 
-## Excellent Test Status
-
-**Test Results: 208/208 Passing**
+## Test Status
 
 All unit and integration tests are currently passing. The previous issues regarding service mocking and database compatibility have been resolved. This indicates a healthy and stable test suite.
 
@@ -243,6 +241,85 @@ sqlite3 test.db "SELECT * FROM Tool;"
 3. **User-Centric**: Test user interactions, not implementation details
 4. **Performance**: Test with large datasets, verify memory leak prevention
 5. **Mocking**: Mock external dependencies, keep mocks simple, reset between tests
+
+## Clipboard & Download Testing
+
+### Unit/RTL (Jest)
+
+- Clipboard: mock the clipboard API or fallback path.
+
+```ts
+// CopyExportBar: mock clipboard and assert copy feedback
+Object.assign(navigator, { clipboard: { writeText: jest.fn().mockResolvedValue(undefined) } });
+render(<CopyExportBar value="hello" />);
+await user.click(screen.getByRole('button', { name: /copy result/i }));
+expect(navigator.clipboard.writeText).toHaveBeenCalledWith('hello');
+```
+
+- Fallback copy (no secure context):
+
+```ts
+// Ensure document.execCommand('copy') is used by clipboard util fallback
+document.execCommand = jest.fn(() => true) as any;
+```
+
+- Download: mock the blob downloader.
+
+```ts
+jest.mock('@/utils/file-processing', () => ({
+  downloadBlob: jest.fn(),
+}));
+render(<CopyExportBar value="data" filename="out.txt" onDownloadData={() => 'data'} />);
+await user.click(screen.getByRole('button', { name: /download result/i }));
+expect(downloadBlob).toHaveBeenCalled();
+```
+
+### Playwright E2E
+
+- Clipboard stubbing and fallback:
+
+```ts
+await page.evaluate(() => {
+  // @ts-ignore
+  if (!navigator.clipboard) navigator.clipboard = {} as any;
+  // @ts-ignore
+  navigator.clipboard.readText = async () => 'Hello Import Panel';
+  // @ts-ignore
+  document.execCommand = () => true; // fallback success
+});
+await page.getByRole('button', { name: /paste from clipboard/i }).click();
+```
+
+- Download assertion:
+
+```ts
+const [download] = await Promise.all([
+  page.waitForEvent('download'),
+  page.getByRole('button', { name: /download result/i }).click(),
+]);
+expect(download.suggestedFilename()).toMatch(/\.txt$/);
+```
+
+- File upload via picker:
+
+```ts
+await page.setInputFiles('input[type="file"]', path.join(__dirname, 'assets', 'file.txt'));
+```
+
+- Drag-and-drop and paste-a-file (Chromium-only patterns):
+
+```ts
+// Convert Node bytes -> browser Uint8Array and dispatch drop or paste with DataTransfer
+await elementHandle.evaluate((el, { name, b64 }) => {
+  const bytes = atob(b64).split('').map(c => c.charCodeAt(0));
+  const file = new File([new Uint8Array(bytes)], name, { type: 'text/plain' });
+  const dt = new DataTransfer();
+  dt.items.add(file);
+  const evt = new Event('drop', { bubbles: true });
+  Object.defineProperty(evt, 'dataTransfer', { value: dt });
+  el.dispatchEvent(evt);
+}, { name: 'dropped.txt', b64 });
+```
 
 ## Troubleshooting
 

@@ -1,23 +1,9 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { inter, jetbrainsMono } from "@/app/fonts";
 import { getLocale } from "next-intl/server";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-  preload: true,
-  fallback: ["system-ui", "arial"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
-  display: "swap",
-  preload: true,
-  fallback: ["monospace"],
-});
+// Fonts are provided via module indirection to allow test builds to stub them
 
 export const metadata: Metadata = {
   title: {

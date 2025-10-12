@@ -14,10 +14,12 @@ import { Input } from "@/components/ui";
 import { Alert } from "@/components/ui/Alert";
 import { AriaLiveRegion } from "@/components/ui/AriaLiveRegion";
 import { ToolHeader } from "@/components/ui/ToolHeader";
-import { FileUpload } from "@/components/ui/FileUpload";
-import { FileInfo } from "@/components/ui/FileInfo";
+// File upload replaced by ImportPanel; keep FileInfo for display
 import { OptionGroup } from "@/components/ui/OptionGroup";
 import { ResultsPanel, ResultBadge } from "@/components/ui/ResultsPanel";
+import { ImportPanel } from "@/components/ui/ImportPanel";
+import { CopyExportBar } from "@/components/ui/CopyExportBar";
+import { FileInfo } from "@/components/ui/FileInfo";
 import { ProgressCard } from "@/components/ui/ProgressCard";
 import { ErrorBoundary } from "@/components/errors/ErrorBoundary";
 import { Loading } from "@/components/ui/Loading";
@@ -114,6 +116,7 @@ if __name__ == "__main__":
 
 export function MarkdownToPdfTool() {
   const tCommon = useTranslations("tools.common");
+  const tUnits = useTranslations("common");
 
   const MODE_OPTIONS = [
     { value: "editor", label: "Editor" },
@@ -491,19 +494,37 @@ export function MarkdownToPdfTool() {
         {/* File Upload Area (when in upload mode) */}
         {state.mode === "upload" && (
           <Card>
-            <CardContent className="p-8">
-              {state.markdownFile ? (
-                <FileInfo
-                  file={state.markdownFile}
-                  onRemove={handleFileRemove}
-                />
-              ) : (
-                <FileUpload
-                  onFileSelect={handleFileUpload}
-                  accept=".md,.markdown,.txt"
-                  maxSize={10}
-                  subtitle="Supported formats: .md, .markdown, .txt • Max 10MB"
-                />
+            <CardContent className="p-8 space-y-4">
+              <ImportPanel
+                mode="file"
+                onModeChange={(m) => {
+                  if (m === "text") handleModeChange("editor");
+                }}
+                textValue={state.markdownContent}
+                onTextChange={(v) => {
+                  setState((prev) => ({ ...prev, markdownContent: v }));
+                  handleModeChange("editor");
+                }}
+                onFileSelect={handleFileUpload}
+                accept=".md,.markdown,.txt"
+                maxSizeMB={10}
+                title="Upload Markdown file"
+                description={tCommon("ui.placeholders.fileUpload")}
+                placeholder={tCommon("ui.placeholders.textInput")}
+                labels={{
+                  textMode: tCommon("ui.inputTypes.text"),
+                  fileMode: tCommon("ui.inputTypes.file"),
+                  pasteFromClipboard: tCommon("ui.actions.pasteFromClipboard"),
+                  clearText: tCommon("ui.actions.clear"),
+                  characters: tUnits("units.characters"),
+                  validationErrors: tCommon("validation.invalidInput"),
+                  filePasteTip: tCommon("ui.placeholders.fileUpload"),
+                }}
+                fileSubtitle={tCommon("ui.placeholders.fileUpload")}
+                onAnnounce={(msg) => addAnnouncement(msg)}
+              />
+              {state.markdownFile && (
+                <FileInfo file={state.markdownFile} onRemove={handleFileRemove} />
               )}
             </CardContent>
           </Card>
@@ -693,8 +714,6 @@ export function MarkdownToPdfTool() {
                 value: `${state.pdfResult.processingTime}ms`,
               },
             ]}
-            onDownload={handleDownloadPdf}
-            downloadLabel="Download PDF"
             badges={[
               <ResultBadge key="pages" variant="success">
                 {state.pdfResult.pageCount} Pages
@@ -703,7 +722,26 @@ export function MarkdownToPdfTool() {
                 {Math.round((state.pdfResult.fileSize || 0) / 1024)} KB
               </ResultBadge>,
             ]}
-          />
+          >
+            <CopyExportBar
+              value={null}
+              rawValue={null}
+              filename={markdownToPdfService.createDownloadOptions(
+                state.pdfResult.pdfBlob,
+              ).filename}
+              mimeType="application/pdf"
+              onDownloadData={() => state.pdfResult?.pdfBlob || null}
+              disabled={!state.pdfResult?.pdfBlob}
+              labels={{
+                copy: tCommon("ui.actions.copy"),
+                copyRaw: tCommon("ui.actions.copyRaw"),
+                copyJSON: tCommon("ui.actions.copyJSON"),
+                download: tCommon("ui.actions.download"),
+                copied: tCommon("ui.status.copied"),
+              }}
+              onAnnounce={(msg) => addAnnouncement(msg)}
+            />
+          </ResultsPanel>
         )}
 
         {/* Quick Templates */}

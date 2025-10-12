@@ -6,7 +6,6 @@ import {
   Base64Progress,
   ValidationError,
   MimeTypeConfig,
-  ClipboardResult,
 } from "@/types/tools/base64";
 
 /**
@@ -511,56 +510,8 @@ export class Base64Service {
     };
   }
 
-  /**
-   * Enhanced clipboard functionality with accessibility
-   */
-  public static async copyToClipboard(text: string): Promise<ClipboardResult> {
-    try {
-      await navigator.clipboard.writeText(text);
-      return {
-        success: true,
-        method: "modern",
-        message: "Content copied to clipboard",
-        announceToScreenReader:
-          "Content has been copied to clipboard successfully",
-      };
-    } catch {
-      // Fallback for older browsers
-      try {
-        const textArea = document.createElement("textarea");
-        textArea.value = text;
-        textArea.style.position = "fixed";
-        textArea.style.left = "-999999px";
-        textArea.style.top = "-999999px";
-        textArea.setAttribute("aria-hidden", "true");
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        const result = document.execCommand("copy");
-        document.body.removeChild(textArea);
-
-        if (result) {
-          return {
-            success: true,
-            method: "fallback",
-            message: "Content copied to clipboard",
-            announceToScreenReader:
-              "Content has been copied to clipboard using fallback method",
-          };
-        } else {
-          throw new Error("Copy command failed");
-        }
-      } catch {
-        return {
-          success: false,
-          method: "failed",
-          message: "Failed to copy to clipboard. Please copy manually.",
-          announceToScreenReader:
-            "Copy to clipboard failed. Please select and copy the content manually.",
-        };
-      }
-    }
-  }
+  // Note: Service-level clipboard helpers removed.
+  // Use `useClipboard` or `@/utils/clipboard` directly in UI components.
 
   /**
    * Read file with progress tracking for large files

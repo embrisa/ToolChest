@@ -222,6 +222,45 @@ Use `@/` prefix for all imports: `@/components/ui`, `@/services/tools`, `@/types
   - Features: Generic progress bar, stage messages, time estimates
   - Usage: `<ProgressCard progress={{progress: 75, stage: "processing"}} title="Encoding" />`
 
+#### Import/Export Workflow (Unified)
+
+- `ImportPanel` — Standardized text/file input with drag-drop, paste, 10MB cap, and inline validation.
+  - Path: `@/components/ui/ImportPanel`
+  - Props: `mode`, `onModeChange`, `textValue`, `onTextChange`, `onFileSelect`, `accept?`, `maxSizeMB?`, `onValidationChange?`, `onAnnounce?`
+- `CopyExportBar` — Standardized actions: Copy, Copy raw, Copy JSON, Download.
+  - Path: `@/components/ui/CopyExportBar`
+  - Props: `value?`, `rawValue?`, `jsonValue?`, `filename?`, `mimeType?`, `onDownloadData?`, `onAnnounce?`
+
+Example:
+
+```tsx
+const [mode, setMode] = useState<"text" | "file">("text");
+
+<ImportPanel
+  mode={mode}
+  onModeChange={setMode}
+  textValue={input}
+  onTextChange={setInput}
+  onFileSelect={async (file) => setInput(await file.text())}
+  accept=".json,.txt"
+  maxSizeMB={10}
+/>;
+
+<ResultsPanel title="Output" result={output}>
+  <CopyExportBar
+    value={output}
+    rawValue={output}
+    jsonValue={safeParseJSON(output)}
+    filename="output.txt"
+    mimeType="text/plain;charset=utf-8"
+  />
+  {/* helper */}
+  {/* function safeParseJSON(s?: string) { try { return s ? JSON.parse(s) : undefined } catch { return undefined } } */}
+</ResultsPanel>
+```
+
+Reference: `docs/patterns-import-export.md`
+
 ### Tool Page Template Components (`@/components/ui`)
 
 - **`ToolPageTemplate`** - Complete tool page template combining all common elements

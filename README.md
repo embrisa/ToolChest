@@ -97,7 +97,7 @@ ADMIN_SECRET_TOKEN="your-secure-admin-token"
 NEXT_PUBLIC_SITE_URL="https://your-domain.com"
 ```
 
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions.
+For detailed deployment tips, use the commands above and ensure your environment variables are set via `.env.local`.
 
 ### Troubleshooting Database Migrations
 
@@ -121,6 +121,10 @@ src/
 ├── types/              # TypeScript type definitions
 └── utils/              # Helper functions
 ```
+
+## 📚 Developer Docs
+
+- Unified Import/Export UI pattern (ImportPanel + CopyExportBar): see `docs/patterns-import-export.md`
 
 ## 🤝 Contributing
 

@@ -17,6 +17,9 @@
     "actions": {
       "process": "프로세스",
       "copy": "결과를 복사하십시오",
+      "copyRaw": "원시 텍스트 복사",
+      "copyJSON": "JSON 복사",
+      "pasteFromClipboard": "클립보드에서 붙여넣기",
       "download": "다운로드",
       "upload": "업로드",
       "clear": "분명한",
