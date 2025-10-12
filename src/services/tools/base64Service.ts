@@ -7,6 +7,7 @@ import {
   ValidationError,
   MimeTypeConfig,
 } from "@/types/tools/base64";
+import { recordToolUsage } from "./toolUsageTracker";
 
 /**
  * Enhanced Base64 Service for client-side encoding/decoding operations
@@ -17,6 +18,7 @@ export class Base64Service {
   private static readonly MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
   private static readonly LARGE_FILE_THRESHOLD = 5 * 1024 * 1024; // 5MB
   private static readonly CHUNK_SIZE = 64 * 1024; // 64KB chunks for progress tracking
+  private static readonly TOOL_SLUG = "base64";
 
   /**
    * MIME type configuration for file validation
@@ -816,7 +818,7 @@ export class Base64Service {
   /**
    * Track usage analytics (privacy-compliant)
    */
-  public static async trackUsage(_usageData: {
+  public static async trackUsage(usageData: {
     operation: "encode" | "decode";
     inputType: "text" | "file";
     variant?: "standard" | "url-safe";
@@ -827,7 +829,10 @@ export class Base64Service {
     clientSide?: boolean;
     error?: string;
   }): Promise<void> {
-    // Raw usage logging removed – no-op
-    return;
+    if (!usageData.success || usageData.inputSize <= 0) {
+      return;
+    }
+
+    await recordToolUsage(Base64Service.TOOL_SLUG);
   }
 }

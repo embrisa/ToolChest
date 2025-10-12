@@ -9,6 +9,7 @@ import {
   ALL_ALLOWED_FILE_TYPES,
   FILE_TYPE_CATEGORIES,
 } from "@/types/tools/hashGenerator";
+import { recordToolUsage } from "./toolUsageTracker";
 
 /**
  * MD5 implementation for client-side hashing
@@ -298,6 +299,8 @@ class MD5 {
 }
 
 export class HashGeneratorService {
+  private static readonly TOOL_SLUG = "hash-generator";
+
   /**
    * Enhanced file validation with comprehensive feedback and security checks
    */
@@ -739,9 +742,12 @@ export class HashGeneratorService {
   /**
    * Track usage statistics (privacy-compliant)
    */
-  static async trackUsage(_metrics: HashUsageMetrics): Promise<void> {
-    // Raw usage tracking removed.
-    return;
+  static async trackUsage(metrics: HashUsageMetrics): Promise<void> {
+    if (!metrics.success || metrics.inputSize <= 0) {
+      return;
+    }
+
+    await recordToolUsage(HashGeneratorService.TOOL_SLUG);
   }
 
   // Note: Service-level clipboard helpers removed.

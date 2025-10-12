@@ -17,6 +17,7 @@ import {
   ImageCompressionOptions,
   PERFORMANCE_THRESHOLDS,
 } from "@/types/tools/faviconGenerator";
+import { recordToolUsage } from "./toolUsageTracker";
 
 interface WebAppManifestIcon {
   src: string;
@@ -29,6 +30,7 @@ interface WebAppManifestIcon {
  * Service for client-side favicon generation using Canvas API with enhanced performance features
  */
 export class FaviconGeneratorService {
+  private static readonly TOOL_SLUG = "favicon-generator";
   private static performanceMonitor: PerformanceMetrics | null = null;
 
   /**
@@ -1286,9 +1288,12 @@ export class FaviconGeneratorService {
   /**
    * Track usage analytics (privacy-compliant)
    */
-  static async trackUsage(_data: FaviconUsageData): Promise<void> {
-    // Usage tracking removed.
-    return;
+  static async trackUsage(data: FaviconUsageData): Promise<void> {
+    if (!data.success || data.inputFileSize <= 0) {
+      return;
+    }
+
+    await recordToolUsage(FaviconGeneratorService.TOOL_SLUG);
   }
 
   /**
@@ -1395,7 +1400,7 @@ export class FaviconGeneratorService {
   /**
    * Enhanced usage tracking with performance metrics
    */
-  static async trackUsageEnhanced(_data: {
+  static async trackUsageEnhanced(data: {
     fileSize: number;
     fileSizes?: number[];
     generatedSizes: number[];
@@ -1410,7 +1415,10 @@ export class FaviconGeneratorService {
     warnings?: string[];
     serverSideUsed?: boolean;
   }): Promise<void> {
-    // Enhanced usage tracking removed.
-    return;
+    if (!data || data.fileSize <= 0) {
+      return;
+    }
+
+    await recordToolUsage(FaviconGeneratorService.TOOL_SLUG);
   }
 }
