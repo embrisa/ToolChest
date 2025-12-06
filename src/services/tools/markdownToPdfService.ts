@@ -922,10 +922,22 @@ export class MarkdownToPdfService {
       ? this.getSyntaxHighlightingCss(syntaxHighlighting.theme)
       : "";
 
+    // Professional color palette for a polished look
+    const accentColor = "#2563eb"; // Professional blue
+    const subtleGray = "#64748b";
+    const borderColor = "#e2e8f0";
+    const surfaceColor = "#f8fafc";
+    const codeBgColor = "#1e293b"; // Dark slate for code blocks
+    const codeTextColor = "#e2e8f0";
+
     return `
             @page {
                 size: ${width}mm ${height}mm;
                 margin: ${margin.top}mm ${margin.right}mm ${margin.bottom}mm ${margin.left}mm;
+            }
+            
+            * {
+                box-sizing: border-box;
             }
             
             body {
@@ -934,8 +946,11 @@ export class MarkdownToPdfService {
                 line-height: ${lineHeight};
                 color: ${colors.text};
                 margin: 0;
-                padding: 0;
+                padding: 20px;
                 background: ${colors.background};
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: optimizeLegibility;
                 ${accessibility?.reducedMotion ? "scroll-behavior: auto;" : ""}
             }
             
@@ -945,117 +960,208 @@ export class MarkdownToPdfService {
                 overflow-wrap: break-word;
             }
             
-            /* Enhanced heading styles with customizable scaling */
+            /* Professional heading styles with elegant typography */
             .pdf-heading {
-                margin-top: 24px;
-                margin-bottom: 16px;
-                font-weight: 600;
-                line-height: 1.25;
+                margin-top: 2em;
+                margin-bottom: 0.75em;
+                font-weight: 700;
+                line-height: 1.3;
                 page-break-after: avoid;
+                letter-spacing: -0.02em;
                 ${accessibility?.structuredHeadings ? "outline: none;" : ""}
             }
             
             .pdf-heading-h1 { 
-                font-size: ${2 * headingScale}em; 
+                font-size: ${2.25 * headingScale}em; 
                 color: ${colors.text};
-                border-bottom: 1px solid ${colors.text}40;
-                padding-bottom: 0.3em;
+                margin-top: 0;
+                margin-bottom: 1em;
+                padding-bottom: 0.5em;
+                border-bottom: 3px solid ${accentColor};
+                letter-spacing: -0.03em;
             }
+            
             .pdf-heading-h2 { 
-                font-size: ${1.5 * headingScale}em; 
+                font-size: ${1.75 * headingScale}em; 
                 color: ${colors.text};
-                border-bottom: 1px solid ${colors.text}40;
-                padding-bottom: 0.3em;
+                padding-bottom: 0.4em;
+                border-bottom: 2px solid ${borderColor};
+                margin-top: 2.5em;
             }
-            .pdf-heading-h3 { font-size: ${1.25 * headingScale}em; color: ${colors.text}; }
-            .pdf-heading-h4 { font-size: ${1 * headingScale}em; color: ${colors.text}; }
-            .pdf-heading-h5 { font-size: ${0.875 * headingScale}em; color: ${colors.text}BB; }
-            .pdf-heading-h6 { font-size: ${0.85 * headingScale}em; color: ${colors.text}BB; }
+            
+            .pdf-heading-h3 { 
+                font-size: ${1.35 * headingScale}em; 
+                color: ${colors.text};
+                padding-left: 0.75em;
+                border-left: 4px solid ${accentColor};
+                margin-top: 2em;
+            }
+            
+            .pdf-heading-h4 { 
+                font-size: ${1.15 * headingScale}em; 
+                color: ${subtleGray};
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+            
+            .pdf-heading-h5 { 
+                font-size: ${1 * headingScale}em; 
+                color: ${subtleGray};
+                font-weight: 600;
+            }
+            
+            .pdf-heading-h6 { 
+                font-size: ${0.9 * headingScale}em; 
+                color: ${subtleGray};
+                font-weight: 600;
+                font-style: italic;
+            }
             
             .pdf-paragraph {
                 margin-top: 0;
-                margin-bottom: 16px;
+                margin-bottom: 1.25em;
                 text-align: left;
-                max-width: 680px;
+                max-width: 100%;
             }
             
+            /* Elegant blockquote styling */
             .pdf-blockquote {
-                border-left: 0.25em solid #d1d9e0;
-                padding: 0 1em;
-                margin: 16px 0;
-                color: #656d76;
+                border-left: 4px solid ${accentColor};
+                padding: 1em 1.5em;
+                margin: 1.5em 0;
+                background: linear-gradient(135deg, ${surfaceColor} 0%, #ffffff 100%);
+                border-radius: 0 8px 8px 0;
+                color: ${subtleGray};
+                font-style: italic;
+                position: relative;
             }
             
-            /* Enhanced GFM table styling */
+            .pdf-blockquote::before {
+                content: '"';
+                position: absolute;
+                top: -10px;
+                left: 15px;
+                font-size: 4em;
+                color: ${borderColor};
+                font-family: Georgia, serif;
+                line-height: 1;
+            }
+            
+            .pdf-blockquote p {
+                margin: 0;
+                position: relative;
+                z-index: 1;
+            }
+            
+            /* Professional table styling */
             .pdf-table, .gfm-table {
                 border-spacing: 0;
-                border-collapse: collapse;
-                margin: 16px 0;
+                border-collapse: separate;
+                margin: 1.5em 0;
                 display: table;
-                width: max-content;
-                max-width: 680px;
-                overflow: auto;
+                width: 100%;
+                max-width: 100%;
+                overflow: hidden;
                 page-break-inside: avoid;
+                border-radius: 8px;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+                border: 1px solid ${borderColor};
             }
             
             .pdf-table-cell {
-                padding: 6px 13px;
-                border: 1px solid #d1d9e0;
+                padding: 12px 16px;
+                border-bottom: 1px solid ${borderColor};
+                text-align: left;
+                vertical-align: top;
+            }
+            
+            .pdf-table-header {
+                background: linear-gradient(180deg, ${surfaceColor} 0%, #f1f5f9 100%);
             }
             
             .pdf-table-header .pdf-table-cell {
-                background-color: #f6f8fa;
                 font-weight: 600;
-                border-bottom: 2px solid #d1d9e0;
+                color: ${colors.text};
+                text-transform: uppercase;
+                font-size: 0.85em;
+                letter-spacing: 0.05em;
+                border-bottom: 2px solid ${borderColor};
+                padding: 14px 16px;
             }
             
             .pdf-table-row-striped .pdf-table-cell {
-                background-color: #f6f8fa;
+                background-color: ${surfaceColor};
             }
             
-            /* Enhanced code styling with customizable options */
+            tbody tr:last-child .pdf-table-cell {
+                border-bottom: none;
+            }
+            
+            /* Modern code block styling - dark theme */
             .pdf-code-block {
-                background-color: #f6f8fa;
-                border-radius: 6px;
-                padding: 16px;
-                overflow: auto;
-                margin: 16px 0;
+                background: ${codeBgColor};
+                border-radius: 10px;
+                padding: 1.25em 1.5em;
+                overflow-x: auto;
+                margin: 1.5em 0;
                 page-break-inside: avoid;
                 position: relative;
+                box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.05);
                 ${syntaxHighlighting?.lineNumbers ? "counter-reset: line-numbering;" : ""}
+            }
+            
+            .pdf-code-block::before {
+                content: '';
+                position: absolute;
+                top: 12px;
+                left: 16px;
+                width: 12px;
+                height: 12px;
+                background: #ef4444;
+                border-radius: 50%;
+                box-shadow: 20px 0 0 #eab308, 40px 0 0 #22c55e;
             }
             
             .pdf-code-language {
                 position: absolute;
                 top: 8px;
-                right: 8px;
-                background: ${colors.text};
-                color: ${colors.background};
-                padding: 2px 6px;
-                border-radius: 3px;
-                font-size: 10px;
-                font-weight: 600;
+                right: 12px;
+                background: rgba(255,255,255,0.1);
+                color: ${codeTextColor};
+                padding: 4px 10px;
+                border-radius: 6px;
+                font-size: 11px;
+                font-weight: 500;
                 text-transform: uppercase;
+                letter-spacing: 0.5px;
                 font-family: ${this.getFontFamilyCSS(syntaxHighlighting?.fontFamily || "monospace")};
+                backdrop-filter: blur(4px);
             }
             
             .pdf-code {
                 background-color: transparent;
                 padding: 0;
+                padding-top: 1.5em;
                 border-radius: 0;
                 font-family: ${this.getFontFamilyCSS(syntaxHighlighting?.fontFamily || "monospace")};
-                font-size: ${syntaxHighlighting?.fontSize || enhancedFontSize * 0.85}px;
-                line-height: 1.45;
-                color: ${colors.text};
+                font-size: ${syntaxHighlighting?.fontSize || Math.round(enhancedFontSize * 0.85)}px;
+                line-height: 1.6;
+                color: ${codeTextColor};
+                display: block;
+                white-space: pre;
+                tab-size: 2;
             }
             
             .pdf-inline-code {
-                background-color: ${colors.text}20;
-                padding: 0.2em 0.4em;
-                border-radius: 6px;
+                background-color: ${surfaceColor};
+                border: 1px solid ${borderColor};
+                padding: 0.2em 0.5em;
+                border-radius: 5px;
                 font-family: ${this.getFontFamilyCSS(syntaxHighlighting?.fontFamily || "monospace")};
-                font-size: 85%;
-                color: ${colors.text};
+                font-size: 0.875em;
+                color: #c026d3;
+                font-weight: 500;
             }
             
             ${
@@ -1076,9 +1182,9 @@ export class MarkdownToPdfService {
                 left: -3em;
                 width: 2.5em;
                 text-align: right;
-                color: ${colors.text}60;
-                border-right: 1px solid ${colors.text}20;
-                padding-right: 0.5em;
+                color: ${codeTextColor}60;
+                border-right: 1px solid rgba(255,255,255,0.1);
+                padding-right: 0.75em;
                 user-select: none;
             }
             `
@@ -1088,90 +1194,166 @@ export class MarkdownToPdfService {
             /* Enhanced strikethrough support (GFM) */
             .pdf-strikethrough {
                 text-decoration: line-through;
-                color: #656d76;
+                color: ${subtleGray};
+                opacity: 0.7;
             }
             
-            /* Enhanced task list styling */
+            /* Modern task list styling */
             .pdf-task-item {
                 list-style: none;
                 margin-left: -1.6em;
                 position: relative;
+                padding: 0.35em 0;
             }
             
             .pdf-task-checkbox {
-                margin-right: 0.5em;
+                margin-right: 0.75em;
                 margin-left: 0.2em;
                 vertical-align: middle;
                 pointer-events: none;
+                width: 16px;
+                height: 16px;
+                accent-color: ${accentColor};
             }
             
             /* Enhanced list styling */
             .pdf-list {
                 margin-top: 0;
-                margin-bottom: 16px;
-                padding-left: 2em;
+                margin-bottom: 1.25em;
+                padding-left: 1.75em;
+            }
+            
+            ul.pdf-list {
+                list-style-type: none;
+            }
+            
+            ul.pdf-list > .pdf-list-item::before {
+                content: '•';
+                color: ${accentColor};
+                font-weight: bold;
+                display: inline-block;
+                width: 1em;
+                margin-left: -1em;
+                font-size: 1.2em;
+                line-height: 1;
+                vertical-align: middle;
+            }
+            
+            ol.pdf-list {
+                list-style-type: decimal;
+                list-style-position: outside;
+            }
+            
+            ol.pdf-list > .pdf-list-item::marker {
+                color: ${accentColor};
+                font-weight: 600;
             }
             
             .pdf-list-item {
-                margin-bottom: 0.25em;
-                word-wrap: break-all;
+                margin-bottom: 0.5em;
+                word-wrap: break-word;
+                padding-left: 0.25em;
             }
             
             .pdf-list .pdf-list {
-                margin-top: 0;
-                margin-bottom: 0;
+                margin-top: 0.5em;
+                margin-bottom: 0.5em;
             }
             
-            /* Enhanced link styling with customizable colors */
+            /* Nested list different bullet styles */
+            ul.pdf-list ul.pdf-list > .pdf-list-item::before {
+                content: '◦';
+            }
+            
+            ul.pdf-list ul.pdf-list ul.pdf-list > .pdf-list-item::before {
+                content: '▪';
+                font-size: 0.8em;
+            }
+            
+            /* Enhanced link styling */
             .pdf-link {
-                color: ${colors.link};
+                color: ${colors.link || accentColor};
                 text-decoration: none;
+                border-bottom: 1px solid transparent;
+                transition: border-color 0.2s ease;
             }
             
             .pdf-link:hover {
-                text-decoration: underline;
+                border-bottom-color: ${colors.link || accentColor};
             }
             
             /* Enhanced image styling */
             .pdf-image {
-                max-width: 680px;
-                width: 100%;
+                max-width: 100%;
                 height: auto;
-                box-sizing: content-box;
+                box-sizing: border-box;
                 background-color: #ffffff;
-                border-style: none;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
                 page-break-inside: avoid;
-              }
+                margin: 1.5em 0;
+            }
             
-            /* Horizontal rules */
+            /* Elegant horizontal rules */
             hr {
-                height: 0.25em;
+                height: 0;
                 padding: 0;
-                margin: 24px 0;
-                background-color: #d1d9e0;
+                margin: 2.5em 0;
+                background: transparent;
                 border: 0;
+                border-top: 2px solid ${borderColor};
+                position: relative;
+            }
+            
+            hr::after {
+                content: '§';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: ${colors.background};
+                padding: 0 1em;
+                color: ${borderColor};
+                font-size: 1.25em;
             }
             
             /* Definition lists */
             dl {
                 padding: 0;
+                margin: 1.25em 0;
             }
             
             dl dt {
                 padding: 0;
-                margin-top: 16px;
+                margin-top: 1.25em;
                 font-size: 1em;
-                font-style: italic;
-                font-weight: 600;
+                font-weight: 700;
+                color: ${colors.text};
             }
             
             dl dd {
-                padding: 0 16px;
-                margin-bottom: 16px;
+                padding: 0.5em 0 0.5em 1.5em;
+                margin-bottom: 0.75em;
+                border-left: 3px solid ${borderColor};
+                color: ${subtleGray};
+            }
+            
+            /* Strong and emphasis */
+            strong, b {
+                font-weight: 700;
+                color: ${colors.text};
+            }
+            
+            em, i {
+                font-style: italic;
             }
             
             /* Print-specific optimizations */
             @media print {
+                body {
+                    padding: 0;
+                }
+                
                 .pdf-content {
                     color: black !important;
                 }
@@ -1182,12 +1364,34 @@ export class MarkdownToPdfService {
                 }
                 
                 .pdf-code-block {
-                    background-color: #f8f9fa !important;
-                    border: 1px solid #e1e4e8 !important;
+                    background-color: #f3f4f6 !important;
+                    color: #1f2937 !important;
+                    border: 1px solid #d1d5db !important;
+                    box-shadow: none !important;
+                }
+                
+                .pdf-code-block::before {
+                    display: none;
+                }
+                
+                .pdf-code {
+                    color: #1f2937 !important;
+                }
+                
+                .pdf-table {
+                    box-shadow: none !important;
                 }
                 
                 .pdf-table-cell {
                     border-color: black !important;
+                }
+                
+                .pdf-image {
+                    box-shadow: none !important;
+                }
+                
+                hr::after {
+                    display: none;
                 }
             }
             
@@ -1198,94 +1402,232 @@ export class MarkdownToPdfService {
 
   /**
    * Get syntax highlighting CSS for the specified theme
+   * All themes are optimized for dark code block backgrounds
    */
   private getSyntaxHighlightingCss(theme: SyntaxTheme): string {
+    // Base styles for all themes - optimized for dark backgrounds
+    const baseStyles = `
+                    .hljs {
+                        background: transparent;
+                        padding: 0;
+                    }
+                    .hljs code {
+                        background: transparent;
+                    }
+                `;
+
     switch (theme) {
       case "github":
-        return `
+        // GitHub Dark theme colors
+        return (
+          baseStyles +
+          `
                     .hljs {
-                        color: #24292e;
-                        background: #f6f8fa;
+                        color: #e6edf3;
                     }
                     .hljs-comment,
                     .hljs-quote {
-                        color: #6a737d;
+                        color: #8b949e;
                         font-style: italic;
                     }
                     .hljs-keyword,
                     .hljs-selector-tag,
                     .hljs-type {
-                        color: #d73a49;
+                        color: #ff7b72;
                     }
                     .hljs-string,
                     .hljs-attr {
-                        color: #032f62;
+                        color: #a5d6ff;
                     }
                     .hljs-number,
                     .hljs-literal {
-                        color: #005cc5;
+                        color: #79c0ff;
                     }
                     .hljs-variable,
-                    .hljs-title {
-                        color: #6f42c1;
+                    .hljs-template-variable {
+                        color: #ffa657;
+                    }
+                    .hljs-title,
+                    .hljs-title.class_,
+                    .hljs-title.function_ {
+                        color: #d2a8ff;
                     }
                     .hljs-function {
-                        color: #6f42c1;
+                        color: #d2a8ff;
                     }
                     .hljs-tag {
-                        color: #22863a;
+                        color: #7ee787;
                     }
-                `;
+                    .hljs-name {
+                        color: #7ee787;
+                    }
+                    .hljs-attribute {
+                        color: #79c0ff;
+                    }
+                    .hljs-built_in {
+                        color: #ffa657;
+                    }
+                    .hljs-params {
+                        color: #e6edf3;
+                    }
+                    .hljs-meta {
+                        color: #8b949e;
+                    }
+                    .hljs-regexp {
+                        color: #a5d6ff;
+                    }
+                    .hljs-selector-class,
+                    .hljs-selector-id {
+                        color: #7ee787;
+                    }
+                `
+        );
       case "monokai":
-        return `
+        return (
+          baseStyles +
+          `
                     .hljs {
                         color: #f8f8f2;
-                        background: #272822;
                     }
                     .hljs-comment,
                     .hljs-quote {
                         color: #75715e;
+                        font-style: italic;
                     }
                     .hljs-keyword,
                     .hljs-selector-tag {
                         color: #f92672;
                     }
-                    .hljs-string {
+                    .hljs-string,
+                    .hljs-attr {
                         color: #e6db74;
                     }
-                    .hljs-number {
+                    .hljs-number,
+                    .hljs-literal {
                         color: #ae81ff;
                     }
                     .hljs-variable,
-                    .hljs-title {
+                    .hljs-template-variable {
+                        color: #fd971f;
+                    }
+                    .hljs-title,
+                    .hljs-title.class_,
+                    .hljs-title.function_ {
                         color: #a6e22e;
                     }
                     .hljs-function {
                         color: #66d9ef;
                     }
-                `;
+                    .hljs-tag {
+                        color: #f92672;
+                    }
+                    .hljs-name {
+                        color: #f92672;
+                    }
+                    .hljs-attribute {
+                        color: #a6e22e;
+                    }
+                    .hljs-built_in {
+                        color: #66d9ef;
+                    }
+                    .hljs-params {
+                        color: #fd971f;
+                    }
+                    .hljs-type {
+                        color: #66d9ef;
+                        font-style: italic;
+                    }
+                `
+        );
       case "vs":
-        return `
+        // VS Code Dark+ theme
+        return (
+          baseStyles +
+          `
                     .hljs {
-                        color: #000;
-                        background: #fff;
+                        color: #d4d4d4;
                     }
                     .hljs-comment,
                     .hljs-quote {
-                        color: #008000;
+                        color: #6a9955;
+                        font-style: italic;
                     }
                     .hljs-keyword {
-                        color: #0000ff;
+                        color: #569cd6;
+                    }
+                    .hljs-selector-tag {
+                        color: #569cd6;
+                    }
+                    .hljs-string,
+                    .hljs-attr {
+                        color: #ce9178;
+                    }
+                    .hljs-number,
+                    .hljs-literal {
+                        color: #b5cea8;
+                    }
+                    .hljs-variable,
+                    .hljs-template-variable {
+                        color: #9cdcfe;
+                    }
+                    .hljs-title,
+                    .hljs-title.class_,
+                    .hljs-title.function_ {
+                        color: #dcdcaa;
+                    }
+                    .hljs-function {
+                        color: #dcdcaa;
+                    }
+                    .hljs-tag {
+                        color: #569cd6;
+                    }
+                    .hljs-name {
+                        color: #4ec9b0;
+                    }
+                    .hljs-attribute {
+                        color: #9cdcfe;
+                    }
+                    .hljs-built_in {
+                        color: #4ec9b0;
+                    }
+                    .hljs-type {
+                        color: #4ec9b0;
+                    }
+                    .hljs-params {
+                        color: #9cdcfe;
+                    }
+                `
+        );
+      default:
+        // Default to GitHub Dark style
+        return (
+          baseStyles +
+          `
+                    .hljs {
+                        color: #e6edf3;
+                    }
+                    .hljs-comment,
+                    .hljs-quote {
+                        color: #8b949e;
+                        font-style: italic;
+                    }
+                    .hljs-keyword {
+                        color: #ff7b72;
                     }
                     .hljs-string {
-                        color: #a31515;
+                        color: #a5d6ff;
                     }
                     .hljs-number {
-                        color: #000;
+                        color: #79c0ff;
                     }
-                `;
-      default:
-        return "";
+                    .hljs-title {
+                        color: #d2a8ff;
+                    }
+                    .hljs-function {
+                        color: #d2a8ff;
+                    }
+                `
+        );
     }
   }
 
