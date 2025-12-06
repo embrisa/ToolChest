@@ -16,9 +16,9 @@ export default async function IndexPage() {
     <NextIntlClientProvider locale={locale} messages={messages}>
       <WebVitals debug={process.env.NODE_ENV === "development"} />
       <Header />
-      <main className="flex-grow relative">
+      <div className="flex-grow relative">
         <HomePage />
-      </main>
+      </div>
       <Footer />
     </NextIntlClientProvider>
   );

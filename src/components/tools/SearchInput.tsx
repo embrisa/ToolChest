@@ -148,6 +148,7 @@ export function SearchInput({
           placeholder={placeholder}
           className={cn(
             "pl-12 pr-12",
+            "text-foreground placeholder:text-foreground-secondary",
             "bg-neutral-50 border-neutral-200",
             "hover:border-brand-300 focus:border-brand-500",
             "transition-all duration-200",

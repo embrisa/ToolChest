@@ -76,7 +76,7 @@ export function TagFilter({
     >
       {/* Header with enhanced spacing */}
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-primary text-xl font-semibold">
+        <h2 className="text-foreground text-xl font-semibold">
           Filter by Tag
           {selectedCount > 0 && (
             <span
@@ -157,7 +157,7 @@ export function TagFilter({
                 </div>
 
                 <div className="flex-1 min-w-0 space-y-2">
-                  <div className="text-primary font-medium text-lg leading-tight">
+                  <div className="text-foreground font-medium text-lg leading-tight">
                     {tag.name}
                   </div>
                   {showCount && tag.toolCount !== undefined && (
@@ -165,7 +165,7 @@ export function TagFilter({
                       id={`tag-count-${tag.id}`}
                       className={cn(
                         "text-sm font-medium",
-                        isSelected ? "text-brand-600" : "text-secondary",
+                        isSelected ? "text-brand-700" : "text-foreground-secondary",
                       )}
                     >
                       {tag.toolCount} tools
@@ -184,7 +184,7 @@ export function TagFilter({
             onKeyDown={handleExpandKeyDown}
             className={cn(
               "card w-full p-6 min-h-[60px]",
-              "text-secondary hover:text-primary",
+              "text-foreground hover:text-primary",
               "hover:bg-neutral-50",
               "focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2",
               "transition-all duration-200 group",

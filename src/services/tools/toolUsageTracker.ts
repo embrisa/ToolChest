@@ -1,5 +1,3 @@
-import { mutate } from "swr";
-
 /**
  * Lightweight client-side helper for recording tool usage.
  * Falls back gracefully when the browser doesn't support newer APIs.
@@ -7,12 +5,19 @@ import { mutate } from "swr";
 const USAGE_ENDPOINT = (slug: string) => `/api/tools/${slug}/usage`;
 
 const revalidateToolCaches = () => {
-  // Only attempt to revalidate on the client.
-  if (typeof window === "undefined") {
-    return;
-  }
-
-  void mutate((key) => typeof key === "string" && key.startsWith("/api/tools"));
+  // SWR is not guaranteed to be present here; this is a best-effort no-op.
+  if (typeof window === "undefined") return;
+  // Dynamically import to avoid hard dependency issues.
+  import("swr")
+    .then((mod) => {
+      const mutator = (mod as any).mutate;
+      if (typeof mutator === "function") {
+        void mutator((key: unknown) => typeof key === "string" && key.startsWith("/api/tools"));
+      }
+    })
+    .catch(() => {
+      // Silent fallback; cache revalidation is optional.
+    });
 };
 
 interface RecordUsageOptions {

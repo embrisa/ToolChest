@@ -206,21 +206,21 @@ export function Footer({ className }: FooterProps) {
             This site follows modern web standards and best practices for
             <Link
               href="/accessibility"
-              className="ml-1 text-brand-600 hover:text-brand-700 underline underline-offset-2 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-inset rounded px-1"
+              className="ml-1 text-brand-800 hover:text-brand-900 underline underline-offset-2 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-inset rounded px-1 font-semibold"
             >
               accessibility (WCAG 2.1 AA)
             </Link>
             ,
             <Link
               href="/privacy"
-              className="ml-1 text-brand-600 hover:text-brand-700 underline underline-offset-2 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-inset rounded px-1"
+              className="ml-1 text-brand-800 hover:text-brand-900 underline underline-offset-2 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-inset rounded px-1 font-semibold"
             >
               privacy protection
             </Link>
             , and
             <Link
               href="/performance"
-              className="ml-1 text-brand-600 hover:text-brand-700 underline underline-offset-2 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-inset rounded px-1"
+              className="ml-1 text-brand-800 hover:text-brand-900 underline underline-offset-2 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-inset rounded px-1 font-semibold"
             >
               optimal performance
             </Link>

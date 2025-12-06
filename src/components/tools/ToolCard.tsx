@@ -180,7 +180,7 @@ export function ToolCard({
               as="h3"
               className={cn(
                 "text-xl font-semibold",
-                "text-primary",
+                "text-foreground",
                 "transition-all duration-200",
                 toolStyling.titleHover,
               )}
@@ -217,7 +217,7 @@ export function ToolCard({
             {tool.description && tool.description.trim().length > 0 && (
               <p
                 id={`tool-description-${tool.id}`}
-                className="text-secondary text-lg line-clamp-2 text-pretty leading-relaxed"
+                className="text-foreground text-lg line-clamp-2 text-pretty leading-relaxed"
               >
                 {tool.description}
               </p>
@@ -260,7 +260,7 @@ export function ToolCard({
                       }
                       aria-label={`Tag: ${tag.name}`}
                     >
-                      {tag.name}
+                      <span className="text-foreground">{tag.name}</span>
                     </span>
                   );
                 })}
@@ -271,7 +271,7 @@ export function ToolCard({
                     className={cn(
                       "inline-flex items-center px-3 py-1.5 rounded-lg",
                       "text-sm font-medium",
-                      "bg-neutral-100 text-muted",
+                      "bg-neutral-100 text-foreground-secondary",
                     )}
                     aria-label={`${tool.tags.filter((tag) => tag.name && tag.name.trim().length > 0).length - 3} additional tags`}
                   >
@@ -287,7 +287,7 @@ export function ToolCard({
 
             {showUsageCount && tool.usageCount !== undefined && (
               <div
-                className={cn("flex items-center gap-2 text-sm", "text-muted")}
+                className="flex items-center gap-2 text-sm text-foreground"
                 aria-label={`Usage statistics: ${tool.usageCount.toLocaleString()} uses`}
               >
                 <svg
@@ -310,7 +310,7 @@ export function ToolCard({
                     d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                   />
                 </svg>
-                <span>{tool.usageCount} uses</span>
+                <span className="text-foreground">{tool.usageCount} uses</span>
               </div>
             )}
           </CardContent>

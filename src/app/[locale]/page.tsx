@@ -85,7 +85,7 @@ function HomePageContent() {
   return (
     <div className="min-h-screen" suppressHydrationWarning>
       {/* Hero Section */}
-      <header className="relative overflow-hidden">
+      <div className="relative overflow-hidden" role="presentation">
         <div className="relative container-wide px-6 sm:px-8 lg:px-12 py-20 sm:py-24 lg:py-16">
           <div className="text-center animate-fade-in-up">
             <h1 className="text-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8">
@@ -160,7 +160,7 @@ function HomePageContent() {
             </div>
           </div>
         </div>
-      </header>
+      </div>
 
       {/* Main Content */}
       <div className="container-wide px-6 sm:px-8 lg:px-12 py-12 lg:py-16">
@@ -168,13 +168,13 @@ function HomePageContent() {
         <div className="lg:hidden mb-10">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-heading text-xl font-semibold text-primary">
+              <h2 className="text-heading text-xl font-semibold text-foreground">
                 {filterState.query
                   ? t("sections.searchResults")
                   : t("sections.allTools")}
               </h2>
               <p
-                className="text-body text-secondary mt-2"
+                className="text-body text-foreground mt-2"
                 data-testid="results-summary-mobile"
               >
                 {isLoading
@@ -243,7 +243,7 @@ function HomePageContent() {
                     : t("sections.allTools")}
                 </h2>
                 <p
-                  className="text-body text-secondary mt-2"
+                  className="text-body text-foreground mt-2"
                   data-testid="results-summary-desktop"
                 >
                   {isLoading
