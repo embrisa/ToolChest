@@ -18,6 +18,8 @@ async function loadModularMessages(locale: string) {
     "tools/hash-generator",
     "tools/favicon-generator",
     "tools/markdown-to-pdf",
+    "tools/format-converter",
+    "tools/jwt-decoder",
   ];
 
   const messages: Record<string, unknown> = {};
