@@ -8,37 +8,47 @@ import {
 } from "@heroicons/react/24/outline";
 import { cn } from "@/utils";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
+import { getLocale } from "next-intl/server";
 
 export interface FooterProps {
   className?: string;
 }
 
-export function Footer({ className }: FooterProps) {
+export async function Footer({ className }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const locale = await getLocale();
+  const localePrefix = `/${locale}`;
+
+  const withLocale = (href: string) => {
+    if (href.startsWith("http")) return href;
+    if (href === "/") return localePrefix;
+    const normalized = href.startsWith("/") ? href : `/${href}`;
+    return `${localePrefix}${normalized}`;
+  };
 
   const footerLinks = [
     {
       title: "Legal",
       links: [
-        { href: "/privacy", label: "Privacy Policy" },
-        { href: "/terms", label: "Terms of Service" },
-        { href: "/cookies", label: "Cookie Policy" },
+        { href: withLocale("/privacy"), label: "Privacy Policy" },
+        { href: withLocale("/terms"), label: "Terms of Service" },
+        { href: withLocale("/cookies"), label: "Cookie Policy" },
       ],
     },
     {
       title: "Company",
       links: [
-        { href: "/about", label: "About Us" },
-        { href: "/contact", label: "Contact" },
-        { href: "/blog", label: "Blog" },
+        { href: withLocale("/about"), label: "About Us" },
+        { href: withLocale("/contact"), label: "Contact" },
+        { href: withLocale("/blog"), label: "Blog" },
       ],
     },
     {
       title: "Resources",
       links: [
-        { href: "/docs", label: "Documentation" },
-        { href: "/api", label: "API Reference" },
-        { href: "/changelog", label: "Changelog" },
+        { href: withLocale("/docs"), label: "Documentation" },
+        { href: withLocale("/api"), label: "API Reference" },
+        { href: withLocale("/changelog"), label: "Changelog" },
       ],
     },
   ];
@@ -79,7 +89,7 @@ export function Footer({ className }: FooterProps) {
           <div className="mb-16 lg:mb-20 text-center">
             <div className="mb-8">
               <Link
-                href="/"
+                href={withLocale("/")}
                 className={cn(
                   "inline-flex items-center text-4xl lg:text-5xl font-bold",
                   "text-primary hover:text-brand-600 transition-all duration-200",
@@ -205,21 +215,21 @@ export function Footer({ className }: FooterProps) {
           <p className="text-sm text-foreground-tertiary leading-relaxed max-w-4xl mx-auto">
             This site follows modern web standards and best practices for
             <Link
-              href="/accessibility"
+              href={withLocale("/accessibility")}
               className="ml-1 text-brand-800 hover:text-brand-900 underline underline-offset-2 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-inset rounded px-1 font-semibold"
             >
               accessibility (WCAG 2.1 AA)
             </Link>
             ,
             <Link
-              href="/privacy"
+              href={withLocale("/privacy")}
               className="ml-1 text-brand-800 hover:text-brand-900 underline underline-offset-2 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-inset rounded px-1 font-semibold"
             >
               privacy protection
             </Link>
             , and
             <Link
-              href="/performance"
+              href={withLocale("/performance")}
               className="ml-1 text-brand-800 hover:text-brand-900 underline underline-offset-2 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-inset rounded px-1 font-semibold"
             >
               optimal performance

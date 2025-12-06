@@ -107,8 +107,8 @@ describe("Header Translation Integration", () => {
       const toolsLink = screen.getByRole("link", { name: /tools/i });
       const aboutLink = screen.getByRole("link", { name: /about/i });
 
-      expect(toolsLink).toHaveAttribute("href", "/tools");
-      expect(aboutLink).toHaveAttribute("href", "/about");
+      expect(toolsLink).toHaveAttribute("href", "/en/tools");
+      expect(aboutLink).toHaveAttribute("href", "/en/about");
     });
   });
 

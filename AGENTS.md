@@ -70,7 +70,7 @@ Purpose: fast, consistent onboarding and execution for coding agents working in 
 
 ## Data, services, and API
 - Prisma schema: `prisma/schema.prisma`; SQLite schemas for tests in `prisma/schema.test.prisma`.
-- Seeds: `prisma/seed.ts`; test DBs in `prisma/test*.db`.
+- Seeds: `prisma/seed.ts` (dev) and `prisma/seed.cjs` (prod). When adding/updating tools or tags, keep both seeds in sync so prod sees new tools. Test DBs live in `prisma/test*.db`.
 - Admin token: `ADMIN_SECRET_TOKEN` (keep out of logs); no user accounts currently.
 - Service pattern: extend `BaseService`/`ToolService` in `src/services`; keep operations client-first with server fallback only when necessary.
 

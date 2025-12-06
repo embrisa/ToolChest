@@ -10,7 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import { cn } from "@/utils";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export interface HeaderProps {
   className?: string;
@@ -22,6 +22,11 @@ export function Header({ className }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
   const t = useTranslations("components.layout.header");
+  const locale = useLocale();
+  const localePrefix = `/${locale}`;
+  const homePath = localePrefix;
+  const toolsPath = `${localePrefix}/tools`;
+  const aboutPath = `${localePrefix}/about`;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,12 +65,12 @@ export function Header({ className }: HeaderProps) {
 
     const trimmed = value.trim();
     if (trimmed.length === 0) {
-      router.push("/");
+      router.push(homePath);
       return;
     }
 
     const query = encodeURIComponent(trimmed);
-    router.push(`/?query=${query}`);
+    router.push(`${toolsPath}?query=${query}`);
   };
 
   const toggleMobileMenu = () => {
@@ -92,7 +97,7 @@ export function Header({ className }: HeaderProps) {
           >
             {/* Logo with enhanced brand typography and accessibility */}
             <Link
-              href="/"
+              href={homePath}
               className={cn(
                 // Enhanced brand typography following design philosophy
                 "flex items-center text-2xl sm:text-3xl lg:text-4xl font-bold",
@@ -149,7 +154,7 @@ export function Header({ className }: HeaderProps) {
                 aria-label="Main site navigation"
               >
                 <Link
-                  href="/tools"
+                  href={toolsPath}
                   className={cn(
                     "btn-secondary text-base font-medium",
                     "hover:bg-background-secondary hover:text-brand-600",
@@ -158,7 +163,7 @@ export function Header({ className }: HeaderProps) {
                   {t("navigation.tools")}
                 </Link>
                 <Link
-                  href="/about"
+                  href={aboutPath}
                   className={cn(
                     "btn-secondary text-base font-medium",
                     "hover:bg-background-secondary hover:text-brand-600",
@@ -277,7 +282,7 @@ export function Header({ className }: HeaderProps) {
               <nav aria-label="Mobile site navigation">
                 <div className="space-y-4">
                   <Link
-                    href="/tools"
+                    href={toolsPath}
                     className={cn(
                       "card-interactive flex items-center justify-between",
                       "px-6 py-4 text-lg font-medium rounded-lg",
@@ -293,7 +298,7 @@ export function Header({ className }: HeaderProps) {
                     </span>
                   </Link>
                   <Link
-                    href="/about"
+                    href={aboutPath}
                     className={cn(
                       "card-interactive flex items-center justify-between",
                       "px-6 py-4 text-lg font-medium rounded-lg",

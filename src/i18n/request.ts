@@ -5,6 +5,7 @@ async function loadModularMessages(locale: string) {
   const modules = [
     "common",
     "pages/home",
+    "pages/about",
     "pages/tools",
     "pages/error",
     "pages/admin",

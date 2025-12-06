@@ -1,0 +1,24 @@
+{
+  "title": "About tool-chest",
+  "subtitle": "Privacy-first utility toolbox for everyday tasks.",
+  "intro": "tool-chest delivers fast, client-side tools so your data stays on your device. No accounts, no tracking, and a strong focus on accessibility.",
+  "pillarsTitle": "What you can expect",
+  "pillars": {
+    "privacy": {
+      "title": "Privacy-first",
+      "description": "Most tools run entirely in your browser, keeping sensitive data local."
+    },
+    "accessibility": {
+      "title": "Accessible by default",
+      "description": "Built to meet WCAG 2.1 AA with keyboard-friendly flows and clear focus states."
+    },
+    "reliability": {
+      "title": "Reliable and fast",
+      "description": "Modern Next.js architecture, offline-friendly patterns, and zero-cost usage."
+    }
+  },
+  "cta": {
+    "primary": "Browse tools",
+    "secondary": "Back to home"
+  }
+}

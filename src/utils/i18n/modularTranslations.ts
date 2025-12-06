@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 export type TranslationModule =
   | "common"
   | "pages.home"
+  | "pages.about"
   | "pages.tools"
   | "pages.error"
   | "pages.admin"
