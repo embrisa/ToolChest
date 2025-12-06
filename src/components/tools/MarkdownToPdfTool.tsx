@@ -709,8 +709,9 @@ export function MarkdownToPdfTool() {
             ]}
           >
             <CopyExportBar
-              value={null}
-              rawValue={null}
+              value={state.pdfResult?.pdfDataUrl ?? ""}
+              rawValue={state.markdownContent}
+              jsonValue={state.pdfResult?.metadata}
               filename={
                 pdfDownloadOptions?.filename || "tool-chest_markdown.pdf"
               }

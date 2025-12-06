@@ -42,6 +42,15 @@ describe("CopyExportBar", () => {
     expect(screen.getByRole("button", { name: /download result/i })).toBeEnabled();
   });
 
+  it("enables download when only onDownloadData is provided", () => {
+    render(<CopyExportBar onDownloadData={() => "download"} />);
+
+    expect(screen.getByRole("button", { name: /copy result/i })).toBeDisabled();
+    expect(screen.getByRole("button", { name: /copy raw result/i })).toBeDisabled();
+    expect(screen.getByRole("button", { name: /copy json result/i })).toBeDisabled();
+    expect(screen.getByRole("button", { name: /download result/i })).toBeEnabled();
+  });
+
   it("copies text, raw and JSON and shows feedback", async () => {
     const onAnnounce = jest.fn();
     render(

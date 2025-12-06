@@ -55,6 +55,9 @@ export function CopyExportBar({
   const canCopy = Boolean(value && value.length > 0);
   const canCopyRaw = Boolean(rawValue && rawValue.length > 0);
   const canCopyJSON = jsonValue !== undefined && jsonValue !== null;
+  const canDownload = Boolean(
+    onDownloadData || canCopy || canCopyRaw || canCopyJSON,
+  );
 
   const L = {
     copy: labels?.copy ?? "Copy",
@@ -110,10 +113,12 @@ export function CopyExportBar({
             type: "application/json;charset=utf-8",
           });
       }
-      if (blob) {
-        downloadBlob(blob, filename);
-        onAnnounce?.(`Downloaded ${filename}`, "polite");
+      if (!blob) {
+        onAnnounce?.("No data available to download", "assertive");
+        return;
       }
+      downloadBlob(blob, filename);
+      onAnnounce?.(`Downloaded ${filename}`, "polite");
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Download failed";
       onAnnounce?.(`Download failed: ${msg}`, "assertive");
@@ -166,7 +171,7 @@ export function CopyExportBar({
         variant="primary"
         size={compact ? "sm" : "md"}
         onClick={handleDownload}
-        disabled={disabled || !(canCopy || canCopyRaw || canCopyJSON)}
+        disabled={disabled || !canDownload}
         aria-label="Download result"
       >
         {L.download}
