@@ -73,6 +73,8 @@ async function main() {
         { toolKey: "hash-generator", nameKey: "tools.hash-generator.name", slug: "hash-generator", descriptionKey: "tools.hash-generator.description", displayOrder: 2, iconClass: "🔐" },
         { toolKey: "favicon-generator", nameKey: "tools.favicon-generator.name", slug: "favicon-generator", descriptionKey: "tools.favicon-generator.description", displayOrder: 3, iconClass: "🎨" },
         { toolKey: "markdown-to-pdf", nameKey: "tools.markdown-to-pdf.name", slug: "markdown-to-pdf", descriptionKey: "tools.markdown-to-pdf.description", displayOrder: 4, iconClass: "📄" },
+        { toolKey: "format-converter", nameKey: "tools.format-converter.name", slug: "format-converter", descriptionKey: "tools.format-converter.description", displayOrder: 5, iconClass: "🔀" },
+        { toolKey: "jwt-decoder", nameKey: "tools.jwt-decoder.name", slug: "jwt-decoder", descriptionKey: "tools.jwt-decoder.description", displayOrder: 6, iconClass: "🛡️" },
     ];
 
     for (const tool of toolsData) {
@@ -89,6 +91,8 @@ async function main() {
         { toolSlug: "hash-generator", tagSlugs: ["security", "generation"] },
         { toolSlug: "favicon-generator", tagSlugs: ["generation", "design"] },
         { toolSlug: "markdown-to-pdf", tagSlugs: ["conversion", "document"] },
+        { toolSlug: "format-converter", tagSlugs: ["conversion"] },
+        { toolSlug: "jwt-decoder", tagSlugs: ["security"] },
     ];
 
     for (const relation of toolTagRelations) {
