@@ -18,6 +18,7 @@ import {
   CopyExportBar,
   FileInfo,
 } from "@/components/ui";
+import { ErrorBoundary } from "@/components/errors/ErrorBoundary";
 import { Base64Service } from "@/services/tools/base64Service";
 import { Base64State, Base64Result, A11yAnnouncement } from "@/types/tools/base64";
 import { cn } from "@/utils";
@@ -318,7 +319,8 @@ export function Base64Tool() {
   }, [announceToScreenReader]);
 
   return (
-    <div className="container-wide space-y-12">
+    <ErrorBoundary>
+      <div className="container-wide space-y-12">
       {/* ARIA live region for screen reader announcements */}
       <AriaLiveRegion announcement={announcement} />
 
@@ -606,125 +608,128 @@ export function Base64Tool() {
       )}
 
       {/* Results Section */}
-      <Card variant="elevated" className="animate-fade-in-up">
-        <CardHeader className="pb-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-title text-xl font-semibold text-foreground mb-3">
-                {state.mode === "encode"
-                  ? `${tCommon("ui.modes.encode")}d Result`
-                  : `${tCommon("ui.modes.decode")}d Result`}
-              </h2>
-              {state.result?.success && state.result.data ? (
-                <div className="flex flex-wrap items-center gap-6 text-sm text-foreground-secondary">
-                  {state.result.originalSize && (
-                    <span>
-                      Input: {state.result.originalSize.toLocaleString()} bytes
-                    </span>
-                  )}
-                  {state.result.outputSize && (
-                    <span>
-                      Output: {state.result.outputSize.toLocaleString()} bytes
-                    </span>
-                  )}
+      <div aria-live="polite">
+        <Card variant="elevated" className="animate-fade-in-up">
+          <CardHeader className="pb-8">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-title text-xl font-semibold text-foreground mb-3">
+                  {state.mode === "encode"
+                    ? `${tCommon("ui.modes.encode")}d Result`
+                    : `${tCommon("ui.modes.decode")}d Result`}
+                </h2>
+                {state.result?.success && state.result.data ? (
+                  <div className="flex flex-wrap items-center gap-6 text-sm text-foreground-secondary">
+                    {state.result.originalSize && (
+                      <span>
+                        Input: {state.result.originalSize.toLocaleString()} bytes
+                      </span>
+                    )}
+                    {state.result.outputSize && (
+                      <span>
+                        Output: {state.result.outputSize.toLocaleString()} bytes
+                      </span>
+                    )}
 
-                  {state.result.serverSide && (
-                    <span
-                      className={cn(
-                        "inline-flex items-center px-3 py-1 rounded-lg text-xs font-medium",
-                        "bg-brand-100 text-brand-800 dark:bg-brand-900/30 dark:text-brand-200",
-                      )}
-                    >
-                      Server-side
-                    </span>
-                  )}
-                </div>
-              ) : state.isProcessing ? (
-                <div className="flex items-center gap-3 text-body text-foreground-secondary">
-                  <Loading size="sm" variant="dots" />
-                  <span>{tCommon("ui.status.processing")}</span>
-                </div>
-              ) : (
-                <p className="text-body text-foreground-secondary">
-                  {`Result will appear here after ${tCommon(`ui.modes.${state.mode}`).toLowerCase()}`}
-                </p>
-              )}
-            </div>
-            <div className="hidden" />
-          </div>
-        </CardHeader>
-        <CardContent className="pt-0">
-          <div className="space-y-6">
-            <TextareaLoadingWrapper
-              isLoading={state.isProcessing}
-              loadingText={`${tCommon(`ui.modes.${state.mode}`)}...`}
-              minDisplayTime={800}
-              aria-label={`${state.mode} operation in progress`}
-            >
-              <textarea
-                value={
-                  state.result?.success && state.result.data
-                    ? state.result.data
-                    : ""
-                }
-                readOnly
-                placeholder={
-                  state.mode === "encode"
-                    ? `${tCommon("ui.modes.encode")}d data will appear here...`
-                    : `${tCommon("ui.modes.decode")}d data will appear here...`
-                }
-                className={cn(
-                  "input-field h-40 resize-vertical text-code bg-background-tertiary",
-                  state.result?.success && state.result.data
-                    ? "cursor-text select-all"
-                    : "cursor-default",
-                  !state.result?.success || !state.result.data
-                    ? "placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
-                    : "",
+                    {state.result.serverSide && (
+                      <span
+                        className={cn(
+                          "inline-flex items-center px-3 py-1 rounded-lg text-xs font-medium",
+                          "bg-brand-100 text-brand-800 dark:bg-brand-900/30 dark:text-brand-200",
+                        )}
+                      >
+                        Server-side
+                      </span>
+                    )}
+                  </div>
+                ) : state.isProcessing ? (
+                  <div className="flex items-center gap-3 text-body text-foreground-secondary">
+                    <Loading size="sm" variant="dots" />
+                    <span>{tCommon("ui.status.processing")}</span>
+                  </div>
+                ) : (
+                  <p className="text-body text-foreground-secondary">
+                    {`Result will appear here after ${tCommon(`ui.modes.${state.mode}`).toLowerCase()}`}
+                  </p>
                 )}
-                aria-label={`${state.mode} result`}
+              </div>
+              <div className="hidden" />
+            </div>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <div className="space-y-6">
+              <TextareaLoadingWrapper
+                isLoading={state.isProcessing}
+                loadingText={`${tCommon(`ui.modes.${state.mode}`)}...`}
+                minDisplayTime={800}
+                aria-label={`${state.mode} operation in progress`}
+              >
+                <textarea
+                  value={
+                    state.result?.success && state.result.data
+                      ? state.result.data
+                      : ""
+                  }
+                  readOnly
+                  placeholder={
+                    state.mode === "encode"
+                      ? `${tCommon("ui.modes.encode")}d data will appear here...`
+                      : `${tCommon("ui.modes.decode")}d data will appear here...`
+                  }
+                  className={cn(
+                    "input-field h-40 resize-vertical text-code bg-background-tertiary",
+                    state.result?.success && state.result.data
+                      ? "cursor-text select-all"
+                      : "cursor-default",
+                    !state.result?.success || !state.result.data
+                      ? "placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
+                      : "",
+                  )}
+                  aria-label={`${state.mode} result`}
+                />
+              </TextareaLoadingWrapper>
+
+              <CopyExportBar
+                value={state.result?.success ? state.result.data || "" : ""}
+                rawValue={state.result?.success ? state.result.data || "" : ""}
+                filename={Base64Service.generateFilename(
+                  state.mode,
+                  state.result?.filename || state.fileInput?.name,
+                )}
+                mimeType="text/plain;charset=utf-8"
+                onDownloadData={() =>
+                  state.result?.success && state.result.data
+                    ? new Blob([state.result.data], {
+                        type: "text/plain;charset=utf-8",
+                      })
+                    : null
+                }
+                disabled={state.isProcessing || !state.result?.success}
+                labels={{
+                  copy: tCommon("ui.actions.copy"),
+                  copyRaw: tCommon("ui.actions.copyRaw"),
+                  copyJSON: tCommon("ui.actions.copyJSON"),
+                  download: tCommon("ui.actions.download"),
+                  copied: tCommon("ui.status.copied"),
+                }}
+                onAnnounce={(msg, kind) =>
+                  setAnnouncement(announceToScreenReader(msg, kind))
+                }
               />
-            </TextareaLoadingWrapper>
 
-            <CopyExportBar
-              value={state.result?.success ? state.result.data || "" : ""}
-              rawValue={state.result?.success ? state.result.data || "" : ""}
-              filename={Base64Service.generateFilename(
-                state.mode,
-                state.result?.filename || state.fileInput?.name,
-              )}
-              mimeType="text/plain;charset=utf-8"
-              onDownloadData={() =>
-                state.result?.success && state.result.data
-                  ? new Blob([state.result.data], {
-                      type: "text/plain;charset=utf-8",
-                    })
-                  : null
-              }
-              disabled={state.isProcessing || !state.result?.success}
-              labels={{
-                copy: tCommon("ui.actions.copy"),
-                copyRaw: tCommon("ui.actions.copyRaw"),
-                copyJSON: tCommon("ui.actions.copyJSON"),
-                download: tCommon("ui.actions.download"),
-                copied: tCommon("ui.status.copied"),
-              }}
-              onAnnounce={(msg, kind) =>
-                setAnnouncement(announceToScreenReader(msg, kind))
-              }
-            />
-
-            {/* Result Warnings */}
-            {state.result?.success &&
-              state.result.warnings &&
-              state.result.warnings.length > 0 && (
-                <Alert variant="warning" title="Processing Notes">
-                  <AlertList items={state.result.warnings} />
-                </Alert>
-              )}
-          </div>
-        </CardContent>
-      </Card>
+              {/* Result Warnings */}
+              {state.result?.success &&
+                state.result.warnings &&
+                state.result.warnings.length > 0 && (
+                  <Alert variant="warning" title="Processing Notes">
+                    <AlertList items={state.result.warnings} />
+                  </Alert>
+                )}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
+  </ErrorBoundary>
   );
 }

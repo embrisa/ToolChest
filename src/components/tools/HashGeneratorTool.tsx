@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect, useRef, useId } from "react";
 import { useTranslations } from "next-intl";
 import {
   Button,
@@ -16,6 +16,7 @@ import {
   ResultBadge,
   CopyExportBar,
 } from "@/components/ui";
+import { ErrorBoundary } from "@/components/errors/ErrorBoundary";
 import { HashGeneratorService } from "@/services/tools/hashGeneratorService";
 import {
   HashState,
@@ -55,6 +56,11 @@ export function HashGeneratorTool() {
     null,
   );
   const [generateAllHashes, setGenerateAllHashes] = useState(false);
+
+  const algorithmSelectId = useId();
+  const inputHeadingId = useId();
+  const textInputId = useId();
+  const fileInputId = useId();
 
   const { announceToScreenReader } = useAccessibilityAnnouncements();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -419,35 +425,39 @@ export function HashGeneratorTool() {
   }, [announceToScreenReader]);
 
   return (
-    <div className="container-wide space-y-12">
-      {/* ARIA live region for screen reader announcements */}
-      <AriaLiveRegion announcement={announcement} />
+    <ErrorBoundary>
+      <div className="container-wide space-y-12">
+        {/* ARIA live region for screen reader announcements */}
+        <AriaLiveRegion announcement={announcement} />
 
-      {/* Hash Algorithm and Input Type Selection */}
-      <Card variant="elevated" className="tool-card-hash">
-        <CardHeader className="pb-8">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="tool-icon tool-icon-hash h-14 w-14 rounded-2xl bg-gradient-to-br from-accent-100 to-accent-200 dark:from-accent-900/30 dark:to-accent-800/30 flex items-center justify-center">
-              <span className="text-lg font-bold text-accent-700 dark:text-accent-300">
-                #
-              </span>
+        {/* Hash Algorithm and Input Type Selection */}
+        <Card variant="elevated" className="tool-card-hash">
+          <CardHeader className="pb-8">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="tool-icon tool-icon-hash h-14 w-14 rounded-2xl bg-gradient-to-br from-accent-100 to-accent-200 dark:from-accent-900/30 dark:to-accent-800/30 flex items-center justify-center">
+                <span className="text-lg font-bold text-accent-700 dark:text-accent-300">
+                  #
+                </span>
+              </div>
+              <div>
+                <h2 className="text-title text-2xl font-semibold text-foreground mb-2">
+                  Hash Generation Settings
+                </h2>
+                <p className="text-body text-foreground-secondary">
+                  Choose your algorithm and input preferences
+                </p>
+              </div>
             </div>
-            <div>
-              <h2 className="text-title text-2xl font-semibold text-foreground mb-2">
-                Hash Generation Settings
-              </h2>
-              <p className="text-body text-foreground-secondary">
-                Choose your algorithm and input preferences
-              </p>
-            </div>
-          </div>
-        </CardHeader>
-        <CardContent className="pt-0">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          </CardHeader>
+          <CardContent className="pt-0">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Algorithm Selection */}
             <div className="space-y-4">
-              <label className="text-body font-medium text-foreground">
-                Hash Algorithm
+              <label
+                className="text-body font-medium text-foreground"
+                htmlFor={algorithmSelectId}
+              >
+                {tHash("info.supportedAlgorithms.title")}
               </label>
               <div className="space-y-3">
                 <label className="flex items-center gap-3 cursor-pointer group">
@@ -485,6 +495,7 @@ export function HashGeneratorTool() {
 
                 {!generateAllHashes && (
                   <select
+                    id={algorithmSelectId}
                     value={state.algorithm}
                     onChange={(e) =>
                       setState((prev) => ({
@@ -604,7 +615,10 @@ export function HashGeneratorTool() {
       {/* Input Section */}
       <Card variant="default">
         <CardHeader className="pb-8">
-          <h2 className="text-title text-xl font-semibold text-foreground mb-2">
+          <h2
+            id={inputHeadingId}
+            className="text-title text-xl font-semibold text-foreground mb-2"
+          >
             {state.inputType === "text"
               ? tCommon("ui.inputTypes.text") + " Input"
               : tCommon("ui.inputTypes.file") + " Upload"}
@@ -618,7 +632,11 @@ export function HashGeneratorTool() {
         <CardContent className="pt-0">
           {state.inputType === "text" ? (
             <div className="space-y-6">
+              <label className="sr-only" htmlFor={textInputId}>
+                {tHash("tool.placeholders.textInput")}
+              </label>
               <textarea
+                id={textInputId}
                 value={state.textInput}
                 onChange={(e) =>
                   setState((prev) => ({
@@ -666,6 +684,7 @@ export function HashGeneratorTool() {
                 onDrop={handleDrop}
               >
                 <input
+                  id={fileInputId}
                   ref={fileInputRef}
                   type="file"
                   onChange={(e) =>
@@ -673,6 +692,7 @@ export function HashGeneratorTool() {
                   }
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                   aria-label="File upload input"
+                  aria-labelledby={inputHeadingId}
                   disabled={state.isProcessing}
                 />
 
@@ -848,132 +868,135 @@ export function HashGeneratorTool() {
       )}
 
       {/* Hash Results Section - Always Visible */}
-      <ResultsPanel
-        title="Hash Results"
-        result={
-          // Combine all successful hash results into a single output
-          HASH_ALGORITHMS.filter(
-            (algorithm) =>
-              state.results[algorithm]?.success &&
-              state.results[algorithm]?.hash,
-          )
-            .map((algorithm) => {
-              const result = state.results[algorithm];
-              return `${algorithm}: ${result?.hash}`;
-            })
-            .join("\n\n") || ""
-        }
-        isProcessing={state.isProcessing}
-        placeholder={
-          state.isProcessing
-            ? "Generating hash values..."
-            : "Hash results will appear here after processing your input"
-        }
-        metadata={
-          Object.values(state.results).some((r) => r?.success)
-            ? [
-                {
-                  label: "Algorithms",
-                  value: HASH_ALGORITHMS.filter(
-                    (a) => state.results[a]?.success,
-                  ).length,
-                  format: (v: string | number) =>
-                    `${v} hash${Number(v) === 1 ? "" : "es"} generated`,
-                },
-                ...(Object.values(state.results).find(
-                  (r) => r?.success && r.processingTime,
-                )
-                  ? [
-                      {
-                        label: "Total Time",
-                        value: Object.values(state.results)
-                          .filter((r) => r?.success && r.processingTime)
-                          .reduce(
-                            (sum, r) => sum + (r?.processingTime || 0),
-                            0,
-                          ),
-                        format: (v: string | number) => `${v}ms`,
-                      },
-                    ]
-                  : []),
-                ...(Object.values(state.results).some(
-                  (r) => r?.success && r.serverSide,
-                )
-                  ? [{ label: "Processing", value: "Mixed (Client + Server)" }]
-                  : Object.values(state.results).some(
-                        (r) => r?.success && !r.serverSide,
-                      )
-                    ? [{ label: "Processing", value: "Client-side" }]
+      <div aria-live="polite">
+        <ResultsPanel
+          title="Hash Results"
+          result={
+            // Combine all successful hash results into a single output
+            HASH_ALGORITHMS.filter(
+              (algorithm) =>
+                state.results[algorithm]?.success &&
+                state.results[algorithm]?.hash,
+            )
+              .map((algorithm) => {
+                const result = state.results[algorithm];
+                return `${algorithm}: ${result?.hash}`;
+              })
+              .join("\n\n") || ""
+          }
+          isProcessing={state.isProcessing}
+          placeholder={
+            state.isProcessing
+              ? "Generating hash values..."
+              : "Hash results will appear here after processing your input"
+          }
+          metadata={
+            Object.values(state.results).some((r) => r?.success)
+              ? [
+                  {
+                    label: "Algorithms",
+                    value: HASH_ALGORITHMS.filter(
+                      (a) => state.results[a]?.success,
+                    ).length,
+                    format: (v: string | number) =>
+                      `${v} hash${Number(v) === 1 ? "" : "es"} generated`,
+                  },
+                  ...(Object.values(state.results).find(
+                    (r) => r?.success && r.processingTime,
+                  )
+                    ? [
+                        {
+                          label: "Total Time",
+                          value: Object.values(state.results)
+                            .filter((r) => r?.success && r.processingTime)
+                            .reduce(
+                              (sum, r) => sum + (r?.processingTime || 0),
+                              0,
+                            ),
+                          format: (v: string | number) => `${v}ms`,
+                        },
+                      ]
                     : []),
-              ]
-            : []
-        }
-        badges={
-          Object.values(state.results).some((r) => r?.success)
-            ? HASH_ALGORITHMS.filter(
-                (algorithm) => state.results[algorithm]?.success,
-              ).map((algorithm) => (
-                <ResultBadge
-                  key={algorithm}
-                  variant={
-                    ALGORITHM_INFO[algorithm]?.secure ? "success" : "warning"
-                  }
-                >
-                  {algorithm}
-                </ResultBadge>
-              ))
-            : []
-        }
-        rows={6}
-        className="animate-fade-in-up"
-      >
-        {/* Copy actions are handled by CopyExportBar */}
-        <div className="mt-4">
-          <CopyExportBar
-            value={
-              HASH_ALGORITHMS.filter(
-                (algorithm) =>
-                  state.results[algorithm]?.success &&
-                  state.results[algorithm]?.hash,
-              )
-                .map((algorithm) => {
-                  const result = state.results[algorithm];
-                  return `${algorithm}: ${result?.hash}`;
-                })
-                .join("\n\n") || ""
-            }
-            rawValue={
-              HASH_ALGORITHMS.filter(
-                (algorithm) =>
-                  state.results[algorithm]?.success &&
-                  state.results[algorithm]?.hash,
-              )
-                .map((algorithm) => state.results[algorithm]?.hash || "")
-                .join("\n") || ""
-            }
-            jsonValue={(() => {
-              const obj: Record<string, string> = {};
-              for (const algo of HASH_ALGORITHMS) {
-                const r = state.results[algo];
-                if (r?.success && r.hash) obj[algo] = r.hash;
+                  ...(Object.values(state.results).some(
+                    (r) => r?.success && r.serverSide,
+                  )
+                    ? [{ label: "Processing", value: "Mixed (Client + Server)" }]
+                    : Object.values(state.results).some(
+                          (r) => r?.success && !r.serverSide,
+                        )
+                      ? [{ label: "Processing", value: "Client-side" }]
+                      : []),
+                ]
+              : []
+          }
+          badges={
+            Object.values(state.results).some((r) => r?.success)
+              ? HASH_ALGORITHMS.filter(
+                  (algorithm) => state.results[algorithm]?.success,
+                ).map((algorithm) => (
+                  <ResultBadge
+                    key={algorithm}
+                    variant={
+                      ALGORITHM_INFO[algorithm]?.secure ? "success" : "warning"
+                    }
+                  >
+                    {algorithm}
+                  </ResultBadge>
+                ))
+              : []
+          }
+          rows={6}
+          className="animate-fade-in-up"
+        >
+          {/* Copy actions are handled by CopyExportBar */}
+          <div className="mt-4">
+            <CopyExportBar
+              value={
+                HASH_ALGORITHMS.filter(
+                  (algorithm) =>
+                    state.results[algorithm]?.success &&
+                    state.results[algorithm]?.hash,
+                )
+                  .map((algorithm) => {
+                    const result = state.results[algorithm];
+                    return `${algorithm}: ${result?.hash}`;
+                  })
+                  .join("\n\n") || ""
               }
-              return Object.keys(obj).length ? obj : undefined;
-            })()}
-            filename="hashes.txt"
-            mimeType="text/plain;charset=utf-8"
-            labels={{
-              copy: tCommon("ui.actions.copy"),
-              copyRaw: tCommon("ui.actions.copyRaw"),
-              copyJSON: tCommon("ui.actions.copyJSON"),
-              download: tCommon("ui.actions.download"),
-              copied: tCommon("ui.status.copied"),
-            }}
-            onAnnounce={(msg, kind) =>
-              setAnnouncement(announceToScreenReader(msg, kind))
-            }
-          />
-        </div>
-      </ResultsPanel>
+              rawValue={
+                HASH_ALGORITHMS.filter(
+                  (algorithm) =>
+                    state.results[algorithm]?.success &&
+                    state.results[algorithm]?.hash,
+                )
+                  .map((algorithm) => state.results[algorithm]?.hash || "")
+                  .join("\n") || ""
+              }
+              jsonValue={(() => {
+                const obj: Record<string, string> = {};
+                for (const algo of HASH_ALGORITHMS) {
+                  const r = state.results[algo];
+                  if (r?.success && r.hash) obj[algo] = r.hash;
+                }
+                return Object.keys(obj).length ? obj : undefined;
+              })()}
+              filename="hashes.txt"
+              mimeType="text/plain;charset=utf-8"
+              labels={{
+                copy: tCommon("ui.actions.copy"),
+                copyRaw: tCommon("ui.actions.copyRaw"),
+                copyJSON: tCommon("ui.actions.copyJSON"),
+                download: tCommon("ui.actions.download"),
+                copied: tCommon("ui.status.copied"),
+              }}
+              onAnnounce={(msg, kind) =>
+                setAnnouncement(announceToScreenReader(msg, kind))
+              }
+            />
+          </div>
+        </ResultsPanel>
+      </div>
     </div>
+  </ErrorBoundary>
   );
 }

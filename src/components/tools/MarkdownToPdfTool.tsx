@@ -117,6 +117,7 @@ if __name__ == "__main__":
 export function MarkdownToPdfTool() {
   const tCommon = useTranslations("tools.common");
   const tUnits = useTranslations("common");
+  const tMarkdown = useTranslations("tools.markdown-to-pdf");
 
   const MODE_OPTIONS = [
     { value: "editor", label: "Editor" },
@@ -460,8 +461,8 @@ export function MarkdownToPdfTool() {
 
         {/* Tool Header */}
         <ToolHeader
-          title="Markdown to PDF"
-          description="Convert your Markdown documents to beautiful PDFs with custom styling. Full GitHub Flavored Markdown support with live preview."
+          title={tMarkdown("page.title")}
+          description={tMarkdown("page.description")}
           iconText="📄"
         />
 
