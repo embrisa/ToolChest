@@ -56,6 +56,7 @@
     "clean": "rm -rf .next out dist node_modules/.cache test-results coverage playwright-report",
     "clean:test": "rm -rf test.db test-e2e.db test-results coverage playwright-report",
     "validate": "npm run lint && npm run test && npm run qa:translations && npm run qa:code",
+    "deploy:prod": "npm run db:deploy && npm run db:seed",
     "prepare": "npm run db:generate",
     "predev": "npm run db:generate",
     "posttest": "npm run db:generate",

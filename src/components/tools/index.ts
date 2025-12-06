@@ -9,3 +9,4 @@ export * from "./FaviconPreview";
 export * from "./MarkdownToPdfTool";
 export * from "./PdfCustomizationPanel";
 export * from "./FormatConverterTool";
+export * from "./JwtDecoderTool";

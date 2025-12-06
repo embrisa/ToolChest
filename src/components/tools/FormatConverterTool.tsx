@@ -15,6 +15,8 @@ import {
 import { FormatConverterService } from "@/services/tools/formatConverterService";
 import { DataFormat } from "@/types/tools/formatConverter";
 import { cn } from "@/utils";
+import { AriaLiveRegion, useAccessibilityAnnouncements } from "@/components/ui/AriaLiveRegion";
+import { A11yAnnouncement } from "@/types/tools/base64";
 
 export function FormatConverterTool() {
   const tCommon = useTranslations("tools.common");
@@ -26,17 +28,36 @@ export function FormatConverterTool() {
   const [fromFormat, setFromFormat] = useState<DataFormat>("json");
   const [toFormat, setToFormat] = useState<DataFormat>("xml");
   const [error, setError] = useState<string | null>(null);
+  const [processingTime, setProcessingTime] = useState<number | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [validationErrors, setValidationErrors] = useState<
+    { code: string; message: string }[]
+  >([]);
+  const [announcement, setAnnouncement] = useState<A11yAnnouncement | null>(null);
   const [importMode, setImportMode] = useState<"text" | "file">("text");
 
+  const { announceSuccess, announceError, announceWarning } = useAccessibilityAnnouncements();
+
   const handleConvert = () => {
+    if (validationErrors.length > 0) {
+      setAnnouncement(announceWarning(tCommon("validation.invalidInput")));
+      return;
+    }
+    setIsProcessing(true);
+
     const result = FormatConverterService.convert(input, fromFormat, toFormat);
+    setProcessingTime(result.processingTime);
+
     if (result.success) {
       setOutput(result.output || "");
       setError(null);
+      setAnnouncement(announceSuccess(t("tool.status.converted")));
     } else {
       setError(result.error || tCommon("errors.processingFailed"));
       setOutput("");
+      setAnnouncement(announceError(result.error || tCommon("errors.processingFailed")));
     }
+    setIsProcessing(false);
   };
 
   const onFileSelect = useCallback(async (file: File) => {
@@ -103,6 +124,7 @@ export function FormatConverterTool() {
             onFileSelect={onFileSelect}
             accept=".json,.xml,.csv,.yaml,.yml,.txt"
             maxSizeMB={10}
+            largeHintThresholdMB={5}
             title={t("tool.placeholders.input")}
             description={tCommon("ui.placeholders.fileUpload")}
             placeholder={tCommon("ui.placeholders.textInput")}
@@ -116,15 +138,35 @@ export function FormatConverterTool() {
               filePasteTip: tCommon("ui.placeholders.fileUpload"),
             }}
             fileSubtitle={tCommon("ui.placeholders.fileUpload")}
+            onValidationChange={setValidationErrors}
+            onAnnounce={(msg, kind) =>
+              setAnnouncement(kind === "assertive" ? announceError(msg) : announceSuccess(msg))
+            }
           />
-          <Button onClick={handleConvert} className="w-full">
+          <Button
+            onClick={handleConvert}
+            className="w-full"
+            disabled={isProcessing || validationErrors.length > 0}
+            aria-busy={isProcessing}
+          >
             {t("tool.actions.convert")}
           </Button>
           {error && <Alert variant="error">{error}</Alert>}
           <ResultsPanel
-            title="Output"
+            title={t("tool.outputTitle")}
             result={output}
-            placeholder="Converted output will appear here..."
+            placeholder={t("tool.outputPlaceholder")}
+            isProcessing={isProcessing}
+            metadata={
+              processingTime !== null
+                ? [
+                    {
+                      label: t("tool.labels.processingTime"),
+                      value: `${processingTime} ms`,
+                    },
+                  ]
+                : []
+            }
           >
             <CopyExportBar
               value={output}
@@ -154,10 +196,14 @@ export function FormatConverterTool() {
                 download: tCommon("ui.actions.download"),
                 copied: tCommon("ui.status.copied"),
               }}
+              onAnnounce={(msg, kind) =>
+                setAnnouncement(kind === "assertive" ? announceError(msg) : announceSuccess(msg))
+              }
           />
           </ResultsPanel>
         </CardContent>
       </Card>
+      <AriaLiveRegion announcement={announcement} />
     </div>
   );
 }

@@ -21,6 +21,11 @@ const MarkdownToPdfTool = lazy(() =>
     default: module.MarkdownToPdfTool,
   })),
 );
+const JwtDecoderTool = lazy(() =>
+  import("@/components/tools/JwtDecoderTool").then((module) => ({
+    default: module.JwtDecoderTool,
+  })),
+);
 const FormatConverterTool = lazy(() =>
   import("@/components/tools/FormatConverterTool").then((module) => ({
     default: module.FormatConverterTool,
@@ -34,6 +39,7 @@ export const TOOL_COMPONENTS = {
   "favicon-generator": FaviconGeneratorTool,
   "markdown-to-pdf": MarkdownToPdfTool,
   "format-converter": FormatConverterTool,
+  "jwt-decoder": JwtDecoderTool,
 } as const;
 
 export type ToolSlug = keyof typeof TOOL_COMPONENTS;

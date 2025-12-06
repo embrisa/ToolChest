@@ -16,8 +16,13 @@ npx prisma migrate deploy
 
 echo "✅ Database migrations completed"
 
-echo "🌱 Seeding database (if needed)..."
-npx prisma db seed || echo "ℹ️ Database seed completed or skipped"
+if [ "${SKIP_SEED}" = "true" ]; then
+    echo "⏭️  SKIP_SEED=true, skipping database seed."
+else
+    echo "🌱 Seeding database..."
+    npx prisma db seed
+    echo "✅ Database seed completed"
+fi
 
 echo "🎯 Starting Next.js application..."
 exec node server.js 

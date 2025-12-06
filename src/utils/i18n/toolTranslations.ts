@@ -90,6 +90,7 @@ export async function getAvailableTools(): Promise<string[]> {
     "format-converter",
     "favicon-generator",
     "markdown-to-pdf",
+    "jwt-decoder",
   ];
 }
 

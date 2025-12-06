@@ -210,6 +210,86 @@ export default async function ToolPage({
           },
         };
 
+      case "format-converter":
+        return {
+          iconText: "FX",
+          iconClassName: "bg-gradient-to-br from-brand-500 to-brand-600",
+          titleClassName: "text-gradient-brand",
+          description: (
+            <>
+              {tPage("description")}
+              {tPage.has("privacyMessage") && (
+                <span className="block mt-2 text-brand-600 dark:text-brand-400 font-medium">
+                  {tPage("privacyMessage")}
+                </span>
+              )}
+            </>
+          ),
+          infoSection: {
+            title: tInfo("title"),
+            description: tInfo("description"),
+            sections: [
+              {
+                title: tInfo("keyFeatures.title"),
+                titleIcon: { color: "bg-brand-500" },
+                items: tInfo
+                  .raw("keyFeatures.items")
+                  .map((text: string) => ({ text })),
+              },
+            ],
+          },
+        };
+
+      case "jwt-decoder":
+        return {
+          iconText: "JWT",
+          iconClassName: "bg-gradient-to-br from-neutral-800 to-neutral-600",
+          titleClassName: "text-gradient bg-gradient-to-r from-neutral-700 to-neutral-400 bg-clip-text text-transparent",
+          description: (
+            <>
+              {tPage("description")}
+              {tPage.has("privacyMessage") && (
+                <span className="block mt-2 text-neutral-700 dark:text-neutral-200 font-medium">
+                  {tPage("privacyMessage")}
+                </span>
+              )}
+            </>
+          ),
+          infoSection: {
+            title: tInfo("title"),
+            description: tInfo("description"),
+            sections: [
+              {
+                title: tInfo("keyFeatures.title"),
+                titleIcon: { color: "bg-neutral-700" },
+                items: tInfo
+                  .raw("keyFeatures.items")
+                  .map((text: string) => ({ text })),
+              },
+              {
+                title: tInfo("security.title"),
+                titleIcon: { color: "bg-success-500" },
+                className:
+                  "surface p-6 rounded-xl border border-success-200/50 dark:border-success-800/50 bg-success-50/50 dark:bg-success-950/20",
+                items: tInfo
+                  .raw("security.items")
+                  .map((text: string) => ({ text })),
+              },
+              ...(tInfo.has("useCases.title")
+                ? [
+                  {
+                    title: tInfo("useCases.title"),
+                    titleIcon: { color: "bg-brand-500" },
+                    items: tInfo
+                      .raw("useCases.items")
+                      .map((text: string) => ({ text })),
+                  },
+                ]
+                : []),
+            ],
+          },
+        };
+
       case "markdown-to-pdf":
         const features = tInfo
           .raw("features.items")

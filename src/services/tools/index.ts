@@ -9,3 +9,4 @@ export {
   markdownToPdfService,
 } from "./markdownToPdfService";
 export { FormatConverterService } from "./formatConverterService";
+export { JwtDecoderService } from "./jwtDecoderService";

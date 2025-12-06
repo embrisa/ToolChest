@@ -31,6 +31,14 @@
     "textDiff": {
       "name": "Текстовый инструмент Diff",
       "description": "Сравните и выделите различия между текстовыми файлами"
+    },
+    "format-converter": {
+      "name": "Format Converter",
+      "description": "Convert between JSON, XML, CSV, and YAML client-side."
+    },
+    "jwt-decoder": {
+      "name": "JWT Decoder",
+      "description": "Decode JSON Web Tokens locally to inspect headers and claims."
     }
   },
   "tags": {

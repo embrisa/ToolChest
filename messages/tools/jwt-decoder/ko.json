@@ -1,0 +1,76 @@
+{
+  "metadata": {
+    "title": "JWT Decoder | tool-chest",
+    "description": "Decode JSON Web Tokens locally to inspect headers and claims without sending them to a server.",
+    "keywords": [
+      "jwt",
+      "json web token",
+      "decode",
+      "debug",
+      "claims",
+      "header"
+    ]
+  },
+  "page": {
+    "title": "JWT Decoder",
+    "description": "Decode JWTs to inspect headers and claims client-side.",
+    "privacyMessage": "Decoding runs entirely in your browser. Tokens never leave your device."
+  },
+  "tool": {
+    "labels": {
+      "tokenInput": "JWT token",
+      "header": "Header",
+      "payload": "Payload",
+      "signature": "Signature",
+      "claims": "Claims",
+      "processingTime": "Processing time"
+    },
+    "placeholders": {
+      "token": "Paste a JWT (three base64url segments separated by dots)...",
+      "signatureNote": "Signatures are displayed as-is and are not verified.",
+      "signaturePlaceholder": "Signature will appear here...",
+      "headerPlaceholder": "Decoded header will appear here..."
+    },
+    "actions": {
+      "decode": "Decode",
+      "clear": "Clear"
+    },
+    "status": {
+      "decoded": "Token decoded"
+    }
+  },
+  "validation": {
+    "missingToken": "Enter a JWT to decode.",
+    "invalidFormat": "Invalid JWT format. Expected three Base64URL segments separated by dots.",
+    "invalidBase64": "Token segments could not be base64url-decoded.",
+    "invalidJSON": "Header or payload is not valid JSON."
+  },
+  "info": {
+    "title": "About JWT Decoder",
+    "description": "Decode JSON Web Tokens locally for debugging without sending data to servers.",
+    "keyFeatures": {
+      "title": "Key features",
+      "items": [
+        "Client-side decoding for privacy",
+        "View header, payload, and signature segments",
+        "Highlight standard claims (exp, iat, nbf)",
+        "Copy decoded JSON or raw signature"
+      ]
+    },
+    "security": {
+      "title": "Security & privacy",
+      "items": [
+        "No server requests; works offline",
+        "Debug tokens without exposing secrets"
+      ]
+    },
+    "useCases": {
+      "title": "Use cases",
+      "items": [
+        "Inspect token headers during development",
+        "Validate claims quickly",
+        "Debug authentication flows"
+      ]
+    }
+  }
+}
