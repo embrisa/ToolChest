@@ -10,3 +10,4 @@ export {
   useTagsWithState,
   useToolWithUsage,
 } from "../useToolsWithState";
+export { useToolMetrics } from "./useToolMetrics";

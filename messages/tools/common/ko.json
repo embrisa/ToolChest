@@ -34,7 +34,9 @@
       "copied": "클립 보드에 복사",
       "error": "작동 실패",
       "ready": "준비가 된",
-      "waiting": "입력을 기다리고 있습니다"
+      "waiting": "입력을 기다리고 있습니다",
+      "workerFallback": "Worker encountered an issue; using main thread instead",
+      "cancelled": "Cancelled"
     },
     "placeholders": {
       "textInput": "여기에 텍스트를 입력하십시오 ...",
@@ -71,5 +73,9 @@
     "fileReadError": "오류 읽기 파일",
     "networkError": "네트워크 오류가 발생했습니다",
     "unknownError": "알 수없는 오류가 발생했습니다"
+  },
+  "debug": {
+    "budgetExceeded": "Budget exceeded for {tool}/{action}: {duration}ms > {budget}ms",
+    "actionFailed": "{tool}/{action} failed ({category})"
   }
 }

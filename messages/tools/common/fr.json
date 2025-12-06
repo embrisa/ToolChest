@@ -34,7 +34,9 @@
       "copied": "Copié dans le presse-papiers",
       "error": "L'opération a échoué",
       "ready": "Prêt",
-      "waiting": "En attente d'entrée"
+      "waiting": "En attente d'entrée",
+      "workerFallback": "Worker encountered an issue; using main thread instead",
+      "cancelled": "Cancelled"
     },
     "placeholders": {
       "textInput": "Saisir le texte ici...",
@@ -71,5 +73,9 @@
     "fileReadError": "Erreur de lecture du fichier",
     "networkError": "Une erreur réseau est survenue",
     "unknownError": "Une erreur inconnue est survenue"
+  },
+  "debug": {
+    "budgetExceeded": "Budget exceeded for {tool}/{action}: {duration}ms > {budget}ms",
+    "actionFailed": "{tool}/{action} failed ({category})"
   }
 }

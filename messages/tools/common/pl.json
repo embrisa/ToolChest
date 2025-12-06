@@ -34,7 +34,9 @@
       "copied": "Skopiowane do schowka",
       "error": "Operacja nie powiodła się",
       "ready": "Gotowy",
-      "waiting": "Czekam na dane wejściowe"
+      "waiting": "Czekam na dane wejściowe",
+      "workerFallback": "Worker encountered an issue; using main thread instead",
+      "cancelled": "Cancelled"
     },
     "placeholders": {
       "textInput": "Wprowadź tekst tutaj ...",
@@ -71,5 +73,9 @@
     "fileReadError": "Błąd plik odczytu",
     "networkError": "Wystąpił błąd sieciowy",
     "unknownError": "Wystąpił nieznany błąd"
+  },
+  "debug": {
+    "budgetExceeded": "Budget exceeded for {tool}/{action}: {duration}ms > {budget}ms",
+    "actionFailed": "{tool}/{action} failed ({category})"
   }
 }

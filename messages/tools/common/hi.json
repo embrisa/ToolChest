@@ -34,7 +34,9 @@
       "copied": "क्लिपबोर्ड के लिए कॉपी किया गया",
       "error": "प्रचालन विफल रहा",
       "ready": "तैयार",
-      "waiting": "इनपुट की प्रतीक्षा में"
+      "waiting": "इनपुट की प्रतीक्षा में",
+      "workerFallback": "Worker encountered an issue; using main thread instead",
+      "cancelled": "Cancelled"
     },
     "placeholders": {
       "textInput": "पाठ यहां लिखें...",
@@ -71,5 +73,9 @@
     "fileReadError": "त्रुटि पठन संचिका",
     "networkError": "नेटवर्क त्रुटि हुई",
     "unknownError": "एक अज्ञात त्रुटि हुई"
+  },
+  "debug": {
+    "budgetExceeded": "Budget exceeded for {tool}/{action}: {duration}ms > {budget}ms",
+    "actionFailed": "{tool}/{action} failed ({category})"
   }
 }

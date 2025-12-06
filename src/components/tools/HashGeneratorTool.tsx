@@ -27,6 +27,8 @@ import {
 } from "@/types/tools/hashGenerator";
 import { A11yAnnouncement } from "@/types/tools/base64";
 import { cn } from "@/utils";
+import { useToolMetrics } from "@/hooks";
+import { durationSince, estimateBytesFromString, getSizeBucket, nowMs } from "@/utils/toolMetrics";
 
 export function HashGeneratorTool() {
   const tCommon = useTranslations("tools.common");
@@ -78,11 +80,23 @@ export function HashGeneratorTool() {
     generateAllHashes: false,
     algorithm: "",
   });
+  const loadStartRef = useRef(nowMs());
+  const { recordMetric } = useToolMetrics({ toolSlug: "hash-generator" });
 
   // Keep stateRef current
   useEffect(() => {
     stateRef.current = state;
   }, [state]);
+
+  useEffect(() => {
+    const durationMs = durationSince(loadStartRef.current);
+    recordMetric({
+      action: "load",
+      durationMs,
+      success: true,
+      workerUsed: false,
+    });
+  }, [recordMetric]);
 
   // Process hash generation with enhanced error handling and progress
   const processHash = useCallback(
@@ -141,6 +155,14 @@ export function HashGeneratorTool() {
         }
       }
 
+      const actionStart = nowMs();
+      const action = "hash";
+      const inputSize =
+        currentState.inputType === "text"
+          ? estimateBytesFromString(currentState.textInput) || 0
+          : currentState.fileInput?.size || 0;
+      const inputSizeBucket = getSizeBucket(inputSize);
+
       setState((prev) => ({
         ...prev,
         isProcessing: true,
@@ -166,10 +188,6 @@ export function HashGeneratorTool() {
           currentState.inputType === "text"
             ? currentState.textInput
             : currentState.fileInput!;
-        const inputSize =
-          currentState.inputType === "text"
-            ? currentState.textInput.length
-            : currentState.fileInput!.size;
 
         const results: Partial<Record<HashAlgorithm, HashResult>> = {};
         let allWarnings: string[] = [];
@@ -200,6 +218,17 @@ export function HashGeneratorTool() {
               success: result.success,
               clientSide: !result.serverSide,
               error: result.success ? undefined : result.error,
+            });
+          }
+
+          if (shouldTrackUsage) {
+            recordMetric({
+              action,
+              durationMs: result.processingTime ?? durationSince(actionStart),
+              success: result.success,
+              errorCategory: result.success ? undefined : "processing-error",
+              inputSizeBucket,
+              workerUsed: false,
             });
           }
         }
@@ -258,6 +287,17 @@ export function HashGeneratorTool() {
             "assertive",
           ),
         );
+
+        if (shouldTrackUsage) {
+          recordMetric({
+            action,
+            durationMs: durationSince(actionStart),
+            success: false,
+            errorCategory: "exception",
+            inputSizeBucket,
+            workerUsed: false,
+          });
+        }
       }
     },
     [
@@ -265,6 +305,7 @@ export function HashGeneratorTool() {
       // This prevents the infinite loop since the callback won't change
       generateAllHashes,
       announceToScreenReader,
+      recordMetric,
       tCommon,
     ],
   );
@@ -726,9 +767,15 @@ export function HashGeneratorTool() {
                       </span>{" "}
                       or drag and drop
                     </p>
+                  <div className="space-y-1">
                     <p className="text-sm text-foreground-tertiary">
                       Maximum file size: 10MB
                     </p>
+                    <p className="text-sm text-foreground-tertiary">
+                      Files over 5MB will show read progress; very large files may
+                      take a moment to hash.
+                    </p>
+                  </div>
                   </div>
                 </div>
               </div>

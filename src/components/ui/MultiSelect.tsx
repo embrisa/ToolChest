@@ -40,6 +40,8 @@ export function MultiSelect({
   // Generate deterministic id using React useId to avoid SSR hydration mismatches
   const generatedId = useId();
   const listId = useRef(`multiselect-${generatedId}`);
+  const labelId = useRef(`multiselect-label-${generatedId}`);
+  const descriptionId = useRef(`multiselect-description-${generatedId}`);
 
   // Filter options based on search query
   const filteredOptions =
@@ -243,6 +245,7 @@ export function MultiSelect({
       {/* Label with enhanced contrast */}
       {label && (
         <label
+          id={labelId.current}
           htmlFor={listId.current}
           className="text-primary text-sm font-medium block"
         >
@@ -255,7 +258,12 @@ export function MultiSelect({
 
       {/* Description with proper contrast */}
       {description && (
-        <p className="text-secondary text-sm leading-relaxed">{description}</p>
+        <p
+          id={descriptionId.current}
+          className="text-secondary text-sm leading-relaxed"
+        >
+          {description}
+        </p>
       )}
 
       {/* Selected Items Display with enhanced styling */}
@@ -295,6 +303,7 @@ export function MultiSelect({
       {/* Main Select Container */}
       <div ref={containerRef} className="relative">
         <div
+          id={listId.current}
           className={cn(
             // Using design system input styling
             "input-field cursor-pointer flex items-center justify-between min-h-[48px]",
@@ -312,7 +321,8 @@ export function MultiSelect({
           aria-expanded={state.isExpanded}
           aria-controls={`${listId.current}-listbox`}
           aria-haspopup="listbox"
-          aria-labelledby={label ? `${listId.current}-label` : undefined}
+          aria-labelledby={label ? labelId.current : undefined}
+          aria-describedby={description ? descriptionId.current : undefined}
           aria-invalid={error ? "true" : "false"}
         >
           <div className="flex-1 flex items-center gap-3">

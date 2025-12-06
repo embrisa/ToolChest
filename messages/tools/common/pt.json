@@ -34,7 +34,9 @@
       "copied": "Copiado para a área de transferência",
       "error": "Falha na operação",
       "ready": "Pronto",
-      "waiting": "Aguardando entrada"
+      "waiting": "Aguardando entrada",
+      "workerFallback": "Worker encountered an issue; using main thread instead",
+      "cancelled": "Cancelled"
     },
     "placeholders": {
       "textInput": "Digite o texto aqui...",
@@ -71,5 +73,9 @@
     "fileReadError": "Erro ao ler o arquivo",
     "networkError": "Ocorreu um erro de rede",
     "unknownError": "Ocorreu um erro desconhecido"
+  },
+  "debug": {
+    "budgetExceeded": "Budget exceeded for {tool}/{action}: {duration}ms > {budget}ms",
+    "actionFailed": "{tool}/{action} failed ({category})"
   }
 }

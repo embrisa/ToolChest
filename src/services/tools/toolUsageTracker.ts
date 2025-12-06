@@ -10,7 +10,7 @@ const revalidateToolCaches = () => {
   // Dynamically import to avoid hard dependency issues.
   import("swr")
     .then((mod) => {
-      const mutator = (mod as any).mutate;
+      const mutator = (mod as { mutate?: unknown }).mutate;
       if (typeof mutator === "function") {
         void mutator((key: unknown) => typeof key === "string" && key.startsWith("/api/tools"));
       }

@@ -22,7 +22,7 @@ export function Header({ className }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
   const t = useTranslations("components.layout.header");
-  const locale = useLocale();
+  const locale = useLocale() || "en";
   const localePrefix = `/${locale}`;
   const homePath = localePrefix;
   const toolsPath = `${localePrefix}/tools`;

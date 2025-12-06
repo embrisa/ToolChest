@@ -20,14 +20,19 @@ jest.mock("next/link", () => {
   };
 });
 
+jest.mock("next-intl/server", () => ({
+  getLocale: jest.fn().mockResolvedValue("en"),
+}));
+
 describe("Footer", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  it("renders current year", () => {
+  it("renders current year", async () => {
     const year = new Date().getFullYear().toString();
-    render(<Footer />);
+    const footer = await Footer({ className: undefined });
+    render(footer);
     expect(
       screen.getByText((content) => content.includes(year)),
     ).toBeInTheDocument();

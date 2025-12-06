@@ -34,7 +34,9 @@
       "copied": "クリップボードにコピーされました",
       "error": "操作に失敗しました",
       "ready": "準備ができて",
-      "waiting": "入力を待っています"
+      "waiting": "入力を待っています",
+      "workerFallback": "Worker encountered an issue; using main thread instead",
+      "cancelled": "Cancelled"
     },
     "placeholders": {
       "textInput": "ここにテキストを入力してください...",
@@ -71,5 +73,9 @@
     "fileReadError": "ファイルの読み取りエラー",
     "networkError": "ネットワークエラーが発生しました",
     "unknownError": "不明なエラーが発生しました"
+  },
+  "debug": {
+    "budgetExceeded": "Budget exceeded for {tool}/{action}: {duration}ms > {budget}ms",
+    "actionFailed": "{tool}/{action} failed ({category})"
   }
 }

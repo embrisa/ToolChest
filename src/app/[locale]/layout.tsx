@@ -5,6 +5,8 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { locales } from "@/i18n";
 import "../globals.css";
+import { ServiceWorkerRegistrar } from "@/components/offline/ServiceWorkerRegistrar";
+import { MetricsDebugToastBridge } from "@/components/metrics/MetricsDebugToastBridge";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -29,6 +31,8 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <WebVitals debug={process.env.NODE_ENV === "development"} />
+      <ServiceWorkerRegistrar />
+      <MetricsDebugToastBridge />
       <Header />
       <div className="flex-grow relative">{children}</div>
       <Footer />

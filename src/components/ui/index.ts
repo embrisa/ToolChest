@@ -1,10 +1,3 @@
-// Base UI components will be exported from here
-// TODO: Add actual UI components as they are created
-
-// Placeholder export to make this a valid module
-export const UI_COMPONENTS_PLACEHOLDER = "ui-components";
-
-// Base UI components
 export { Button } from "./Button";
 export type { ButtonProps } from "./Button";
 
@@ -70,6 +63,7 @@ export {
   createWarningToast,
   createCriticalToast,
 } from "./Toast";
+export { FileReadProgress } from "./FileReadProgress";
 
 export {
   OptimizedImage,
@@ -85,8 +79,14 @@ export type { ToolHeaderProps } from "./ToolHeader";
 export { OptionGroup } from "./OptionGroup";
 export type { OptionGroupProps } from "./OptionGroup";
 
+export { MultiSelect } from "./MultiSelect";
+
 export { ProgressCard } from "./ProgressCard";
 export type { ProgressCardProps, ProgressInfo } from "./ProgressCard";
+
+export { LazyLoader } from "./LazyLoader";
+export { NetworkErrorHandler } from "./NetworkErrorHandler";
+export { PageTransition, usePageTransition } from "./PageTransition";
 
 // New Tool Page Components
 export { ToolPageLayout } from "./ToolPageLayout";

@@ -34,7 +34,9 @@
       "copied": "Đã sao chép vào clipboard",
       "error": "Thao tác thất bại",
       "ready": "Sẵn sàng",
-      "waiting": "Đang chờ nhập liệu"
+      "waiting": "Đang chờ nhập liệu",
+      "workerFallback": "Worker encountered an issue; using main thread instead",
+      "cancelled": "Cancelled"
     },
     "placeholders": {
       "textInput": "Nhập văn bản vào đây...",
@@ -71,5 +73,9 @@
     "fileReadError": "Lỗi đọc tệp",
     "networkError": "Đã xảy ra lỗi mạng",
     "unknownError": "Đã xảy ra lỗi không xác định"
+  },
+  "debug": {
+    "budgetExceeded": "Budget exceeded for {tool}/{action}: {duration}ms > {budget}ms",
+    "actionFailed": "{tool}/{action} failed ({category})"
   }
 }

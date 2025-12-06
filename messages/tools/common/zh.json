@@ -34,7 +34,9 @@
       "copied": "已复制到剪贴板",
       "error": "操作失败",
       "ready": "就绪",
-      "waiting": "等待输入"
+      "waiting": "等待输入",
+      "workerFallback": "Worker encountered an issue; using main thread instead",
+      "cancelled": "Cancelled"
     },
     "placeholders": {
       "textInput": "在此输入文本...",
@@ -71,5 +73,9 @@
     "fileReadError": "读取文件时出错",
     "networkError": "网络错误",
     "unknownError": "未知错误"
+  },
+  "debug": {
+    "budgetExceeded": "Budget exceeded for {tool}/{action}: {duration}ms > {budget}ms",
+    "actionFailed": "{tool}/{action} failed ({category})"
   }
 }

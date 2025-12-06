@@ -34,7 +34,9 @@
       "copied": "Скопировано в буфер обмена",
       "error": "Операция не удалась",
       "ready": "Готовый",
-      "waiting": "В ожидании ввода"
+      "waiting": "В ожидании ввода",
+      "workerFallback": "Worker encountered an issue; using main thread instead",
+      "cancelled": "Cancelled"
     },
     "placeholders": {
       "textInput": "Введите текст здесь ...",
@@ -71,5 +73,9 @@
     "fileReadError": "Файл чтения ошибок",
     "networkError": "Произошла сетевая ошибка",
     "unknownError": "Произошла неизвестная ошибка"
+  },
+  "debug": {
+    "budgetExceeded": "Budget exceeded for {tool}/{action}: {duration}ms > {budget}ms",
+    "actionFailed": "{tool}/{action} failed ({category})"
   }
 }

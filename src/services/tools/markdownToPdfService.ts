@@ -639,6 +639,11 @@ export class MarkdownToPdfService {
    * Post-process HTML for enhanced PDF rendering with comprehensive GFM support
    */
   private postProcessHtml(html: string, options: MarkdownOptions): string {
+    // In worker contexts there is no DOM; skip post-processing and return raw HTML.
+    if (typeof document === "undefined") {
+      return html;
+    }
+
     try {
       // Create a temporary DOM element to process the HTML
       const tempDiv = document.createElement("div");
@@ -1164,9 +1169,8 @@ export class MarkdownToPdfService {
                 font-weight: 500;
             }
             
-            ${
-              syntaxHighlighting?.lineNumbers
-                ? `
+            ${syntaxHighlighting?.lineNumbers
+        ? `
             .pdf-code-block .hljs {
                 counter-reset: line-numbering;
             }
@@ -1188,8 +1192,8 @@ export class MarkdownToPdfService {
                 user-select: none;
             }
             `
-                : ""
-            }
+        : ""
+      }
             
             /* Enhanced strikethrough support (GFM) */
             .pdf-strikethrough {

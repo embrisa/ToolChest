@@ -27,6 +27,10 @@ NODE_ENV = "production"
 # ENABLE_ANALYTICS = "true"
 # ENABLE_ERROR_LOGGING = "true"
 
+# Metrics forwarding (optional but recommended for prod):
+# TOOL_METRICS_WEBHOOK_URL = "https://your-metrics-webhook.example.com"
+# TOOL_METRICS_LOG = "true" # optional: log received payloads
+
 # Feature flags (defaults to true if not set):
 # FEATURE_BASE64_TOOL = "true"
 # FEATURE_HASH_GENERATOR = "true" 

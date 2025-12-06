@@ -31,6 +31,9 @@ import {
   FAVICON_SIZES,
   FAVICON_FILE_LIMITS,
 } from "@/types/tools/faviconGenerator";
+import { ErrorBoundary } from "@/components/errors/ErrorBoundary";
+import { useToolMetrics } from "@/hooks";
+import { durationSince, getSizeBucket, nowMs } from "@/utils/toolMetrics";
 
 export function FaviconGeneratorTool() {
   const tCommon = useTranslations("tools.common");
@@ -58,11 +61,23 @@ export function FaviconGeneratorTool() {
 
   const { announceToScreenReader } = useAccessibilityAnnouncements();
   const stateRef = useRef(state);
+  const loadStartRef = useRef(nowMs());
+  const { recordMetric } = useToolMetrics({ toolSlug: "favicon-generator" });
 
   // Keep stateRef current
   useEffect(() => {
     stateRef.current = state;
   }, [state]);
+
+  useEffect(() => {
+    const durationMs = durationSince(loadStartRef.current);
+    recordMetric({
+      action: "load",
+      durationMs,
+      success: true,
+      workerUsed: false,
+    });
+  }, [recordMetric]);
 
   // Generate real-time preview with performance optimization
   const generatePreview = useCallback(
@@ -254,6 +269,10 @@ export function FaviconGeneratorTool() {
   const handleGenerate = useCallback(async () => {
     if (!state.sourceImage) return;
 
+    const actionStart = nowMs();
+    const inputSize = state.sourceImage.size;
+    const inputSizeBucket = getSizeBucket(inputSize);
+
     try {
       setState((prev) => ({ ...prev, isProcessing: true, error: null }));
       announceToScreenReader(
@@ -272,6 +291,15 @@ export function FaviconGeneratorTool() {
         `Favicon generation ${tCommon("ui.status.success").toLowerCase()}!`,
         "polite",
       );
+
+      recordMetric({
+        action: "generate",
+        durationMs: durationSince(actionStart),
+        success: result.success,
+        errorCategory: result.success ? undefined : "processing-error",
+        inputSizeBucket,
+        workerUsed: false,
+      });
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : tCommon("ui.status.error");
@@ -284,8 +312,17 @@ export function FaviconGeneratorTool() {
         `Generation ${tCommon("ui.status.error").toLowerCase()}: ${errorMessage}`,
         "assertive",
       );
+
+      recordMetric({
+        action: "generate",
+        durationMs: durationSince(actionStart),
+        success: false,
+        errorCategory: "exception",
+        inputSizeBucket,
+        workerUsed: false,
+      });
     }
-  }, [state.sourceImage, state.options, announceToScreenReader, tCommon]);
+  }, [state.sourceImage, state.options, announceToScreenReader, recordMetric, tCommon]);
 
   // Download all favicons handled via CopyExportBar onDownloadData
 
@@ -321,7 +358,8 @@ export function FaviconGeneratorTool() {
   );
 
   return (
-    <div className="container-wide space-y-12">
+    <ErrorBoundary>
+      <div className="container-wide space-y-12">
       {/* ARIA live region for screen reader announcements */}
       <AriaLiveRegion announcement={announcement} />
 
@@ -866,6 +904,7 @@ export function FaviconGeneratorTool() {
           </div>
         )}
       </ResultsPanel>
-    </div>
+      </div>
+    </ErrorBoundary>
   );
 }

@@ -22,6 +22,8 @@ import { ErrorBoundary } from "@/components/errors/ErrorBoundary";
 import { Base64Service } from "@/services/tools/base64Service";
 import { Base64State, Base64Result, A11yAnnouncement } from "@/types/tools/base64";
 import { cn } from "@/utils";
+import { useToolMetrics } from "@/hooks";
+import { durationSince, estimateBytesFromString, getSizeBucket, nowMs } from "@/utils/toolMetrics";
 
 export function Base64Tool() {
   const tCommon = useTranslations("tools.common");
@@ -57,11 +59,23 @@ export function Base64Tool() {
     textInput: "",
     fileInput: null,
   });
+  const loadStartRef = useRef(nowMs());
+  const { recordMetric } = useToolMetrics({ toolSlug: "base64" });
 
   // Keep stateRef current
   useEffect(() => {
     stateRef.current = state;
   }, [state]);
+
+  useEffect(() => {
+    const durationMs = durationSince(loadStartRef.current);
+    recordMetric({
+      action: "load",
+      durationMs,
+      success: true,
+      workerUsed: false,
+    });
+  }, [recordMetric]);
 
   // Process Base64 operation with enhanced error handling and progress
   const processBase64 = useCallback(
@@ -114,6 +128,14 @@ export function Base64Tool() {
         }
       }
 
+      const actionStart = nowMs();
+      const action = currentState.mode === "encode" ? "encode" : "decode";
+      const inputSize =
+        currentState.inputType === "text"
+          ? estimateBytesFromString(currentState.textInput) || 0
+          : currentState.fileInput?.size || 0;
+      const inputSizeBucket = getSizeBucket(inputSize);
+
       setState((prev) => ({
         ...prev,
         isProcessing: true,
@@ -135,10 +157,6 @@ export function Base64Tool() {
           currentState.inputType === "text"
             ? currentState.textInput
             : currentState.fileInput!;
-        const inputSize =
-          currentState.inputType === "text"
-            ? currentState.textInput.length
-            : currentState.fileInput!.size;
 
         const result: Base64Result = await Base64Service[currentState.mode]({
           mode: currentState.mode,
@@ -192,6 +210,17 @@ export function Base64Tool() {
             ),
           );
         }
+
+        if (shouldTrackUsage) {
+          recordMetric({
+            action,
+            durationMs: durationSince(actionStart),
+            success: result.success,
+            errorCategory: result.success ? undefined : "processing-error",
+            inputSizeBucket,
+            workerUsed: false,
+          });
+        }
       } catch (error) {
         const errorMessage =
           error instanceof Error ? error.message : tCommon("ui.status.error");
@@ -209,12 +238,24 @@ export function Base64Tool() {
             "assertive",
           ),
         );
+
+        if (shouldTrackUsage) {
+          recordMetric({
+            action,
+            durationMs: durationSince(actionStart),
+            success: false,
+            errorCategory: "exception",
+            inputSizeBucket,
+            workerUsed: false,
+          });
+        }
       }
     },
     [
       // Use a ref for state to avoid recreating this function on every state change
       // This prevents the infinite loop since the callback won't change
       announceToScreenReader,
+      recordMetric,
       tCommon,
     ],
   );

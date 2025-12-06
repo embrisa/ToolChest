@@ -34,7 +34,9 @@
       "copied": "Panoya kopyalandı",
       "error": "İşlem başarısız oldu",
       "ready": "Hazır",
-      "waiting": "Giriş bekleniyor"
+      "waiting": "Giriş bekleniyor",
+      "workerFallback": "Worker encountered an issue; using main thread instead",
+      "cancelled": "Cancelled"
     },
     "placeholders": {
       "textInput": "Metni buraya girin...",
@@ -71,5 +73,9 @@
     "fileReadError": "Dosya okunurken hata oluştu",
     "networkError": "Ağ hatası oluştu",
     "unknownError": "Bilinmeyen bir hata oluştu"
+  },
+  "debug": {
+    "budgetExceeded": "Budget exceeded for {tool}/{action}: {duration}ms > {budget}ms",
+    "actionFailed": "{tool}/{action} failed ({category})"
   }
 }

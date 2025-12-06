@@ -34,7 +34,9 @@
       "copied": "Скопійовано в буфер обміну",
       "error": "Операція не вдалася",
       "ready": "Готово",
-      "waiting": "Очікування введення"
+      "waiting": "Очікування введення",
+      "workerFallback": "Worker encountered an issue; using main thread instead",
+      "cancelled": "Cancelled"
     },
     "placeholders": {
       "textInput": "Введіть текст тут...",
@@ -71,5 +73,9 @@
     "fileReadError": "Помилка читання файлу",
     "networkError": "Сталася помилка мережі",
     "unknownError": "Сталася невідома помилка"
+  },
+  "debug": {
+    "budgetExceeded": "Budget exceeded for {tool}/{action}: {duration}ms > {budget}ms",
+    "actionFailed": "{tool}/{action} failed ({category})"
   }
 }

@@ -273,6 +273,9 @@ export function ImportPanel({
             <p className="mt-3 text-sm text-foreground-tertiary">
               {labels?.filePasteTip ?? "Tip: You can also paste a file here."}
             </p>
+            <p className="text-sm text-foreground-tertiary">
+              {`Max ${maxSizeMB}MB. Files over ${largeHintThresholdMB}MB show progress while reading.`}
+            </p>
             {lastFileInfo && lastFileInfo.sizeMB * 1024 * 1024 >= largeThresholdBytes &&
               lastFileInfo.sizeMB * 1024 * 1024 <= maxBytes && (
                 <p className="mt-2 text-sm text-foreground-tertiary">

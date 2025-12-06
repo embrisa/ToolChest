@@ -34,7 +34,9 @@
       "copied": "In die Zwischenablage kopiert",
       "error": "Vorgang fehlgeschlagen",
       "ready": "Bereit",
-      "waiting": "Warte auf Eingabe"
+      "waiting": "Warte auf Eingabe",
+      "workerFallback": "Worker encountered an issue; using main thread instead",
+      "cancelled": "Cancelled"
     },
     "placeholders": {
       "textInput": "Text hier eingeben...",
@@ -71,5 +73,9 @@
     "fileReadError": "Fehler beim Lesen der Datei",
     "networkError": "Netzwerkfehler aufgetreten",
     "unknownError": "Ein unbekannter Fehler ist aufgetreten"
+  },
+  "debug": {
+    "budgetExceeded": "Budget exceeded for {tool}/{action}: {duration}ms > {budget}ms",
+    "actionFailed": "{tool}/{action} failed ({category})"
   }
 }

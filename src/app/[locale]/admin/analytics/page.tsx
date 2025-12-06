@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { AnalyticsDashboard } from "@/components/admin/AnalyticsDashboard";
+import { MetricsDigest } from "@/components/admin/MetricsDigest";
 
 export const metadata: Metadata = {
   title: "Analytics - tool-chest Admin",
@@ -54,6 +55,9 @@ export default function AnalyticsPage() {
           </div>
         </div>
       </div>
+
+      {/* Metrics Digest */}
+      <MetricsDigest />
 
       {/* Analytics Dashboard */}
       <AnalyticsDashboard />

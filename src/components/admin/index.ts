@@ -6,4 +6,5 @@ export { TagFilters } from "./TagFilters";
 export { TagForm } from "./TagForm";
 export { AnalyticsChart } from "./AnalyticsChart";
 export { AnalyticsDashboard } from "./AnalyticsDashboard";
+export { MetricsDigest } from "./MetricsDigest";
 export { default as SystemHealthDashboard } from "./SystemHealthDashboard";

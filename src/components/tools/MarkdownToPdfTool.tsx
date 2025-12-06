@@ -10,7 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { Button } from "@/components/ui/Button";
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/Card";
-import { Input } from "@/components/ui";
+import { Input, FileReadProgress } from "@/components/ui";
 import { Alert } from "@/components/ui/Alert";
 import { AriaLiveRegion } from "@/components/ui/AriaLiveRegion";
 import { ToolHeader } from "@/components/ui/ToolHeader";
@@ -30,10 +30,14 @@ import {
   PdfStylingOptions,
   DEFAULT_PDF_STYLING,
   DEFAULT_MARKDOWN_OPTIONS,
+  MarkdownOptions,
   MarkdownToPdfProgress,
   MarkdownParseResult,
   PDF_TEMPLATES,
 } from "@/types/tools/markdownToPdf";
+import { useToolMetrics } from "@/hooks";
+import { durationSince, estimateBytesFromString, getSizeBucket, nowMs } from "@/utils/toolMetrics";
+import { useCancelableFileReader } from "@/hooks/useCancelableFileReader";
 
 // MODE_OPTIONS will be dynamically generated using translations
 
@@ -113,6 +117,7 @@ if __name__ == "__main__":
 ---
 
 *Ready to create your PDF? Edit this content or upload your own markdown file!*`;
+const LARGE_FILE_THRESHOLD_BYTES = 5 * 1024 * 1024;
 
 export function MarkdownToPdfTool() {
   const tCommon = useTranslations("tools.common");
@@ -153,24 +158,186 @@ export function MarkdownToPdfTool() {
   );
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
+  const parseWorkerRef = useRef<Worker | null>(null);
+  const parseWorkerPendingRef = useRef<
+    Map<
+      number,
+      { resolve: (result: MarkdownParseResult) => void; reject: (reason: unknown) => void }
+    >
+  >(new Map());
+  const parseWorkerRequestIdRef = useRef(0);
+  const previewRequestIdRef = useRef(0);
+  const parseWorkerUsedRef = useRef(false);
+  const [uploadProgress, setUploadProgress] = useState<{
+    loaded: number;
+    total: number;
+  } | null>(null);
+  const uploadAbortRef = useRef<AbortController | null>(null);
+  const [isParseWorkerReady, setIsParseWorkerReady] = useState(false);
+  const { recordMetric } = useToolMetrics({ toolSlug: "markdown-to-pdf" });
+  const { readAsText, cancel: cancelFileRead } = useCancelableFileReader();
+  const loadStartRef = useRef(nowMs());
 
-  // Parse markdown and update preview
-  const updatePreview = useCallback(async () => {
+  useEffect(() => {
+    const durationMs = durationSince(loadStartRef.current);
+    recordMetric({
+      action: "load",
+      durationMs,
+      success: true,
+      workerUsed: false,
+    });
+  }, [recordMetric]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
     try {
-      const result = markdownToPdfService.parseMarkdown(
-        state.markdownContent,
-        state.markdownOptions,
+      const worker = new Worker(
+        new URL("../../workers/markdownParseWorker.ts", import.meta.url),
+        { type: "module" },
       );
+      parseWorkerRef.current = worker;
+      setIsParseWorkerReady(true);
+
+      worker.onmessage = (
+        event: MessageEvent<{
+          id: number;
+          success: boolean;
+          result?: MarkdownParseResult;
+          error?: string;
+        }>,
+      ) => {
+        const { id, success, result, error } = event.data;
+        const pending = parseWorkerPendingRef.current.get(id);
+        if (!pending) return;
+        parseWorkerPendingRef.current.delete(id);
+        if (success && result) {
+          pending.resolve(result);
+        } else {
+          pending.reject(
+            new Error(error || "Markdown parse failed in worker"),
+          );
+        }
+      };
+
+      worker.onerror = (event) => {
+        console.warn("[markdown-to-pdf] parse worker error", event);
+      };
+
+      return () => {
+        parseWorkerPendingRef.current.clear();
+        worker.terminate();
+      };
+    } catch (error) {
+      console.warn("[markdown-to-pdf] parse worker unavailable, falling back", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      cancelFileRead();
+      uploadAbortRef.current?.abort();
+    };
+  }, [cancelFileRead]);
+
+  const parseWithWorker = useCallback(
+    (
+      content: string,
+      options: MarkdownOptions,
+    ): Promise<MarkdownParseResult> | null => {
+      if (!parseWorkerRef.current) return null;
+      const requestId = parseWorkerRequestIdRef.current++;
+
+      return new Promise<MarkdownParseResult>((resolve, reject) => {
+        parseWorkerPendingRef.current.set(requestId, { resolve, reject });
+        parseWorkerRef.current?.postMessage({ id: requestId, content, options });
+
+        setTimeout(() => {
+          const pending = parseWorkerPendingRef.current.get(requestId);
+          if (pending) {
+            parseWorkerPendingRef.current.delete(requestId);
+            reject(new Error("Worker timed out"));
+          }
+        }, 15_000);
+      });
+    },
+    [],
+  );
+
+  // Parse markdown and update preview (worker for large docs with fallback)
+  const updatePreview = useCallback(async () => {
+    const requestId = ++previewRequestIdRef.current;
+    const content = state.markdownContent;
+    const options = state.markdownOptions;
+    const sizeBytes =
+      state.markdownFile?.size ?? estimateBytesFromString(content) ?? 0;
+    const useWorker =
+      isParseWorkerReady && sizeBytes >= LARGE_FILE_THRESHOLD_BYTES;
+
+    try {
+      let result: MarkdownParseResult | null = null;
+
+      if (useWorker) {
+        try {
+          setCurrentAnnouncement({
+            message: tCommon("ui.status.processing"),
+            type: "polite",
+            timestamp: Date.now(),
+          });
+          result = await parseWithWorker(content, options);
+        } catch (workerError) {
+          console.warn(
+            "[markdown-to-pdf] parse worker failed, falling back",
+            workerError,
+          );
+          setCurrentAnnouncement({
+            message: tCommon("ui.status.workerFallback"),
+            type: "polite",
+            timestamp: Date.now(),
+          });
+        }
+      }
+
+      if (!result) {
+        result = markdownToPdfService.parseMarkdown(content, options);
+        parseWorkerUsedRef.current = false;
+      } else if (useWorker) {
+        parseWorkerUsedRef.current = true;
+      }
+
+      if (previewRequestIdRef.current !== requestId || !result) return;
+
       setParseResult(result);
       setState((prev) => ({ ...prev, previewHtml: result.html, error: null }));
+
+      if (useWorker) {
+        setCurrentAnnouncement({
+          message: tCommon("ui.status.success"),
+          type: "polite",
+          timestamp: Date.now(),
+        });
+      }
     } catch (error) {
+      parseWorkerUsedRef.current = false;
+      if (previewRequestIdRef.current !== requestId) return;
       const errorMessage =
         error instanceof Error
           ? error.message
           : tCommon("errors.processingFailed");
       setState((prev) => ({ ...prev, error: errorMessage }));
+      setCurrentAnnouncement({
+        message: `${tCommon("ui.status.error")}: ${errorMessage}`,
+        type: "assertive",
+        timestamp: Date.now(),
+      });
     }
-  }, [state.markdownContent, state.markdownOptions, tCommon]);
+  }, [
+    isParseWorkerReady,
+    parseWithWorker,
+    state.markdownContent,
+    state.markdownFile,
+    state.markdownOptions,
+    tCommon,
+  ]);
 
   // Update preview when content or options change
   useEffect(() => {
@@ -216,6 +383,9 @@ export function MarkdownToPdfTool() {
   // Handle file upload
   const handleFileUpload = useCallback(
     async (file: File) => {
+      const abortController = new AbortController();
+      uploadAbortRef.current = abortController;
+
       try {
         setState((prev) => ({
           ...prev,
@@ -223,7 +393,13 @@ export function MarkdownToPdfTool() {
           error: null,
           warnings: [],
         }));
-        addAnnouncement(tCommon("ui.status.processing"));
+        const showProgress = file.size >= LARGE_FILE_THRESHOLD_BYTES;
+        if (showProgress) {
+          setUploadProgress({ loaded: 0, total: file.size });
+          addAnnouncement(tCommon("ui.status.processing"));
+        } else {
+          addAnnouncement(tCommon("ui.status.processing"));
+        }
 
         const validation =
           await markdownToPdfService.validateMarkdownFile(file);
@@ -237,6 +413,7 @@ export function MarkdownToPdfTool() {
           addAnnouncement(
             `${tCommon("errors.processingFailed")}: ${validation.error}`,
           );
+          setUploadProgress(null);
           return;
         }
 
@@ -251,11 +428,13 @@ export function MarkdownToPdfTool() {
         }
 
         // Read file content
-        const content = await new Promise<string>((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = (e) => resolve((e.target?.result as string) || "");
-          reader.onerror = () => reject(new Error("Failed to read file"));
-          reader.readAsText(file);
+        const content = await readAsText(file, {
+          onProgress: (progress) => {
+            if (showProgress) {
+              setUploadProgress(progress);
+            }
+          },
+          signal: abortController.signal,
         });
 
         setState((prev) => ({
@@ -269,6 +448,14 @@ export function MarkdownToPdfTool() {
           `File uploaded successfully: ${validation.wordCount} words, ${validation.lineCount} lines`,
         );
       } catch (error) {
+        if (error instanceof DOMException && error.name === "AbortError") {
+          addAnnouncement(tCommon("ui.status.cancelled"));
+          setState((prev) => ({
+            ...prev,
+            isProcessing: false,
+          }));
+          return;
+        }
         const errorMessage =
           error instanceof Error ? error.message : tCommon("ui.status.error");
         setState((prev) => ({
@@ -277,10 +464,21 @@ export function MarkdownToPdfTool() {
           error: errorMessage,
         }));
         addAnnouncement(`${tCommon("ui.status.error")}: ${errorMessage}`);
+      } finally {
+        setUploadProgress(null);
+        uploadAbortRef.current = null;
       }
     },
-    [addAnnouncement, tCommon],
+    [addAnnouncement, readAsText, tCommon],
   );
+
+  const handleCancelUpload = useCallback(() => {
+    cancelFileRead();
+    uploadAbortRef.current?.abort();
+    setUploadProgress(null);
+    setState((prev) => ({ ...prev, isProcessing: false }));
+    addAnnouncement(tCommon("ui.status.cancelled"));
+  }, [addAnnouncement, cancelFileRead, tCommon]);
 
   // Handle file remove
   const handleFileRemove = useCallback(() => {
@@ -294,8 +492,23 @@ export function MarkdownToPdfTool() {
 
   // Generate PDF
   const handleGeneratePdf = useCallback(async () => {
+    const actionStart = nowMs();
+    const inputSize =
+      state.markdownFile?.size ??
+      estimateBytesFromString(state.markdownContent) ??
+      0;
+    const inputSizeBucket = getSizeBucket(inputSize);
+
     if (!state.markdownContent.trim()) {
       addAnnouncement(tCommon("validation.emptyInput"));
+      recordMetric({
+        action: "generate",
+        durationMs: durationSince(actionStart),
+        success: false,
+        errorCategory: "validation",
+        inputSizeBucket,
+        workerUsed: parseWorkerUsedRef.current,
+      });
       return;
     }
 
@@ -329,6 +542,13 @@ export function MarkdownToPdfTool() {
         addAnnouncement(
           `PDF generated successfully! ${result.pageCount} pages, ${Math.round((result.fileSize || 0) / 1024)} KB`,
         );
+        recordMetric({
+          action: "generate",
+          durationMs: durationSince(actionStart),
+          success: true,
+          inputSizeBucket,
+          workerUsed: parseWorkerUsedRef.current,
+        });
       } else {
         throw new Error(result.error || tCommon("ui.status.error"));
       }
@@ -344,12 +564,23 @@ export function MarkdownToPdfTool() {
       addAnnouncement(
         `PDF generation ${tCommon("ui.status.error").toLowerCase()}: ${errorMessage}`,
       );
+
+      recordMetric({
+        action: "generate",
+        durationMs: durationSince(actionStart),
+        success: false,
+        errorCategory: "exception",
+        inputSizeBucket,
+        workerUsed: parseWorkerUsedRef.current,
+      });
     }
   }, [
     state.markdownContent,
+    state.markdownFile,
     state.previewHtml,
     state.stylingOptions,
     addAnnouncement,
+    recordMetric,
     tCommon,
   ]);
 
@@ -508,6 +739,15 @@ export function MarkdownToPdfTool() {
                 fileSubtitle={tCommon("ui.placeholders.fileUpload")}
                 onAnnounce={(msg) => addAnnouncement(msg)}
               />
+              {uploadProgress && (
+                <FileReadProgress
+                  progress={uploadProgress}
+                  label={tCommon("ui.status.processing")}
+                  note={`${tCommon("ui.status.processing")} ${(uploadProgress.total / (1024 * 1024)).toFixed(2)} ${tUnits("units.mb")}`}
+                  cancelLabel={tUnits("actions.cancel")}
+                  onCancel={handleCancelUpload}
+                />
+              )}
               {state.markdownFile && (
                 <FileInfo file={state.markdownFile} onRemove={handleFileRemove} />
               )}

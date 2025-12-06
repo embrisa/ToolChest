@@ -34,7 +34,9 @@
       "copied": "Copied to clipboard",
       "error": "Operation failed",
       "ready": "Ready",
-      "waiting": "Waiting for input"
+      "waiting": "Waiting for input",
+      "workerFallback": "Worker encountered an issue; using main thread instead",
+      "cancelled": "Cancelled"
     },
     "placeholders": {
       "textInput": "Enter text here...",
@@ -71,5 +73,9 @@
     "fileReadError": "Error reading file",
     "networkError": "Network error occurred",
     "unknownError": "An unknown error occurred"
+  },
+  "debug": {
+    "budgetExceeded": "Budget exceeded for {tool}/{action}: {duration}ms > {budget}ms",
+    "actionFailed": "{tool}/{action} failed ({category})"
   }
 }

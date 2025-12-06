@@ -34,7 +34,9 @@
       "copied": "Gekopieerd naar klembord",
       "error": "Bewerking mislukt",
       "ready": "Klaar",
-      "waiting": "Wachten op invoer"
+      "waiting": "Wachten op invoer",
+      "workerFallback": "Worker encountered an issue; using main thread instead",
+      "cancelled": "Cancelled"
     },
     "placeholders": {
       "textInput": "Voer hier tekst in...",
@@ -71,5 +73,9 @@
     "fileReadError": "Fout bij het lezen van het bestand",
     "networkError": "Er is een netwerkfout opgetreden",
     "unknownError": "Er is een onbekende fout opgetreden"
+  },
+  "debug": {
+    "budgetExceeded": "Budget exceeded for {tool}/{action}: {duration}ms > {budget}ms",
+    "actionFailed": "{tool}/{action} failed ({category})"
   }
 }

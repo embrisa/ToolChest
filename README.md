@@ -97,6 +97,10 @@ ADMIN_SECRET_TOKEN="your-secure-admin-token"
 NEXT_PUBLIC_SITE_URL="https://your-domain.com"
 ```
 
+Optional metrics forwarding:
+- `TOOL_METRICS_WEBHOOK_URL`: HTTPS endpoint to receive tool metrics; required for server-side forwarding (otherwise metrics stay client-side/dev-only).
+- `TOOL_METRICS_LOG`: set to `true` to log received metrics on the server (useful while testing the webhook).
+
 For detailed deployment tips, use the commands above and ensure your environment variables are set via `.env.local`.
 
 ### Troubleshooting Database Migrations

@@ -24,3 +24,6 @@ export type {
   PreloadOptions,
   CacheStrategy,
 } from "./usePerformanceOptimization";
+
+// Metrics hooks
+export { useToolMetrics } from "./tools";

@@ -75,13 +75,17 @@ function parseBoolean(value, defaultValue = false) {
 
 function parseNumber(value, defaultValue) {
   if (!value) return defaultValue;
-  const parsed = parseInt(value, 10);
-  return isNaN(parsed) ? defaultValue : parsed;
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : defaultValue;
 }
 
 // Validation functions
 function validateRequired() {
-  const requiredVars = ["DATABASE_URL"];
+  const requiredVars = [
+    "DATABASE_URL",
+    "ADMIN_SECRET_TOKEN",
+    "ADMIN_SESSION_SECRET",
+  ];
   const missing = requiredVars.filter((varName) => !process.env[varName]);
 
   if (missing.length > 0) {
@@ -144,6 +148,7 @@ function validateNumericValues() {
     CACHE_TTL: { default: 300, min: 0 },
     MAX_FILE_SIZE: { default: 10485760, min: 1024 }, // min 1KB
     LARGE_FILE_THRESHOLD: { default: 5242880, min: 1024 }, // min 1KB
+    TOOL_METRICS_SAMPLE_RATE: { default: 0.1, min: 0, max: 1 },
   };
 
   let allValid = true;
@@ -187,6 +192,27 @@ function validateFeatureFlags() {
   return true;
 }
 
+function validateMetricsWebhook() {
+  const webhook = process.env.TOOL_METRICS_WEBHOOK_URL;
+  const shouldLog = parseBoolean(process.env.TOOL_METRICS_LOG, false);
+  const sampleRate = parseNumber(
+    process.env.TOOL_METRICS_SAMPLE_RATE,
+    process.env.NODE_ENV === "production" ? 0.1 : 1,
+  );
+
+  if (!webhook) {
+    logWarning(
+      "TOOL_METRICS_WEBHOOK_URL not set; /api/tools/metrics will not forward events server-side.",
+    );
+  } else {
+    logSuccess("TOOL_METRICS_WEBHOOK_URL configured for server-side metrics.");
+  }
+
+  logInfo(`TOOL_METRICS_LOG: ${shouldLog ? "enabled" : "disabled"}`);
+  logInfo(`TOOL_METRICS_SAMPLE_RATE: ${sampleRate}`);
+  return true;
+}
+
 function main() {
   log(`${colors.bold}🔍 Environment Validation${colors.reset}\n`);
 
@@ -202,6 +228,7 @@ function main() {
     validateNodeEnv,
     validateNumericValues,
     validateFeatureFlags,
+    validateMetricsWebhook,
   ];
 
   let allValid = true;

@@ -133,5 +133,22 @@
     "monitoring": "모니터링",
     "logout": "로그 아웃",
     "viewSite": "공개 사이트 보기"
+  },
+  "metricsDigest": {
+    "title": "Metrics Digest",
+    "subtitle": "Sampled tool events (counts only, no payloads)",
+    "window": "{days} day window",
+    "totalEvents": "Total events",
+    "successRate": "Success rate",
+    "errors": "Errors",
+    "errorBuckets": "Error buckets",
+    "byTool": "By tool",
+    "tool": "Tool",
+    "total": "Total",
+    "noData": "No tool data yet",
+    "noErrors": "No errors recorded",
+    "loading": "Loading metrics digest...",
+    "lastEvent": "Last event",
+    "noEvents": "No events recorded yet"
   }
 }
