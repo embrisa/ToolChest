@@ -71,7 +71,8 @@
     "docker:down": "docker-compose down",
     "docker:logs": "docker-compose logs -f",
     "docker:clean": "docker-compose down -v && docker system prune -f",
-    "i18n:addkey": "node scripts/add-translation-key.mjs"
+    "i18n:addkey": "node scripts/add-translation-key.mjs",
+    "ci:postdeploy": "sh scripts/ci-postdeploy.sh"
   },
   "dependencies": {
     "@axe-core/react": "^4.10.1",
